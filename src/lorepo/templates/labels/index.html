@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load apptags %}
+
+{% block content %}
+
+<div id="toolbar">
+	<form action="add" method="post">
+		Label name:
+		<input type="text" name="title"/>
+		<button>Add label</button>
+	</form>
+</div>
+
+<table width="100%">
+	<tr>
+		<th>Title</th>
+		<th>Actions</th>
+	</tr>
+	{% for label in labels %} 
+		<tr>
+			<td>{{label.title}}</td>
+			<td><a href="{{label.id}}/rename">{% trans "Rename" %}</a></td>
+		</tr>
+	{% endfor %}
+</table>
+
+<div class="tableFooter">
+</div>
+
+{% endblock %}

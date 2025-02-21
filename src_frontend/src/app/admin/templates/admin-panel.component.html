@@ -1,0 +1,75 @@
+<div id="admin-panel">
+    <div class="page-title-bar flex-row with-dots">
+
+        <div class="page-title-bar__header">
+            <h1> {{translations | getLabel: "plain.admin.panel.admin_panel"}}</h1>
+        </div>
+
+    </div>
+
+    <div putFooterBottom
+         class="page-content">
+        <div *ngIf="!isInitialized"
+             class="app-loading-wrapper">
+            <app-loading></app-loading>
+        </div>
+
+        <div *ngIf="isInitialized">
+            <div class="mdl-grid">
+
+                <div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--5-col-desktop mdl-cell--1-offset-desktop mdl-card mdl-shadow--2dp ">
+                    <div class="mdl-card__title">
+                        <h2 class="mdl-card__title-text"> {{translations | getLabel: 'plain.admin.panel.portal_settings'}} </h2>
+                    </div>
+
+                    <ul class="mdl-list mdl-cell mdl-cell--12-col">
+
+                        <li class="mdl-list__item mdl-list__item--three-line">
+                            <a class="mdl-list__item-primary-content" [routerLink]="'translations'">
+                                <i class="material-icons mdl-list__item-avatar">&#xE8E2;</i>
+                                <span> {{ translations | getLabel: 'plain.admin.panel.translations' }}  </span>
+                                <span class="mdl-list__item-text-body">  {{ translations | getLabel: 'plain.admin.panel.translations_description' }} </span>
+                            </a>
+                        </li>
+
+                        <li class="mdl-list__item mdl-list__item--three-line">
+                            <a class="mdl-list__item-primary-content"
+                               [routerLink]="'settings'">
+                                <i class="material-icons mdl-list__item-avatar">&#xE8B8;</i>
+                                <span> {{ translations | getLabel: 'plain.admin.panel.global_settings' }} </span>
+                                <span class="mdl-list__item-text-body"> {{ translations | getLabel: 'plain.admin.panel.just_global_settings' }} </span>
+                            </a>
+                        </li>
+
+                        <li class="mdl-list__item mdl-list__item--three-line">
+                            <a class="mdl-list__item-primary-content"
+                               [routerLink]="'/panel/home_websites'">
+                                <i class="material-icons mdl-list__item-avatar">&#xE051;</i>
+                                <span> {{ translations | getLabel: 'plain.admin.panel.home_websites.title' }} </span>
+                                <span class="mdl-list__item-text-body"> {{ translations | getLabel: 'plain.admin.panel.home_websites.description' }} </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--5-col-desktop mdl-card mdl-shadow--2dp ">
+                    <div class="mdl-card__title">
+                        <h2 class="mdl-card__title-text"> {{ translations | getLabel: 'plain.admin.panel.other_settings' }} </h2>
+                    </div>
+
+                    <ul class="mdl-list mdl-cell mdl-cell--12-col">
+                        <li class="mdl-list__item mdl-list__item--three-line">
+                            <a class="mdl-list__item-primary-content"
+                               href="/panel/manage_admins">
+                                <i class="material-icons mdl-list__item-avatar">&#xE7FD;</i>
+                                <span>{{  translations | getLabel: 'plain.admin.panel.temporary' }} </span>
+                                <span class="mdl-list__item-text-body">{{  translations | getLabel: 'plain.admin.panel.temp' }}</span>
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

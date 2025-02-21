@@ -1,0 +1,268 @@
+[
+  {
+    "pk": 4, 
+    "model": "contenttypes.contenttype", 
+    "fields": {
+      "model": "space", 
+      "name": "space", 
+      "app_label": "spaces"
+    }
+  }, 
+  {
+    "pk": 7, 
+    "model": "contenttypes.contenttype", 
+    "fields": {
+      "model": "spaceaccess", 
+      "name": "space access", 
+      "app_label": "spaces"
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "auth.user", 
+    "fields": {
+      "username": "admin", 
+      "first_name": "", 
+      "last_name": "", 
+      "is_active": true, 
+      "idxf_email_l_iexact": "admin@wp.pl", 
+      "idxf_username_l_iexact": "admin", 
+      "is_superuser": true, 
+      "is_staff": true, 
+      "last_login": "2012-07-05 13:09:36", 
+      "groups": [], 
+      "user_permissions": [], 
+      "password": "sha1$d4635$ecd8e6eee560c0880accb237278f0a7275a25909", 
+      "email": "admin@wp.pl", 
+      "date_joined": "2012-07-05 13:06:55"
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "auth.user", 
+    "fields": {
+      "username": "test", 
+      "first_name": "", 
+      "last_name": "", 
+      "is_active": true, 
+      "idxf_email_l_iexact": "test@wp.pl", 
+      "idxf_username_l_iexact": "test", 
+      "is_superuser": true, 
+      "is_staff": true, 
+      "last_login": "2012-07-05 13:10:38", 
+      "groups": [], 
+      "user_permissions": [], 
+      "password": "sha1$28d05$88d93a5201baf8e590fcd04cd3a1176e1865b2e7", 
+      "email": "test@wp.pl", 
+      "date_joined": "2012-07-05 13:07:24"
+    }
+  }, 
+  {
+    "pk": "0b7536bd507db74313f01cf61b69b63a", 
+    "model": "sessions.session", 
+    "fields": {
+      "expire_date": "2012-07-19 13:10:54", 
+      "session_data": "ZTA0YTlmNDA1MWUzYWExNTM3MmM1ZGI5NzcxYzY2NzEwNDRmYmMwMDqAAn1xAChVD19zZXNzaW9u\nX2V4cGlyeXEBSwBVBXRva2VucQJVBW1QNWE1cQNVDWxhc3Rfc3BhY2VfaWRxBIoBElUNX2F1dGhf\ndXNlcl9pZHEFSwJVEl9hdXRoX3VzZXJfYmFja2VuZHEGVSlkamFuZ28uY29udHJpYi5hdXRoLmJh\nY2tlbmRzLk1vZGVsQmFja2VuZHEHdS4=\n"
+    }
+  }, 
+  {
+    "pk": 3, 
+    "model": "registration.registrationprofile", 
+    "fields": {
+      "activation_key": "ALREADY_ACTIVATED", 
+      "user": 2
+    }
+  }, 
+  {
+    "pk": 5, 
+    "model": "spaces.space", 
+    "fields": {
+      "modified_date": "2012-07-05 13:08:58", 
+      "right": 2, 
+      "is_deleted": false, 
+      "parent": null, 
+      "title": "test", 
+      "rank": 20, 
+      "top_level": 5, 
+      "created_date": "2012-07-05 13:08:58", 
+      "space_type": 1, 
+      "left": 1
+    }
+  }, 
+  {
+    "pk": 10, 
+    "model": "spaces.space", 
+    "fields": {
+      "modified_date": "2012-07-05 13:09:51", 
+      "right": 2, 
+      "is_deleted": false, 
+      "parent": null, 
+      "title": "admin", 
+      "rank": 20, 
+      "top_level": 10, 
+      "created_date": "2012-07-05 13:09:51", 
+      "space_type": 1, 
+      "left": 1
+    }
+  }, 
+  {
+    "pk": 14, 
+    "model": "spaces.space", 
+    "fields": {
+      "modified_date": "2012-07-05 13:11:02", 
+      "right": 6, 
+      "is_deleted": false, 
+      "parent": null, 
+      "title": "Solwit", 
+      "rank": 20, 
+      "top_level": 14, 
+      "created_date": "2012-07-05 13:10:29", 
+      "space_type": 3, 
+      "left": 1
+    }
+  }, 
+  {
+    "pk": 15, 
+    "model": "spaces.space", 
+    "fields": {
+      "modified_date": "2012-07-05 13:10:29", 
+      "right": 2, 
+      "is_deleted": false, 
+      "parent": null, 
+      "title": "Solwit Public", 
+      "rank": 20, 
+      "top_level": 15, 
+      "created_date": "2012-07-05 13:10:29", 
+      "space_type": 2, 
+      "left": 1
+    }
+  }, 
+  {
+    "pk": 18, 
+    "model": "spaces.space", 
+    "fields": {
+      "modified_date": "2012-07-05 13:11:02", 
+      "right": 5, 
+      "is_deleted": false, 
+      "parent": 14, 
+      "title": "Project 1", 
+      "rank": 20, 
+      "top_level": 14, 
+      "created_date": "2012-07-05 13:10:50", 
+      "space_type": 3, 
+      "left": 2
+    }
+  }, 
+  {
+    "pk": 19, 
+    "model": "spaces.space", 
+    "fields": {
+      "modified_date": "2012-07-05 13:11:02", 
+      "right": 4, 
+      "is_deleted": false, 
+      "parent": 18, 
+      "title": "Publication 1", 
+      "rank": 20, 
+      "top_level": 14, 
+      "created_date": "2012-07-05 13:11:02", 
+      "space_type": 3, 
+      "left": 3
+    }
+  }, 
+  {
+    "pk": 8, 
+    "model": "spaces.spaceaccess", 
+    "fields": {
+      "modified_date": "2012-07-05 13:09:12", 
+      "is_deleted": false, 
+      "space": 5, 
+      "user": 2, 
+      "created_date": "2012-07-05 13:09:12", 
+      "access_right": 3
+    }
+  }, 
+  {
+    "pk": 12, 
+    "model": "spaces.spaceaccess", 
+    "fields": {
+      "modified_date": "2012-07-05 13:10:06", 
+      "is_deleted": false, 
+      "space": 10, 
+      "user": 1, 
+      "created_date": "2012-07-05 13:10:06", 
+      "access_right": 3
+    }
+  }, 
+  {
+    "pk": 16, 
+    "model": "spaces.spaceaccess", 
+    "fields": {
+      "modified_date": "2012-07-05 13:10:29", 
+      "is_deleted": false, 
+      "space": 14, 
+      "user": 2, 
+      "created_date": "2012-07-05 13:10:29", 
+      "access_right": 3
+    }
+  }, 
+  {
+    "pk": 17, 
+    "model": "corporate.corporatepublicspace", 
+    "fields": {
+      "public_category": 15, 
+      "company": 14
+    }
+  }, 
+  {
+    "pk": 13, 
+    "model": "admin.logentry", 
+    "fields": {
+      "action_flag": 1, 
+      "action_time": "2012-07-05 13:10:06", 
+      "object_repr": "admin:admin <owner>", 
+      "object_id": "12", 
+      "change_message": "", 
+      "user": 1, 
+      "content_type": 7
+    }
+  }, 
+  {
+    "pk": 11, 
+    "model": "admin.logentry", 
+    "fields": {
+      "action_flag": 1, 
+      "action_time": "2012-07-05 13:09:51", 
+      "object_repr": "admin", 
+      "object_id": "10", 
+      "change_message": "", 
+      "user": 1, 
+      "content_type": 4
+    }
+  }, 
+  {
+    "pk": 9, 
+    "model": "admin.logentry", 
+    "fields": {
+      "action_flag": 1, 
+      "action_time": "2012-07-05 13:09:12", 
+      "object_repr": "test:test <owner>", 
+      "object_id": "8", 
+      "change_message": "", 
+      "user": 1, 
+      "content_type": 7
+    }
+  }, 
+  {
+    "pk": 6, 
+    "model": "admin.logentry", 
+    "fields": {
+      "action_flag": 1, 
+      "action_time": "2012-07-05 13:08:58", 
+      "object_repr": "test", 
+      "object_id": "5", 
+      "change_message": "", 
+      "user": 1, 
+      "content_type": 4
+    }
+  }
+]

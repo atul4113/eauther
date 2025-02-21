@@ -1,0 +1,10 @@
+{% autoescape off %}
+Dear {{ user }},
+<p>
+PDF {{ content }} has NOT been successfully imported at {{ app_name }}.
+</p>
+
+<p>
+Please try again or contact administrators.
+</p>
+{% endautoescape %}

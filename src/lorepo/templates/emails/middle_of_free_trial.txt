@@ -1,0 +1,25 @@
+{% load i18n %}
+<p>
+Hi there!
+</p>
+<p>
+You are in the middle of your mAuthor’s FREE TRIAL testing period.
+Thank you very much for your time so far. We hope you managed to experience at least some of mAuthor’s outstanding capabilities.
+</p>
+<p>
+However, as we mentioned to you before, being such powerful tool mAuthor has many options and functionalities that could make it a bit difficult to discover. Do not worry, we are here all the time to assist you to explore it as deep as you might require.
+</p>
+<p>
+So, please do not hesitate to contact us directly under the email or phone mentioned below. We are happy to answer to any of your questions, or offer you short one-to-one instructional webinar.
+</p>
+<p>
+Please just let us know and we will get back to you shortly with a helping hand, suggestion or advice.
+</p>
+<p>
+With Best Regards,
+Learnetic Customer Satisfaction Team
+</p>
+<p>
+e-mail: mauthor@learnetic.com
+phone: +48 58 764 75 00
+</p>

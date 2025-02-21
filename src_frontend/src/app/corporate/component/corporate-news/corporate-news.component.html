@@ -1,0 +1,13 @@
+<mat-card *ngFor="let singleNews of news" class="news-card">
+    <!--<img [src]="assetsUrl + '/images/news_img.png'" mat-card-image>-->
+    <div class="content-container">
+        <mat-card-title>{{ singleNews.title }}</mat-card-title>
+        <mat-card-subtitle>{{ singleNews.published }}</mat-card-subtitle>
+        <mat-card-content class="news-description">{{ singleNews.summary }}</mat-card-content>
+        <mat-card-content class="button-container">
+            <a [href]="singleNews.link" target="_blank">
+                {{ translations | getLabel:"plain.corporate.panel.news.read_more" }}
+            </a>
+        </mat-card-content>
+    </div>
+</mat-card>

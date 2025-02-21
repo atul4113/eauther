@@ -1,0 +1,7 @@
+{% for space in spaces %}
+	<option value="{{space.id}}" {% if space.id == selected_space.id %}selected{% endif %}>{{param}} {{space.title}}</option>
+	{% with param|add:space.title|add:" -> " as inner_param %}
+		{% children_tag_select space.kids.all inner_param selected_space %}
+	{% endwith %}
+{% endfor %}
+

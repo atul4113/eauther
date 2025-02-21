@@ -1,0 +1,32 @@
+@import "../../../common/templates/mdl-colors";
+
+app-lesson-details-metadata-icon {
+    .icon {
+        display: flex;
+        flex-grow: 0;
+        width: calc(120px - 8px);
+        height: calc(100px - 8px);
+        padding: 4px;
+        margin-right: 16px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+        align-items: flex-end;
+        justify-content: flex-start;
+        flex-direction: column;
+
+        &.edit {
+            background-image: none !important;
+
+            app-loading,
+            upload-file {
+                align-self: center;
+            }
+        }
+
+        button.white {
+            background: $white!important;
+            color: $grey-800!important;
+        }
+    }
+}

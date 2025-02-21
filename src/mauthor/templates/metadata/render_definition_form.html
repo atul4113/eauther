@@ -1,0 +1,31 @@
+<div class="metadata-element{% if definition.unused %} removed {% endif %}">
+	<div class="field-type">{{definition.name}}</div>
+    {% if definition.unused %}
+        <div class="add-wrapper"><a class="add"><img alt="+" src="/media/images/add.png" title="Add"/></a></div>
+        <div class="remove-wrapper hidden"><a class="remove"><img alt="x" src="/media/images/cross.png" title="Remove"/></a></div>
+        <input type="hidden" id="unused" name="unused{{suffix}}" value="true" />
+    {% else %}
+        <div class="add-wrapper hidden"><a class="add"><img alt="+" src="/media/images/add.png" title="Add"/></a></div>
+        <div class="remove-wrapper"><a class="remove"><img alt="x" src="/media/images/cross.png" title="Remove"/></a></div>
+        <input type="hidden" id="unused" name="unused{{suffix}}" value="false" />
+    {% endif %}
+	<div class="clear"></div>
+	{{definition.description}}<br/>
+	<input type="hidden" name="type{{suffix}}" value="{{definition.field_type}}"/>
+	<input type="hidden" name="name{{suffix}}" value="{{definition.name}}"/>
+	<input type="hidden" name="metadata_description{{suffix}}" value="{{definition.description}}"/>
+	<input type="hidden" name="values{{suffix}}" value="{{definition.value}}"/>
+
+{% if definition.field_type == DefinitionType.SHORT_TEXT %}
+	<input type="text" class="entered-value" name="entered_value{{suffix}}" value="{{definition.entered_value}}" {% if definition.unused %} disabled {% endif %} {% if language_bidi %}dir="rtl"{% endif %}/>
+{% endif %}
+
+{% if definition.field_type == DefinitionType.LONG_TEXT %}
+	<textarea name="entered_value{{suffix}}" class="entered-value" rows="5" {% if definition.unused %} disabled {% endif %} {% if language_bidi %}dir="rtl"{% endif %}>{{definition.entered_value}}</textarea>
+{% endif %}
+
+
+{% if definition.field_type == DefinitionType.SELECT %}
+	{% render_select_tag definition suffix %}
+{% endif %}
+</div>

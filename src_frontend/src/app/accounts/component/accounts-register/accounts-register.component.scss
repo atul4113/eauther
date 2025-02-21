@@ -1,0 +1,198 @@
+@import "../../../common/templates/mdl-colors";
+
+.mdl-checkbox {
+  min-height: 24px;
+  height:auto;
+}
+
+#ui-datepicker-div {
+  background-color: $white;
+  text-decoration: none;
+  box-shadow: 10px 10px 45px;
+  padding: 8px;
+
+  .ui-datepicker-next {
+    float: right;
+  }
+
+  .ui-datepicker-next, .ui-datepicker-prev {
+    color: $black;
+    cursor: pointer;
+  }
+
+  .ui-datepicker-title {
+    text-align: center;
+  }
+
+  .ui-datepicker-calendar {
+    thead {
+      color: $grey-400
+    }
+
+    tbody{
+      tr{
+        td{
+          text-align: center;
+          font-size: 13px;
+          border-radius: 100px;
+          padding: 8px;
+
+            &.ui-datepicker-unselectable.ui-state-disabled {
+                color: $grey-400;
+            }
+
+          a{
+            text-decoration: none;
+            color: $black;
+          }
+        }
+        td:hover {
+          background-color: $grey-300;
+        }
+        td.ui-datepicker-current-day {
+          background-color: rgb(33,150,243);
+        }
+      }
+    }
+  }
+}
+
+section#accounts-register {
+    div.page-content {
+        padding: 15px;
+        background: $white;
+
+        .form-alert {
+          font-size: 13px;
+          color: red;
+        }
+
+        .error-list{
+          margin-top: -16px;
+          min-height: 0;
+        }
+
+        .select-info {
+          color: $grey-400;
+        }
+
+        .invalid {
+          border-color: $red-600;
+        }
+
+        .registration-info {
+          text-align: center;
+        }
+
+        .registration-alert {
+          color: $red-600;
+        }
+
+        .sso-register-buttons {
+            margin-top: 50px;
+        }
+
+        .sso-register-button {
+          min-width: 190px;
+        }
+
+        .custom-register-button {
+            background-color: $green-600;
+            width: 250px;
+        }
+
+        .dropdown-button {
+            margin-left: 5px;
+        }
+
+        .aggrements-info {
+          .first-info {
+            margin-top: 10px;
+          }
+
+          li {
+            margin-bottom: 15px;
+            padding-left: 16px;
+            padding-right: 16px;
+
+            span {
+              display: inline-flex;
+            }
+
+            i {
+              margin-right: 32px;
+            }
+
+            .mdl-checkbox__label {
+              max-width: 370px;
+            }
+          }
+        }
+
+        .profile-header {
+          border-top: solid 1px #d6d6d6;
+          padding-top: 15px;
+        }
+
+        form {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+
+            div.error {
+                color: $red-600;
+                padding: 8px;
+            }
+
+            ul.mdl-list {
+                padding: 0;
+                margin: 0;
+
+                li.mdl-list__item {
+                    padding-top: 0;
+                    padding-bottom: 0;
+
+                    .mdl-textfield__input[readonly]:not(.active-readonly) {
+                      color: $grey-500;
+                    }
+                }
+            }
+
+            div.bottom-actions {
+                margin-top: 16px;
+                padding-top: 8px;
+                border-top: 1px solid $grey-300;
+            }
+        }
+
+        div.date-format-info {
+          font-size: 12px;
+          padding-top: 25px;
+          padding-left: 10px;
+        }
+
+        div.profile-type-info {
+          font-size: 12px;
+          padding-top: 10px;
+          padding-left: 10px;
+        }
+
+        div.wrong-email-alert {
+          font-size: 12px;
+          padding-top: 25px;
+          padding-left: 10px;
+          color: red;
+        }
+
+      .regulations {
+        margin-top: 16px;
+      }
+
+      .change-button {
+        margin-top: 16px;
+      }
+      .regulation-link {
+        margin-left: 3px;
+      }
+    }
+}

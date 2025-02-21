@@ -1,0 +1,45 @@
+{% autoescape off %}
+
+<p>
+Dear {{ user }},
+</p>
+
+<p>
+Course "{{ exported_course.course.name }}" exported successfully.
+</p>
+
+<p>
+Export started at: {{ exported_course.created_date }}
+</p>
+
+<p>
+The fastest way to import your course to mCourser is to use the following code string:
+</p>
+<p>
+{{ course_code }}
+</p>
+
+<p>
+or you can download your course at <a href="{{ settings.BASE_URL }}/file/serve/{{ exported_course.uploaded_file.id }}">
+{{ settings.BASE_URL }}/file/serve/{{ exported_course.uploaded_file.id }}</a>
+</p>
+
+{% if exported_lessons %}
+<p>
+Packages with resources can be downloaded at the following locations:
+<ul>
+{% for package in exported_lessons %}
+	<li>
+		<a href="{{ settings.BASE_URL }}/file/serve/{{ package.zipped_content.id }}">{{ package.zipped_content.id }}.zip</a>
+		- {{ package.content.title }}, target folder {{package.content.id}}
+	</li>
+{% endfor %}
+</ul>
+If you would like to create a SCORM package with the whole course please copy each lesson files to target folder inside the course zip file.
+</p>
+{% endif %}
+
+<p>Exported packages will be available on the server for a month. After this period the links and the code provided in this e-mail will become invalid.</p>
+
+
+{% endautoescape %}

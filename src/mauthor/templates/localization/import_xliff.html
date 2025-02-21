@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load apptags %}
+
+{% block content %}
+
+<h1 class="page_header">Upload Xliff</h1>
+<div class="main clear" style="padding-top: 0"></div>
+
+{% include "common/messages/display_messages.html" %}
+<div>
+	Browse a XLIFF file you want to upload and press 'Upload'. <br />
+	In background the file will be read and copy of presentation with translated texts will be created in 
+	{% if space.space_type == 1 %} My Lessons {% else %} {{space}} {% endif %}. <br />
+	<div>
+		Requirements:
+		<ul>
+			<li>must be a valid XML/XLIFF</li>
+			<li>contains id of source presentation</li>
+		</ul>
+	</div>
+</div>
+<div>
+	<form action="{{upload_url}}" method="POST" enctype="multipart/form-data" name="import">
+		{% csrf_token %}
+			{{form}}
+		{% button 'Upload' 'document.forms["import"].submit()' %}
+		<input type="hidden" value="{{next}}" name="next" />
+		<input type="submit" value="import" />
+	</form>
+</div>
+
+{% endblock %}

@@ -1,0 +1,108 @@
+{% load i18n %}
+{% load apptags %}
+{% load logo %}
+{% load corporate %}
+{% load spaces %}
+{% load cache %}
+{% load utility %}
+
+{% if request.user and request.user.company.id|is_test_company %}
+    <script type='text/javascript'>
+        window.__wtw_lucky_site_id = 76522;
+
+        (function() {
+        var wa = document.createElement('script'); wa.type = 'text/javascript'; wa.async = true;
+        wa.src = 'https://d10lpsik1i8c69.cloudfront.net/w.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(wa, s);
+        })();
+    </script>
+{% endif %}
+
+<div id="cookies-notification" class="alert-info" style="text-align: center">
+    Please note that the new version of mAuthor is available at the following address: <a target="_blank" href="http://new.mauthor.com">new.mauthor.com</a>. Please go there and use your current credentials to log in. The new version offers numerous important improvements. Learn more about the new version <a target="_blank" href="https://www.mauthor.com/present/4966625777025024">here</a>. The current version of mAuthor will be available only till the end of August 2018. After this date the new version will be the only version available.
+</div>
+
+{% include 'common/cookies_notification.html' %}
+{% include 'common/announcement.html' %}
+
+{% if request.user and request.user.company|is_more_users_in_company %}
+    <div id="more-users-notofication" class="alert-danger">
+        Too many users added to {{ request.user.company }} space.
+    </div>
+{% endif %}
+
+<nav class="navbar navbar-default navbar-inverse navbar-static-top" role="navigation" id="home_header">
+	<div class="container">
+		<div class="navbar-header">
+            {% if not hide_logo %}
+			    <a href="http://www.learnetic.com/mauthor/" title="Home" class="no-padding"><img src="/media/images/main-page/ma_main_mauthor_logo.svg"/></a>
+            {% endif %}
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        		<span class="sr-only">Toggle navigation</span>
+        		<span class="icon-bar"></span>
+        		<span class="icon-bar"></span>
+        		<span class="icon-bar"></span>
+      		</button>
+		</div>
+	
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				<li></li>
+				{% if user.is_authenticated %}
+                    <li><a href="/corporate">Dashboard</a></li>
+                {% if not request.user.company|is_company_locked_for_user %}
+				<li><a href="/mycontent">My Lessons</a></li>
+                    {% if user.company %}
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Projects <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                {% corporate_subspaces_menu request %}
+                            </ul>
+                        </li>
+                        <li><a href="/support">Support</a></li>
+                    {% endif %}
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Help <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/doc">Documentation</a></li>
+                        <li><a href="/doc/en/page/Video-Tutorials">Video Tutorials</a></li>
+                        <li><a href="/doc/en/page/Sample-Lessons?no_menu">Modules Examples</a></li>
+                    </ul>
+                </li>
+                {% endif %}
+				{% endif %}
+			</ul>
+			
+			{% if not user.is_authenticated %}
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="/accounts/register">Register</a></li>
+			</ul>
+			<form class="navbar-form navbar-right" method="post" action="/accounts/login">
+				<div class="form-group">
+					<input type="text" name="username" class="form-control input-sm" placeholder="username"/>
+					<input type="password" name="password" class="form-control input-sm" placeholder="password"/>
+				</div>
+                <input type="hidden" name="next" value="{{ next }}" />
+				<button type="submit" class="btn btn-primary btn-sm">Login</button>
+			</form>
+			{% else %}
+			<ul class="nav navbar-nav navbar-right">
+            {% if not request.user.company|is_company_locked_for_user %}
+				{% if user.company.id|is_space_owner_tag:user %}
+					<li><a href='/corporate/admin'>Company admin</a></li> 
+				{% endif %}
+				{% if user|is_any_division_admin %}
+					<li><a href='/corporate/divisionadmin'>Project admin</a></li> 
+				{% endif %}
+                {% endif %}
+				{% if user.is_superuser %}
+					<li><a href="/user/settings">{{ user.username }}</a></li>
+				{% else %}
+					<li><a href="/user/profile">{{ user.username }}</a></li>
+				{% endif %}
+				<li><a href="/user/logout">Logout</a></li>
+			</ul>			
+			{% endif %}
+		</div>
+	</div>
+</nav>

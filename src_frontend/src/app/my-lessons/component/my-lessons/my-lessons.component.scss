@@ -1,0 +1,308 @@
+@import "../../../common/templates/mdl-colors";
+
+section#my-lessons {
+    display: flex;
+
+    div.page-content {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+
+        .is-bold {
+            font-weight: bold;
+        }
+
+        .main-view {
+            display: flex;
+
+            .publications-header {
+                display: flex;
+
+                .material-icons {
+                    padding-top: 10px;
+                }
+            }
+
+            .lessons-section {
+                height: 26px;
+            }
+
+            .publication-container {
+                a {
+                    text-decoration: none;
+                    color: black;
+                }
+
+                .custom-addons {
+                    cursor: pointer;
+                    padding-top: 4px;
+                    padding-bottom: 10px;
+                }
+            }
+
+            .grid {
+                flex-grow: 1;
+                display: block;
+            }
+
+            .column-body {
+                padding: 8px;
+            }
+
+            .categories {
+                display: block;
+                width: 256px;
+                float: left;
+                padding-left: 12px;
+
+                h4 {
+                    margin: 8px 0 7px 0;
+                }
+            }
+
+            .lessons {
+                display: block;
+                width: calc(100% - 268px);
+                float: left;
+
+                .app-loading-wrapper {
+                    display: flex;
+                    justify-content: center;
+                }
+
+                .lessons-paginator {
+                    display: flex;
+                    align-items: center;
+                    justify-content: flex-end;
+
+                }
+
+                .no-lessons-info {
+                    text-align: center;
+                    padding-top: 30px;
+                    color: #757575;
+                }
+
+            }
+
+            .text-center {
+                text-align: center;
+            }
+
+            .lesson-header {
+                height: 40px;
+
+                .sort-button {
+                    float: right;
+                }
+
+                .material-icons {
+                    width: 24px;
+                }
+            }
+
+            paginator {
+                float: right;
+            }
+        }
+
+    }
+
+    .page-content-bigger {
+        width: 100% !important;
+    }
+
+    .details-view {
+        display: flex;
+        //float: left;
+        background-color: white;
+        min-width: 481px;
+        max-width: 481px;
+        border-left: 1px solid $grey-300;
+
+        .select-lesson-info {
+            width: 100%;
+            text-align: center;
+            padding-top: 30px;
+            font-size: 20px;
+            color: $grey-600;
+        }
+
+        .hide-empty {
+            margin: 15px 15px 15px auto;
+            color: $grey-400;
+            cursor: pointer;
+        }
+
+        .lessons-list {
+            width: 100%;
+
+            .selected-lessons {
+                padding: 8px;
+                text-align: center;
+                margin-bottom: 10px;
+                font-size: 20px;
+                color: $grey-600;
+            }
+
+            .lesson-list-element {
+                padding: 4px 8px;
+                font-size: 17px;
+
+                a {
+                    text-decoration: none;
+                    color: $blue-500;
+                }
+            }
+        }
+    }
+
+    .closed-details {
+        background-color: white;
+        width: 75px;
+        border-left: 1px solid $grey-300;
+
+        a {
+            top: 30px;
+            padding: 0;
+            left: 25px;
+            min-width: 27px;
+            border-radius: 25px;
+        }
+
+        .enabled {
+            color: $blue-500;
+        }
+
+        .disabled {
+            color: $grey-400;
+        }
+    }
+
+    .page-title-bar {
+        padding: 16px 20px;
+        display: flex;
+        overflow: visible;
+        background: $white;
+        border-bottom: 1px solid $grey-300;
+        align-items: flex-end;
+        -webkit-align-items: flex-end;
+
+        .page-title-bar__header {
+            display: flex;
+            flex-wrap: wrap;
+            width: 100%;
+
+            .project-title-container {
+                display: flex;
+                flex-direction: column;
+                flex-grow: 1;
+
+                span {
+                    color: $grey-700;
+                    font-size: 18px;
+                }
+            }
+
+            .title {
+                line-height: 56px;
+            }
+
+            #import-options, #create-options {
+                cursor: pointer;
+            }
+
+            #create-options {
+                //right: 484px;
+                //position: absolute;
+                color: white;
+                margin-left: 15px;
+            }
+
+            h1 {
+                padding: 0;
+                margin: 0 10px 0 0;
+                display: inline-block;
+                font-size: 36px;
+                line-height: 44px;
+            }
+
+            a {
+                text-decoration: none;
+                color: $grey-700;
+            }
+
+            .material-icons {
+                width: 24px;
+            }
+
+            .header-functions {
+                float: right;
+                align-items: center;
+                display: flex;
+
+                .manage-courser, .property-change, .remove-descriptors {
+                    display: inline-flex;
+                    justify-content: center;
+                    align-items: center;
+                    color: black;
+                }
+
+                .line {
+                    height: 30px;
+                    margin-left: 20px;
+                    margin-right: 10px;
+                    border-right: solid $grey-300 1px;
+                }
+
+                button {
+                    margin-left: 10px;
+                }
+
+                i {
+                    width: 24px;
+                }
+
+                i {
+                    width: 24px;
+                }
+
+                i {
+                    width: 24px;
+                }
+
+                .publication-item {
+                    padding-left: 35px;
+                }
+
+                .icon-link {
+                    padding: 0;
+                    min-width: 0;
+                }
+
+                .icon-link.disabled {
+                    color: $grey-300
+                }
+            }
+
+            .sort-order {
+                display: flex;
+                align-items: center;
+
+                i {
+                    margin-left: 8px;
+                }
+            }
+        }
+    }
+}
+
+.cdk-overlay-container {
+    z-index: 10000;
+
+    .mat-menu-content{
+        app-loading {
+            margin: 2px 2px 2px 42px;
+        }
+    }
+}

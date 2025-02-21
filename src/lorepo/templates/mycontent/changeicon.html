@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load apptags %}
+{% block head %}
+	<script src="/media/agileuploader/jquery.flash.min.js" type="text/javascript"></script>
+	<script src="/media/agileuploader/agile-uploader-3.0.js" type="text/javascript"></script>
+	
+{% endblock %}
+
+
+{% block content %}
+
+<h1 class="page_header">{% trans "Change icon" %}</h1>
+<div class="main clear" style="padding-top: 0"></div>
+
+<div style="float:left; padding:10px;">
+{% if content.content_type == 3 %}
+	{% if content.icon_href != None %}
+		<img src="{{content.icon_href}}" style="border:0px none;" />
+	{% else %}
+		<img src="/media/content/default_small_addon.png" style="border:0px none;" />
+	{% endif %}
+{% else %}
+	{% if content.icon_href != None %}
+		<img src="{{content.icon_href}}" style="border:1px solid lightgray;"/>
+	{% else %}
+		<img src="/media/content/default_presentation.png" style="border:1px solid lightgray;"/>
+	{% endif %}
+{% endif %}
+</div>
+<form name="upload" method="post" enctype="multipart/form-data" action="{{upload_url}}">
+	<table class="upload-logo">
+			{{ form }}
+		<tr><th></th><th><button role="submit" class="btn btn-primary btn-sm">Upload</button></th></tr>
+	</table>
+	<input type="hidden" value="{{next}}" name="next" />
+	<input type="submit" value="upload" />
+</form>
+
+{% endblock %}

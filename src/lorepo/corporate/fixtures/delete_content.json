@@ -1,0 +1,288 @@
+[
+  {
+    "pk": 2, 
+    "model": "contenttypes.contenttype", 
+    "fields": {
+      "model": "space", 
+      "name": "space", 
+      "app_label": "spaces"
+    }
+  }, 
+  {
+    "pk": 5, 
+    "model": "contenttypes.contenttype", 
+    "fields": {
+      "model": "spaceaccess", 
+      "name": "space access", 
+      "app_label": "spaces"
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "auth.user", 
+    "fields": {
+      "username": "admin", 
+      "first_name": "", 
+      "last_name": "", 
+      "is_active": true, 
+      "idxf_email_l_iexact": "admin@wp.pl", 
+      "idxf_username_l_iexact": "admin", 
+      "is_superuser": true, 
+      "is_staff": true, 
+      "last_login": "2012-08-02 15:02:58", 
+      "groups": [], 
+      "user_permissions": [], 
+      "password": "sha1$01a8e$bdcb22ee34235228e7657737dd4b02a33cdd3b1e", 
+      "email": "admin@wp.pl", 
+      "date_joined": "2012-08-02 15:01:38"
+    }
+  }, 
+  {
+    "pk": "c9e1b85fc0ee3b35b254549e2d9f8655", 
+    "model": "sessions.session", 
+    "fields": {
+      "expire_date": "2012-08-16 15:04:10", 
+      "session_data": "YzEzNmEyYWYyZWU5MmQ2YzhiZTljMjY3YmFlYzVjODRkODMzNTA1ZDqAAn1xAChVDV9hdXRoX3Vz\nZXJfaWRxAUsBVRJfYXV0aF91c2VyX2JhY2tlbmRxAlUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNr\nZW5kcy5Nb2RlbEJhY2tlbmRxA1UFdG9rZW5xBFUFU2drY1JxBVUNbGFzdF9zcGFjZV9pZHEGSw1V\nD19zZXNzaW9uX2V4cGlyeXEHSwBVD2xhc3RfcHJvamVjdF9pZHEIfXEJSw1LDnN1Lg==\n"
+    }
+  }, 
+  {
+    "pk": 17, 
+    "model": "search.relationindex_mycontent_content_search_index", 
+    "fields": {
+      "modified_date": "2012-08-02 15:04:07", 
+      "is_featured": false, 
+      "big_icon_href": null, 
+      "is_deleted": false, 
+      "file": 16, 
+      "title": "Lesson 1", 
+      "author": 1, 
+      "public_version": null, 
+      "view_count": 0, 
+      "name": null, 
+      "search_index_search_list_field": [
+        "1", 
+        "lesson"
+      ], 
+      "is_template": false, 
+      "is_globally_public": false, 
+      "content_type": 1, 
+      "created_date": "2012-08-02 15:04:06", 
+      "short_description": "", 
+      "is_public": false, 
+      "icon_href": null, 
+      "associated_content": null, 
+      "tags": "", 
+      "description": ""
+    }
+  }, 
+  {
+    "pk": 17, 
+    "model": "mycontent.content", 
+    "fields": {
+      "modified_date": "2012-08-02 15:04:07", 
+      "is_featured": false, 
+      "big_icon_href": null, 
+      "is_deleted": false, 
+      "file": 16, 
+      "title": "Lesson 1", 
+      "author": 1, 
+      "public_version": null, 
+      "view_count": 0, 
+      "name": null, 
+      "is_template": false, 
+      "is_globally_public": false, 
+      "content_type": 1, 
+      "created_date": "2012-08-02 15:04:06", 
+      "short_description": "", 
+      "is_public": false, 
+      "icon_href": null, 
+      "associated_content": null, 
+      "tags": "", 
+      "description": ""
+    }
+  }, 
+  {
+    "pk": 18, 
+    "model": "mycontent.contentspace", 
+    "fields": {
+      "content": 17, 
+      "is_deleted": false, 
+      "space": 14
+    }
+  }, 
+  {
+    "pk": 3, 
+    "model": "spaces.space", 
+    "fields": {
+      "modified_date": "2012-08-02 15:02:12", 
+      "right": 2, 
+      "is_deleted": false, 
+      "parent": null, 
+      "title": "admin", 
+      "rank": 20, 
+      "top_level": 3, 
+      "created_date": "2012-08-02 15:02:12", 
+      "space_type": 1, 
+      "left": 1
+    }
+  }, 
+  {
+    "pk": 8, 
+    "model": "spaces.space", 
+    "fields": {
+      "modified_date": "2012-08-02 15:03:56", 
+      "right": 6, 
+      "is_deleted": false, 
+      "parent": null, 
+      "title": "AdMiN", 
+      "rank": 20, 
+      "top_level": 8, 
+      "created_date": "2012-08-02 15:02:48", 
+      "space_type": 3, 
+      "left": 1
+    }
+  }, 
+  {
+    "pk": 9, 
+    "model": "spaces.space", 
+    "fields": {
+      "modified_date": "2012-08-02 15:02:48", 
+      "right": 2, 
+      "is_deleted": false, 
+      "parent": null, 
+      "title": "AdMiN Public", 
+      "rank": 20, 
+      "top_level": 9, 
+      "created_date": "2012-08-02 15:02:48", 
+      "space_type": 2, 
+      "left": 1
+    }
+  }, 
+  {
+    "pk": 13, 
+    "model": "spaces.space", 
+    "fields": {
+      "modified_date": "2012-08-02 15:03:56", 
+      "right": 5, 
+      "is_deleted": false, 
+      "parent": 8, 
+      "title": "Project 1", 
+      "rank": 20, 
+      "top_level": 8, 
+      "created_date": "2012-08-02 15:03:46", 
+      "space_type": 3, 
+      "left": 2
+    }
+  }, 
+  {
+    "pk": 14, 
+    "model": "spaces.space", 
+    "fields": {
+      "modified_date": "2012-08-02 15:03:56", 
+      "right": 4, 
+      "is_deleted": false, 
+      "parent": 13, 
+      "title": "Publication 1", 
+      "rank": 20, 
+      "top_level": 8, 
+      "created_date": "2012-08-02 15:03:56", 
+      "space_type": 3, 
+      "left": 3
+    }
+  }, 
+  {
+    "pk": 6, 
+    "model": "spaces.spaceaccess", 
+    "fields": {
+      "modified_date": "2012-08-02 15:02:21", 
+      "is_deleted": false, 
+      "space": 3, 
+      "user": 1, 
+      "created_date": "2012-08-02 15:02:21", 
+      "access_right": 3
+    }
+  }, 
+  {
+    "pk": 10, 
+    "model": "spaces.spaceaccess", 
+    "fields": {
+      "modified_date": "2012-08-02 15:02:48", 
+      "is_deleted": false, 
+      "space": 8, 
+      "user": 1, 
+      "created_date": "2012-08-02 15:02:48", 
+      "access_right": 3
+    }
+  }, 
+  {
+    "pk": 15, 
+    "model": "filestorage.filestorage", 
+    "fields": {
+      "modified_date": "2012-08-02 15:04:06", 
+      "history_for": null, 
+      "version": null, 
+      "content_type": "text/xml", 
+      "created_date": "2012-08-02 15:04:06", 
+      "owner": 1, 
+      "contents": "<?xml version='1.0' encoding='UTF-8' ?> \n\n<page>\n\t<modules> \n\t\n\t\t<textModule id=\"Title\" left=\"5\" top=\"3\" width=\"90\" height=\"7\" style=\"\">\n\t\t\t<text>&lt;div style=&quot;text-align: center;&quot;&gt;Title&lt;/div&gt;</text>\n\t\t</textModule>\t\n\t\t<buttonModule id=\"PrevPage\" left=\"0\" top=\"90\" width=\"10\" height=\"10\" style=\"\">\n\t\t\t<button type=\"prevPage\" text=\"\"/>\n\t\t</buttonModule>\n\t\t<buttonModule id=\"NextPage\" left=\"90\" top=\"90\" width=\"10\" height=\"10\" style=\"\">\n\t\t\t<button type=\"nextPage\" text=\"\"/>\n\t\t</buttonModule>\n    </modules> \n</page>\n"
+    }
+  }, 
+  {
+    "pk": 16, 
+    "model": "filestorage.filestorage", 
+    "fields": {
+      "modified_date": "2012-08-02 15:04:06", 
+      "history_for": 17, 
+      "version": 1, 
+      "content_type": "text/xml", 
+      "created_date": "2012-08-02 15:04:06", 
+      "owner": 1, 
+      "contents": "<?xml version='1.0' encoding='UTF-8' ?>\n<interactiveContent>\n\n\t<style href=\"/media/content/styles/default/content.css\"/>\n\t\n\t<pages>\n    \t<page name='Page 1' href='15'/> \n    </pages>\n</interactiveContent>"
+    }
+  }, 
+  {
+    "pk": 11, 
+    "model": "corporate.corporatepublicspace", 
+    "fields": {
+      "public_category": 9, 
+      "company": 8
+    }
+  }, 
+  {
+    "pk": 12, 
+    "model": "corporate.companyproperties", 
+    "fields": {
+      "valid_until": null, 
+      "modified_date": "2012-08-02 15:02:48", 
+      "company": 8, 
+      "max_accounts": null, 
+      "created_date": "2012-08-02 15:02:48"
+    }
+  }, 
+  {
+    "pk": 7, 
+    "model": "admin.logentry", 
+    "fields": {
+      "action_flag": 1, 
+      "action_time": "2012-08-02 15:02:21", 
+      "object_repr": "admin:admin <owner>", 
+      "object_id": "6", 
+      "change_message": "", 
+      "user": 1, 
+      "content_type": 5
+    }
+  }, 
+  {
+    "pk": 4, 
+    "model": "admin.logentry", 
+    "fields": {
+      "action_flag": 1, 
+      "action_time": "2012-08-02 15:02:12", 
+      "object_repr": "admin", 
+      "object_id": "3", 
+      "change_message": "", 
+      "user": 1, 
+      "content_type": 2
+    }
+  }
+]

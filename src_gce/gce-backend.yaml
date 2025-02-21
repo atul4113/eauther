@@ -1,0 +1,14 @@
+service: gce-backend
+runtime: custom
+env: flex
+
+manual_scaling:
+  instances: 1
+
+resources:
+  cpu: .5
+  memory_gb: 0.90
+  disk_size_gb: 10
+
+env_variables:
+  MAUTHOR_HOST: http://mAuthor.com

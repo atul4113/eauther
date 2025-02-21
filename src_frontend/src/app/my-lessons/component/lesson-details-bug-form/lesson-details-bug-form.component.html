@@ -1,0 +1,47 @@
+<form (ngSubmit)="onSubmit()">
+
+    <mat-form-field class="full-width"
+                    [ngClass]="{'mat-form-field-invalid': !isTitleValid }">
+
+        <input matInput
+               [(ngModel)]="title"
+               name="title"
+               [placeholder]=" translations | getLabel:'plain.my_lessons.panel.lesson_details_meta.title'">
+
+         <mat-hint *ngIf="!isTitleValid"
+                  class="error">
+            {{ translations | getLabel:"plain.my_lessons.panel.lesson_details_meta.title_not_empty" }}
+        </mat-hint>
+
+    </mat-form-field>
+
+
+    <mat-form-field class="full-width bug-desc"
+                    [ngClass]="{'mat-form-field-invalid': !isDescValid }">
+
+        <h6> {{translations | getLabel:"plain.languages.panel.description" }}</h6>
+
+        <textarea matInput style="display: none;" value="a"></textarea>
+
+        <tiny-mce [id]="'bugtrack-description-of-bug'"
+                  [formatSelect]="false"
+                  [(value)]="description"
+        ></tiny-mce>
+
+        <mat-hint *ngIf="!isDescValid"
+                  class="error">
+            {{ translations | getLabel:"plain.my_lessons.panel.lesson_details_meta.desc_not_empty" }}
+        </mat-hint>
+
+    </mat-form-field>
+
+    <div class="button-to-the-right">
+        <button mat-raised-button
+                color="accent"
+                type="submit">
+            {{ translations | getLabel:"plain.my_lessons.panel.lesson_details.comment" }}
+        </button>
+    </div>
+</form>
+
+

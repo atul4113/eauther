@@ -1,0 +1,12 @@
+{
+	"kids" : [
+		{% for kid in kids %}
+			{
+				"id" : {{ kid.id }},
+				"title" : "{{ kid.title }}",
+				"hasKids" : {% if kid.has_kids %}true{% else %}false{% endif %},
+				"hasLessons" : {% if kid.has_lessons %}true{% else %}false{% endif %}
+			}{% if not forloop.last %},{% endif %}
+		{% endfor %}
+	]
+}

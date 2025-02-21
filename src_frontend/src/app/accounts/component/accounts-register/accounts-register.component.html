@@ -1,0 +1,174 @@
+<section mdl id="accounts-register">
+    <page-title-bar>
+        <h1 class="title">
+            {{ translations | getLabel:"plain.accounts.register.panel.register" }}
+        </h1>
+    </page-title-bar>
+
+    <div putFooterBottom class="page-content">
+        <form method="post" name="login">
+            <div *ngFor="let error of errors" class="registration-alert">
+                {{ error }}
+            </div>
+            <div class="require-info"> {{ translations | getLabel:"plain.accounts.register.panel.account" }} </div>
+            <ul class="mdl-list">
+                <li class="mdl-list__item">
+                    <span class="mdl-list__item-primary-content">
+                        <i class="material-icons mdl-list__item-icon">&#xE7FD;</i>
+                        <div class="mdl-textfield mdl-js-textfield">
+                            <input [(ngModel)]="registerAccount.username"
+                                [ngClass]="{'invalid': !formValid.username}"
+                                   [placeholder] = " translations | getLabel:'plain.accounts.register.panel.username' "
+
+                                 class="mdl-textfield__input" id="username" type="text" name="username">
+                            <label class="mdl-textfield__label" for="username"></label>
+                        </div>
+                    </span>
+                </li>
+                <li *ngIf="(!formValid.username && !isUsernameServerError) || (!formValid.username && isUsernameServerError)" class="mdl-list__item error-list">
+                    <span class="mdl-list__item-primary-content">
+                        <i class="material-icons mdl-list__item-icon"></i>
+                        <div *ngIf="!formValid.username && !isUsernameServerError" class="form-alert">
+                            {{ translations | getLabel:"plain.accounts.register.panel.field_required" }}
+                        </div>
+                        <div *ngIf="!formValid.username && isUsernameServerError" class="form-alert">
+                            {{ usernameErrorText }}
+                        </div>
+                    </span>
+                </li>
+                <div class="password_container">
+                    <li class="mdl-list__item">
+                        <span class="mdl-list__item-primary-content">
+                            <i class="material-icons mdl-list__item-icon">&#xE897;</i>
+                            <div class="mdl-textfield mdl-js-textfield">
+                                <input [(ngModel)]="registerAccount.password"
+                                       [ngClass]="{'invalid': !formValid.password}"
+                                       (blur)="checkPasswords()"
+                                       [placeholder]= " translations | getLabel: 'plain.accounts.login.panel.password' "
+                                       class="mdl-textfield__input" id="password" type="password" name="password">
+                                <label class="mdl-textfield__label" for="password"></label>
+                            </div>
+                        </span>
+                    </li>
+                    <li *ngIf="!formValid.password" class="mdl-list__item error-list">
+                        <span class="mdl-list__item-primary-content">
+                            <i class="material-icons mdl-list__item-icon"></i>
+                            <div *ngIf="!formValid.password" class="form-alert">
+                                {{ translations | getLabel:"plain.accounts.register.panel.field_required" }}
+                            </div>
+                        </span>
+                    </li>
+
+                    <li class="mdl-list__item">
+                        <span class="mdl-list__item-primary-content">
+                            <i class="material-icons mdl-list__item-icon">&#xE897;</i>
+                            <div class="mdl-textfield mdl-js-textfield">
+                            <input [(ngModel)]="registerAccount.passwordAgain"
+                                   [ngClass]="{'invalid': !formValid.passwordAgain}"
+                                   (blur)="checkPasswords()"
+                                   [placeholder]= " translations | getLabel: 'plain.accounts.login.panel.password_again'"
+                                   class="mdl-textfield__input" id="password_again" type="password" name="password_again">
+                            <label class="mdl-textfield__label" for="password_again"></label>
+                        </div>
+                    </span>
+                    </li>
+                        <li *ngIf="!formValid.passwordAgain" class="mdl-list__item error-list">
+                            <span class="mdl-list__item-primary-content">
+                                <i class="material-icons mdl-list__item-icon"></i>
+                                <div *ngIf="!formValid.passwordAgain" class="form-alert">
+                                    {{ translations | getLabel:"plain.accounts.register.panel.type_same_password" }}
+                                </div>
+                            </span>
+                        </li>
+                    </div>
+                    <li class="mdl-list__item">
+                        <span class="mdl-list__item-primary-content">
+                            <i class="material-icons mdl-list__item-icon">&#xE0BE;</i>
+                            <div class="mdl-textfield mdl-js-textfield">
+                                <input [readonly]="isSSORegistration ? 'true' : null"
+                                     [(ngModel)]="registerAccount.accountEmail"
+                                     [ngClass]="{'invalid': !formValid.accountEmail}"
+                                     (blur)="checkEmails()"
+                                     [placeholder]= "translations | getLabel:'plain.accounts.register.panel.email'"
+                                     class="mdl-textfield__input" id="email" type="text" name="email">
+                                <label class="mdl-textfield__label" for="email"></label>
+                            </div>
+                        </span>
+                    </li>
+                    <li *ngIf="(!formValid.accountEmail && !isEmailServerError) || (!formValid.accountEmail && isEmailServerError)" class="mdl-list__item error-list">
+                        <span class="mdl-list__item-primary-content">
+                            <i class="material-icons mdl-list__item-icon"></i>
+                            <div *ngIf="!formValid.accountEmail && !isEmailServerError" class="form-alert">
+                                {{ translations | getLabel:"plain.accounts.register.panel.field_required" }}
+                            </div>
+                            <div *ngIf="!formValid.accountEmail && isEmailServerError" class="form-alert">
+                                {{ translations | getLabel:"plain.accounts.register.panel.enter_valid_email" }}
+                            </div>
+                        </span>
+                    </li>
+
+                    <li class="mdl-list__item">
+                        <span class="mdl-list__item-primary-content">
+                            <i class="material-icons mdl-list__item-icon">&#xE0BE;</i>
+                            <div class="mdl-textfield mdl-js-textfield">
+                                <input [readonly]="isSSORegistration ? 'true' : null"
+                                     [(ngModel)]="registerAccount.accountEmailConfirmed"
+                                     [ngClass]="{'invalid': !formValid.accountEmailConfirmed}"
+                                     (blur)="checkEmails()"
+                                     [placeholder]= " translations | getLabel:'plain.accounts.register.panel.email_again'"
+                                     class="mdl-textfield__input" id="email_confirmed" type="text" name="email_confirmed">
+                                <label class="mdl-textfield__label" for="email_confirmed"></label>
+                            </div>
+                        </span>
+                </li>
+                <li *ngIf="(!formValid.accountEmailConfirmed && !isEmailConfirmedServerError) || (!formValid.accountEmailConfirmed && isEmailConfirmedServerError)" class="mdl-list__item error-list">
+                    <span class="mdl-list__item-primary-content">
+                        <i class="material-icons mdl-list__item-icon"></i>
+                        <div *ngIf="!formValid.accountEmailConfirmed" class="form-alert"> <!-- && !isEmailConfirmedServerError -->
+                            {{ translations | getLabel:"plain.accounts.register.panel.emails_dont_match" }}
+                        </div>
+                        <div *ngIf="!formValid.accountEmailConfirmed && isEmailConfirmedServerError" class="form-alert">
+                            {{ translations | getLabel:"plain.accounts.register.panel.enter_valid_email" }}
+                        </div>
+                    </span>
+                </li>
+
+                <div class="aggrements-info">
+                    <li class="first-info">
+                        <span class="mdl-list__item-primary-content">
+                            <i class="material-icons mdl-list__item-icon">&#xE86C;</i>
+                            <mat-checkbox  color="primary"
+                                          [checked]="registerAccount.regulationAgreementInfo"
+                                          (change)="registerAccount.regulationAgreementInfo = $event.checked">
+                                <span class="regulation-link"><a target="_blank" href="/user/terms"> {{ translations | getLabel:"plain.accounts.register.panel.have_read_terms_of_use" }}  </a></span>
+                            </mat-checkbox>
+                        </span>
+                    </li>
+                    <li *ngIf="!formValid.regulationAgreementInfo" class="error-list">
+                        <span class="mdl-list__item-primary-content">
+                            <i class="material-icons mdl-list__item-icon"></i>
+                            <div *ngIf="!formValid.regulationAgreementInfo" class="form-alert">
+                                {{ translations | getLabel:"plain.accounts.register.panel.email_required" }}
+                            </div>
+                        </span>
+                    </li>
+                </div>
+
+                <div class="register-buttons">
+                    <li class="mdl-list__item">
+                        <span class="mdl-list__item-primary-content">
+                            <button (click)="register()" [disabled]="registerIsClicked" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--primary custom-register-button">
+                                {{ translations | getLabel:"plain.accounts.register.panel.register" }}
+                            </button>
+                        </span>
+                    </li>
+                </div>
+            </ul>
+            <div class="bottom-actions">
+                <a [routerLink]="'/accounts/login'" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                    {{ translations | getLabel:"plain.accounts.register.panel.back_to_login" }}
+                </a>
+            </div>
+        </form>
+    </div>
+</section>

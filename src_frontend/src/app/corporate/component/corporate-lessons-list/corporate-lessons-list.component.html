@@ -1,0 +1,76 @@
+<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+    <thead>
+        <tr>
+            <th class="mdl-data-table__cell--non-numeric">
+                {{ translations | getLabel: "plain.corporate.panel._lessons_list.lesson"}}
+            </th>
+            <th class="mdl-data-table__cell--non-numeric">
+                {{ translations | getLabel: "plain.corporate.panel._lessons_list.project"}}
+
+            </th>
+            <th class="mdl-data-table__cell--non-numeric">
+                {{ translations | getLabel: "plain.corporate.panel._lessons_list.publication"}}
+
+            </th>
+            <th class="mdl-data-table__cell--non-numeric">
+                {{ translations | getLabel: "plain.corporate.panel._lessons_list.last_modified"}}
+            </th>
+            <th>
+                {{ translations | getLabel: "plain.corporate.panel._lessons_list.edit"}}
+
+            </th>
+            <th>
+                {{ translations | getLabel: "plain.corporate.panel._lessons_list.view"}}
+
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let lesson of lessons">
+            <td class="mdl-data-table__cell--non-numeric">
+                {{ lesson.title }}
+            </td>
+            <td class="mdl-data-table__cell--non-numeric">
+                {{ lesson.projectName }}
+            </td>
+            <td class="mdl-data-table__cell--non-numeric">
+                {{ lesson.publicationName }}
+            </td>
+            <td class="mdl-data-table__cell--non-numeric">
+                {{ lesson.modifiedDate | date: 'medium' }}
+            </td>
+            <ng-container *ngIf="lesson.contentType.isLesson()">
+                <td>
+                    <a mat-icon-button
+                        [href]="'/mycontent/' + lesson.id + '/editor?' + editLessonToken.tokenKey + '=' + editLessonToken.token + '&next=/corporate'"
+                        target="_blank">
+                        <i class="material-icons">mode_edit</i>
+                    </a>
+                </td>
+                <td>
+                    <a mat-icon-button
+                        [href]="'/present/' + lesson.id"
+                        target="_blank">
+                        <i class="material-icons">visibility</i>
+                    </a>
+                </td>
+            </ng-container>
+            <ng-container *ngIf="lesson.contentType.isAddon()">
+                <td>
+                    <a mat-icon-button
+                        [href]="'/mycontent/' + lesson.id + '/editaddon?' + editLessonToken.tokenKey + '=' + editLessonToken.token + '&next=/corporate'"
+                        target="_blank">
+                        <i class="material-icons">mode_edit</i>
+                    </a>
+                </td>
+                <td>
+                    <a mat-icon-button
+                        [href]="'/mycontent/view_addon/' + lesson.id"
+                        target="_blank">
+                        <i class="material-icons">visibility</i>
+                    </a>
+                </td>
+            </ng-container>
+        </tr>
+    </tbody>
+</table>

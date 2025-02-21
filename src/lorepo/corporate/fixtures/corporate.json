@@ -1,0 +1,1054 @@
+[
+  {
+    "pk": 2,
+    "model": "contenttypes.contenttype",
+    "fields": {
+      "model": "space",
+      "name": "space",
+      "app_label": "spaces"
+    }
+  },
+  {
+    "pk": 6,
+    "model": "contenttypes.contenttype",
+    "fields": {
+      "model": "spaceaccess",
+      "name": "space access",
+      "app_label": "spaces"
+    }
+  },
+  {
+    "pk": 10,
+    "model": "contenttypes.contenttype",
+    "fields": {
+      "model": "user",
+      "name": "user",
+      "app_label": "auth"
+    }
+  },
+  {
+    "pk": 1,
+    "model": "auth.user",
+    "fields": {
+      "username": "admin",
+      "first_name": "",
+      "last_name": "",
+      "is_active": true,
+      "idxf_email_l_iexact": "admin@wp.pl",
+      "idxf_username_l_iexact": "admin",
+      "is_superuser": true,
+      "is_staff": true,
+      "last_login": "2012-02-09 16:02:36",
+      "groups": [],
+      "user_permissions": [],
+      "password": "sha1$396eb$77d29f82abfe566653b7eab6252573a83071dfd3",
+      "email": "admin@wp.pl",
+      "date_joined": "2012-02-09 11:06:47"
+    }
+  },
+  {
+    "pk": 11,
+    "model": "auth.user",
+    "fields": {
+      "username": "test",
+      "first_name": "",
+      "last_name": "",
+      "is_active": true,
+      "idxf_email_l_iexact": "",
+      "idxf_username_l_iexact": "test",
+      "is_superuser": true,
+      "is_staff": true,
+      "last_login": "2012-02-10 09:18:01",
+      "groups": [],
+      "user_permissions": [],
+      "password": "sha1$94ed1$5911eb4486ae941ba9233a2e1f934a5ee051d1b0",
+      "email": "",
+      "date_joined": "2012-02-09 11:22:37"
+    }
+  },
+  {
+    "pk": 12,
+    "model": "auth.user",
+    "fields": {
+      "username": "test2",
+      "first_name": "",
+      "last_name": "",
+      "is_active": true,
+      "idxf_email_l_iexact": "",
+      "idxf_username_l_iexact": "test",
+      "is_superuser": false,
+      "is_staff": false,
+      "last_login": "2012-02-10 09:18:01",
+      "groups": [],
+      "user_permissions": [],
+      "password": "sha1$94ed1$5911eb4486ae941ba9233a2e1f934a5ee051d1b0",
+      "email": "",
+      "date_joined": "2012-02-09 11:22:37"
+    }
+  },
+  {
+    "pk": 112,
+    "model": "auth.user",
+    "fields": {
+      "username": "test3",
+      "first_name": "",
+      "last_name": "",
+      "is_active": true,
+      "idxf_email_l_iexact": "",
+      "idxf_username_l_iexact": "test",
+      "is_superuser": false,
+      "is_staff": false,
+      "last_login": "2012-02-10 09:18:01",
+      "groups": [],
+      "user_permissions": [],
+      "password": "sha1$94ed1$5911eb4486ae941ba9233a2e1f934a5ee051d1b0",
+      "email": "",
+      "date_joined": "2012-02-09 11:22:37"
+    }
+  },
+  {
+    "pk": 36,
+    "model": "search.relationindex_mycontent_content_search_index",
+    "fields": {
+      "modified_date": "2012-02-10 09:41:09",
+      "is_featured": false,
+      "big_icon_href": null,
+      "is_deleted": false,
+      "content_type": 1,
+      "title": "Solwit Mission",
+      "author": 11,
+      "view_count": 0,
+      "search_index_search_list_field": [
+        "solwit",
+        "mission",
+        "solwit",
+        "mission",
+        "solwit",
+        "describ",
+        "mission"
+      ],
+      "is_template": false,
+      "file": 35,
+      "created_date": "2012-02-10 09:41:09",
+      "icon_href": null,
+      "associated_content": null,
+      "tags": "solwit,mission",
+      "description": "Describes Solwit Mission"
+    }
+  },
+  {
+    "pk": 40,
+    "model": "search.relationindex_mycontent_content_search_index",
+    "fields": {
+      "modified_date": "2012-02-10 09:41:55",
+      "is_featured": false,
+      "big_icon_href": null,
+      "is_deleted": false,
+      "content_type": 1,
+      "title": "Solwit Board",
+      "author": 11,
+      "view_count": 0,
+      "search_index_search_list_field": [
+        "solwit",
+        "board",
+        "solwit",
+        "board",
+        "solwit",
+        "board"
+      ],
+      "is_template": false,
+      "file": 39,
+      "created_date": "2012-02-10 09:41:55",
+      "icon_href": null,
+      "associated_content": null,
+      "tags": "solwit,board",
+      "description": "Solwit Board"
+    }
+  },
+  {
+    "pk": 44,
+    "model": "search.relationindex_mycontent_content_search_index",
+    "fields": {
+      "modified_date": "2012-02-10 09:45:19",
+      "is_featured": false,
+      "big_icon_href": null,
+      "is_deleted": false,
+      "content_type": 1,
+      "title": "Recruitment process",
+      "author": 11,
+      "view_count": 0,
+      "search_index_search_list_field": [
+        "process",
+        "recruit",
+        "solwit",
+        "hr"
+      ],
+      "is_template": false,
+      "file": 43,
+      "created_date": "2012-02-10 09:45:19",
+      "icon_href": null,
+      "associated_content": null,
+      "tags": "solwit,hr",
+      "description": ""
+    }
+  },
+  {
+    "pk": 48,
+    "model": "search.relationindex_mycontent_content_search_index",
+    "fields": {
+      "modified_date": "2012-02-10 09:45:40",
+      "is_featured": false,
+      "big_icon_href": null,
+      "is_deleted": false,
+      "content_type": 1,
+      "title": "Solwit network",
+      "author": 11,
+      "view_count": 0,
+      "search_index_search_list_field": [
+        "solwit",
+        "network"
+      ],
+      "is_template": false,
+      "file": 47,
+      "created_date": "2012-02-10 09:45:40",
+      "icon_href": null,
+      "associated_content": null,
+      "tags": "",
+      "description": ""
+    }
+  },
+  {
+    "pk": 52,
+    "model": "search.relationindex_mycontent_content_search_index",
+    "fields": {
+      "modified_date": "2012-02-10 09:46:00",
+      "is_featured": false,
+      "big_icon_href": null,
+      "is_deleted": false,
+      "content_type": 1,
+      "title": "Solwit programmers",
+      "author": 11,
+      "view_count": 0,
+      "search_index_search_list_field": [
+        "solwit",
+        "programm"
+      ],
+      "is_template": false,
+      "file": 51,
+      "created_date": "2012-02-10 09:45:59",
+      "icon_href": null,
+      "associated_content": null,
+      "tags": "",
+      "description": ""
+    }
+  },
+  {
+    "pk": 56,
+    "model": "search.relationindex_mycontent_content_search_index",
+    "fields": {
+      "modified_date": "2012-02-10 09:46:19",
+      "is_featured": false,
+      "big_icon_href": null,
+      "is_deleted": false,
+      "content_type": 1,
+      "title": "Test Driven Development",
+      "author": 11,
+      "view_count": 0,
+      "search_index_search_list_field": [
+        "test",
+        "driven",
+        "develop"
+      ],
+      "is_template": false,
+      "file": 55,
+      "created_date": "2012-02-10 09:46:19",
+      "icon_href": null,
+      "associated_content": null,
+      "tags": "",
+      "description": ""
+    }
+  },
+  {
+    "pk": 60,
+    "model": "search.relationindex_mycontent_content_search_index",
+    "fields": {
+      "modified_date": "2012-02-10 09:55:06",
+      "is_featured": false,
+      "big_icon_href": null,
+      "is_deleted": false,
+      "content_type": 2,
+      "title": "Presentation template",
+      "author": 11,
+      "view_count": 0,
+      "search_index_search_list_field": [
+        "present",
+        "templat"
+      ],
+      "is_template": false,
+      "file": 59,
+      "created_date": "2012-02-10 09:54:40",
+      "icon_href": null,
+      "associated_content": null,
+      "tags": "",
+      "description": ""
+    }
+  },
+  {
+    "pk": 64,
+    "model": "search.relationindex_mycontent_content_search_index",
+    "fields": {
+      "modified_date": "2012-02-10 09:55:23",
+      "is_featured": false,
+      "big_icon_href": null,
+      "is_deleted": false,
+      "content_type": 3,
+      "title": "Youtube addon",
+      "author": 11,
+      "view_count": 0,
+      "search_index_search_list_field": [
+        "youtub",
+        "addon"
+      ],
+      "is_template": false,
+      "file": 63,
+      "created_date": "2012-02-10 09:55:23",
+      "icon_href": null,
+      "associated_content": null,
+      "tags": "",
+      "description": ""
+    }
+  },
+  {
+    "pk": 67,
+    "model": "search.relationindex_mycontent_content_search_index",
+    "fields": {
+      "modified_date": "2012-02-10 09:55:32",
+      "is_featured": false,
+      "big_icon_href": null,
+      "is_deleted": false,
+      "content_type": 3,
+      "title": "Vimeo addon",
+      "author": 11,
+      "view_count": 0,
+      "search_index_search_list_field": [
+        "vimeo",
+        "addon"
+      ],
+      "is_template": false,
+      "file": 66,
+      "created_date": "2012-02-10 09:55:32",
+      "icon_href": null,
+      "associated_content": null,
+      "tags": "",
+      "description": ""
+    }
+  },
+  {
+    "pk": 67,
+    "model": "mycontent.content",
+    "fields": {
+      "modified_date": "2012-02-10 09:55:32",
+      "is_featured": false,
+      "big_icon_href": null,
+      "is_deleted": false,
+      "content_type": 3,
+      "title": "Vimeo addon",
+      "author": 11,
+      "view_count": 0,
+      "is_template": false,
+      "file": 66,
+      "created_date": "2012-02-10 09:55:32",
+      "icon_href": null,
+      "associated_content": null,
+      "tags": "",
+      "description": ""
+    }
+  },
+  {
+    "pk": 64,
+    "model": "mycontent.content",
+    "fields": {
+      "modified_date": "2012-02-10 09:55:23",
+      "is_featured": false,
+      "big_icon_href": null,
+      "is_deleted": false,
+      "content_type": 3,
+      "title": "Youtube addon",
+      "author": 11,
+      "view_count": 0,
+      "is_template": false,
+      "file": 63,
+      "created_date": "2012-02-10 09:55:23",
+      "icon_href": null,
+      "associated_content": null,
+      "tags": "",
+      "description": ""
+    }
+  },
+  {
+    "pk": 60,
+    "model": "mycontent.content",
+    "fields": {
+      "modified_date": "2012-02-10 09:55:06",
+      "is_featured": false,
+      "big_icon_href": null,
+      "is_deleted": false,
+      "content_type": 2,
+      "title": "Presentation template",
+      "author": 11,
+      "view_count": 0,
+      "is_template": false,
+      "file": 59,
+      "created_date": "2012-02-10 09:54:40",
+      "icon_href": null,
+      "associated_content": null,
+      "tags": "",
+      "description": ""
+    }
+  },
+  {
+    "pk": 56,
+    "model": "mycontent.content",
+    "fields": {
+      "modified_date": "2012-02-10 09:46:19",
+      "is_featured": false,
+      "big_icon_href": null,
+      "is_deleted": false,
+      "content_type": 1,
+      "title": "Test Driven Development",
+      "author": 11,
+      "view_count": 0,
+      "is_template": false,
+      "file": 55,
+      "created_date": "2012-02-10 09:46:19",
+      "icon_href": null,
+      "associated_content": null,
+      "tags": "",
+      "description": ""
+    }
+  },
+  {
+    "pk": 52,
+    "model": "mycontent.content",
+    "fields": {
+      "modified_date": "2012-02-10 09:46:00",
+      "is_featured": false,
+      "big_icon_href": null,
+      "is_deleted": false,
+      "content_type": 1,
+      "title": "Solwit programmers",
+      "author": 11,
+      "view_count": 0,
+      "is_template": false,
+      "file": 51,
+      "created_date": "2012-02-10 09:45:59",
+      "icon_href": null,
+      "associated_content": null,
+      "tags": "",
+      "description": ""
+    }
+  },
+  {
+    "pk": 48,
+    "model": "mycontent.content",
+    "fields": {
+      "modified_date": "2012-02-10 09:45:40",
+      "is_featured": false,
+      "big_icon_href": null,
+      "is_deleted": false,
+      "content_type": 1,
+      "title": "Solwit network",
+      "author": 11,
+      "view_count": 0,
+      "is_template": false,
+      "file": 47,
+      "created_date": "2012-02-10 09:45:40",
+      "icon_href": null,
+      "associated_content": null,
+      "tags": "",
+      "description": ""
+    }
+  },
+  {
+    "pk": 44,
+    "model": "mycontent.content",
+    "fields": {
+      "modified_date": "2012-02-10 09:45:19",
+      "is_featured": false,
+      "big_icon_href": null,
+      "is_deleted": false,
+      "content_type": 1,
+      "title": "Recruitment process",
+      "author": 11,
+      "view_count": 0,
+      "is_template": false,
+      "file": 43,
+      "created_date": "2012-02-10 09:45:19",
+      "icon_href": null,
+      "associated_content": null,
+      "tags": "solwit,hr",
+      "description": ""
+    }
+  },
+  {
+    "pk": 40,
+    "model": "mycontent.content",
+    "fields": {
+      "modified_date": "2012-02-10 09:41:55",
+      "is_featured": false,
+      "big_icon_href": null,
+      "is_deleted": false,
+      "content_type": 1,
+      "title": "Solwit Board",
+      "author": 11,
+      "view_count": 0,
+      "is_template": false,
+      "file": 39,
+      "created_date": "2012-02-10 09:41:55",
+      "icon_href": null,
+      "associated_content": null,
+      "tags": "solwit,board",
+      "description": "Solwit Board"
+    }
+  },
+  {
+    "pk": 36,
+    "model": "mycontent.content",
+    "fields": {
+      "modified_date": "2012-02-10 09:41:09",
+      "is_featured": false,
+      "big_icon_href": null,
+      "is_deleted": false,
+      "content_type": 1,
+      "title": "Solwit Mission",
+      "author": 11,
+      "view_count": 0,
+      "is_template": false,
+      "file": 35,
+      "created_date": "2012-02-10 09:41:09",
+      "icon_href": null,
+      "associated_content": null,
+      "tags": "solwit,mission",
+      "description": "Describes Solwit Mission"
+    }
+  },
+  {
+    "pk": 37,
+    "model": "mycontent.contentspace",
+    "fields": {
+      "content": 36,
+      "is_deleted": false,
+      "space": 33
+    }
+  },
+  {
+    "pk": 41,
+    "model": "mycontent.contentspace",
+    "fields": {
+      "content": 40,
+      "is_deleted": false,
+      "space": 33
+    }
+  },
+  {
+    "pk": 45,
+    "model": "mycontent.contentspace",
+    "fields": {
+      "content": 44,
+      "is_deleted": false,
+      "space": 31
+    }
+  },
+  {
+    "pk": 49,
+    "model": "mycontent.contentspace",
+    "fields": {
+      "content": 48,
+      "is_deleted": false,
+      "space": 32
+    }
+  },
+  {
+    "pk": 53,
+    "model": "mycontent.contentspace",
+    "fields": {
+      "content": 52,
+      "is_deleted": false,
+      "space": 32
+    }
+  },
+  {
+    "pk": 57,
+    "model": "mycontent.contentspace",
+    "fields": {
+      "content": 56,
+      "is_deleted": false,
+      "space": 32
+    }
+  },
+  {
+    "pk": 62,
+    "model": "mycontent.contentspace",
+    "fields": {
+      "content": 60,
+      "is_deleted": false,
+      "space": 31
+    }
+  },
+  {
+    "pk": 65,
+    "model": "mycontent.contentspace",
+    "fields": {
+      "content": 64,
+      "is_deleted": false,
+      "space": 32
+    }
+  },
+  {
+    "pk": 68,
+    "model": "mycontent.contentspace",
+    "fields": {
+      "content": 67,
+      "is_deleted": false,
+      "space": 32
+    }
+  },
+  {
+    "pk": 3,
+    "model": "spaces.space",
+    "fields": {
+      "modified_date": "2012-02-09 11:10:24",
+      "right": 2,
+      "parent": null,
+      "title": "admin",
+      "rank": 20,
+      "top_level": 3,
+      "created_date": "2012-02-09 11:10:24",
+      "space_type": 1,
+      "left": 1
+    }
+  },
+  {
+    "pk": 16,
+    "model": "spaces.space",
+    "fields": {
+      "modified_date": "2012-02-09 11:23:31",
+      "right": 2,
+      "parent": null,
+      "title": "test",
+      "rank": 20,
+      "top_level": 16,
+      "created_date": "2012-02-09 11:23:31",
+      "space_type": 1,
+      "left": 1
+    }
+  },
+  {
+    "pk": 19,
+    "model": "spaces.space",
+    "fields": {
+      "modified_date": "2012-02-09 16:04:16",
+      "right": 10,
+      "parent": null,
+      "title": "Solwit",
+      "rank": 20,
+      "top_level": 19,
+      "created_date": "2012-02-09 11:23:59",
+      "space_type": 3,
+      "left": 1
+    }
+  },
+  {
+    "pk": 31,
+    "model": "spaces.space",
+    "fields": {
+      "modified_date": "2012-02-09 16:04:16",
+      "right": 3,
+      "parent": 19,
+      "title": "Solwit HR",
+      "rank": 20,
+      "top_level": 19,
+      "created_date": "2012-02-09 16:03:24",
+      "space_type": 3,
+      "left": 2
+    }
+  },
+  {
+    "pk": 32,
+    "model": "spaces.space",
+    "fields": {
+      "modified_date": "2012-02-09 16:04:10",
+      "right": 7,
+      "parent": 19,
+      "title": "Solwit IT",
+      "rank": 20,
+      "top_level": 19,
+      "created_date": "2012-02-09 16:04:10",
+      "space_type": 3,
+      "left": 4
+    }
+  },
+  {
+    "pk": 33,
+    "model": "spaces.space",
+    "fields": {
+      "modified_date": "2012-02-09 16:04:16",
+      "right": 9,
+      "parent": 19,
+      "title": "Solwit Board",
+      "rank": 20,
+      "top_level": 19,
+      "created_date": "2012-02-09 16:04:16",
+      "space_type": 3,
+      "left": 8
+    }
+  },
+  {
+    "pk": 133,
+    "model": "spaces.space",
+    "fields": {
+      "modified_date": "2011-02-09 16:04:16",
+      "right": 6,
+      "parent": 32,
+      "title": "Solwit IT Project",
+      "rank": 20,
+      "top_level": 19,
+      "created_date": "2012-02-09 16:04:16",
+      "space_type": 3,
+      "left": 5
+    }
+  },
+  {
+    "pk": 34,
+    "model": "spaces.space",
+    "fields": {
+      "modified_date": "2011-02-09 16:04:16",
+      "right": 6,
+      "parent": null,
+      "title": "Solwit Public",
+      "rank": 20,
+      "top_level": 34,
+      "created_date": "2012-02-09 16:04:16",
+      "space_type": 2,
+      "left": 1
+    }
+  },
+  {
+    "pk": 1134,
+    "model": "spaces.space",
+    "fields": {
+      "modified_date": "2012-02-09 16:04:16",
+      "right": 5,
+      "parent": 34,
+      "title": "Solwit Public 1",
+      "rank": 20,
+      "top_level": 34,
+      "created_date": "2012-02-09 16:04:16",
+      "space_type": 2,
+      "left": 4
+    }
+  },
+  {
+    "pk": 1135,
+    "model": "spaces.space",
+    "fields": {
+      "modified_date": "2012-02-09 16:04:16",
+      "right": 3,
+      "parent": 34,
+      "title": "Solwit Public 2",
+      "rank": 20,
+      "top_level": 34,
+      "created_date": "2012-02-09 16:04:16",
+      "space_type": 2,
+      "left": 2
+    }
+  },
+  {
+    "pk": 35,
+    "model": "corporate.corporatepublicspace",
+    "fields": {
+      "public_category": 34,
+      "company": 19
+    }
+  },
+  {
+    "pk": 7,
+    "model": "spaces.spaceaccess",
+    "fields": {
+      "modified_date": "2012-02-09 11:10:38",
+      "is_deleted": false,
+      "space": 3,
+      "user": 1,
+      "created_date": "2012-02-09 11:10:38",
+      "access_right": 3
+    }
+  },
+  {
+    "pk": 117,
+    "model": "spaces.spaceaccess",
+    "fields": {
+      "modified_date": "2012-02-09 11:10:38",
+      "is_deleted": false,
+      "space": 133,
+      "user": 112,
+      "created_date": "2012-02-09 11:10:38",
+      "access_right": 2
+    }
+  },
+  {
+    "pk": 118,
+    "model": "spaces.spaceaccess",
+    "fields": {
+      "modified_date": "2012-02-09 11:10:38",
+      "is_deleted": false,
+      "space": 133,
+      "user": 112,
+      "created_date": "2012-02-09 11:10:38",
+      "access_right": 2
+    }
+  },
+  {
+    "pk": 8,
+    "model": "spaces.spaceaccess",
+    "fields": {
+      "modified_date": "2012-02-09 11:10:38",
+      "is_deleted": false,
+      "space": 33,
+      "user": 12,
+      "created_date": "2012-02-09 11:10:38",
+      "access_right": 2
+    }
+  },
+  {
+    "pk": 22,
+    "model": "spaces.spaceaccess",
+    "fields": {
+      "modified_date": "2012-02-09 11:24:12",
+      "is_deleted": false,
+      "space": 16,
+      "user": 11,
+      "created_date": "2012-02-09 11:24:12",
+      "access_right": 3
+    }
+  },
+  {
+    "pk": 25,
+    "model": "spaces.spaceaccess",
+    "fields": {
+      "modified_date": "2012-02-09 11:24:25",
+      "is_deleted": false,
+      "space": 19,
+      "user": 11,
+      "created_date": "2012-02-09 11:24:25",
+      "access_right": 3
+    }
+  },
+  {
+    "pk": 34,
+    "model": "filestorage.filestorage",
+    "fields": {
+      "modified_date": "2012-02-10 09:41:09",
+      "history_for": null,
+      "version": null,
+      "content_type": "text/xml",
+      "created_date": "2012-02-10 09:41:09",
+      "owner": 11,
+      "contents": "<?xml version='1.0' encoding='UTF-8' ?> \n\n<page>\n\t<modules> \n\t\n\t\t<textModule id=\"Title\" left=\"5\" top=\"3\" width=\"90\" height=\"7\" style=\"\">\n\t\t\t<text>&lt;div style=&quot;text-align: center;&quot;&gt;Title&lt;/div&gt;</text>\n\t\t</textModule>\t\n\t\t<buttonModule id=\"PrevPage\" left=\"0\" top=\"90\" width=\"10\" height=\"10\" style=\"\">\n\t\t\t<button type=\"prevPage\" text=\"\"/>\n\t\t</buttonModule>\n\t\t<buttonModule id=\"NextPage\" left=\"90\" top=\"90\" width=\"10\" height=\"10\" style=\"\">\n\t\t\t<button type=\"nextPage\" text=\"\"/>\n\t\t</buttonModule>\n    </modules> \n</page>\n"
+    }
+  },
+  {
+    "pk": 35,
+    "model": "filestorage.filestorage",
+    "fields": {
+      "modified_date": "2012-02-10 09:41:09",
+      "history_for": 36,
+      "version": 1,
+      "content_type": "text/xml",
+      "created_date": "2012-02-10 09:41:09",
+      "owner": 11,
+      "contents": "<?xml version='1.0' encoding='UTF-8' ?>\n<interactiveContent>\n\n\t<style href=\"/media/content/styles/default/content.css\"/>\n\t\n\t<pages>\n    \t<page name='page 1' href='34'/> \n    </pages>\n</interactiveContent>"
+    }
+  },
+  {
+    "pk": 38,
+    "model": "filestorage.filestorage",
+    "fields": {
+      "modified_date": "2012-02-10 09:41:55",
+      "history_for": null,
+      "version": null,
+      "content_type": "text/xml",
+      "created_date": "2012-02-10 09:41:55",
+      "owner": 11,
+      "contents": "<?xml version='1.0' encoding='UTF-8' ?> \n\n<page>\n\t<modules> \n\t\n\t\t<textModule id=\"Title\" left=\"5\" top=\"3\" width=\"90\" height=\"7\" style=\"\">\n\t\t\t<text>&lt;div style=&quot;text-align: center;&quot;&gt;Title&lt;/div&gt;</text>\n\t\t</textModule>\t\n\t\t<buttonModule id=\"PrevPage\" left=\"0\" top=\"90\" width=\"10\" height=\"10\" style=\"\">\n\t\t\t<button type=\"prevPage\" text=\"\"/>\n\t\t</buttonModule>\n\t\t<buttonModule id=\"NextPage\" left=\"90\" top=\"90\" width=\"10\" height=\"10\" style=\"\">\n\t\t\t<button type=\"nextPage\" text=\"\"/>\n\t\t</buttonModule>\n    </modules> \n</page>\n"
+    }
+  },
+  {
+    "pk": 39,
+    "model": "filestorage.filestorage",
+    "fields": {
+      "modified_date": "2012-02-10 09:41:55",
+      "history_for": 40,
+      "version": 1,
+      "content_type": "text/xml",
+      "created_date": "2012-02-10 09:41:55",
+      "owner": 11,
+      "contents": "<?xml version='1.0' encoding='UTF-8' ?>\n<interactiveContent>\n\n\t<style href=\"/media/content/styles/default/content.css\"/>\n\t\n\t<pages>\n    \t<page name='page 1' href='38'/> \n    </pages>\n</interactiveContent>"
+    }
+  },
+  {
+    "pk": 42,
+    "model": "filestorage.filestorage",
+    "fields": {
+      "modified_date": "2012-02-10 09:45:19",
+      "history_for": null,
+      "version": null,
+      "content_type": "text/xml",
+      "created_date": "2012-02-10 09:45:19",
+      "owner": 11,
+      "contents": "<?xml version='1.0' encoding='UTF-8' ?> \n\n<page>\n\t<modules> \n\t\n\t\t<textModule id=\"Title\" left=\"5\" top=\"3\" width=\"90\" height=\"7\" style=\"\">\n\t\t\t<text>&lt;div style=&quot;text-align: center;&quot;&gt;Title&lt;/div&gt;</text>\n\t\t</textModule>\t\n\t\t<buttonModule id=\"PrevPage\" left=\"0\" top=\"90\" width=\"10\" height=\"10\" style=\"\">\n\t\t\t<button type=\"prevPage\" text=\"\"/>\n\t\t</buttonModule>\n\t\t<buttonModule id=\"NextPage\" left=\"90\" top=\"90\" width=\"10\" height=\"10\" style=\"\">\n\t\t\t<button type=\"nextPage\" text=\"\"/>\n\t\t</buttonModule>\n    </modules> \n</page>\n"
+    }
+  },
+  {
+    "pk": 43,
+    "model": "filestorage.filestorage",
+    "fields": {
+      "modified_date": "2012-02-10 09:45:19",
+      "history_for": 44,
+      "version": 1,
+      "content_type": "text/xml",
+      "created_date": "2012-02-10 09:45:19",
+      "owner": 11,
+      "contents": "<?xml version='1.0' encoding='UTF-8' ?>\n<interactiveContent>\n\n\t<style href=\"/media/content/styles/default/content.css\"/>\n\t\n\t<pages>\n    \t<page name='page 1' href='42'/> \n    </pages>\n</interactiveContent>"
+    }
+  },
+  {
+    "pk": 46,
+    "model": "filestorage.filestorage",
+    "fields": {
+      "modified_date": "2012-02-10 09:45:40",
+      "history_for": null,
+      "version": null,
+      "content_type": "text/xml",
+      "created_date": "2012-02-10 09:45:40",
+      "owner": 11,
+      "contents": "<?xml version='1.0' encoding='UTF-8' ?> \n\n<page>\n\t<modules> \n\t\n\t\t<textModule id=\"Title\" left=\"5\" top=\"3\" width=\"90\" height=\"7\" style=\"\">\n\t\t\t<text>&lt;div style=&quot;text-align: center;&quot;&gt;Title&lt;/div&gt;</text>\n\t\t</textModule>\t\n\t\t<buttonModule id=\"PrevPage\" left=\"0\" top=\"90\" width=\"10\" height=\"10\" style=\"\">\n\t\t\t<button type=\"prevPage\" text=\"\"/>\n\t\t</buttonModule>\n\t\t<buttonModule id=\"NextPage\" left=\"90\" top=\"90\" width=\"10\" height=\"10\" style=\"\">\n\t\t\t<button type=\"nextPage\" text=\"\"/>\n\t\t</buttonModule>\n    </modules> \n</page>\n"
+    }
+  },
+  {
+    "pk": 47,
+    "model": "filestorage.filestorage",
+    "fields": {
+      "modified_date": "2012-02-10 09:45:40",
+      "history_for": 48,
+      "version": 1,
+      "content_type": "text/xml",
+      "created_date": "2012-02-10 09:45:40",
+      "owner": 11,
+      "contents": "<?xml version='1.0' encoding='UTF-8' ?>\n<interactiveContent>\n\n\t<style href=\"/media/content/styles/default/content.css\"/>\n\t\n\t<pages>\n    \t<page name='page 1' href='46'/> \n    </pages>\n</interactiveContent>"
+    }
+  },
+  {
+    "pk": 50,
+    "model": "filestorage.filestorage",
+    "fields": {
+      "modified_date": "2012-02-10 09:45:59",
+      "history_for": null,
+      "version": null,
+      "content_type": "text/xml",
+      "created_date": "2012-02-10 09:45:59",
+      "owner": 11,
+      "contents": "<?xml version='1.0' encoding='UTF-8' ?> \n\n<page>\n\t<modules> \n\t\n\t\t<textModule id=\"Title\" left=\"5\" top=\"3\" width=\"90\" height=\"7\" style=\"\">\n\t\t\t<text>&lt;div style=&quot;text-align: center;&quot;&gt;Title&lt;/div&gt;</text>\n\t\t</textModule>\t\n\t\t<buttonModule id=\"PrevPage\" left=\"0\" top=\"90\" width=\"10\" height=\"10\" style=\"\">\n\t\t\t<button type=\"prevPage\" text=\"\"/>\n\t\t</buttonModule>\n\t\t<buttonModule id=\"NextPage\" left=\"90\" top=\"90\" width=\"10\" height=\"10\" style=\"\">\n\t\t\t<button type=\"nextPage\" text=\"\"/>\n\t\t</buttonModule>\n    </modules> \n</page>\n"
+    }
+  },
+  {
+    "pk": 51,
+    "model": "filestorage.filestorage",
+    "fields": {
+      "modified_date": "2012-02-10 09:45:59",
+      "history_for": 52,
+      "version": 1,
+      "content_type": "text/xml",
+      "created_date": "2012-02-10 09:45:59",
+      "owner": 11,
+      "contents": "<?xml version='1.0' encoding='UTF-8' ?>\n<interactiveContent>\n\n\t<style href=\"/media/content/styles/default/content.css\"/>\n\t\n\t<pages>\n    \t<page name='page 1' href='50'/> \n    </pages>\n</interactiveContent>"
+    }
+  },
+  {
+    "pk": 54,
+    "model": "filestorage.filestorage",
+    "fields": {
+      "modified_date": "2012-02-10 09:46:19",
+      "history_for": null,
+      "version": null,
+      "content_type": "text/xml",
+      "created_date": "2012-02-10 09:46:19",
+      "owner": 11,
+      "contents": "<?xml version='1.0' encoding='UTF-8' ?> \n\n<page>\n\t<modules> \n\t\n\t\t<textModule id=\"Title\" left=\"5\" top=\"3\" width=\"90\" height=\"7\" style=\"\">\n\t\t\t<text>&lt;div style=&quot;text-align: center;&quot;&gt;Title&lt;/div&gt;</text>\n\t\t</textModule>\t\n\t\t<buttonModule id=\"PrevPage\" left=\"0\" top=\"90\" width=\"10\" height=\"10\" style=\"\">\n\t\t\t<button type=\"prevPage\" text=\"\"/>\n\t\t</buttonModule>\n\t\t<buttonModule id=\"NextPage\" left=\"90\" top=\"90\" width=\"10\" height=\"10\" style=\"\">\n\t\t\t<button type=\"nextPage\" text=\"\"/>\n\t\t</buttonModule>\n    </modules> \n</page>\n"
+    }
+  },
+  {
+    "pk": 55,
+    "model": "filestorage.filestorage",
+    "fields": {
+      "modified_date": "2012-02-10 09:46:19",
+      "history_for": 56,
+      "version": 1,
+      "content_type": "text/xml",
+      "created_date": "2012-02-10 09:46:19",
+      "owner": 11,
+      "contents": "<?xml version='1.0' encoding='UTF-8' ?>\n<interactiveContent>\n\n\t<style href=\"/media/content/styles/default/content.css\"/>\n\t\n\t<pages>\n    \t<page name='page 1' href='54'/> \n    </pages>\n</interactiveContent>"
+    }
+  },
+  {
+    "pk": 58,
+    "model": "filestorage.filestorage",
+    "fields": {
+      "modified_date": "2012-02-10 09:54:40",
+      "history_for": null,
+      "version": null,
+      "content_type": "text/xml",
+      "created_date": "2012-02-10 09:54:40",
+      "owner": 11,
+      "contents": "<?xml version='1.0' encoding='UTF-8' ?> \n\n<page>\n\t<modules> \n\t\n\t\t<textModule id=\"Title\" left=\"5\" top=\"3\" width=\"90\" height=\"7\" style=\"\">\n\t\t\t<text>&lt;div style=&quot;text-align: center;&quot;&gt;Title&lt;/div&gt;</text>\n\t\t</textModule>\t\n\t\t<buttonModule id=\"PrevPage\" left=\"0\" top=\"90\" width=\"10\" height=\"10\" style=\"\">\n\t\t\t<button type=\"prevPage\" text=\"\"/>\n\t\t</buttonModule>\n\t\t<buttonModule id=\"NextPage\" left=\"90\" top=\"90\" width=\"10\" height=\"10\" style=\"\">\n\t\t\t<button type=\"nextPage\" text=\"\"/>\n\t\t</buttonModule>\n    </modules> \n</page>\n"
+    }
+  },
+  {
+    "pk": 59,
+    "model": "filestorage.filestorage",
+    "fields": {
+      "modified_date": "2012-02-10 09:54:40",
+      "history_for": 60,
+      "version": 1,
+      "content_type": "text/xml",
+      "created_date": "2012-02-10 09:54:40",
+      "owner": 11,
+      "contents": "<?xml version='1.0' encoding='UTF-8' ?>\n<interactiveContent>\n\n\t<style href=\"/media/content/styles/default/content.css\"/>\n\t\n\t<pages>\n    \t<page name='page 1' href='58'/> \n    </pages>\n</interactiveContent>"
+    }
+  },
+  {
+    "pk": 63,
+    "model": "filestorage.filestorage",
+    "fields": {
+      "modified_date": "2012-02-10 09:55:23",
+      "history_for": 64,
+      "version": 1,
+      "content_type": "text/xml",
+      "created_date": "2012-02-10 09:55:23",
+      "owner": 11,
+      "contents": "<?xml version=\"1.0\" encoding=\"UTF-8\" ?> \n<addon id=\"64\">\n\n\t<metadata>\n\t\t<title>Hello world Addon</title>\n\t\t<description>\n\t\t\tEnter addon description here\n\t\t</description>\n\t</metadata>\n\t\n\t<model>\n\t\t<property name=\"Text\" type=\"string\"/>\n\t</model>\n\t\n\t<view>\n\t\t&lt;p&gt;test&lt;/p&gt;\n\t</view>\n\t\n\t<preview>\n\t\t&lt;p&gt;Addon 64&lt;/p&gt;\n\t</preview>\n\t\n\t<presenter>\n\t\tfunction Addon64_create(){\n\t\t\t\n\t\t\tvar presenter = function(){}\n\n\t\t\tvar element;\n\t\t\t\n\t\t\tpresenter.run = function(view, model){\n\t\t\t\t\n\t\t\t\telement = view.getElementsByTagName('p')[0];\n\t\t\t\telement.innerHTML = model['Text'];\n\t\t\t}\n\n\t\t\tpresenter.setShowErrorsMode = function(){\n\t\t\t\telement.innerHTML = 'setShowErrorsMode';\n\t\t\t}\n\t\t\t\n\t\t\tpresenter.setWorkMode = function(){\n\t\t\t\telement.innerHTML = 'setWorkMode';\n\t\t\t}\n\t\t\t\n\t\t\tpresenter.reset = function(){\n\t\t\t\telement.innerHTML = 'Reset';\n\t\t\t}\n\t\t\t\n\t\t\tpresenter.getErrorCount = function(){\n\t\t\t\treturn 7;\n\t\t\t}\n\t\t\t\n\t\t\tpresenter.getMaxScore = function(){\n\t\t\t\treturn 3;\n\t\t\t}\n\t\t\t\n\t\t\tpresenter.getScore = function(){\n\t\t\t\treturn 1;\n\t\t\t}\n\t\t\t\n\t\t\tpresenter.getState = function(){\n\t\t\t\telement.innerHTML = 'Get state';\n\t\t\t\treturn \"State saved\";\n\t\t\t}\n\n\t\t\tpresenter.setState = function(state){\n\t\t\t\telement.innerHTML = 'Set state';\n\t\t\t}\n\n\t\t\treturn presenter;\n\t\t}\n\t\t\n\t</presenter>\n\t\n</addon>\n"
+    }
+  },
+  {
+    "pk": 66,
+    "model": "filestorage.filestorage",
+    "fields": {
+      "modified_date": "2012-02-10 09:55:32",
+      "history_for": 67,
+      "version": 1,
+      "content_type": "text/xml",
+      "created_date": "2012-02-10 09:55:32",
+      "owner": 11,
+      "contents": "<?xml version=\"1.0\" encoding=\"UTF-8\" ?> \n<addon id=\"67\">\n\n\t<metadata>\n\t\t<title>Hello world Addon</title>\n\t\t<description>\n\t\t\tEnter addon description here\n\t\t</description>\n\t</metadata>\n\t\n\t<model>\n\t\t<property name=\"Text\" type=\"string\"/>\n\t</model>\n\t\n\t<view>\n\t\t&lt;p&gt;test&lt;/p&gt;\n\t</view>\n\t\n\t<preview>\n\t\t&lt;p&gt;Addon 67&lt;/p&gt;\n\t</preview>\n\t\n\t<presenter>\n\t\tfunction Addon67_create(){\n\t\t\t\n\t\t\tvar presenter = function(){}\n\n\t\t\tvar element;\n\t\t\t\n\t\t\tpresenter.run = function(view, model){\n\t\t\t\t\n\t\t\t\telement = view.getElementsByTagName('p')[0];\n\t\t\t\telement.innerHTML = model['Text'];\n\t\t\t}\n\n\t\t\tpresenter.setShowErrorsMode = function(){\n\t\t\t\telement.innerHTML = 'setShowErrorsMode';\n\t\t\t}\n\t\t\t\n\t\t\tpresenter.setWorkMode = function(){\n\t\t\t\telement.innerHTML = 'setWorkMode';\n\t\t\t}\n\t\t\t\n\t\t\tpresenter.reset = function(){\n\t\t\t\telement.innerHTML = 'Reset';\n\t\t\t}\n\t\t\t\n\t\t\tpresenter.getErrorCount = function(){\n\t\t\t\treturn 7;\n\t\t\t}\n\t\t\t\n\t\t\tpresenter.getMaxScore = function(){\n\t\t\t\treturn 3;\n\t\t\t}\n\t\t\t\n\t\t\tpresenter.getScore = function(){\n\t\t\t\treturn 1;\n\t\t\t}\n\t\t\t\n\t\t\tpresenter.getState = function(){\n\t\t\t\telement.innerHTML = 'Get state';\n\t\t\t\treturn \"State saved\";\n\t\t\t}\n\n\t\t\tpresenter.setState = function(state){\n\t\t\t\telement.innerHTML = 'Set state';\n\t\t\t}\n\n\t\t\treturn presenter;\n\t\t}\n\t\t\n\t</presenter>\n\t\n</addon>\n"
+    }
+  }
+]

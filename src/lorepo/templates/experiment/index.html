@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div id="toolbar">
+	<a href="add">Add experiment</a>
+</div>
+
+<table width="100%">
+	<tr>
+		<th>Name</th>
+		<th>Title</th>
+		<th>Created</th>
+		<th>Description</th>
+	</tr>
+	{% for item in items %} 
+		<tr>
+			<td><a href="view/{{item.id}}">{{item.name}}</a></td>
+			<td>{{item.title}}</td>
+			<td>{{item.created_date}}</td>
+			<td>{{item.description}}</td>
+		</tr>
+	{% endfor %}
+</table>
+
+
+{% endblock %}

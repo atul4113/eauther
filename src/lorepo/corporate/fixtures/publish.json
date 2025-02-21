@@ -1,0 +1,1533 @@
+[
+  {
+    "pk": 170,
+    "model": "contenttypes.contenttype",
+    "fields": {
+      "model": "content",
+      "name": "content",
+      "app_label": "mycontent"
+    }
+  },
+  {
+    "pk": 318,
+    "model": "contenttypes.contenttype",
+    "fields": {
+      "model": "corporatepublicspace",
+      "name": "corporate public space",
+      "app_label": "corporate"
+    }
+  },
+  {
+    "pk": 337,
+    "model": "contenttypes.contenttype",
+    "fields": {
+      "model": "registrationprofile",
+      "name": "registration profile",
+      "app_label": "registration"
+    }
+  },
+  {
+    "pk": 17,
+    "model": "contenttypes.contenttype",
+    "fields": {
+      "model": "space",
+      "name": "space",
+      "app_label": "spaces"
+    }
+  },
+  {
+    "pk": 21,
+    "model": "contenttypes.contenttype",
+    "fields": {
+      "model": "spaceaccess",
+      "name": "space access",
+      "app_label": "spaces"
+    }
+  },
+  {
+    "pk": 204,
+    "model": "contenttypes.contenttype",
+    "fields": {
+      "model": "user",
+      "name": "user",
+      "app_label": "auth"
+    }
+  },
+  {
+    "pk": 16,
+    "model": "auth.user",
+    "fields": {
+      "username": "kgebert",
+      "first_name": "",
+      "last_name": "",
+      "is_active": true,
+      "idxf_email_l_iexact": "kgebert@kgebert.pl",
+      "idxf_username_l_iexact": "kgebert",
+      "is_superuser": true,
+      "is_staff": true,
+      "last_login": "2012-02-23 10:59:22",
+      "groups": [],
+      "user_permissions": [],
+      "password": "sha1$98f0b$b4064d58adbc9e2464b8d974086bdf70f32d19d4",
+      "email": "kgebert@kgebert.pl",
+      "date_joined": "2012-02-09 12:52:05"
+    }
+  },
+  {
+    "pk": 24,
+    "model": "auth.user",
+    "fields": {
+      "username": "karol",
+      "first_name": "",
+      "last_name": "",
+      "is_active": true,
+      "idxf_email_l_iexact": "karol@karol.pl",
+      "idxf_username_l_iexact": "karol",
+      "is_superuser": false,
+      "is_staff": false,
+      "last_login": "2012-02-10 13:09:43",
+      "groups": [],
+      "user_permissions": [],
+      "password": "sha1$75dc4$ed97062b2b4ee860ad39ecffe920ea251d993ffd",
+      "email": "karol@karol.pl",
+      "date_joined": "2012-02-09 13:21:38"
+    }
+  },
+  {
+    "pk": 187,
+    "model": "auth.user",
+    "fields": {
+      "username": "karolgebert",
+      "first_name": "",
+      "last_name": "",
+      "is_active": true,
+      "idxf_email_l_iexact": "karol.gebert@solwit.pl",
+      "idxf_username_l_iexact": "karolgebert",
+      "is_superuser": false,
+      "is_staff": false,
+      "last_login": "2012-02-17 10:14:33",
+      "groups": [],
+      "user_permissions": [],
+      "password": "sha1$51827$7779e2468e224d3520db325b53279c248cff872e",
+      "email": "karol.gebert@solwit.pl",
+      "date_joined": "2012-02-17 10:13:12"
+    }
+  },
+  {
+    "pk": 205,
+    "model": "auth.user",
+    "fields": {
+      "username": "owner1",
+      "first_name": "",
+      "last_name": "",
+      "is_active": true,
+      "idxf_email_l_iexact": "",
+      "idxf_username_l_iexact": "owner1",
+      "is_superuser": true,
+      "is_staff": true,
+      "last_login": "2012-02-23 10:59:39",
+      "groups": [],
+      "user_permissions": [],
+      "password": "sha1$bd301$395ec6c359b4e37b001e84d950cbe7fa91b02378",
+      "email": "",
+      "date_joined": "2012-02-17 16:09:29"
+    }
+  },
+  {
+    "pk": 208,
+    "model": "auth.user",
+    "fields": {
+      "username": "owner2",
+      "first_name": "",
+      "last_name": "",
+      "is_active": true,
+      "idxf_email_l_iexact": "",
+      "idxf_username_l_iexact": "owner2",
+      "is_superuser": false,
+      "is_staff": false,
+      "last_login": "2012-02-21 11:03:50",
+      "groups": [],
+      "user_permissions": [],
+      "password": "sha1$9ae9b$963ec975393ffa78419270057bb8f14f3956a7e0",
+      "email": "",
+      "date_joined": "2012-02-17 16:09:46"
+    }
+  },
+  {
+    "pk": 211,
+    "model": "auth.user",
+    "fields": {
+      "username": "owner3",
+      "first_name": "",
+      "last_name": "",
+      "is_active": true,
+      "idxf_email_l_iexact": "",
+      "idxf_username_l_iexact": "owner3",
+      "is_superuser": false,
+      "is_staff": false,
+      "last_login": "2012-02-21 10:50:32",
+      "groups": [],
+      "user_permissions": [],
+      "password": "sha1$cc70f$56dbc53a01451145ab8034d947f0475742722fdb",
+      "email": "",
+      "date_joined": "2012-02-17 16:10:08"
+    }
+  },
+  {
+    "pk": 214,
+    "model": "auth.user",
+    "fields": {
+      "username": "read",
+      "first_name": "",
+      "last_name": "",
+      "is_active": true,
+      "idxf_email_l_iexact": "",
+      "idxf_username_l_iexact": "read",
+      "is_superuser": false,
+      "is_staff": false,
+      "last_login": "2012-02-17 16:10:24",
+      "groups": [],
+      "user_permissions": [],
+      "password": "sha1$affa4$21bde8ee70914f326bcbb8637ccec0cf2bda1998",
+      "email": "",
+      "date_joined": "2012-02-17 16:10:24"
+    }
+  },
+  {
+    "pk": 217,
+    "model": "auth.user",
+    "fields": {
+      "username": "write",
+      "first_name": "",
+      "last_name": "",
+      "is_active": true,
+      "idxf_email_l_iexact": "",
+      "idxf_username_l_iexact": "write",
+      "is_superuser": false,
+      "is_staff": false,
+      "last_login": "2012-02-17 16:10:35",
+      "groups": [],
+      "user_permissions": [],
+      "password": "sha1$04d0a$7d737cccd617b97f25b09762e5c15df63105ecfa",
+      "email": "",
+      "date_joined": "2012-02-17 16:10:35"
+    }
+  },
+  {
+    "pk": 220,
+    "model": "auth.user",
+    "fields": {
+      "username": "user",
+      "first_name": "",
+      "last_name": "",
+      "is_active": true,
+      "idxf_email_l_iexact": "",
+      "idxf_username_l_iexact": "user",
+      "is_superuser": false,
+      "is_staff": false,
+      "last_login": "2012-02-22 11:32:10",
+      "groups": [],
+      "user_permissions": [],
+      "password": "sha1$28ce6$95874cacc151cf9bdbd6959b843c0ea85f26037f",
+      "email": "",
+      "date_joined": "2012-02-17 16:10:44"
+    }
+  },
+  {
+    "pk": 333,
+    "model": "auth.user",
+    "fields": {
+      "username": "user2",
+      "first_name": "",
+      "last_name": "",
+      "is_active": true,
+      "idxf_email_l_iexact": "user2@user2.pl",
+      "idxf_username_l_iexact": "user2",
+      "is_superuser": false,
+      "is_staff": false,
+      "last_login": "2012-02-20 13:19:15",
+      "groups": [],
+      "user_permissions": [],
+      "password": "sha1$2ed32$ca1c2b14a08a89094da440d7f4902f4c2c7ee63b",
+      "email": "user2@user2.pl",
+      "date_joined": "2012-02-20 12:41:01"
+    }
+  },
+  {
+    "pk": "0f23ea1d005a2268e3c88c77cc6cbb1c",
+    "model": "sessions.session",
+    "fields": {
+      "expire_date": "2012-02-28 17:02:17",
+      "session_data": "ZWIxYmM5NmJiN2JiMzViYzcyYzQ4MGEzODNmNmQwYjcyYjVhM2NiOTqAAn1xAChVEl9hdXRoX3Vz\nZXJfYmFja2VuZHEBVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEC\nVQ1sYXN0X3NwYWNlX2lkcQOKAU1VDV9hdXRoX3VzZXJfaWRxBIoBEFUPX3Nlc3Npb25fZXhwaXJ5\ncQVLAHUu\n"
+    }
+  },
+  {
+    "pk": "1739294b88a44a226faebfd849d68f91",
+    "model": "sessions.session",
+    "fields": {
+      "expire_date": "2012-02-29 10:29:27",
+      "session_data": "NThiNjBkZjM3MGFmNTQ4NTBlZWY3Yjc4MGZkOGU2ODJhZmI3MDA2OTqAAn1xAChVEl9hdXRoX3Vz\nZXJfYmFja2VuZHEBVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEC\nVQ1fYXV0aF91c2VyX2lkcQOKARBVD19zZXNzaW9uX2V4cGlyeXEESwB1Lg==\n"
+    }
+  },
+  {
+    "pk": "1b74cdd3b01d156acd34eddb57e45aa2",
+    "model": "sessions.session",
+    "fields": {
+      "expire_date": "2012-03-05 17:08:44",
+      "session_data": "YmMzZWQzMDA2M2Y4MWUxYTMzMjZkMTMzNWE5NDAyNzliYTZmODMxMzqAAn1xAChVD19zZXNzaW9u\nX2V4cGlyeXEBSwBVDWxhc3Rfc3BhY2VfaWRxAooCAwFVDV9hdXRoX3VzZXJfaWRxA4oCzQBVEl9h\ndXRoX3VzZXJfYmFja2VuZHEEVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFj\na2VuZHEFdS4=\n"
+    }
+  },
+  {
+    "pk": "1c3bb252097eecc70eafc9e44dcb359d",
+    "model": "sessions.session",
+    "fields": {
+      "expire_date": "2012-03-05 13:19:15",
+      "session_data": "NDg4NmE1ZjgyYTZiMDk5OTEzZjk3ZjAyMTEwZWFiNWY4NjcyOTVkYTqAAn1xAChVEl9hdXRoX3Vz\nZXJfYmFja2VuZHEBVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEC\nVQ1fYXV0aF91c2VyX2lkcQNNTQFVD19zZXNzaW9uX2V4cGlyeXEESwB1Lg==\n"
+    }
+  },
+  {
+    "pk": "284dbef8f6bad162c3d5ac2625e0604e",
+    "model": "sessions.session",
+    "fields": {
+      "expire_date": "2012-03-02 13:21:41",
+      "session_data": "NzE3NGEzZWE5NmQxOTA3MDhkOTdiMDFkNTgzMmYzZWE0MGQzNzhmYTqAAn1xAChVD19zZXNzaW9u\nX2V4cGlyeXEBSwBVDWxhc3Rfc3BhY2VfaWRxAooBTVUNX2F1dGhfdXNlcl9pZHEDigEQVRJfYXV0\naF91c2VyX2JhY2tlbmRxBFUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tl\nbmRxBXUu\n"
+    }
+  },
+  {
+    "pk": "298e3d1f502e1234d663a5fe351935f3",
+    "model": "sessions.session",
+    "fields": {
+      "expire_date": "2012-02-27 12:31:24",
+      "session_data": "NzQ3MzgyMjAyYjRhNGNhYWQ1NTRmNDhlMDczYjQ2M2RmOTY2MDFlNjqAAn1xAChVEl9hdXRoX3Vz\nZXJfYmFja2VuZHEBVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEC\nVQ1fYXV0aF91c2VyX2lkcQNLEFUPX3Nlc3Npb25fZXhwaXJ5cQRLAHUu\n"
+    }
+  },
+  {
+    "pk": "2d1fe36aaa1af3c9060dbd4da46e5ee0",
+    "model": "sessions.session",
+    "fields": {
+      "expire_date": "2012-03-07 11:36:02",
+      "session_data": "ZmUyYjlkZjAyMmIzODE1ZmZhM2Y5NjE4MzhkYjQxZWVmZDQwYWRmNzqAAn1xAChVEl9hdXRoX3Vz\nZXJfYmFja2VuZHEBVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEC\nVQ1fYXV0aF91c2VyX2lkcQNLzVUPX3Nlc3Npb25fZXhwaXJ5cQRLAHUu\n"
+    }
+  },
+  {
+    "pk": "2e2c2cca72256b110f4b38cd28a22726",
+    "model": "sessions.session",
+    "fields": {
+      "expire_date": "2012-02-28 11:45:02",
+      "session_data": "NThiNjBkZjM3MGFmNTQ4NTBlZWY3Yjc4MGZkOGU2ODJhZmI3MDA2OTqAAn1xAChVEl9hdXRoX3Vz\nZXJfYmFja2VuZHEBVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEC\nVQ1fYXV0aF91c2VyX2lkcQOKARBVD19zZXNzaW9uX2V4cGlyeXEESwB1Lg==\n"
+    }
+  },
+  {
+    "pk": "35c70f467a2ec16a615a8187c5a6a34a",
+    "model": "sessions.session",
+    "fields": {
+      "expire_date": "2012-02-23 12:51:22",
+      "session_data": "MzM3MTk5MzZiYjQ4Y2JiZWFiZTEwY2E1MmE3NWQ0YTUxNWZhZTViNTqAAn1xAFUKdGVzdGNvb2tp\nZXEBVQZ3b3JrZWRxAnMu\n"
+    }
+  },
+  {
+    "pk": "37b86da5e2d279c78ad7317ef1bbd01c",
+    "model": "sessions.session",
+    "fields": {
+      "expire_date": "2012-02-23 17:09:29",
+      "session_data": "NThiNjBkZjM3MGFmNTQ4NTBlZWY3Yjc4MGZkOGU2ODJhZmI3MDA2OTqAAn1xAChVEl9hdXRoX3Vz\nZXJfYmFja2VuZHEBVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEC\nVQ1fYXV0aF91c2VyX2lkcQOKARBVD19zZXNzaW9uX2V4cGlyeXEESwB1Lg==\n"
+    }
+  },
+  {
+    "pk": "3851184b352698a98895d01a194ee692",
+    "model": "sessions.session",
+    "fields": {
+      "expire_date": "2012-02-27 12:30:31",
+      "session_data": "NThiNjBkZjM3MGFmNTQ4NTBlZWY3Yjc4MGZkOGU2ODJhZmI3MDA2OTqAAn1xAChVEl9hdXRoX3Vz\nZXJfYmFja2VuZHEBVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEC\nVQ1fYXV0aF91c2VyX2lkcQOKARBVD19zZXNzaW9uX2V4cGlyeXEESwB1Lg==\n"
+    }
+  },
+  {
+    "pk": "3b71e8e90535dfd1197bc6786ddfd693",
+    "model": "sessions.session",
+    "fields": {
+      "expire_date": "2012-02-27 14:03:28",
+      "session_data": "NzQ3MzgyMjAyYjRhNGNhYWQ1NTRmNDhlMDczYjQ2M2RmOTY2MDFlNjqAAn1xAChVEl9hdXRoX3Vz\nZXJfYmFja2VuZHEBVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEC\nVQ1fYXV0aF91c2VyX2lkcQNLEFUPX3Nlc3Npb25fZXhwaXJ5cQRLAHUu\n"
+    }
+  },
+  {
+    "pk": "3ee301289f8825eb58bf36a84c803b84",
+    "model": "sessions.session",
+    "fields": {
+      "expire_date": "2012-03-07 09:40:29",
+      "session_data": "YTIxNjdmYjZjOTQ1NTczMmU2MTQxYzY0NzMzYWVjNTFmODE5MDdkZTqAAn1xAChVD19zZXNzaW9u\nX2V4cGlyeXEBSwBVDWxhc3Rfc3BhY2VfaWRxAooCAAFVDV9hdXRoX3VzZXJfaWRxA4oCzQBVEl9h\ndXRoX3VzZXJfYmFja2VuZHEEVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFj\na2VuZHEFdS4=\n"
+    }
+  },
+  {
+    "pk": "41dabbb487b453e7d5cc71b47a1e3669",
+    "model": "sessions.session",
+    "fields": {
+      "expire_date": "2012-03-01 15:57:13",
+      "session_data": "NzQ3MzgyMjAyYjRhNGNhYWQ1NTRmNDhlMDczYjQ2M2RmOTY2MDFlNjqAAn1xAChVEl9hdXRoX3Vz\nZXJfYmFja2VuZHEBVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEC\nVQ1fYXV0aF91c2VyX2lkcQNLEFUPX3Nlc3Npb25fZXhwaXJ5cQRLAHUu\n"
+    }
+  },
+  {
+    "pk": "41e507b74e86ceab33bb85d498a5e35b",
+    "model": "sessions.session",
+    "fields": {
+      "expire_date": "2012-02-29 11:18:21",
+      "session_data": "NThiNjBkZjM3MGFmNTQ4NTBlZWY3Yjc4MGZkOGU2ODJhZmI3MDA2OTqAAn1xAChVEl9hdXRoX3Vz\nZXJfYmFja2VuZHEBVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEC\nVQ1fYXV0aF91c2VyX2lkcQOKARBVD19zZXNzaW9uX2V4cGlyeXEESwB1Lg==\n"
+    }
+  },
+  {
+    "pk": "42ace1b197dedf15d1136d25a3b43a6c",
+    "model": "sessions.session",
+    "fields": {
+      "expire_date": "2012-02-24 13:12:48",
+      "session_data": "NThiNjBkZjM3MGFmNTQ4NTBlZWY3Yjc4MGZkOGU2ODJhZmI3MDA2OTqAAn1xAChVEl9hdXRoX3Vz\nZXJfYmFja2VuZHEBVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEC\nVQ1fYXV0aF91c2VyX2lkcQOKARBVD19zZXNzaW9uX2V4cGlyeXEESwB1Lg==\n"
+    }
+  },
+  {
+    "pk": "4a0274cb4997c1288c1bd464ab8cd56d",
+    "model": "sessions.session",
+    "fields": {
+      "expire_date": "2012-03-02 16:54:55",
+      "session_data": "Mzg2NjhjZjZlNDFmYjExMmQxOWI2ZGRkYTk2YTZiMTIwYTFlNWU0ZDqAAn1xAChVEl9hdXRoX3Vz\nZXJfYmFja2VuZHEBVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEC\nVQ1sYXN0X3NwYWNlX2lkcQNNAAFVDV9hdXRoX3VzZXJfaWRxBEvQVQ9fc2Vzc2lvbl9leHBpcnlx\nBUsAdS4=\n"
+    }
+  },
+  {
+    "pk": "5954734b7128eda40bddc9b2a501381f",
+    "model": "sessions.session",
+    "fields": {
+      "expire_date": "2012-03-07 15:31:52",
+      "session_data": "OWMwMjM4OWZhYjZkZjk1YWE0MWMxM2VjZWFkNDRjZDViZGQ3ZjczYzqAAn1xAChVD19zZXNzaW9u\nX2V4cGlyeXEBSwBVDWxhc3Rfc3BhY2VfaWRxAooCAwFVDV9hdXRoX3VzZXJfaWRxA0vNVRJfYXV0\naF91c2VyX2JhY2tlbmRxBFUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tl\nbmRxBXUu\n"
+    }
+  },
+  {
+    "pk": "6373674711f6219b873a779d5dcef223",
+    "model": "sessions.session",
+    "fields": {
+      "expire_date": "2012-03-02 10:51:28",
+      "session_data": "NThiNjBkZjM3MGFmNTQ4NTBlZWY3Yjc4MGZkOGU2ODJhZmI3MDA2OTqAAn1xAChVEl9hdXRoX3Vz\nZXJfYmFja2VuZHEBVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEC\nVQ1fYXV0aF91c2VyX2lkcQOKARBVD19zZXNzaW9uX2V4cGlyeXEESwB1Lg==\n"
+    }
+  },
+  {
+    "pk": "886b58b4e17687e1d8e7c495d3f1757a",
+    "model": "sessions.session",
+    "fields": {
+      "expire_date": "2012-03-06 16:07:57",
+      "session_data": "MjhhYmU0YzZkNGU0MDk4NmExNWViNWQ2ZDEwMDAwMzFkN2YwZjhmZjqAAn1xAChVEl9hdXRoX3Vz\nZXJfYmFja2VuZHEBVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEC\nVQ1sYXN0X3NwYWNlX2lkcQOKAgABVQ1fYXV0aF91c2VyX2lkcQSKAs0AVQ9fc2Vzc2lvbl9leHBp\ncnlxBUsAdS4=\n"
+    }
+  },
+  {
+    "pk": "a6558f2726ceadc38790ee4a051f055f",
+    "model": "sessions.session",
+    "fields": {
+      "expire_date": "2012-02-29 10:01:45",
+      "session_data": "NzE3NGEzZWE5NmQxOTA3MDhkOTdiMDFkNTgzMmYzZWE0MGQzNzhmYTqAAn1xAChVD19zZXNzaW9u\nX2V4cGlyeXEBSwBVDWxhc3Rfc3BhY2VfaWRxAooBTVUNX2F1dGhfdXNlcl9pZHEDigEQVRJfYXV0\naF91c2VyX2JhY2tlbmRxBFUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tl\nbmRxBXUu\n"
+    }
+  },
+  {
+    "pk": "d4bc20d641cae61f607eac8049db274c",
+    "model": "sessions.session",
+    "fields": {
+      "expire_date": "2012-03-02 10:14:33",
+      "session_data": "NTU2YzU0ZjdiOGI2MmVmYmUzNDhiMzJhNWQwM2RiODE2ZjRiZWFjNDqAAn1xAChVEl9hdXRoX3Vz\nZXJfYmFja2VuZHEBVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEC\nVQ1fYXV0aF91c2VyX2lkcQNLu1UPX3Nlc3Npb25fZXhwaXJ5cQRLAHUu\n"
+    }
+  },
+  {
+    "pk": "d9f0374655fc41cce987776e6785816d",
+    "model": "sessions.session",
+    "fields": {
+      "expire_date": "2012-03-06 12:00:00",
+      "session_data": "ZTVlNzkwY2FlN2IxOWQwYzQ0NTZlYzVlY2VhYTcxN2NjYzEwYWMxNzqAAn1xAChVEl9hdXRoX3Vz\nZXJfYmFja2VuZHEBVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEC\nVQ1sYXN0X3NwYWNlX2lkcQOKAgABVQ1fYXV0aF91c2VyX2lkcQSKAtAAVQ9fc2Vzc2lvbl9leHBp\ncnlxBUsAdS4=\n"
+    }
+  },
+  {
+    "pk": "e1145fb92721db8da472c489c8c24d7d",
+    "model": "sessions.session",
+    "fields": {
+      "expire_date": "2012-02-24 10:28:36",
+      "session_data": "ZjBmZDhmNTAzY2I3OWI5OGNiNDk1NTVkNmU0OTU5NzE3ZTBjYTJhOTqAAn1xAChVD19zZXNzaW9u\nX2V4cGlyeXEBSwBVCnRlc3Rjb29raWVxAlUGd29ya2VkcQNVDV9hdXRoX3VzZXJfaWRxBIoBGFUS\nX2F1dGhfdXNlcl9iYWNrZW5kcQVVKWRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxC\nYWNrZW5kcQZ1Lg==\n"
+    }
+  },
+  {
+    "pk": "f332424c5af04595511e3b067870662c",
+    "model": "sessions.session",
+    "fields": {
+      "expire_date": "2012-03-06 10:51:02",
+      "session_data": "ZjYwNDA4N2Y0YzM2ZmE1MzQyYmJkMjk5ZjI4ZTI0NDU2YjEzNDNjZDqAAn1xAChVEl9hdXRoX3Vz\nZXJfYmFja2VuZHEBVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEC\nVQ1sYXN0X3NwYWNlX2lkcQOKAgMBVQ1fYXV0aF91c2VyX2lkcQRLzVUPX3Nlc3Npb25fZXhwaXJ5\ncQVLAHUu\n"
+    }
+  },
+  {
+    "pk": "f9278a66a7367ae51853ea1bd88bf4a2",
+    "model": "sessions.session",
+    "fields": {
+      "expire_date": "2012-03-06 12:31:22",
+      "session_data": "MDQ1ZmQ5ODYxMjIyNmY2NDI3ZGM1YWRkZTc3M2M0NTU2YjlkMDdjNzqAAn1xAChVD19zZXNzaW9u\nX2V4cGlyeXEBSwBVDWxhc3Rfc3BhY2VfaWRxAooCTAFVDV9hdXRoX3VzZXJfaWRxA4oC3ABVEl9h\ndXRoX3VzZXJfYmFja2VuZHEEVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFj\na2VuZHEFdS4=\n"
+    }
+  },
+  {
+    "pk": "faf7af41c49a624f2b7f42dad3eca900",
+    "model": "sessions.session",
+    "fields": {
+      "expire_date": "2012-03-08 10:59:43",
+      "session_data": "MGFmMTc2YTY1YWVhNDE2NDhhZmRmZGQ1MzI5ODc3MGU2YjY4NjZhYzqAAn1xAChVEl9hdXRoX3Vz\nZXJfYmFja2VuZHEBVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEC\nVQ1sYXN0X3NwYWNlX2lkcQOKAnQBVQ1fYXV0aF91c2VyX2lkcQRLzVUPX3Nlc3Npb25fZXhwaXJ5\ncQVLAHUu\n"
+    }
+  },
+  {
+    "pk": 360,
+    "model": "search.relationindex_mycontent_content_search_index",
+    "fields": {
+      "modified_date": "2012-02-23 10:52:12",
+      "is_featured": false,
+      "big_icon_href": null,
+      "is_deleted": false,
+      "file": 359,
+      "title": "test",
+      "author": 205,
+      "icon_href": null,
+      "view_count": 0,
+      "search_index_search_list_field": [
+        "test"
+      ],
+      "is_template": false,
+      "content_type": 1,
+      "created_date": "2012-02-23 10:52:12",
+      "short_description": "",
+      "is_public": false,
+      "associated_content": null,
+      "tags": "",
+      "description": ""
+    }
+  },
+  {
+    "pk": 375,
+    "model": "search.relationindex_mycontent_content_search_index",
+    "fields": {
+      "modified_date": "2012-02-23 10:56:11",
+      "is_featured": false,
+      "big_icon_href": "123123asdas",
+      "is_deleted": false,
+      "file": 374,
+      "title": "Copy of test",
+      "author": 205,
+      "icon_href": "asd",
+      "view_count": 0,
+      "search_index_search_list_field": [
+        "test",
+        "of",
+        "copi",
+        "tasg",
+        "asda"
+      ],
+      "is_template": false,
+      "content_type": 1,
+      "created_date": "2012-02-23 10:56:11",
+      "short_description": "asdasd",
+      "is_public": true,
+      "associated_content": null,
+      "tags": "tasg",
+      "description": "asda"
+    }
+  },
+  {
+    "pk": 188,
+    "model": "registration.registrationprofile",
+    "fields": {
+      "activation_key": "ALREADY_ACTIVATED",
+      "user": 187
+    }
+  },
+  {
+    "pk": 334,
+    "model": "registration.registrationprofile",
+    "fields": {
+      "activation_key": "ALREADY_ACTIVATED",
+      "user": 333
+    }
+  },
+  {
+    "pk": 375,
+    "model": "mycontent.content",
+    "fields": {
+      "modified_date": "2012-02-23 10:56:11",
+      "is_featured": false,
+      "big_icon_href": "123123asdas",
+      "is_deleted": false,
+      "file": 374,
+      "title": "Copy of test",
+      "author": 205,
+      "icon_href": "asd",
+      "view_count": 0,
+      "is_template": false,
+      "content_type": 1,
+      "created_date": "2012-02-23 10:56:11",
+      "short_description": "asdasd",
+      "is_public": true,
+      "associated_content": null,
+      "tags": "tasg",
+      "description": "asda"
+    }
+  },
+  {
+    "pk": 360,
+    "model": "mycontent.content",
+    "fields": {
+      "modified_date": "2012-02-23 10:52:12",
+      "is_featured": false,
+      "big_icon_href": null,
+      "is_deleted": false,
+      "file": 359,
+      "title": "test",
+      "author": 205,
+      "icon_href": null,
+      "view_count": 0,
+      "is_template": false,
+      "content_type": 1,
+      "created_date": "2012-02-23 10:52:12",
+      "short_description": "",
+      "is_public": false,
+      "associated_content": null,
+      "tags": "",
+      "description": ""
+    }
+  },
+  {
+    "pk": 361,
+    "model": "mycontent.contentspace",
+    "fields": {
+      "content": 360,
+      "is_deleted": false,
+      "space": 352
+    }
+  },
+  {
+    "pk": 376,
+    "model": "mycontent.contentspace",
+    "fields": {
+      "content": 375,
+      "is_deleted": false,
+      "space": 372
+    }
+  },
+  {
+    "pk": 352,
+    "model": "spaces.space",
+    "fields": {
+      "modified_date": "2012-02-23 10:50:18",
+      "right": 2,
+      "parent": null,
+      "title": "test",
+      "rank": 20,
+      "top_level": 352,
+      "created_date": "2012-02-23 10:50:18",
+      "space_type": 1,
+      "left": 1
+    }
+  },
+  {
+    "pk": 362,
+    "model": "spaces.space",
+    "fields": {
+      "modified_date": "2012-02-23 10:53:53",
+      "right": 2,
+      "parent": null,
+      "title": "kgebert",
+      "rank": 20,
+      "top_level": 362,
+      "created_date": "2012-02-23 10:53:53",
+      "space_type": 1,
+      "left": 1
+    }
+  },
+  {
+    "pk": 368,
+    "model": "spaces.space",
+    "fields": {
+      "modified_date": "2012-02-23 10:55:48",
+      "right": 4,
+      "parent": null,
+      "title": "testCorp",
+      "rank": 20,
+      "top_level": 368,
+      "created_date": "2012-02-23 10:55:10",
+      "space_type": 3,
+      "left": 1
+    }
+  },
+  {
+    "pk": 369,
+    "model": "spaces.space",
+    "fields": {
+      "modified_date": "2012-02-23 10:55:10",
+      "right": 2,
+      "parent": null,
+      "title": "testCorp Public",
+      "rank": 20,
+      "top_level": 369,
+      "created_date": "2012-02-23 10:55:10",
+      "space_type": 2,
+      "left": 1
+    }
+  },
+  {
+    "pk": 372,
+    "model": "spaces.space",
+    "fields": {
+      "modified_date": "2012-02-23 10:55:48",
+      "right": 3,
+      "parent": 368,
+      "title": "testDivi",
+      "rank": 20,
+      "top_level": 368,
+      "created_date": "2012-02-23 10:55:48",
+      "space_type": 3,
+      "left": 2
+    }
+  },
+  {
+    "pk": 355,
+    "model": "spaces.spaceaccess",
+    "fields": {
+      "modified_date": "2012-02-23 10:50:46",
+      "is_deleted": false,
+      "space": 352,
+      "user": 205,
+      "created_date": "2012-02-23 10:50:46",
+      "access_right": 3
+    }
+  },
+  {
+    "pk": 365,
+    "model": "spaces.spaceaccess",
+    "fields": {
+      "modified_date": "2012-02-23 10:54:10",
+      "is_deleted": false,
+      "space": 362,
+      "user": 16,
+      "created_date": "2012-02-23 10:54:10",
+      "access_right": 3
+    }
+  },
+  {
+    "pk": 370,
+    "model": "spaces.spaceaccess",
+    "fields": {
+      "modified_date": "2012-02-23 10:55:10",
+      "is_deleted": false,
+      "space": 368,
+      "user": 205,
+      "created_date": "2012-02-23 10:55:10",
+      "access_right": 3
+    }
+  },
+  {
+    "pk": 358,
+    "model": "filestorage.filestorage",
+    "fields": {
+      "modified_date": "2012-02-23 10:52:12",
+      "history_for": null,
+      "version": null,
+      "content_type": "text/xml",
+      "created_date": "2012-02-23 10:52:12",
+      "owner": 205,
+      "contents": "<?xml version='1.0' encoding='UTF-8' ?> \n\n<page>\n\t<modules> \n\t\n\t\t<textModule id=\"Title\" left=\"5\" top=\"3\" width=\"90\" height=\"7\" style=\"\">\n\t\t\t<text>&lt;div style=&quot;text-align: center;&quot;&gt;Title&lt;/div&gt;</text>\n\t\t</textModule>\t\n\t\t<buttonModule id=\"PrevPage\" left=\"0\" top=\"90\" width=\"10\" height=\"10\" style=\"\">\n\t\t\t<button type=\"prevPage\" text=\"\"/>\n\t\t</buttonModule>\n\t\t<buttonModule id=\"NextPage\" left=\"90\" top=\"90\" width=\"10\" height=\"10\" style=\"\">\n\t\t\t<button type=\"nextPage\" text=\"\"/>\n\t\t</buttonModule>\n    </modules> \n</page>\n"
+    }
+  },
+  {
+    "pk": 359,
+    "model": "filestorage.filestorage",
+    "fields": {
+      "modified_date": "2012-02-23 10:52:12",
+      "history_for": 360,
+      "version": 1,
+      "content_type": "text/xml",
+      "created_date": "2012-02-23 10:52:12",
+      "owner": 205,
+      "contents": "<?xml version='1.0' encoding='UTF-8' ?>\n<interactiveContent>\n\n\t<style href=\"/media/content/styles/default/content.css\"/>\n\t\n\t<pages>\n    \t<page name='page 1' href='358'/> \n    </pages>\n</interactiveContent>"
+    }
+  },
+  {
+    "pk": 373,
+    "model": "filestorage.filestorage",
+    "fields": {
+      "modified_date": "2012-02-23 10:56:11",
+      "history_for": null,
+      "version": null,
+      "content_type": "text/xml",
+      "created_date": "2012-02-23 10:56:11",
+      "owner": 205,
+      "contents": "<?xml version='1.0' encoding='UTF-8' ?> \n\n<page>\n\t<modules> \n\t\n\t\t<textModule id=\"Title\" left=\"5\" top=\"3\" width=\"90\" height=\"7\" style=\"\">\n\t\t\t<text>&lt;div style=&quot;text-align: center;&quot;&gt;Title&lt;/div&gt;</text>\n\t\t</textModule>\t\n\t\t<buttonModule id=\"PrevPage\" left=\"0\" top=\"90\" width=\"10\" height=\"10\" style=\"\">\n\t\t\t<button type=\"prevPage\" text=\"\"/>\n\t\t</buttonModule>\n\t\t<buttonModule id=\"NextPage\" left=\"90\" top=\"90\" width=\"10\" height=\"10\" style=\"\">\n\t\t\t<button type=\"nextPage\" text=\"\"/>\n\t\t</buttonModule>\n    </modules> \n</page>\n"
+    }
+  },
+  {
+    "pk": 374,
+    "model": "filestorage.filestorage",
+    "fields": {
+      "modified_date": "2012-02-23 10:56:11",
+      "history_for": 375,
+      "version": 1,
+      "content_type": "text/xml",
+      "created_date": "2012-02-23 10:56:11",
+      "owner": 205,
+      "contents": "<?xml version=\"1.0\" encoding=\"utf-8\"?><interactiveContent>\n\n\t<style href=\"/media/content/styles/default/content.css\"/>\n\t\n\t<pages>\n    \t<page href=\"373\" name=\"page 1\"/> \n    </pages>\n</interactiveContent>"
+    }
+  },
+  {
+    "pk": 371,
+    "model": "corporate.corporatepublicspace",
+    "fields": {
+      "public_category": 369,
+      "company": 368
+    }
+  },
+  {
+    "pk": 377,
+    "model": "admin.logentry",
+    "fields": {
+      "action_flag": 2,
+      "action_time": "2012-02-23 10:58:42",
+      "object_repr": "Copy of test",
+      "object_id": "375",
+      "change_message": "Changed is_public, icon_href, big_icon_href, tags, description and short_description.",
+      "user": 16,
+      "content_type": 170
+    }
+  },
+  {
+    "pk": 366,
+    "model": "admin.logentry",
+    "fields": {
+      "action_flag": 1,
+      "action_time": "2012-02-23 10:54:10",
+      "object_repr": "kgebert:kgebert <owner>",
+      "object_id": "365",
+      "change_message": "",
+      "user": 16,
+      "content_type": 21
+    }
+  },
+  {
+    "pk": 363,
+    "model": "admin.logentry",
+    "fields": {
+      "action_flag": 1,
+      "action_time": "2012-02-23 10:53:53",
+      "object_repr": "kgebert",
+      "object_id": "362",
+      "change_message": "",
+      "user": 16,
+      "content_type": 17
+    }
+  },
+  {
+    "pk": 356,
+    "model": "admin.logentry",
+    "fields": {
+      "action_flag": 1,
+      "action_time": "2012-02-23 10:50:46",
+      "object_repr": "owner1:test <owner>",
+      "object_id": "355",
+      "change_message": "",
+      "user": 16,
+      "content_type": 21
+    }
+  },
+  {
+    "pk": 353,
+    "model": "admin.logentry",
+    "fields": {
+      "action_flag": 1,
+      "action_time": "2012-02-23 10:50:18",
+      "object_repr": "test",
+      "object_id": "352",
+      "change_message": "",
+      "user": 16,
+      "content_type": 17
+    }
+  },
+  {
+    "pk": 325,
+    "model": "admin.logentry",
+    "fields": {
+      "action_flag": 3,
+      "action_time": "2012-02-20 12:11:18",
+      "object_repr": "kgebert:corpKgbert <owner>",
+      "object_id": "80",
+      "change_message": "",
+      "user": 16,
+      "content_type": 21
+    }
+  },
+  {
+    "pk": 320,
+    "model": "admin.logentry",
+    "fields": {
+      "action_flag": 1,
+      "action_time": "2012-02-20 09:45:16",
+      "object_repr": "Solwit:Solwit Public",
+      "object_id": "319",
+      "change_message": "",
+      "user": 16,
+      "content_type": 318
+    }
+  },
+  {
+    "pk": 316,
+    "model": "admin.logentry",
+    "fields": {
+      "action_flag": 1,
+      "action_time": "2012-02-20 09:43:35",
+      "object_repr": "owner1:Solwit Public <owner>",
+      "object_id": "315",
+      "change_message": "",
+      "user": 16,
+      "content_type": 21
+    }
+  },
+  {
+    "pk": 308,
+    "model": "admin.logentry",
+    "fields": {
+      "action_flag": 1,
+      "action_time": "2012-02-17 16:37:34",
+      "object_repr": "user:user <owner>",
+      "object_id": "307",
+      "change_message": "",
+      "user": 16,
+      "content_type": 21
+    }
+  },
+  {
+    "pk": 305,
+    "model": "admin.logentry",
+    "fields": {
+      "action_flag": 1,
+      "action_time": "2012-02-17 16:37:25",
+      "object_repr": "write:write <owner>",
+      "object_id": "304",
+      "change_message": "",
+      "user": 16,
+      "content_type": 21
+    }
+  },
+  {
+    "pk": 302,
+    "model": "admin.logentry",
+    "fields": {
+      "action_flag": 1,
+      "action_time": "2012-02-17 16:37:15",
+      "object_repr": "read:read <owner>",
+      "object_id": "301",
+      "change_message": "",
+      "user": 16,
+      "content_type": 21
+    }
+  },
+  {
+    "pk": 299,
+    "model": "admin.logentry",
+    "fields": {
+      "action_flag": 1,
+      "action_time": "2012-02-17 16:37:07",
+      "object_repr": "owner3:owner3 <owner>",
+      "object_id": "298",
+      "change_message": "",
+      "user": 16,
+      "content_type": 21
+    }
+  },
+  {
+    "pk": 296,
+    "model": "admin.logentry",
+    "fields": {
+      "action_flag": 1,
+      "action_time": "2012-02-17 16:36:59",
+      "object_repr": "owner2:owner2 <owner>",
+      "object_id": "295",
+      "change_message": "",
+      "user": 16,
+      "content_type": 21
+    }
+  },
+  {
+    "pk": 293,
+    "model": "admin.logentry",
+    "fields": {
+      "action_flag": 1,
+      "action_time": "2012-02-17 16:36:50",
+      "object_repr": "owner1:owner1 <owner>",
+      "object_id": "292",
+      "change_message": "",
+      "user": 16,
+      "content_type": 21
+    }
+  },
+  {
+    "pk": 290,
+    "model": "admin.logentry",
+    "fields": {
+      "action_flag": 1,
+      "action_time": "2012-02-17 16:30:42",
+      "object_repr": "user",
+      "object_id": "289",
+      "change_message": "",
+      "user": 16,
+      "content_type": 17
+    }
+  },
+  {
+    "pk": 287,
+    "model": "admin.logentry",
+    "fields": {
+      "action_flag": 1,
+      "action_time": "2012-02-17 16:30:33",
+      "object_repr": "write",
+      "object_id": "286",
+      "change_message": "",
+      "user": 16,
+      "content_type": 17
+    }
+  },
+  {
+    "pk": 284,
+    "model": "admin.logentry",
+    "fields": {
+      "action_flag": 1,
+      "action_time": "2012-02-17 16:30:20",
+      "object_repr": "read",
+      "object_id": "283",
+      "change_message": "",
+      "user": 16,
+      "content_type": 17
+    }
+  },
+  {
+    "pk": 281,
+    "model": "admin.logentry",
+    "fields": {
+      "action_flag": 1,
+      "action_time": "2012-02-17 16:30:12",
+      "object_repr": "owner3",
+      "object_id": "280",
+      "change_message": "",
+      "user": 16,
+      "content_type": 17
+    }
+  },
+  {
+    "pk": 278,
+    "model": "admin.logentry",
+    "fields": {
+      "action_flag": 1,
+      "action_time": "2012-02-17 16:30:01",
+      "object_repr": "owner2",
+      "object_id": "277",
+      "change_message": "",
+      "user": 16,
+      "content_type": 17
+    }
+  },
+  {
+    "pk": 275,
+    "model": "admin.logentry",
+    "fields": {
+      "action_flag": 1,
+      "action_time": "2012-02-17 16:29:49",
+      "object_repr": "owner1",
+      "object_id": "274",
+      "change_message": "",
+      "user": 16,
+      "content_type": 17
+    }
+  },
+  {
+    "pk": 272,
+    "model": "admin.logentry",
+    "fields": {
+      "action_flag": 2,
+      "action_time": "2012-02-17 16:29:19",
+      "object_repr": "owner1:Solwit <owner>",
+      "object_id": "238",
+      "change_message": "Changed space.",
+      "user": 16,
+      "content_type": 21
+    }
+  },
+  {
+    "pk": 270,
+    "model": "admin.logentry",
+    "fields": {
+      "action_flag": 2,
+      "action_time": "2012-02-17 16:28:47",
+      "object_repr": "owner2:Solwit IT <owner>",
+      "object_id": "241",
+      "change_message": "Changed space.",
+      "user": 16,
+      "content_type": 21
+    }
+  },
+  {
+    "pk": 268,
+    "model": "admin.logentry",
+    "fields": {
+      "action_flag": 2,
+      "action_time": "2012-02-17 16:28:27",
+      "object_repr": "owner3:Solwit HR <owner>",
+      "object_id": "244",
+      "change_message": "Changed space.",
+      "user": 16,
+      "content_type": 21
+    }
+  },
+  {
+    "pk": 266,
+    "model": "admin.logentry",
+    "fields": {
+      "action_flag": 2,
+      "action_time": "2012-02-17 16:27:59",
+      "object_repr": "read:Solwit IT <read>",
+      "object_id": "247",
+      "change_message": "Changed space.",
+      "user": 16,
+      "content_type": 21
+    }
+  },
+  {
+    "pk": 264,
+    "model": "admin.logentry",
+    "fields": {
+      "action_flag": 2,
+      "action_time": "2012-02-17 16:27:12",
+      "object_repr": "Solwit IT",
+      "object_id": "256",
+      "change_message": "Changed title.",
+      "user": 16,
+      "content_type": 17
+    }
+  },
+  {
+    "pk": 262,
+    "model": "admin.logentry",
+    "fields": {
+      "action_flag": 2,
+      "action_time": "2012-02-17 16:26:17",
+      "object_repr": "write:Solwit HR <write>",
+      "object_id": "250",
+      "change_message": "Changed space.",
+      "user": 16,
+      "content_type": 21
+    }
+  },
+  {
+    "pk": 260,
+    "model": "admin.logentry",
+    "fields": {
+      "action_flag": 1,
+      "action_time": "2012-02-17 16:25:28",
+      "object_repr": "Solwit HR",
+      "object_id": "259",
+      "change_message": "",
+      "user": 16,
+      "content_type": 17
+    }
+  },
+  {
+    "pk": 257,
+    "model": "admin.logentry",
+    "fields": {
+      "action_flag": 1,
+      "action_time": "2012-02-17 16:25:03",
+      "object_repr": "Solwit IT Public",
+      "object_id": "256",
+      "change_message": "",
+      "user": 16,
+      "content_type": 17
+    }
+  },
+  {
+    "pk": 254,
+    "model": "admin.logentry",
+    "fields": {
+      "action_flag": 1,
+      "action_time": "2012-02-17 16:24:48",
+      "object_repr": "Solwit",
+      "object_id": "253",
+      "change_message": "",
+      "user": 16,
+      "content_type": 17
+    }
+  },
+  {
+    "pk": 251,
+    "model": "admin.logentry",
+    "fields": {
+      "action_flag": 1,
+      "action_time": "2012-02-17 16:17:24",
+      "object_repr": "write:Solwit HR Public <write>",
+      "object_id": "250",
+      "change_message": "",
+      "user": 16,
+      "content_type": 21
+    }
+  },
+  {
+    "pk": 248,
+    "model": "admin.logentry",
+    "fields": {
+      "action_flag": 1,
+      "action_time": "2012-02-17 16:16:41",
+      "object_repr": "read:Solwit IT Public <read>",
+      "object_id": "247",
+      "change_message": "",
+      "user": 16,
+      "content_type": 21
+    }
+  },
+  {
+    "pk": 245,
+    "model": "admin.logentry",
+    "fields": {
+      "action_flag": 1,
+      "action_time": "2012-02-17 16:16:06",
+      "object_repr": "owner3:Solwit HR Public <owner>",
+      "object_id": "244",
+      "change_message": "",
+      "user": 16,
+      "content_type": 21
+    }
+  },
+  {
+    "pk": 242,
+    "model": "admin.logentry",
+    "fields": {
+      "action_flag": 1,
+      "action_time": "2012-02-17 16:15:57",
+      "object_repr": "owner2:Solwit IT Public <owner>",
+      "object_id": "241",
+      "change_message": "",
+      "user": 16,
+      "content_type": 21
+    }
+  },
+  {
+    "pk": 239,
+    "model": "admin.logentry",
+    "fields": {
+      "action_flag": 1,
+      "action_time": "2012-02-17 16:15:41",
+      "object_repr": "owner1:Solwit Public <owner>",
+      "object_id": "238",
+      "change_message": "",
+      "user": 16,
+      "content_type": 21
+    }
+  },
+  {
+    "pk": 236,
+    "model": "admin.logentry",
+    "fields": {
+      "action_flag": 1,
+      "action_time": "2012-02-17 16:15:19",
+      "object_repr": "IT Administracja",
+      "object_id": "235",
+      "change_message": "",
+      "user": 16,
+      "content_type": 17
+    }
+  },
+  {
+    "pk": 233,
+    "model": "admin.logentry",
+    "fields": {
+      "action_flag": 1,
+      "action_time": "2012-02-17 16:14:44",
+      "object_repr": "IT Programowanie",
+      "object_id": "232",
+      "change_message": "",
+      "user": 16,
+      "content_type": 17
+    }
+  },
+  {
+    "pk": 230,
+    "model": "admin.logentry",
+    "fields": {
+      "action_flag": 1,
+      "action_time": "2012-02-17 16:13:59",
+      "object_repr": "Solwit HR Public",
+      "object_id": "229",
+      "change_message": "",
+      "user": 16,
+      "content_type": 17
+    }
+  },
+  {
+    "pk": 227,
+    "model": "admin.logentry",
+    "fields": {
+      "action_flag": 1,
+      "action_time": "2012-02-17 16:13:39",
+      "object_repr": "Solwit IT Public",
+      "object_id": "226",
+      "change_message": "",
+      "user": 16,
+      "content_type": 17
+    }
+  },
+  {
+    "pk": 224,
+    "model": "admin.logentry",
+    "fields": {
+      "action_flag": 1,
+      "action_time": "2012-02-17 16:13:15",
+      "object_repr": "Solwit Public",
+      "object_id": "223",
+      "change_message": "",
+      "user": 16,
+      "content_type": 17
+    }
+  },
+  {
+    "pk": 221,
+    "model": "admin.logentry",
+    "fields": {
+      "action_flag": 1,
+      "action_time": "2012-02-17 16:10:44",
+      "object_repr": "user",
+      "object_id": "220",
+      "change_message": "",
+      "user": 16,
+      "content_type": 204
+    }
+  },
+  {
+    "pk": 218,
+    "model": "admin.logentry",
+    "fields": {
+      "action_flag": 1,
+      "action_time": "2012-02-17 16:10:35",
+      "object_repr": "write",
+      "object_id": "217",
+      "change_message": "",
+      "user": 16,
+      "content_type": 204
+    }
+  },
+  {
+    "pk": 215,
+    "model": "admin.logentry",
+    "fields": {
+      "action_flag": 1,
+      "action_time": "2012-02-17 16:10:24",
+      "object_repr": "read",
+      "object_id": "214",
+      "change_message": "",
+      "user": 16,
+      "content_type": 204
+    }
+  },
+  {
+    "pk": 212,
+    "model": "admin.logentry",
+    "fields": {
+      "action_flag": 1,
+      "action_time": "2012-02-17 16:10:08",
+      "object_repr": "owner3",
+      "object_id": "211",
+      "change_message": "",
+      "user": 16,
+      "content_type": 204
+    }
+  },
+  {
+    "pk": 209,
+    "model": "admin.logentry",
+    "fields": {
+      "action_flag": 1,
+      "action_time": "2012-02-17 16:09:46",
+      "object_repr": "owner2",
+      "object_id": "208",
+      "change_message": "",
+      "user": 16,
+      "content_type": 204
+    }
+  },
+  {
+    "pk": 206,
+    "model": "admin.logentry",
+    "fields": {
+      "action_flag": 1,
+      "action_time": "2012-02-17 16:09:29",
+      "object_repr": "owner1",
+      "object_id": "205",
+      "change_message": "",
+      "user": 16,
+      "content_type": 204
+    }
+  },
+  {
+    "pk": 185,
+    "model": "admin.logentry",
+    "fields": {
+      "action_flag": 3,
+      "action_time": "2012-02-17 09:25:43",
+      "object_repr": "Heniek",
+      "object_id": "182",
+      "change_message": "",
+      "user": 16,
+      "content_type": 17
+    }
+  },
+  {
+    "pk": 183,
+    "model": "admin.logentry",
+    "fields": {
+      "action_flag": 1,
+      "action_time": "2012-02-17 09:25:33",
+      "object_repr": "Heniek",
+      "object_id": "182",
+      "change_message": "",
+      "user": 16,
+      "content_type": 17
+    }
+  },
+  {
+    "pk": 121,
+    "model": "admin.logentry",
+    "fields": {
+      "action_flag": 1,
+      "action_time": "2012-02-10 12:52:30",
+      "object_repr": "corpKarol:karol",
+      "object_id": "120",
+      "change_message": "",
+      "user": 16,
+      "content_type": 21
+    }
+  },
+  {
+    "pk": 118,
+    "model": "admin.logentry",
+    "fields": {
+      "action_flag": 1,
+      "action_time": "2012-02-10 12:52:12",
+      "object_repr": "corpKarol",
+      "object_id": "117",
+      "change_message": "",
+      "user": 16,
+      "content_type": 17
+    }
+  },
+  {
+    "pk": 100,
+    "model": "admin.logentry",
+    "fields": {
+      "action_flag": 2,
+      "action_time": "2012-02-09 17:13:30",
+      "object_repr": "corpKgbert:kgebert",
+      "object_id": "80",
+      "change_message": "Changed access_right.",
+      "user": 16,
+      "content_type": 21
+    }
+  },
+  {
+    "pk": 98,
+    "model": "admin.logentry",
+    "fields": {
+      "action_flag": 2,
+      "action_time": "2012-02-09 17:13:04",
+      "object_repr": "corpKgbert:kgebert",
+      "object_id": "80",
+      "change_message": "Changed access_right.",
+      "user": 16,
+      "content_type": 21
+    }
+  },
+  {
+    "pk": 81,
+    "model": "admin.logentry",
+    "fields": {
+      "action_flag": 1,
+      "action_time": "2012-02-09 15:57:36",
+      "object_repr": "corpKgbert:kgebert",
+      "object_id": "80",
+      "change_message": "",
+      "user": 16,
+      "content_type": 21
+    }
+  },
+  {
+    "pk": 78,
+    "model": "admin.logentry",
+    "fields": {
+      "action_flag": 1,
+      "action_time": "2012-02-09 15:56:49",
+      "object_repr": "corpKgbert",
+      "object_id": "77",
+      "change_message": "",
+      "user": 16,
+      "content_type": 17
+    }
+  },
+  {
+    "pk": 31,
+    "model": "admin.logentry",
+    "fields": {
+      "action_flag": 1,
+      "action_time": "2012-02-09 13:26:05",
+      "object_repr": "karol:karol",
+      "object_id": "30",
+      "change_message": "",
+      "user": 16,
+      "content_type": 21
+    }
+  },
+  {
+    "pk": 28,
+    "model": "admin.logentry",
+    "fields": {
+      "action_flag": 2,
+      "action_time": "2012-02-09 13:25:51",
+      "object_repr": "kgebert",
+      "object_id": "18",
+      "change_message": "Changed title.",
+      "user": 16,
+      "content_type": 17
+    }
+  },
+  {
+    "pk": 26,
+    "model": "admin.logentry",
+    "fields": {
+      "action_flag": 1,
+      "action_time": "2012-02-09 13:25:40",
+      "object_repr": "karol",
+      "object_id": "25",
+      "change_message": "",
+      "user": 16,
+      "content_type": 17
+    }
+  },
+  {
+    "pk": 23,
+    "model": "admin.logentry",
+    "fields": {
+      "action_flag": 1,
+      "action_time": "2012-02-09 13:06:25",
+      "object_repr": "s:kgebert",
+      "object_id": "22",
+      "change_message": "",
+      "user": 16,
+      "content_type": 21
+    }
+  },
+  {
+    "pk": 19,
+    "model": "admin.logentry",
+    "fields": {
+      "action_flag": 1,
+      "action_time": "2012-02-09 13:06:10",
+      "object_repr": "s",
+      "object_id": "18",
+      "change_message": "",
+      "user": 16,
+      "content_type": 17
+    }
+  }
+]

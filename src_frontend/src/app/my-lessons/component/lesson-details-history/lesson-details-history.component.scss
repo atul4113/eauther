@@ -1,0 +1,24 @@
+@import "../../../common/templates/mdl-colors";
+
+app-lesson-details-history {
+    .history-card {
+        margin: 8px;
+        height: 110px;
+
+        mat-card-title {
+            .current-info {
+                float: right;
+                color: $blue-500;
+                font-size: 20px;
+            }
+        }
+
+        mat-card-content {
+            mat-card-actions {
+                .set-as-current-button {
+                    float: right;
+                }
+            }
+        }
+    }
+}

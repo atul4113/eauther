@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% load apptags %}
+{% load utility %}
+
+{% block content %}
+
+<style>
+/* Popup container - can be anything you want */
+.popup {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* The actual popup */
+.popup .popuptext {
+    visibility: hidden;
+    width: 600%;
+    background-color: #555;
+    color: #fff;
+    text-align: justify;
+    border-radius: 6px;
+    padding: 20px;
+    padding-left: 25px;
+    padding-right: 25px;
+    position: absolute;
+    right: 150%;
+    z-index: 1000;
+    top: 200%;
+}
+
+/* Popup arrow */
+.popup .popuptext::after {
+    content: "";
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+    position: center;
+}
+
+/* Toggle this class - hide and show the popup */
+.popup .show {
+    visibility: visible;
+    -webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s;
+}
+
+/* Add animation (fade in the popup) */
+@-webkit-keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity:1 ;}
+}
+</style>
+
+
+
+
+<div class="alert alert-info alert-narrow alert-block">
+	You are currently editing this content. This action will create a new version in the history. Are you sure you want to continue? {{ find_out }}
+
+    <div class="popup" onclick="showPopup()"> <b> Find out more</b>
+        <span class="popuptext" id="findOutMorePopup">
+           This situation is due to the incorrect closing of the editor, e.g. opening the editor in another tab, not clicking the “Close” button before leaving the editor, or double-clicking the “Edit” button. If you think that none of these situations occurred and this message is still visible, please contact us.
+        </span>
+    </div>
+
+</div>
+
+<a role="button" class="btn btn-primary btn-sm pull-left" href="{{full_path_to_editor}}&confirmed=True">Yes</a>
+<a role="button" class="btn btn-primary btn-sm pull-right" href="{{back}}">No</a>
+
+<div class="clearfix"></div>
+
+<script>
+function showPopup() {
+    var popup = document.getElementById("findOutMorePopup");
+    popup.classList.toggle("show");
+}
+</script>
+
+
+{% endblock %}

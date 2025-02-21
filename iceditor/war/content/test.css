@@ -1,0 +1,32 @@
+/** 
+ *	Plik CSS dowiązany do contentu 
+ */
+
+/**
+ * Parametry każdej storny
+ */
+.ic_page{
+}
+
+.ic_button_nextpage{
+	background-image	:url('next_page.gif');
+	background-repeat	:no-repeat;
+	background-position	:center; 	
+}
+
+.ic_button_nextpage-down-hovering
+{
+	background-image	:url('next_page_down.gif');
+}
+
+.ic_button_prevpage{
+	background-image	:url('prev_page.gif');
+	background-repeat	:no-repeat;
+	background-position	:center; 	
+}
+
+.ic_button_prevpage-down-hovering
+{
+	background-image	:url('prev_page_down.gif');
+}
+

@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load apptags %}
+{% load support %}
+
+{% block content %}
+
+<h1 class="page_header pull-left">{{ticket.title}}</h1><h2 class="pull-left page_header">[{{ticket.ticket_type|print_type}}]</h2>
+
+<div class="pull-right">
+	{% if admin %}
+		{% button 'Back to list' 'parent.location="/support/admin"' %}
+	{% else %}
+		{% button 'Back to list' 'parent.location="/support/"' %}
+	{% endif %}
+</div>
+
+<div class="main clear" style="padding-top: 0"></div>
+
+{% include "common/messages/display_messages.html" %}
+
+<div class="commentList">
+
+
+	{% if ticket.lesson_url %}
+	<div style="padding-top: 10px">
+
+		<b>Lesson url:</b>
+    <a href="{{ ticket.lesson_url }}" rel="nofollow">
+        {{ ticket.lesson_url }}
+    </a>
+        {% if admin and lesson_id %}<a href="/mycontent/copy/{{lesson_id}}?next={{request.get_full_path}}&_SECURITY_TOKEN={{request.session.security_token_copy_content}}"><b>Copy to My Lessons</b></a>{% endif %}
+	</div>
+	{% endif %}
+
+	<div style="padding-top: 10px">
+		<b>Status: {{ticket.status|print_status}}</b> | 
+		{% if admin %}
+		Change status to:
+		<a href="/support/admin/status/{{ticket.id}}/1">New</a> |
+		<a href="/support/admin/status/{{ticket.id}}/2">Accepted</a> |
+		<a href="/support/admin/status/{{ticket.id}}/3">In Development</a> |
+		<a href="/support/admin/status/{{ticket.id}}/5">Ready</a> |
+		<a href="/support/admin/status/{{ticket.id}}/4">Closed</a>
+		{% else %}
+			{% if ticket.status != 4 %}
+			<a href="/support/status/{{ticket.id}}/4">Close ticket</a>
+			{% else %}
+			<a href="/support/status/{{ticket.id}}/1">Reopen ticket</a>
+			{% endif %}
+		{% endif %}
+	</div>
+
+	<div style="padding-top: 10px">
+		<b>Attachment:</b> <a href="/support/add_attachment/{{ticket.id}}{% if admin %}/1{% endif %}">Add attachment</a>
+	</div>
+
+	<form action="{{ticket.id}}" method="post" name="edit">
+
+	{% if admin %}
+	<div style="padding-top: 10px">
+		<b>Assigned to:</b>
+		<input type="hidden" name="old_assigned_to" value="{% if ticket.assigned_to %}{{ticket.assigned_to.id}}{% else %}0{% endif %}"/>
+		<select name="assigned_to">
+			<option value="0">None</option>
+			{% for user in users %}
+			<option value="{{user.id}}" {% if ticket.assigned_to.id == user.id %}selected{% endif %}>{{user.username}}</option>
+			{% endfor %}
+		</select>
+	</div>
+
+	<div style="padding-top: 10px">
+		<b>Company:</b> {{ticket.company}}
+	</div>
+	{% endif %}
+
+	{% for comment in comments %} 
+		<div class="supportComment">
+			<div class="commentAuthor">
+				by <b>{{comment.author}}</b><br/>
+				{{comment.created_date}}
+			</div>
+			<div class="commentText">
+				{{comment.text|urlize|linebreaks}}
+			</div>
+			<div class="clear"></div>
+		</div>
+	{% endfor %}
+	
+</div>
+
+<div class="clear"></div>
+<div style="padding-top:10px;padding-bottom:10px">
+	Reply to ticket:
+		{% csrf_token %}
+		<span class="errorlist">{% for e in form.text.errors %}{{ e }}{% endfor %}</span>
+		<div>
+			<textarea name="text" rows="10" cols="90"></textarea>
+		</div>
+		<p>{% button 'Send' 'document.forms["edit"].submit()' %}</p>
+	</form>
+</div>
+
+{% endblock content %}
+
+{% block head %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.commentText a').attr('target', '_blank');
+        });
+    </script>
+{% endblock head %}

@@ -1,0 +1,21 @@
+{% autoescape off %}
+<p>
+	<b>Title:</b> {{ bug.title }}
+</p>
+
+<p>
+	<b>Author:</b> {{ bug.author.username }}
+</p>
+
+<p>
+	<b>Content titile:</b> {{ bug.content.title }}
+</p>
+
+<p>
+	<b>Link:</b> <a href="{{ settings.BASE_URL }}/corporate/view/{{bug.content.id}}">{{ settings.BASE_URL }}/corporate/view/{{bug.content.id}}</a>
+</p>
+
+<p>
+	<b>Description:</b> {{ bug.description }}
+</p>
+{% endautoescape %}

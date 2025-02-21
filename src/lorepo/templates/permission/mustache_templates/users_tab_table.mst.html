@@ -1,0 +1,153 @@
+<tr>
+    <th class="project-publication">
+        Project / Publication
+    </th>
+    <th class="roles">
+        Roles
+    </th>
+    <th class="actions">
+        Actions
+    </th>
+</tr>
+[[#have-no-data]]
+    <tr>
+        <td colspan="3">
+            <div class="pull-center">
+                User has no permissions.
+            </div>
+        </td>
+    </tr>
+[[/have-no-data]]
+
+[[#projects]]
+    <tr class="userrow accordion-toggle clickable-user-publication collapsable-clickable-element">
+        <td data-toggle="collapse" data-target="#project-publications-[[row-index]]" data-parentid="project-[[row-index]]" class="role-collapser">[[name]]</td>
+        <td data-toggle="collapse" data-target="#project-publications-[[row-index]]" data-parentid="project-[[row-index]]" class="role-collapser">
+            [[roles-string]]
+        </td>
+        <td>
+            <a class="clickable-user-role-link project-space-access-remove remove-access-button" data-projectid="[[id]]">Remove</a> &middot;
+            <a data-toggle="collapse" data-target="#project-roles-data-[[row-index]]" class="accordion-toggle clickable-user-role-link">Edit</a>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="3" class="hiddenRow hidden-row">
+            <div class="collapse fully-expanded" data-child="project-[[row-index]]" id="project-roles-data-[[row-index]]">
+                <table class="user-project-table hidden-table">
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <td colspan="3" class="hidden-row-td">
+                            <div class="pull-right roles-edit-panel project-level" data-roles-panel="[[row-index]]">
+                                [[#roles]]
+                                    <label class="checkbox">
+                                        <input type="checkbox" class="checkbox-label-center-margin" [[#checked]]checked[[/checked]] data-actualrole="[[checked]]" data-value="[[id]]"> [[name]]</input>
+                                    </label>
+                                [[/roles]]
+                                <div class="roles-controls">
+                                    <button class="btn btn-success btn-sm project-level-apply-button" data-projectid="[[id]]" data-roles-panel="[[row-index]]">Apply</button>
+                                    <button class="btn btn-link btn-sm project-level-discard-button" data-roles-panel="[[row-index]]">Discard</button>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </td>
+    </tr>
+
+    [[#have-publications]]
+    <tr>
+        <td colspan="3" class="hiddenRow hidden-row">
+            <div class="accordian-body collapse fully-expanded" id="project-publications-[[row-index]]">
+                <table class="table hidden-table">
+                    [[#publications]]
+                    <tr class="userrow">
+                        <td>[[name]]</td>
+                        <td>
+                            <div>[[roles-string]]</div>
+                        </td>
+                        <td>
+                            <a class="clickable-user-role-link" data-toggle="collapse" data-target="#role-[[row-index]]-[[roles-row-index]]" class="accordion-toggle clickable-user-role-link">Edit</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" class="hiddenRow nopadding">
+                            <div class="collapse fully-expanded" data-child="data1" id="role-[[row-index]]-[[roles-row-index]]">
+                                <table>
+                                    <tr>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3" class="hidden-row-td">
+                                            <div class="pull-right roles-edit-panel project-publication-level" data-roles-panel="[[roles-row-index]]">
+                                                [[#roles]]
+                                                <label class="checkbox">
+                                                    <input type="checkbox" class="checkbox-label-center-margin" [[#checked]]checked[[/checked]] data-value="[[id]]" data-actualrole="[[checked]]"> [[name]]</input>
+                                                </label>
+                                                [[/roles]]
+                                                <div class="roles-controls">
+                                                    <button class="btn btn-success btn-sm project-publication-level-apply-button" data-publicationid="[[id]]" data-roles-panel="[[roles-row-index]]">Apply</button>
+                                                    <button class="btn btn-link btn-sm project-publication-level-discard-button" data-roles-panel="[[roles-row-index]]">Discard</button>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </td>
+                    </tr>
+                    [[/publications]]
+                </table>
+            </div>
+        </td>
+    </tr>
+    [[/have-publications]]
+[[/projects]]
+
+
+[[#publications]]
+    <tr class="userrow accordion">
+        <td data-toggle="collapse"  class="role-collapser">[[name]]</td>
+        <td data-toggle="collapse"  class="role-collapser">
+            [[roles-string]]
+        </td>
+        <td>
+            <a class="clickable-user-role-link publication-space-access-remove remove-access-button" data-publicationid="[[id]]">Remove</a> &middot;
+            <a data-toggle="collapse" data-target="#publication-roles-data-[[row-index]]" class="accordion-toggle clickable-user-role-link">Edit</a>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="3" class="hiddenRow nopadding">
+            <div class="collapse fully-expanded" data-child="publication-[[row-index]]" id="publication-roles-data-[[row-index]]">
+                <table>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <td colspan="3">
+                            <div class="pull-right roles-edit-panel publication-only-level" data-roles-panel="[[row-index]]">
+                                [[#roles]]
+                                    <label class="checkbox">
+                                        <input type="checkbox" class="checkbox-label-center-margin" [[#checked]]checked[[/checked]] data-actualrole="[[checked]]" data-value="[[id]]"> [[name]]</input>
+                                    </label>
+                                [[/roles]]
+                                <div class="roles-controls">
+                                    <button class="btn btn-success btn-sm publication-level-apply-button" data-projectid="[[id]]" data-roles-panel="[[row-index]]">Apply</button>
+                                    <button class="btn btn-link btn-sm publication-level-discard-button" data-roles-panel="[[row-index]]">Discard</button>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </td>
+    </tr>
+[[/publications]]

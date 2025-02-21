@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+{% load apptags %}
+{% load markdown_deux_tags %}
+{% load corporate %}
+{% load public %}
+{% block head %}
+<link href="/media/style/shCore.css" rel="stylesheet" type="text/css" />
+<link href="/media/style/shThemeDefault.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" language="javascript" src="/media/icplayer/icplayer.nocache.js"></script>
+<script type="text/javascript" language="javascript" src="/media/js/shCore.js"></script>
+<script type="text/javascript" language="javascript" src="/media/js/shBrushJScript.js"></script>
+<script type="text/javascript" language="javascript" src="/media/js/shBrushXml.js"></script>
+<script type="text/javascript" src="/media/js/addon-source-menu.js"></script>
+
+{% if addon.associated_content %}
+<script type="text/javascript" language="javascript">
+		var player;
+  		function icOnAppLoaded(){
+     	// Load assessment
+	    	player = icCreatePlayer('_icplayer');
+	    	player.load('/file/{{addon.associated_content.file.id}}');
+  		}
+</script>
+{% endif %}
+{% include 'common/math_jax.html' %}
+{% endblock %}
+
+{% block content %}
+
+<h1 class="page_header" >
+{% space_path spaces %}
+</h1>
+<div class="main clear" style="padding-top: 0px"></div>
+
+<div class="title-description">
+<div class="title">{{addon.title}}</div>
+</div>
+
+<div class="clear" style="padding-top: 0"></div>
+
+<div class="tab-menu" >
+	<div class="single-tab selected" sourceId="Description">Description</div>
+	<div class="single-tab" sourceId="View">View</div>
+	<div class="single-tab" sourceId="Preview">Preview</div>
+	<div class="single-tab" sourceId="Model">Model</div>
+	<div class="single-tab" sourceId="SourceCode">Source Code</div>
+</div>
+<div class="addon-source">
+	<div id="Description">
+		<span>Description</span>
+		<div class="description">
+			{{ addon.description|markdown }} 
+		</div>
+	</div>
+	<div id="View">
+		<span>View</span>
+		<pre class="brush: xml">
+			{{view}}
+		</pre>
+	</div>
+	<div id="Preview">
+		<span>Preview</span>
+		<pre class="brush: xml">
+			{{preview}}
+		</pre>
+	</div>
+	<div id="Model">
+		<span>Model</span>
+		<pre class="brush: xml">
+			{{properties}}
+		</pre>
+	</div>
+	<div id="SourceCode">
+		<span>Source Code</span>
+		<pre class="brush: javascript">
+			{{presenter}}
+		</pre>
+	</div>
+</div>
+<div class="myContent">
+	<div class="content infoPreview" >
+	{% for cs in addon.contentspace_set.all %}
+		{% if cs.space.is_corporate %}
+			<span><b>Publisher: </b><a href="/public/?publisher={{cs.space.top_level.id}}&type={{addon.content_type}}">{{ cs.space.top_level }}</a></span>
+			<span><b>Author: </b> <a href="/public/?author={{addon.author.username}}&type={{addon.content_type}}">{{addon.author.username}}</a></span>
+		{% else %}
+		{% if cs.space.is_private %}
+			<span><b>Author: </b> <a href="/public/?author={{addon.author.username}}&type={{addon.content_type}}">{{addon.author.username}}</a></span>
+		{% endif %}
+		{% endif %}
+	{% endfor %}
+	</div>
+	<div class="clear"></div>
+	{% if addon.associated_content %}
+		<h3>Example usage in public lesson:</h3>
+		<div class="associated-presentation"><span>Title:</span> <a href="/embed/{{addon.associated_content.id}}">{{addon.associated_content}}</a></div>
+		<div id="_icplayer"></div>
+	
+	<form name="form_copy_{{addon.associated_content.id}}" method="GET" style="padding:5px 0">
+		<select name="menu_copy_{{addon.associated_content.id}}" 
+			onChange="top.location.href = this.form.menu_copy_{{addon.associated_content.id}}.options[this.form.menu_copy_{{addon.associated_content.id}}.selectedIndex].value;return false;">
+			<option>Copy lesson...</option>
+			<option value="/mycontent/copy/{{addon.associated_content.id}}/{{private_space.id}}">
+				My Lessons
+			</option>
+			{% for division in divisions %}
+				{% copy_spaces division request addon.associated_content.id %}
+			{% endfor %}
+		</select>
+	</form>
+	{% endif %}
+	
+	<div class="clear"></div>
+	
+</div>
+{% endblock %}

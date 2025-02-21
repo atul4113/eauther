@@ -1,0 +1,286 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load apptags %}
+{% load spaces %}
+{% load content %}
+{% load corporate %}
+
+{% block head %}
+    <script type="text/javascript" src="/media/js/description-display-more.js"></script>
+    <script type="text/javascript" src="/media/js/tags-display-more.js"></script>
+    <script type="text/javascript" src="/media/js/messages.js"></script>
+{% endblock %}
+{% block content %}
+    {% if not is_company_locked %}
+        <div class="pull-left">
+            <h1 class="page_header">
+                {{ header|default:"My Lessons" }}
+                <span>{% if subheader %} [<span class="subheader">{{ subheader }}</span>]{% endif %}
+                    {% if is_trash %} [Trash]{% endif %}</span>
+            </h1>
+        </div>
+        {% if not is_trash %}
+            {% if spaces %}
+                <div class="button-right">
+                    {% make_dropdown_menu 'Actions' sub_menus %}
+                </div>
+                <div class="clear"></div>
+            {% else %}
+                <div style="float:right; padding:10px;">You have to create publication before, you can create lessons.</div>
+            {% endif %}
+        {% endif %}
+        <div class="main clear" style="padding-top: 0"></div>
+
+        {% include "common/messages/display_messages.html" %}
+        <div id="messages">
+        </div>
+        <div class="myContent">
+
+            <div class="labelBoxColumn">
+                {% include "corporate/division_categories.html" %}
+                {% if request.session.merge_lessons %}
+                    {% include "corporate/merge_pages.html" %}
+                {% endif %}
+            </div>
+
+            <div class="container">
+                {% paginator_form request.path paginator current_page extra_params %}
+
+                {% if contents %}
+                    {% sort_by %}
+
+                    {% for content in contents %}
+                        <div class="content">
+                            <a name="{{ content.id }}"></a>
+                            <div class="content image">
+                                {% get_icon request content 'corporate' %}
+                            </div>
+                            <div class="content info">
+					<span class="content-details">
+						<b>Title:</b>
+                        {% if content.content_type != 3 %}
+                            <a href="/corporate/view/{{ content.id }}?next={{ request.get_full_path }}">
+                        {% else %}
+                            <a href="/corporate/view_addon/{{ content.id }}">
+                        {% endif %}
+                        {{ content.title|cut_after:40 }}</a>
+					</span>
+
+                                <span class="content-details">
+						<b>Author:</b> {{ content.author }}
+					</span>
+
+                                {% if content.content_type != 3 %}
+                                    <span class="content-details">
+						<b>State:</b>
+                                        {% if content.state %}
+                                            {{ content.state }}
+                                        {% else %}
+                                            No state assigned
+                                        {% endif %}
+					</span>
+
+                                    <span class="template content-details">
+						{% get_template_for_content content %}
+					</span>
+                                {% endif %}
+
+                                <span class="content-details content-details-modified">
+						<b>Modified:</b>
+						{{ content.modified_date|timesince }}
+					</span>
+                            </div>
+                            <div class="content actions">
+                                {% if not is_trash %}
+                                    <!-- LESSONS AND TEMPLATES -->
+                                    {% if content.content_type != 3 %}
+                                        {% if Permission.CONTENT_EDIT in user_permissions %}
+                                            <div class="content-actions-single">
+                                                <a class="edit_content" href="/mycontent/{{ content.id }}/editor?next={{ request.path }}&{{ editor_token_key }}={{ editor_token }}">
+                                                    {% trans "Edit&nbsp;Lesson" %}
+                                                </a>
+                                            </div>
+                                        {% endif %}
+
+                                        {% if Permission.CONTENT_EDIT_METADATA in user_permissions %}
+                                            <div class="content-actions-single">
+                                                <a href="/corporate/{{ content.id }}/metadata?next={{ request.path }}">
+                                                    {% trans "Edit&nbsp;Metadata" %}
+                                                </a>
+                                            </div>
+                                            {% if content.enable_page_metadata %}
+                                                <div class="content-actions-single">
+                                                    <a href="/mycontent/{{ content.id }}/pagemetadata?next={{ request.path }}">
+                                                        Edit Page Metadata
+                                                    </a>
+                                                </div>
+                                            {% endif %}
+                                        {% endif %}
+                                        {% if content.original and Permission.LOCALIZATION_LOCALIZE in user_permissions %}
+                                            <div class="content-actions-single">
+                                                <a href="/localization/check_repeated_ids/{{ content.id }}?next={{ request.path }}&{{ editor_token_key }}={{ editor_token }}">
+                                                    {% trans "Localize" %}
+                                                </a>
+                                            </div>
+                                        {% endif %}
+
+                                        {% if Permission.CONTENT_MAKE_PUBLIC in user_permissions %}
+                                            {% include 'common/mycontent/make_public.html' %}
+                                        {% endif %}
+                                        {% if Permission.CONTENT_REMOVE in user_permissions %}
+                                            <div class='content-actions-single'>
+                                                <a href="/corporate/{{ content.id }}/delete?next={{ request.get_full_path }}"
+                                                   target="_self"
+                                                   onclick="return confirm('Are you sure you want to delete this lesson?')">
+                                                    Delete
+                                                </a>
+                                            </div>
+                                        {% endif %}
+
+                                        {% if request.user.is_superuser %}
+                                            <div class="content-actions-single">Is template:
+                                                {% if content.content_type == 2 %}
+                                                    <a class="orange"
+                                                       href="/mycontent/{{ content.id }}/maketemplate?next={{ request.get_full_path }}">Yes</a>
+                                                {% else %}
+                                                    <a href="/mycontent/{{ content.id }}/maketemplate?next={{ request.get_full_path }}">No</a>
+                                                {% endif %}
+                                            </div>
+                                        {% endif %}
+                                        <div class="content-actions-single">
+                                            {% include "common/mycontent/view_as.html" %}
+                                        </div>
+
+                                        {% if Permission.CONTENT_COPY in user_permissions %}
+                                            <div class="content-actions-single">
+                                                <form name="form_copy_{{ content.id }}" method="GET">
+                                                    <select name="menu_copy_{{ content.id }}" style="max-width: 220px"
+                                                            onChange="top.location.href = this.form.menu_copy_{{ content.id }}.options[this.form.menu_copy_{{ content.id }}.selectedIndex].value;return false;">
+                                                        <option value="javascript:void(0)">Copy to location...</option>
+                                                        <option value="/mycontent/copy/{{ content.id }}/{{ private_space.id }}">
+                                                            My Lessons
+                                                        </option>
+                                                        {% for division in divisions %}
+                                                            {% copy_spaces division request content.id %}
+                                                        {% endfor %}
+                                                    </select>
+                                                </form>
+                                            </div>
+                                        {% endif %}
+                                        <div class="content-actions-single">
+                                            {% with 1 as show_merge %}
+                                                {% include "common/mycontent/more_actions.html" %}
+                                            {% endwith %}
+                                        </div>
+                                    {% else %} <!-- ADDONS -->
+
+                                        {% if Permission.CONTENT_EDIT in user_permissions %}
+                                            <div class='content-actions-single'>
+                                                 <a class="edit_content"  href='/mycontent/{{ content.id }}/editaddon?next={{ request.path }}&{{ addon_token_key }}={{ addon_token }}'>
+                                                    {% trans "Edit&nbsp;Addon"  %}
+                                                </a>
+                                            </div>
+                                        {% endif %}
+                                        {% if Permission.CONTENT_EDIT_METADATA in user_permissions %}
+                                            <div class='content-actions-single'>
+                                                <a href="/corporate/{{ content.id }}/addon_metadata?next={{ request.path }}">{% trans "Edit&nbsp;Metadata" %}</a>
+                                            </div>
+                                        {% endif %}
+                                        {% if Permission.CONTENT_REMOVE in user_permissions %}
+                                            <div class='content-actions-single'>
+                                                <a href="/corporate/{{ content.id }}/delete?next={{ request.get_full_path }}"
+                                                   target="_self"
+                                                   onclick="return confirm('Are you sure you want to delete this addon?')">{% trans "Delete" %}</a>
+                                            </div>
+                                        {% endif %}
+                                        {% if Permission.CONTENT_EDIT in user_permissions %}
+                                            <div class='content-actions-single'>
+                                                <a href="/mycontent/{{ content.id }}/change_addon_icon?next={{ request.get_full_path }}">Edit
+                                                    Preview Icon</a>
+                                            </div>
+                                        {% endif %}
+                                        {% if space_request|should_include_contents_in_editor %}
+                                            {% include "common/mycontent/make_public.html" %}
+                                        {% endif %}
+                                    {% endif %}
+                                {% else %}
+                                    {% if Permission.CONTENT_REMOVE in user_permissions %}
+                                        <a href="/corporate/{{ content.id }}/delete?next={{ request.get_full_path }}">{% trans "Undelete" %}</a>
+                                    {% endif %}
+                                {% endif %}
+                            </div>
+                            <div class="clear"></div>
+
+                            <div id="pages{{ content.id }}" class="extractPages">
+                            </div>
+
+                        </div>
+                        {% if content.last_bug and Permission.BUGTRACK_VIEW in user_permissions %}
+                            <div id="last-message-from-bt-container">
+                                <div id="last-message-from-bt-top">
+                                    <div class="author-wrapper">
+                                        <div class="author">
+                                            {{ content.last_bug.author }}
+                                        </div>
+                                    </div>
+                                    <div class="title-wrapper">
+                                        <div class="title">
+                                            {{ content.last_bug.title }}
+                                        </div>
+                                    </div>
+                                    <div class="date-wrapper">
+                                        <div class="date">
+                                            {{ content.last_bug.created_date }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="last-message-from-bt-bottom">
+                                    <div class="description-wrapper">
+                                        <div class="description">
+                                            {{ content.last_bug.description|safe }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                        {% if not forloop.last %}
+                            <div class="content clear"></div>
+                        {% else %}
+                            <div class="main clear"></div>
+                        {% endif %}
+                    {% endfor %}
+                {% else %}
+                    <div style="height:200px;">&nbsp;</div>
+                {% endif %}
+
+                {% paginator paginator current_page extra_params %}
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    {% else %}
+        <div class="message-company-closed">Sorry, your account at mAuthor’s development platform is permanently closed now.
+            Please <a href="/public/contact-us">contact us </a>in case you need more information or wish to extend your
+            subscription.
+        </div>
+    {% endif %}
+
+
+    <script>
+        //Prevent double-click on edit buttons
+        $(document).ready(function() {
+
+            $('.edit_content')
+                .on("dblclick", function (event){
+                    return false;
+                })
+
+                .on("click", function (event) {
+                    var clicks_counter = event.originalEvent.detail;
+                    if (clicks_counter === 1) {
+                        return true;
+                    }
+                    return false;
+                });
+            });
+     </script>
+{% endblock %}

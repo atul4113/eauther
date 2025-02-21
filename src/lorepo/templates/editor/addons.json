@@ -1,0 +1,22 @@
+{
+	"version": "1",
+	"addons": [
+	{% for addon in addons %}
+		{
+			"id" : "{{addon.name}}",
+			"name" : {% autoescape off %}"{{addon.title|addslashes}}"{% endautoescape %},
+			"icon_url": {% if addon.icon_href != None %}"{{uri}}{{addon.icon_href|slice:"1:"}}"{% else %}"{{uri}}media/content/default_small_addon.png"{% endif %},
+			{% if addon.category == 'Private' %}
+			"descriptor_url": "/proxy/get?url={{uri}}mycontent/{{addon.name}}/getaddon",
+			{% else %}
+			"descriptor_url": "/proxy/get?url={{uri}}public/{{addon.name}}/getaddon",
+			{% endif %}
+			{% if addon.category == 'Corporate' %}
+			"category" : "Private"
+			{% else %}
+			"category" : "{{addon.category}}"
+			{% endif %}
+		}{% if not forloop.last %},{% endif %}
+	{% endfor %}
+	]
+}

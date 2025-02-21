@@ -1,0 +1,23 @@
+@import "../../common/templates/mdl-colors";
+
+#home-websites {
+
+    .app-loading-wrapper {
+        padding: 64px 0;
+        text-align: center;
+    }
+
+    mat-card {
+        margin-bottom: 16px;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+
+        mat-list-item {
+            span, a, button {
+                margin-right: 8px;
+            }
+        }
+    }
+}

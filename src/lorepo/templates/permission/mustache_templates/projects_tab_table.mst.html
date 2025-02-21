@@ -1,0 +1,124 @@
+<tr>
+    <th class="project-publication">
+        Project/Publication
+    </th>
+    <th class="roles" id="project-table-roles-header">
+        Roles
+    </th>
+    <th id="project-table-actions-header" class="actions">
+        Actions
+    </th>
+</tr>
+    <tr data-toggle="collapse" data-target="#data-project-[[row-index]]" class="userrow accordion-toggle clickable-user-publication collapsable-clickable-element">
+        <td>[[name]]</td>
+        <td>
+        </td>
+        <td>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="4" class="hiddenRow hidden-row">
+            <div class="accordian-body collapse fully-expanded" id="data-project-[[row-index]]">
+                <table class="table hidden-table">
+                    [[#project_usersView]]
+                    <tr class="userrow">
+                        <td style="padding-left: 20px;">[[name]]</td>
+                        <td class="project-table-project-user-role">
+                            [[roles-string]]
+                        </td>
+                        <td class="project-table-project-user-actions">
+                            [[#canRemovePermission]]<a class="clickable-user-role-link project-user-remove-access-button remove-access-button" data-userid="[[id]]" data-username="[[name]]" data-projectid="[[project-id]]">Remove</a> &middot;[[/canRemovePermission]]
+                            <a class="clickable-user-role-link" data-toggle="collapse" data-target="#role-project-[[row-index]]-[[user-index]]" class="accordion-toggle clickable-user-role-link">Edit</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" class="hiddenRow nopadding">
+                            <div class="collapse fully-expanded" id="role-project-[[row-index]]-[[user-index]]">
+                                <table>
+                                    <tr>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3" class="hidden-row-td">
+                                            <div class="pull-right roles-edit-panel project-user-level" data-roles-panel="[[row-index]]-[[user-index]]">
+                                                [[#roles]]
+                                                <label class="checkbox">
+                                                    <input type="checkbox" class="checkbox-label-center-margin" [[#checked]]checked[[/checked]] data-value="[[id]]" data-actualrole="[[checked]]"> [[name]]</input>
+                                                </label>
+                                                [[/roles]]
+                                                <div class="roles-controls">
+                                                    <button class="btn btn-success btn-sm project-user-apply-button" data-userid="[[id]]" data-username="[[name]]" data-projectid="[[project-id]]" data-roles-panel="[[row-index]]-[[user-index]]">Apply</button>
+                                                    <button class="btn btn-link btn-sm project-user-discard-button" data-roles-panel="[[row-index]]-[[user-index]]">Discard</button>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </td>
+                    </tr>
+                    [[/project_usersView]]
+                </table>
+            </div>
+        </td>
+    </tr>
+
+[[#publications]]
+    <tr data-toggle="collapse" data-target="#data-publication-[[publication-index]]" class="userrow accordion-toggle clickable-user-publication collapsable-clickable-element">
+        <td style="padding-left: 20px;">[[name]]</td>
+        <td>
+        </td>
+        <td>
+        </td>
+    </tr>
+        <tr>
+            <td colspan="4" class="hiddenRow hidden-row">
+                <div class="accordian-body collapse fully-expanded" id="data-publication-[[publication-index]]">
+                    <table class="table hidden-table">
+                        [[#usersView]]
+                            <tr class="userrow">
+                                <td style="padding-left: 40px;">[[name]]</td>
+                                <td>
+                                   [[roles-string]]
+                                </td>
+                                <td>
+                                    [[#canRemovePermission]]<a class="clickable-user-role-link project-publication-remove-access-button remove-access-button" data-userid="[[id]]" data-projectid="[[project-id]]" data-publicationid="[[publication-id]]" data-username="[[name]]">Remove</a> &middot;[[/canRemovePermission]]
+                                    <a class="clickable-user-role-link" data-toggle="collapse" data-target="#publication-role-project-[[publication-index]]-[[user-index]]" class="accordion-toggle clickable-user-role-link">Edit</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" class="hiddenRow hidden-table">
+                                    <div class="collapse fully-expanded" id="publication-role-project-[[publication-index]]-[[user-index]]">
+                                        <table>
+                                            <tr>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="3" class="hidden-row-td">
+                                                    <div class="pull-right roles-edit-panel publication-level" data-roles-panel="[[publication-index]]-[[user-index]]">
+                                                        [[#roles]]
+                                                        <label class="checkbox">
+                                                            <input type="checkbox" class="checkbox-label-center-margin" [[#checked]]checked[[/checked]] data-value="[[id]]" data-actualrole="[[checked]]"> [[name]]</input>
+                                                        </label>
+                                                        [[/roles]]
+                                                        <div class="roles-controls">
+                                                            <button class="btn btn-success btn-sm publication-project-apply-button" data-userid="[[id]]" data-username="[[name]]" data-publicationid="[[publication-id]]" data-roles-panel="[[publication-index]]-[[user-index]]">Apply</button>
+                                                            <button class="btn btn-link btn-sm publication-project-discard-button" data-roles-panel="[[publication-index]]-[[user-index]]">Discard</button>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </td>
+                            </tr>
+                        [[/usersView]]
+                    </table>
+                </div>
+            </td>
+        </tr>
+[[/publications]]

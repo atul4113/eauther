@@ -1,0 +1,148 @@
+<table>
+    <tr>
+        <td>
+            {{ translations | getLabel:"plain.my_lessons.panel.lesson_details_meta.score_type" }}
+        </td>
+
+        <td [ngClass]="{'slim': isEditMode}">
+            <mat-form-field *ngIf="isEditMode">
+                <mat-select [(value)]="properties.scoreType"
+                    [placeholder]="translations | getLabel:'plain.my_lessons.panel.lesson_details_meta.select_score_type'">
+                    <mat-option [value]="'first'">
+                        {{ translations | getLabel:"plain.my_lessons.panel.lesson_details_meta.first_score" }}
+                    </mat-option>
+                    <mat-option [value]="'last'">
+                        {{ translations | getLabel:"plain.my_lessons.panel.lesson_details_meta.last_score" }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <ng-container *ngIf="!isEditMode">
+                <span *ngIf="properties.scoreType === 'first'">
+                    {{ translations | getLabel:"plain.my_lessons.panel.lesson_details_meta.first_score" }}
+                </span>
+                <span *ngIf="properties.scoreType === 'last'">
+                    {{ translations | getLabel:"plain.my_lessons.panel.lesson_details_meta.last_score" }}
+                </span>
+            </ng-container>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            {{ translations | getLabel:"plain.my_lessons.panel.lesson_details_meta.is_template" }}
+        </td>
+
+        <td>
+            <mat-checkbox
+                [(ngModel)]="properties.isTemplate"
+                [disabled]="!isEditMode"
+                color="primary"></mat-checkbox>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            {{ translations | getLabel:"plain.my_lessons.panel.lesson_details_meta.pages_meta_enabled" }}
+        </td>
+
+        <td>
+            <mat-checkbox
+                [(ngModel)]="properties.enablePageMetadata"
+                [disabled]="!isEditMode"
+                color="primary"></mat-checkbox>
+        </td>
+    </tr>
+
+    <tr *ngIf="!isProject">
+        <td>
+            Category
+        </td>
+
+        <td [ngClass]="{'slim': isEditMode}">
+            <!--<mat-radio-group *ngFor="let category of categories" (change)="publicatonChange($event)">-->
+                <!--<mat-radio-button *ngIf="projectStructure && isEditMode" [checked]="lesson.publicationId === selectedProject.id" [value]="category.id" class="publication-name">-->
+                        <!--{{ category.title }}-->
+                <!--</mat-radio-button>-->
+            <!--</mat-radio-group>-->
+
+            <mat-form-field *ngIf="isEditMode">
+                <mat-select [(value)]="selectedCategory" (change)="publicatonChange($event)"
+                    [placeholder]="'Select category'">
+                    <mat-option *ngFor="let category of categories" [value]="category">
+                        {{ category.title }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <ng-container *ngIf="!isEditMode">
+                <span>
+                    {{ lesson.projectName }}
+                </span>
+            </ng-container>
+        </td>
+    </tr>
+
+    <tr *ngIf="isProject">
+        <td>
+            Project
+        </td>
+
+        <td [ngClass]="{'slim': isEditMode}">
+            <mat-form-field *ngIf="isEditMode">
+                <mat-select [(value)]="selectedProject" (change)="changeProject($event)"
+                    [placeholder]="'Select project'">
+                    <mat-option *ngFor="let project of projects" [value]="project">
+                        {{ project.title }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <ng-container *ngIf="!isEditMode">
+                <span>
+                    {{ lesson.projectName }}
+                </span>
+            </ng-container>
+        </td>
+    </tr>
+
+    <tr *ngIf="isProject">
+        <td>
+            Publication
+        </td>
+
+        <td [ngClass]="{'slim': isEditMode}">
+            <!--<mat-form-field *ngIf="isEditMode">-->
+                <!--<mat-select [(value)]="properties.scoreType"-->
+                    <!--[placeholder]="'Select publication'">-->
+                    <!--<mat-option [value]="'first'">-->
+                        <!--{{ translations | getLabel:"plain.my_lessons.panel.lesson_details_meta.first_score" }}-->
+                    <!--</mat-option>-->
+                    <!--<mat-option [value]="'last'">-->
+                        <!--{{ translations | getLabel:"plain.my_lessons.panel.lesson_details_meta.last_score" }}-->
+                    <!--</mat-option>-->
+                <!--</mat-select>-->
+            <!--</mat-form-field>-->
+
+            <mat-radio-group (change)="publicatonChange($event)">
+                <mat-radio-button *ngIf="projectStructure && isEditMode" [checked]="lesson.publicationId === selectedProject.id" [value]="projectStructure.id" class="publication-name none-option">
+                    None
+                </mat-radio-button>
+                <app-project-structure *ngIf="projectStructure && isEditMode"
+                                       [lesson]="lesson"
+                                       [selectable]="true"
+                                       [hasLeftPadding]="false"
+                                       [shouldShowAddons]="false"
+                                       [projectId]="selectedProjectId"
+                                       [currentSpaceId]="selectedProject">
+                </app-project-structure>
+            </mat-radio-group>
+
+            <ng-container *ngIf="!isEditMode">
+                <span>
+                    {{ lesson.publicationName }}
+                </span>
+            </ng-container>
+        </td>
+    </tr>
+</table>

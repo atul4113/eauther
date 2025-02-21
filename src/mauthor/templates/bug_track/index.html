@@ -1,0 +1,51 @@
+{% load apptags %}
+
+{% block content %}
+<div id="bug-track-container">
+	<div id="bug-track-users-wrapper">
+		<div id="bug-track-followers">
+			Followers:
+		</div>
+		<div id="bug-track-users">
+			{% for user in users %}
+				{{ user }}{% if not forloop.last %}, {% endif %}
+			{% endfor %}
+		</div>
+	</div>
+	<div id="bug-track-bugs-container">
+		{% for bug in bugs %}
+			<div class="bug-track-single-bug">
+				<div class="bug-track-bug-top">
+					<div class="bug-track-bug-author-wrapper">
+						<div class="bug-track-bug-author">
+							{{ bug.author }}
+						</div>
+					</div>
+					<div class="bug-track-bug-title-wrapper">
+						<div class="bug-track-bug-title">
+							{{ bug.title }}
+						</div>
+					</div>
+					<div class="bug-track-bug-date-wrapper">
+						<div class="bug-track-bug-date">
+							{{ bug.created_date }}
+						</div>
+					</div>
+				</div>
+				<div class="bug-track-bug-bottom">
+					<div class="bug-track-bug-description-wrapper">
+						<div class="bug-track-bug-description">
+							{{ bug.description|safe }}
+						</div>
+					</div>
+					<div class="bug-track-bug-links">
+						{% if is_owner %}
+							<a href='/bug_track/{{ bug.id }}/delete?next={{back_url}}' class="bug-track-bug-links-right">delete</a>
+						{% endif %}
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+</div>
+{% endblock %}

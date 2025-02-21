@@ -1,0 +1,1583 @@
+[
+  {
+    "pk": 37,
+    "model": "contenttypes.contenttype",
+    "fields": {
+      "model": "content",
+      "name": "content",
+      "app_label": "mycontent"
+    }
+  },
+  {
+    "pk": 2,
+    "model": "contenttypes.contenttype",
+    "fields": {
+      "model": "space",
+      "name": "space",
+      "app_label": "spaces"
+    }
+  },
+  {
+    "pk": 6,
+    "model": "contenttypes.contenttype",
+    "fields": {
+      "model": "spaceaccess",
+      "name": "space access",
+      "app_label": "spaces"
+    }
+  },
+  {
+    "pk": 1,
+    "model": "auth.user",
+    "fields": {
+      "username": "admin",
+      "first_name": "",
+      "last_name": "",
+      "is_active": true,
+      "idxf_email_l_iexact": "admin@admin.pl",
+      "idxf_username_l_iexact": "admin",
+      "is_superuser": true,
+      "is_staff": true,
+      "last_login": "2012-03-05 14:04:12",
+      "groups": [],
+      "user_permissions": [],
+      "password": "sha1$4b90b$c08e14db561c0ab0e703ef6afea9c57a9cf12a63",
+      "email": "admin@admin.pl",
+      "date_joined": "2012-02-27 13:19:44"
+    }
+  },
+  {
+    "pk": 10,
+    "model": "auth.user",
+    "fields": {
+      "username": "test",
+      "first_name": "",
+      "last_name": "",
+      "is_active": true,
+      "idxf_email_l_iexact": "test@test.pl",
+      "idxf_username_l_iexact": "test",
+      "is_superuser": true,
+      "is_staff": true,
+      "last_login": "2012-03-05 15:32:37",
+      "groups": [],
+      "user_permissions": [],
+      "password": "sha1$bfc73$1a15cc3b2672367d8c77a33e281e37020b2db54c",
+      "email": "test@test.pl",
+      "date_joined": "2012-02-27 13:20:55"
+    }
+  },
+  {
+    "pk": "c39512b1bcf605a35cfa26e7e3a9d562",
+    "model": "sessions.session",
+    "fields": {
+      "expire_date": "2012-03-19 15:32:37",
+      "session_data": "NWRkODcxYTg4MmZjYmZlODJhNGE0ZTEyZDFjYTRlZjVhZGE0NDhlNzqAAn1xAChVEl9hdXRoX3Vz\nZXJfYmFja2VuZHEBVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEC\nVQ1fYXV0aF91c2VyX2lkcQNLClUPX3Nlc3Npb25fZXhwaXJ5cQRLAHUu\n"
+    }
+  },
+  {
+    "pk": 15,
+    "model": "search.relationindex_mycontent_content_search_index",
+    "fields": {
+      "modified_date": "2012-02-29 13:58:32",
+      "is_featured": false,
+      "big_icon_href": null,
+      "is_deleted": false,
+      "file": 51,
+      "title": "New addon",
+      "author": 10,
+      "public_version": null,
+      "view_count": 0,
+      "name": "new_addon",
+      "search_index_search_list_field": [
+        "new",
+        "addon"
+      ],
+      "is_template": false,
+      "content_type": 3,
+      "created_date": "2012-02-28 15:07:16",
+      "short_description": "",
+      "is_public": false,
+      "icon_href": null,
+      "associated_content": null,
+      "tags": "",
+      "description": ""
+    }
+  },
+  {
+    "pk": 22,
+    "model": "search.relationindex_mycontent_content_search_index",
+    "fields": {
+      "modified_date": "2012-03-05 14:01:31",
+      "is_featured": false,
+      "big_icon_href": null,
+      "is_deleted": false,
+      "file": 95,
+      "title": "New presentation",
+      "author": 10,
+      "public_version": 29,
+      "view_count": 2,
+      "name": null,
+      "search_index_search_list_field": [
+        "new",
+        "present"
+      ],
+      "is_template": false,
+      "content_type": 1,
+      "created_date": "2012-02-28 15:13:15",
+      "short_description": "",
+      "is_public": false,
+      "icon_href": null,
+      "associated_content": null,
+      "tags": "",
+      "description": ""
+    }
+  },
+  {
+    "pk": 33,
+    "model": "search.relationindex_mycontent_content_search_index",
+    "fields": {
+      "modified_date": "2012-02-29 14:00:49",
+      "is_featured": false,
+      "big_icon_href": null,
+      "is_deleted": false,
+      "file": 56,
+      "title": "Test",
+      "author": 10,
+      "public_version": null,
+      "view_count": 0,
+      "name": "test",
+      "search_index_search_list_field": [
+        "test"
+      ],
+      "is_template": false,
+      "content_type": 1,
+      "created_date": "2012-02-28 15:26:26",
+      "short_description": "",
+      "is_public": false,
+      "icon_href": null,
+      "associated_content": null,
+      "tags": "",
+      "description": ""
+    }
+  },
+  {
+    "pk": 44,
+    "model": "search.relationindex_mycontent_content_search_index",
+    "fields": {
+      "modified_date": "2012-02-29 09:47:32",
+      "is_featured": false,
+      "big_icon_href": null,
+      "is_deleted": false,
+      "file": 43,
+      "title": "Company addon",
+      "author": 10,
+      "public_version": 43,
+      "view_count": 0,
+      "name": "Company_addon",
+      "search_index_search_list_field": [
+        "compani",
+        "addon"
+      ],
+      "is_template": false,
+      "content_type": 3,
+      "created_date": "2012-02-29 09:46:51",
+      "short_description": "",
+      "is_public": false,
+      "icon_href": null,
+      "associated_content": 48,
+      "tags": "",
+      "description": ""
+    }
+  },
+  {
+    "pk": 48,
+    "model": "search.relationindex_mycontent_content_search_index",
+    "fields": {
+      "modified_date": "2012-02-29 09:47:03",
+      "is_featured": false,
+      "big_icon_href": null,
+      "is_deleted": false,
+      "file": 47,
+      "title": "Company presentation",
+      "author": 10,
+      "public_version": 47,
+      "view_count": 0,
+      "name": null,
+      "search_index_search_list_field": [
+        "compani",
+        "present"
+      ],
+      "is_template": false,
+      "content_type": 1,
+      "created_date": "2012-02-29 09:47:02",
+      "short_description": "",
+      "is_public": false,
+      "icon_href": null,
+      "associated_content": null,
+      "tags": "",
+      "description": ""
+    }
+  },
+  {
+    "pk": 60,
+    "model": "search.relationindex_mycontent_content_search_index",
+    "fields": {
+      "modified_date": "2012-02-29 14:05:04",
+      "is_featured": false,
+      "big_icon_href": null,
+      "is_deleted": false,
+      "file": 76,
+      "title": "TRESWA",
+      "author": 10,
+      "public_version": null,
+      "view_count": 0,
+      "name": null,
+      "search_index_search_list_field": [
+        "treswa"
+      ],
+      "is_template": false,
+      "content_type": 1,
+      "created_date": "2012-02-29 14:01:13",
+      "short_description": "",
+      "is_public": false,
+      "icon_href": null,
+      "associated_content": null,
+      "tags": "",
+      "description": ""
+    }
+  },
+  {
+    "pk": 65,
+    "model": "search.relationindex_mycontent_content_search_index",
+    "fields": {
+      "modified_date": "2012-02-29 14:05:17",
+      "is_featured": false,
+      "big_icon_href": null,
+      "is_deleted": false,
+      "file": 78,
+      "title": "TRESWA_ADDON",
+      "author": 10,
+      "public_version": null,
+      "view_count": 0,
+      "name": "TRESWA_ADDON",
+      "search_index_search_list_field": [
+        "treswa_addon"
+      ],
+      "is_template": false,
+      "content_type": 3,
+      "created_date": "2012-02-29 14:02:06",
+      "short_description": "",
+      "is_public": false,
+      "icon_href": null,
+      "associated_content": null,
+      "tags": "",
+      "description": ""
+    }
+  },
+  {
+    "pk": 84,
+    "model": "search.relationindex_mycontent_content_search_index",
+    "fields": {
+      "modified_date": "2012-02-29 14:35:44",
+      "is_featured": false,
+      "big_icon_href": null,
+      "is_deleted": false,
+      "file": 83,
+      "title": "A presentation",
+      "author": 1,
+      "public_version": 83,
+      "view_count": 0,
+      "name": null,
+      "search_index_search_list_field": [
+        "a",
+        "present"
+      ],
+      "is_template": false,
+      "content_type": 1,
+      "created_date": "2012-02-29 14:35:44",
+      "short_description": "",
+      "is_public": false,
+      "icon_href": null,
+      "associated_content": null,
+      "tags": "",
+      "description": ""
+    }
+  },
+  {
+    "pk": 99,
+    "model": "search.relationindex_mycontent_content_search_index",
+    "fields": {
+      "modified_date": "2012-03-05 14:03:16",
+      "is_featured": false,
+      "big_icon_href": null,
+      "is_deleted": false,
+      "file": 111,
+      "title": "With assets",
+      "author": 10,
+      "public_version": null,
+      "view_count": 0,
+      "name": null,
+      "search_index_search_list_field": [
+        "with",
+        "asset"
+      ],
+      "is_template": false,
+      "content_type": 1,
+      "created_date": "2012-03-05 14:01:48",
+      "short_description": "",
+      "is_public": false,
+      "icon_href": null,
+      "associated_content": null,
+      "tags": "",
+      "description": ""
+    }
+  },
+  {
+    "pk": 107,
+    "model": "search.relationindex_mycontent_content_search_index",
+    "fields": {
+      "modified_date": "2012-03-05 14:36:39",
+      "is_featured": false,
+      "big_icon_href": null,
+      "is_deleted": false,
+      "file": 113,
+      "title": "With assets 2",
+      "author": 10,
+      "public_version": null,
+      "view_count": 0,
+      "name": null,
+      "search_index_search_list_field": [
+        "2",
+        "with",
+        "asset"
+      ],
+      "is_template": false,
+      "content_type": 1,
+      "created_date": "2012-03-05 14:02:41",
+      "short_description": "",
+      "is_public": false,
+      "icon_href": null,
+      "associated_content": null,
+      "tags": "",
+      "description": ""
+    }
+  },
+  {
+    "pk": 11,
+    "model": "registration.registrationprofile",
+    "fields": {
+      "activation_key": "ALREADY_ACTIVATED",
+      "user": 10
+    }
+  },
+  {
+    "pk": 107,
+    "model": "mycontent.content",
+    "fields": {
+      "modified_date": "2012-03-05 14:36:39",
+      "is_featured": false,
+      "big_icon_href": null,
+      "is_deleted": false,
+      "file": 113,
+      "title": "With assets 2",
+      "author": 10,
+      "public_version": null,
+      "view_count": 0,
+      "name": null,
+      "is_template": false,
+      "content_type": 1,
+      "created_date": "2012-03-05 14:02:41",
+      "short_description": "",
+      "is_public": false,
+      "icon_href": null,
+      "associated_content": null,
+      "tags": "",
+      "description": ""
+    }
+  },
+  {
+    "pk": 99,
+    "model": "mycontent.content",
+    "fields": {
+      "modified_date": "2012-03-05 14:03:16",
+      "is_featured": false,
+      "big_icon_href": null,
+      "is_deleted": false,
+      "file": 111,
+      "title": "With assets",
+      "author": 10,
+      "public_version": null,
+      "view_count": 0,
+      "name": null,
+      "is_template": false,
+      "content_type": 1,
+      "created_date": "2012-03-05 14:01:48",
+      "short_description": "",
+      "is_public": false,
+      "icon_href": null,
+      "associated_content": null,
+      "tags": "",
+      "description": ""
+    }
+  },
+  {
+    "pk": 22,
+    "model": "mycontent.content",
+    "fields": {
+      "modified_date": "2012-03-05 14:01:31",
+      "is_featured": false,
+      "big_icon_href": null,
+      "is_deleted": false,
+      "file": 95,
+      "title": "New presentation",
+      "author": 10,
+      "public_version": 29,
+      "view_count": 2,
+      "name": null,
+      "is_template": false,
+      "content_type": 1,
+      "created_date": "2012-02-28 15:13:15",
+      "short_description": "",
+      "is_public": false,
+      "icon_href": null,
+      "associated_content": null,
+      "tags": "",
+      "description": ""
+    }
+  },
+  {
+    "pk": 84,
+    "model": "mycontent.content",
+    "fields": {
+      "modified_date": "2012-02-29 14:35:44",
+      "is_featured": false,
+      "big_icon_href": null,
+      "is_deleted": false,
+      "file": 83,
+      "title": "A presentation",
+      "author": 1,
+      "public_version": 83,
+      "view_count": 0,
+      "name": null,
+      "is_template": false,
+      "content_type": 1,
+      "created_date": "2012-02-29 14:35:44",
+      "short_description": "",
+      "is_public": false,
+      "icon_href": null,
+      "associated_content": null,
+      "tags": "",
+      "description": ""
+    }
+  },
+  {
+    "pk": 65,
+    "model": "mycontent.content",
+    "fields": {
+      "modified_date": "2012-02-29 14:05:17",
+      "is_featured": false,
+      "big_icon_href": null,
+      "is_deleted": false,
+      "file": 78,
+      "title": "TRESWA_ADDON",
+      "author": 10,
+      "public_version": null,
+      "view_count": 0,
+      "name": "TRESWA_ADDON",
+      "is_template": false,
+      "content_type": 3,
+      "created_date": "2012-02-29 14:02:06",
+      "short_description": "",
+      "is_public": false,
+      "icon_href": null,
+      "associated_content": null,
+      "tags": "",
+      "description": ""
+    }
+  },
+  {
+    "pk": 60,
+    "model": "mycontent.content",
+    "fields": {
+      "modified_date": "2012-02-29 14:05:04",
+      "is_featured": false,
+      "big_icon_href": null,
+      "is_deleted": false,
+      "file": 76,
+      "title": "TRESWA",
+      "author": 10,
+      "public_version": null,
+      "view_count": 0,
+      "name": null,
+      "is_template": false,
+      "content_type": 1,
+      "created_date": "2012-02-29 14:01:13",
+      "short_description": "",
+      "is_public": false,
+      "icon_href": null,
+      "associated_content": null,
+      "tags": "",
+      "description": ""
+    }
+  },
+  {
+    "pk": 33,
+    "model": "mycontent.content",
+    "fields": {
+      "modified_date": "2012-02-29 14:00:49",
+      "is_featured": false,
+      "big_icon_href": null,
+      "is_deleted": false,
+      "file": 56,
+      "title": "Test",
+      "author": 10,
+      "public_version": null,
+      "view_count": 0,
+      "name": "test",
+      "is_template": false,
+      "content_type": 1,
+      "created_date": "2012-02-28 15:26:26",
+      "short_description": "",
+      "is_public": false,
+      "icon_href": null,
+      "associated_content": null,
+      "tags": "",
+      "description": ""
+    }
+  },
+  {
+    "pk": 15,
+    "model": "mycontent.content",
+    "fields": {
+      "modified_date": "2012-02-29 13:58:32",
+      "is_featured": false,
+      "big_icon_href": null,
+      "is_deleted": false,
+      "file": 51,
+      "title": "New addon",
+      "author": 10,
+      "public_version": null,
+      "view_count": 0,
+      "name": "new_addon",
+      "is_template": false,
+      "content_type": 3,
+      "created_date": "2012-02-28 15:07:16",
+      "short_description": "",
+      "is_public": false,
+      "icon_href": null,
+      "associated_content": null,
+      "tags": "",
+      "description": ""
+    }
+  },
+  {
+    "pk": 44,
+    "model": "mycontent.content",
+    "fields": {
+      "modified_date": "2012-02-29 09:47:32",
+      "is_featured": false,
+      "big_icon_href": null,
+      "is_deleted": false,
+      "file": 43,
+      "title": "Company addon",
+      "author": 10,
+      "public_version": 43,
+      "view_count": 0,
+      "name": "Company_addon",
+      "is_template": false,
+      "content_type": 3,
+      "created_date": "2012-02-29 09:46:51",
+      "short_description": "",
+      "is_public": false,
+      "icon_href": null,
+      "associated_content": 48,
+      "tags": "",
+      "description": ""
+    }
+  },
+  {
+    "pk": 48,
+    "model": "mycontent.content",
+    "fields": {
+      "modified_date": "2012-02-29 09:47:03",
+      "is_featured": false,
+      "big_icon_href": null,
+      "is_deleted": false,
+      "file": 47,
+      "title": "Company presentation",
+      "author": 10,
+      "public_version": 47,
+      "view_count": 0,
+      "name": null,
+      "is_template": false,
+      "content_type": 1,
+      "created_date": "2012-02-29 09:47:02",
+      "short_description": "",
+      "is_public": false,
+      "icon_href": null,
+      "associated_content": null,
+      "tags": "",
+      "description": ""
+    }
+  },
+  {
+    "pk": 16,
+    "model": "mycontent.contentspace",
+    "fields": {
+      "content": 15,
+      "is_deleted": false,
+      "space": 12
+    }
+  },
+  {
+    "pk": 23,
+    "model": "mycontent.contentspace",
+    "fields": {
+      "content": 22,
+      "is_deleted": false,
+      "space": 12
+    }
+  },
+  {
+    "pk": 34,
+    "model": "mycontent.contentspace",
+    "fields": {
+      "content": 33,
+      "is_deleted": false,
+      "space": 12
+    }
+  },
+  {
+    "pk": 45,
+    "model": "mycontent.contentspace",
+    "fields": {
+      "content": 44,
+      "is_deleted": false,
+      "space": 41
+    }
+  },
+  {
+    "pk": 49,
+    "model": "mycontent.contentspace",
+    "fields": {
+      "content": 48,
+      "is_deleted": false,
+      "space": 41
+    }
+  },
+  {
+    "pk": 61,
+    "model": "mycontent.contentspace",
+    "fields": {
+      "content": 60,
+      "is_deleted": false,
+      "space": 12
+    }
+  },
+  {
+    "pk": 66,
+    "model": "mycontent.contentspace",
+    "fields": {
+      "content": 65,
+      "is_deleted": false,
+      "space": 12
+    }
+  },
+  {
+    "pk": 85,
+    "model": "mycontent.contentspace",
+    "fields": {
+      "content": 84,
+      "is_deleted": false,
+      "space": 41
+    }
+  },
+  {
+    "pk": 100,
+    "model": "mycontent.contentspace",
+    "fields": {
+      "content": 99,
+      "is_deleted": false,
+      "space": 12
+    }
+  },
+  {
+    "pk": 108,
+    "model": "mycontent.contentspace",
+    "fields": {
+      "content": 107,
+      "is_deleted": false,
+      "space": 12
+    }
+  },
+  {
+    "pk": 3,
+    "model": "spaces.space",
+    "fields": {
+      "modified_date": "2012-02-29 15:55:30",
+      "right": 2,
+      "parent": null,
+      "title": "admin",
+      "rank": 20,
+      "top_level": 3,
+      "created_date": "2012-02-27 13:20:10",
+      "space_type": 1,
+      "left": 1
+    }
+  },
+  {
+    "pk": 12,
+    "model": "spaces.space",
+    "fields": {
+      "modified_date": "2012-02-29 09:57:08",
+      "right": 4,
+      "parent": null,
+      "title": "test",
+      "rank": 20,
+      "top_level": 12,
+      "created_date": "2012-02-27 13:20:55",
+      "space_type": 1,
+      "left": 1
+    }
+  },
+  {
+    "pk": 41,
+    "model": "spaces.space",
+    "fields": {
+      "modified_date": "2012-02-29 09:46:18",
+      "right": 2,
+      "parent": null,
+      "title": "Test company",
+      "rank": 20,
+      "top_level": 41,
+      "created_date": "2012-02-29 09:46:18",
+      "space_type": 3,
+      "left": 1
+    }
+  },
+  {
+    "pk": 50,
+    "model": "spaces.space",
+    "fields": {
+      "modified_date": "2012-02-29 09:57:08",
+      "right": 3,
+      "parent": 12,
+      "title": "Test",
+      "rank": 20,
+      "top_level": 12,
+      "created_date": "2012-02-29 09:57:08",
+      "space_type": 1,
+      "left": 2
+    }
+  },
+  {
+    "pk": 91,
+    "model": "spaces.space",
+    "fields": {
+      "modified_date": "2012-02-29 15:57:13",
+      "right": 4,
+      "parent": null,
+      "title": "Test",
+      "rank": 20,
+      "top_level": 91,
+      "created_date": "2012-02-29 15:56:56",
+      "space_type": 2,
+      "left": 1
+    }
+  },
+  {
+    "pk": 7,
+    "model": "spaces.spaceaccess",
+    "fields": {
+      "modified_date": "2012-02-27 13:20:22",
+      "is_deleted": false,
+      "space": 3,
+      "user": 1,
+      "created_date": "2012-02-27 13:20:22",
+      "access_right": 3
+    }
+  },
+  {
+    "pk": 13,
+    "model": "spaces.spaceaccess",
+    "fields": {
+      "modified_date": "2012-02-27 13:20:55",
+      "is_deleted": false,
+      "space": 12,
+      "user": 10,
+      "created_date": "2012-02-27 13:20:55",
+      "access_right": 3
+    }
+  },
+  {
+    "pk": 42,
+    "model": "spaces.spaceaccess",
+    "fields": {
+      "modified_date": "2012-02-29 09:46:18",
+      "is_deleted": false,
+      "space": 41,
+      "user": 10,
+      "created_date": "2012-02-29 09:46:18",
+      "access_right": 3
+    }
+  },
+  {
+    "pk": 79,
+    "model": "spaces.spaceaccess",
+    "fields": {
+      "modified_date": "2012-02-29 14:33:58",
+      "is_deleted": false,
+      "space": 41,
+      "user": 1,
+      "created_date": "2012-02-29 14:33:58",
+      "access_right": 3
+    }
+  },
+  {
+    "pk": 14,
+    "model": "filestorage.filestorage",
+    "fields": {
+      "modified_date": "2012-02-28 15:07:16",
+      "history_for": 15,
+      "version": 1,
+      "content_type": "text/xml",
+      "created_date": "2012-02-28 15:07:16",
+      "owner": 10,
+      "contents": "<?xml version=\"1.0\" encoding=\"UTF-8\" ?> \n<addon id=\"new_addon\">\n\n\t<metadata>\n\t\t<title>Hello world Addon</title>\n\t\t<description>\n\t\t\tEnter addon description here\n\t\t</description>\n\t</metadata>\n\t\n\t<model>\n\t\t<property name=\"Text\" type=\"string\"/>\n\t</model>\n\t\n\t<view>\n\t\t&lt;p&gt;test&lt;/p&gt;\n\t</view>\n\t\n\t<preview>\n\t\t&lt;p&gt;Addon new_addon&lt;/p&gt;\n\t</preview>\n\t\n\t<presenter>\n\t\tfunction Addonnew_addon_create(){\n\t\t\t\n\t\t\tvar presenter = function(){}\n\n\t\t\tpresenter.run = function(view, model){\n\t\t\t\t\n\t\t\t\telement = view.getElementsByTagName('p')[0];\n\t\t\t\telement.innerHTML = model['Text'];\n\t\t\t}\n\n\t\t\tpresenter.setShowErrorsMode = function(){\n\t\t\t\telement.innerHTML = 'setShowErrorsMode';\n\t\t\t}\n\t\t\t\n\t\t\tpresenter.setWorkMode = function(){\n\t\t\t\telement.innerHTML = 'setWorkMode';\n\t\t\t}\n\t\t\t\n\t\t\tpresenter.reset = function(){\n\t\t\t\telement.innerHTML = 'Reset';\n\t\t\t}\n\t\t\t\n\t\t\tpresenter.getErrorCount = function(){\n\t\t\t\treturn 7;\n\t\t\t}\n\t\t\t\n\t\t\tpresenter.getMaxScore = function(){\n\t\t\t\treturn 3;\n\t\t\t}\n\t\t\t\n\t\t\tpresenter.getScore = function(){\n\t\t\t\treturn 1;\n\t\t\t}\n\t\t\t\n\t\t\treturn presenter;\n\t\t}\n\t\t\n\t</presenter>\n\t\n</addon>\n"
+    }
+  },
+  {
+    "pk": 17,
+    "model": "filestorage.filestorage",
+    "fields": {
+      "modified_date": "2012-02-28 15:07:20",
+      "history_for": 15,
+      "version": 2,
+      "content_type": "text/xml",
+      "created_date": "2012-02-28 15:07:20",
+      "owner": 10,
+      "contents": "<?xml version=\"1.0\" encoding=\"UTF-8\" ?> \n<addon id=\"new_addon\">\n\n\t<metadata>\n\t\t<title>Hello world Addon</title>\n\t\t<description>\n\t\t\tEnter addon description here\n\t\t</description>\n\t</metadata>\n\t\n\t<model>\n\t\t<property name=\"Text\" type=\"string\"/>\n\t</model>\n\t\n\t<view>\n\t\t&lt;p&gt;test&lt;/p&gt;\n\t</view>\n\t\n\t<preview>\n\t\t&lt;p&gt;Addon new_addon&lt;/p&gt;\n\t</preview>\n\t\n\t<presenter>\n\t\tfunction Addonnew_addon_create(){\n\t\t\t\n\t\t\tvar presenter = function(){}\n\n\t\t\tpresenter.run = function(view, model){\n\t\t\t\t\n\t\t\t\telement = view.getElementsByTagName('p')[0];\n\t\t\t\telement.innerHTML = model['Text'];\n\t\t\t}\n\n\t\t\tpresenter.setShowErrorsMode = function(){\n\t\t\t\telement.innerHTML = 'setShowErrorsMode';\n\t\t\t}\n\t\t\t\n\t\t\tpresenter.setWorkMode = function(){\n\t\t\t\telement.innerHTML = 'setWorkMode';\n\t\t\t}\n\t\t\t\n\t\t\tpresenter.reset = function(){\n\t\t\t\telement.innerHTML = 'Reset';\n\t\t\t}\n\t\t\t\n\t\t\tpresenter.getErrorCount = function(){\n\t\t\t\treturn 7;\n\t\t\t}\n\t\t\t\n\t\t\tpresenter.getMaxScore = function(){\n\t\t\t\treturn 3;\n\t\t\t}\n\t\t\t\n\t\t\tpresenter.getScore = function(){\n\t\t\t\treturn 1;\n\t\t\t}\n\t\t\t\n\t\t\treturn presenter;\n\t\t}\n\t\t\n\t</presenter>\n\t\n</addon>\n"
+    }
+  },
+  {
+    "pk": 18,
+    "model": "filestorage.filestorage",
+    "fields": {
+      "modified_date": "2012-02-28 15:07:29",
+      "history_for": 15,
+      "version": 3,
+      "content_type": "text/xml",
+      "created_date": "2012-02-28 15:07:29",
+      "owner": 10,
+      "contents": "<?xml version=\"1.0\" encoding=\"UTF-8\" ?> \n<addon id=\"new_addon\">\n\n\t<metadata>\n\t\t<title>Hello world Addon</title>\n\t\t<description>\n\t\t\tEnter addon description here\n\t\t</description>\n\t</metadata>\n\t\n\t<model>\n\t\t<property name=\"Text\" type=\"string\"/>\n\t</model>\n\t\n\t<view>\n\t\t&lt;p&gt;test&lt;/p&gt;\n\t</view>\n\t\n\t<preview>\n\t\t&lt;p&gt;Addon new_addon&lt;/p&gt;\n\t</preview>\n\t\n\t<presenter>\n\t\tfunction Addonnew_addon_create(){\n\t\t\t\n\t\t\tvar presenter = function(){}\n\n\t\t\tpresenter.run = function(view, model){\n\t\t\t\t\n\t\t\t\telement = view.getElementsByTagName('p')[0];\n\t\t\t\telement.innerHTML = model['Text'];\n\t\t\t}\n\n\t\t\tpresenter.setShowErrorsMode = function(){\n\t\t\t\telement.innerHTML = 'setShowErrorsMode';\n\t\t\t}\n\t\t\t\n\t\t\tpresenter.setWorkMode = function(){\n\t\t\t\telement.innerHTML = 'setWorkMode';\n\t\t\t}\n\t\t\t\n\t\t\tpresenter.reset = function(){\n\t\t\t\telement.innerHTML = 'Reset';\n\t\t\t}\n\t\t\t\n\t\t\tpresenter.getErrorCount = function(){\n\t\t\t\treturn 7;\n\t\t\t}\n\t\t\t\n\t\t\tpresenter.getMaxScore = function(){\n\t\t\t\treturn 3;\n\t\t\t}\n\t\t\t\n\t\t\tpresenter.getScore = function(){\n\t\t\t\treturn 1;\n\t\t\t}\n\t\t\t\n\t\t\treturn presenter;\n\t\t}\n\t\t\n\t</presenter>\n\t\n</addon>\n"
+    }
+  },
+  {
+    "pk": 19,
+    "model": "filestorage.filestorage",
+    "fields": {
+      "modified_date": "2012-02-28 15:07:32",
+      "history_for": 15,
+      "version": 4,
+      "content_type": "text/xml",
+      "created_date": "2012-02-28 15:07:32",
+      "owner": 10,
+      "contents": "<?xml version=\"1.0\" encoding=\"UTF-8\" ?> \n<addon id=\"new_addon\">\n\n\t<metadata>\n\t\t<title>Hello world Addon</title>\n\t\t<description>\n\t\t\tEnter addon description here\n\t\t</description>\n\t</metadata>\n\t\n\t<model>\n\t\t<property name=\"Text\" type=\"string\"/>\n\t</model>\n\t\n\t<view>\n\t\t&lt;p&gt;test&lt;/p&gt;\n\t</view>\n\t\n\t<preview>\n\t\t&lt;p&gt;Addon new_addon&lt;/p&gt;\n\t</preview>\n\t\n\t<presenter>\n\t\tfunction Addonnew_addon_create(){\n\t\t\t\n\t\t\tvar presenter = function(){}\n\n\t\t\tpresenter.run = function(view, model){\n\t\t\t\t\n\t\t\t\telement = view.getElementsByTagName('p')[0];\n\t\t\t\telement.innerHTML = model['Text'];\n\t\t\t}\n\n\t\t\tpresenter.setShowErrorsMode = function(){\n\t\t\t\telement.innerHTML = 'setShowErrorsMode';\n\t\t\t}\n\t\t\t\n\t\t\tpresenter.setWorkMode = function(){\n\t\t\t\telement.innerHTML = 'setWorkMode';\n\t\t\t}\n\t\t\t\n\t\t\tpresenter.reset = function(){\n\t\t\t\telement.innerHTML = 'Reset';\n\t\t\t}\n\t\t\t\n\t\t\tpresenter.getErrorCount = function(){\n\t\t\t\treturn 7;\n\t\t\t}\n\t\t\t\n\t\t\tpresenter.getMaxScore = function(){\n\t\t\t\treturn 3;\n\t\t\t}\n\t\t\t\n\t\t\tpresenter.getScore = function(){\n\t\t\t\treturn 1;\n\t\t\t}\n\t\t\t\n\t\t\treturn presenter;\n\t\t}\n\t\t\n\t</presenter>\n\t\n</addon>\n"
+    }
+  },
+  {
+    "pk": 20,
+    "model": "filestorage.filestorage",
+    "fields": {
+      "modified_date": "2012-02-28 15:13:33",
+      "history_for": null,
+      "version": null,
+      "content_type": "text/xml",
+      "created_date": "2012-02-28 15:13:15",
+      "owner": 10,
+      "contents": "<?xml version='1.0' encoding='UTF-8' ?><page layout='pixels' width='0' height='0'><modules><textModule id='Title' left='28' top='11' width='520' height='27'><text draggable='false'>&lt;div style=&quot;text-align: center;&quot;&gt;Title&lt;/div&gt;</text></textModule><buttonModule id='PrevPage' left='0' top='358' width='57' height='39'><button type='prevPage' text='' onclick=''/></buttonModule><buttonModule id='NextPage' left='520' top='358' width='57' height='39'><button type='nextPage' text='' onclick=''/></buttonModule><addonModule addonId='new_addon' id='new_addon1' left='209' top='134' width='100' height='100'><properties><property name='Text' type='string' value=''/></properties></addonModule></modules></page>"
+    }
+  },
+  {
+    "pk": 21,
+    "model": "filestorage.filestorage",
+    "fields": {
+      "modified_date": "2012-02-28 15:13:25",
+      "history_for": 22,
+      "version": 1,
+      "content_type": "text/xml",
+      "created_date": "2012-02-28 15:13:15",
+      "owner": 10,
+      "contents": "<?xml version='1.0' encoding='UTF-8' ?><interactiveContent><metadata></metadata><addons><addon-descriptor addonId='new_addon' href='/mycontent/new_addon/getaddon'/></addons><pages><page name='page 1' href='20' reportable='true'/></pages><assets></assets></interactiveContent>"
+    }
+  },
+  {
+    "pk": 24,
+    "model": "filestorage.filestorage",
+    "fields": {
+      "modified_date": "2012-02-28 15:13:52",
+      "history_for": 15,
+      "version": 5,
+      "content_type": "text/xml",
+      "created_date": "2012-02-28 15:13:40",
+      "owner": 10,
+      "contents": "<addon id='new_addon'><metadata></metadata><model><property name='Text' type='string'/></model><resources></resources><css></css><view>&lt;p&gt;test&lt;/p&gt;</view><preview>&lt;p&gt;Addon new_addon&lt;/p&gt;</preview><presenter>function Addonnew_addon_create(){\n\t\t\t\n\t\t\tvar presenter = function(){}\n\n\t\t\tpresenter.run = function(view, model){\n\t\t\t\t\n\n\t\t\t}\n\n\t\t\tpresenter.setShowErrorsMode = function(){\n\t\t\t\telement.innerHTML = &apos;setShowErrorsMode&apos;;\n\t\t\t}\n\t\t\t\n\t\t\tpresenter.setWorkMode = function(){\n\t\t\t\telement.innerHTML = &apos;setWorkMode&apos;;\n\t\t\t}\n\t\t\t\n\t\t\tpresenter.reset = function(){\n\t\t\t\telement.innerHTML = &apos;Reset&apos;;\n\t\t\t}\n\t\t\t\n\t\t\tpresenter.getErrorCount = function(){\n\t\t\t\treturn 7;\n\t\t\t}\n\t\t\t\n\t\t\tpresenter.getMaxScore = function(){\n\t\t\t\treturn 3;\n\t\t\t}\n\t\t\t\n\t\t\tpresenter.getScore = function(){\n\t\t\t\treturn 1;\n\t\t\t}\n\t\t\t\n\t\t\treturn presenter;\n\t\t}</presenter></addon>"
+    }
+  },
+  {
+    "pk": 25,
+    "model": "filestorage.filestorage",
+    "fields": {
+      "modified_date": "2012-02-28 15:18:44",
+      "history_for": 22,
+      "version": 2,
+      "content_type": "text/xml",
+      "created_date": "2012-02-28 15:18:44",
+      "owner": 10,
+      "contents": "<?xml version=\"1.0\" encoding=\"utf-8\"?><interactiveContent><metadata/><addons><addon-descriptor addonId=\"new_addon\" href=\"/mycontent/new_addon/getaddon\"/></addons><pages><page href=\"26\" name=\"page 1\" reportable=\"true\"/></pages><assets/></interactiveContent>"
+    }
+  },
+  {
+    "pk": 26,
+    "model": "filestorage.filestorage",
+    "fields": {
+      "modified_date": "2012-02-28 15:19:29",
+      "history_for": null,
+      "version": null,
+      "content_type": "text/xml",
+      "created_date": "2012-02-28 15:18:44",
+      "owner": 10,
+      "contents": "<?xml version='1.0' encoding='UTF-8' ?><page layout='pixels' width='0' height='0'><modules><textModule id='Title' left='28' top='11' width='520' height='27'><text draggable='false'>&lt;div style=&quot;text-align: center;&quot;&gt;Title&lt;/div&gt;</text></textModule><buttonModule id='PrevPage' left='0' top='358' width='57' height='39'><button type='prevPage' text='' onclick=''/></buttonModule><buttonModule id='NextPage' left='520' top='358' width='57' height='39'><button type='nextPage' text='' onclick=''/></buttonModule><imageModule id='Image1' left='90' top='65' width='406' height='248'><image src='/file/serve/28'/></imageModule></modules></page>"
+    }
+  },
+  {
+    "pk": 29,
+    "model": "filestorage.filestorage",
+    "fields": {
+      "modified_date": "2012-02-28 15:25:49",
+      "history_for": 22,
+      "version": 3,
+      "content_type": "text/xml",
+      "created_date": "2012-02-28 15:24:10",
+      "owner": 10,
+      "contents": "<?xml version='1.0' encoding='UTF-8' ?><interactiveContent><metadata></metadata><addons><addon-descriptor addonId='new_addon' href='/mycontent/new_addon/getaddon'/></addons><pages><page name='page 1' href='30' reportable='true'/></pages><assets></assets></interactiveContent>"
+    }
+  },
+  {
+    "pk": 30,
+    "model": "filestorage.filestorage",
+    "fields": {
+      "modified_date": "2012-02-28 15:25:52",
+      "history_for": null,
+      "version": null,
+      "content_type": "text/xml",
+      "created_date": "2012-02-28 15:24:10",
+      "owner": 10,
+      "contents": "<?xml version='1.0' encoding='UTF-8' ?><page layout='pixels' width='0' height='0'><modules><textModule id='Title' left='28' top='11' width='520' height='27'><text draggable='false'>&lt;div style=&quot;text-align: center;&quot;&gt;Title&lt;/div&gt;</text></textModule><buttonModule id='PrevPage' left='0' top='358' width='57' height='39'><button type='prevPage' text='' onclick=''/></buttonModule><buttonModule id='NextPage' left='520' top='358' width='57' height='39'><button type='nextPage' text='' onclick=''/></buttonModule><imageModule id='Image1' left='90' top='65' width='406' height='248'><image src='/file/serve/28'/></imageModule></modules></page>"
+    }
+  },
+  {
+    "pk": 31,
+    "model": "filestorage.filestorage",
+    "fields": {
+      "modified_date": "2012-02-28 15:26:44",
+      "history_for": null,
+      "version": null,
+      "content_type": "text/xml",
+      "created_date": "2012-02-28 15:26:26",
+      "owner": 10,
+      "contents": "<?xml version='1.0' encoding='UTF-8' ?><page layout='pixels' width='0' height='0'><modules><textModule id='Title' left='28' top='11' width='520' height='27'><text draggable='false'>&lt;div style=&quot;text-align: center;&quot;&gt;Title&lt;/div&gt;</text></textModule><buttonModule id='PrevPage' left='0' top='358' width='57' height='39'><button type='prevPage' text='' onclick=''/></buttonModule><buttonModule id='NextPage' left='520' top='358' width='57' height='39'><button type='nextPage' text='' onclick=''/></buttonModule><imageModule id='Image1' left='270' top='124' width='100' height='100'><image src='/file/serve/36'/></imageModule></modules></page>"
+    }
+  },
+  {
+    "pk": 32,
+    "model": "filestorage.filestorage",
+    "fields": {
+      "modified_date": "2012-02-28 15:26:44",
+      "history_for": 33,
+      "version": 1,
+      "content_type": "text/xml",
+      "created_date": "2012-02-28 15:26:26",
+      "owner": 10,
+      "contents": "<?xml version='1.0' encoding='UTF-8' ?><interactiveContent><metadata></metadata><addons></addons><pages><page name='page 1' href='31' reportable='true'/></pages><assets><asset type='image' href='/file/serve/36'/></assets></interactiveContent>"
+    }
+  },
+  {
+    "pk": 43,
+    "model": "filestorage.filestorage",
+    "fields": {
+      "modified_date": "2012-02-29 09:46:51",
+      "history_for": 44,
+      "version": 1,
+      "content_type": "text/xml",
+      "created_date": "2012-02-29 09:46:51",
+      "owner": 10,
+      "contents": "<?xml version=\"1.0\" encoding=\"UTF-8\" ?> \n<addon id=\"Company_addon\">\n\n\t<metadata>\n\t\t<title>Hello world Addon</title>\n\t\t<description>\n\t\t\tEnter addon description here\n\t\t</description>\n\t</metadata>\n\t\n\t<model>\n\t\t<property name=\"Text\" type=\"string\"/>\n\t</model>\n\t\n\t<view>\n\t\t&lt;p&gt;test&lt;/p&gt;\n\t</view>\n\t\n\t<preview>\n\t\t&lt;p&gt;Addon Company_addon&lt;/p&gt;\n\t</preview>\n\t\n\t<presenter>\n\t\tfunction AddonCompany_addon_create(){\n\t\t\t\n\t\t\tvar presenter = function(){}\n\n\t\t\tpresenter.run = function(view, model){\n\t\t\t\t\n\t\t\t\telement = view.getElementsByTagName('p')[0];\n\t\t\t\telement.innerHTML = model['Text'];\n\t\t\t}\n\n\t\t\tpresenter.setShowErrorsMode = function(){\n\t\t\t\telement.innerHTML = 'setShowErrorsMode';\n\t\t\t}\n\t\t\t\n\t\t\tpresenter.setWorkMode = function(){\n\t\t\t\telement.innerHTML = 'setWorkMode';\n\t\t\t}\n\t\t\t\n\t\t\tpresenter.reset = function(){\n\t\t\t\telement.innerHTML = 'Reset';\n\t\t\t}\n\t\t\t\n\t\t\tpresenter.getErrorCount = function(){\n\t\t\t\treturn 7;\n\t\t\t}\n\t\t\t\n\t\t\tpresenter.getMaxScore = function(){\n\t\t\t\treturn 3;\n\t\t\t}\n\t\t\t\n\t\t\tpresenter.getScore = function(){\n\t\t\t\treturn 1;\n\t\t\t}\n\t\t\t\n\t\t\treturn presenter;\n\t\t}\n\t\t\n\t</presenter>\n\t\n</addon>\n"
+    }
+  },
+  {
+    "pk": 46,
+    "model": "filestorage.filestorage",
+    "fields": {
+      "modified_date": "2012-02-29 09:47:02",
+      "history_for": null,
+      "version": null,
+      "content_type": "text/xml",
+      "created_date": "2012-02-29 09:47:02",
+      "owner": 10,
+      "contents": "<?xml version='1.0' encoding='UTF-8' ?> \n\n<page>\n\t<modules> \n\t\n\t\t<textModule id=\"Title\" left=\"5\" top=\"3\" width=\"90\" height=\"7\" style=\"\">\n\t\t\t<text>&lt;div style=&quot;text-align: center;&quot;&gt;Title&lt;/div&gt;</text>\n\t\t</textModule>\t\n\t\t<buttonModule id=\"PrevPage\" left=\"0\" top=\"90\" width=\"10\" height=\"10\" style=\"\">\n\t\t\t<button type=\"prevPage\" text=\"\"/>\n\t\t</buttonModule>\n\t\t<buttonModule id=\"NextPage\" left=\"90\" top=\"90\" width=\"10\" height=\"10\" style=\"\">\n\t\t\t<button type=\"nextPage\" text=\"\"/>\n\t\t</buttonModule>\n    </modules> \n</page>\n"
+    }
+  },
+  {
+    "pk": 47,
+    "model": "filestorage.filestorage",
+    "fields": {
+      "modified_date": "2012-02-29 09:47:02",
+      "history_for": 48,
+      "version": 1,
+      "content_type": "text/xml",
+      "created_date": "2012-02-29 09:47:02",
+      "owner": 10,
+      "contents": "<?xml version='1.0' encoding='UTF-8' ?>\n<interactiveContent>\n\n\t<style href=\"/media/content/styles/default/content.css\"/>\n\t\n\t<pages>\n    \t<page name='page 1' href='46'/> \n    </pages>\n</interactiveContent>"
+    }
+  },
+  {
+    "pk": 51,
+    "model": "filestorage.filestorage",
+    "fields": {
+      "modified_date": "2012-02-29 14:01:31",
+      "history_for": 15,
+      "version": 6,
+      "content_type": "text/xml",
+      "created_date": "2012-02-29 13:58:32",
+      "owner": 10,
+      "contents": "<addon id='new_addon'><metadata></metadata><model><property name='Text' type='string'/></model><resources></resources><css></css><view>&lt;div class=&quot;my_addon&quot;&gt;TEST&lt;/div&gt;</view><preview>&lt;p&gt;Addon new_addon&lt;/p&gt;</preview><presenter>function Addonnew_addon_create(){\n\t\t\t\n\t\t\tvar presenter = function(){}\n\n\t\t\tpresenter.run = function(view, model){\n\t\t\t\t\n\n\t\t\t}\n\n    \t\tpresenter.createPreview = function(view, model){\n                var mydiv = view.getElementsByClassName(&apos;my_addon&apos;)[0]\n                console.log(mydiv.style.borderTopWidth)\n                console.log($(&apos;.my_addon&apos;).css(&apos;borderTopWidth&apos;))\n                console.log(window.getComputedStyle(mydiv, &quot;&quot;).borderTopWidth)\n                console.log(document.defaultView.getComputedStyle(mydiv,null).borderTopWidth);\n                console.log(mydiv.clientWidth)\n                console.log(mydiv.offsetWidth)\t\t\t\t\n\n\t\t\t}\n\n\n\t\t\tpresenter.setShowErrorsMode = function(){\n\t\t\t\telement.innerHTML = &apos;setShowErrorsMode&apos;;\n\t\t\t}\n\t\t\t\n\t\t\tpresenter.setWorkMode = function(){\n\t\t\t\telement.innerHTML = &apos;setWorkMode&apos;;\n\t\t\t}\n\t\t\t\n\t\t\tpresenter.reset = function(){\n\t\t\t\telement.innerHTML = &apos;Reset&apos;;\n\t\t\t}\n\t\t\t\n\t\t\tpresenter.getErrorCount = function(){\n\t\t\t\treturn 7;\n\t\t\t}\n\t\t\t\n\t\t\tpresenter.getMaxScore = function(){\n\t\t\t\treturn 3;\n\t\t\t}\n\t\t\t\n\t\t\tpresenter.getScore = function(){\n\t\t\t\treturn 1;\n\t\t\t}\n\t\t\t\n\t\t\treturn presenter;\n\t\t}</presenter></addon>"
+    }
+  },
+  {
+    "pk": 52,
+    "model": "filestorage.filestorage",
+    "fields": {
+      "modified_date": "2012-02-29 13:59:02",
+      "history_for": 33,
+      "version": 2,
+      "content_type": "text/xml",
+      "created_date": "2012-02-29 13:58:36",
+      "owner": 10,
+      "contents": "<?xml version='1.0' encoding='UTF-8' ?><interactiveContent><metadata></metadata><addons><addon-descriptor addonId='new_addon' href='/mycontent/new_addon/getaddon'/></addons><pages><page name='page 1' href='53' reportable='true'/></pages><assets><asset type='image' href='/file/serve/36'/></assets></interactiveContent>"
+    }
+  },
+  {
+    "pk": 53,
+    "model": "filestorage.filestorage",
+    "fields": {
+      "modified_date": "2012-02-29 13:59:02",
+      "history_for": null,
+      "version": null,
+      "content_type": "text/xml",
+      "created_date": "2012-02-29 13:58:37",
+      "owner": 10,
+      "contents": "<?xml version='1.0' encoding='UTF-8' ?><page layout='pixels' width='0' height='0'><modules><textModule id='Title' left='28' top='11' width='520' height='27'><text draggable='false'>&lt;div style=&quot;text-align: center;&quot;&gt;Title&lt;/div&gt;</text></textModule><buttonModule id='PrevPage' left='0' top='358' width='57' height='39'><button type='prevPage' text='' onclick=''/></buttonModule><buttonModule id='NextPage' left='520' top='358' width='57' height='39'><button type='nextPage' text='' onclick=''/></buttonModule><imageModule id='Image1' left='270' top='124' width='100' height='100'><image src='/file/serve/36'/></imageModule><addonModule addonId='new_addon' id='new_addon1' left='106' top='127' width='100' height='100'><properties><property name='Text' type='string' value=''/></properties></addonModule></modules></page>"
+    }
+  },
+  {
+    "pk": 54,
+    "model": "filestorage.filestorage",
+    "fields": {
+      "modified_date": "2012-02-29 14:00:38",
+      "history_for": 33,
+      "version": 3,
+      "content_type": "text/xml",
+      "created_date": "2012-02-29 13:59:19",
+      "owner": 10,
+      "contents": "<?xml version='1.0' encoding='UTF-8' ?><interactiveContent><metadata></metadata><addons><addon-descriptor addonId='new_addon' href='/mycontent/new_addon/getaddon'/></addons><style>.addon_sradon {}\n\n.addon_sradon .my_addon {\nborder: solid 1px black;\n}</style><pages><page name='page 1' href='55' reportable='true'/></pages><assets><asset type='image' href='/file/serve/36'/></assets></interactiveContent>"
+    }
+  },
+  {
+    "pk": 55,
+    "model": "filestorage.filestorage",
+    "fields": {
+      "modified_date": "2012-02-29 14:00:47",
+      "history_for": null,
+      "version": null,
+      "content_type": "text/xml",
+      "created_date": "2012-02-29 13:59:19",
+      "owner": 10,
+      "contents": "<?xml version='1.0' encoding='UTF-8' ?><page layout='pixels' width='0' height='0'><modules><textModule id='Title' left='28' top='11' width='520' height='27'><text draggable='false'>&lt;div style=&quot;text-align: center;&quot;&gt;Title&lt;/div&gt;</text></textModule><buttonModule id='PrevPage' left='0' top='358' width='57' height='39'><button type='prevPage' text='' onclick=''/></buttonModule><buttonModule id='NextPage' left='520' top='358' width='57' height='39'><button type='nextPage' text='' onclick=''/></buttonModule><imageModule id='Image1' left='270' top='124' width='100' height='100'><image src='/file/serve/36'/></imageModule><addonModule addonId='new_addon' id='new_addon1' left='106' top='127' width='100' height='100' style=' ' class='addon_sradon'><properties><property name='Text' type='string' value=''/></properties></addonModule></modules></page>"
+    }
+  },
+  {
+    "pk": 56,
+    "model": "filestorage.filestorage",
+    "fields": {
+      "modified_date": "2012-02-29 14:00:49",
+      "history_for": 33,
+      "version": 4,
+      "content_type": "text/xml",
+      "created_date": "2012-02-29 14:00:49",
+      "owner": 10,
+      "contents": "<?xml version=\"1.0\" encoding=\"utf-8\"?><interactiveContent><metadata/><addons><addon-descriptor addonId=\"new_addon\" href=\"/mycontent/new_addon/getaddon\"/></addons><style>.addon_sradon {}\n\n.addon_sradon .my_addon {\nborder: solid 1px black;\n}</style><pages><page href=\"57\" name=\"page 1\" reportable=\"true\"/></pages><assets><asset href=\"/file/serve/36\" type=\"image\"/></assets></interactiveContent>"
+    }
+  },
+  {
+    "pk": 57,
+    "model": "filestorage.filestorage",
+    "fields": {
+      "modified_date": "2012-02-29 14:00:49",
+      "history_for": null,
+      "version": null,
+      "content_type": "text/xml",
+      "created_date": "2012-02-29 14:00:49",
+      "owner": 10,
+      "contents": "<?xml version='1.0' encoding='UTF-8' ?><page layout='pixels' width='0' height='0'><modules><textModule id='Title' left='28' top='11' width='520' height='27'><text draggable='false'>&lt;div style=&quot;text-align: center;&quot;&gt;Title&lt;/div&gt;</text></textModule><buttonModule id='PrevPage' left='0' top='358' width='57' height='39'><button type='prevPage' text='' onclick=''/></buttonModule><buttonModule id='NextPage' left='520' top='358' width='57' height='39'><button type='nextPage' text='' onclick=''/></buttonModule><imageModule id='Image1' left='270' top='124' width='100' height='100'><image src='/file/serve/36'/></imageModule><addonModule addonId='new_addon' id='new_addon1' left='106' top='127' width='100' height='100' style=' ' class='addon_sradon'><properties><property name='Text' type='string' value=''/></properties></addonModule></modules></page>"
+    }
+  },
+  {
+    "pk": 58,
+    "model": "filestorage.filestorage",
+    "fields": {
+      "modified_date": "2012-02-29 14:01:50",
+      "history_for": null,
+      "version": null,
+      "content_type": "text/xml",
+      "created_date": "2012-02-29 14:01:13",
+      "owner": 10,
+      "contents": "<?xml version='1.0' encoding='UTF-8' ?><page layout='pixels' width='0' height='0'><modules><textModule id='Title' left='28' top='11' width='520' height='27'><text draggable='false'>&lt;div style=&quot;text-align: center;&quot;&gt;Title&lt;/div&gt;</text></textModule><buttonModule id='PrevPage' left='0' top='358' width='57' height='39'><button type='prevPage' text='' onclick=''/></buttonModule><buttonModule id='NextPage' left='520' top='358' width='57' height='39'><button type='nextPage' text='' onclick=''/></buttonModule><addonModule addonId='new_addon' id='new_addon1' left='10' top='10' width='100' height='100'><properties><property name='Text' type='string' value=''/></properties></addonModule></modules></page>"
+    }
+  },
+  {
+    "pk": 59,
+    "model": "filestorage.filestorage",
+    "fields": {
+      "modified_date": "2012-02-29 14:01:22",
+      "history_for": 60,
+      "version": 1,
+      "content_type": "text/xml",
+      "created_date": "2012-02-29 14:01:13",
+      "owner": 10,
+      "contents": "<?xml version='1.0' encoding='UTF-8' ?><interactiveContent><metadata></metadata><addons><addon-descriptor addonId='new_addon' href='/mycontent/new_addon/getaddon'/></addons><pages><page name='page 1' href='58' reportable='true'/></pages><assets></assets></interactiveContent>"
+    }
+  },
+  {
+    "pk": 62,
+    "model": "filestorage.filestorage",
+    "fields": {
+      "modified_date": "2012-02-29 14:01:40",
+      "history_for": 60,
+      "version": 2,
+      "content_type": "text/xml",
+      "created_date": "2012-02-29 14:01:40",
+      "owner": 10,
+      "contents": "<?xml version=\"1.0\" encoding=\"utf-8\"?><interactiveContent><metadata/><addons><addon-descriptor addonId=\"new_addon\" href=\"/mycontent/new_addon/getaddon\"/></addons><pages><page href=\"63\" name=\"page 1\" reportable=\"true\"/></pages><assets/></interactiveContent>"
+    }
+  },
+  {
+    "pk": 63,
+    "model": "filestorage.filestorage",
+    "fields": {
+      "modified_date": "2012-02-29 14:01:40",
+      "history_for": null,
+      "version": null,
+      "content_type": "text/xml",
+      "created_date": "2012-02-29 14:01:40",
+      "owner": 10,
+      "contents": "<?xml version='1.0' encoding='UTF-8' ?> \n\n<page>\n\t<modules> \n\t\n\t\t<textModule id=\"Title\" left=\"5\" top=\"3\" width=\"90\" height=\"7\" style=\"\">\n\t\t\t<text>&lt;div style=&quot;text-align: center;&quot;&gt;Title&lt;/div&gt;</text>\n\t\t</textModule>\t\n\t\t<buttonModule id=\"PrevPage\" left=\"0\" top=\"90\" width=\"10\" height=\"10\" style=\"\">\n\t\t\t<button type=\"prevPage\" text=\"\"/>\n\t\t</buttonModule>\n\t\t<buttonModule id=\"NextPage\" left=\"90\" top=\"90\" width=\"10\" height=\"10\" style=\"\">\n\t\t\t<button type=\"nextPage\" text=\"\"/>\n\t\t</buttonModule>\n    </modules> \n</page>\n"
+    }
+  },
+  {
+    "pk": 64,
+    "model": "filestorage.filestorage",
+    "fields": {
+      "modified_date": "2012-02-29 14:02:06",
+      "history_for": 65,
+      "version": 1,
+      "content_type": "text/xml",
+      "created_date": "2012-02-29 14:02:06",
+      "owner": 10,
+      "contents": "<?xml version=\"1.0\" encoding=\"UTF-8\" ?> \n<addon id=\"TRESWA_ADDON\">\n\n\t<metadata>\n\t\t<title>Hello world Addon</title>\n\t\t<description>\n\t\t\tEnter addon description here\n\t\t</description>\n\t</metadata>\n\t\n\t<model>\n\t\t<property name=\"Text\" type=\"string\"/>\n\t</model>\n\t\n\t<view>\n\t\t&lt;p&gt;test&lt;/p&gt;\n\t</view>\n\t\n\t<preview>\n\t\t&lt;p&gt;Addon TRESWA_ADDON&lt;/p&gt;\n\t</preview>\n\t\n\t<presenter>\n\t\tfunction AddonTRESWA_ADDON_create(){\n\t\t\t\n\t\t\tvar presenter = function(){}\n\n\t\t\tpresenter.run = function(view, model){\n\t\t\t\t\n\t\t\t\telement = view.getElementsByTagName('p')[0];\n\t\t\t\telement.innerHTML = model['Text'];\n\t\t\t}\n\n\t\t\tpresenter.setShowErrorsMode = function(){\n\t\t\t\telement.innerHTML = 'setShowErrorsMode';\n\t\t\t}\n\t\t\t\n\t\t\tpresenter.setWorkMode = function(){\n\t\t\t\telement.innerHTML = 'setWorkMode';\n\t\t\t}\n\t\t\t\n\t\t\tpresenter.reset = function(){\n\t\t\t\telement.innerHTML = 'Reset';\n\t\t\t}\n\t\t\t\n\t\t\tpresenter.getErrorCount = function(){\n\t\t\t\treturn 7;\n\t\t\t}\n\t\t\t\n\t\t\tpresenter.getMaxScore = function(){\n\t\t\t\treturn 3;\n\t\t\t}\n\t\t\t\n\t\t\tpresenter.getScore = function(){\n\t\t\t\treturn 1;\n\t\t\t}\n\t\t\t\n\t\t\treturn presenter;\n\t\t}\n\t\t\n\t</presenter>\n\t\n</addon>\n"
+    }
+  },
+  {
+    "pk": 67,
+    "model": "filestorage.filestorage",
+    "fields": {
+      "modified_date": "2012-02-29 14:02:37",
+      "history_for": 65,
+      "version": 2,
+      "content_type": "text/xml",
+      "created_date": "2012-02-29 14:02:11",
+      "owner": 10,
+      "contents": "<addon id='TRESWA_ADDON'><metadata></metadata><model><property name='Text' type='string'/></model><resources></resources><css>.my_addon {\r\n    color: #f00;\r\n    }</css><view>&lt;div class=&quot;my_addon&quot;&gt;test&lt;/p&gt;</view><preview>&lt;div class=&quot;my_addon&quot;&gt;test&lt;/p&gt;</preview><presenter>function AddonTRESWA_ADDON_create(){\n\t\t\t\n\t\t\tvar presenter = function(){}\n\n        \tpresenter.run = function(view, model){\n                var mydiv = view.getElementsByClassName(&apos;my_addon&apos;)[0]\n                console.log(mydiv.style.borderTopWidth)\n                console.log($(&apos;.my_addon&apos;).css(&apos;borderTopWidth&apos;))\n                console.log(window.getComputedStyle(mydiv, &quot;&quot;).borderTopWidth)\n                console.log(document.defaultView.getComputedStyle(mydiv,null).borderTopWidth);\n                console.log(mydiv.clientWidth)\n                console.log(mydiv.offsetWidth)\n\t\t\t}\n\n    \t\tpresenter.createPreview = function(view, model){\n                var mydiv = view.getElementsByClassName(&apos;my_addon&apos;)[0]\n                console.log(mydiv.style.borderTopWidth)\n                console.log($(&apos;.my_addon&apos;).css(&apos;borderTopWidth&apos;))\n                console.log(window.getComputedStyle(mydiv, &quot;&quot;).borderTopWidth)\n                console.log(document.defaultView.getComputedStyle(mydiv,null).borderTopWidth);\n                console.log(mydiv.clientWidth)\n                console.log(mydiv.offsetWidth)\n\t\t\t}\n\n\t\t\tpresenter.setShowErrorsMode = function(){\n\t\t\t\telement.innerHTML = &apos;setShowErrorsMode&apos;;\n\t\t\t}\n\t\t\t\n\t\t\tpresenter.setWorkMode = function(){\n\t\t\t\telement.innerHTML = &apos;setWorkMode&apos;;\n\t\t\t}\n\t\t\t\n\t\t\tpresenter.reset = function(){\n\t\t\t\telement.innerHTML = &apos;Reset&apos;;\n\t\t\t}\n\t\t\t\n\t\t\tpresenter.getErrorCount = function(){\n\t\t\t\treturn 7;\n\t\t\t}\n\t\t\t\n\t\t\tpresenter.getMaxScore = function(){\n\t\t\t\treturn 3;\n\t\t\t}\n\t\t\t\n\t\t\tpresenter.getScore = function(){\n\t\t\t\treturn 1;\n\t\t\t}\n\t\t\t\n\t\t\treturn presenter;\n\t\t}</presenter></addon>"
+    }
+  },
+  {
+    "pk": 68,
+    "model": "filestorage.filestorage",
+    "fields": {
+      "modified_date": "2012-02-29 14:03:24",
+      "history_for": 60,
+      "version": 3,
+      "content_type": "text/xml",
+      "created_date": "2012-02-29 14:02:45",
+      "owner": 10,
+      "contents": "<?xml version='1.0' encoding='UTF-8' ?><interactiveContent><metadata></metadata><addons><addon-descriptor addonId='new_addon' href='/mycontent/new_addon/getaddon'/><addon-descriptor addonId='TRESWA_ADDON' href='/mycontent/TRESWA_ADDON/getaddon'/></addons><style>.addon_a {}\n\n.addon_a .my_addon {\npadding: 1px;\nborder: solid 1px black;\n}</style><pages><page name='page 1' href='69' reportable='true'/></pages><assets></assets></interactiveContent>"
+    }
+  },
+  {
+    "pk": 69,
+    "model": "filestorage.filestorage",
+    "fields": {
+      "modified_date": "2012-02-29 14:03:25",
+      "history_for": null,
+      "version": null,
+      "content_type": "text/xml",
+      "created_date": "2012-02-29 14:02:45",
+      "owner": 10,
+      "contents": "<?xml version='1.0' encoding='UTF-8' ?><page layout='pixels' width='0' height='0'><modules><textModule id='Title' left='28' top='11' width='520' height='27'><text draggable='false'>&lt;div style=&quot;text-align: center;&quot;&gt;Title&lt;/div&gt;</text></textModule><buttonModule id='PrevPage' left='0' top='358' width='57' height='39'><button type='prevPage' text='' onclick=''/></buttonModule><buttonModule id='NextPage' left='520' top='358' width='57' height='39'><button type='nextPage' text='' onclick=''/></buttonModule><addonModule addonId='TRESWA_ADDON' id='TRESWA_ADDON1' left='255' top='120' width='100' height='100' class='addon_a'><properties><property name='Text' type='string' value=''/></properties></addonModule></modules></page>"
+    }
+  },
+  {
+    "pk": 70,
+    "model": "filestorage.filestorage",
+    "fields": {
+      "modified_date": "2012-02-29 14:03:49",
+      "history_for": 60,
+      "version": 4,
+      "content_type": "text/xml",
+      "created_date": "2012-02-29 14:03:49",
+      "owner": 10,
+      "contents": "<?xml version=\"1.0\" encoding=\"utf-8\"?><interactiveContent><metadata/><addons><addon-descriptor addonId=\"new_addon\" href=\"/mycontent/new_addon/getaddon\"/><addon-descriptor addonId=\"TRESWA_ADDON\" href=\"/mycontent/TRESWA_ADDON/getaddon\"/></addons><style>.addon_a {}\n\n.addon_a .my_addon {\npadding: 1px;\nborder: solid 1px black;\n}</style><pages><page href=\"71\" name=\"page 1\" reportable=\"true\"/></pages><assets/></interactiveContent>"
+    }
+  },
+  {
+    "pk": 71,
+    "model": "filestorage.filestorage",
+    "fields": {
+      "modified_date": "2012-02-29 14:03:49",
+      "history_for": null,
+      "version": null,
+      "content_type": "text/xml",
+      "created_date": "2012-02-29 14:03:49",
+      "owner": 10,
+      "contents": "<?xml version='1.0' encoding='UTF-8' ?><page layout='pixels' width='0' height='0'><modules><textModule id='Title' left='28' top='11' width='520' height='27'><text draggable='false'>&lt;div style=&quot;text-align: center;&quot;&gt;Title&lt;/div&gt;</text></textModule><buttonModule id='PrevPage' left='0' top='358' width='57' height='39'><button type='prevPage' text='' onclick=''/></buttonModule><buttonModule id='NextPage' left='520' top='358' width='57' height='39'><button type='nextPage' text='' onclick=''/></buttonModule><addonModule addonId='TRESWA_ADDON' id='TRESWA_ADDON1' left='255' top='120' width='100' height='100' class='addon_a'><properties><property name='Text' type='string' value=''/></properties></addonModule></modules></page>"
+    }
+  },
+  {
+    "pk": 72,
+    "model": "filestorage.filestorage",
+    "fields": {
+      "modified_date": "2012-02-29 14:04:30",
+      "history_for": 60,
+      "version": 5,
+      "content_type": "text/xml",
+      "created_date": "2012-02-29 14:04:30",
+      "owner": 10,
+      "contents": "<?xml version=\"1.0\" encoding=\"utf-8\"?><interactiveContent><metadata/><addons><addon-descriptor addonId=\"new_addon\" href=\"/mycontent/new_addon/getaddon\"/><addon-descriptor addonId=\"TRESWA_ADDON\" href=\"/mycontent/TRESWA_ADDON/getaddon\"/></addons><style>.addon_a {}\n\n.addon_a .my_addon {\npadding: 1px;\nborder: solid 1px black;\n}</style><pages><page href=\"73\" name=\"page 1\" reportable=\"true\"/></pages><assets/></interactiveContent>"
+    }
+  },
+  {
+    "pk": 73,
+    "model": "filestorage.filestorage",
+    "fields": {
+      "modified_date": "2012-02-29 14:04:30",
+      "history_for": null,
+      "version": null,
+      "content_type": "text/xml",
+      "created_date": "2012-02-29 14:04:30",
+      "owner": 10,
+      "contents": "<?xml version='1.0' encoding='UTF-8' ?><page layout='pixels' width='0' height='0'><modules><textModule id='Title' left='28' top='11' width='520' height='27'><text draggable='false'>&lt;div style=&quot;text-align: center;&quot;&gt;Title&lt;/div&gt;</text></textModule><buttonModule id='PrevPage' left='0' top='358' width='57' height='39'><button type='prevPage' text='' onclick=''/></buttonModule><buttonModule id='NextPage' left='520' top='358' width='57' height='39'><button type='nextPage' text='' onclick=''/></buttonModule><addonModule addonId='TRESWA_ADDON' id='TRESWA_ADDON1' left='255' top='120' width='100' height='100' class='addon_a'><properties><property name='Text' type='string' value=''/></properties></addonModule></modules></page>"
+    }
+  },
+  {
+    "pk": 74,
+    "model": "filestorage.filestorage",
+    "fields": {
+      "modified_date": "2012-02-29 14:04:46",
+      "history_for": 60,
+      "version": 6,
+      "content_type": "text/xml",
+      "created_date": "2012-02-29 14:04:46",
+      "owner": 10,
+      "contents": "<?xml version=\"1.0\" encoding=\"utf-8\"?><interactiveContent><metadata/><addons><addon-descriptor addonId=\"new_addon\" href=\"/mycontent/new_addon/getaddon\"/><addon-descriptor addonId=\"TRESWA_ADDON\" href=\"/mycontent/TRESWA_ADDON/getaddon\"/></addons><style>.addon_a {}\n\n.addon_a .my_addon {\npadding: 1px;\nborder: solid 1px black;\n}</style><pages><page href=\"75\" name=\"page 1\" reportable=\"true\"/></pages><assets/></interactiveContent>"
+    }
+  },
+  {
+    "pk": 75,
+    "model": "filestorage.filestorage",
+    "fields": {
+      "modified_date": "2012-02-29 14:04:46",
+      "history_for": null,
+      "version": null,
+      "content_type": "text/xml",
+      "created_date": "2012-02-29 14:04:46",
+      "owner": 10,
+      "contents": "<?xml version='1.0' encoding='UTF-8' ?><page layout='pixels' width='0' height='0'><modules><textModule id='Title' left='28' top='11' width='520' height='27'><text draggable='false'>&lt;div style=&quot;text-align: center;&quot;&gt;Title&lt;/div&gt;</text></textModule><buttonModule id='PrevPage' left='0' top='358' width='57' height='39'><button type='prevPage' text='' onclick=''/></buttonModule><buttonModule id='NextPage' left='520' top='358' width='57' height='39'><button type='nextPage' text='' onclick=''/></buttonModule><addonModule addonId='TRESWA_ADDON' id='TRESWA_ADDON1' left='255' top='120' width='100' height='100' class='addon_a'><properties><property name='Text' type='string' value=''/></properties></addonModule></modules></page>"
+    }
+  },
+  {
+    "pk": 76,
+    "model": "filestorage.filestorage",
+    "fields": {
+      "modified_date": "2012-02-29 14:05:04",
+      "history_for": 60,
+      "version": 7,
+      "content_type": "text/xml",
+      "created_date": "2012-02-29 14:05:04",
+      "owner": 10,
+      "contents": "<?xml version=\"1.0\" encoding=\"utf-8\"?><interactiveContent><metadata/><addons><addon-descriptor addonId=\"new_addon\" href=\"/mycontent/new_addon/getaddon\"/><addon-descriptor addonId=\"TRESWA_ADDON\" href=\"/mycontent/TRESWA_ADDON/getaddon\"/></addons><style>.addon_a {}\n\n.addon_a .my_addon {\npadding: 1px;\nborder: solid 1px black;\n}</style><pages><page href=\"77\" name=\"page 1\" reportable=\"true\"/></pages><assets/></interactiveContent>"
+    }
+  },
+  {
+    "pk": 77,
+    "model": "filestorage.filestorage",
+    "fields": {
+      "modified_date": "2012-02-29 14:05:04",
+      "history_for": null,
+      "version": null,
+      "content_type": "text/xml",
+      "created_date": "2012-02-29 14:05:04",
+      "owner": 10,
+      "contents": "<?xml version='1.0' encoding='UTF-8' ?><page layout='pixels' width='0' height='0'><modules><textModule id='Title' left='28' top='11' width='520' height='27'><text draggable='false'>&lt;div style=&quot;text-align: center;&quot;&gt;Title&lt;/div&gt;</text></textModule><buttonModule id='PrevPage' left='0' top='358' width='57' height='39'><button type='prevPage' text='' onclick=''/></buttonModule><buttonModule id='NextPage' left='520' top='358' width='57' height='39'><button type='nextPage' text='' onclick=''/></buttonModule><addonModule addonId='TRESWA_ADDON' id='TRESWA_ADDON1' left='255' top='120' width='100' height='100' class='addon_a'><properties><property name='Text' type='string' value=''/></properties></addonModule></modules></page>"
+    }
+  },
+  {
+    "pk": 78,
+    "model": "filestorage.filestorage",
+    "fields": {
+      "modified_date": "2012-02-29 14:05:17",
+      "history_for": 65,
+      "version": 3,
+      "content_type": "text/xml",
+      "created_date": "2012-02-29 14:05:17",
+      "owner": 10,
+      "contents": "<addon id='TRESWA_ADDON'><metadata></metadata><model><property name='Text' type='string'/></model><resources></resources><css>.my_addon {\r\n    color: #f00;\r\n    }</css><view>&lt;div class=&quot;my_addon&quot;&gt;test&lt;/p&gt;</view><preview>&lt;div class=&quot;my_addon&quot;&gt;test&lt;/p&gt;</preview><presenter>function AddonTRESWA_ADDON_create(){\n\t\t\t\n\t\t\tvar presenter = function(){}\n\n        \tpresenter.run = function(view, model){\n                var mydiv = view.getElementsByClassName(&apos;my_addon&apos;)[0]\n                console.log(mydiv.style.borderTopWidth)\n                console.log($(&apos;.my_addon&apos;).css(&apos;borderTopWidth&apos;))\n                console.log(window.getComputedStyle(mydiv, &quot;&quot;).borderTopWidth)\n                console.log(document.defaultView.getComputedStyle(mydiv,null).borderTopWidth);\n                console.log(mydiv.clientWidth)\n                console.log(mydiv.offsetWidth)\n\t\t\t}\n\n    \t\tpresenter.createPreview = function(view, model){\n                var mydiv = view.getElementsByClassName(&apos;my_addon&apos;)[0]\n                console.log(mydiv.style.borderTopWidth)\n                console.log($(&apos;.my_addon&apos;).css(&apos;borderTopWidth&apos;))\n                console.log(window.getComputedStyle(mydiv, &quot;&quot;).borderTopWidth)\n                console.log(document.defaultView.getComputedStyle(mydiv,null).borderTopWidth);\n                console.log(mydiv.clientWidth)\n                console.log(mydiv.offsetWidth)\n\t\t\t}\n\n\t\t\tpresenter.setShowErrorsMode = function(){\n\t\t\t\telement.innerHTML = &apos;setShowErrorsMode&apos;;\n\t\t\t}\n\t\t\t\n\t\t\tpresenter.setWorkMode = function(){\n\t\t\t\telement.innerHTML = &apos;setWorkMode&apos;;\n\t\t\t}\n\t\t\t\n\t\t\tpresenter.reset = function(){\n\t\t\t\telement.innerHTML = &apos;Reset&apos;;\n\t\t\t}\n\t\t\t\n\t\t\tpresenter.getErrorCount = function(){\n\t\t\t\treturn 7;\n\t\t\t}\n\t\t\t\n\t\t\tpresenter.getMaxScore = function(){\n\t\t\t\treturn 3;\n\t\t\t}\n\t\t\t\n\t\t\tpresenter.getScore = function(){\n\t\t\t\treturn 1;\n\t\t\t}\n\t\t\t\n\t\t\treturn presenter;\n\t\t}</presenter></addon>"
+    }
+  },
+  {
+    "pk": 82,
+    "model": "filestorage.filestorage",
+    "fields": {
+      "modified_date": "2012-02-29 14:35:44",
+      "history_for": null,
+      "version": null,
+      "content_type": "text/xml",
+      "created_date": "2012-02-29 14:35:44",
+      "owner": 1,
+      "contents": "<?xml version='1.0' encoding='UTF-8' ?> \n\n<page>\n\t<modules> \n\t\n\t\t<textModule id=\"Title\" left=\"5\" top=\"3\" width=\"90\" height=\"7\" style=\"\">\n\t\t\t<text>&lt;div style=&quot;text-align: center;&quot;&gt;Title&lt;/div&gt;</text>\n\t\t</textModule>\t\n\t\t<buttonModule id=\"PrevPage\" left=\"0\" top=\"90\" width=\"10\" height=\"10\" style=\"\">\n\t\t\t<button type=\"prevPage\" text=\"\"/>\n\t\t</buttonModule>\n\t\t<buttonModule id=\"NextPage\" left=\"90\" top=\"90\" width=\"10\" height=\"10\" style=\"\">\n\t\t\t<button type=\"nextPage\" text=\"\"/>\n\t\t</buttonModule>\n    </modules> \n</page>\n"
+    }
+  },
+  {
+    "pk": 83,
+    "model": "filestorage.filestorage",
+    "fields": {
+      "modified_date": "2012-02-29 14:35:44",
+      "history_for": 84,
+      "version": 1,
+      "content_type": "text/xml",
+      "created_date": "2012-02-29 14:35:44",
+      "owner": 1,
+      "contents": "<?xml version='1.0' encoding='UTF-8' ?>\n<interactiveContent>\n\n\t<style href=\"/media/content/styles/default/content.css\"/>\n\t\n\t<pages>\n    \t<page name='page 1' href='82'/> \n    </pages>\n</interactiveContent>"
+    }
+  },
+  {
+    "pk": 95,
+    "model": "filestorage.filestorage",
+    "fields": {
+      "modified_date": "2012-03-05 14:01:31",
+      "history_for": 22,
+      "version": 4,
+      "content_type": "text/xml",
+      "created_date": "2012-03-05 14:01:31",
+      "owner": 10,
+      "contents": "<?xml version=\"1.0\" encoding=\"utf-8\"?><interactiveContent><metadata/><addons><addon-descriptor addonId=\"new_addon\" href=\"/mycontent/new_addon/getaddon\"/></addons><pages><page href=\"96\" name=\"page 1\" reportable=\"true\"/></pages><assets/></interactiveContent>"
+    }
+  },
+  {
+    "pk": 96,
+    "model": "filestorage.filestorage",
+    "fields": {
+      "modified_date": "2012-03-05 14:01:31",
+      "history_for": null,
+      "version": null,
+      "content_type": "text/xml",
+      "created_date": "2012-03-05 14:01:31",
+      "owner": 10,
+      "contents": "<?xml version='1.0' encoding='UTF-8' ?><page layout='pixels' width='0' height='0'><modules><textModule id='Title' left='28' top='11' width='520' height='27'><text draggable='false'>&lt;div style=&quot;text-align: center;&quot;&gt;Title&lt;/div&gt;</text></textModule><buttonModule id='PrevPage' left='0' top='358' width='57' height='39'><button type='prevPage' text='' onclick=''/></buttonModule><buttonModule id='NextPage' left='520' top='358' width='57' height='39'><button type='nextPage' text='' onclick=''/></buttonModule><imageModule id='Image1' left='90' top='65' width='406' height='248'><image src='/file/serve/28'/></imageModule></modules></page>"
+    }
+  },
+  {
+    "pk": 97,
+    "model": "filestorage.filestorage",
+    "fields": {
+      "modified_date": "2012-03-05 14:02:15",
+      "history_for": null,
+      "version": null,
+      "content_type": "text/xml",
+      "created_date": "2012-03-05 14:01:48",
+      "owner": 10,
+      "contents": "<?xml version='1.0' encoding='UTF-8' ?><page layout='pixels' width='0' height='0'><modules><textModule id='Title' left='28' top='11' width='520' height='27'><text draggable='false'>&lt;div style=&quot;text-align: center;&quot;&gt;Title&lt;/div&gt;</text></textModule><buttonModule id='PrevPage' left='0' top='358' width='57' height='39'><button type='prevPage' text='' onclick=''/></buttonModule><buttonModule id='NextPage' left='520' top='358' width='57' height='39'><button type='nextPage' text='' onclick=''/></buttonModule><imageModule id='Image1' left='101' top='64' width='368' height='244'><image src='/file/serve/102'/></imageModule></modules></page>"
+    }
+  },
+  {
+    "pk": 98,
+    "model": "filestorage.filestorage",
+    "fields": {
+      "modified_date": "2012-03-05 14:01:48",
+      "history_for": 99,
+      "version": 1,
+      "content_type": "text/xml",
+      "created_date": "2012-03-05 14:01:48",
+      "owner": 10,
+      "contents": "<?xml version='1.0' encoding='UTF-8' ?>\n<interactiveContent>\n\n\t<style href=\"/media/content/styles/default/content.css\"/>\n\t\n\t<pages>\n    \t<page name='page 1' href='97'/> \n    </pages>\n</interactiveContent>"
+    }
+  },
+  {
+    "pk": 103,
+    "model": "filestorage.filestorage",
+    "fields": {
+      "modified_date": "2012-03-05 14:02:27",
+      "history_for": 99,
+      "version": 2,
+      "content_type": "text/xml",
+      "created_date": "2012-03-05 14:02:27",
+      "owner": 10,
+      "contents": "<?xml version=\"1.0\" encoding=\"utf-8\"?><interactiveContent>\n\n\t<style href=\"/media/content/styles/default/content.css\"/>\n\t\n\t<pages>\n    \t<page href=\"104\" name=\"page 1\"/> \n    </pages>\n</interactiveContent>"
+    }
+  },
+  {
+    "pk": 104,
+    "model": "filestorage.filestorage",
+    "fields": {
+      "modified_date": "2012-03-05 14:02:27",
+      "history_for": null,
+      "version": null,
+      "content_type": "text/xml",
+      "created_date": "2012-03-05 14:02:27",
+      "owner": 10,
+      "contents": "<?xml version='1.0' encoding='UTF-8' ?><page layout='pixels' width='0' height='0'><modules><textModule id='Title' left='28' top='11' width='520' height='27'><text draggable='false'>&lt;div style=&quot;text-align: center;&quot;&gt;Title&lt;/div&gt;</text></textModule><buttonModule id='PrevPage' left='0' top='358' width='57' height='39'><button type='prevPage' text='' onclick=''/></buttonModule><buttonModule id='NextPage' left='520' top='358' width='57' height='39'><button type='nextPage' text='' onclick=''/></buttonModule><imageModule id='Image1' left='101' top='64' width='368' height='244'><image src='/file/serve/102'/></imageModule></modules></page>"
+    }
+  },
+  {
+    "pk": 105,
+    "model": "filestorage.filestorage",
+    "fields": {
+      "modified_date": "2012-03-05 14:02:58",
+      "history_for": null,
+      "version": null,
+      "content_type": "text/xml",
+      "created_date": "2012-03-05 14:02:41",
+      "owner": 10,
+      "contents": "<?xml version='1.0' encoding='UTF-8' ?><page layout='pixels' width='0' height='0'><modules><textModule id='Title' left='28' top='11' width='520' height='27'><text draggable='false'>&lt;div style=&quot;text-align: center;&quot;&gt;Title&lt;/div&gt;</text></textModule><buttonModule id='PrevPage' left='0' top='358' width='57' height='39'><button type='prevPage' text='' onclick=''/></buttonModule><buttonModule id='NextPage' left='520' top='358' width='57' height='39'><button type='nextPage' text='' onclick=''/></buttonModule><imageModule id='Image1' left='221' top='123' width='268' height='171'><image src='/file/serve/110'/></imageModule></modules></page>"
+    }
+  },
+  {
+    "pk": 106,
+    "model": "filestorage.filestorage",
+    "fields": {
+      "modified_date": "2012-03-05 14:02:58",
+      "history_for": 107,
+      "version": 1,
+      "content_type": "text/xml",
+      "created_date": "2012-03-05 14:02:41",
+      "owner": 10,
+      "contents": "<?xml version='1.0' encoding='UTF-8' ?><interactiveContent><metadata></metadata><addons></addons><pages><page name='page 1' href='105' reportable='true'/></pages><assets><asset type='image' href='/file/serve/110'/></assets></interactiveContent>"
+    }
+  },
+  {
+    "pk": 111,
+    "model": "filestorage.filestorage",
+    "fields": {
+      "modified_date": "2012-03-05 14:03:16",
+      "history_for": 99,
+      "version": 3,
+      "content_type": "text/xml",
+      "created_date": "2012-03-05 14:03:16",
+      "owner": 10,
+      "contents": "<?xml version=\"1.0\" encoding=\"utf-8\"?><interactiveContent>\n\n\t<style href=\"/media/content/styles/default/content.css\"/>\n\t\n\t<pages>\n    \t<page href=\"112\" name=\"page 1\"/> \n    </pages>\n</interactiveContent>"
+    }
+  },
+  {
+    "pk": 112,
+    "model": "filestorage.filestorage",
+    "fields": {
+      "modified_date": "2012-03-05 14:03:16",
+      "history_for": null,
+      "version": null,
+      "content_type": "text/xml",
+      "created_date": "2012-03-05 14:03:16",
+      "owner": 10,
+      "contents": "<?xml version='1.0' encoding='UTF-8' ?><page layout='pixels' width='0' height='0'><modules><textModule id='Title' left='28' top='11' width='520' height='27'><text draggable='false'>&lt;div style=&quot;text-align: center;&quot;&gt;Title&lt;/div&gt;</text></textModule><buttonModule id='PrevPage' left='0' top='358' width='57' height='39'><button type='prevPage' text='' onclick=''/></buttonModule><buttonModule id='NextPage' left='520' top='358' width='57' height='39'><button type='nextPage' text='' onclick=''/></buttonModule><imageModule id='Image1' left='101' top='64' width='368' height='244'><image src='/file/serve/102'/></imageModule></modules></page>"
+    }
+  },
+  {
+    "pk": 113,
+    "model": "filestorage.filestorage",
+    "fields": {
+      "modified_date": "2012-03-05 14:36:53",
+      "history_for": 107,
+      "version": 2,
+      "content_type": "text/xml",
+      "created_date": "2012-03-05 14:36:39",
+      "owner": 10,
+      "contents": "<?xml version='1.0' encoding='UTF-8' ?><interactiveContent><metadata></metadata><addons></addons><pages><page name='page 1' href='114' reportable='true'/></pages><assets><asset type='image' href='/file/serve/110' contentType='image/jpeg'/><asset type='image' href='/file/serve/116' contentType='image/jpeg'/></assets></interactiveContent>"
+    }
+  },
+  {
+    "pk": 114,
+    "model": "filestorage.filestorage",
+    "fields": {
+      "modified_date": "2012-03-05 14:36:53",
+      "history_for": null,
+      "version": null,
+      "content_type": "text/xml",
+      "created_date": "2012-03-05 14:36:39",
+      "owner": 10,
+      "contents": "<?xml version='1.0' encoding='UTF-8' ?><page layout='pixels' width='0' height='0'><modules><textModule id='Title' left='28' top='11' width='520' height='27'><text draggable='false'>&lt;div style=&quot;text-align: center;&quot;&gt;Title&lt;/div&gt;</text></textModule><buttonModule id='PrevPage' left='0' top='358' width='57' height='39'><button type='prevPage' text='' onclick=''/></buttonModule><buttonModule id='NextPage' left='520' top='358' width='57' height='39'><button type='nextPage' text='' onclick=''/></buttonModule><imageModule id='Image1' left='221' top='123' width='268' height='171'><image src='/file/serve/110'/></imageModule><imageModule id='Image2' left='64' top='99' width='100' height='100'><image src='/file/serve/116'/></imageModule></modules></page>"
+    }
+  },
+  {
+    "pk": 28,
+    "model": "filestorage.uploadedfile",
+    "fields": {
+      "owner": 10,
+      "content_type": "image/jpeg",
+      "file": "tGPQCWZvYTyZIwNFbNh90w==/uploads/2012/02/28/15/19/19/Desert.jpg"
+    }
+  },
+  {
+    "pk": 36,
+    "model": "filestorage.uploadedfile",
+    "fields": {
+      "owner": 10,
+      "content_type": "image/jpeg",
+      "file": "GO9JNpKF0WKYWTogbz9Ing==/uploads/2012/02/28/15/26/41/Desert.jpg"
+    }
+  },
+  {
+    "pk": 102,
+    "model": "filestorage.uploadedfile",
+    "fields": {
+      "owner": 10,
+      "content_type": "image/jpeg",
+      "file": "-GBx0qlfJRaSooIDiQ5NfA==/uploads/2012/03/05/14/02/07/Jellyfish.jpg"
+    }
+  },
+  {
+    "pk": 110,
+    "model": "filestorage.uploadedfile",
+    "fields": {
+      "owner": 10,
+      "content_type": "image/jpeg",
+      "file": "dX7Ly3lzFQTdlmx3iUvrVQ==/uploads/2012/03/05/14/02/53/Koala.jpg"
+    }
+  },
+  {
+    "pk": 116,
+    "model": "filestorage.uploadedfile",
+    "fields": {
+      "owner": 10,
+      "content_type": "image/jpeg",
+      "file": "_e6pCbYviZ4XamvasMNoIA==/uploads/2012/03/05/14/36/51/Hydrangeas.jpg"
+    }
+  }
+]

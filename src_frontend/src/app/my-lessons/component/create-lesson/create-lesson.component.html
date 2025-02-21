@@ -1,0 +1,91 @@
+<div class="app-content" id="create-lesson">
+    <page-title-bar>
+        <h1 class="title">{{ translations | getLabel:"plain.my_lessons.create_lesson.create_lesson" }}</h1>
+    </page-title-bar>
+    <div putFooterBottom class="app-content-page">
+        <form method="post" name="login">
+            <mat-form-field class="example-full-width" required>
+                <input [(ngModel)]="title" [ngModelOptions]="{standalone: true}" matInput
+                       [placeholder]="translations | getLabel:'plain.my_lessons.create_lesson.title'">
+            </mat-form-field>
+            <div *ngIf="isError" class="error">
+                {{ translations | getLabel:"plain.my_lessons.create_lesson.title_required" }}
+            </div>
+
+            <mat-form-field>
+                <mat-select [(ngModel)]="selectedTemplate" [ngModelOptions]="{standalone: true}"
+                            [placeholder]="translations | getLabel:'plain.my_lessons.create_lesson.template'">
+                    <mat-option>
+                        {{ translations | getLabel:"plain.my_lessons.create_lesson.default" }}
+                    </mat-option>
+                    <mat-option *ngIf="!templatesLoaded" mdl style="text-align: center">
+                        <app-loading></app-loading>
+                    </mat-option>
+                    <ng-container *ngIf="templatesLoaded">
+                        <mat-optgroup label="Public">
+                            <mat-option *ngFor="let publicTemplate of publicTemplates" [value]="publicTemplate">
+                                {{ publicTemplate.title }}
+                            </mat-option>
+                        </mat-optgroup>
+                        <mat-optgroup label="Private">
+                            <mat-option *ngFor="let privateTemplate of privateTemplates" [value]="privateTemplate">
+                                {{ privateTemplate.title }}
+                            </mat-option>
+                        </mat-optgroup>
+                    </ng-container>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width">
+                <textarea [(ngModel)]="tags" [ngModelOptions]="{standalone: true}" rows="4" matInput
+                          [placeholder]="translations | getLabel:'plain.my_lessons.create_lesson.tags'"></textarea>
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width">
+                <textarea [(ngModel)]="shortDescription" [ngModelOptions]="{standalone: true}" rows="4" matInput
+                          [placeholder]="translations | getLabel:'plain.my_lessons.create_lesson.short_description'"></textarea>
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width">
+                <textarea [(ngModel)]="description" [ngModelOptions]="{standalone: true}" rows="10" matInput
+                          [placeholder]="translations | getLabel:'plain.my_lessons.create_lesson.description'"></textarea>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-select [(value)]="scoreType"
+                            [placeholder]="translations | getLabel:'plain.my_lessons.create_lesson.score_type'">
+                    <mat-option value="last">
+                        {{ translations | getLabel:"plain.my_lessons.create_lesson.last" }}
+                    </mat-option>
+                    <mat-option value="first">
+                        {{ translations | getLabel:"plain.my_lessons.create_lesson.first" }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width">
+                <input [(ngModel)]="passingScore" [ngModelOptions]="{standalone: true}" matInput
+                       [placeholder]="translations | getLabel:'plain.my_lessons.create_lesson.passing_score'">
+            </mat-form-field>
+            <div class="bottom-actions">
+                <a *ngIf="this.isButtonActive" (click)="createLesson()" mat-button color="accent" class="create-button">
+                    {{ translations | getLabel:"plain.my_lessons.create_lesson.create" }}
+                </a>
+                <a *ngIf="!this.isButtonActive" class="create-button-disabled" mat-raised-button disabled> {{
+                    translations | getLabel:"plain.my_lessons.create_lesson.create" }}</a>
+                <div *ngIf="!this.isButtonActive"
+                     mdl
+                     class="app-loading-wrapper">
+                    <app-loading></app-loading>
+                </div>
+                <a *ngIf="this.isButtonActive" mat-button color="primary" [routerLink]="'/' + backUrl"
+                   class="cancel-button">
+                    {{ translations | getLabel:"plain.my_lessons.create_lesson.cancel" }}
+                </a>
+                <a *ngIf="!this.isButtonActive" class="cancel-button-disabled" mat-raised-button disabled>{{
+                    translations | getLabel:"plain.my_lessons.create_lesson.cancel" }}</a>
+            </div>
+        </form>
+    </div>
+
+</div>

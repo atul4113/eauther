@@ -1,0 +1,13 @@
+{% load i18n %}
+{% load apptags %}
+{% block content %}
+<p style="font-weight:900; font-size:medium; margin: 10px 0 10px 50px;">Change e-mail</p>
+<form method="post" action="profile" name="changeEmail">
+		{% csrf_token %}
+		<table class="profile-edit-table">
+	  		{{ email_form }}
+	  	<tr><th></th><th>{% button 'Change' 'document.forms["changeEmail"].submit()' '' '' %}</th></tr>
+	  	</table>
+	  	<input type="submit" />
+</form>
+{% endblock %}

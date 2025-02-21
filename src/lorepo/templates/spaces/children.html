@@ -1,0 +1,11 @@
+<ul class="public_spaces">
+    {% for space in spaces %}
+    <li><strong>{{ space }}</strong> <span class="rank">[{{space.rank}}]</span>
+    	<a href="{{ space.get_absolute_url }}/spaces/{{ space.id}}/subspace"> add subcategory / </a>
+    	<a href="{{ space.get_absolute_url }}/spaces/{{ space.id}}/rename_public?next=/corporate/publicspaces"> rename / </a>
+    	<a href="{{ space.get_absolute_url }}/spaces/{{ space.id}}/rank?next=/corporate/publicspaces"> change rank / </a>
+    	<a href="{{ space.get_absolute_url }}/spaces/{{ space.id}}/delete_public?next=/corporate/publicspaces"  onclick="return confirm('Are you sure you want to delete category \'{{space.title}}\'?')">delete </a>
+    </li>
+        {% children_tag space.kids.all %}
+    {% endfor %}
+</ul>

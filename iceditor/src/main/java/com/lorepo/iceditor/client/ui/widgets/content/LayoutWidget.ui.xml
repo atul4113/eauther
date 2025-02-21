@@ -1,0 +1,30 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+	
+	</ui:style>
+	<g:HTMLPanel ui:field="panel" styleName="mainPage">
+		<div class="mainPageHeader">
+				<h3 ui:field="title"></h3>
+				<a class="mainPageCloseBtn closeWidgetLocker"></a>
+			</div>
+			<div id="Layout-contents" class="contents">
+				<div class="layoutColumn">
+					<label for="headerName" ui:field="useLabel" />
+					<div>
+						<label for="leftOption" ui:field="leftLabel" />
+						<input type="checkbox" ui:field="useLeft"/>
+					</div>
+					<div>
+						<label for="rightOption" ui:field="rightLabel" />
+						<input type="checkbox" ui:field="useRight"/>
+					</div>
+				</div>	
+			</div>
+			<div class="settingsControls">
+				<a class="controlsBtn" ui:field="apply" />
+				<a class="controlsBtn" ui:field="save" />				
+			</div>
+	</g:HTMLPanel>
+</ui:UiBinder> 

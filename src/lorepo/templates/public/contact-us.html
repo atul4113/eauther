@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load apptags %}
+
+{% block head %}
+		<script src="//maps.google.com/maps?file=api&amp;v=2&amp;sensor=false&amp;key=ABQIAAAAnRpF87lkj8gYnUY-yq_ONxRe2tkK98O-3m6j7osCA4CD8TmHeBST2f-4tmPvLo76ioAXvvEcxBO8ag" type="text/javascript"></script>
+		<script type="text/javascript" language="javascript" src="/media/js/gmap.js"></script>
+		<script type="text/javascript" src="/media/js/util/equal-height.js"></script>
+		<script>
+			$(document).ready(function() {
+			   equalHeight($(".three_column"));
+			});
+		</script>
+{% endblock %}
+
+{% block content %}
+
+<h1 class="page_header">Contact us</h1>
+<div class="main clear" style="padding-top: 0px"></div>
+
+<div class="contact_us">
+	<div class="three_column">
+		<div>Use the form below or contact us directly!</div>
+		<form id="contactForm" action="/public/contact-us" method="POST" class="contact_form">
+		<table>
+		<tr><th>{{form.name.label}}:</th><td>{{form.name.errors}}{{form.name}}</td></tr>
+		<tr><th>{{form.company.label}}:</th><td>{{form.company.errors}}{{form.company}}</td></tr>
+		<tr><th>{{form.country.label}}:</th><td>{{form.country.errors}}{{form.country}}</td></tr>
+		<tr><th>{{form.email.label}}:</th><td>{{form.email.errors}}{{form.email}}</td></tr>
+		<tr><th>{{form.message.label}}:</th><td>{{form.message.errors}}{{form.message}}</td></tr>
+		<tr><th>{{form.math_captcha_field.label}}:</th><td>{{ form.non_field_errors }}{{form.math_captcha_field}}</td></tr>
+		<tr><th>&nbsp;</th>
+		<td>
+		<div class="button-left">
+		{% button 'Send' 'document.getElementById("contactForm").submit()' '' 'auto' %}
+		</div>
+		</td></tr>
+		</table>
+		</form>
+	</div>
+	<div class="three_column">
+		<a href="http://learnetic.com"><img src="/media/logo_www.PNG" width="242" height="107" alt="Learnetic S.A." /></a>
+		<br/>
+		<div class="contact_info_txt">
+			Learnetic S.A. <br />
+			<br />
+			ul. Azymutalna 9 <br />
+			80-298 Gdańsk,  Poland <br />
+			<br />
+			Tel. (48)58 7647 500 <br />
+			Fax (48)58 7647 501 <br />
+			<br />
+			<a href="mailto:mauthor@learnetic.com">mauthor@learnetic.com</a>
+		</div>
+	</div>
+	<div class="three_column last">
+		<div id='gMap'>Google Map Goes Here</div>
+	</div>
+	<div class="clear">&nbsp;</div>
+</div>
+
+{% endblock %}

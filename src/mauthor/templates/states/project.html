@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load apptags %}
+
+{% block content %}
+
+<h1 class="page_header">Select lesson state set for {{project.title}}</h1>
+<div class="main clear" style="padding-top: 0"></div>
+
+
+<form action="/states/project/{{project.id}}" method="post" name="project_states" id="project_state">
+	<input type="hidden" name="next" value="{{next}}"/>
+	<table>
+		<tr>
+			<td>Select states set: 
+			<select name="set_id">
+				<option value="">-</option>
+				{% for set in sets %}
+					<option value="{{set.id}}" {% if set.id == kanban.states_set.id %}selected{% endif %}>{{set.name}}</option>
+				{% endfor %}
+			</select>
+			</td>
+			<td>&nbsp;<div id="submit-button" class="btn btn-primary btn-sm">Add set</div></td>
+		</tr>
+	</table>
+
+    <input type="hidden" name="{{ token_key }}" value="{{ token_value }}"/>
+</form>
+
+<script>
+    $(document).ready(function () {
+        $("#submit-button").click(function (event) {
+            var self = $(this);
+            if (self.hasClass("was-clicked")) {
+                return;
+            } else {
+                self.addClass("was-clicked");
+                $("#project_state").submit();
+            }
+        });
+    })
+</script>
+{% endblock %}

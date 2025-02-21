@@ -1,0 +1,195 @@
+{% load apptags %}
+<html>
+	<head>
+	<title>Localization Editor</title>
+	<link href="/media/style.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="/media/js/jquery.min.js"></script>
+	<script type="text/javascript" src="/media/icplayer/icplayer.nocache.js"></script>
+	<script type="text/javascript" src="/mauthor_media/js/encoder.js"></script>
+	<script type="text/javascript" src="/mauthor_media/js/localization/utils.js"></script>
+	<script type="text/javascript" src="/mauthor_media/js/localization/models.js"></script>
+	<script type="text/javascript" src="/mauthor_media/js/localization/shortCuts.js"></script>
+	<script type="text/javascript" src="/media/js/tiny_mce/tiny_mce.js"></script>
+	<script type="text/javascript">
+		var player;
+		var p;
+		
+		function icOnAppLoaded(){
+			// load lesson
+			var page = parseInt(window.location.hash.substring(1), 10);
+			if (page != NaN) {
+				page = page - 1;
+			} else {
+				page = 0;
+			}
+			
+			player = icCreatePlayer('_icplayer');
+			player.load('/file/{{localized_content.file.id}}', page);
+			
+			p = new Presentation();
+			
+			// create editor
+			tinyMCE.init({
+				mode : "specific_textareas",
+				editor_selector : "textarea",
+				theme: 'advanced',
+				theme_advanced_buttons1 : 'forecolor,backcolor,|,bold,italic,underline,|,justifyleft,justifycenter,justifyright,|,removeformat',
+				width: '521',
+				height: '250',
+				auto_focus: 'mce_0',
+				oninit: (function(){ p.init(player, this, '{{localized_content.id}}'); }),
+				setup : 
+				function(ed) {
+					ed.onKeyUp.add(function(ed, evt) {
+						handleKeyUp(evt, p);
+					}),
+					ed.onKeyPress.add(function(ed, evt) {
+						handleKeyPress(evt, p);
+					})
+				}
+			});
+			
+			bindGlobalShortCuts(p);
+			
+			// create pages, modules and fields
+			{% for page in pages %}
+				var page = new Page('{{page.name}}', '{{page.id}}', '{{page.folder_name}}', {{forloop.counter0}});
+				{% for module in page.modules %}
+					var module = new Module('{{module.id}}', '{{module.name}}');
+					page.modules.push(module);
+					{% for field in module.fields %}
+						var field = new Field(
+									'{{field.value|escapejs}}',
+									'{{field.name|escapejs}}',
+									'{{field.type|escapejs}}',
+									'{{field.list_name|escapejs}}',
+									'{{field.list_index|escapejs}}')
+						module.fields.push(field);
+					{% endfor %}
+				{% endfor %}
+				p.addPage(page);
+			{% endfor %}
+			
+			player.onPageLoaded(function(){
+				p.highLightCurrent();
+				var currentPage = player.getPlayerServices().getCurrentPageIndex();
+				p.changePage(currentPage);
+				fitRightColumn();
+				checkTextsFitsContainers();
+			});
+		}
+		
+		function openDialog() {
+			$( "#change-pagename-form" ).dialog("open");
+		}
+		
+	</script>
+	{% include 'common/math_jax.html' %}
+	</head>
+	<body class="localization-editor">
+		<div class="loading"><img src="/media/images/loading.gif" /></div>
+		<div class="shadow"></div>
+		<div class="menu-bar-wrapper">
+			<div class="close-button-wrapper">
+				{% with url="parent.location='"|add:close_url|add:"'" %}
+					{% button 'Exit' url %}
+				{% endwith %}
+			</div>
+			<div class="presentation-title">
+				<strong>Localization Editor:</strong>
+				{{localized_content|default:'localized presentation title'}}
+			</div>
+		</div>
+		
+		{% include 'common/messages/display_messages.html' %}
+		
+		<div class="left-column-wrapper">
+			<div class="positioner">
+			
+				<div class="left background">
+					<div class="label">Page <span></span></div>
+					<div class="page-name-wrapper">
+						<div class="navigation-button-left"></div>
+						<div class="page-name">
+							<div class="name">
+								page name
+							</div>
+							<div class="image">
+								<img src="/media/images/bckg-primary-menu-children.png" />
+							</div>
+						</div>
+						<div class="navigation-button-right"></div>
+					</div>
+					<div class="edit-page-name">
+						{% button 'Edit' 'openDialog()' %}
+					</div>
+				</div>
+				<div class="left background">
+					<div class="label">Module <span></span></div>
+					<div class="module-name-wrapper">
+						<div class="navigation-button-left"></div>
+						<div class="module-name">
+							<div class="name">
+								module name
+							</div>
+							<div class="image">
+								<img src="/media/images/bckg-primary-menu-children.png" />
+							</div>
+						</div>
+						<div class="navigation-button-right"></div>
+					</div>
+				</div>
+				<div class="left background">
+					<div class="label">Field <span></span></div>
+					<div class="field-name-wrapper">
+						<div class="navigation-button-left"></div>
+						<div class="field-name">
+							<div class="name">
+								field name
+							</div>
+							<div class="image">
+								<img src="/media/images/bckg-primary-menu-children.png" />
+							</div>
+						</div>
+						<div class="navigation-button-right"></div>
+					</div>
+					<div class="saved">Saved</div>
+				</div>
+				<div class="left">
+					<textarea id='mce_0' class="textarea">
+					
+					</textarea>
+				</div>
+				<div class="left">
+					<div class="refresh">
+						{% button 'Refresh' '' %}
+					</div>
+					
+					<div class="refresh-text">
+						Choose refresh button to see changes in the lesson.
+					</div>
+					
+					<div class="clear"></div>
+					
+					<div class="shortcut-wrapper">
+						<strong>Shortcuts:</strong>
+						<div>CTRL + Space &rarr; Next field</div>
+						<div>CTRL + Q &rarr; Previous field</div>
+						<div>CTRL + S &rarr; Save field</div>
+						<div>CTRL + A &rarr; Select all</div>
+						<div>CTRL + Z &rarr; Undo</div>
+						<div>CTRL + Y &rarr; Redo</div>
+					</div>
+				</div>
+			</div>
+			<div id="change-pagename-form">
+				<input type="text" name="pagename" id="pagename" />
+			</div>
+		</div>
+		<div class="right-column-wrapper">
+			<div id="_icplayer"></div>
+		</div>
+		
+		<div class="clear"></div>
+	</body>
+</html>

@@ -1,0 +1,132 @@
+<div *ngIf="lesson" class="details-header">
+    <div class="title">
+        <div class="lesson-title">{{ lesson.title }}</div>
+        <div class="lesson-publication" *ngIf="isProject && lessonDetails">{{lessonDetails.publicationName}}</div>
+    </div>
+
+    <button *ngIf="!isView" mat-icon-button
+            (click)="hideDetails()">
+        <i class="material-icons">clear</i>
+    </button>
+</div>
+
+
+<div *ngIf="lesson" class="main-container">
+    <div class="app-loading-wrapper">
+        <app-loading *ngIf="!isInitialized">
+        </app-loading>
+    </div>
+
+    <div *ngIf="isInitialized" class="tabs">
+        <div class="tabs-nav">
+            <button mat-button
+                    [ngClass]="{'active': isMetadataTabActive}"
+                (click)="onTabChange(Tabs.METADATA)">
+                {{ translations | getLabel:'plain.my_lessons.panel.lesson_details.details' }}
+            </button>
+            <button *ngIf="lesson.contentType.isLesson()"
+                    mat-button
+                    [ngClass]="{'active': isAssetsTabActive}"
+                    (click)="onTabChange(Tabs.ASSETS)">
+                {{ translations | getLabel:'plain.my_lessons.panel.lesson_details.assets' }}
+            </button>
+            <button *ngIf="lesson.contentType.isLesson()"
+                    mat-button
+                    [ngClass]="{'active': isBugTackTabActive}"
+                    (click)="onTabChange(Tabs.BUG_TRACK)">
+                {{ translations | getLabel:'plain.my_lessons.panel.lesson_details.bugtrack' }}
+            </button>
+            <button *ngIf="lesson.contentType.isLesson()"
+                    mat-button
+                    [ngClass]="{'active': isHistoryTabActive}"
+                    (click)="onTabChange(Tabs.HISTORY)">
+                {{ translations | getLabel:'plain.my_lessons.panel.lesson_details.history' }}
+            </button>
+        </div>
+
+        <div *ngIf="isMetadataTabActive"
+            class="tab">
+            <perfect-scrollbar
+                style="position: relative"
+                [scrollIndicators]="true"
+                appFullScreenHeight
+            >
+                <app-lesson-details-metadata
+                    [translations]="translations"
+                    [lesson]="lessonDetails"
+                    [(pages)]="lessonPages"
+                    [versions]="versions"
+                    [metadata]="metadata"
+                    [isProject]="isProject"
+                    [userPermissions]="userPermissions"
+                    (iconChange)="onIconChange($event)"
+                    (metadataChange)="onMetadataChange($event)"
+                    (LoadPages)="onLoadPages()"
+                    (reloadLessons)="reloadLessonsSignal($event)"
+                ></app-lesson-details-metadata>
+            </perfect-scrollbar>
+        </div>
+
+        <div *ngIf="isAssetsTabActive && lesson.contentType.isLesson()"
+             class="tab">
+            <perfect-scrollbar
+                style="position: relative"
+                [scrollIndicators]="true"
+                appFullScreenHeight
+                >
+                <app-lesson-details-assets
+                    *ngIf="assets"
+                    [lesson]="lessonDetails"
+                    [assets]="assets"
+                    [assetsLoaded]="assetsLoaded"
+                    [userPermissions]="userPermissions"
+                ></app-lesson-details-assets>
+            </perfect-scrollbar>
+        </div>
+
+        <div *ngIf="isBugTackTabActive && lesson.contentType.isLesson()"
+             class="tab">
+            <perfect-scrollbar
+                style="position: relative"
+                [scrollIndicators]="true"
+                appFullScreenHeight
+                >
+                <app-lesson-details-bug-track
+                    [lesson]="lessonDetails"
+                    [bugs]="bugs"
+                    [user]="user"
+                    [userPermissions]="userPermissions"
+                    (deleteBug)="onBugDelete($event)"
+                    (reportBug)="onBugReport($event)"
+                ></app-lesson-details-bug-track>
+            </perfect-scrollbar>
+        </div>
+
+        <div *ngIf="isHistoryTabActive && lesson.contentType.isLesson()"
+             class="tab">
+            <perfect-scrollbar
+                style="position: relative"
+                [scrollIndicators]="true"
+                appFullScreenHeight
+                >
+                <app-lesson-details-history
+                    *ngIf="versions"
+                    [lesson]="lessonDetails"
+                    [versions]="versions"
+                    [userPermissions]="userPermissions"
+                ></app-lesson-details-history>
+            </perfect-scrollbar>
+        </div>
+    </div>
+
+</div>
+
+
+<popup
+ [title]="(translations | getLabel:'plain.my_lessons.panel.my_lessons.delete_bug') + ' ' + bugToDelete?.title"
+ [content]="translations | getLabel:'plain.my_lessons.panel.my_lessons.confirm_delete_bug'"
+ [acceptLabel]="translations | getLabel:'plain.my_lessons.panel.my_lessons.yes_delete'"
+ [rejectLabel]="translations | getLabel:'plain.my_lessons.panel.lesson_list.cancel'"
+ [(isVisible)]="isPopupVisible"
+ (accept)="onDeleteBugAccept($event)"
+ (reject)="onDeleteBugReject($event)"></popup>

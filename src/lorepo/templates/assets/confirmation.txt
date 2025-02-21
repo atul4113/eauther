@@ -1,0 +1,15 @@
+{% autoescape off %}
+Dear {{ user }},
+<p>
+Lesson "{{content.title}}" have been successfully updated with assets package.
+</p>
+
+<p>
+You can browse the assets at <a href="{{ settings.BASE_URL }}/assets/{{content.id}}">{{ settings.BASE_URL }}/assets/{{content.id}}</a>
+</p>
+
+<p>
+--<br/>
+{{ settings.APP_NAME }}
+</p>
+{% endautoescape %}

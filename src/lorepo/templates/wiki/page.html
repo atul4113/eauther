@@ -1,0 +1,14 @@
+{% load apptags %}
+{% load markdown_deux_tags %}
+{% block content %}
+
+<div class="wikiPage" id="{{page.id}}">
+
+	<div class="wiki-page-preview-wrapper">
+		<h4>{{ page.title }}</h4>
+		{{page.text|markdown:"tables"}}
+	</div>	
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,15 @@
+@import "../../../common/templates/mdl-colors";
+
+
+app-lesson-details-bug-followers {
+
+    .mat-card {
+        background-color: $grey-50;
+        margin: 8px;
+    }
+
+    div.mat-card-header-text{
+        margin-left: 0px;
+    }
+
+}

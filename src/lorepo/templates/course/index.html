@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% load apptags %}
+
+{% block head %}
+
+{% endblock %}
+
+{% block content %}
+
+<div id="course-index">
+	<h1 class="page-header">
+		Manage Courses for {{ project }}
+	</h1>
+	
+	{% include 'common/messages/display_messages.html' %}
+			<form action="./{{ project.id }}" method="POST" name="add_course" class="add-course clearfix">
+				<div class="name pull-left horizontal-stack">
+					<input name="name" type="text" />
+				</div>
+				<div class="pull-left horizontal-stack">
+					<button type="submit" class="btn btn-primary btn-sm">Add Course</button>
+				</div>
+			</form>
+			<div>
+				{% if order == 'ASC' %}
+				<a href="/course/list/{{project.id}}?order=DESC">Sort courses descending</a>
+				{% else %}
+				<a href="/course/list/{{project.id}}?order=ASC">Sort courses ascending</a>
+				{% endif %}
+			</div>
+			<div class="courses-list">
+				{% for course in courses %}
+					<div class="course">
+						<div class="name pull-left">{{ course }}</div>
+						<div class="actions pull-right">
+							<a href="/course/remove/{{ course.id }}?next={{ request.path }}" onClick="return confirm('Are you sure?')">Remove</a> &middot;
+							<a href="/course/rename/{{ course.id }}?next={{ request.path }}">Rename</a> &middot;
+							<a href="/course/edit_table_of_contents/{{ course.id }}/{{ project.id }}?next={{ request.path }}">Edit Table of Contents</a> &middot;
+							<a href="/course/export/{{ course.id }}?next={{ request.path }}">Export</a>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+				{% endfor %}
+			</div>
+</div>
+
+{% endblock %}

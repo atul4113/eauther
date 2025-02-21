@@ -1,0 +1,20 @@
+{% load corporate %}
+
+<ul class="public_spaces">
+    {% for space in spaces %}
+        {% if space.is_deleted %}
+        {% else %}
+            <li><strong>{{ space }}</strong> <span class="rank">[{{space.rank}}]</span>
+            <a href="{{ space.get_absolute_url }}/corporate/{{ space.id}}/add_subproject?project={{project_id}}"> add section / </a>
+            <a href="{{ space.get_absolute_url }}/corporate/projects/{{ space.id}}/rename_section?next=/corporate/{{project_id}}/subproject"> rename / </a>
+            <a href="{{ space.get_absolute_url }}/corporate/projects/{{ space.id}}/section_rank?next=/corporate/{{project_id}}/subproject"> change rank / </a>
+            <a href="{{ space.get_absolute_url }}/corporate/delete/{{ space.id}}?next=/corporate/{{project_id}}/subproject&{{ token_key }}={{ token }}"  onclick="return confirm('Are you sure you want to delete unit \'{{space.title}}\'?')">delete </a>
+            </li>
+                {% children_tag_corporate space.kids.all project_id token_key token %}
+
+            {% if space.parent.parent.is_second_level %}
+            <div class="main clear" style="width:50%;"></div>
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+</ul>

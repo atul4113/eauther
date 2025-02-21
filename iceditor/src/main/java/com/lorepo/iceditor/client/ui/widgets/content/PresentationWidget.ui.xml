@@ -1,0 +1,32 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+	</ui:style>
+	<g:HTMLPanel ui:field="panel">
+	    <g:AbsolutePanel ui:field="outerPanel">
+			<g:VerticalPanel styleName="ic_player" ui:field="playerPanel">
+				<g:AbsolutePanel ui:field="headerPanel" styleName="ic_header ic_page">
+        		</g:AbsolutePanel>
+
+				<g:AbsolutePanel ui:field="innerPanel" styleName="ic_page ic_main">
+        		</g:AbsolutePanel>
+
+        		<g:AbsolutePanel ui:field="footerPanel" styleName="ic_footer ic_page">
+        		</g:AbsolutePanel>
+         	</g:VerticalPanel>
+		</g:AbsolutePanel>
+		<div id="contextMenu"></div>
+		<div id="ruler_vertical"></div>
+		<ul id="ruler_vertical_options">
+			<li><a></a></li>
+			<li><a></a></li>
+		</ul>
+		<div id="outstretchHeightRuler"></div>
+		<g:HTMLPanel ui:field="headerLock" styleName="commonsLock"></g:HTMLPanel>
+		<g:HTMLPanel ui:field="footerLock" styleName="commonsLock"></g:HTMLPanel>
+		
+		<div id="presentationResizer-vertical" class="presentationResizer" style="opacity: 1;"></div>
+		<div id="presentationResizer-horizontal" class="presentationResizer" style="opacity: 1;"></div>
+	</g:HTMLPanel>
+</ui:UiBinder> 

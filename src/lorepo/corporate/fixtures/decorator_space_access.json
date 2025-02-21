@@ -1,0 +1,874 @@
+[
+  {
+    "pk": 2, 
+    "model": "contenttypes.contenttype", 
+    "fields": {
+      "model": "space", 
+      "name": "space", 
+      "app_label": "spaces"
+    }
+  }, 
+  {
+    "pk": 5, 
+    "model": "contenttypes.contenttype", 
+    "fields": {
+      "model": "spaceaccess", 
+      "name": "space access", 
+      "app_label": "spaces"
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "auth.user", 
+    "fields": {
+      "username": "kgebert", 
+      "first_name": "", 
+      "last_name": "", 
+      "is_active": true, 
+      "idxf_email_l_iexact": "karol.gebert@solwit.com", 
+      "idxf_username_l_iexact": "kgebert", 
+      "is_superuser": true, 
+      "is_staff": true, 
+      "last_login": "2013-05-22 08:25:16", 
+      "groups": [], 
+      "user_permissions": [], 
+      "password": "sha1$b5c91$a6bf465777e64f67fd43e857722716427a547f99", 
+      "email": "karol.gebert@solwit.com", 
+      "date_joined": "2013-05-22 10:16:04"
+    }
+  }, 
+  {
+    "pk": 15, 
+    "model": "auth.user", 
+    "fields": {
+      "username": "test", 
+      "first_name": "", 
+      "last_name": "", 
+      "is_active": true, 
+      "idxf_email_l_iexact": "test@test.pl", 
+      "idxf_username_l_iexact": "test", 
+      "is_superuser": false, 
+      "is_staff": false, 
+      "last_login": "2013-05-22 08:22:20", 
+      "groups": [], 
+      "user_permissions": [], 
+      "password": "sha1$01493$76ef2e2066457a9fecf207df9e2f8fa13d06662f", 
+      "email": "test@test.pl", 
+      "date_joined": "2013-05-22 08:18:39"
+    }
+  }, 
+  {
+    "pk": 19, 
+    "model": "auth.user", 
+    "fields": {
+      "username": "test2", 
+      "first_name": "", 
+      "last_name": "", 
+      "is_active": true, 
+      "idxf_email_l_iexact": "test@test.pl", 
+      "idxf_username_l_iexact": "test2", 
+      "is_superuser": false, 
+      "is_staff": false, 
+      "last_login": "2013-05-22 08:24:25", 
+      "groups": [], 
+      "user_permissions": [], 
+      "password": "sha1$71c8d$b3869d51ea90c579e95cdbf26d9312901bba01c7", 
+      "email": "test@test.pl", 
+      "date_joined": "2013-05-22 08:19:27"
+    }
+  }, 
+  {
+    "pk": "3d6e69f5afdad3a0f47ec295cb770401", 
+    "model": "sessions.session", 
+    "fields": {
+      "expire_date": "2013-06-05 08:28:40", 
+      "session_data": "N2E5ODNjNjM3YzFmNWYyZDE1NmJlYmRiMWViMzZhNDA3MWM0MTMxZDqAAn1xAChVDV9hdXRoX3Vz\nZXJfaWRxAYoBAVUMdG9rZW5fZWRpdG9ycQJVBWs4U3Y5cQNVEl9hdXRoX3VzZXJfYmFja2VuZHEE\nVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEFVQ1sYXN0X3NwYWNl\nX2lkcQaKAQ1VD19zZXNzaW9uX2V4cGlyeXEHSwBVD2xhc3RfcHJvamVjdF9pZHEIfXEJigENSxpz\ndS4=\n"
+    }
+  }, 
+  {
+    "pk": 30, 
+    "model": "search.relationindex_mycontent_content_search_index", 
+    "fields": {
+      "is_featured": false, 
+      "idxf_spaces_path_l_contains": [
+        "21", 
+        "1"
+      ], 
+      "spaces": [
+        "21"
+      ], 
+      "file": 29, 
+      "description": "", 
+      "modified_date": "2013-05-22 08:24:50", 
+      "title": "test2 lesson 1", 
+      "tags": "", 
+      "public_version": null, 
+      "xliff_file": null, 
+      "version": 0, 
+      "short_description": "", 
+      "big_icon_href": null, 
+      "icon_href": null, 
+      "is_globally_public": false, 
+      "view_count": 0, 
+      "content_type": 1, 
+      "is_public": false, 
+      "associated_content": null, 
+      "is_deleted": false, 
+      "name": null, 
+      "search_index_search_list_field": [
+        "1", 
+        "lesson", 
+        "test2"
+      ], 
+      "author": 19, 
+      "is_template": false, 
+      "passing_score": 0, 
+      "spaces_path": "21", 
+      "created_date": "2013-05-22 08:24:49", 
+      "original": null
+    }
+  }, 
+  {
+    "pk": 35, 
+    "model": "search.relationindex_mycontent_content_search_index", 
+    "fields": {
+      "is_featured": false, 
+      "idxf_spaces_path_l_contains": [
+        "3"
+      ], 
+      "spaces": [
+        "3"
+      ], 
+      "file": 34, 
+      "description": "", 
+      "modified_date": "2013-05-22 08:25:28", 
+      "title": "kgebert lesson 1", 
+      "tags": "", 
+      "public_version": null, 
+      "xliff_file": null, 
+      "version": 0, 
+      "short_description": "", 
+      "big_icon_href": null, 
+      "icon_href": null, 
+      "is_globally_public": false, 
+      "view_count": 0, 
+      "content_type": 1, 
+      "is_public": false, 
+      "associated_content": null, 
+      "is_deleted": false, 
+      "name": null, 
+      "search_index_search_list_field": [
+        "1", 
+        "lesson", 
+        "kgebert"
+      ], 
+      "author": 1, 
+      "is_template": false, 
+      "passing_score": 0, 
+      "spaces_path": "3", 
+      "created_date": "2013-05-22 08:25:27", 
+      "original": null
+    }
+  }, 
+  {
+    "pk": 40, 
+    "model": "search.relationindex_mycontent_content_search_index", 
+    "fields": {
+      "is_featured": false, 
+      "idxf_spaces_path_l_contains": [
+        "8,13,25", 
+        ",13,25", 
+        "13,25", 
+        "3,25", 
+        ",25", 
+        "25", 
+        "5"
+      ], 
+      "spaces": [
+        "8", 
+        "13", 
+        "25"
+      ], 
+      "file": 39, 
+      "description": "", 
+      "modified_date": "2013-05-22 08:28:10", 
+      "title": "publication 1 lesson 1", 
+      "tags": "", 
+      "public_version": null, 
+      "xliff_file": null, 
+      "version": 0, 
+      "short_description": "", 
+      "big_icon_href": null, 
+      "icon_href": null, 
+      "is_globally_public": false, 
+      "view_count": 0, 
+      "content_type": 1, 
+      "is_public": false, 
+      "associated_content": null, 
+      "is_deleted": false, 
+      "name": null, 
+      "search_index_search_list_field": [
+        "1", 
+        "lesson", 
+        "public"
+      ], 
+      "author": 1, 
+      "is_template": false, 
+      "passing_score": 0, 
+      "spaces_path": "8,13,25", 
+      "created_date": "2013-05-22 08:28:10", 
+      "original": null
+    }
+  }, 
+  {
+    "pk": 45, 
+    "model": "search.relationindex_mycontent_content_search_index", 
+    "fields": {
+      "is_featured": false, 
+      "idxf_spaces_path_l_contains": [
+        "8,13,26", 
+        ",13,26", 
+        "13,26", 
+        "3,26", 
+        ",26", 
+        "26", 
+        "6"
+      ], 
+      "spaces": [
+        "8", 
+        "13", 
+        "26"
+      ], 
+      "file": 44, 
+      "description": "", 
+      "modified_date": "2013-05-22 08:28:32", 
+      "title": "publication 2 lesson 1", 
+      "tags": "", 
+      "public_version": null, 
+      "xliff_file": null, 
+      "version": 0, 
+      "short_description": "", 
+      "big_icon_href": null, 
+      "icon_href": null, 
+      "is_globally_public": false, 
+      "view_count": 0, 
+      "content_type": 1, 
+      "is_public": false, 
+      "associated_content": null, 
+      "is_deleted": false, 
+      "name": null, 
+      "search_index_search_list_field": [
+        "1", 
+        "lesson", 
+        "2", 
+        "public"
+      ], 
+      "author": 1, 
+      "is_template": false, 
+      "passing_score": 0, 
+      "spaces_path": "8,13,26", 
+      "created_date": "2013-05-22 08:28:31", 
+      "original": null
+    }
+  }, 
+  {
+    "pk": 16, 
+    "model": "registration.registrationprofile", 
+    "fields": {
+      "activation_key": "ALREADY_ACTIVATED", 
+      "user": 15
+    }
+  }, 
+  {
+    "pk": 20, 
+    "model": "registration.registrationprofile", 
+    "fields": {
+      "activation_key": "ALREADY_ACTIVATED", 
+      "user": 19
+    }
+  }, 
+  {
+    "pk": 30, 
+    "model": "mycontent.content", 
+    "fields": {
+      "is_featured": false, 
+      "idxf_spaces_path_l_contains": [
+        "21", 
+        "1"
+      ], 
+      "spaces": [
+        "21"
+      ], 
+      "file": 29, 
+      "description": "", 
+      "modified_date": "2013-05-22 08:24:50", 
+      "title": "test2 lesson 1", 
+      "tags": "", 
+      "public_version": 29, 
+      "xliff_file": null, 
+      "version": 0, 
+      "short_description": "", 
+      "big_icon_href": null, 
+      "icon_href": null, 
+      "is_globally_public": false, 
+      "view_count": 0, 
+      "content_type": 1, 
+      "is_public": false, 
+      "associated_content": null, 
+      "is_deleted": false, 
+      "name": null, 
+      "author": 19, 
+      "is_template": false, 
+      "passing_score": 0, 
+      "spaces_path": "21", 
+      "created_date": "2013-05-22 08:24:49", 
+      "original": null
+    }
+  }, 
+  {
+    "pk": 35, 
+    "model": "mycontent.content", 
+    "fields": {
+      "is_featured": false, 
+      "idxf_spaces_path_l_contains": [
+        "3"
+      ], 
+      "spaces": [
+        "3"
+      ], 
+      "file": 34, 
+      "description": "", 
+      "modified_date": "2013-05-22 08:25:28", 
+      "title": "kgebert lesson 1", 
+      "tags": "", 
+      "public_version": null, 
+      "xliff_file": null, 
+      "version": 0, 
+      "short_description": "", 
+      "big_icon_href": null, 
+      "icon_href": null, 
+      "is_globally_public": false, 
+      "view_count": 0, 
+      "content_type": 1, 
+      "is_public": false, 
+      "associated_content": null, 
+      "is_deleted": false, 
+      "name": null, 
+      "author": 1, 
+      "is_template": false, 
+      "passing_score": 0, 
+      "spaces_path": "3", 
+      "created_date": "2013-05-22 08:25:27", 
+      "original": null
+    }
+  }, 
+  {
+    "pk": 40, 
+    "model": "mycontent.content", 
+    "fields": {
+      "is_featured": false, 
+      "idxf_spaces_path_l_contains": [
+        "8,13,25", 
+        ",13,25", 
+        "13,25", 
+        "3,25", 
+        ",25", 
+        "25", 
+        "5"
+      ], 
+      "spaces": [
+        "8", 
+        "13", 
+        "25"
+      ], 
+      "file": 39, 
+      "description": "", 
+      "modified_date": "2013-05-22 08:28:10", 
+      "title": "publication 1 lesson 1", 
+      "tags": "", 
+      "public_version": null, 
+      "xliff_file": null, 
+      "version": 0, 
+      "short_description": "", 
+      "big_icon_href": null, 
+      "icon_href": null, 
+      "is_globally_public": false, 
+      "view_count": 0, 
+      "content_type": 1, 
+      "is_public": false, 
+      "associated_content": null, 
+      "is_deleted": false, 
+      "name": null, 
+      "author": 1, 
+      "is_template": false, 
+      "passing_score": 0, 
+      "spaces_path": "8,13,25", 
+      "created_date": "2013-05-22 08:28:10", 
+      "original": null
+    }
+  }, 
+  {
+    "pk": 45, 
+    "model": "mycontent.content", 
+    "fields": {
+      "is_featured": false, 
+      "idxf_spaces_path_l_contains": [
+        "8,13,26", 
+        ",13,26", 
+        "13,26", 
+        "3,26", 
+        ",26", 
+        "26", 
+        "6"
+      ], 
+      "spaces": [
+        "8", 
+        "13", 
+        "26"
+      ], 
+      "file": 44, 
+      "description": "", 
+      "modified_date": "2013-05-22 08:28:32", 
+      "title": "publication 2 lesson 1", 
+      "tags": "", 
+      "public_version": null, 
+      "xliff_file": null, 
+      "version": 0, 
+      "short_description": "", 
+      "big_icon_href": null, 
+      "icon_href": null, 
+      "is_globally_public": false, 
+      "view_count": 0, 
+      "content_type": 1, 
+      "is_public": false, 
+      "associated_content": null, 
+      "is_deleted": false, 
+      "name": null, 
+      "author": 1, 
+      "is_template": false, 
+      "passing_score": 0, 
+      "spaces_path": "8,13,26", 
+      "created_date": "2013-05-22 08:28:31", 
+      "original": null
+    }
+  }, 
+  {
+    "pk": 31, 
+    "model": "mycontent.contentspace", 
+    "fields": {
+      "content": 30, 
+      "is_deleted": false, 
+      "space": 21
+    }
+  }, 
+  {
+    "pk": 36, 
+    "model": "mycontent.contentspace", 
+    "fields": {
+      "content": 35, 
+      "is_deleted": false, 
+      "space": 3
+    }
+  }, 
+  {
+    "pk": 41, 
+    "model": "mycontent.contentspace", 
+    "fields": {
+      "content": 40, 
+      "is_deleted": false, 
+      "space": 25
+    }
+  }, 
+  {
+    "pk": 46, 
+    "model": "mycontent.contentspace", 
+    "fields": {
+      "content": 45, 
+      "is_deleted": false, 
+      "space": 26
+    }
+  }, 
+  {
+    "pk": 3, 
+    "model": "spaces.space", 
+    "fields": {
+      "modified_date": "2013-05-22 08:25:28", 
+      "right": 0, 
+      "is_deleted": false, 
+      "parent": null, 
+      "title": "kgebert", 
+      "rank": 100, 
+      "top_level": 3, 
+      "include_contents_in_editor": false, 
+      "created_date": "2013-05-22 08:17:19", 
+      "contents_count": 1, 
+      "space_type": 1, 
+      "left": 0
+    }
+  }, 
+  {
+    "pk": 8, 
+    "model": "spaces.space", 
+    "fields": {
+      "modified_date": "2013-05-22 08:28:31", 
+      "right": 0, 
+      "is_deleted": false, 
+      "parent": null, 
+      "title": "kgebert Corporation", 
+      "rank": 100, 
+      "top_level": 8, 
+      "include_contents_in_editor": false, 
+      "created_date": "2013-05-22 08:17:54", 
+      "contents_count": 2, 
+      "space_type": 3, 
+      "left": 0
+    }
+  }, 
+  {
+    "pk": 9, 
+    "model": "spaces.space", 
+    "fields": {
+      "modified_date": "2013-05-22 08:17:54", 
+      "right": 0, 
+      "is_deleted": false, 
+      "parent": null, 
+      "title": "kgebert Corporation Public", 
+      "rank": 100, 
+      "top_level": 9, 
+      "include_contents_in_editor": false, 
+      "created_date": "2013-05-22 08:17:54", 
+      "contents_count": 0, 
+      "space_type": 2, 
+      "left": 0
+    }
+  }, 
+  {
+    "pk": 13, 
+    "model": "spaces.space", 
+    "fields": {
+      "modified_date": "2013-05-22 08:28:31", 
+      "right": 0, 
+      "is_deleted": false, 
+      "parent": 8, 
+      "title": "Project 1", 
+      "rank": 100, 
+      "top_level": 8, 
+      "include_contents_in_editor": false, 
+      "created_date": "2013-05-22 08:18:09", 
+      "contents_count": 2, 
+      "space_type": 3, 
+      "left": 0
+    }
+  }, 
+  {
+    "pk": 14, 
+    "model": "spaces.space", 
+    "fields": {
+      "modified_date": "2013-05-22 08:18:15", 
+      "right": 0, 
+      "is_deleted": false, 
+      "parent": 8, 
+      "title": "Project 2", 
+      "rank": 100, 
+      "top_level": 8, 
+      "include_contents_in_editor": false, 
+      "created_date": "2013-05-22 08:18:15", 
+      "contents_count": 0, 
+      "space_type": 3, 
+      "left": 0
+    }
+  }, 
+  {
+    "pk": 17, 
+    "model": "spaces.space", 
+    "fields": {
+      "modified_date": "2013-05-22 08:18:40", 
+      "right": 0, 
+      "is_deleted": false, 
+      "parent": null, 
+      "title": "test", 
+      "rank": 100, 
+      "top_level": 17, 
+      "include_contents_in_editor": false, 
+      "created_date": "2013-05-22 08:18:40", 
+      "contents_count": 0, 
+      "space_type": 1, 
+      "left": 0
+    }
+  }, 
+  {
+    "pk": 21, 
+    "model": "spaces.space", 
+    "fields": {
+      "modified_date": "2013-05-22 08:24:50", 
+      "right": 0, 
+      "is_deleted": false, 
+      "parent": null, 
+      "title": "test2", 
+      "rank": 100, 
+      "top_level": 21, 
+      "include_contents_in_editor": false, 
+      "created_date": "2013-05-22 08:19:27", 
+      "contents_count": 1, 
+      "space_type": 1, 
+      "left": 0
+    }
+  }, 
+  {
+    "pk": 25, 
+    "model": "spaces.space", 
+    "fields": {
+      "modified_date": "2013-05-22 08:28:10", 
+      "right": 0, 
+      "is_deleted": false, 
+      "parent": 13, 
+      "title": "Publication 1", 
+      "rank": 100, 
+      "top_level": 8, 
+      "include_contents_in_editor": false, 
+      "created_date": "2013-05-22 08:21:06", 
+      "contents_count": 1, 
+      "space_type": 3, 
+      "left": 0
+    }
+  }, 
+  {
+    "pk": 26, 
+    "model": "spaces.space", 
+    "fields": {
+      "modified_date": "2013-05-22 08:28:31", 
+      "right": 0, 
+      "is_deleted": false, 
+      "parent": 13, 
+      "title": "Publication 2", 
+      "rank": 100, 
+      "top_level": 8, 
+      "include_contents_in_editor": false, 
+      "created_date": "2013-05-22 08:21:12", 
+      "contents_count": 1, 
+      "space_type": 3, 
+      "left": 0
+    }
+  }, 
+  {
+    "pk": 6, 
+    "model": "spaces.spaceaccess", 
+    "fields": {
+      "modified_date": "2013-05-22 08:17:32", 
+      "is_deleted": false, 
+      "space": 3, 
+      "user": 1, 
+      "created_date": "2013-05-22 08:17:32", 
+      "access_right": 3
+    }
+  }, 
+  {
+    "pk": 10, 
+    "model": "spaces.spaceaccess", 
+    "fields": {
+      "modified_date": "2013-05-22 08:17:54", 
+      "is_deleted": false, 
+      "space": 8, 
+      "user": 1, 
+      "created_date": "2013-05-22 08:17:54", 
+      "access_right": 3
+    }
+  }, 
+  {
+    "pk": 18, 
+    "model": "spaces.spaceaccess", 
+    "fields": {
+      "modified_date": "2013-05-22 08:18:40", 
+      "is_deleted": false, 
+      "space": 17, 
+      "user": 15, 
+      "created_date": "2013-05-22 08:18:40", 
+      "access_right": 3
+    }
+  }, 
+  {
+    "pk": 22, 
+    "model": "spaces.spaceaccess", 
+    "fields": {
+      "modified_date": "2013-05-22 08:19:27", 
+      "is_deleted": false, 
+      "space": 21, 
+      "user": 19, 
+      "created_date": "2013-05-22 08:19:27", 
+      "access_right": 3
+    }
+  }, 
+  {
+    "pk": 24, 
+    "model": "spaces.spaceaccess", 
+    "fields": {
+      "modified_date": "2013-05-22 08:20:47", 
+      "is_deleted": false, 
+      "space": 13, 
+      "user": 15, 
+      "created_date": "2013-05-22 08:20:47", 
+      "access_right": 3
+    }
+  }, 
+  {
+    "pk": 27, 
+    "model": "spaces.spaceaccess", 
+    "fields": {
+      "modified_date": "2013-05-22 08:21:30", 
+      "is_deleted": false, 
+      "space": 25, 
+      "user": 19, 
+      "created_date": "2013-05-22 08:21:30", 
+      "access_right": 1
+    }
+  }, 
+  {
+    "pk": 28, 
+    "model": "filestorage.filestorage", 
+    "fields": {
+      "modified_date": "2013-05-22 08:24:49", 
+      "history_for": null, 
+      "version": null, 
+      "content_type": "text/xml", 
+      "created_date": "2013-05-22 08:24:49", 
+      "owner": 19, 
+      "contents": "<?xml version='1.0' encoding='UTF-8' ?> \n\n<page>\n\t<modules>\n\t\n\t\t<textModule id=\"Title\" left=\"5\" top=\"3\" width=\"90\" height=\"7\" style=\"\">\n\t\t\t<text>&lt;div style=&quot;text-align: center;&quot;&gt;Title&lt;/div&gt;</text>\n\t\t</textModule>\t\n\t\t<buttonModule id=\"PrevPage\" left=\"0\" top=\"90\" width=\"10\" height=\"10\" style=\"\">\n\t\t\t<button type=\"prevPage\" text=\"\"/>\n\t\t</buttonModule>\n\t\t<buttonModule id=\"NextPage\" left=\"90\" top=\"90\" width=\"10\" height=\"10\" style=\"\">\n\t\t\t<button type=\"nextPage\" text=\"\"/>\n\t\t</buttonModule>\n\t</modules> \n</page>\n"
+    }
+  }, 
+  {
+    "pk": 29, 
+    "model": "filestorage.filestorage", 
+    "fields": {
+      "modified_date": "2013-05-22 08:24:49", 
+      "history_for": 30, 
+      "version": 1, 
+      "content_type": "text/xml", 
+      "created_date": "2013-05-22 08:24:49", 
+      "owner": 19, 
+      "contents": "<?xml version=\"1.0\" encoding=\"utf-8\"?><interactiveContent name=\"test2 lesson 1\">\n\n\t<style href=\"/media/content/styles/default/content.css\"/>\n\n\t<pages>\n\t\t<page href=\"28\" name=\"Page 1\"/>\n\t</pages>\n</interactiveContent>"
+    }
+  }, 
+  {
+    "pk": 33, 
+    "model": "filestorage.filestorage", 
+    "fields": {
+      "modified_date": "2013-05-22 08:25:27", 
+      "history_for": null, 
+      "version": null, 
+      "content_type": "text/xml", 
+      "created_date": "2013-05-22 08:25:27", 
+      "owner": 1, 
+      "contents": "<?xml version='1.0' encoding='UTF-8' ?> \n\n<page>\n\t<modules>\n\t\n\t\t<textModule id=\"Title\" left=\"5\" top=\"3\" width=\"90\" height=\"7\" style=\"\">\n\t\t\t<text>&lt;div style=&quot;text-align: center;&quot;&gt;Title&lt;/div&gt;</text>\n\t\t</textModule>\t\n\t\t<buttonModule id=\"PrevPage\" left=\"0\" top=\"90\" width=\"10\" height=\"10\" style=\"\">\n\t\t\t<button type=\"prevPage\" text=\"\"/>\n\t\t</buttonModule>\n\t\t<buttonModule id=\"NextPage\" left=\"90\" top=\"90\" width=\"10\" height=\"10\" style=\"\">\n\t\t\t<button type=\"nextPage\" text=\"\"/>\n\t\t</buttonModule>\n\t</modules> \n</page>\n"
+    }
+  }, 
+  {
+    "pk": 34, 
+    "model": "filestorage.filestorage", 
+    "fields": {
+      "modified_date": "2013-05-22 08:25:27", 
+      "history_for": 35, 
+      "version": 1, 
+      "content_type": "text/xml", 
+      "created_date": "2013-05-22 08:25:27", 
+      "owner": 1, 
+      "contents": "<?xml version=\"1.0\" encoding=\"utf-8\"?><interactiveContent name=\"kgebert lesson 1\">\n\n\t<style href=\"/media/content/styles/default/content.css\"/>\n\n\t<pages>\n\t\t<page href=\"33\" name=\"Page 1\"/>\n\t</pages>\n</interactiveContent>"
+    }
+  }, 
+  {
+    "pk": 38, 
+    "model": "filestorage.filestorage", 
+    "fields": {
+      "modified_date": "2013-05-22 08:28:10", 
+      "history_for": null, 
+      "version": null, 
+      "content_type": "text/xml", 
+      "created_date": "2013-05-22 08:28:10", 
+      "owner": 1, 
+      "contents": "<?xml version='1.0' encoding='UTF-8' ?> \n\n<page>\n\t<modules>\n\t\n\t\t<textModule id=\"Title\" left=\"5\" top=\"3\" width=\"90\" height=\"7\" style=\"\">\n\t\t\t<text>&lt;div style=&quot;text-align: center;&quot;&gt;Title&lt;/div&gt;</text>\n\t\t</textModule>\t\n\t\t<buttonModule id=\"PrevPage\" left=\"0\" top=\"90\" width=\"10\" height=\"10\" style=\"\">\n\t\t\t<button type=\"prevPage\" text=\"\"/>\n\t\t</buttonModule>\n\t\t<buttonModule id=\"NextPage\" left=\"90\" top=\"90\" width=\"10\" height=\"10\" style=\"\">\n\t\t\t<button type=\"nextPage\" text=\"\"/>\n\t\t</buttonModule>\n\t</modules> \n</page>\n"
+    }
+  }, 
+  {
+    "pk": 39, 
+    "model": "filestorage.filestorage", 
+    "fields": {
+      "modified_date": "2013-05-22 08:28:10", 
+      "history_for": 40, 
+      "version": 1, 
+      "content_type": "text/xml", 
+      "created_date": "2013-05-22 08:28:10", 
+      "owner": 1, 
+      "contents": "<?xml version=\"1.0\" encoding=\"utf-8\"?><interactiveContent name=\"publication 1 lesson 1\">\n\n\t<style href=\"/media/content/styles/default/content.css\"/>\n\n\t<pages>\n\t\t<page href=\"38\" name=\"Page 1\"/>\n\t</pages>\n</interactiveContent>"
+    }
+  }, 
+  {
+    "pk": 43, 
+    "model": "filestorage.filestorage", 
+    "fields": {
+      "modified_date": "2013-05-22 08:28:31", 
+      "history_for": null, 
+      "version": null, 
+      "content_type": "text/xml", 
+      "created_date": "2013-05-22 08:28:31", 
+      "owner": 1, 
+      "contents": "<?xml version='1.0' encoding='UTF-8' ?> \n\n<page>\n\t<modules>\n\t\n\t\t<textModule id=\"Title\" left=\"5\" top=\"3\" width=\"90\" height=\"7\" style=\"\">\n\t\t\t<text>&lt;div style=&quot;text-align: center;&quot;&gt;Title&lt;/div&gt;</text>\n\t\t</textModule>\t\n\t\t<buttonModule id=\"PrevPage\" left=\"0\" top=\"90\" width=\"10\" height=\"10\" style=\"\">\n\t\t\t<button type=\"prevPage\" text=\"\"/>\n\t\t</buttonModule>\n\t\t<buttonModule id=\"NextPage\" left=\"90\" top=\"90\" width=\"10\" height=\"10\" style=\"\">\n\t\t\t<button type=\"nextPage\" text=\"\"/>\n\t\t</buttonModule>\n\t</modules> \n</page>\n"
+    }
+  }, 
+  {
+    "pk": 44, 
+    "model": "filestorage.filestorage", 
+    "fields": {
+      "modified_date": "2013-05-22 08:28:31", 
+      "history_for": 45, 
+      "version": 1, 
+      "content_type": "text/xml", 
+      "created_date": "2013-05-22 08:28:31", 
+      "owner": 1, 
+      "contents": "<?xml version=\"1.0\" encoding=\"utf-8\"?><interactiveContent name=\"publication 2 lesson 1\">\n\n\t<style href=\"/media/content/styles/default/content.css\"/>\n\n\t<pages>\n\t\t<page href=\"43\" name=\"Page 1\"/>\n\t</pages>\n</interactiveContent>"
+    }
+  }, 
+  {
+    "pk": 11, 
+    "model": "corporate.corporatepublicspace", 
+    "fields": {
+      "public_category": 9, 
+      "company": 8
+    }
+  }, 
+  {
+    "pk": 12, 
+    "model": "corporate.companyproperties", 
+    "fields": {
+      "valid_until": null, 
+      "modified_date": "2013-05-22 08:17:54", 
+      "company": 8, 
+      "max_accounts": null, 
+      "created_date": "2013-05-22 08:17:54"
+    }
+  }, 
+  {
+    "pk": 7, 
+    "model": "admin.logentry", 
+    "fields": {
+      "action_flag": 1, 
+      "action_time": "2013-05-22 08:17:32", 
+      "object_repr": "kgebert:kgebert <owner>", 
+      "object_id": "6", 
+      "change_message": "", 
+      "user": 1, 
+      "content_type": 5
+    }
+  }, 
+  {
+    "pk": 4, 
+    "model": "admin.logentry", 
+    "fields": {
+      "action_flag": 1, 
+      "action_time": "2013-05-22 08:17:19", 
+      "object_repr": "kgebert", 
+      "object_id": "3", 
+      "change_message": "", 
+      "user": 1, 
+      "content_type": 2
+    }
+  }
+]

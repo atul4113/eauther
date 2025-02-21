@@ -1,0 +1,16 @@
+{% if data %}
+	{{ data.lessons_checked }} lessons checked in space <strong>{{ data.space_title }}</strong>.
+	{{ data.problems_found }} problems found.
+	{% if data.report_url %}
+		<br />
+		<a href="{{ data.report_url }}" target="_blank">Report</a>
+		{% if data.recipients %}
+			Assigned users:
+			{% for user in data.recipients %}
+				<a href="mailto:{{ user.email }}">{{ user.username }}</a>{% if not forloop.last %},{% endif %}
+			{% endfor %}
+		{% endif %}
+	{% endif %}
+{% else %}
+	In progress...
+{% endif %}

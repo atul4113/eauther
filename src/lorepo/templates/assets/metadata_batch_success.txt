@@ -1,0 +1,12 @@
+{% autoescape off %}
+Dear {{ user }},
+<p>
+Extended metadata batch update for the space {{ company }} has been successfully completed.
+</p>
+
+<p>
+--<br/>
+{{ settings.APP_NAME }}
+</p>
+
+{% endautoescape %}

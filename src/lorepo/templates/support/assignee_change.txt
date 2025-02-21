@@ -1,0 +1,16 @@
+{% load support %}
+
+{% autoescape off %}
+
+<p>
+Ticket URL: <a href="{{ settings.BASE_URL }}/support/admin/ticket/{{ticket.id}}">{{ settings.BASE_URL }}/support/admin/ticket/{{ticket.id}}</a>
+</p>
+
+<p>
+Ticket "{{ticket.title}}" has been assigned to you.
+</p>
+
+<p>
+Action performed by: "{{changer}}"
+</p>
+{% endautoescape %}

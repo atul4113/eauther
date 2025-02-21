@@ -1,0 +1,114 @@
+{% load apptags %}{% load metadata %}<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+    <meta name="format-detection" content="telephone=no">
+	<title>mAuthor - Edit Page Metadata</title>
+	<script type="text/javascript" language="javascript" src="/media/js/jquery.min.js"></script>
+	{% include 'common/math_jax.html' %}
+	<script type="text/javascript" src="/media/icplayer/icplayer.nocache.js"></script>
+	<script type="text/javascript" src="/media/js/custom.js"></script>
+	<script type="text/javascript" src="/mauthor_media/js/localization/utils.js"></script>
+	<link href="/media/style.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript">
+		var player;
+		
+		function icOnAppLoaded(){
+			// load lesson
+			var page = parseInt(window.location.hash.substring(1), 10);
+			if (page != NaN) {
+				page = page - 1;
+			} else {
+				page = 0;
+			}
+			
+			player = icCreatePlayer('_icplayer');
+			player.load('/file/{{content.file.id}}', page);
+			
+			player.onPageLoaded(function(){
+				var currentPage = player.getPlayerServices().getPresentation().getPage(player.getPlayerServices().getCurrentPageIndex());
+				fitRightColumn();
+				$(".pages").hide();
+				$('#' + currentPage.getId()).show();
+			});
+		};
+
+        $(document).ready(function() {
+            $('.remove').click(function() {
+				$(this).parent().parent().addClass('removed'); // we move up to the div class="metadata-element"
+                $(this).parent().addClass('hidden');
+                $(this).parent().parent().find('.add-wrapper').removeClass('hidden');
+                $(this).parent().parent().find('#unused').attr('value','true');
+                $(this).parent().parent().find('.entered-value').attr('disabled','true');
+			});
+
+            $('.add').click(function() {
+				$(this).parent().parent().removeClass('removed'); // we move up to the div class="metadata-element"
+                $(this).parent().addClass('hidden');
+                $(this).parent().parent().find('.remove-wrapper').removeClass('hidden');
+                $(this).parent().parent().find('#unused').attr('value','false');
+                $(this).parent().parent().find('.entered-value').removeAttr('disabled');
+			});
+		});
+	</script>
+</head>
+<body class="localization-editor">
+<form action="/mycontent/{{content.id}}/pagemetadata" method="POST" name="page_metadata">
+	<div class="menu-bar-wrapper">
+		<div class="close-button-wrapper">
+			{% button 'Save' '$(".entered-value").removeAttr("disabled");document.forms["page_metadata"].submit();' %}
+		</div>
+		<div class="close-button-wrapper">
+			{% with next_url as next %}
+				{% with "location.href='"|add:next|add:"'" as url %}
+					{% button 'Cancel' url %}
+				{% endwith %}
+			{% endwith %}
+		</div>
+		<div class="presentation-title">
+			<strong>Page metadata Editor:</strong>
+			{{content.title}}
+		</div>
+	</div>
+	<div class="left-column-wrapper">
+		<div class="createDiv">
+			<input type="submit" class="hidden" />
+			<input type="hidden" name="next" value="{{next_url}}"/>
+			{% for page in pagemetadata %}
+			{% if page.title != 'header' and page.title != 'footer' %}
+			<div id="{{page.page_id}}" class="pages">
+				<h3>{{page.title}}</h3>
+				<input type="hidden" name="ids[{{page.id}}]"/>
+				<div class="title-tags">
+					Tags:<br/>
+					<textarea rows="4" id="id_tags" name="tags[{{page.id}}]" {% if language_bidi %}dir="rtl"{% endif %}>{{page.tags}}</textarea>
+				</div>
+				Short description: <textarea name="short_description[{{page.id}}]" {% if language_bidi %}dir="rtl"{% endif %}>{{page.short_description}}</textarea><br/>
+				Description: <textarea name="description[{{page.id}}]" {% if language_bidi %}dir="rtl"{% endif %}>{{page.description}}</textarea><br/>
+				<br/>
+				{% if page.metadata_values %}
+				<div>
+					{% for definition in page.metadata_values %}
+						{% with page.id|stringformat:"s" as page_id %}
+							{% with "["|add:page_id|add:"]" as suffix %}
+								{% render_definition_form definition language_bidi suffix %}
+							{% endwith %}
+						{% endwith %}
+					{% endfor %}
+				</div>
+				{% endif %}
+			</div>	
+			{% endif %}
+			{% endfor %}
+		</div>
+	</div>
+	<div class="right-column-wrapper">
+		<div id="_icplayer"></div>
+	</div>
+	<div class="clear"></div>
+	</form>
+</body>
+</html>
+
+

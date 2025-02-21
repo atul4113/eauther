@@ -1,0 +1,65 @@
+<html>
+	<head>
+		<script type="text/javascript" language="javascript" src="/media/js/jquery.min.js"></script>
+		<script type="text/javascript" src="/media/js/tiny_mce/tiny_mce.js"></script>
+		<script type="text/javascript">
+			tinyMCE.init({
+        		mode : "specific_textareas",
+        		editor_selector : "bug_description",
+	        	theme: 'advanced',
+	        	theme_advanced_buttons1 : 'forecolor,backcolor,|,bold,italic,underline,charmap'
+			});
+		</script>
+		<script type="text/javascript">
+			function getOpener() {
+				var parent = null;
+				
+				if (window.parent != null && window.parent.postMessage != null) {
+					parent = window.parent;
+				}
+				if (window.opener != null && window.opener.postMessage != null) {
+					parent = window.opener;
+				}
+				
+				return parent;
+			}
+			
+			$(document).ready(function () {
+				$('#bug-track-add-buttons .button_text').click(function () {
+					var title = $('#bug-track-add-title-input input').val(),
+						description = tinyMCE.activeEditor.getContent({format: 'text'});
+					
+					getOpener().postMessage("REPORT_BUG||||" + title + "||||" + description, "*");
+				});
+			})
+		</script>
+		<link href="/media/style.css" rel="stylesheet" type="text/css">
+	</head>
+	<body>
+		{% load apptags %}
+		<div id="bug-track-add-form-wrapper">
+			<div id="bug-track-add-form-container">
+				<form method="post" name="add">
+					<div id="bug-track-add-title">
+						<span>Title: {{form.title.errors}}</span>
+					</div>
+					<div id="bug-track-add-title-input">
+						<input type="text" name="title" />
+					</div>
+					<div id="bug-track-add-description">
+						<span>Description:</span>
+					</div>
+					<div id="bug-track-add-description-textarea">
+						<textarea rows="5" cols="10" name="description" class="bug_description" id="tinymce_editor_textarea">{{form.data.description}}</textarea>
+					</div>
+					<div id="bug-track-add-buttons">
+						<div class="button-left">
+							{% button 'Report a bug' 'void(0)' %}
+						</div>
+						<div class="clear"></div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</body>
+</html>

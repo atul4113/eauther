@@ -1,0 +1,14 @@
+<div class="block-outer">
+	<div class="blok-content">
+		<ul class="{{ul_class}}">
+			{% for content in contents %}
+			{% if content.content_type != 3 %}
+				{% include "public/tags/presentation.html" %}
+			{% else %}
+				{% include "public/tags/addon.html" %}
+			{% endif %}
+			{% endfor %}
+		</ul>
+	</div>
+</div>
+<div class="clear"></div>

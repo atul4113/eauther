@@ -1,0 +1,21 @@
+<ul class="tree">
+    {% for space in spaces %}
+    
+    {% if selected_space.id == space.id %}
+	    {% if forloop.last and space.parent != None %}
+	    	<li class="last selected">{{ space.title }} [{{ space.size }}]</li>
+	    {% else %}
+	    	<li class="selected">{{ space.title }} [{{ space.size }}]</li>
+	    {% endif %}
+	        {% children_tag_spaces_list space.loaded_kids selected_space %}
+    {% else %}
+     	{% if forloop.last and space.parent != None %}
+	    	<li class="last"><a href="/public/spaces/{{ space.id }}">{{ space.title }} [{{ space.size }}]</a></li>
+	    {% else %}
+	    	<li><a href="/public/spaces/{{ space.id }}">{{ space.title }} [{{ space.size }}]</a></li>
+	    {% endif %}
+
+        {% children_tag_spaces_list space.loaded_kids selected_space %}
+	{% endif %}
+    {% endfor %}
+</ul>

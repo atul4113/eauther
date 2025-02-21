@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load search %}
+
+{% block content %}
+
+<h1 class="page_header">Search results</h1>
+<div class="main clear" style="padding-top: 0"></div>
+
+<div class="search_info">
+Found {{result.number_found}} results for phrase <b>{{query}}</b><br/>
+</div>
+
+<div class="search_results">
+{% for r in result.results %}
+	<div class="search_result">
+		<div class="search_icon">
+		<a href="/embed/{{r|get_id}}">
+		{% if r|get_field:"icon_href" != "None" %}
+			<img src="{{r|get_field:'icon_href'}}"/>
+		{% else %}
+			<img src="/media/content/default_presentation.png"/>
+		{% endif %}
+		</a>
+		</div>
+		<div class="search_description">
+			<h3><a href="/embed/{{r|get_id}}">{{r|get_field:"title"}}</a></h3>
+			<a href="/embed/{{r|get_id}}">Preview</a> | 
+			<a href="{% if r|get_field:'space_type' == 1 %}/mycontent/view{% else %}/corporate/view{% endif %}/{{r|get_id}}">Details</a> | 
+			<a href="{% if r|get_field:'space_type' == 1 %}/mycontent{% else %}/corporate/list{% endif %}/{{r|get_field:'assigned_space'}}">Publication</a>
+		</div>
+		<div class="clear"></div>
+	</div>
+{% endfor %}
+</div>
+
+<div class="search_paginator">
+{% search_paginator page result.number_found query %}
+</div>
+
+{% endblock %}

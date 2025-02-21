@@ -1,0 +1,191 @@
+{% load spaces %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="format-detection" content="telephone=no">
+    {% if meta_seo %}{{ meta_seo }}{% endif %}
+    <link rel="stylesheet" href="/media/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/media/css/present.css">
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="/media/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/media/js/check-browser.js"></script>
+    <script src="/media/js/fullscreen.js"></script>
+    <script src="/media/js/embed/stretch-fullscreen.js"></script>
+    <script type="text/javascript" src="/media/js/util/screen.js"></script>
+    <script src="/media/js/mauthor-redirect.js"></script>
+    <style>
+        html {
+            margin: 0;
+            -webkit-overflow-scrolling: touch !important;
+            overflow: auto !important;
+            height: 100% !important;
+        }
+
+        body {
+            margin: 0;
+            -webkit-overflow-scrolling: touch !important;
+            overflow: auto !important;
+        }
+
+    </style>
+    {% if request.user and request.user.company.id|is_test_company %}
+        <script type='text/javascript'>
+            window.__wtw_lucky_site_id = 76522;
+
+            (function () {
+                var wa = document.createElement ('script');
+                wa.type = 'text/javascript';
+                wa.async = true;
+                wa.src = 'https://d10lpsik1i8c69.cloudfront.net/w.js';
+                var s = document.getElementsByTagName ('script')[0];
+                s.parentNode.insertBefore (wa, s);
+            }) ();
+        </script>
+    {% endif %}
+</head>
+<body>
+<div id="content-view">
+    <nav role="navigation">
+        <div class="header">
+            <a href="/" title="Home" class="no-padding"><img id="logo" src="/media/images/main-page/ma_main_mauthor_logo.svg"/></a>
+        </div>
+        <div class="menu">
+            <button class="btn btn-primary navbar-btn" id="display-fit-to-window-btn" data-text="Fit to window">Fit to window
+            </button>
+            <button class="btn btn-primary navbar-btn" id="display-full-screen-btn" data-text="Full screen">Full screen</button>
+        </div>
+    </nav>
+
+    <div id="content">
+        <iframe id="content-iframe" allowfullscreen="allowfullscreen"></iframe>
+    </div>
+</div>
+
+<script>
+
+    $ (function () {
+        var $iframe = $ ('#content-iframe'),
+          viewPort = document.querySelector ("meta[name=viewport]"),
+          iframeWindow = $iframe[0].contentWindow || $iframe[0].contentDocument;
+
+        var userAgent = window.navigator.userAgent;
+        var screenSizes = window.mAuthor.ScreenUtils.getScreenSizesDependingOnOrientation (userAgent);
+
+        function getHash() {
+            return window.location.hash.substring (1);
+        }
+
+        function onMessageReceived (event) {
+            if (event.data.indexOf ('RESIZE:') === 0 && !window.isStretchOrFullScreenMode) {
+                handleResize (event.data.substring ('RESIZE:'.length));
+                var height = parseInt ($iframe.css ('height'), 10);
+                postIFrameMessage (height, true);
+            } else if (event.data.indexOf ('SCROLLTOP:') === 0) {
+                handleScrollTop (event.data.substring ('SCROLLTOP:'.length));
+            } else if (event.data.indexOf ('PAGE_LOADED') === 0) {
+                document.body.scrollTop = 0;
+                var height = parseInt ($iframe.css ('height'), 10);
+                postIFrameMessage (height, true);
+            }
+        }
+
+        function handleResize (data) {
+            var dimensions = data.split (';');
+            var width = dimensions[0];
+            var height = dimensions[1];
+
+            $iframe.css ({
+                'width': width + 'px',
+                'height': height + 'px'
+            });
+
+
+            viewPort.setAttribute ('content', 'width=' + width);
+        }
+
+        function handleScrollTop (data) {
+            var top = parseInt (data),
+              frameTop = $iframe.offset ().top,
+              position = top + frameTop;
+
+            window.scrollTo (0, position);
+        }
+
+        function postIFrameMessage (height, isFullScreen) {
+            var offset, frameOffset, windowInnerHeight;
+            if (window.isStretchOrFullScreenMode) {
+                if (isFullScreen) {
+                    offset = $ ("#content-view").scrollTop () / window.fitToWindowScale;
+                } else {
+                    offset = window.pageYOffset / window.fitToWindowScale || document.documentElement.scrollTop / window.fitToWindowScale;
+                }
+                frameOffset = 70 / window.fitToWindowScale;
+                windowInnerHeight = window.innerHeight / window.fitToWindowScale + (70 / window.fitToWindowScale)
+            } else {
+                offset = window.pageYOffset || document.documentElement.scrollTop;
+                frameOffset = 70;
+                windowInnerHeight = window.innerHeight
+            }
+
+            var postObject = {
+                offsetTop: offset,
+                height: height,
+                frameOffset: frameOffset,
+                notScaledOffset: 70,
+                windowInnerHeight: windowInnerHeight || 0
+            };
+
+            iframeWindow.postMessage ('I_FRAME_SCROLL:' + offset, '*');
+            iframeWindow.postMessage ('I_FRAME_SIZES:' + JSON.stringify (postObject), '*');
+        }
+
+        function postWindowWidth () {
+            var type = "WINDOW_WIDTH:";
+            var screenSizes = window.mAuthor.ScreenUtils.getScreenSizesDependingOnOrientation (userAgent);
+
+            var message = type + JSON.stringify (screenSizes);
+
+            iframeWindow.postMessage (message, '*');
+        }
+
+        $iframe.width (screenSizes.width);
+        $iframe.height (screenSizes.height);
+        $iframe.attr ('src', '/embed/iframe/{{ content.id }}#' + getHash ());
+
+        window.addEventListener("resize", function () {
+            postWindowWidth ();
+        });
+
+        window.addEventListener("orientationchange", function () {
+            postWindowWidth ();
+        }, false);
+
+        window.FullScreen.onChanged (function (isFullScreen) {
+            if (!isFullScreen) {
+                var height = parseInt ($iframe.css ('height'), 10);
+                postIFrameMessage (height);
+            }
+        });
+
+        window.addEventListener ('scroll', function (event) {
+            var height = parseInt ($iframe.css ('height'), 10);
+            postIFrameMessage (height);
+        });
+
+        window.addEventListener('message', onMessageReceived, false);
+
+        $("#content-view").on('scroll', function () {
+            var height = parseInt($iframe.css('height'), 10);
+            postIFrameMessage(height, true);
+        });
+
+        $("#display-fit-to-window-btn, #display-full-screen-btn").on("click", function () {
+            var height = parseInt($iframe.css('height'), 10);
+            postIFrameMessage(height, true);
+        });
+    });
+</script>
+</body>

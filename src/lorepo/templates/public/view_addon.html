@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+{% load apptags %}
+{% load public %}
+{% load corporate %}
+{% load markdown_deux_tags %}
+{% block head %}
+<script type="text/javascript" language="javascript" src="/media/icplayer/icplayer.nocache.js"></script>
+
+{% if addon.associated_content %}
+<script type="text/javascript" language="javascript">
+		var player;
+  		function icOnAppLoaded(){
+     	// Load assessment
+	    	player = icCreatePlayer('_icplayer');
+    		{% if is_public and addon.associated_content.public_version %}
+    			player.load('/file/{{addon.associated_content.public_version.id}}');
+    		{% else %}
+    			player.load('/file/{{addon.associated_content.file.id}}');
+    		{% endif %}
+  		}
+</script>
+{% endif %}
+	{% include 'common/math_jax.html' %}
+{% endblock %}
+
+{% block content %}
+
+<h1 class="page_header" >
+{% space_path spaces 3 %}
+</h1>
+<div class="main clear" style="padding-top: 0px"></div>
+
+<div class="title-description">
+<div class="title">{{addon.title}}</div>
+<div class="clear"></div>
+</div>
+
+<div class="clear" style="padding-top: 0px"></div>
+<div class="myContent">
+
+	
+	<div class="content infoPreview" >
+	{% for cs in addon.contentspace_set.all %}
+		{% if cs.space.is_corporate %}
+			<span><b>Publisher: </b><a href="/public/?publisher={{cs.space.top_level.id}}&type={{addon.content_type}}">{{ cs.space.top_level }}</a></span>
+			<span><b>Author: </b> <a href="/public/?author={{addon.author.username}}&type={{addon.content_type}}">{{addon.author.username}}</a></span>
+		{% else %}
+		{% if cs.space.is_private %}
+			<span><b>Author:</b> <a href="/public/?author={{addon.author.username}}&type={{addon.content_type}}">{{addon.author.username}}</a></span>
+		{% endif %}
+		{% endif %}
+	{% endfor %}
+	</div>
+	<div class="clear"></div>
+	{% if addon.associated_content %}
+		<h3>Example usage in public lesson:</h3>
+		<div class="associated-presentation"><span>Title:</span> <a href="/public/view/{{addon.associated_content.id}}">{{addon.associated_content}}</a></div>
+		<div id="_icplayer"></div>
+	{% endif %}
+	<form name="form_copy_{{addon.associated_content.id}}" method="GET" style="padding:5px 0px">
+		<select name="menu_copy_{{addon.associated_content.id}}" 
+			onChange="top.location.href = this.form.menu_copy_{{addon.associated_content.id}}.options[this.form.menu_copy_{{addon.associated_content.id}}.selectedIndex].value;return false;">
+			<option value="javascript:void(0)">Copy to location...</option>
+			<option value="/mycontent/copy/{{addon.associated_content.id}}/{{private_space.id}}">
+				My Lessons
+			</option>
+			{% for division in copy_spaces %}
+				{% copy_spaces division request content.id %}
+			{% endfor %}
+		</select>
+	</form>
+	
+	<div class="description addon"><span>Description:</span>{{ addon.description|markdown }} </div>
+	<div class="clear"></div>
+	{% if related %}
+		<div class="ColCenter">
+		<a href="/public/?q={% for tag in addon.tags|split:',' %}{{tag}}{% endfor %}&type={{addon.content_type}}" class="thumbnails">Related addons:</a>
+		<div class="more-link" style="float:right;"><a href="/public/?q={% for tag in addon.tags|split:',' %}{{tag}}{% endfor %}&type={{addon.content_type}}">more</a></div>
+		<div class="main clear" style="padding-top: 0px"></div>
+			{% content_thumbnails request related "inline-search" %}
+		</div>
+	{% endif %}
+	
+	{% if from_the_same_publisher %}
+		<div class="ColCenter">
+		<a href="/public/?publisher={% for cs in addon.contentspace_set.all %}{% if cs.space.is_corporate %}{{cs.space.top_level.id}}{% endif %}{% endfor %}&type={{addon.content_type}}" class="thumbnails">From the same publisher:</a>
+		<div class="more-link" style="float:right;"><a href="/public/?publisher={% for cs in addon.contentspace_set.all %}{% if cs.space.is_corporate %}{{cs.space.top_level.id}}{% endif %}{% endfor %}&type={{addon.content_type}}">more</a></div>
+		<div class="main clear" style="padding-top: 0px"></div>
+			{% content_thumbnails request from_the_same_publisher "inline-search" %}
+		</div>
+	{% endif %}
+	
+	{% if from_the_same_author %}
+		<div class="ColCenter">
+		<div class="more-link" style="float:right;"><a href="/public/?author={{addon.author.username}}&type={{addon.content_type}}">more</a></div>
+		<a href="/public/?author={{addon.author.username}}&type={{addon.content_type}}" class="thumbnails">From the same author:</a>
+		<div class="main clear" style="padding-top: 0px"></div>
+			{% content_thumbnails request from_the_same_author "inline-search" %}
+		</div>
+	{% endif %}
+</div>
+{% endblock %}

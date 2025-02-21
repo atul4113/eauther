@@ -1,0 +1,40 @@
+<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp my-project">
+    <thead>
+    <tr>
+        <th class="mdl-data-table__cell--non-numeric">
+            {{ translations | getLabel:"plain.corporate.panel._lessons_list.project" }}
+        </th>
+
+        <th>
+            {{ translations | getLabel:"plain.corporate.panel._lessons_list.publications" }}
+        </th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let project of projects">
+        <td class="mdl-data-table__cell--non-numeric">{{ project.title }}</td>
+        <td>
+            <button mat-button (click)="getPublications(project)"
+                    [matMenuTriggerFor]="publications"
+                    class="header__main-menu-item">
+                {{ translations | getLabel: "plain.corporate.panel._projects_list.go_to" }}
+                <i class="material-icons">arrow_drop_down</i>
+            </button>
+            <mat-menu #publications="matMenu"
+                      [overlapTrigger]="false">
+                <a *ngIf="!project.publications">
+                    <app-loading></app-loading>
+                </a>
+                <ng-container *ngIf="project.publications">
+                    <a mat-menu-item
+                       *ngFor="let publication of project.publications"
+                       [routerLink]="'/corporate/list/' + publication.id">
+                        {{ publication.title }}
+                    </a>
+                </ng-container>
+            </mat-menu>
+        </td>
+    </tr>
+    </tbody>
+</table>

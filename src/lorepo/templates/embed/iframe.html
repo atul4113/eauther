@@ -1,0 +1,95 @@
+{% extends 'embed/template.html' %}
+
+{% block styles %}
+    <style>
+        body {
+            overflow: hidden;
+            background: #FFFFFF;
+        }
+        #_icplayer {
+            display: table;
+        }
+    </style>
+{% endblock %}
+
+{%block player %}
+    <script type="text/javascript">
+        var player;
+        var semiResponsiveLayoutChooser;
+
+        function chooseLayout(layoutChooser, screenConfiguration) {
+            var isMobile = screenConfiguration.orientation !== window.mAuthor.ScreenUtils.ORIENTATION_TYPES.NOT_MOBILE;
+            var isVertical = screenConfiguration.orientation === window.mAuthor.ScreenUtils.ORIENTATION_TYPES.PORTRAIT;
+            var isHorizontal = screenConfiguration.orientation === window.mAuthor.ScreenUtils.ORIENTATION_TYPES.LANDSCAPE;
+
+            return layoutChooser.chooseLayout(screenConfiguration.width, isMobile, isVertical, isHorizontal);
+        }
+
+        function icOnAppLoaded(){
+            function iframeResizeRequest() {
+                var $icPlayer = $('#_icplayer');
+                var viewPort = document.querySelector("meta[name=viewport]");
+
+                var width = parseInt($icPlayer.css('width'), 10);
+                var height = parseInt($icPlayer.css('height'), 10);
+
+                viewPort.setAttribute('content', 'width=' + width);
+
+                postResizeMessage(width, height);
+            }
+
+            var page = getPageNumberWithCommons();
+
+            player = icCreatePlayer('_icplayer');
+
+            if (page.isCommons) {
+                player.loadCommonPage('/file/{% if version %}{{version}}{% else %}{{content.file.id}}{% endif %}', page.index);
+            } else {
+                player.load('/file/{% if version %}{{version}}{% else %}{{content.file.id}}{% endif %}', page.index);
+            }
+
+            var firstPageLoaded = false;
+            player.onPageLoaded(function() {
+                if (!firstPageLoaded) {
+                    semiResponsiveLayoutChooser = new window.semiResponsive.LayoutChooser(player.getSemiResponsiveLayouts());
+                    var screenConfiguration = window.mAuthor.ScreenUtils.getScreenSizesDependingOnOrientation(navigator.userAgent);
+                    var layoutID = chooseLayout(semiResponsiveLayoutChooser, screenConfiguration);
+                    var changed = player.changeLayout(layoutID);
+
+                    firstPageLoaded = true;
+                }
+                postPageLoadedMessage();
+                iframeResizeRequest();
+            });
+
+            player.onOutstretchHeight(function () {
+                iframeResizeRequest();
+            });
+
+            player.onPageScrollTo(function (top) {
+                var parent = getOpener();
+                if (parent) {
+                    parent.postMessage('SCROLLTOP:' + top, "*");
+                }
+            });
+
+            function receiveMessage(event) {
+                var WINDOW_WIDTH_EVENT = "WINDOW_WIDTH:";
+
+                if (!event.data) {
+                    return;
+                }
+
+                if (event.data.indexOf(WINDOW_WIDTH_EVENT) === 0) {
+                    if (semiResponsiveLayoutChooser) {
+                        var screenConfiguration = JSON.parse(event.data.substring(WINDOW_WIDTH_EVENT.length, event.data.length));
+                        var layoutID = chooseLayout(semiResponsiveLayoutChooser, screenConfiguration);
+                        var changed = player.changeLayout(layoutID);
+                    }
+                }
+            }
+
+            window.addEventListener("message", receiveMessage, false);
+        }
+    </script>
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load apptags %}
+
+{% block content %}
+<h1 class="page_header">Player versions</h1>
+<div class="main clear" style="padding-top: 0"></div>
+
+<p>
+{% button 'Download Current Version' 'parent.location="/media/icplayer.zip"' %}
+</p>
+
+<h3>All releases</h3>
+<table class="player-versions">
+	<tr>
+		<th>Version</th>
+		<th>Release date</th>
+		<th>Actions</th>
+	</tr>
+</table>
+
+<script>
+$(document).ready(function() {
+	var packageUrl = "https://player-distribution.storage.googleapis.com/%VERSION%/icplayer.zip";
+	var changelogUrl = "https://player-distribution.storage.googleapis.com/%VERSION%/changelog.txt";
+
+	$.get('/media/player/releases.xml', function(data) {
+		var releases = data.getElementsByTagName("release");
+		for (var i = 0; i < releases.length; i++) {
+			var row = $("<tr>");
+			var version = $("<td>");
+			version.text(releases[i].getAttribute("version"));
+
+			var date = $("<td>");
+			date.text(releases[i].getAttribute("date"));
+
+			var actions = $("<td>");
+			var downloadZip = $("<a>");
+			downloadZip.attr("href", packageUrl.replace('%VERSION%', releases[i].getAttribute("version")));
+			downloadZip.text("Download player");
+			var changelog = $("<a>");
+			changelog.attr("href", changelogUrl.replace('%VERSION%', releases[i].getAttribute("version")));
+			changelog.text("Changelog");
+			actions.append(downloadZip).append(" | ").append(changelog);
+
+			row.append(version).append(date).append(actions);
+			$('.player-versions').append(row);
+		}
+	}, "xml");
+});
+</script>
+
+{% endblock %}

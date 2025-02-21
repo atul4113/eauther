@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+
+<page>
+	<modules> 
+	
+		<textModule id="Title" left="5" top="3" width="90" height="7" style="">
+			<text>&lt;div style=&quot;text-align: center;&quot;&gt;Title&lt;/div&gt;</text>
+		</textModule>	
+		<buttonModule id="PrevPage" left="0" top="90" width="10" height="10" style="">
+			<button type="prevPage" text=""/>
+		</buttonModule>
+		<buttonModule id="NextPage" left="90" top="90" width="10" height="10" style="">
+			<button type="nextPage" text=""/>
+		</buttonModule>
+    </modules> 
+</page>

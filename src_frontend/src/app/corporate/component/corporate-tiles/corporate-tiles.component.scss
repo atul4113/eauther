@@ -1,0 +1,91 @@
+@import "../../../common/templates/mdl-colors";
+
+app-corporate-tiles {
+    display: flex;
+    flex-direction: row;
+    padding-left: 12px;
+    padding-right: 12px;
+    margin-top: 12px;
+    overflow-x: hidden;
+
+    .card {
+        flex: 1;
+        height: auto;
+        margin: 10px;
+        background-color: $blue-500;
+        color: white;
+        min-height: 180px;
+        padding: 25px 20px 0 10px;
+
+        .card-title {
+            text-align: center;
+            margin: 0;
+            font-size: 21px;
+        }
+
+        :last-child:not(.mat-card-footer) {
+            margin-bottom: 10px;
+        }
+
+        .card-content, .icon-content {
+            text-align: center;
+
+            .card-content-button {
+                top: 8px;
+                width: 75px;
+                height: 75px;
+                padding: 25px 0 0 0;
+                background-color: white;
+
+                .material-icons {
+                    font-size: 35px;
+                    padding: 2px 20px;
+                    color: $blue-500;
+                }
+            }
+
+            .lesson-title {
+                margin-top: 5px;
+                font-size: 15px;
+                font-weight: bold;
+            }
+        }
+
+        .icon-content {
+            margin: 10px;
+        }
+
+        .card-content {
+            margin-bottom: 22px;
+            margin-top: 22px;
+            font-size: 13px;
+        }
+
+        a {
+            width: 32px;
+            height: 32px;
+
+            .mat-button-wrapper {
+                padding: 0;
+
+                i {
+                    width: 30px;
+                    height: 30px;
+                    margin-right: 5px;
+                    position: relative;
+                    top: -5px;
+                }
+            }
+
+            .mat-button-ripple {
+                width: 32px;
+                height: 32px;
+            }
+
+            .mat-button-focus-overlay {
+                width: 32px;
+                height: 32px;
+            }
+        }
+    }
+}

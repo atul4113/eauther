@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load apptags %}
+{% block content %}
+<div>
+<div class="alert info" style="display:block">
+	This lesson is currently being edited by {{username}}. If you update assets now, {{username}} will lose all changes.
+	Are you sure you want to continue?
+</div>
+<div class="button-left">
+	{% with request.get_full_path|stringformat:"s" as s %}
+		{% with "parent.location='"|add:s|add:"&confirmed=True'" as url %}
+			{% button 'Yes' url %}
+		{% endwith %}
+	{% endwith %}
+</div>
+<div class="button-right">
+	{% with back|stringformat:"s" as s %}
+		{% with "parent.location='"|add:s|add:"'" as url %}
+			{% button 'No' url %}
+		{% endwith %}
+	{% endwith %}
+</div>
+</div>
+{% endblock %}

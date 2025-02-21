@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% load apptags %}
+{% load metadata %}
+
+{% block content %}
+
+<h1 class="page_header">Assign extended metadata</h1>
+<div class="main clear" style="padding-top: 0"></div>
+
+<div>
+
+<form method="post" action="/metadata/save/{{content.id}}" name="extended_metadata">
+<input type="hidden" name="next" value="{{next_url}}"/>
+{% for definition in definitions %}
+	{% render_definition_form definition language_bidi %}
+{% endfor %}
+
+<br/>
+{% button 'Save' 'document.forms["extended_metadata"].submit()' %}
+<input type="submit" />
+
+</form>
+
+</div>
+
+<script>
+$(document).ready(function() {
+	$('.remove').click(function() {
+		$(this).parent().parent().remove();
+	});
+});
+</script>
+
+{% endblock %}

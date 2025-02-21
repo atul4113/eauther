@@ -1,0 +1,15 @@
+<app-lesson-pages *ngFor="let lesson of lessons"
+                  [lesson]="lesson"
+                  [pages]="lesson.content.pages"
+                  [commons]="lesson.content.commons">
+</app-lesson-pages>
+
+<div>
+    <button class="merge-options-button" mat-raised-button color="accent" (click)="selectMerge()">
+        {{ translations | getLabel: "plain.my_lessons.panel.lesson_list.select"}}
+    </button>
+
+    <button class="merge-options-button" mat-raised-button color="primary" (click)="cancelMerge()">
+        {{ translations | getLabel: "plain.my_lessons.panel.lesson_list.cancel"}}
+    </button>
+</div>

@@ -1,0 +1,22 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+	
+	</ui:style>
+	<g:HTMLPanel>
+		<div class="boxName">
+			<a class="expandBtn expandBtn-assets expanded"></a>
+			Assets
+		</div>
+		<div class="boxContents boxContents-assets">
+			<div id="assetsList" class="boxList">
+				<div class="listItem jpg">image1.jpg</div>
+				<div class="listItem">music.mp3</div>
+				<div class="listItem">video1.mp4</div>
+				<div class="listItem">video1.ogv</div>
+				<div class="listItem">video1.webm</div>
+			</div>
+		</div>
+	</g:HTMLPanel>
+</ui:UiBinder> 

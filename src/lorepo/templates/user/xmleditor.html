@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% load apptags %}
+
+{% block content %}
+
+<div class="createDiv">
+<h2>Edit File Storage</h2>
+
+<form method="post" action="/user/editxml">
+	{% csrf_token %}
+	<p>
+		<label for="id_desc">Content</label><br/>
+		<input type="hidden" name="id" value="{{fs.id}}"/>
+		<textarea id="id_desc" cols="83" rows="20" name="contents">{{fs.contents}}</textarea>
+	</p>
+	{% button 'Save' 'parentNode.submit()' %}
+</form>
+<div class="content clear"></div>
+</div>
+
+{% endblock %}

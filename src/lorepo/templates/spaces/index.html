@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load apptags %}
+
+{% block content %}
+<h1 class="page_header">Edit categories</h1>
+<div class="main clear" style="padding-top: 0"></div>
+<div id="toolbar">
+		<form method="post" action="add{% if space_id %}/{{space_id}}{% endif %}" name="add">
+			<input type="hidden" name="next" value="{{ request.path }}" />
+			<table style="margin:0 10px">
+				<tr>
+					<td>Category name:</td>
+					<td><input type="text" name="title" /></td>
+					<td>{% button 'Add category' 'document.forms["add"].submit()' %}</td>
+					<td><input type="submit" /></td>
+				</tr>
+			</table>
+		</form>
+</div>
+<div class="clear"></div>
+	{% for space in spaces %}
+		<ul class="categories">
+			{% if space.parent != None %} 
+			
+				<li class="title">{{space.title}} [{{space.size}}]</li>
+				<li class="actions">
+					<a href="{{space.id}}/rename_space">{% trans "Rename" %}</a> |
+					<a href="{{space.id}}/delete_space">{% trans "Delete" %}</a>
+				</li>
+			{% endif %}
+		</ul>
+	{% endfor %}
+
+<div class="tableFooter">
+</div>
+
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load apptags %}
+
+{% block content %}
+
+<h1 class="page_header">Text direction</h1>
+<div class="main clear" style="padding-top: 0"></div>
+
+<div class="company_details">
+Change this setting to alter the direction of text in the metadata editable fields. This setting works for lesson metadata, page metadata and custom metadata.
+For the "Left to Right" setting to work you need to make sure that you have the proper keyboard configuration set up in your operating system.
+
+<form method="post" action="/company/edit_locale/{{company.id}}" name="create">
+	{% csrf_token %}
+	<table>
+        <tr><th>Metadata text direction:</th><td>
+        <div class="locale_select">
+        <select name="language">
+            {% for lang in languages %}
+              <option value="{{ lang.0 }}" {% if lang.0 == properties.language_code%}selected{% endif %}>{{ lang.1 }}</option>
+            {% endfor %}
+        </select>
+        </div>
+        </td></tr>
+        <tr><th></th><td><br /></td></tr>
+      	<tr><th></th><td>{% button 'Save' 'document.forms["create"].submit()' %}</td></tr>
+  	</table>
+  	<input type="submit" />
+</form>
+</div>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load apptags %}
+{% load markdown_deux_tags %}
+{% block head %}
+
+<script src="/media/js/messages.js" type="text/javascript"></script>
+
+{% endblock head %}
+
+{% block content %}
+
+<h1 class="page_header">Remove addon descriptors</h1>
+<div class="main clear" style="padding-top: 0"></div>
+<div id="messages"></div>
+{% include "common/messages/display_messages.html" %}
+
+<form method="post" action="/lessons_parsers/remove_descriptors/{{ space_id }}">
+	{% csrf_token %}
+    <table>
+        {{ form }}
+        <tr>
+            <td></td>
+            <td style="padding-top: 20px">
+                <button type="submit">Process</button>
+            </td>
+        </tr>
+  	</table>
+</form>
+
+{% endblock %}

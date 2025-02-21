@@ -1,0 +1,2 @@
+"c:\Program Files (x86)\Google\google_appengine\dev_appserver.py" --blobstore_path=src\.gaedata_dev\blobstore --datastore_path=src\.gaedata_dev\datastore --smtp_host=localhost --smtp_port=1025 --host=0.0.0.0 --port=8080 src/app.yaml src/backup.yaml src/download.yaml src/localization.yaml
+start "http://localhost:8080"

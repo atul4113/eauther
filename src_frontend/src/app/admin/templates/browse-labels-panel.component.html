@@ -1,0 +1,190 @@
+<div id="admin-panel">
+    <div class="page-title-bar flex-row with-dots">
+
+        <a class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored back-button" [routerLink]="'/panel/translations/'">
+           <i class="material-icons">expand_more</i>
+        </a>
+
+        <div class="page-title-bar__header">
+            <h1> {{ translations | getLabel:"plain.translations.panel.browse_labels" }} </h1>
+        </div>
+    </div>
+
+
+    <div putFooterBottom class="page-content">
+        <div *ngIf="!isInitialized" class="app-loading-wrapper">
+            <app-loading></app-loading>
+        </div>
+
+        <div *ngIf="isInitialized" mdl>
+            <div class="mdl-grid">
+
+                <div class="mdl-cell mdl-cell--10-col-phone mdl-cell--10-col-tablet mdl-cell--10-col-desktop mdl-cell--1-offset-desktop ">
+
+                    <h4> {{ translations | getLabel: "plain.browse_labels.panel.browse_and_edit_labels" }} </h4>
+                    <div>
+                        <div class="mdl-cell mdl-cell--12-col-phone mdl-cell--12-col-tablet mdl-cell--12-col-desktop">
+
+                            <div *ngIf="selectedLanguage" class="input-group">
+                                <a id="search-by-menu" class="mdl-button mdl-js-button language-dropdown-list">
+                                    <span> {{ selectedLanguage.key }} </span>
+                                    <i class="material-icons">expand_more</i>
+                                </a>
+                                <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect "  for="search-by-menu">
+                                    <a *ngFor="let lang of languages;" (click)="selectedLanguage = lang ;" class="mdl-menu__item language-dropdown-list" >
+                                        {{ lang.key }}
+                                    </a>
+                                </ul>
+
+                                <div class="mdl-textfield mdl-js-textfield">
+                                    <input (keydown)="filterLabels($event)"
+                                           [(ngModel)]="labelFilter"
+                                           class="mdl-textfield__input"
+                                           type="text"
+                                           id="label-filter-input">
+                                    <label class="mdl-textfield__label" for="label-filter-input"> {{ translations | getLabel: "plain.browse_labels.panel.key_or_value" }} </label>
+                                </div>
+
+                                <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+                                        (click)="filterLabels(undefined)">
+                                  {{ translations | getLabel: "plain.browse_labels.panel.search" }}
+                                </button>
+
+                                <button class="mdl-button mdl-js-button mdl-button--raised" (click)="clearLabelFilters()">
+                                  {{ translations | getLabel: "plain.browse_labels.panel.clear_filters" }}
+                                </button>
+                            </div>
+
+                            <table mdl class="mdl-data-table mdl-js-data-table mdl-shadow--2dp mdl-cell mdl-cell--12-col data-table-info">
+                                <thead>
+                                <tr class="data-table-info-header">
+                                    <th (click)="sortLabels('lang')" class="mdl-data-table__cell--non-numeric sortable language-header">
+                                        <span class="content-vertical-align-middle">
+                                            {{ translations | getLabel: "plain.browse_labels.panel.language" }}
+                                        </span>
+                                        <i class="material-icons content-vertical-align-middle" [innerHtml]="getSortIcon('lang')"></i>
+                                    </th>
+
+                                    <th (click)="sortLabels('key')" class="mdl-data-table__cell--non-numeric sortable">
+                                        <span class="content-vertical-align-middle">
+                                            {{ translations | getLabel: "plain.browse_labels.panel.key_name" }}
+                                        </span>
+                                        <i class="material-icons content-vertical-align-middle" [innerHtml]="getSortIcon('key')"></i>
+                                    </th>
+
+                                    <th (click)="sortLabels('value')" class="mdl-data-table__cell--non-numeric sortable">
+                                        <span class="content-vertical-align-middle">
+                                            {{ translations | getLabel: "plain.browse_labels.panel.translation_value" }}
+                                        </span>
+                                        <i class="material-icons content-vertical-align-middle" [innerHtml]="getSortIcon('value')"></i>
+                                    </th>
+
+                                    <th class="mdl-data-table__cell--non-numeric clickable" (click)="exampleFormatAngular = !exampleFormatAngular">
+                                        <span *ngIf="exampleFormatAngular" class="content-vertical-align-middle">
+                                            {{ translations | getLabel: "plain.browse_labels.panel.angular_syntax" }}
+                                        </span>
+                                        <span *ngIf="!exampleFormatAngular" class="content-vertical-align-middle">
+                                            {{ translations | getLabel: "plain.browse_labels.panel.typescript_syntax" }}
+                                        </span>
+                                    </th>
+
+                                    <th class="mdl-data-table__cell--non-numeric middle-value-cell">
+                                        <span class="content-vertical-align-middle">
+                                         {{ translations | getLabel: "plain.languages.panel.action" }}
+                                        </span>
+                                    </th>
+
+                                </tr>
+                                </thead>
+
+                                <tbody *ngIf="labelTableInitialized">
+                                <tr *ngFor="let label of (filteredLabels || labels) | paginate: paginatedLabelsPage:pageSize; let i = index; let last = last" [mdlup]="last" [mdlup-always]="true">
+
+                                    <td class="mdl-data-table__cell--non-numeric">
+                                        {{ label.language }}
+                                    </td>
+
+                                    <td class="mdl-data-table__cell--non-numeric">
+                                        <div class="content-vertical-align-middle">
+                                            {{ label.key }}
+                                        </div>
+                                    </td>
+
+                                    <td class="mdl-data-table__cell--non-numeric">
+
+                                        <textarea [(ngModel)]="label.value"
+                                           *ngIf="label._ui.isEditing"
+                                           (blur)="clickOutsideTextarea(label)"
+                                           type="text"
+                                           class="inline-edit"
+                                           autocomplete="off"
+                                           minlength="1"
+                                           rows="5"
+                                           auto-focus-after-init
+                                        ></textarea>
+
+                                        <span class="inline-edit-label"
+                                              *ngIf="!label._ui.isEditing"
+                                              (click)="clickInsideTextarea(label)" >
+                                            {{ label.value }}
+                                        </span>
+
+                                    </td>
+
+                                    <td class="mdl-data-table__cell--non-numeric">
+                                        <span [innerHTML]="getTranslationExample(label.key)"></span>
+                                    </td>
+
+                                    <td class="mdl-data-table__cell--non-numeric middle-value-cell">
+                                        <a class="mdl-button mdl-js-button" (click)="deleteLabel(label)">
+                                            {{ translations | getLabel: "plain.languages.panel.delete" }}
+                                        </a>
+                                    </td>
+
+                                </tr>
+                                </tbody>
+
+                                <tbody *ngIf="!labelTableInitialized">
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td>
+                                        <div mdl class="app-loading-wrapper">
+                                            <app-loading></app-loading>
+                                        </div>
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                </tbody>
+
+                            </table>
+
+                            <span class="paginator-page-size-group">Labels per page:
+                                <a id="paginator-page-size-change" class="mdl-button mdl-js-button ">
+                                    <span> {{ pageSize }} </span>
+                                    <i class="material-icons">expand_more</i>
+                                </a>
+                                <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"  for="paginator-page-size-change">
+                                    <a *ngFor="let size of pageSizes" (click)="pageSize = size ;" class="mdl-menu__item" >
+                                        {{ size }}
+                                    </a>
+                                </ul>
+                            </span>
+
+
+                            <paginator *ngIf="labels" [list]="filteredLabels || labels" [buttonsCount]="5" [pageSize]="pageSize" (pageChange)="paginatedLabelsPage = $event"></paginator>
+
+                            <add-label
+                                    [languages]="realLanguages"
+                                    (addNewLabels)="addNewLabels($event)"
+                            ></add-label>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,25 @@
+<div class="header-container">
+    <h4 class="categories-title">{{ translations | getLabel: "plain.my_lessons.panel.categories_list.categories"}}</h4>
+    <a
+        id="edit-category"
+        class="icon-link"
+        [matTooltip]=" translations | getLabel:'plain.corporate.panel._lessons_list.edit' "
+        [matTooltipPosition]="'below'"
+        [href]="'/spaces/' + mainCategoryId"
+        mat-icon-button>
+        <i class="material-icons">mode_edit</i>
+    </a>
+</div>
+<mat-list *ngIf="categories">
+    <mat-list-item *ngIf="mainCategory"  mat-list-item>
+        <a (click)="showLessons()" [routerLink]="'/mycontent/' + mainCategory.id" [ngClass]="{'is-bold': (mainCategory.id == currentSpaceId || !currentSpaceId) && !shouldShowAddons && !shouldShowTrash}" class="category-link">
+            {{ translations | getLabel: "plain.my_lessons.panel.my_lessons.lessons"}}
+        </a>
+    </mat-list-item>
+    <mat-list-item class="other-categories" *ngFor="let category of categoriesToDisplay" mat-list-item>
+        <a (click)="showLessons()" [routerLink]="'/mycontent/' + category.id" [ngClass]="{'is-bold': category.id == currentSpaceId && !shouldShowAddons && !shouldShowTrash}"
+           class="category-link" >
+            {{ category.title }}
+        </a>
+    </mat-list-item>
+</mat-list>

@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% load apptags %}
+{% load wiki %}
+{% load cache %}
+
+{% block head %}
+    <link href="/media/languages/languages.min.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="/media/js/jquery-ui-1.8.19.custom.js"></script>
+<script type="text/javascript" src="/media/js/lib/jquery-ui-nestedSortable.js"></script>
+<script type="text/javascript" src="/media/js/table-of-contents.js"></script>
+<script type="text/javascript" src="/media/js/toc-disable-links.js"></script>
+<script type="text/javascript" src="/media/js/equal-height.js"></script>
+<script>
+	$(document).ready(function() {
+		equalHeight($(".sortable"));
+	});
+</script>
+{% endblock %}
+
+{% block content %}
+<h1 class="page_header">Wiki pages - edit Table of contents</h1>
+<div class="main clear" style="padding-top: 0"></div>
+
+<div id="edit-toc-instructions">
+	Contents from left column will be shown as Table of contents in the main Documentation page. 
+	Contents which you don't want to be shown, insert on the right column.
+	Simply grab content and drop it where you need it.
+	You can also make a hierarchy in the Table of contents, 
+	just drop selected content under ( and a little on the right ) content which you want to become a parent.
+</div>
+
+	<div id="wiki-two-box-wrapper">
+		<div id="wiki-pages-list-wrapper-sortable" class="wiki-list-wrapper">
+			<div id="table-of-contents-header-sortable">
+				Table of contents
+			</div>
+
+			<div class="clear"></div>
+
+			<ul id="wiki-pages-list-root-sortable" class="sortable">
+				{% edit_toc wiki_pages %}
+			</ul>
+		</div>
+
+
+		<div id="wiki-pages-list-wrapper-sortable" class="wiki-list-wrapper">
+			<div id="table-of-contents-header-sortable">
+				Other pages
+			</div>
+
+			<div class='clear'></div>
+
+			<ul id="pages-list-root-sortable" class="sortable">
+				{% edit_toc pages %}
+			</ul>
+		</div>
+	<div class="clear"></div>
+	<div class="button-left" id='serialize' style="margin-bottom:10px;">
+		{% button 'Save' 'javascript:void(0)' %}
+	</div>
+	</div>
+
+{% endblock %}

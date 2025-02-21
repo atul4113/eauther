@@ -1,0 +1,91 @@
+<!--
+KNOWN ISSUES
+Appearance of soft keyboard on an android devices triggers a resize event
+In Portait orientation this may cause change to landscape orientation and reloading of the layout
+window.mAuthor.ScreenUtils.isSoftKeyboardResize() is used to detect if the resize is caused by the keyboard
+-->
+{% extends 'embed/template.html' %}
+
+{% block styles %}
+    <style>
+        body {
+            background: #FFFFFF;
+        }
+        #_icplayer {
+            display: table;
+        }
+    </style>
+{% endblock %}
+
+
+{%block player %}
+    <script type="text/javascript">
+        var player;
+        var viewportmeta = document.querySelector("meta[name=viewport]");
+
+        function postGetActualIdLayoutMessage() {
+            var parent = getOpener();
+
+            if (parent != null) {
+                var message = "GET_ACTUAL_ID";
+                parent.postMessage(message, '*');
+            }
+        }
+
+        function setViewPortSizesAfterScreenChanges() {
+            var $icPlayer = $('#_icplayer');
+            var width = parseInt($icPlayer.css('width'), 10);
+            viewportmeta.setAttribute('content', 'width=' + width + ',maximum-scale=1');
+        }
+
+        function icOnAppLoaded() {
+            function iframeResizeRequest() {
+                var $icPlayer = $('#_icplayer');
+                var width = parseInt($icPlayer.css('width'), 10);
+                var height = parseInt($icPlayer.css('height'), 10);
+                setViewPortSizesAfterScreenChanges();
+                postResizeMessage(width, height);
+            }
+
+
+            var page = getPageNumberWithCommons();
+
+            player = icCreatePlayer('_icplayer');
+
+            if (page.isCommons) {
+                player.loadCommonPage('/file/{% if version %}{{version}}{% else %}{{content.file.id}}{% endif %}', page.index);
+            } else {
+                player.load('/file/{% if version %}{{version}}{% else %}{{content.file.id}}{% endif %}', page.index);
+            }
+
+
+            player.onPageLoaded(function onPageLoadedHandler() {
+                postGetActualIdLayoutMessage();
+                iframeResizeRequest();
+                postPageLoadedMessage();
+            });
+
+
+            player.onOutstretchHeight(function () {
+                iframeResizeRequest();
+            });
+
+            function receiveMessage(event) {
+                var SET_ACTUAL_ID = "SET_ACTUAL_ID:";
+
+                if (!event.data) {
+                    return;
+                }
+
+                if(event.data.indexOf(SET_ACTUAL_ID) === 0){
+                    var conf = JSON.parse(event.data.substring(SET_ACTUAL_ID.length, event.data.length));
+                    var id = conf.id;
+                    player.changeLayout(id);
+                    iframeResizeRequest();
+                }
+            }
+
+            window.addEventListener("message", receiveMessage, false);
+        }
+    </script>
+{% endblock %}

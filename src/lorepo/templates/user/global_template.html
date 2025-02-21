@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load apptags %}
+{% block content %}
+
+<h1 class="page_header">Change global template</h1>
+<div class="main clear" style="padding-top: 0"></div>
+
+<div class="global-template">
+	<div class="current">
+		Current global template:
+		{% if current_template  %}
+			<a href="/embed/{{current_template.id}}">{{current_template}}</a>
+		{% else %}
+			None
+		{% endif %}
+		{{form.template_id.errors}}
+	</div>
+	<div class="form">
+		<form method="post" action="/user/change_global_template" name="change_template">
+			<div class="single-field-wrapper template-id">
+				<label for="template_id">{{form.template_id.label}}:</label>
+				{{form.template_id}}
+			</div>
+			
+			<div class="single-field-wrapper">
+				{% button 'Change' 'document.forms["change_template"].submit()' '' '' %}
+			</div>
+			
+			<input type="submit" />
+		</form>
+	</div>
+	
+	<div class="clear"></div>
+
+	{% if current_template %}
+	<div class="remove">
+		<a href="/user/remove_global_template">Remove</a>
+	</div>
+	{% endif %}
+</div>
+{% endblock %}

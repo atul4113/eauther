@@ -1,0 +1,20 @@
+{% load indesign %}
+
+<ul>
+{% for child in element %}
+	{% if child.text or child|has_children %}
+	<li {% if child.text %}class="draggable"{% endif %} data-id="{{child.tag}}_{{counter|add:1}}">
+		<div class="element">
+			<b>{{child.tag}}{{counter}}{{forloop.counter}}</b><br/>
+			{% if child.text %}<span>{{child.text}}</span>{% endif %}
+		</div>
+
+		{% with forloop.counter|stringformat:"s" as loop_counter %}
+		{% with counter|add:loop_counter|add:"_" as new_counter %}
+			{% structure child new_counter %}
+		{% endwith %}
+		{% endwith %}
+	</li>
+	{% endif %}
+{% endfor %}
+</ul>

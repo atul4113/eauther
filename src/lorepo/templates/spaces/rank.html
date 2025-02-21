@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load apptags %}
+
+{% block content %}
+
+<h1 class="page_header">Change space rank</h1>
+<div class="main clear" style="padding-top: 0"></div>
+<div id="toolbar">
+	<form action="{{request.path}}" method="post" name="rank">
+	<table style="margin:0 10px">
+	<tr>
+		<td colspan="4">
+			{{ form.non_field_errors }}
+			{{ form.rank.errors }}
+		</td>
+	</tr>
+	<tr>
+		<td>Rank for category {{space.title}}:</td>
+		<td><input type="text" name="rank" value="{{space.rank}}"/></td>	
+		<td><input type="hidden" name="next" value="{{next}}"/></td>	
+		<td>{% button 'Change' 'document.forms["rank"].submit()' %}</td>
+		<td><input type="submit" /></td>
+	</tr>
+	</table>
+	</form>
+</div>
+
+{% endblock %}

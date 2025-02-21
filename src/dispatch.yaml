@@ -1,0 +1,10 @@
+#application: lorepocorporate
+dispatch:
+  - url: "*old.mauthor.com/*"
+    module: oldinterfaceservice
+
+  - url: "*newinterface.mauthor.com/*"
+    module: default
+
+  - url: "*new.mauthor.com/*"
+    module: default

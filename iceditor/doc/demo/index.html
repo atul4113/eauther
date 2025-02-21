@@ -1,0 +1,31 @@
+<!doctype html>
+
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+    <title>Editor demo</title>
+
+	<script type="text/javascript" language="javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>    
+    <script type="text/javascript" language="javascript" src="iceditor/iceditor.nocache.js"></script>
+    
+    <script language="javascript">
+		var ic_editor;
+      	function iceOnAppLoaded(){
+	        // Load assessment
+    	    ic_editor = icCreateEditor();
+    	    ic_editor.load('files/content.xml');
+    	    ic_editor.setNextUrl('/next/url');
+      	}
+      
+    </script>
+
+    <script type="text/javascript"
+  		src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+	</script>
+    
+  </head>
+
+  <body>
+  </body>
+</html>

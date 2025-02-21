@@ -1,0 +1,176 @@
+{% extends "base.html" %}
+
+{% load apptags %}
+{% load content %}
+{% load public %}
+
+{% block head %}
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#projects-per-page-select').change(function() {
+			$('#projects-per-page-form').submit();
+		});
+		
+		$('select.publications').on('change', function() {
+			var url = $(this).find(':selected').val();
+
+			if (url.length > 0) {
+				document.location = url;
+			}
+			$(this).val('');
+		}).val('');
+
+        function createNewsElement(news) {
+            var $news = $(document.createElement('div')).addClass('content-box-description'),
+                $item = $(document.createElement('div')).addClass('main-news-item'),
+                $date = $(document.createElement('div')).addClass('main-news-date'),
+                $content = $(document.createElement('div')).addClass('main-news-content');
+
+            $date.html('<img src="/media/images/comment.png" alt="" height="16" width="16">' + news.published);
+            $content.html('<div><strong>' + news.title + '</strong></div>' +
+                            news.summary + '<br>' +
+                            '<a href="' + news.link +  '">read more&nbsp;</a>' +
+                            '<img src="/media/images/more-arrow.png">'
+            );
+
+            $item.append($date);
+            $item.append($content);
+            $news.append($item);
+
+            return $news;
+        }
+
+        jQuery.ajax({
+            method: 'GET',
+            url: '/corporate/api/news',
+            success: function (data) {
+                var $news = $('#news');
+
+                for (var i = 0; i < data.length; i++) {
+                    $news.append(createNewsElement(data[i]));
+                }
+            }
+        });
+	});
+</script>
+{% endblock %}
+
+{% block content %}
+{% if not is_company_locked %}
+<h1 class="page_header">Dashboard</h1>
+<div class="main clear" style="padding-top: 0"></div>
+	
+<div id="more-projects">
+<div class="more-projects-wrapper">
+	<div class="section">
+		<div class="block-outer">
+			<div class="content-box">
+				<div class="content-box-title">
+					<strong>Recently edited lessons</strong>
+				</div>
+				<div class="main-news-content">
+					<table id="recently-opened">
+						<tr>
+							<th class="lesson">Lesson</th>
+							<th class="date">Last edited</th>
+							<th class="edit_link">Edit</th>
+							<th class="view">View</th>
+						</tr>
+						{% for lesson in recently_opened %}
+						<tr>
+							<td class="lesson">{% get_content_link lesson.content %}</td>
+							<td class="date">{{lesson.created_date}}</td>
+							<td class="edit_link"><a href="/mycontent/{{lesson.content.id}}/editor?next=/corporate&{{ token_key }}={{token}}">Edit</a></td>
+							{% with lesson.content as content %}
+							<td class="view">{% include "common/mycontent/view_as.html" %}</td>
+							{% endwith %}
+						</tr>
+						{% endfor %}
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="section">
+		<div class="block-outer">
+			<div class="content-box">
+				<div class="content-box-title">
+					<strong>My project</strong>
+				</div>
+				<div class="main-news-content">
+					<table id="projects">
+						<tr>
+							<th class="project">Project</th>
+							<th class="number-of-publications">Number of Publications</th>
+							<th class="publications">Publications</th>
+							<th class="show-kanban">Show Kanban table for...</th>
+						</tr>
+						{% for project in projects %}
+							<tr>
+								<td class="project">
+									<strong>
+										<a href="/corporate/list/{{ project.id }}">{{ project.title }}</a>
+									</strong>
+								</td>
+								{% with project.loaded_kids|length as count %}
+									<td>
+										{{ count }}
+									</td>
+									<td>
+										{% if count > 0 %}
+											<select class="publications">
+												<option value="">Go to publication...</option>
+												{% for publication in project.loaded_kids %}
+													<option value="/corporate/list/{{ publication.id }}">{{ publication.title }}</option>
+												{% endfor %}
+											</select>
+										{% else %}
+											No available publications
+										{% endif %}
+									</td>
+									<td>
+										{% if count > 0 %}
+											<select class="publications">
+												<option value="">Kanban table for...</option>
+												{% for publication in project.loaded_kids %}
+													<option value="/states/show_kanban/{{ publication.id }}">{{ publication.title }}</option>
+												{% endfor %}
+											</select>
+										{% else %}
+											No available publications
+										{% endif %}
+									</td>
+								{% endwith %}
+							</tr>
+						{% endfor %}
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+</div>
+
+<div class="more-projects-right-column">
+	<div class="section">
+		<div class="block-outer">
+			<div class="content-box" id="news">
+				<div class="content-box-title"><a href="http://multiplatformeditor.wordpress.com/"><strong>News</strong></a></div>
+				<div class="content-box-description">
+				Our blog will provide you with the latest information on our Editor's new features and improvements.<br/>
+				<a href="http://multiplatformeditor.wordpress.com/">Click to read</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="clear-both"></div>
+
+</div>
+{% else %}
+    <div class="message-company-closed">Sorry, your account at mAuthor’s development platform is permanently closed now. Please <a href="/public/contact-us">contact us </a>in case you need more information or wish to extend your subscription.</div>
+{% endif %}
+{% endblock %}

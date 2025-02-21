@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% load apptags %}
+{% block head %}
+<script type="text/javascript">
+$(document).ready(function(){
+	var templateWrapper = $("#change-template-form");
+	$.getJSON('/editor/api/templates', function(data){
+		$("#loading").remove();
+		$(".single-template-wrapper.none").css('display', 'block');
+		$.each(data, function(key, value){
+			$.each(value, function(key, value){
+				if(value != 1 && value.category == 'Others'){
+					var image = document.createElement("img");
+					var wrapper = document.createElement("div");
+					var radioWrapper = document.createElement("div");
+					var imageWrapper = document.createElement("div");
+					var title = document.createElement("div");
+					var radio = document.createElement("input");
+					$(wrapper).addClass("single-template-wrapper");
+					$(radioWrapper).addClass("radio-wrapper");
+					$(imageWrapper).addClass("image-wrapper");
+					$(title).addClass("template-title-wrapper");
+					$(title).append(value.name);
+					$(radio).attr({"type" : "radio", "name" : "template", "value" : value.id});
+					if(value.id == "{{current_id}}") {
+						$(radio).attr("checked", "checked");
+						$(wrapper).attr("id", "checked");
+					}
+					$(image).attr("src", value.icon_url);
+					$(wrapper).append(image).append(title).append(radio);
+					$(radio).wrap($(radioWrapper));
+					$(image).wrap($(imageWrapper));
+					templateWrapper.append(wrapper);
+				}
+			});
+		});
+	});
+});
+</script>
+{% endblock %}
+{% block content %}
+
+<h1 class="page_header" >
+	Change default template
+</h1>
+
+<div class="main clear" style="padding-top: 0px"></div>
+
+{% include "common/messages/display_messages.html" %}
+
+<div id="change-template-wrapper">
+	<form name="change_template" id="change-template-form" method="POST">
+		<div class="single-template-wrapper none" {% if current_id == 0 %} id="checked" {% endif %} >
+			<div class="image-wrapper">
+				<img src="/media/images/default_presentation_none.png" />
+			</div>
+			<div class="template-title-wrapper">
+				None 
+			</div>
+			<div class="radio-wrapper">
+				<input type="radio" value="none" name="template" {% if current_id == 0 %} checked="checked" {% endif %} />
+			</div>
+		</div>
+	</form>
+	<img src="/media/images/loading.gif" id="loading" />
+</div>
+<div class="button-left">
+	{% button 'Change' 'document.forms["change_template"].submit()' %}
+</div>
+<div class="button-right">
+	{% button 'Cancel' 'document.location="/user/settings"' %}
+</div>
+{% endblock %}

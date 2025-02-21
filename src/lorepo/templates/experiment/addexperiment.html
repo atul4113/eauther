@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Add Experiment</h2>
+
+<form action="add" method="post">
+	{% csrf_token %}
+	<table>
+		<tr>
+			<td><label for="id_name">Name:</label></td>
+			<td><input id="id_name" type="text" name="name" size="10"/></td>
+		</tr>
+		<tr>
+			<td><label for="id_title">Title:</label></td>
+			<td><input id="id_title" type="text" name="title" size="80"/></td>
+		</tr>
+		<tr>
+			<td><label for="id_text">Description:</label></td>
+			<td><textarea id="id_text" name="text" rows="10" cols="80"></textarea></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><input type="submit" value="Send" /></td>
+		</tr>
+	</table>
+</form>
+
+
+{% endblock %}

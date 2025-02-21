@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load apptags %}
+{% load content %}
+{% block content %}
+
+{% include "mycontent/spaces_list.html" %}
+
+<div class="myContent">
+
+	<table width="100%">
+		<tr>
+			<th></th>
+			<th></th>
+			<th>{% trans "Actions" %}</th>
+		</tr>
+
+		{% for content in contents %} 
+			<tr>
+				<td>
+				{% get_icon request content %}
+				<br/>
+				</td>
+				<td style="vertical-align:top">
+					<p>
+					<b>Title</b>: <a href="{{content.id}}/editor?id={{content.file.id}}" style="color:#e77817">{{content.title}}</a>
+					</p>
+					<div style="font-size:small">{{content.description|linebreaksbr|truncatewords:10}}</div>
+					<div style="font-size:small"><b>Tags</b>: {{content.tags}}</div>
+					<div style="font-size:x-small"><b>Modified:</b> {{content.modified_date|timesince}} ago</div>
+				</td>
+				<td>
+					<a href="{{content.id}}/delete">{% trans "Undelete" %}</a>
+				</td>
+			</tr>
+		{% endfor %}
+	</table>
+	
+	<div class="tableFooter">
+	   	{% paginator paginator current_page %}
+	</div>
+
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,22 @@
+<app-lesson-details-bug-form
+    *ngIf="userPermissions && userPermissions.bugtruckReportNewBugsInBugtruck"
+    (reportBug)="onBugReport($event)"
+></app-lesson-details-bug-form>
+
+<ng-container *ngIf="userPermissions && userPermissions.bugtruckViewBugs">
+    <app-lesson-details-bug-card
+        *ngFor="let bug of bugs"
+        [bug]="bug"
+        [user]="user"
+        (deleteBug)="onBugDelete($event)"
+    ></app-lesson-details-bug-card>
+</ng-container>
+
+<app-lesson-details-bug-followers
+    [lesson]="lesson"
+></app-lesson-details-bug-followers>
+
+
+
+
+

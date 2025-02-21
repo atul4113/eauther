@@ -1,0 +1,12 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>
+            {{ translations | getLabel: "plain.my_lessons.panel.lesson_details.followers" }}
+        </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <ng-container *ngFor="let follower of lesson.followers; let last = last">
+            {{ follower }} <ng-container *ngIf="!last">,</ng-container>
+        </ng-container>
+    </mat-card-content>
+</mat-card>

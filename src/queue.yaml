@@ -1,0 +1,29 @@
+queue:
+- name: default
+  rate: 15/s
+  bucket_size: 30
+
+- name: download
+  rate: 5/s
+  bucket_size: 10
+
+- name: backup
+  rate: 5/s
+  bucket_size: 10
+
+- name: localization
+  rate: 15/s
+  bucket_size: 30
+  
+- name: search
+  rate: 30/s
+  bucket_size: 30
+  retry_parameters:
+    min_backoff_seconds: 30
+
+- name: gce-backend
+  rate: 1/s
+  bucket_size: 1
+  retry_parameters:
+    min_backoff_seconds: 300
+    max_backoff_seconds: 300

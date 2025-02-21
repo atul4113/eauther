@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load apptags %}
+{% load markdown_deux_tags %}
+
+{% block content %}
+
+<h1 class="page_header">Upload Logo</h1>
+<div class="main clear" style="padding-top: 0"></div>
+
+<form method="post" action="{{ upload_url }}" name="upload" enctype="multipart/form-data">
+	{% csrf_token %}
+	<table class="upload-logo">
+  		{{ form }}
+  	<tr><th></th><th>{% button 'Upload' 'document.forms["upload"].submit()' %}</th></tr>
+  	</table>
+  	<input type="submit" />
+</form>
+{% endblock %}

@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+{% load apptags %}
+{% block head %}
+<script type="text/javascript" src="/media/js/util/equal-height.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	var states = $(".single-state-wrapper");
+	var statesWidth = 0;
+	var kanbanWrapper = $("#show-kanban-wrapper");
+	$.each(states, function(){
+		statesWidth += $(this).children().outerWidth(true) + 5;
+	});
+	kanbanWrapper.width(statesWidth);
+	
+	var contentsTitle = $('.single-content-title');
+	var containerWidth = contentsTitle.width();
+	$.each(contentsTitle, function(){
+		var title = $(this).children();
+		var titleWidth = title.width();
+		for(var i = 1; titleWidth >= containerWidth; i++) {
+			var htmlTitle = title.html();
+			var slicedTitle = htmlTitle.substr(0, htmlTitle.length - i);
+			title.html(slicedTitle);
+			title.append("...");
+			titleWidth = title.width() - 5;
+		}
+	});
+   	equalHeight($('div.state-title'));
+   	equalHeight($('.state-content.single'));
+   	var height = $('.state-content.single').height();
+   	$("#show-kanban-container").height(height + 30);
+});
+</script>
+{% endblock %}
+{% block content %}
+<h1 class="page_header">Show Kanban [{{project}}]</h1>
+<div class="main clear" style="padding-top: 0px"></div>
+<div>
+	{% include "common/messages/display_messages.html" %}
+</div>
+<div id="show-kanban-container">
+	<div id="show-kanban-wrapper">
+		{% for state in states %}
+				<div class="single-state-wrapper">
+					<div class="state-content single">
+						<div class="state-title-wrapper">
+							<div class="state-title">
+								{{ state }}
+							</div>
+							<div class="state-lessons-count">
+								[{{state.contents|length}}/{{state.contents_ready|length}}]
+							</div>
+						</div>
+						<div class="contents-title-wrapper">
+							In progress
+						</div>
+						<div class="contents-wrapper">
+							{% for content in state.contents %}
+								<div class="single-content-wrapper">
+									<div class="single-content-title">
+										<a href="/corporate/view/{{ content.id }}">{{ content }}</a>
+									</div>
+									<div class="single-content-change">
+										<a href="/states/change_to_ready/{{content.id}}/{{state.id}}?next={{request.get_full_path}}&{{ token_key }}={{ token }}" class="dblclick">&gt;</a>
+									</div>
+								</div>
+							{% endfor %}
+						</div>
+						<div class="contents-title-wrapper">
+							Ready
+						</div>
+						<div class="contents-wrapper">
+							{% for content in state.contents_ready %}
+								<div class="single-content-wrapper">
+									<div class="single-content-title">
+										<a href="/corporate/view/{{ content.id }}">{{ content }}</a>
+									</div>
+								 {% if state.next != None %}
+									<div class="single-content-change">
+										<a href="/states/change/{{content.id}}/{{state.next.id}}?next={{request.get_full_path}}&{{ token_key }}={{token}}" class="dblclick">&gt;</a>
+									</div>
+								 {% endif %}
+								</div>
+							{% endfor %}
+						</div>
+					</div>
+				</div>
+		{% endfor %}
+	</div>
+</div>
+	<div id="default-state-wrapper">
+		<div class="state-content-default">
+			<div class="state-title-wrapper">
+				<div class="state-title-default">
+					Contents without state:
+				</div>
+				<div class="state-lessons-count">
+					[{{contents|length}}]
+				</div>
+			</div>
+			<div class="contents-wrapper contents-default">
+				{% for content in contents %}
+				<div class="single-content-wrapper-default">
+					<div class="single-content-title">
+						<a href="/corporate/view/{{ content.id }}">{{ content }}</a>
+					</div>
+					<div class="single-content-change">
+						<a href="/states/change/{{content.id}}/{{states.0.id}}?next={{request.get_full_path}}&{{ token_key }}={{token}}" class="dblclick">&gt;</a>
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+<div class="clear"></div>
+{% endblock %}

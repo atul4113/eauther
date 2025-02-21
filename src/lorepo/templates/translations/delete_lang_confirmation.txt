@@ -1,0 +1,8 @@
+{% load translate %}{% autoescape off %}
+<p>{% get_label 'translations.confirmation.Dear' %} {{ user }},</p>
+
+<p>{% get_label 'translations.del_lang_confirm.info.1' %} {{ lang_key }} {% get_label 'translations.del_lang_confirm.info.2' %}</p>
+
+<p>{% get_label 'translations.confirmation.regards' %}</p>
+
+{% endautoescape %}

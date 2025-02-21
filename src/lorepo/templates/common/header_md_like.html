@@ -1,0 +1,270 @@
+{% load i18n %}
+{% load apptags %}
+{% load logo %}
+{% load corporate %}
+{% load spaces %}
+{% load cache %}
+{% load utility %}
+
+<header id="header" class="mdl-layout__header disable-print">
+    <div class="header-top-bar mdl-layout__header-row">
+        <a href="/"><img class="header-top-bar__logo" src="/media/images/main-page/ealpha_white.svg"/></a>
+
+        <div class="header-top-bar__right">
+            <form action="/search/search" class="header-top-bar__search mdl-layout--large-screen-only">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
+                    <label id="header-top-bar__search-btn" class="mdl-button mdl-js-button mdl-button--icon"
+                           for="header-top-bar__search-field">
+                        <i class="material-icons">&#xE8B6;</i>
+                    </label>
+                    <div class="mdl-textfield__expandable-holder">
+                        <input id="header-top-bar__search-field" class="mdl-textfield__input" type="text" name="q"
+                               placeholder="search" value="{{ text }}">
+                    </div>
+                </div>
+            </form>
+
+            {% if request.user and request.user|is_any_division_admin %}
+                <a id="header-menu-bar__my-project-admin" class="mdl-button mdl-js-button mdl-navigation__link" href='/corporate/divisionadmin'>Project
+                    admin</a>
+            {% endif %}
+            {% if request.user and request.user.company.id|is_space_owner_tag:user %}
+                <a id="header-menu-bar__my-company-admin" class="mdl-button mdl-js-button mdl-navigation__link" href='/corporate/admin'>Company
+                    admin</a>
+            {% endif %}
+
+            {% if request.user and request.user.is_authenticated %}
+                {% if request.user.is_superuser %}
+                    <a class="mdl-button mdl-js-button xsmall-screen__hide"
+                       href="/user/settings">{{ request.user.username }}</a>
+                {% else %}
+                    <a class="mdl-button mdl-js-button xsmall-screen__hide"
+                       href="/user/profile">{{ request.user.username }}</a>
+                {% endif %}
+                <a class="mdl-button mdl-js-button xsmall-screen__hide" href="/user/logout">Logout</a>
+            {% else %}
+                <a class="mdl-button mdl-js-button xsmall-screen__hide" href="/accounts/login/">Login</a>
+                <a class="mdl-button mdl-js-button xsmall-screen__hide" href="/accounts/register/">Register</a>
+            {% endif %}
+
+            <button id="header-top-bar-user-btn"
+                    class="header-top-bar__user-btn mdl-button mdl-js-button mdl-button--icon xsmall-screen__show--inline">
+                <i class="material-icons">&#xE853;</i>
+            </button>
+
+            <div id="header-top-bar__user-menu" class="mdl-menu__container header-top-bar__user-menu-container">
+                <ul class="header-top-bar__user-menu mdl-menu mdl-menu--bottom-right mdl-js-menu xsmall-screen__show"
+                    for="header-top-bar-user-btn">
+                    {% if request.user and request.user.is_authenticated %}
+                        {% if request.user.is_superuser %}
+                            <li><a href="/user/settings" class="mdl-menu__item">{{ request.user.username }}</a></li>
+                        {% else %}
+                            <li><a href="/user/profile" class="mdl-menu__item">{{ request.user.username }}</a></li>
+                        {% endif %}
+                        <li><a href="/user/logout" class="mdl-menu__item">Logout</a></li>
+                    {% else %}
+                        <li><a href="/accounts/login/" class="mdl-menu__item">Login</a></li>
+                        <li><a href="/accounts/register/" class="mdl-menu__item">Register</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-menu-bar mdl-layout__header-row mdl-layout--large-screen-only">
+        <nav class="mdl-navigation mdl-layout--large-screen-only">
+            <a id="header-menu-bar__home"
+               class="mdl-navigation__link {% if request.path|is_home_active %}mdl-navigation__link--current{% endif %}"
+               href="/">Home</a>
+            {% if request.user and request.user.is_authenticated %}
+                <a id="header-menu-bar__dashboard"
+                   class="mdl-navigation__link {% if request.path|is_dashboard_active %}mdl-navigation__link--current{% endif %}"
+                   href="/corporate">Dashboard</a>
+
+                {% if not request.user.company|is_company_locked_for_user %}
+                    <a id="header-menu-bar__my-lessons"
+                       class="mdl-navigation__link {% if request.path|is_my_lessons_active %}mdl-navigation__link--current{% endif %}"
+                       href="/mycontent">My Lessons</a>
+
+                    {% if user.company %}
+                        <a id="header-menu-bar__projects"
+                           class="mdl-navigation__link {% if request.path|is_projects_active %}mdl-navigation__link--current{% endif %}">Projects</a>
+
+                        <div id="header-top-bar__projects-menu"
+                             class="mdl-menu__container header-top-bar__user-menu-container">
+                            <ul class="header-top-bar__user-menu mdl-menu mdl-menu--bottom-right mdl-js-menu"
+                                for="header-menu-bar__projects">
+                                {% corporate_subspaces_menu request %}
+                            </ul>
+                        </div>
+
+                        <a id="header-menu-bar__support"
+                           class="mdl-navigation__link {% if request.path|slice:"1:8" == "support" %}mdl-navigation__link--current{% endif %}"
+                           href="/support">Support</a>
+                    {% endif %}
+                {% endif %}
+            {% endif %}
+
+            <a id="header-menu-bar__help"
+               class="mdl-navigation__link {% if request.path|slice:"1:4" == "doc" %}mdl-navigation__link--current{% endif %}">Help</a>
+
+            <div id="header-top-bar__help-menu" class="mdl-menu__container header-top-bar__user-menu-container">
+                <ul class="header-top-bar__user-menu mdl-menu mdl-menu--bottom-right mdl-js-menu"
+                    for="header-menu-bar__help">
+                    <li><a href="/doc" class="mdl-menu__item">Documentation</a></li>
+                    <li><a href="/doc/en/page/Interactive-Tutorials" class="mdl-menu__item">Interactive Tutorials</a></li>
+                    <li><a href="/doc/en/page/Sample-Lessons" class="mdl-menu__item">Modules Examples</a></li>
+                </ul>
+            </div>
+            <span class="toolbar-spacer"></span>
+
+            <button id="header-top-bar-user-btn-second"
+                    class="header-top-bar__user-btn mdl-button mdl-js-button mdl-button--icon">
+                <i class="material-icons">&#xE853;</i>
+            </button>
+
+            <div id="header-top-bar__user-menu-second" class="mdl-menu__container header-top-bar__user-menu-container">
+                <ul class="header-top-bar__user-menu mdl-menu mdl-menu--bottom-right mdl-js-menu"
+                    for="header-top-bar-user-btn-second">
+                    {% if request.user and request.user.is_authenticated %}
+                        {% if request.user.is_superuser %}
+                            <li><a href="/user/settings" class="mdl-menu__item">{{ request.user.username }}</a></li>
+                        {% else %}
+                            <li><a href="/user/profile" class="mdl-menu__item">{{ request.user.username }}</a></li>
+                        {% endif %}
+                        <li><a href="/user/logout" class="mdl-menu__item">Logout</a></li>
+                    {% else %}
+                        <li><a href="/accounts/login/" class="mdl-menu__item">Login</a></li>
+                        <li><a href="/accounts/register/" class="mdl-menu__item">Register</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+
+            {% if request.user and request.user|is_any_division_admin %}
+                <a id="header-menu-bar__my-project-admin" class="mdl-navigation__link" href='/corporate/divisionadmin'>Project
+                    admin</a>
+            {% endif %}
+            {% if request.user and request.user.company.id|is_space_owner_tag:user %}
+                <a id="header-menu-bar__my-company-admin" class="mdl-navigation__link" href='/corporate/admin'>Company
+                    admin</a>
+            {% endif %}
+            <form action="/search/search" class="header-menu-bar__search mdl-layout--large-screen-only search-second">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
+                    <label id="header-top-bar__search-btn-second" class="mdl-button mdl-js-button mdl-button--icon"
+                           for="header-top-bar__search-field-second">
+                        <i class="material-icons">&#xE8B6;</i>
+                    </label>
+                    <div class="mdl-textfield__expandable-holder">
+                        <input id="header-top-bar__search-field-second" class="mdl-textfield__input" type="text" name="q"
+                               placeholder="search" value="{{ text }}">
+                    </div>
+                </div>
+            </form>
+            <div class="logo-img">
+                {% if request.user and user.company %}
+                    {% get_logo request.user %}
+                {% endif %}
+            </div>
+        </nav>
+    </div>
+</header>
+
+<button class="mdl-button mdl-js-button mdl-button--icon mdl-layout__drawer-button disable-print">
+    <i class="material-icons">&#xE5D2;</i>
+</button>
+
+<div class="mdl-layout__drawer-mask disable-print"></div>
+
+<div class="mdl-layout__drawer disable-print">
+    <div class="drawer__logo">
+        <a href="/"><img src="/media/images/main-page/mauthor_menu_dark.svg"/></a>
+    </div>
+
+    <ul class="drawer__search mdl-list mdl-layout--small-screen-only">
+        <li class="mdl-list__item">
+            <span class="mdl-list__item-primary-content">
+            <i class="material-icons mdl-list__item-icon">&#xE8B6;</i>
+            <form action="/search/search" class="mdl-textfield mdl-js-textfield">
+                <input class="mdl-textfield__input" type="text" name="q" placeholder="Search..." value="{{ text }}">
+            </form>
+        </span>
+        </li>
+    </ul>
+
+    <nav class="drawer__main-menu mdl-navigation mdl-layout--small-screen-only">
+        <a id="drawer__home" class="mdl-navigation__link" href="/corporate">Home</a>
+        {% if request.user and request.user.is_authenticated %}
+            <a id="drawer__my-space"
+               href="/corporate"
+               class="mdl-navigation__link">
+                Dashboard
+            </a>
+
+            {% if not request.user.company|is_company_locked_for_user %}
+                <a id="drawer__my-ebooks"
+                   href="/mycontent"
+                   class="mdl-navigation__link">
+                    My Lessons
+                </a>
+            {% endif %}
+
+            <a id="drawer__library"
+               class="mdl-navigation__link"
+               href="/support"
+            >Support</a>
+        {% endif %}
+
+        {% if request.user and request.user.company.id|is_space_owner_tag:user %}
+            <a id="drawer__my-company-admin"
+               href='/corporate/admin'
+               class="mdl-navigation__link">
+                Company admin
+            </a>
+        {% endif %}
+
+        {% if request.user and request.user|is_any_division_admin %}
+            <a id="drawer__my-project-admin"
+               href='/corporate/divisionadmin'
+               class="mdl-navigation__link">
+                Project admin
+            </a>
+        {% endif %}
+    </nav>
+
+    {% if request.user and user.company %}
+        <nav class="mdl-navigation">
+            <h6>Projects</h6>
+
+            {% corporate_subspaces_menu_links request %}
+        </nav>
+    {% endif %}
+
+    <nav class="mdl-navigation">
+        <h6>Help</h6>
+
+        <a href="/doc"
+           class="mdl-navigation__link">
+            Documentation
+        </a>
+        <a href="/doc/en/page/Video-Tutorials"
+           class="mdl-navigation__link">
+            Video Tutorials
+        </a>
+        <a href="/doc/en/page/Sample-Lessons?no_menu"
+           class="mdl-navigation__link">
+            Modules Examples
+        </a>
+    </nav>
+
+    <nav class="mdl-navigation">
+        <h6>Learnetic</h6>
+        <a href="/about_us"
+           class="mdl-navigation__link">
+            About Learnetic
+        </a>
+        <a href="/public/contact-us"
+           class="mdl-navigation__link">
+            Contact Learnetic
+        </a>
+    </nav>
+</div>

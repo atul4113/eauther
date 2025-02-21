@@ -1,0 +1,283 @@
+[
+  {
+    "pk": 2, 
+    "model": "contenttypes.contenttype", 
+    "fields": {
+      "model": "space", 
+      "name": "space", 
+      "app_label": "spaces"
+    }
+  }, 
+  {
+    "pk": 5, 
+    "model": "contenttypes.contenttype", 
+    "fields": {
+      "model": "spaceaccess", 
+      "name": "space access", 
+      "app_label": "spaces"
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "auth.user", 
+    "fields": {
+      "username": "kgebert", 
+      "first_name": "", 
+      "last_name": "", 
+      "is_active": true, 
+      "idxf_email_l_iexact": "kgebert@kgebert.pl", 
+      "idxf_username_l_iexact": "kgebert", 
+      "is_superuser": true, 
+      "is_staff": true, 
+      "last_login": "2012-05-31 12:46:29", 
+      "groups": [], 
+      "user_permissions": [], 
+      "password": "sha1$bc2d4$a0a8e198e6ecee07c4eae16e6ba2c70da7a7dc1a", 
+      "email": "kgebert@kgebert.pl", 
+      "date_joined": "2012-05-31 12:45:36"
+    }
+  }, 
+  {
+    "pk": "ae57be53ab2e6d77a7c708f2bce81a42", 
+    "model": "sessions.session", 
+    "fields": {
+      "expire_date": "2012-06-14 12:48:59", 
+      "session_data": "ZTQ2NjgyNmUzYTdiZjZlZDk3YTBmZTIzNzEzYmNmMWFkNTMwYTE4NjqAAn1xAChVBXRva2VucQFV\nBWtHNWE0cQJVDWxhc3Rfc3BhY2VfaWRxA0sMVQ1fYXV0aF91c2VyX2lkcQSKAQFVEl9hdXRoX3Vz\nZXJfYmFja2VuZHEFVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEG\nVQ9sYXN0X3Byb2plY3RfaWRxB31xCEsMSxJzdS4=\n"
+    }
+  }, 
+  {
+    "pk": 3, 
+    "model": "spaces.space", 
+    "fields": {
+      "modified_date": "2012-05-31 12:46:54", 
+      "right": 2, 
+      "is_deleted": false, 
+      "parent": null, 
+      "title": "kgebert", 
+      "rank": 20, 
+      "top_level": 3, 
+      "created_date": "2012-05-31 12:46:54", 
+      "space_type": 1, 
+      "left": 1
+    }
+  }, 
+  {
+    "pk": 8, 
+    "model": "spaces.space", 
+    "fields": {
+      "modified_date": "2012-05-31 12:48:47", 
+      "right": 8, 
+      "is_deleted": false, 
+      "parent": null, 
+      "title": "Karol Corporation", 
+      "rank": 20, 
+      "top_level": 8, 
+      "created_date": "2012-05-31 12:47:34", 
+      "space_type": 3, 
+      "left": 1
+    }
+  }, 
+  {
+    "pk": 9, 
+    "model": "spaces.space", 
+    "fields": {
+      "modified_date": "2012-05-31 12:47:34", 
+      "right": 2, 
+      "is_deleted": false, 
+      "parent": null, 
+      "title": "Karol Corporation Public", 
+      "rank": 20, 
+      "top_level": 9, 
+      "created_date": "2012-05-31 12:47:34", 
+      "space_type": 2, 
+      "left": 1
+    }
+  }, 
+  {
+    "pk": 12, 
+    "model": "spaces.space", 
+    "fields": {
+      "modified_date": "2012-05-31 12:48:47", 
+      "right": 7, 
+      "is_deleted": false, 
+      "parent": 8, 
+      "title": "Dywizja 303", 
+      "rank": 20, 
+      "top_level": 8, 
+      "created_date": "2012-05-31 12:47:52", 
+      "space_type": 3, 
+      "left": 2
+    }
+  }, 
+  {
+    "pk": 18, 
+    "model": "spaces.space", 
+    "fields": {
+      "modified_date": "2012-05-31 12:48:41", 
+      "right": 4, 
+      "is_deleted": false, 
+      "parent": 12, 
+      "title": "Projekt 1", 
+      "rank": 20, 
+      "top_level": 8, 
+      "created_date": "2012-05-31 12:48:41", 
+      "space_type": 3, 
+      "left": 3
+    }
+  }, 
+  {
+    "pk": 20, 
+    "model": "spaces.space", 
+    "fields": {
+      "modified_date": "2012-05-31 12:48:47", 
+      "right": 6, 
+      "is_deleted": false, 
+      "parent": 12, 
+      "title": "Projekt 2", 
+      "rank": 20, 
+      "top_level": 8, 
+      "created_date": "2012-05-31 12:48:47", 
+      "space_type": 3, 
+      "left": 5
+    }
+  }, 
+  {
+    "pk": 6, 
+    "model": "spaces.spaceaccess", 
+    "fields": {
+      "modified_date": "2012-05-31 12:47:09", 
+      "is_deleted": false, 
+      "space": 3, 
+      "user": 1, 
+      "created_date": "2012-05-31 12:47:09", 
+      "access_right": 3
+    }
+  }, 
+  {
+    "pk": 10, 
+    "model": "spaces.spaceaccess", 
+    "fields": {
+      "modified_date": "2012-05-31 12:47:34", 
+      "is_deleted": false, 
+      "space": 8, 
+      "user": 1, 
+      "created_date": "2012-05-31 12:47:34", 
+      "access_right": 3
+    }
+  }, 
+  {
+    "pk": 19, 
+    "model": "spaces.spaceaccess", 
+    "fields": {
+      "modified_date": "2012-05-31 12:48:41", 
+      "is_deleted": false, 
+      "space": 18, 
+      "user": 1, 
+      "created_date": "2012-05-31 12:48:41", 
+      "access_right": 3
+    }
+  }, 
+  {
+    "pk": 21, 
+    "model": "spaces.spaceaccess", 
+    "fields": {
+      "modified_date": "2012-05-31 12:48:47", 
+      "is_deleted": false, 
+      "space": 20, 
+      "user": 1, 
+      "created_date": "2012-05-31 12:48:47", 
+      "access_right": 3
+    }
+  }, 
+  {
+    "pk": 11, 
+    "model": "corporate.corporatepublicspace", 
+    "fields": {
+      "public_category": 9, 
+      "company": 8
+    }
+  }, 
+  {
+    "pk": 14, 
+    "model": "states.state", 
+    "fields": {
+      "modified_date": "2012-05-31 12:48:16", 
+      "percentage": 0, 
+      "name": "Stan 1", 
+      "rank": 0, 
+      "created_date": "2012-05-31 12:48:16"
+    }
+  }, 
+  {
+    "pk": 16, 
+    "model": "states.state", 
+    "fields": {
+      "modified_date": "2012-05-31 12:48:23", 
+      "percentage": 0, 
+      "name": "Stan 2", 
+      "rank": 1, 
+      "created_date": "2012-05-31 12:48:23"
+    }
+  }, 
+  {
+    "pk": 13, 
+    "model": "states.statesset", 
+    "fields": {
+      "modified_date": "2012-05-31 12:48:09", 
+      "company": 8, 
+      "name": "Test", 
+      "created_date": "2012-05-31 12:48:09"
+    }
+  }, 
+  {
+    "pk": 15, 
+    "model": "states.statetoset", 
+    "fields": {
+      "state": 14, 
+      "states_set": 13
+    }
+  }, 
+  {
+    "pk": 17, 
+    "model": "states.statetoset", 
+    "fields": {
+      "state": 16, 
+      "states_set": 13
+    }
+  }, 
+  {
+    "pk": 22, 
+    "model": "states.projectstatesset", 
+    "fields": {
+      "project": 18, 
+      "states_set": 13, 
+      "created_date": "2012-05-31 12:51:57"
+    }
+  }, 
+  {
+    "pk": 7, 
+    "model": "admin.logentry", 
+    "fields": {
+      "action_flag": 1, 
+      "action_time": "2012-05-31 12:47:09", 
+      "object_repr": "kgebert:kgebert <owner>", 
+      "object_id": "6", 
+      "change_message": "", 
+      "user": 1, 
+      "content_type": 5
+    }
+  }, 
+  {
+    "pk": 4, 
+    "model": "admin.logentry", 
+    "fields": {
+      "action_flag": 1, 
+      "action_time": "2012-05-31 12:46:54", 
+      "object_repr": "kgebert", 
+      "object_id": "3", 
+      "change_message": "", 
+      "user": 1, 
+      "content_type": 2
+    }
+  }
+]

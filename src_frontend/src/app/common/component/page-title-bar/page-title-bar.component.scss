@@ -1,0 +1,103 @@
+@import "../../templates/common";
+
+.page-title-bar {
+    padding: 16px 20px;
+    display: flex;
+    overflow: visible;
+    background: $white;
+    border-bottom: 1px solid $grey-300;
+    align-items: flex-end;
+    -webkit-align-items: flex-end;
+
+    .page-title-bar__header {
+        width: 100%;
+
+        h1 {
+            padding: 0;
+            margin: 0 10px 0 0;
+            display: inline-block;
+            font-size: 36px;
+            line-height: 44px;
+        }
+
+        .navigation {
+            float: right;
+            margin: 4px 0;
+            position: relative;
+
+            .tab-page.mdl-button {
+                margin-top: 0;
+
+                &.active-mdl-button {
+                    background-color: $blue-500;
+                    color: $white;
+                }
+            }
+
+            .page-title-bar__drop-down-menu-btn {
+                padding-right: 8px;
+            }
+
+            .mdl-button {
+                margin-top: 4px;
+                margin-right: 5px;
+                font-weight: 700;
+                color: #2196F3;
+
+                &.mdl-button--accent,
+                &.mdl-button--colored {
+                    color: #FFFFFF;
+                    font-weight: 500;
+                }
+            }
+        }
+    }
+
+    &.with-dots {
+        padding-right: 8px;
+
+        .page-title-bar__header {
+            width: calc(100% - 40px);
+        }
+
+        .page-title-bar__menu {
+            margin: 6px 0;
+            position: relative;
+
+            .mdl-button {
+                text-decoration: none;
+
+                i.material-icons {
+                    color: $black;
+                }
+            }
+
+            .mdl-menu .mdl-menu__item {
+                text-decoration: none;
+            }
+
+            .mdl-menu__container {
+                z-index: 10001;
+            }
+        }
+    }
+
+    &.with-back {
+        .back-button {
+            float: left;
+            margin: 0 8px 0 0;
+        }
+
+        h1 {
+            line-height: 56px;
+        }
+
+        .navigation {
+            margin: 10px 0;
+        }
+
+        .page-title-bar__menu {
+            margin: 12px 0;
+        }
+    }
+}

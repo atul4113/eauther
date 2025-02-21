@@ -1,0 +1,23 @@
+@import "../../../common/templates/mdl-colors";
+
+app-lesson-details-metadata-base-form {
+    .data-vertical {
+        h6 {
+            margin: 0 0 2px 0;
+            font-size: 13px;
+            color: $grey-400;
+            line-height: 18px;
+        }
+
+        p {
+            margin: 0 0 16px 0;
+            min-height: 24px;
+        }
+    }
+
+    mat-form-field {
+        mat-hint.error {
+            color: $red-500;
+        }
+    }
+}

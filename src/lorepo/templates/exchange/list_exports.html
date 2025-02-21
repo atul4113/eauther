@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% load apptags %}
+
+{% block content %}
+
+<h1 class="page_header">Export Lesson</h1>
+<div class="main clear" style="padding-top: 0"></div>
+
+{% include "common/messages/display_messages.html" %}
+
+<div>
+
+<h2>Previously created packages:</h2>
+<ul>
+{% for export in exports %}
+	<li><a href="/file/serve/{{export.export.id}}">{{export.content.title}} - {{export.created_date}}
+       ({{ export.version_name }})
+    </a></li>
+{% endfor %}
+</ul>
+{% if request.user.is_staff or request.user.is_superuser %}
+	{% with content.id|stringformat:"s" as s %}
+		{% with "parent.location='/exchange/create/"|add:s|add:"/womi'" as url %}
+			<div class="button-left">{% button 'Create new package (WOMI)' url %}</div>
+		{% endwith %}
+	{% endwith %}
+{% endif %}
+
+{% with content.id|stringformat:"s" as s %}
+	{% with "parent.location='/exchange/create/"|add:s|add:"/3'" as url %}
+		<div class="button-left">{% button 'Create new package (xAPI)' url %}</div>
+	{% endwith %}
+{% endwith %}
+
+{% with content.id|stringformat:"s" as s %}
+	{% with "parent.location='/exchange/create/"|add:s|add:"/2'" as url %}
+		<div class="button-left">{% button 'Create new package (SCORM 2004)' url %}</div>
+	{% endwith %}
+{% endwith %}
+
+{% with content.id|stringformat:"s" as s %}
+	{% with "parent.location='/exchange/create/"|add:s|add:"/1'" as url %}
+		<div class="button-left">{% button 'Create new package (SCORM 1.2)' url %}</div>
+	{% endwith %}
+{% endwith %}
+
+{% with content.id|stringformat:"s" as s %}
+	{% with "parent.location='/exchange/create/"|add:s|add:"/6'" as url %}
+		<div class="button-left">{% button 'Create new package (HTML5)' url %}</div>
+	{% endwith %}
+{% endwith %}
+
+</div>
+{% endblock %}

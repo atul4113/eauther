@@ -1,0 +1,59 @@
+@import "../../../common/templates/mdl-colors";
+
+div#corporate {
+    display: block;
+
+    .app-loading-wrapper {
+        margin: 64px auto;
+        text-align: center;
+
+        &.small {
+            margin: 16px auto;
+        }
+    }
+
+    .app-content-page {
+        display: flex;
+        flex-direction: column;
+        overflow: auto;
+        padding-bottom: 16px;
+
+
+        @media (max-width: 1150px) {
+          .main-grid {
+            flex-direction: column;
+          }
+        }
+
+        app-corporate-tiles {
+            min-width: 1110px;
+        }
+
+        .main-grid {
+            margin: 0;
+            display: flex;
+            padding: 8px 22px 0 22px;
+
+            .tables {
+                flex-grow: 1;
+            }
+
+            .news {
+                flex-grow: 0;
+                margin-left: 20px;
+                flex-direction: column;
+                display: flex;
+                min-width: 490px;
+            }
+
+            .table-title {
+                font-size: 22px;
+                line-height: 48px;
+            }
+
+            a {
+                text-decoration: none;
+            }
+        }
+    }
+}

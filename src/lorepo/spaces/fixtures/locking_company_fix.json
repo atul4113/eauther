@@ -1,0 +1,409 @@
+[
+  {
+    "pk": 2, 
+    "model": "contenttypes.contenttype", 
+    "fields": {
+      "model": "space", 
+      "name": "space", 
+      "app_label": "spaces"
+    }
+  }, 
+  {
+    "pk": 5, 
+    "model": "contenttypes.contenttype", 
+    "fields": {
+      "model": "spaceaccess", 
+      "name": "space access", 
+      "app_label": "spaces"
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "auth.user", 
+    "fields": {
+      "username": "kgebert", 
+      "first_name": "", 
+      "last_name": "", 
+      "is_active": true, 
+      "idxf_email_l_iexact": "karol.gebert@solwit.pl", 
+      "idxf_username_l_iexact": "kgebert", 
+      "is_superuser": true, 
+      "is_staff": true, 
+      "last_login": "2013-04-23 12:20:35", 
+      "groups": [], 
+      "user_permissions": [], 
+      "password": "sha1$98da9$8e99d26b4bc8fff3b0da496ad519d7c0857a0c0f", 
+      "email": "karol.gebert@solwit.pl", 
+      "date_joined": "2013-04-23 14:10:16"
+    }
+  }, 
+  {
+    "pk": 14, 
+    "model": "auth.user", 
+    "fields": {
+      "username": "test", 
+      "first_name": "", 
+      "last_name": "", 
+      "is_active": true, 
+      "idxf_email_l_iexact": "test@test.pl", 
+      "idxf_username_l_iexact": "test", 
+      "is_superuser": false, 
+      "is_staff": false, 
+      "last_login": "2013-04-23 12:16:44", 
+      "groups": [], 
+      "user_permissions": [], 
+      "password": "sha1$5b45e$0238fb41efe56b79e4de3d9344857aa70e558386", 
+      "email": "test@test.pl", 
+      "date_joined": "2013-04-23 12:16:06"
+    }
+  }, 
+  {
+    "pk": 19, 
+    "model": "auth.user", 
+    "fields": {
+      "username": "locked_company_admin", 
+      "first_name": "", 
+      "last_name": "", 
+      "is_active": true, 
+      "idxf_email_l_iexact": "admin@admin.pl", 
+      "idxf_username_l_iexact": "locked_company_admin", 
+      "is_superuser": false, 
+      "is_staff": false, 
+      "last_login": "2013-04-23 12:20:21", 
+      "groups": [], 
+      "user_permissions": [], 
+      "password": "sha1$dc87d$d6a29de90931498d4edb17058189c43912b0e8de", 
+      "email": "admin@admin.pl", 
+      "date_joined": "2013-04-23 12:20:00"
+    }
+  }, 
+  {
+    "pk": "c4a333b4dfb6d326b63f8426f34399d6", 
+    "model": "sessions.session", 
+    "fields": {
+      "expire_date": "2013-05-07 12:21:31", 
+      "session_data": "NTE5NDA2NDUzYWQ4N2Y0NDg0ZjRjNTZlZTVmMTZjY2RjOWQ5Njk1MDqAAn1xAC4=\n"
+    }
+  }, 
+  {
+    "pk": 15, 
+    "model": "registration.registrationprofile", 
+    "fields": {
+      "activation_key": "ALREADY_ACTIVATED", 
+      "user": 14
+    }
+  }, 
+  {
+    "pk": 20, 
+    "model": "registration.registrationprofile", 
+    "fields": {
+      "activation_key": "ALREADY_ACTIVATED", 
+      "user": 19
+    }
+  }, 
+  {
+    "pk": 3, 
+    "model": "spaces.space", 
+    "fields": {
+      "modified_date": "2013-04-23 12:14:06", 
+      "right": 0, 
+      "is_deleted": false, 
+      "parent": null, 
+      "title": "kgebert", 
+      "rank": 100, 
+      "top_level": 3, 
+      "include_contents_in_editor": false, 
+      "created_date": "2013-04-23 12:14:06", 
+      "contents_count": 0, 
+      "space_type": 1, 
+      "left": 0,
+      "path": [
+      	3
+      ]
+    }
+  }, 
+  {
+    "pk": 8, 
+    "model": "spaces.space", 
+    "fields": {
+      "modified_date": "2013-04-23 12:14:35", 
+      "right": 0, 
+      "is_deleted": false, 
+      "parent": null, 
+      "title": "kgebert Corporation", 
+      "rank": 100, 
+      "top_level": 8, 
+      "include_contents_in_editor": false, 
+      "created_date": "2013-04-23 12:14:35", 
+      "contents_count": 0, 
+      "space_type": 3, 
+      "left": 0,
+      "path": [
+      	8
+      ]
+    }
+  }, 
+  {
+    "pk": 9, 
+    "model": "spaces.space", 
+    "fields": {
+      "modified_date": "2013-04-23 12:14:36", 
+      "right": 0, 
+      "is_deleted": false, 
+      "parent": null, 
+      "title": "kgebert Corporation Public", 
+      "rank": 100, 
+      "top_level": 9, 
+      "include_contents_in_editor": false, 
+      "created_date": "2013-04-23 12:14:36", 
+      "contents_count": 0, 
+      "space_type": 2, 
+      "left": 0,
+      "path": [
+      	9
+      ]
+    }
+  }, 
+  {
+    "pk": 13, 
+    "model": "spaces.space", 
+    "fields": {
+      "modified_date": "2013-04-23 12:14:55", 
+      "right": 0, 
+      "is_deleted": false, 
+      "parent": 8, 
+      "title": "Project", 
+      "rank": 100, 
+      "top_level": 8, 
+      "include_contents_in_editor": false, 
+      "created_date": "2013-04-23 12:14:55", 
+      "contents_count": 0, 
+      "space_type": 3, 
+      "left": 0,
+      "path": [
+      	8,
+      	13
+      ]
+    }
+  }, 
+  {
+    "pk": 16, 
+    "model": "spaces.space", 
+    "fields": {
+      "modified_date": "2013-04-23 12:16:06", 
+      "right": 0, 
+      "is_deleted": false, 
+      "parent": null, 
+      "title": "test", 
+      "rank": 100, 
+      "top_level": 16, 
+      "include_contents_in_editor": false, 
+      "created_date": "2013-04-23 12:16:06", 
+      "contents_count": 0, 
+      "space_type": 1, 
+      "left": 0,
+      "path": [
+      	16
+      ]
+    }
+  }, 
+  {
+    "pk": 21, 
+    "model": "spaces.space", 
+    "fields": {
+      "modified_date": "2013-04-23 12:20:00", 
+      "right": 0, 
+      "is_deleted": false, 
+      "parent": null, 
+      "title": "locked_company_admin", 
+      "rank": 100, 
+      "top_level": 21, 
+      "include_contents_in_editor": false, 
+      "created_date": "2013-04-23 12:20:00", 
+      "contents_count": 0, 
+      "space_type": 1, 
+      "left": 0,
+      "path": [
+      	21
+      ]
+    }
+  }, 
+  {
+    "pk": 23, 
+    "model": "spaces.space", 
+    "fields": {
+      "modified_date": "2013-04-23 12:21:03", 
+      "right": 0, 
+      "is_deleted": false, 
+      "parent": null, 
+      "title": "locked_company", 
+      "rank": 100, 
+      "top_level": 23, 
+      "include_contents_in_editor": false, 
+      "created_date": "2013-04-23 12:21:03", 
+      "contents_count": 0, 
+      "space_type": 3, 
+      "left": 0,
+      "path": [
+      	23
+      ]
+    }
+  }, 
+  {
+    "pk": 24, 
+    "model": "spaces.space", 
+    "fields": {
+      "modified_date": "2013-04-23 12:21:03", 
+      "right": 0, 
+      "is_deleted": false, 
+      "parent": null, 
+      "title": "locked_company Public", 
+      "rank": 100, 
+      "top_level": 24, 
+      "include_contents_in_editor": false, 
+      "created_date": "2013-04-23 12:21:03", 
+      "contents_count": 0, 
+      "space_type": 2, 
+      "left": 0,
+      "path": [
+      	24
+      ]
+    }
+  }, 
+  {
+    "pk": 6, 
+    "model": "spaces.spaceaccess", 
+    "fields": {
+      "modified_date": "2013-04-23 12:14:15", 
+      "is_deleted": false, 
+      "space": 3, 
+      "user": 1, 
+      "created_date": "2013-04-23 12:14:15", 
+      "access_right": 3
+    }
+  }, 
+  {
+    "pk": 10, 
+    "model": "spaces.spaceaccess", 
+    "fields": {
+      "modified_date": "2013-04-23 12:14:36", 
+      "is_deleted": false, 
+      "space": 8, 
+      "user": 1, 
+      "created_date": "2013-04-23 12:14:36", 
+      "access_right": 3
+    }
+  }, 
+  {
+    "pk": 17, 
+    "model": "spaces.spaceaccess", 
+    "fields": {
+      "modified_date": "2013-04-23 12:16:06", 
+      "is_deleted": false, 
+      "space": 16, 
+      "user": 14, 
+      "created_date": "2013-04-23 12:16:06", 
+      "access_right": 3
+    }
+  }, 
+  {
+    "pk": 18, 
+    "model": "spaces.spaceaccess", 
+    "fields": {
+      "modified_date": "2013-04-23 12:17:14", 
+      "is_deleted": false, 
+      "space": 13, 
+      "user": 14, 
+      "created_date": "2013-04-23 12:17:14", 
+      "access_right": 1
+    }
+  }, 
+  {
+    "pk": 22, 
+    "model": "spaces.spaceaccess", 
+    "fields": {
+      "modified_date": "2013-04-23 12:20:00", 
+      "is_deleted": false, 
+      "space": 21, 
+      "user": 19, 
+      "created_date": "2013-04-23 12:20:00", 
+      "access_right": 3
+    }
+  }, 
+  {
+    "pk": 28, 
+    "model": "spaces.lockedspaceaccess", 
+    "fields": {
+      "modified_date": "2013-04-23 12:21:23", 
+      "is_deleted": false, 
+      "space": 23, 
+      "user": 19, 
+      "created_date": "2013-04-23 12:21:23", 
+      "access_right": 3
+    }
+  }, 
+  {
+    "pk": 11, 
+    "model": "corporate.corporatepublicspace", 
+    "fields": {
+      "public_category": 9, 
+      "company": 8
+    }
+  }, 
+  {
+    "pk": 26, 
+    "model": "corporate.corporatepublicspace", 
+    "fields": {
+      "public_category": 24, 
+      "company": 23
+    }
+  }, 
+  {
+    "pk": 12, 
+    "model": "corporate.companyproperties", 
+    "fields": {
+      "valid_until": null, 
+      "modified_date": "2013-04-23 12:14:36", 
+      "company": 8, 
+      "max_accounts": null, 
+      "created_date": "2013-04-23 12:14:36"
+    }
+  }, 
+  {
+    "pk": 27, 
+    "model": "corporate.companyproperties", 
+    "fields": {
+      "valid_until": null, 
+      "modified_date": "2013-04-23 12:21:03", 
+      "company": 23, 
+      "max_accounts": null, 
+      "created_date": "2013-04-23 12:21:03"
+    }
+  }, 
+  {
+    "pk": 7, 
+    "model": "admin.logentry", 
+    "fields": {
+      "action_flag": 1, 
+      "action_time": "2013-04-23 12:14:15", 
+      "object_repr": "kgebert:kgebert <owner>", 
+      "object_id": "6", 
+      "change_message": "", 
+      "user": 1, 
+      "content_type": 5
+    }
+  }, 
+  {
+    "pk": 4, 
+    "model": "admin.logentry", 
+    "fields": {
+      "action_flag": 1, 
+      "action_time": "2013-04-23 12:14:06", 
+      "object_repr": "kgebert", 
+      "object_id": "3", 
+      "change_message": "", 
+      "user": 1, 
+      "content_type": 2
+    }
+  }
+]

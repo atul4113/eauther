@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load apptags %}
+
+{% block content %}
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#access option").each(function(){
+		if(this.id == {{space_access.access_right}}) {
+			$(this).attr('selected', 'selected');
+		} 
+	});
+});
+</script>
+<h1 class="page_header">Edit Access Rights</h1>
+<div class="main clear" style="padding-top: 0"></div>
+<h2>You are editing access rights for {{ space_access.user }} to {{ space_access.space }} </h2>
+<form action="{{request.path}}" method="get">
+<table border="0">
+		<tr>
+			<td><label for="access">Access rights:</label></td>
+			<td><select name="access" id="access">
+				<option value="1" id="1"> read </option>
+				<option value="2" id="2"> write </option>
+				<option value="3" id="3"> owner </option>
+			</select></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><button>Edit access rights</button></td>
+			<td></td>
+		</tr>
+</table>
+</form>
+{% endblock %}

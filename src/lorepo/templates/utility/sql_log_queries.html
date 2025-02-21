@@ -1,0 +1,26 @@
+{%if sql_queries %}
+   <div class="footNav">
+  <h2>Queries</h2>
+  <p>
+    {{ sql_queries|length }} Quer{{ sql_queries|pluralize:"y,ies" }}, {{sql_time_sum}} Time
+  </p>
+  <table>
+    <col width="1"></col>
+    <col></col>
+    <col width="1"></col>
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">SQL</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for query in sql_queries %}<tr class="{% cycle odd,even %}">
+      <td>{{ forloop.counter }}</td>
+      <td>{{ query.sql|escape }}</td>
+    </tr>{% endfor %}
+    </tbody>
+  </table>
+
+</div>
+{% endif %}

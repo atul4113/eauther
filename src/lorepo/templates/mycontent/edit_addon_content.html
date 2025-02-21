@@ -1,0 +1,72 @@
+{% load spaces %}
+
+<!doctype html>
+
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+    <title>Addon Editor - {{ settings.APP_NAME }}</title>
+
+    <script src="https://cdn.rawgit.com/showdownjs/showdown/1.8.6/dist/showdown.min.js"></script>
+
+    <script type="text/javascript" src="/media/js/jquery-1.6.4.min.js"></script>
+    <script type="text/javascript" src="/media/addoneditor/addoneditor.nocache.js"></script>
+
+    <script>var require = { paths: { 'vs': '/media/addoneditor/libs/monaco/vs' } };</script>
+    <script src="/media/addoneditor/libs/monaco/vs/loader.js"></script>
+    <script src="/media/addoneditor/libs/monaco/vs/editor/editor.main.nls.js"></script>
+    <script src="/media/addoneditor/libs/monaco/vs/editor/editor.main.js"></script>
+
+	<script type="text/javascript">
+
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-22106147-3']);
+	  _gaq.push(['_trackPageview']);
+
+
+		var addon_editor;
+      	function iaeOnAppLoaded(){
+	        // Load assessment
+            addon_editor = iaeCreateEditor();
+    	    addon_editor.setNextUrl('{{ next_url }}');
+    	    {% if publish_url %}
+    	    	addon_editor.setPublishUrl('{{ publish_url }}');
+    	    	addon_editor.setCreateNewVersionUrl('{{ create_new_version_url }}');
+    	    {% endif %}
+    	    addon_editor.load('/file/{{content.file.id}}');
+      	    addon_editor.loadDocumentation('/doc/api/private/{{ content.pk }}')
+      	}
+	</script>
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+        function sendPageViewEvent(username, companyName) {
+            var is_test_account = false;
+            {% if request.user and request.user.company.id|is_test_company %}
+            is_test_account = true;
+            {%  endif %}
+            ga('set', 'dimension1', username);
+            ga('set', 'dimension2', companyName);
+            ga('set', 'dimension3', is_test_account);
+            ga('send', 'pageview', location.pathname);
+        }
+
+        ga('create', 'UA-22106147-3', 'auto');
+
+        {% if user.is_authenticated %}
+            sendPageViewEvent("{{ user.username }}", "{{ user.company.title }}");
+        {% else %}
+            sendPage1ViewEvent("Anonymous", "Anonymous");
+        {% endif %}
+
+
+    </script>
+  </head>
+
+  <body>
+  </body>
+</html>

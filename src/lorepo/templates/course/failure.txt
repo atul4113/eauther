@@ -1,0 +1,6 @@
+{% autoescape off %}
+<p>
+	Dear {{ username }}, <br />
+	Your export for course "{{ course.name }}" has not been created. Please contact support at mauthor@learnetic.com
+</p>
+{% endautoescape %}

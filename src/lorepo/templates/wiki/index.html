@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+{% load apptags %}
+{% load wiki %}
+{% load cache %}
+{% load markdown_deux_tags %}
+
+{% block head %}
+    <script type="text/javascript" src="/media/js/toc-disable-links.js"></script>
+    <link href="/media/languages/languages.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/media/css/material.css" rel="stylesheet" type="text/css"/>
+{% endblock %}
+
+{% block content %}
+
+
+    <h1 class="title">Documentation</h1>
+    {% if languages %}
+        <div class="btn-group dropdown">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                <span class="lang-sm lang-lbl-full" lang="{{ lang_code }}"></span> <b class="caret"></b>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+                {% for lang in languages %}
+                    {% if lang != lang_code %}
+                        {% if page_url %}
+                            <li><a href="/doc/{{ lang }}/page/{{ page_url }}"><span class="lang-sm lang-lbl-full"
+                                                                                    lang="{{ lang }}"></span></a></li>
+                        {% else %}
+                            <li><a href="/doc/{{ lang }}"><span class="lang-sm lang-lbl-full" lang="{{ lang }}"></span></a>
+                            </li>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+
+    <div class="main clear" style="padding-top: 0"></div>
+
+    {% include "common/messages/display_messages.html" %}
+
+    {% if no_menu and selected_page %}
+        <div class="wiki-page-preview-wrapper">
+            <h4>
+                {{ selected_page.title }}
+            </h4>
+            {{ selected_page.text|markdown:"tables" }}
+        </div>
+    {% else %}
+        <div id="wiki-pages-list-wrapper-not-sortable" class="wiki-list-wrapper">
+            <ul id="wiki-pages-list-root-not-sortable" class="not-sortable">
+                {% toc toc_pages selected_page lang_code %}
+            </ul>
+        </div>
+
+        <div id="wiki-pages-display-wrapper">
+        {% if selected_page %}
+            <div class="wikiPage" id="{{ selected_page.id }}">
+                <div class="wiki-page-preview-wrapper">
+                    <div class="wiki-page-preview-header">
+                        <h4>
+                            {{ selected_page.title }}
+                        </h4>
+                        <div id="wiki-page-buttons">
+                            {% if user.is_superuser or user.is_staff %}
+                                <div class="button-left" id="edit-toc">
+                                    {% button 'Edit TOC' 'parent.location="/doc/edit_table_of_contents"' %}
+                                </div>
+
+                                {% with request.path|stringformat:"s" as s %}
+                                    {% with "parent.location='/doc/upload?next="|add:s|add:"'" as url %}
+                                        <div class="button-left">{% button 'Upload File' url %}</div>
+                                    {% endwith %}
+                                {% endwith %}
+
+                                <div class="button-left">
+                                    {% button 'Add Page' 'parent.location="/doc/add"' '' '' %}
+                                </div>
+                                <div class="button-left">
+                                    {% button 'Edit Page' 'return getPageURL("edit")' %}
+                                </div>
+                                <div class="button-left">
+                                    <script>
+                                        function confirmDeletion() {
+                                            if (confirm("Are you sure?")) {
+                                                return getPageURL("delete");
+                                            }
+                                        }
+                                    </script>
+                                    {% button 'Delete Page' 'confirmDeletion()' %}
+                                </div>
+                                <div class="clear"></div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="wiki-page-preview-text">
+                    {{ selected_page.text|markdown:"tables" }}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    {% endif %}
+</div>
+
+    <script>
+        $(document).ready(function () {
+            localStorage.clear();
+            highlight('{{ highlight_word }}');
+
+            function highlight(text) {
+                if (text.length == 0) {
+                    return;
+                }
+                var inputText = $('.wiki-page-preview-wrapper');
+                var html = inputText.html();
+                var pattern = new RegExp("(" + text + ")", "gi");
+                var new_text = html.replace(pattern, "<span class='highlight'>" + text + "</span>");
+                inputText.html(new_text);
+            }
+        });
+    </script>
+
+    <div class="clearfix"></div>
+
+{% endblock %}

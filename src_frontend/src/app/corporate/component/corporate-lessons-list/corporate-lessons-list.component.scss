@@ -1,0 +1,21 @@
+@import "../../../common/templates/mdl-colors";
+
+app-corporate-lessons-list {
+    table {
+        width: 100%;
+        margin-bottom: 15px;
+
+        th {
+            background-color: $grey-300;
+        }
+
+        td {
+            .material-icons {
+                color: $grey-500;
+                line-height: 40px;
+            }
+
+            white-space: normal;
+        }
+    }
+}

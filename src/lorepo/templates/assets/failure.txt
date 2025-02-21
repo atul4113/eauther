@@ -1,0 +1,16 @@
+{% autoescape off %}
+Dear {{ user }},
+<p>
+Lesson {{ content.title }} has not been successfully updated with your assets. Probably it is opened in editor or the editor has not been closed properly.
+</p>
+
+<p>
+Please close any opened editors for this lesson or open and close it once more. Then please try to upload the assets again.
+</p>
+
+<p>
+--<br/>
+{{ settings.APP_NAME }}
+</p>
+
+{% endautoescape %}

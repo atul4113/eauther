@@ -1,0 +1,105 @@
+@import '../../templates/common';
+
+footer {
+    h3[mat-subheader] {
+        font-size: 18px !important;
+        line-height: 20px;
+    }
+
+    .footer-first-column {
+        img.footer__logo {
+            width: 200px;
+            max-width: 100%;
+            height: 73.7px;
+        }
+
+        p {
+            margin: 16px 0;
+            color: $grey-350;
+        }
+    }
+
+
+    .footer-second-column {
+        h3[mat-subheader] {
+            color: $blue-500;
+        }
+
+        .footer-social__wrapper {
+            .mat-list-item-content {
+                height: auto!important;
+
+                .mat-line {
+                    white-space: normal;
+                }
+            }
+        }
+
+        a.footer-social {
+            width: 37px;
+            height: 37px;
+            padding: 0!important;
+            min-width: 37px!important;
+
+            .over {
+                display: none;
+            }
+
+            .normal {
+                display: block;
+            }
+
+            &:hover {
+                .over {
+                    display: block;
+                }
+
+                .normal {
+                    display: none;
+                }
+            }
+        }
+    }
+
+    .footer-third-column {
+        h3[mat-subheader] {
+            color: $pink-500;
+        }
+    }
+
+    .footer-fourth-column {
+        h3[mat-subheader] {
+            color: $green-500;
+        }
+
+        img.footer__service-logo {
+            max-width: 120px;
+            max-height: 40px;
+        }
+    }
+
+    a[mat-line] {
+        color: $grey-350;
+        font-size: 14px !important;
+        font-weight: 500 !important;
+        text-decoration: none;
+
+        &:hover {
+            color: $grey-300;
+        }
+    }
+
+    .footer-copyright {
+        padding: 16px;
+        background: $grey-750;
+        text-align: center;
+        color: $grey-350;
+        font-weight: 500;
+
+        .footer-copyright__build {
+            margin-left: 16px;
+            color: $grey-500;
+            font-weight: 400;
+        }
+    }
+}

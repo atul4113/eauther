@@ -1,0 +1,22 @@
+{% extends "base_no_search.html" %}
+
+{% load apptags %}
+
+{% block content %}
+
+<div id="pricing_plans">
+	<h1 class="page-header">
+		Pricing plans
+	</h1>
+
+	<div class="wrapper">
+        <div class="pricing_login_register_info">
+            <div>To create 30 days trial demo account you have to log in to your account.</div>
+            <a href="/accounts/login/?next=/corporate/create_trial_account" class="btn btn-large btn-primary">Login</a>
+            <div>If you don't have an account, please register.</div>
+            <a href="/accounts/register/" class="btn btn-large btn-info">Register</a>
+        </div>
+	</div>
+</div>
+
+{% endblock %}

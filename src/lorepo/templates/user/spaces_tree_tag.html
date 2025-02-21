@@ -1,0 +1,8 @@
+{% load admin_tag %}
+
+<ul>
+{% for space in spaces %}
+	<li>{{space}} [{{space.left}} - {{space.right}}]</li>
+	{% spaces_tree_tag space.kids.all %}
+{% endfor %}
+</ul>

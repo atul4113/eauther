@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load logo %}
+{% load apptags %}
+
+{% block head %}
+<link href="/media/languages/languages.min.css" rel="stylesheet" type="text/css"/>
+{% endblock %}
+
+{% block content %}
+
+<h1 class="page_header">Edit profile :: <span class="user-edit-profile">[{{ request.user }}]</span></h1>
+<div class="main clear" style="padding-top: 0"></div>
+
+{% include "common/messages/display_messages.html" %}
+
+<div class="myContent" id="profile-view">
+	<div class="wrapper pull-center">
+        <div class="editor-form-box">
+            {% include "user/password_change_form.html" %}
+            <div class="clear content"></div>
+            {% include "user/email_change_form.html" %}
+            <div class="clear content"></div>
+            {% include "user/lang_change_form.html" %}
+        </div>
+
+        <div class="profile-info-box">
+            <span><b>Username:</b> {{ request.user }}</span>
+            <span><b>E-mail:</b> {{ request.user.email }}</span>
+            <div class="clear"></div>
+        </div>
+	</div>
+</div>
+<div class="main clear"></div>
+{% endblock %}

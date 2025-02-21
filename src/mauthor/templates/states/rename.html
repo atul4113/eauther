@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load apptags %}
+
+{% block content %}
+
+<h1 class="page_header">Rename state</h1>
+<div class="main clear" style="padding-top: 0"></div>
+
+<div>
+	<form action="{{request.path}}" method="post" name="rename">
+	<input type="hidden" name="next" value="{{next}}"/>
+	<input type="hidden" name="state_id" value="{{state.id}}"/>
+	<table style="margin:0px 10px">
+	<tr>
+		<td>State name:</td>
+		<td><input type="text" name="name" value="{{state.name}}"/></td>
+		<td>{% button 'Rename' 'document.forms["rename"].submit()' %}</td>
+		<td><input type="submit" /></td>
+	</tr>
+	</table>
+	</form>
+</div>
+
+{% endblock %}

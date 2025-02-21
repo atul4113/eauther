@@ -1,0 +1,29 @@
+@import "../../../common/templates/mdl-colors";
+
+
+app-lesson-details-bug-card {
+
+    .mat-card {
+        background-color: $grey-50;
+        margin: 8px;
+    }
+
+    div.mat-card-header-text{
+        margin-left: 0px;
+    }
+
+    mat-card-title.mat-card-title {
+        font-weight: bold;
+    }
+
+   div.button-to-the-right {
+        text-align: right;
+    }
+
+    mat-card-actions.mat-card-actions {
+        text-align: right;
+        margin-bottom: -36px;
+    }
+
+}
+

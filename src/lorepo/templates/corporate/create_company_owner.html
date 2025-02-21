@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load apptags %}
+{% load markdown_deux_tags %}
+
+{% block content %}
+
+<h1 class="page_header">Create Company Owner</h1>
+<div class="main clear" style="padding-top: 0"></div>
+
+{% include "common/messages/display_messages.html" %}
+
+<form method="post" action="/corporate/create_company_owner" name="create">
+	{% csrf_token %}
+	<table>
+  		{{ form }}
+  	<tr><th></th><th>{% button 'Create' 'document.forms["create"].submit()' %}</th></tr>
+  	</table>
+  	<input type="submit" />
+</form>
+{% endblock %}

@@ -1,0 +1,175 @@
+@import "../../common/templates/mdl-colors";
+
+#admin-panel {
+
+    .app-loading-wrapper {
+        padding: 64px 0;
+        text-align: center;
+    }
+
+    .mdl-card {
+        overflow: visible;
+
+        .mdl-card__title {
+            padding-bottom: 8px;
+        }
+
+        .mdl-list {
+            margin: 0 8px;
+            padding: 0;
+
+            .mdl-list__item {
+                a {
+                    text-decoration: none;
+                    height: auto;
+                    cursor: pointer;
+                }
+            }
+
+            .mdl-list__item.mdl-list__item--three-line {
+                height: auto;
+                overflow: auto;
+
+                .mdl-list__item-text-body {
+                    height: auto;
+                    overflow: auto;
+                }
+            }
+
+            .mdl-list__item-avatar {
+                background-color: $blue-500;
+                font-size: 24px;
+                line-height: 40px;
+                text-align: center;
+            }
+
+            .mdl-list__item-text-body {
+                margin-left: 56px;
+            }
+        }
+    }
+
+    .data-table-info {
+        margin-top: 0;
+        margin-bottom: 0;
+        white-space: normal;
+        word-break: normal;
+        word-wrap: normal;
+
+        .data-table-info-header th.sortable, th.clickable {
+            cursor: pointer;
+            user-select: none;
+        }
+
+        tr td {
+            transition: background-color 1500ms linear;
+        }
+
+        .material-icons.mdl-list__item-icon.non-active {
+            opacity: 0.4;
+        }
+
+        .content-vertical-align-middle {
+            vertical-align: middle;
+        }
+
+        .middle-value-cell {
+            text-align: center;
+        }
+
+        .disable-line-break {
+            white-space: nowrap;
+        }
+
+        // to have Language and sorting icon - by default on same line
+        .language-header {
+            width: 130px;
+        }
+
+    }
+
+    .input-group {
+        display: flex;
+        align-items: center;
+
+        .mdl-textfield {
+            flex-grow: 1;
+            margin: 0 8px 0 0;
+        }
+
+    }
+
+    .mdl-button {
+        margin-left: 4px;
+    }
+
+    .import-button {
+        margin-top: 8px;
+    }
+
+    .language-dropdown-list {
+        text-transform: none;
+    }
+
+    .paginator-page-size-group {
+        float: left;
+        margin-left: 24px;
+        margin-top: 4px;
+    }
+
+    paginator {
+        display: block;
+        text-align: right;
+    }
+
+    .import-textarea {
+        display: flex;
+        width: 100%;
+
+        textarea {
+            border: 1px #d7d7d7 solid;
+            flex-grow: 1;
+            background: white;
+        }
+    }
+
+    .button-lowercase {
+        text-transform: none;
+    }
+
+    .middle-value-cell {
+        text-align: center;
+    }
+
+    .not-visible {
+        display: none;
+    }
+
+    .inline-edit-label {
+        white-space: normal;
+    }
+
+    .inline-edit-label:hover {
+        color: #6584e2;
+    }
+
+    .inline-edit {
+        resize: both;
+        width: 100%;
+    }
+
+    .back-button {
+        float: left;
+        margin: 0 8px 0 0;
+    }
+
+    .long-button {
+        width: 250px;
+    }
+
+    .default-language {
+        font-weight: bold;
+    }
+
+
+}

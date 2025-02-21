@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<interactiveContent name="Copy Semi Responsive Second Test" scoreType="last" version="2">
+    <metadata>
+        <entry key="useGrid" value="false"/>
+        <entry key="gridSize" value="5"/>
+        <entry key="staticHeader" value="false"/>
+        <entry key="staticFooter" value="false"/>
+
+        <entry key="snapToGrid" value="true"/>
+        <entry key="useRulers" value="true"/>
+        <entry key="snapToRulers" value="true"/>
+        <entry key="theme.href" value="/file/6485362123997184"/>
+    </metadata>
+    <addons>
+        <addon-descriptor addonId="Page_Name" href="/proxy/get?url=http://www.mauthor.com/media/iceditor/addons/Page_Name.xml"/>
+        <addon-descriptor addonId="Page_Counter" href="/proxy/get?url=http://www.mauthor.com/media/iceditor/addons/Page_Counter.xml"/>
+        <addon-descriptor addonId="TestAddon1" href="http://TestAddon1.xml"/>
+        <addon-descriptor addonId="TestAddon4" href="http://TestAddon1.xml"/>
+    </addons>
+    <styles>
+        <style id="phone" name="phone">phone-theme</style>
+        <style id="desktop" isDefault="true" name="desktop">desktop-theme</style>
+        <style id="pc" name="pc">pc-theme</style>
+        <style id="pc-big" name="pc-big">pc-big-theme</style>
+        <style id="pc-big-waagh" name="pc-big-waagh">pc-big-waagh-theme</style>
+    </styles>
+    <layouts>
+        <layout id="phone" name="phone">
+            <style id="phone"/>
+            <threshold width="400"/>
+        </layout>
+        <layout id="desktop" isDefault="true" name="desktop">
+            <style id="desktop"/>
+            <threshold width="600"/>
+        </layout>
+        <layout id="pc" name="pc">
+            <style id="pc"/>
+            <threshold width="1200"/>
+        </layout>
+        <layout id="pc-big" name="pc-big">
+            <style id="pc-big"/>
+            <threshold width="1800"/>
+        </layout>
+        <layout id="pc-big-waagh" name="pc-big-waagh">
+            <style id="pc-big-waagh"/>
+            <threshold width="2400"/>
+        </layout>
+    </layouts>
+    <pages>
+        <page href="4589705131720704" id="Sw8NvN" modulesMaxScore="3" name="Page 2" pageWeight="1" preview="" reportable="true"/>
+        <page href="5715605038563328" id="aecOAT" modulesMaxScore="0" name="Page 1" pageWeight="1"
+              preview="/file/serve/6722757689606144" reportable="false"/>
+        <folder name="commons">
+            <page href="5152655085142016" id="ZF2Wg1" modulesMaxScore="0" name="header" pageWeight="1" preview=""
+                  reportable="true"/>
+            <page href="6278554991984640" id="8LJBze" modulesMaxScore="0" name="footer" pageWeight="1" preview=""
+                  reportable="true"/>
+        </folder>
+        <header ref="commons/header"/>
+        <footer ref="commons/footer"/>
+    </pages>
+    <assets>
+        <asset contentType="image/svg+xml" fileName="ic_arrow_back_white_48px.svg" href="/file/serve/4576510992187392" title=""
+               type="image"/>
+        <asset contentType="image/jpeg" fileName="iStock_000018239670Large.jpg" href="/file/serve/4523734434054144" title=""
+               type="image"/>
+    </assets>
+</interactiveContent>

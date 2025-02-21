@@ -1,0 +1,6 @@
+{% autoescape off %}
+<p>
+	Dear {{ username }}, <br />
+	Assets for project "{{ project_name }}" have not been updated. Please contact support at mauthor@learnetic.com
+</p>
+{% endautoescape %}

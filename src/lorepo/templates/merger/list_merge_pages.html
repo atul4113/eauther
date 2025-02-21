@@ -1,0 +1,34 @@
+{% load apptags %}
+
+	<div class="selectPages">Select pages to be included in new lesson:</div>
+	<form action="/merger/extract/{{content.id}}{% if space.id %}/{{ space.id }}{% endif %}?next={{ next }}"
+		method="post" name="extract{{content.id}}" id="extract{{content.id}}">
+	<div class="selectPagesList" id="merge{{conten.id}}">
+
+ 		{% for page in pages_chapters %}
+            {% if page.isPage %}
+			{{page.indent|safe}}<input type="checkbox" name="pages[{{page.index}}]"> {{page.title}}
+			<a href="/embed/{{content.id}}#{{page.index|add:"1"}}" target="_new">Preview</a><br/>
+            {%  else %}
+            {{page.indent|safe}}<b>{{page.title}}</b><br />
+            {% endif %}
+		{% endfor %}
+        {%  if common_pages %}
+            <b>Commons</b><br />
+            {% for page in common_pages %}
+            &nbsp;&nbsp;&nbsp;<input type="checkbox" name="common_pages[{{page.index}}]"> {{page.title}} <br />
+            {% endfor %}
+        {%  endif %}
+        <input type="checkbox" name="select-all" id="select-all{{content.id}}" /> Select All
+        <script language="JavaScript">
+
+            $('#select-all{{content.id}}').click(function(event) {
+                var $that = $(this)
+                $('#extract{{content.id}}').find(':checkbox').each(function () {
+                    this.checked = $that.is(':checked');
+                });
+            });
+        </script>
+	</div>
+    <button type="submit" class="btn btn-primary btn-sm" name="action-type" value="merge">Select for merge</button>
+	</form>

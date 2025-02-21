@@ -1,0 +1,153 @@
+<mat-card class="lesson-card" (dblclick)="previewLesson()" (click)="selectLesson()" >
+    <mat-card-title
+        class="card-title">
+        {{ lesson.title }}
+    </mat-card-title>
+
+    <div class="content-body">
+        <div class="content-left">
+            <mat-card-subtitle>
+                {{ lesson.author }}
+            </mat-card-subtitle>
+            <mat-card-content>
+                <div class="modified-date">
+                    {{ lesson.modifiedDate | amTimeAgo }}
+                </div>
+            </mat-card-content>
+        </div>
+
+        <div [ngStyle]="{'background-image': 'url(' + lesson.iconHref + ')'}"
+             class="content-right"></div>
+    </div>
+
+    <mat-card-actions
+        [ngClass]="{'selected': isSelected, 'not-selected': !isSelected}">
+        <ng-container *ngIf="lesson.contentType.isLesson()">
+            <a *ngIf="userPermissions && userPermissions.contentViewLessonsAddons" mat-icon-button
+               [matTooltip]="translations | getLabel:'plain.my_lessons.panel.lesson_details.preview'"
+               [href]="'/present/' + lesson.id"
+               (click)="$event.stopPropagation()"
+               target="_blank"><i class="material-icons">launch</i></a>
+
+            <a *ngIf="!isProject && (userPermissions && userPermissions.contentCreateEditLessonsAddons)" mat-icon-button
+               [matTooltip]="translations | getLabel:'plain.corporate.panel._lessons_list.edit'"
+               [class.disabled]="!editEnabled"
+               (click)="$event.stopPropagation(); onEdit($event)">
+                <i class="material-icons">mode_edit</i></a>
+            <a *ngIf="isProject && (userPermissions && userPermissions.contentCreateEditLessonsAddons)" mat-icon-button
+               [matTooltip]="translations | getLabel:'plain.corporate.panel._lessons_list.edit'"
+               [class.disabled]="!editEnabled"
+               (click)="$event.stopPropagation(); onEdit($event)">
+               <i class="material-icons">mode_edit</i></a>
+        </ng-container>
+
+        <ng-container *ngIf="lesson.contentType.isAddon()">
+            <a mat-icon-button
+               matTooltip="Preview"
+               [href]="(isProject ? '/corporate' : '/mycontent') + '/view_addon/' + lesson.id"
+               (click)="$event.stopPropagation()"
+               target="_blank"><i class="material-icons">launch</i></a>
+
+            <a *ngIf="!isProject" mat-icon-button
+               matTooltip="Edit"
+               [class.disabled]="!editEnabled"
+               (click)="$event.stopPropagation(); onEdit($event);"
+               ><i class="material-icons">mode_edit</i></a>
+            <a *ngIf="isProject" mat-icon-button
+               matTooltip="Edit"
+               [class.disabled]="!editEnabled"
+               (click)="$event.stopPropagation(); onEdit($event);"
+               ><i class="material-icons">mode_edit</i></a>
+            <div class="actions-spacer"></div>
+            <button class="undelete-button"
+                    *ngIf="isTrash"
+                    (click)="undelete($event)"
+                mat-button>{{ translations | getLabel: 'plain.my_lessons.panel.lesson_details.undelete' }}</button>
+        </ng-container>
+
+        <!--<ng-container *ngIf="lesson.contentType.isLesson() || isProject">-->
+            <!--<button *ngIf="!lesson.isPublic"-->
+                    <!--[matTooltip]="translations | getLabel:'plain.my_lessons.panel.lesson_card.publish'"-->
+                    <!--mat-icon-button-->
+                    <!--(click)="publishLesson(lesson.id, $event)"><img src="/media/images/ic_lock_outline_white2_24px.svg">-->
+            <!--</button>-->
+
+            <!--<button *ngIf="lesson.isPublic"-->
+                    <!--[matTooltip]="translations | getLabel:'plain.my_lessons.panel.lesson_card.unpublish'"-->
+                    <!--mat-icon-button-->
+                    <!--(click)="unpublishLesson(lesson.id, $event)"><img src="/media/images/ic_lock_open_white2_24px.svg">-->
+            <!--</button>-->
+        <!--</ng-container>-->
+        <ng-container *ngIf="lesson.contentType.isLesson()">
+            <div class="actions-spacer"></div>
+
+            <button class="undelete-button"
+                    *ngIf="isTrash"
+                    (click)="undelete($event)"
+                    mat-button>{{ translations | getLabel: 'plain.my_lessons.panel.lesson_details.undelete' }}</button>
+            <button mat-icon-button
+                    [matTooltip]="translations | getLabel: 'plain.my_lessons.panel.lesson_card.more_options'"
+                    [matMenuTriggerFor]="menu"
+                    (click)="$event.stopPropagation()"
+                    class="more-actions"><i class="material-icons more-icon">more_vert</i></button>
+
+            <mat-menu #menu="matMenu">
+                <a mat-menu-item>
+                    <b>{{ translations | getLabel:"plain.my_lessons.panel.lesson_card.view_as" }}</b>
+                </a>
+                <a *ngIf="userPermissions && userPermissions.contentViewLessonsAddons" mat-menu-item
+                   [href]="'/embed/' + lesson.id"
+                   class="lesson-menu-item"
+                   target="_blank">
+                    {{ translations | getLabel:"plain.my_lessons.panel.lesson_card.single_page" }}
+                </a>
+                <a *ngIf="userPermissions && userPermissions.contentViewLessonsAddons" mat-menu-item
+                   [href]="'/embed/book/' + lesson.id"
+                   class="lesson-menu-item"
+                   target="_blank">
+                    {{ translations | getLabel:"plain.my_lessons.panel.lesson_card.double_page" }}
+                </a>
+                <a *ngIf="userPermissions && userPermissions.contentViewLessonsAddons" mat-menu-item
+                   [href]="'/embed/' + lesson.id + '?cover=1'"
+                   class="lesson-menu-item"
+                   target="_blank">
+                    {{ translations | getLabel:"plain.my_lessons.panel.lesson_card.double_page_cover" }}
+                </a>
+                <a *ngIf="userPermissions && userPermissions.contentViewLessonsAddons" mat-menu-item
+                   [href]="'/present/' + lesson.id"
+                   class="lesson-menu-item"
+                   target="_blank">
+                    {{ translations | getLabel:"plain.my_lessons.panel.lesson_card.presentation" }}
+                </a>
+
+                <a mat-menu-item>
+                    <b>{{ translations | getLabel:"plain.my_lessons.panel.lesson_card.localization" }}</b>
+                </a>
+                <a *ngIf="userPermissions && userPermissions.localizationCreateLessonsForLocalization" mat-menu-item
+                   [href]="'/localization/start_localization/' + lesson.id + '/' + spaceId + '?next=/mycontent'"
+                   class="lesson-menu-item"
+                   target="_blank">
+                    {{ translations | getLabel:"plain.my_lessons.panel.lesson_card.start_localization" }}
+                </a>
+                <a *ngIf="userPermissions && userPermissions.narrationExportAudioVideoNarrations" mat-menu-item
+                   [href]="'/exchange_narration/export_to_csv/' + lesson.id + '?next=/mycontent'"
+                   class="lesson-menu-item"
+                   target="_blank">
+                    {{ translations | getLabel:"plain.my_lessons.panel.lesson_card.export_csv" }}
+                </a>
+                <a *ngIf="userPermissions && userPermissions.narrationExportAudioVideoNarrations" mat-menu-item
+                   [href]="'/exchange_narration/export_to_html/' + lesson.id + '?next=/mycontent'"
+                   class="lesson-menu-item"
+                   target="_blank">
+                    {{ translations | getLabel:"plain.my_lessons.panel.lesson_card.export_html" }}
+                </a>
+                <a *ngIf="userPermissions && userPermissions.localizationExportXLIFF" mat-menu-item
+                   [href]="'/localization/create_export/' + lesson.id + '?next=/mycontent'"
+                   class="lesson-menu-item"
+                   target="_blank">
+                    {{ translations | getLabel:"plain.my_lessons.panel.lesson_card.export_xliff" }}
+                </a>
+            </mat-menu>
+        </ng-container>
+    </mat-card-actions>
+</mat-card>

@@ -1,0 +1,12 @@
+cron:
+- description: delete_old_courses
+  url: /cron/delete_old_courses_cron
+  schedule: first monday of month 05:00
+
+- description: lock_companies
+  url: /cron/lock_companies_cron
+  schedule: every day 00:00
+
+- description: is_more_users_in_company
+  url: /cron/is_more_users_in_company_cron
+  schedule: every 120 hours

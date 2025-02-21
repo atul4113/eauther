@@ -1,0 +1,22 @@
+{% load support %}
+
+{% autoescape off %}
+
+<p>
+Ticket URL: <a href="{{ settings.BASE_URL }}/support/admin/ticket/{{ticket.id}}">{{ settings.BASE_URL }}/support/admin/ticket/{{ticket.id}}</a>
+</p>
+
+<p>
+Status of ticket "{{ticket.title}}" has been changed from "{{old_status|print_status}}" to "{{status|print_status}}".
+</p>
+
+<p>
+Action performed by: "{{changer}}"
+</p>
+
+{% if ticket.company %}
+<p>
+Company: {{ticket.company}}
+</p>
+{% endif %}
+{% endautoescape %}

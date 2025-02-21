@@ -1,0 +1,48 @@
+{% load narration %}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="format-detection" content="telephone=no">
+		<title>Exported Narration for lesson {{ lesson }}</title>
+	</head>
+	<body>
+		<b>Project:</b> <span class="project">{{ project }}</span>, <br />
+		<b>Publication:</b> <span class="publication">{{ publication }}</span>, <br />
+		<b>Lesson:</b> <span class="lesson">{{ lesson }}</span>, <br />
+		<b>URL:</b> <a href="{{ url }}">{{ url }}</a> <br />
+		<b>Date of export:</b> <span class="date">{{ date }}</span> <br />
+
+		<br />
+		
+		{% if pages|all_empty %}
+
+			<p>
+				There is no modules with narration in the lesson.
+			</p>
+
+		{% else %}
+		
+			{% for page in pages %}
+				{% if page.narrations %}
+					<b>Page {{ page.index }}:</b> {{ page.name }},
+		
+					<br />
+		
+					{% for narration in page.narrations %}
+						<b>Module:</b> {{ narration.module_name }}, <br />
+						<b>URL:</b> <a href="{{ url }}#{{ page.index }}">{{ url }}#{{ page.index }}</a> <br />
+						<p>
+							{{ narration.value|safe }}
+						</p>
+					{% endfor %}
+		
+					<br />
+				{% endif %}
+			{% endfor %}
+			
+		{% endif %}
+
+	</body>
+</html>

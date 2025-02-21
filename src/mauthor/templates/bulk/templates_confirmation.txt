@@ -1,0 +1,27 @@
+{% autoescape off %}
+
+<p>
+Dear {{ user }},
+</p>
+
+<p>
+Templates have been updated for project "{{ project }}".
+</p>
+
+{% if skipped_contents %}
+<p>
+The following lessons have not been updated because they are currently being edited:
+<ul>
+{% for content in skipped_contents %}
+	<li><a href="{{ settings.BASE_URL }}/corporate/view/{{content.0}}">{{content.1}}</a>
+	{% if content.2 %} - template {{ content.2 }} is currently edited{% endif %}</li>
+{% endfor %}
+</ul>
+</p>
+{% endif %}
+
+<p>
+--<br/>
+{{ settings.APP_NAME }}
+</p>
+{% endautoescape %}

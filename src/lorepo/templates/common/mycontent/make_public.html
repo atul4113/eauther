@@ -1,0 +1,13 @@
+{% load apptags %}
+
+{% if request.user.company %}
+{% if content.is_content_public %}
+	<div class="content-actions-single">
+		<a class="orange" href="/corporate/{{content.id}}/makepublic?next={{request.get_full_path}}#{{content.id}}">Unpublish</a>
+	</div>
+{% else %}
+	<div class="content-actions-single">
+		<a href="/corporate/{{content.id}}/makepublic?next={{request.get_full_path}}#{{content.id}}">Publish</a>
+	</div>
+{% endif %}
+{% endif %}

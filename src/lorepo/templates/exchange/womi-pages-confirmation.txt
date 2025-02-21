@@ -1,0 +1,20 @@
+{% autoescape off %}
+Dear {{ user }},
+<p>
+Pages from lesson {{ content.title }} successfully exported as WOMI.
+</p>
+
+<p>
+You can download the exported packages using below links:
+
+<ul>
+    {% for package in packages %}
+    <li>
+    Page {{ forloop.counter }} <a href="{{ settings.BASE_URL }}/file/serve/{{package.id}}">{{ settings.BASE_URL }}/file/serve/{{package.id}}</a>
+    </li>
+    {% endfor %}
+</ul>
+
+</p>
+
+{% endautoescape %}

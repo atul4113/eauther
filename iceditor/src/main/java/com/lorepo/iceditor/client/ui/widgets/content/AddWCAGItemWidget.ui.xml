@@ -1,0 +1,9 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<g:HTMLPanel ui:field="panel" styleName="listItem">
+			<div class="tableCell"><div class="pageName"></div></div>
+			<div class="tableCell"><div class="moduleID"></div></div>
+			<div class="tableCell"><div class="errorMessage"></div></div>
+	</g:HTMLPanel>
+</ui:UiBinder> 

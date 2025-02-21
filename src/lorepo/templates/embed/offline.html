@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>{{content.title}} - {{ app_name }}</title>
+
+    <script type="text/javascript" src="javascript/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="icplayer/icplayer.nocache.js"></script>
+    <script type="text/javascript" src="javascript/semi-responsive-layout-chooser.js"></script>
+    <script type="text/javascript" src="javascript/screen.js"></script>
+
+    <script type="text/x-mathjax-config">
+		MathJax.Hub.Config({
+			TeX: {imageFont: null, extensions: ["mhchem.js", "AMSsymbols.js", "AMSmath.js"]},
+			extensions: ["tex2jax.js", "forminput.js"],
+			skipStartupTypeset: true,
+			showProcessingMessages: false,
+			jax: ["input/TeX","output/HTML-CSS"],
+			playerObject: "player"
+  		});
+	</script>
+    <script type="text/javascript" src="javascript/MathJax/MathJax.js"></script>
+    <style>
+        .no-margin {
+            margin: 0;
+            padding: 0;
+        }
+        .pull-left {
+            float: left;
+        }
+        .clear {
+            clear: both;
+        }
+    </style>
+
+	<script language="javascript">
+        var player;
+        var scorm;
+        var start;
+        var semiResponsiveLayoutChooser;
+		var userAgent = window.navigator.userAgent;
+		var viewPort = document.querySelector("meta[name=viewport]");
+		var $contentView;
+		var $content;
+		var isMobile = window.mAuthor.ScreenUtils.isMobileUserAgent(userAgent);
+
+        function getOpener() {
+            var parent = null;
+            if (window.parent != null && window.parent.postMessage != null) {
+                parent = window.parent;
+            }
+            if (window.opener != null && window.opener.postMessage != null) {
+                parent = window.opener;
+            }
+            return parent;
+        }
+
+        function getLessonSize() {
+            var $icPlayer = $('#_icplayer');
+            var width = parseInt($icPlayer.css('width'), 10);
+            var height = parseInt($icPlayer.css('height'), 10);
+
+            return {
+                'width': width,
+                'height': height
+            }
+        }
+
+        function postResizeMessage(width, height) {
+            var parent = getOpener();
+
+            if (parent != null) {
+                var message = "RESIZE:" + width + ";" + height;
+                parent.postMessage(message, '*');
+            }
+        }
+
+		function postPageLoadedMessage() {
+            var parent = getOpener();
+
+            if (parent != null) {
+                var message = "PAGE_LOADED";
+                parent.postMessage(message, '*');
+            }
+        }
+
+
+        function chooseLayout(layoutChooser, screenConfiguration) {
+            var isMobile = screenConfiguration.orientation !== window.mAuthor.ScreenUtils.ORIENTATION_TYPES.NOT_MOBILE;
+            var isVertical = screenConfiguration.orientation === window.mAuthor.ScreenUtils.ORIENTATION_TYPES.PORTRAIT;
+            var isHorizontal = screenConfiguration.orientation === window.mAuthor.ScreenUtils.ORIENTATION_TYPES.LANDSCAPE;
+
+            return layoutChooser.chooseLayout(screenConfiguration.width, isMobile, isVertical, isHorizontal);
+        }
+
+		function setViewPortSizesAfterScreenChanges() {
+            var width = getLessonSize().width;
+            viewPort.setAttribute('content', 'width=' + width + ',maximum-scale=1');
+        }
+
+        function onResizeHandler() {
+            if (isMobile) {
+                var size = getLessonSize();
+                scaleIframe(size.width, size.height);
+            }
+
+            var screenSizes = window.mAuthor.ScreenUtils.getScreenSizesDependingOnOrientation(userAgent);
+            var layoutID = chooseLayout(semiResponsiveLayoutChooser, screenSizes);
+            var changed = player.changeLayout(layoutID);
+            if (changed) {
+                setViewPortSizesAfterScreenChanges();
+            }
+        }
+
+        function setScaleInformation (width, height, scale) {
+			var scaleX = $contentView[0].getBoundingClientRect().width / width;
+			var scaleY = $contentView[0].getBoundingClientRect().height / height;
+
+			var scaleInformation = {
+				scaleX: scaleX,
+				scaleY: scaleY,
+				transform: 'scale(' + scale + ')',
+				transformOrigin: 'top left'
+			};
+
+			player.getPlayerServices().setScaleInformation(scaleInformation);
+		}
+
+        function scaleIframe (width, height) {
+            var screenSizes = window.mAuthor.ScreenUtils.getScreenSizesDependingOnOrientation(userAgent);
+            var windowWidth = screenSizes.width;
+
+            var scale = windowWidth / width;
+
+            $content.css('transform', 'scale(' + scale + ')');
+            $content.css('transform-origin', 'top left');
+            $content.css('-webkit-transform', 'scale(' + scale + ')');
+            $content.css('-webkit-transform-origin', 'top left');
+
+            var newWidth = scale * width;
+            var newHeight = scale * height;
+
+            $contentView.width(newWidth);
+            $contentView.height(newHeight);
+            $contentView.css({
+                "overflow": "hidden"
+            });
+
+            var $scrollableContent = $("#scrollableBody");
+            $scrollableContent.width(newWidth);
+            $scrollableContent.height(newHeight);
+
+            viewPort.setAttribute ('content', getViewPortContent (userAgent, newWidth));
+            setScaleInformation(width, height, scale);
+        }
+
+        function getViewPortContent (ua, width) {
+            if (!( /iPhone|iPad|iPod/.test (navigator.platform) && /OS [1-5]_[0-9_]* like Mac OS X/i.test (ua) && ua.indexOf ("AppleWebKit") > -1 )) {
+                var contentTag = viewPort.getAttribute ('content');
+                var newContent = contentTag.replace (/width=[^,]+/, 'width=' + width);
+                return newContent;
+            } else {
+                return 'width=' + width;
+            }
+        }
+
+        function receiveMessage(event) {
+            var WINDOW_WIDTH_EVENT = "WINDOW_WIDTH:";
+
+            if (!event.data) {
+                return;
+            }
+
+            if (event.data.indexOf(WINDOW_WIDTH_EVENT) === 0) {
+                if (semiResponsiveLayoutChooser) {
+                    var screenConfiguration = JSON.parse(event.data.substring(WINDOW_WIDTH_EVENT.length, event.data.length));
+                    var layoutID = chooseLayout(semiResponsiveLayoutChooser, screenConfiguration);
+                    var changed = player.changeLayout(layoutID);
+                }
+            }
+        }
+
+        function iframeResizeRequest() {
+		    if (window.parent != null && window.parent.postMessage != null) {
+                var size = getLessonSize();
+                setViewPortSizesAfterScreenChanges();
+                postResizeMessage(size.width, size.height);
+            }
+        }
+
+
+        function icOnAppLoaded(){
+            player = icCreatePlayer('_icplayer');
+            player.load('pages/main.xml', parseInt(location));
+
+			$contentView = $('#content-view');
+			$content = $('#content');
+
+            var firstPageLoaded = false;
+            var orientationChangeHandlerAdded = false;
+            var debounceTimeoutID = null;
+            var currentScore = 0;
+
+            if (!isMobile) {
+                // this moves the lesson to the center of screen on PC
+                $("#scrollableBody").css({'display': 'flex', 'justify-content': 'center'});
+            }
+
+            player.onPageLoaded(function onPageLoadedHandler() {
+				start = start || new Date().getTime();
+
+                if (!firstPageLoaded) {
+                    semiResponsiveLayoutChooser = new window.semiResponsive.LayoutChooser(player.getSemiResponsiveLayouts());
+                    var screenSizes = window.mAuthor.ScreenUtils.getScreenSizesDependingOnOrientation(userAgent);
+
+                    var layoutID = chooseLayout(semiResponsiveLayoutChooser, screenSizes);
+                    var changed = player.changeLayout(layoutID);
+
+                    firstPageLoaded = true;
+
+                    window.addEventListener('orientationchange', onResizeHandler);
+					window.addEventListener("resize", onResizeHandler, false);
+                }
+                
+                iframeResizeRequest();
+                postPageLoadedMessage();
+
+				$("#scrollableBody").css({
+                    "overflow": "",
+                    "height": ""
+                });
+
+				if (isMobile) {
+                    var size = getLessonSize();
+                    scaleIframe(size.width, size.height);
+                }
+
+				// event bus handlers are cleared on each page change, so they should be set on each page load
+                var valueChangedHandler = {
+                    onEventReceived: function() {
+                        var utils = new PlayerUtils(player);
+                        var presentation = utils.getPresentation();
+                        var newScoreValue = utils.getPresentationScore(presentation).scaledScore;
+
+                        // if score changed send now
+                        if (newScoreValue != currentScore) {
+                            sendSCORMScore(false);
+                            window.clearTimeout(debounceTimeoutID);
+                            debounceTimeoutID = null;
+                            currentScore = newScoreValue;
+                        } else {
+                            // update 30 seconds after event came
+                            if (debounceTimeoutID === null) {
+                                debounceTimeoutID = window.setTimeout(function () {
+                                    sendSCORMScore(false);
+                                    debounceTimeoutID = null;
+                                }, 30000);
+                            }
+                        }
+                    }
+                };
+                var playerEventBus = player.getPlayerServices().getEventBus();
+                playerEventBus.addEventListener('ValueChanged', valueChangedHandler);
+
+                (function () {
+                    var scrollDetectorInterval = null;
+                    var retries = 0;
+
+                    function scrollAddIfBodyBiggerThanWindow () {
+                        var $window = $(window);
+                        var $icplayerDiv = $("#_icplayer");
+                        var $scrollableContent = $("#scrollableBody");
+
+                        var windowHeight = $window.height();
+                        var windowWidth = $window.width();
+
+                        var bodyHeight = $icplayerDiv.height();
+                        var bodyWidth = $icplayerDiv.width();
+
+                        if (windowHeight < bodyHeight || windowWidth < bodyWidth) {
+                            $scrollableContent.css("overflow", "auto");
+                            $scrollableContent.height(windowHeight);
+                        } else if (windowHeight >= bodyHeight && windowWidth >=  bodyWidth) {
+                            $scrollableContent.css("height", "");
+                            $scrollableContent.css("overflow", "");
+                        } else if (windowHeight >= bodyHeight) {
+                            $scrollableContent.css("height", "");
+                        }
+
+                        retries++;
+                        if (retries > 5) {
+                            window.clearInterval(scrollDetectorInterval);
+                        }
+                    }
+
+                    $(document).ready(function () {
+                        if (scrollDetectorInterval == null) {
+                            scrollDetectorInterval = setInterval(scrollAddIfBodyBiggerThanWindow, 1000);
+                        }
+                    });
+
+                    if (!orientationChangeHandlerAdded) {
+                        orientationChangeHandlerAdded = true;
+                        // when orientation changes there is a need to set scrollableContent height again
+                        window.addEventListener('orientationchange', function() {
+                            // values of window height/width may not be updated immediately after orientation change
+                            setTimeout(scrollAddIfBodyBiggerThanWindow, 1000);
+                        });
+                    }
+                })();
+            });
+
+            player.onOutstretchHeight(function () {
+                iframeResizeRequest();
+            });
+
+            player.onPageScrollTo(function (top) {
+                var parent = getOpener();
+                if (parent) {
+                    parent.postMessage('SCROLLTOP:' + top, "*");
+                }
+            });
+
+
+            window.addEventListener("message", receiveMessage, false);
+
+            scorm = getScorm();
+            var result = scorm.initializeScormCommunication(window);
+            if (result === false) {
+                scorm = getScorm_1_2();
+                scorm.initializeScormCommunication(window);
+            }
+            var savedState = scorm.loadState();
+            if (savedState) {
+                player.setState(savedState);
+            }
+            var location = scorm.loadLocation();
+            if (location === false) {
+                location = '0';
+            }
+        }
+
+        function registerEventListeners () {
+            // event pagehide doesn't work properly in Chrome browser when the document is in iframe
+            if (window.frameElement !== null && navigator.userAgent.indexOf("Chrome") > -1) {
+                window.addEventListener("beforeunload", sendSCORMScore.bind({}, true), false);
+            }
+            else if ("onpagehide" in window) {
+                window.addEventListener("pagehide", sendSCORMScore.bind({}, true), false);
+            } else {
+                window.addEventListener("beforeunload",sendSCORMScore.bind({}, true), false);
+            }
+        }
+
+        function doStart() {
+            registerEventListeners();
+        }
+
+        /**
+         * Saves state, score and location of SCORM package
+         */
+        function sendSCORMScore(terminateScorm) {
+            var end = new Date().getTime(),
+                wasCompleted = false;
+
+            // This ensures that Player knows to update score before leaving page, event for score type FIRST.
+            if (player.hasOwnProperty('forceScoreUpdate')) {
+                player.forceScoreUpdate();
+            }
+
+            var ps = player.getPlayerServices();
+            var utils = new PlayerUtils(player);
+            var presentation = utils.getPresentation();
+            var score = utils.getPresentationScore(presentation);
+            for (var i = 0; i < score.paginatedResult.length; i++) {
+                var s = score.paginatedResult[i];
+                scorm.setPageName(i, 'Page_' + s.page_number);
+                scorm.setPageMinScore(i, 0);
+                scorm.setPageMaxScore(i, 1);
+                scorm.setPageRawScore(i, s.score);
+                scorm.setPageScaledScore(i, s.score);
+            }
+
+            var _rawscore = score.scaledScore * 100;
+            var rawscore = Math.round(_rawscore);
+
+            if (rawscore >= 100) {
+                wasCompleted = true;
+            }
+
+            scorm.setMinScore(0);
+            scorm.setMaxScore(100);
+            scorm.setRawScore(rawscore);
+            scorm.setScaledScore(_rawscore/100);
+            scorm.setSessionTime(end - start);
+            scorm.saveState(player.getState());
+            scorm.saveLocation(ps.getCurrentPageIndex());
+
+            if (wasCompleted) {
+                scorm.setCompleted();
+            } else {
+                scorm.setIncomplete();
+            }
+
+            scorm.commitScormCommunication();
+            if (terminateScorm) {
+                scorm.terminateScormCommunication();
+            }
+        }
+    </script>
+</head>
+
+<body class="no-margin" onload="doStart();">
+    <div id="scrollableBody">
+		<div id="content-view">
+			<div id="content">
+                <div id="_icplayer" class="no-margin pull-left"></div>
+                <div class="clear"></div>
+			</div>
+		</div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% load apptags %}
+{% load token %}
+
+{% block content %}
+
+<h1 class="page_header">Export course for project {{project}}</h1>
+<div class="main clear" style="padding-top: 0"></div>
+
+{% include 'common/messages/display_messages.html' %}
+
+<div>
+<p><strong>Choose parameters for course export</strong></p>
+
+<form method="POST" action="{{course_id}}" name="export_course">
+    {% form_token "export" %}
+<p>
+SCORM version:
+<select name="scorm_version">
+	<option value="2">SCORM 2004</option>
+	<option value="1">SCORM 1.2</option>
+</select>
+    </br><i> Use "SCORM 2004" to export lessons with page metadata and extended metadata.</i>
+</p>
+
+<p>
+Include player in lesson packages:
+<input type="checkbox" name="include_player" value="1" checked="checked"/>
+<br/>
+<i> Use "Include player in lesson packages" only if you are planning to use the packages with LMS other than mCourser.</i>
+</p>
+
+<input type="hidden" name="next" value="{{next_url}}"/>
+<div class="button-left">
+	<button type="submit" class="btn btn-primary btn-sm">Export</button>
+</div>
+<input type="submit" />
+
+</form>
+
+</div>
+
+{% endblock %}

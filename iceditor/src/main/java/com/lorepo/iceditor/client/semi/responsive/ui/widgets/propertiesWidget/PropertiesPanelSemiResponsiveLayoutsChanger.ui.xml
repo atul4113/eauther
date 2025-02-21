@@ -1,0 +1,16 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui"
+	xmlns:semi-responsive="urn:import:com.lorepo.iceditor.client.semi.responsive.ui.widgets">
+	<ui:style>
+	</ui:style>
+	<g:HTMLPanel styleName="property">
+		<div class="propertyLabel" ui:field="titleLabel"></div>
+		<div class="propertyValue">
+			<semi-responsive:SemiResponsiveLayoutsListWidget
+			visibleItemCount="1" emptyChangeHandler="true"
+			ui:field="semiResponsiveList"
+			></semi-responsive:SemiResponsiveLayoutsListWidget>
+		</div>
+	</g:HTMLPanel>
+</ui:UiBinder> 

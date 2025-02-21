@@ -1,0 +1,77 @@
+<div class="app-content" id="corporate">
+    <page-title-bar [withDots]="true">
+        <h1 class="title">
+            {{ translations | getLabel : "plain.corporate.panel.corporate.dashboard" }}
+        </h1>
+
+        <li *ngIf="areTilesHidden"
+            (click)="showTiles()"
+            class="mdl-menu__item dots-menu-item">
+            {{ translations | getLabel : "plain.corporate.panel.corporate.show_tiles" }}
+        </li>
+        <li *ngIf="!areTilesHidden"
+            (click)="hideTiles()"
+            class="mdl-menu__item dots-menu-item">
+            {{ translations | getLabel : "plain.corporate.panel.corporate.hide_tiles" }}
+        </li>
+    </page-title-bar>
+
+    <div [putFooterBottom]="16" class="app-content-page">
+        <div *ngIf="!isInitialized" class="app-loading-wrapper">
+            <app-loading></app-loading>
+        </div>
+
+        <section *ngIf="isInitialized">
+            <app-corporate-tiles *ngIf="!areTilesHidden"
+                                 [privateSpace]="privateSpace"
+                                 [editLessonToken]="editLessonToken"
+                                 [lastEditedLesson]="getLastEditedLessonId()">
+            </app-corporate-tiles>
+
+            <div class="main-grid">
+                <div class="tables">
+                    <div class="table-title">
+                        {{ translations | getLabel : "plain.corporate.panel.corporate.recently_edited_lessons" }}
+                    </div>
+
+                    <div *ngIf="!editedLessons" class="app-loading-wrapper small">
+                        <app-loading></app-loading>
+                    </div>
+
+                    <app-corporate-lessons-list *ngIf="editedLessons"
+                                                [lessons]="editedLessons"
+                                                [editLessonToken]="editLessonToken"
+                    >
+                    </app-corporate-lessons-list>
+
+                    <div class="table-title">
+                        {{ translations | getLabel : "plain.corporate.panel.corporate.my_project" }}
+                    </div>
+
+                    <div *ngIf="!projects" class="app-loading-wrapper small">
+                        <app-loading></app-loading>
+                    </div>
+
+                    <app-corporate-projects-list *ngIf="projects"
+                                                 [projects]="projects">
+                    </app-corporate-projects-list>
+                </div>
+
+                <div class="news">
+                    <div class="table-title">
+                        {{ translations | getLabel : "plain.corporate.panel.corporate.news" }}
+                    </div>
+
+                    <div *ngIf="!allNews" class="app-loading-wrapper small">
+                        <app-loading></app-loading>
+                    </div>
+
+                    <app-corporate-news *ngIf="allNews"
+                                        [assetsUrl]="assetsUrl"
+                                        [news]="allNews">
+                    </app-corporate-news>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>

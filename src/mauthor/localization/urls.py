@@ -1,0 +1,21 @@
+from django.conf.urls import patterns, url
+
+urlpatterns = patterns('mauthor.localization.views',
+    (r'^create_export/(?P<content_id>\d+)/{0,1}$', 'create_export'),
+    (r'^export/(?P<content_id>\d+)/(?P<user_id>\d+)/(?P<language_code>[a-z\-]+)/{0,1}$', 'export'),
+    (r'^import/(?P<space_id>\d+)/(?P<user_id>\d+)/(?P<uploaded_file_id>\d+)/{0,1}$', 'import_xliff'),
+    (r'^create_import/(?P<space_id>\d+)/{0,1}$', 'create_import'),
+    (r'^check_versions/(?P<content_id>\d+)/{0,1}$', 'check_versions'),
+    (r'^check_repeated_ids/(?P<content_id>\d+)/{0,1}$', 'check_repeated_ids'),
+    (r'^editor/(?P<content_id>\d+)/{0,1}$', 'editor'),
+    (r'^close/(?P<content_id>\d+)/{0,1}$', 'close'),
+    (r'^start_localization/(?P<content_id>\d+)/(?P<space_id>\d+)/{0,1}$', 'start_localization'),
+    (r'^create_xliff/(?P<content_id>\d+)/(?P<project_id>\d+)/(?P<user_id>\d+)/{0,1}$', 'create_xliff'),
+    (r'^create_xliff_trigger/(?P<content_id>\d+)/(?P<project_id>\d+)/{0,1}$', 'create_xliff_trigger'),
+    (r'^reset_xliff_to_current/(?P<content_id>\d+)/{0,1}$', 'reset_xliff_to_current'),
+    (r'^reset_xliff_to_original/(?P<content_id>\d+)/{0,1}$', 'reset_xliff_to_original'),
+    (r'^show_versions/(?P<content_id>\d+)/{0,1}$', 'show_versions'),
+    (r'^save_field/{0,1}$', 'save_field'),
+    (r'^compare/(?P<content_id>\d+)/{0,1}$', 'compare'),
+    (r'^get_differences/(?P<content_id>\d+)/{0,1}$', 'update_lesson'),
+)

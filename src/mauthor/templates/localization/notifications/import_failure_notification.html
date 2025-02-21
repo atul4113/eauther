@@ -1,0 +1,16 @@
+{% autoescape off %}
+<p>
+	{{subject}}
+</p>
+	<p>
+		Because there were several problems:
+	</p>
+	
+	<ul>
+		{% for info in important_informations %}
+			<li>
+				{{ info }}
+			</li>
+		{% endfor %}
+	</ul>
+{% endautoescape %}

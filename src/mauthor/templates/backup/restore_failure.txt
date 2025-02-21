@@ -1,0 +1,19 @@
+{% autoescape off %}
+<p>
+	Dear {{ username }},
+</p>
+
+<p>
+	Your backup for project {{ project_name }} has not been{% if errors %} fully{% endif %} restored. Please contact support at mauthor@learnetic.com
+</p>
+{% if errors %}
+<p>
+	These lessons has not been restored:
+	<ul>
+		{% for error in errors %}
+			<li>{{ error }}</li>
+		{% endfor %}
+	</ul>
+</p>
+{% endif %}
+{% endautoescape %}

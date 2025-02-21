@@ -1,0 +1,6 @@
+{% autoescape off %}
+Dear {{ user }},
+<p>
+Your backup for project {{ project }} has been restored successfully.
+</p>
+{% endautoescape %}

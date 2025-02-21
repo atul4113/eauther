@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<addon id="{{addonId}}">
+
+	<metadata>
+		<title>Hello world Addon</title>
+		<description>
+			Enter addon description here
+		</description>
+	</metadata>
+	
+	<model>
+		<property name="Text" type="string"/>
+	</model>
+	
+	<view>
+		&lt;p&gt;test&lt;/p&gt;
+	</view>
+	
+	<preview>
+		&lt;p&gt;Addon {{addonId}}&lt;/p&gt;
+	</preview>
+	
+	<presenter>
+		function Addon{{addonId}}_create(){
+			
+			var presenter = function(){}
+
+			var element;
+			
+			presenter.run = function(view, model){
+				
+				element = view.getElementsByTagName('p')[0];
+				element.innerHTML = model['Text'];
+			}
+
+			presenter.setShowErrorsMode = function(){
+				element.innerHTML = 'setShowErrorsMode';
+			}
+			
+			presenter.setWorkMode = function(){
+				element.innerHTML = 'setWorkMode';
+			}
+			
+			presenter.reset = function(){
+				element.innerHTML = 'Reset';
+			}
+			
+			presenter.getErrorCount = function(){
+				return 7;
+			}
+			
+			presenter.getMaxScore = function(){
+				return 3;
+			}
+			
+			presenter.getScore = function(){
+				return 1;
+			}
+			
+			presenter.getState = function(){
+				element.innerHTML = 'Get state';
+				return "State saved";
+			}
+
+			presenter.setState = function(state){
+				element.innerHTML = 'Set state';
+			}
+
+			return presenter;
+		}
+		
+	</presenter>
+	
+</addon>

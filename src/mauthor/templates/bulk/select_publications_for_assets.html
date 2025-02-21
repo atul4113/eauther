@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load backup %}
+{% load apptags %}
+
+{% block content %}
+
+    <h1 class="page_header">Select publications for bulk assets update</h1>
+    <div class="main clear" style="padding-top: 0"></div>
+    <div id="messages"></div>
+    <script>
+        $(document).ready(function() {
+            $('ul.no_symbol li input').click(function() {
+                if ($(this).is(':checked')) {
+                    $(this).parent().find('input[name=spaces]').attr('checked', true);
+                    $(this).parents('li').find('input[name=spaces]:first').attr('checked', true);
+                } else {
+                    $(this).parent().find('input[name=spaces]').attr('checked', false);
+                }
+            });
+        });
+    </script>
+
+    <p>
+        Select categories that should be included in bulk assets updated. If you select a category on a deeper level the hierarchy up to the root will be
+        updated too to maintain the hierarchy.
+    </p>
+
+
+
+<form action="/bulk/assets/{{project_id}}" method="post" name="assets_update">
+	<input type="hidden" name="next" value="{{next_url}}"/>
+	<input type="hidden" name="spaces" value="{{project_id}}"/>
+	{% render_checkboxes spaces %}
+	<input type="submit" value="Update assets" />
+	{% button 'Update assets' 'document.forms["assets_update"].submit()' %}
+</form>
+
+{% endblock %}

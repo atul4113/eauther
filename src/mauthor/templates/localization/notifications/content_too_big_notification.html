@@ -1,0 +1,23 @@
+{% autoescape off %}
+<p>
+Dear {{ user.username }}, <br />
+Lesson {{ content.title }} for localization has NOT been created.
+</p> 
+
+<p>
+It is due to the fact that lesson is too big for localization processes. This is mostly because of formatting in
+texts created after copying and pasting the text from word. If you have copied and pasted any texts from text editors
+please use the clear formatting option in lesson editor and then try to localize the lesson again.
+</p>
+
+<p>
+Here are the sizes of individual pages. The bigger the size is the better the chance of finding modules with pasted texts:<br/>
+{% for page in pages %}
+	{{page.1}} - {{page.0.contents|length|filesizeformat}}<br/>
+{% endfor %}
+</p>
+
+<p>
+In case of further problems please contact administrators: admin@{{ app_name }}
+</p>
+{% endautoescape %}

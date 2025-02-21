@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% load apptags %}
+
+{% block head %}
+<style>
+    h3 {
+        font-size: 14px;
+        margin-bottom: 8px;
+    }
+
+    ul {
+        margin-top: 0;
+    }
+
+    ul > li {
+        padding: 4px 0;
+    }
+
+    .buttons-wrapper > form {
+        display: inline-block;
+        margin-right: 16px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<h1 class="page_header">Export Lesson pages</h1>
+<div class="main clear" style="padding-top: 0"></div>
+
+{% include "common/messages/display_messages.html" %}
+
+<div>
+
+<h2>Previously created packages:</h2>
+
+{% for export in exports %}
+    <h3> {{export.content.title}} - {{export.created_date}}, {{ export.user }} </h3>
+    <ul>
+    {% for package in export.sorted_packages %}
+	<li>
+        <a href="/file/serve/{{package.id}}">
+            {{export.content.title}} - page {{ forloop.counter }}
+        </a>
+    </li>
+    {% endfor %}
+    </ul>
+
+{% empty %}
+    No previously exported packages found.
+{% endfor %}
+
+
+<div class="buttons-wrapper">
+
+        <form method="post">
+            <button type="submit" class="btn btn-primary">
+                Export new pages packages (WOMI)
+            </button>
+        </form>
+        <form method="post" action="?hide_nav=1">
+            <button type="submit" class="btn btn-primary">
+                Export new pages packages (WOMI) with hidden header and footer
+            </button>
+        </form>
+
+</div>
+
+</div>
+{% endblock %}

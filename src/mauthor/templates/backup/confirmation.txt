@@ -1,0 +1,26 @@
+{% autoescape off %}
+
+<p>
+Dear {{ user }},
+</p>
+
+<p>
+Backup for project {{ project }} has been created successfully.
+</p>
+
+<p>
+You can download it at <a href="{{ settings.BASE_URL }}/file/serve/{{project_backup.backup.id}}">{{ settings.BASE_URL }}/file/serve/{{project_backup.backup.id}}</a>
+</p>
+
+{% if packages %}
+<p>
+Packages with resources can be downloaded at the following locations:
+<ul>
+{% for package in packages %}
+	<li><a href="{{ settings.BASE_URL }}/file/serve/{{package.zipped_content.id}}">{{package.zipped_content.id}}.zip</a> - {{package.content.title}}
+{% endfor %}
+</ul>
+</p>
+{% endif %}
+
+{% endautoescape %}

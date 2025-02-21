@@ -1,0 +1,22 @@
+<html>
+	<head>
+		<title>Parsed PDF file</title>
+		<style>
+		.text:hover {
+			background-color: #ddd;
+		}
+		</style>
+	</head>
+	<body>
+	{% for key, data in texts.items %}
+	<div>
+		<h1>Page {{key}}</h1>
+		<div>
+			{% for text in data %}
+			<div class="text">{{text.text}}</div>
+			{% endfor %}
+		</div>
+	</div>
+	{% endfor %}
+	</body>
+</html>

@@ -1,0 +1,43 @@
+@import "../../templates/mdl-colors";
+
+popup-with-radio {
+    p:last-child {
+        margin-bottom: 0;
+    }
+
+    mat-radio-group.popup-with-radio__group {
+        display: flex;
+        flex-direction: row;
+
+        &.vertical {
+            flex-direction: column;
+
+            mat-radio-button {
+                margin-bottom: 8px;
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+            }
+        }
+
+        mat-radio-button {
+            display: flex;
+            flex-grow: 1;
+
+            .mat-radio-container {
+                .mat-radio-outer-circle {
+                    border-color: $blue-500;
+                }
+
+                .mat-radio-inner-circle {
+                    background-color: $blue-500;
+                }
+            }
+
+            .mat-radio-ripple .mat-ripple-foreground {
+                background-color: rgba(68, 138, 255, 0.26);
+            }
+        }
+    }
+}

@@ -1,0 +1,9 @@
+{% if content_self_is_template %} 
+	<b>This is a template.</b>
+{% else %} 
+	{% if template %} 
+		<b>Template:</b> {{template}}
+	{% else %} 
+		<b>Template:</b> not selected.
+	{% endif %} 
+{% endif %}

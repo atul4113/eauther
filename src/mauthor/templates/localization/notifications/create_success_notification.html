@@ -1,0 +1,7 @@
+{% autoescape off %}
+<p>
+Dear {{ username }}, <br />
+Lesson {{ content.title }} for localization has been created. You can see it here:
+<a href="{{ settings.BASE_URL }}/corporate/list/{{ project_id }}">Click</a>
+</p>
+{% endautoescape %}

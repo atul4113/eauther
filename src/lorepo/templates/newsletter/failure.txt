@@ -1,0 +1,16 @@
+{% autoescape off %}
+Dear {{ user }},
+<p>
+Unfortunately user emails have not been exported.
+</p>
+
+<p>
+Please try again later or contact us.
+</p>
+
+<p>
+--<br/>
+{{ settings.APP_NAME }}
+</p>
+
+{% endautoescape %}

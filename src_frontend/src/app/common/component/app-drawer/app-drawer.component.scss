@@ -1,0 +1,113 @@
+@import "../../templates/common";
+
+app-drawer {
+    button.drawer-button {
+        position: fixed;
+        top: 64px;
+        left: 0;
+        z-index: 10001;
+        width: 64px;
+        height: 64px;
+        padding: 8px;
+
+        &.is-header-compact {
+            top: 0;
+
+            .material-icons {
+                color: $white;
+            }
+        }
+
+        @media screen and (max-width: $desktop-breakpoint) {
+            top: 0;
+
+            .material-icons {
+                color: $white;
+            }
+        }
+
+        .mat-button-focus-overlay {
+            background-color: transparent !important;
+        }
+    }
+
+    div.drawer-mask {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 11000;
+        background: transparent;
+        transform-style: preserve-3d;
+        will-change: background-color;
+        transition-duration: .2s;
+        transition-timing-function: cubic-bezier(.4, 0, .2, 1);
+        transition-property: transform;
+        pointer-events: none;
+
+        &.is-open {
+            pointer-events: auto;
+            background: rgba(0, 0, 0, 0.5);
+        }
+    }
+
+    div.drawer {
+        width: 300px;
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 11001;
+        background: $white;
+        transform-style: preserve-3d;
+        will-change: transform;
+        transition-duration: .2s;
+        transition-timing-function: cubic-bezier(.4, 0, .2, 1);
+        transition-property: transform;
+        transform: translateX(-310px);
+        overflow: auto;
+        @include shadow--2dp;
+
+        &.is-open {
+            transform: translateX(0);
+        }
+
+        .header-top-bar__logo {
+            height: 50px;
+            padding-left: 12px;
+            margin: 10px 0 10px 0;
+        }
+    }
+
+    nav {
+        border-top: 1px solid $grey-300;
+
+        h6 {
+            font-size: 14px;
+            color: $grey-500;
+            margin: 16px 0 8px 16px;
+        }
+
+        form {
+            margin: 0;
+            padding: 0;
+        }
+
+        mat-nav-list.mat-nav-list {
+            padding-top: 0;
+
+            a[mat-list-item] {
+                padding-left: 16px;
+
+                &.drawer__search {
+                    padding-left: 0;
+
+                    .mat-list-item-content {
+                        height: auto !important;
+                    }
+                }
+            }
+        }
+    }
+}

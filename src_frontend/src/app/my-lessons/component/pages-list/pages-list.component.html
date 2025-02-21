@@ -1,0 +1,11 @@
+<mat-checkbox *ngFor="let page of pages"
+              [(ngModel)]="page._ui.isSelected">
+    {{ page.title }}
+
+    <a *ngIf="page.index != undefined"
+       [href]="'/embed/' + lesson.id + '#' + (page.index + 1)"
+       target="_blank"
+       class="lesson-preview">
+        {{ translations | getLabel: "plain.my_lessons.panel.lesson_details.preview"}}
+    </a>
+</mat-checkbox>

@@ -1,0 +1,17 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui"
+	xmlns:r="urn:import:com.lorepo.iceditor.client.semi.responsive.ui.widgets">
+	<ui:style>
+	</ui:style>
+	<g:HTMLPanel styleName="semi-responsive-orientation-device-selector-widget">
+		<div class="semi-responsive-layout-row">
+			<g:CheckBox ui:field="useDeviceOrientation"></g:CheckBox>
+			<span class="semi-responsive-layout-row-label-next-to-checkbox" ui:field="useDeviceLabel"></span>
+		</div>
+		<div class="semi-responsive-layout-row">
+			<r:DeviceOrientationWidget ui:field="deviceOrientation"></r:DeviceOrientationWidget>
+			<span class="semi-responsive-layout-row-label" ui:field="orientationLabel"></span>
+		</div>
+	</g:HTMLPanel>
+</ui:UiBinder> 

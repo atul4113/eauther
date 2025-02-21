@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load content %}
+
+{% block content %}
+
+<h1 class="page_header">
+	Results for {{ content }}
+</h1>
+
+<div class="main clear"></div>
+
+<div class="browse-results-paginator">
+	{% paginator_form request.path paginator current_page %}
+</div>
+
+<div class="browse-results-container">
+	
+	<table class="browse-results-table">
+		<tr>
+			<th class="date"><a href="?sort=date&desc={{descending}}">Date</a></th>
+			<th class="comments">Comments</th>
+			<th class="score"><a href="?sort=score&desc={{descending}}">Score</a></th>
+		</tr>
+		{% for result in results %} 
+			<tr>
+				<td class="date">
+					<div class="date">
+						{{result.created_date.date}}
+					</div>
+					<div class="time">
+						{{result.created_date.time}}
+					</div>
+				</td>
+				<td>{{result.comments}}</td>
+				<td class="score">{{result.score}}</td>
+			</tr>
+		{% endfor %}
+	</table>
+</div>
+
+<div class="browse-results-paginator">
+	{% paginator paginator current_page %}
+</div>
+
+{% endblock %}

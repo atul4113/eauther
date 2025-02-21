@@ -1,0 +1,56 @@
+  [[#publications]]
+        <tr data-toggle="collapse" data-target="#data-publication-[[row-index]]" class="userrow accordion-toggle clickable-user-publication">
+            <td>[[name]]</td>
+            <td>
+            </td>
+            <td>
+            </td>
+        </tr>
+        [[#have-users]]
+            <tr>
+                <td colspan="4" class="hiddenRow">
+                    <div class="accordian-body collapse fully-expanded" id="data-publication-[[row-index]]">
+                        <table class="table">
+                            [[#users]]
+                                <tr class="userrow">
+                                    <td>[[name]]</td>
+                                    <td>
+                                    </td>
+                                    <td>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" class="hiddenRow">
+                                        <div class="collapse fully-expanded" id="role-[[row-index]]">
+                                            <table>
+                                                <tr>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th></th>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="3">
+                                                        <div class="pull-right roles-edit-panel">
+                                                            [[#roles]]
+                                                            <label class="checkbox">
+                                                                <input type="checkbox" class="checkbox-label-center-margin" [[#checked]]checked[[/checked]] value="[[id]]"> [[name]]</input>
+                                                            </label>
+                                                            [[/roles]]
+                                                            <div class="roles-controls">
+                                                                <button class="btn btn-success btn-sm">Apply</button>
+                                                                <button class="btn btn-link btn-sm">Discard</button>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </td>
+                                </tr>
+                            [[/users]]
+                        </table>
+                    </div>
+                </td>
+            </tr>
+        [[/have-users]]
+    [[/publications]]

@@ -1,0 +1,60 @@
+@import "../../../common/templates/mdl-colors";
+
+app-project-structure-select {
+    display: flex;
+    flex-direction: column;
+
+    .is-bold {
+        font-weight: bold;
+    }
+
+    .has-left-padding {
+        padding-left: 16px;
+    }
+
+    .invisible {
+        opacity: 0;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    a {
+        text-decoration: none;
+        color: black;
+    }
+
+    i {
+        cursor: pointer;
+    }
+
+    .publication-container {
+        margin: 0;
+
+        .material-icons {
+            float: left;
+        }
+
+        .publication-name {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            padding: 0 0 2px 0;
+
+            a {
+                word-break: normal;
+            }
+        }
+
+    }
+
+    .folder-icon {
+        color: $blue-500;
+        font-size: 20px;
+    }
+
+    .blue-arrow {
+        color: $blue-500;
+    }
+}

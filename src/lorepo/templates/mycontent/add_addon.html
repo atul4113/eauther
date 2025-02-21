@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load apptags %}
+{% block content %}
+<div class="createDiv">
+<h2>Create Addon</h2>
+
+<form method="post" action="/mycontent/addon{% if space_id %}/{{space_id}}{% endif %}" name="create">
+	{% csrf_token %}
+	<input type="hidden" value="{{next}}" name="next" />
+	<div class="title-tags">
+		<label for="id_title">{% trans "Title" %}:
+			<div class="errorlist">{% for e in form.title.errors %}{{ e }}{% endfor %}</div>
+		</label>
+		<div>
+			<input id="id_title" type="text" size="60" name="title" value="{{form.data.title}}" autofocus="autofocus" />
+		</div>
+		<label for="id_name">{% trans "Name" %}: 
+			<div class="errorlist">{% for e in form.name.errors %}{{ e }}{% endfor %}</div>
+		</label>
+		<div>
+			<input id="id_name" type="text" size="60" name="name" value="{{form.data.name}}"/>
+		</div>
+		<label for="id_tags">{% trans "Tags" %} <span style="font-size:0.8em">(Must be comma separated)</span>:
+			<div class="errorlist">{% for e in form.tags.errors %}{{ e }}{% endfor %}</div>
+		</label>
+		<div>
+			<textarea rows="4" id="id_tags" name="tags">{{form.data.tags}}</textarea>
+		</div>
+	</div>
+	<div class="description-shortdescription">
+		<label for="id_short">{% trans "Short Description" %}:
+			<div class="errorlist">{% for e in form.short_description.errors %}{{ e }}{% endfor %}</div>
+		</label>
+		<div>
+			<textarea id="id_short" style="width:100%;" rows="4" name="short_description">{{form.data.short_description}}</textarea>
+		</div>
+		<label for="id_desc">{% trans "Description" %}:
+			<div class="errorlist">{% for e in form.description.errors %}{{ e }}{% endfor %}</div>
+		</label>
+		<div>
+			<textarea id="id_desc" style="width:100%;" rows="10" name="description">{{form.data.description}}</textarea>
+		</div>
+	</div>
+	<div style="float:left">{% button 'Create' 'jQuery(this).hide();document.forms["create"].submit();' %}</div>
+	{% with next as next %}
+		{% with "location.href='"|add:next|add:"'" as url %}
+			<div style="float:right">{% button 'Cancel' url %}</div>
+		{% endwith %}
+	{% endwith %}
+</form>
+<div class="content clear"></div>
+</div>
+
+{% endblock %}

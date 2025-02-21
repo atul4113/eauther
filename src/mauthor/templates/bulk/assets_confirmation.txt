@@ -1,0 +1,26 @@
+{% autoescape off %}
+
+<p>
+Dear {{ user }},
+</p>
+
+<p>
+Assets have been updated for project "{{ project }}".
+</p>
+
+{% if skipped_contents %}
+<p>
+The following lessons have not been updated, because they are were during edition:
+<ul>
+{% for content in skipped_contents %}
+	<li><a href="{{ settings.BASE_URL }}/corporate/view/{{content.0}}">{{content.1}}</a></li>
+{% endfor %}
+</ul>
+</p>
+{% endif %}
+
+<p>
+--<br/>
+{{ settings.APP_NAME }}
+</p>
+{% endautoescape %}

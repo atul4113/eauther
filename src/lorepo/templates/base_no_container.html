@@ -1,0 +1,36 @@
+{% load i18n %}
+{% load apptags %}
+{% load logo %}
+{% load corporate %}
+{% load spaces %}
+{% load cache %}
+{% load utility %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head profile="http://www.w3.org/1999/xhtml/vocab">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="format-detection" content="telephone=no" />
+    <title>{% block title %}{% trans "eAuthor - Create once, publish many" %}{% endblock %}</title>
+    {% include 'common/scripts.html' %}
+    {% include 'common/stylesheets.html' %}
+    {% block head %}
+    {% endblock %}
+    <link rel="stylesheet" href="/media/assets_md/material/material.roboto.font.css"/>
+    <link rel="stylesheet" href="/media/assets_md/material/material.icons.css"/>
+    <link rel="stylesheet" href="/media/css/header_md_like.css"/>
+    <script type="text/javascript" src="/media/js/header_md_like.js"></script>
+</head>
+
+<body class="sidebar-second">
+
+{% include 'common/header_md_like.html' %}
+
+{% block content %}{% endblock %}
+
+{% include 'common/footer.html' %}
+
+</body>
+</html>

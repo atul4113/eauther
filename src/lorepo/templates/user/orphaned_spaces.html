@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% load apptags %}
+{% load admin_tag %}
+
+{% block content %}
+
+
+<div class="createDiv">
+<h2>Orphaned spaces</h2>
+
+<ul>
+{% for s in orphaned %}
+	<li>[{{s.id}}] {{s.title}} ({{s.contents}}) - <a href="/corporate/{{s.id}}/delete_space?next={{request.path}}">Remove</a></li>
+{% endfor %}
+</ul>
+
+<div class="content clear"></div>
+</div>
+
+{% endblock %}

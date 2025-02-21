@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+{% load apptags %}
+
+{% block head %}
+<script type="text/javascript">
+function sendResetXLIFF_Request(selected) {
+	$('.confirm-editor-container .loading').show();
+	$.get('/localization/reset_xliff_to_' + selected + '/{{content_id}}')
+	.complete(function(data){
+		document.location = '/localization/editor/{{content_id}}?next={{next_url}}';
+	}).error(function(){
+		$('.confirm-editor-container .loading').hide();
+		$('.confirm-editor-container .error').css('display', 'block');
+	});
+}
+
+function sendUpdateXLIFF_Request() {
+	$('.confirm-editor-container .loading').show();
+	$.post('/localization/get_differences/{{content_id}}')
+	.complete(function() {
+		sendResetXLIFF_Request('current');
+	}).error(function() {
+		$('.confirm-editor-container .loading').hide();
+		$('.confirm-editor-container .error').css('display', 'block');
+	});
+}
+
+</script>
+{% endblock %}
+
+{% block content %}
+<h1 class="page_header">Information</h1>
+<div class="main clear" style="padding-top: 0"></div>
+
+<div class="confirm-editor-container">
+	<div class='error'>
+		Unexpected error occured. Please contact administration.
+	</div>
+	<div class="loading">
+		<img src="/media/images/loading.gif" />
+	</div>
+	<div class="message">
+		{{lesson_type}} lesson has been modified in standard editor.
+		This changes will not be visible until you reset or update XLIFF to {{lesson_type}} lesson.
+		<div>What would you like to do?</div>
+	</div>
+	
+	<div class="options">
+		<div class="single-option">
+			<div class="info">
+				Changes from standard editor will NOT be included in XLIFF.
+			</div>
+			<div class="button">
+				{% with url="parent.location='/localization/editor/"|add:content_id|add:"?next="|add:next_url|add:"'" %}
+					{% button 'Continue' url %}
+				{% endwith %}
+			</div>
+			<div class="clear"></div>
+		</div>
+		
+		{% if lesson_type == "Original" %}
+		<div class="single-option">
+			<div class="info">
+				This option will update current lesson and XLIFF depending on changes made to original lesson.
+			</div>
+			<div class="button">
+				{% button 'Update' 'sendUpdateXLIFF_Request()' %}
+			</div>
+			<div class="clear"></div>
+		</div>
+		{% endif %}
+		
+		{% if lesson_type == "Current" %}
+		<div class="single-option">
+			<div class="info">
+				This option will create new XLIFF from current lesson.
+			</div>
+			<div class="button">
+				{% button 'Reset' 'sendResetXLIFF_Request("current")' %}
+			</div>
+			<div class="clear"></div>
+		</div>
+		{% endif %}
+		
+		{% if lesson_type == "Original" %}
+		<div class="single-option">
+			<div class="info">
+				This option will create new XLIFF from original lesson. You will lose all, not-saved translations made to this lesson.
+			</div>
+			<div class="button">
+				{% button 'Reset' 'sendResetXLIFF_Request("original")' %}
+			</div>
+			<div class="clear"></div>
+		</div>
+		{% endif %}
+		
+		<div class="single-option">
+			<div class="info">
+				Go back to list of lessons. No additional action will be taken.
+			</div>
+			<div class="button">
+				{% with url="parent.location='"|add:next_url|add:"'" %}
+					{% button 'Cancel' url %}
+				{% endwith %}
+			</div>
+			<div class="clear"></div>
+		</div>
+	</div>
+</div>
+{% endblock %}

@@ -1,0 +1,9 @@
+<h4> {{ translations | getLabel: "plain.my_lessons.panel.pages_to_merge.merge"}}</h4>
+<div *ngFor="let lesson of lessonsToMerge">
+    <h6><a [href]='"/present/" + lesson.content_id' target="_blank">{{ lesson.title }}</a></h6>
+    <p>{{ translations | getLabel: "plain.my_lessons.panel.lesson_pages.pages"}}:<span *ngFor="let page of lesson.pages"> {{(page + 1) }},</span></p>
+    <p> {{ translations | getLabel: "plain.my_lessons.panel.lesson_pages.commons"}}:<span *ngIf="lesson.common_pages.length === 0"> {{ translations | getLabel: "plain.my_lessons.panel.my_lessons.none"}}</span><span *ngFor="let page of lesson.common_pages"> {{ (page + 1) }},</span></p>
+</div>
+<button mat-raised-button color="accent" (click)="selectMerge()"> {{ translations | getLabel: "plain.my_lessons.panel.pages_to_merge.merge"}}</button>
+<button mat-raised-button color="primary" (click)="cancelMerge()"> {{ translations | getLabel: "plain.my_lessons.panel.lesson_list.cancel"}}</button>
+<app-loading *ngIf="mergeInProgress"></app-loading>

@@ -1,0 +1,24 @@
+{
+  "name": "iceditor",
+  "version": "2.0.0",
+  "description": "Iceditor for editing mAuthor Lessons",
+  "scripts": {
+    "build": "gulp"
+  },
+  "keywords": [],
+  "author": "Solwit S.A.",
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {
+    "gulp": "3.9.1",
+    "gulp-autoprefixer": "^3.1.1",
+    "gulp-clean": "0.3.2",
+    "gulp-clean-css": "2.0.7",
+    "gulp-concat": "2.6.0",
+    "gulp-less": "3.1.0",
+    "gulp-shell": "0.5.2",
+    "gulp-tsc": "1.1.5",
+    "less-plugin-autoprefix": "1.5.1"
+  },
+  "repository": {}
+}

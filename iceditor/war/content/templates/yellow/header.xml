@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<page layout="pixels" height="60" style="background-color:lightgreen">
+	<modules>
+		<textModule id="Text4" left="10" top="10" width="400" height="40" isVisible="true" style="text-align: right;font-size: 18px;color: #464646;-webkit-font-smoothing: antialiased;">
+			<text draggable="false" gapWidth="0" isActivity="false" isDisabled="false" isCaseSensitive="false">Lesson 08:&nbsp;<b>Past simple: irregular verbs</b></text>
+		</textModule>
+	</modules>
+</page>

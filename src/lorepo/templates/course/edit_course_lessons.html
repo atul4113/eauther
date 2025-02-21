@@ -1,0 +1,156 @@
+{% extends "base.html" %}
+
+{% load apptags %}
+
+{% block head %}
+<script type="text/javascript" src="//code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+<script type="text/javascript" src="/media/js/lib/jquery-ui-nestedSortable.js"></script>
+<script type="text/javascript" src="/media/js/equal-height.js"></script>
+<script type="text/javascript">
+	function loadLessons( span ) {
+		var $span = $(span);
+	}
+	$(document).ready(function() {
+		function toggleOpen(element) {
+			var publicationID = $(element).attr('data-id');
+			var list = $('.lessons-' + publicationID);
+			$(element).toggleClass('open');
+			$(list).toggleClass('open close');
+		}
+		
+		function displayLoading(element) {
+			var loading = $(element).parent().find('.loading');
+			loading.show();
+		}
+		
+		function hideLoading() {
+			$('.loading').hide();
+		}
+		
+		function populateListOfLessons(lessons, publicationID) {
+			var list = $('ul.lessons-' + publicationID);
+			list.html('');
+
+			$.each(lessons, function() {
+				var listElem = $('<li>');
+				var textContainer = $('<div>');
+				textContainer.css('padding-left', '20px');
+				listElem.addClass('list-item');
+				listElem.attr('lesson-id', this.id);
+				textContainer.html(this.title);
+				listElem.append(textContainer);
+				list.append(listElem);
+			});
+			
+		}
+		
+		$('span.display-lessons').click(function() {
+			var $span = $(this);
+			var publicationID = $span.attr('data-id');
+			
+			toggleOpen(this);
+			
+			if ( !$span.hasClass('loaded') ) {
+				displayLoading(this);
+				var response = $.get('/course/get_publication_lessons/' + publicationID)
+				
+				response.done(function(data) {
+					var lessons = JSON.parse(data).lessons;
+					hideLoading();
+					$span.addClass('loaded');
+					populateListOfLessons(lessons, publicationID);
+				});
+			}
+		});
+		
+		var sortableLists = $('.sortable-list');
+		equalHeight( sortableLists );
+		sortableLists.disableSelection();
+
+		$('ul#available-lessons').nestedSortable({
+			disableNesting: 'no-nest',
+			forcePlaceholderSize: true,
+			handle: 'div',
+			helper: 'clone',
+			items: 'li',
+			listType: 'ul',
+			placeholder: 'placeholder',
+			revert: 250,
+			tabSize: 30,
+			tolerance: 'pointer',
+			toleranceElement: '> div',
+			connectWith: 'ul#course-lessons'
+		}); 
+			
+		$('ul#course-lessons').nestedSortable({
+			disableNesting: 'no-nest',
+			forcePlaceholderSize: true,
+			handle: 'div',
+			helper: 'clone',
+			items: 'li',
+			listType: 'ul',
+			placeholder: 'placeholder',
+			revert: 250,
+			tabSize: 30,
+			tolerance: 'pointer',
+			toleranceElement: '> div',
+			connectWith: 'ul#available-lessons'
+		});
+	});
+</script>
+{% endblock %}
+
+{% block content %}
+
+<div id="course-index">
+	<h1 class="page-header">
+		Manage Courses
+	</h1>
+	
+	<div class="wrapper">
+		<div class="container">
+			<div class="list-wrapper">
+				<div class="list-container">
+				
+					<h3>Available Lessons</h3>
+				
+					<ul id="available-lessons" class="sortable-list left root">
+					{% for publication in publications %}
+						<li>
+							<div class="clearfix">
+								{% if publication.contents_count > 0 %}
+									<span data-id="{{ publication.id }}" class="display-lessons"></span>
+								{% else %}
+									<span class="display-lessons-placeholder"></span>
+								{% endif %}
+
+								<span class="publication-title">{{ publication }}</span>
+								
+								<span class="loading">
+									<img src="/media/images/loading.gif" />
+									Loading lessons...
+								</span>
+								
+							</div>
+							<ul class="lessons-{{ publication.id }} clearfix close">
+								<li><div></div></li>
+							</ul>
+						</li>
+					{% endfor %}
+					</ul>
+				</div>
+			</div>
+			<div class="list-wrapper right">
+				<div class="list-container">
+
+					<h3>Course Lessons</h3>
+
+					<ul id="course-lessons" class="sortable-list right root">
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

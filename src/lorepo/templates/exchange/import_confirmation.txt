@@ -1,0 +1,10 @@
+{% autoescape off %}
+Dear {{ user }},
+<p>
+Presentation "{{ content.title }}" has been successfully imported at {{ settings.APP_NAME }}.
+</p>
+
+<p>
+Follow <a href="{{ settings.BASE_URL }}/mycontent/view/{{ content.id }}">this link</a> to see imported presentation.
+</p>
+{% endautoescape %}

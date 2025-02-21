@@ -1,0 +1,77 @@
+{% extends 'embed/template.html' %}
+
+{%block player %}
+    <script type="text/javascript">
+        var player;
+        var userAgent = window.navigator.userAgent;
+        function icOnAppLoaded() {
+            function iframeResizeRequest() {
+                var $icPlayer = $('#_icplayer');
+                var width = parseInt($icPlayer.css('width'), 10);
+                var height = parseInt($icPlayer.css('height'), 10);
+                var viewPort = document.querySelector("meta[name=viewport]");
+
+                viewPort.setAttribute('content', 'width=' + width);
+
+                postResizeMessage(width, height);
+            }
+
+            var firstPageLoaded = false;
+            var semiResponsiveLayoutChooser;
+            var page = getPageNumberWithCommons();
+
+            player = icCreatePlayer('_icplayer');
+
+            if (page.isCommons) {
+                player.loadCommonPage('/file/{% if version %}{{version}}{% else %}{{content.file.id}}{% endif %}', page.index);
+            } else {
+                player.load('/file/{% if version %}{{version}}{% else %}{{content.file.id}}{% endif %}', page.index);
+            }
+
+            player.onPageLoaded(function() {
+                if (!firstPageLoaded) {
+                    semiResponsiveLayoutChooser = new window.semiResponsive.LayoutChooser(player.getSemiResponsiveLayouts());
+                    var screenSizes = window.mAuthor.ScreenUtils.getScreenSizesDependingOnOrientation(userAgent);
+                    var layoutID = semiResponsiveLayoutChooser.chooseLayout(screenSizes.width);
+                    player.changeLayout(layoutID);
+                    firstPageLoaded = true;
+                }
+
+                iframeResizeRequest();
+                postPageLoadedMessage();
+            });
+
+            player.onOutstretchHeight(function () {
+                iframeResizeRequest();
+            });
+
+            player.onPageScrollTo(function (top) {
+                var parent = getOpener();
+
+                if (window != parent) {
+                    parent.postMessage('SCROLLTOP:' + top, "*");
+                } else {
+                    window.scrollTo(0, top);
+                }
+            });
+
+            function receiveMessage(event) {
+                var WINDOW_WIDTH_EVENT = "WINDOW_WIDTH:";
+
+                if (!event.data) {
+                    return;
+                }
+
+                if (event.data.indexOf(WINDOW_WIDTH_EVENT) === 0) {
+                    if (semiResponsiveLayoutChooser) {
+                        var parentWindowWidth = JSON.parse(event.data.substring(WINDOW_WIDTH_EVENT.length, event.data.length));
+                        var layoutID = semiResponsiveLayoutChooser.chooseLayout(parentWindowWidth);
+                        player.changeLayout(layoutID);
+                    }
+                }
+            }
+
+            window.addEventListener("message", receiveMessage, false);
+        }
+    </script>
+{% endblock %}

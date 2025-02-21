@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load apptags %}
+{% load markdown_deux_tags %}
+
+{% block content %}
+
+<h1 class="page_header">Wiki pages</h1>
+<div class="main clear" style="padding-top: 0"></div>
+
+<form method="post" action="{{ upload_url }}" name="upload" enctype="multipart/form-data">
+	{% csrf_token %}
+	<input type="hidden" name="next" value="{{next}}"/>
+	<table class="upload-wiki">
+  		{{ form }}
+  	<tr>
+		<th><div class="button-left">{% button 'Upload' 'document.forms["upload"].submit()' %}</div></th>
+	  	<th><div class="button-left">{% button 'Cancel' 'history.go(-1)' %}</div></th>
+	</tr>
+  	</table>
+  	<input type="submit" />
+</form>
+{% endblock %}

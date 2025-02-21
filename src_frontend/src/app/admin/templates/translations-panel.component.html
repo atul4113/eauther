@@ -1,0 +1,115 @@
+<div id="admin-panel">
+    <div class="page-title-bar flex-row with-dots">
+        <a class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored back-button" [routerLink]="'/panel/'">
+           <i class="material-icons">&#xE5CB;</i>
+        </a>
+        <div class="page-title-bar__header">
+            <h1> {{ translations | getLabel:"plain.translations.panel.translations_panel" }} </h1>
+        </div>
+    </div>
+    <div putFooterBottom
+         class="page-content">
+        <div *ngIf="!isInitialized"
+             mdl
+             class="app-loading-wrapper">
+            <app-loading></app-loading>
+        </div>
+
+        <div *ngIf="isInitialized"
+             mdl>
+            <div class="mdl-grid">
+
+                <div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--5-col-desktop mdl-cell--1-offset-desktop mdl-card mdl-shadow--2dp ">
+                    <div class="mdl-card__title">
+                        <h2 class="mdl-card__title-text">
+                        {{ translations | getLabel:"plain.translations.panel.translation_settings"  }}
+                        </h2>
+                    </div>
+
+                    <ul class="mdl-list mdl-cell mdl-cell--12-col">
+
+                        <li class="mdl-list__item mdl-list__item--three-line">
+                            <a class="mdl-list__item-primary-content"
+                               [routerLink]="'labels'">
+                                <i class="material-icons mdl-list__item-avatar">&#xE8E2;</i>
+                                <span>
+                                     {{ translations | getLabel:"plain.translations.panel.browse_labels"  }}
+                                </span>
+                                <span class="mdl-list__item-text-body"></span>
+                            </a>
+                        </li>
+
+                        <li class="mdl-list__item mdl-list__item--three-line">
+                            <a class="mdl-list__item-primary-content"
+                               [routerLink]="'languages'">
+                                <i class="material-icons mdl-list__item-avatar">&#xE8A1;</i>
+                                <span>
+                                     {{ translations | getLabel:"plain.translations.panel.languages_panel"  }}
+                                </span>
+                                <span class="mdl-list__item-text-body"></span>
+                            </a>
+                        </li>
+
+                        <li class="mdl-list__item mdl-list__item--three-line">
+                            <a class="mdl-list__item-primary-content"
+                               [routerLink]="'images'">
+                                <i class="material-icons mdl-list__item-avatar">&#xE8B8;</i>
+                                <span>
+                                     {{ translations | getLabel:"plain.translations.panel.images_panel"  }}
+                                </span>
+                                <span class="mdl-list__item-text-body"></span>
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+
+                <div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--5-col-desktop mdl-card mdl-shadow--2dp ">
+                    <div class="mdl-card__title">
+                        <h2 class="mdl-card__title-text">
+                         {{ translations | getLabel:"plain.admin.panel.other_settings"  }}
+                        </h2>
+                    </div>
+
+                    <ul class="mdl-list mdl-cell mdl-cell--12-col">
+                        <li class="mdl-list__item mdl-list__item--three-line">
+                            <a class="mdl-list__item-primary-content"
+                               [routerLink]="'settings'">
+                                <i class="material-icons mdl-list__item-avatar">&#xE7FD;</i>
+                                <span>
+                                     {{ translations | getLabel:"plain.translations.panel.settings"  }}
+                                </span>
+                                <span class="mdl-list__item-text-body">
+                                     {{ translations | getLabel:"plain.admin.panel.temp"  }}
+                                </span>
+                            </a>
+                        </li>
+
+                        <li class="mdl-list__item mdl-list__item--three-line">
+                            <a class="mdl-list__item-primary-content"
+                               [routerLink]="'notifications'">
+                                <i class="material-icons mdl-list__item-avatar">&#xE7FD;</i>
+                                <span> {{ translations | getLabel:"plain.translations.panel.notifications"  }}</span>
+                                <span class="mdl-list__item-text-body">
+                                    {{ translations | getLabel:"plain.admin.panel.temp"  }}
+                                </span>
+                            </a>
+                        </li>
+
+                        <li class="mdl-list__item mdl-list__item--three-line">
+                            <a class="mdl-list__item-primary-content"
+                               [routerLink]="'notifications/settings'">
+                                <i class="material-icons mdl-list__item-avatar">&#xE7FD;</i>
+                                <span> {{ translations | getLabel:"plain.translations.panel.manage_notifications"  }}</span>
+                                <span class="mdl-list__item-text-body">
+                                    {{ translations | getLabel:"plain.admin.panel.temp"  }}
+                                </span>
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

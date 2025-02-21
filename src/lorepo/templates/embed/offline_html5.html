@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>{{content.title}} - {{ app_name }}</title>
+
+    <script type="text/javascript" src="javascript/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="icplayer/icplayer.nocache.js"></script>
+    <script type="text/javascript" src="javascript/semi-responsive-layout-chooser.js"></script>
+    <script type="text/javascript" src="javascript/screen.js"></script>
+
+    <script type="text/x-mathjax-config">
+		MathJax.Hub.Config({
+			TeX: {imageFont: null, extensions: ["mhchem.js", "AMSsymbols.js", "AMSmath.js"]},
+			extensions: ["tex2jax.js", "forminput.js"],
+			skipStartupTypeset: true,
+			showProcessingMessages: false,
+			jax: ["input/TeX","output/HTML-CSS"],
+			playerObject: "player"
+  		});
+	</script>
+    <script type="text/javascript" src="javascript/MathJax/MathJax.js"></script>
+    <style>
+        .no-margin {
+            margin: 0;
+            padding: 0;
+        }
+        .pull-left {
+            float: left;
+        }
+        .clear {
+            clear: both;
+        }
+    </style>
+
+
+    <script language="javascript">
+        var player;
+        var start;
+        var semiResponsiveLayoutChooser;
+		var userAgent = window.navigator.userAgent;
+		var viewPort = document.querySelector("meta[name=viewport]");
+
+        function getOpener() {
+            var parent = null;
+            if (window.parent != null && window.parent.postMessage != null) {
+                parent = window.parent;
+            }
+            if (window.opener != null && window.opener.postMessage != null) {
+                parent = window.opener;
+            }
+            return parent;
+        }
+
+        function postResizeMessage(width, height) {
+            var parent = getOpener();
+
+            if (parent != null) {
+                var message = "RESIZE:" + width + ";" + height;
+                parent.postMessage(message, '*');
+            }
+        }
+
+		function postPageLoadedMessage() {
+            var parent = getOpener();
+
+            if (parent != null) {
+                var message = "PAGE_LOADED";
+                parent.postMessage(message, '*');
+            }
+        }
+
+
+        function chooseLayout(layoutChooser, screenConfiguration) {
+            var isMobile = screenConfiguration.orientation !== window.mAuthor.ScreenUtils.ORIENTATION_TYPES.NOT_MOBILE;
+            var isVertical = screenConfiguration.orientation === window.mAuthor.ScreenUtils.ORIENTATION_TYPES.PORTRAIT;
+            var isHorizontal = screenConfiguration.orientation === window.mAuthor.ScreenUtils.ORIENTATION_TYPES.LANDSCAPE;
+
+            return layoutChooser.chooseLayout(screenConfiguration.width, isMobile, isVertical, isHorizontal);
+        }
+
+		function setViewPortSizesAfterScreenChanges() {
+            var $icPlayer = $('#_icplayer');
+            var width = parseInt($icPlayer.css('width'), 10);
+            viewPort.setAttribute('content', 'width=' + width + ',maximum-scale=1');
+        }
+
+        function onResizeHandler() {
+            var screenSizes = window.mAuthor.ScreenUtils.getScreenSizesDependingOnOrientation(userAgent);
+            var layoutID = chooseLayout(semiResponsiveLayoutChooser, screenSizes);
+            var changed = player.changeLayout(layoutID);
+            if (changed) {
+                setViewPortSizesAfterScreenChanges();
+            }
+        }
+
+        function receiveMessage(event) {
+            var WINDOW_WIDTH_EVENT = "WINDOW_WIDTH:";
+
+            if (!event.data) {
+                return;
+            }
+
+            if (event.data.indexOf(WINDOW_WIDTH_EVENT) === 0) {
+                if (semiResponsiveLayoutChooser) {
+                    var screenConfiguration = JSON.parse(event.data.substring(WINDOW_WIDTH_EVENT.length, event.data.length));
+                    var layoutID = chooseLayout(semiResponsiveLayoutChooser, screenConfiguration);
+                    var changed = player.changeLayout(layoutID);
+                }
+            }
+        }
+
+        function iframeResizeRequest() {
+		    if (window.parent != null && window.parent.postMessage != null) {
+                var $icPlayer = $('#_icplayer');
+                var width = parseInt($icPlayer.css('width'), 10);
+                var height = parseInt($icPlayer.css('height'), 10);
+                setViewPortSizesAfterScreenChanges();
+                postResizeMessage(width, height);
+            }
+        }
+
+
+        function icOnAppLoaded(){
+            player = icCreatePlayer('_icplayer');
+            player.load('pages/main.xml', parseInt(location));
+
+            var firstPageLoaded = false;
+            player.onPageLoaded(function onPageLoadedHandler() {
+				start = start || new Date().getTime();
+
+                if (!firstPageLoaded) {
+                    semiResponsiveLayoutChooser = new window.semiResponsive.LayoutChooser(player.getSemiResponsiveLayouts());
+                    var screenSizes = window.mAuthor.ScreenUtils.getScreenSizesDependingOnOrientation(userAgent);
+
+                    var layoutID = chooseLayout(semiResponsiveLayoutChooser, screenSizes);
+                    var changed = player.changeLayout(layoutID);
+
+                    firstPageLoaded = true;
+					window.addEventListener("resize", onResizeHandler, false)
+                }
+                iframeResizeRequest();
+                postPageLoadedMessage();
+
+                $("#scrollableBody").css({
+                    "overflow": "",
+                    "height": ""
+                });
+
+                (function () {
+                    var scrollDetectorInterval = null;
+                    var retries = 0;
+
+                    function scrollAddIfBodyBiggerThanWindow () {
+                        var $window = $(window);
+                        var $icplayerDiv = $("#_icplayer");
+                        var $scrollableContent = $("#scrollableBody");
+
+                        var windowHeight = $window.height();
+                        var windowWidth = $window.width();
+
+                        var bodyHeight = $icplayerDiv.height();
+                        var bodyWidth = $icplayerDiv.width();
+
+                        if (windowHeight < bodyHeight || windowWidth < bodyWidth) {
+                            $scrollableContent.css("overflow", "auto");
+                            $scrollableContent.height(windowHeight);
+                        } else if (windowHeight >= bodyHeight && windowWidth >=  bodyWidth) {
+                            $scrollableContent.css("height", "");
+                            $scrollableContent.css("overflow", "");
+                        } else if (windowHeight >= bodyHeight) {
+                            $scrollableContent.css("height", "");
+                        }
+
+                        retries++;
+                        if (retries > 5) {
+                            window.clearInterval(scrollDetectorInterval);
+                        }
+                    }
+
+                    $(document).ready(function () {
+                        if (scrollDetectorInterval == null) {
+                            scrollDetectorInterval = setInterval(scrollAddIfBodyBiggerThanWindow, 1000);
+                        }
+                    });
+                })();
+            });
+
+            player.onOutstretchHeight(function () {
+                iframeResizeRequest();
+            });
+
+            player.onPageScrollTo(function (top) {
+                var parent = getOpener();
+                if (parent) {
+                    parent.postMessage('SCROLLTOP:' + top, "*");
+                }
+            });
+
+
+            window.addEventListener("message", receiveMessage, false);
+        }
+
+        function registerEventListeners () {
+            // event pagehide doesn't work properly in Chrome browser when the document is in iframe
+            if (window.frameElement !== null && navigator.userAgent.indexOf("Chrome") > -1) {
+                window.addEventListener("beforeunload", doUnload, false);
+            }
+            else if ("onpagehide" in window) {
+                window.addEventListener("pagehide", doUnload, false);
+            } else {
+                window.addEventListener("beforeunload", doUnload, false);
+            }
+        }
+
+        function doStart() {
+            registerEventListeners();
+        }
+
+        function doUnload() {
+            // This ensures that Player knows to update score before leaving page, event for score type FIRST.
+            if (player.hasOwnProperty('forceScoreUpdate')) {
+                player.forceScoreUpdate();
+            }
+        }
+    </script>
+</head>
+
+<body class="no-margin" onload="doStart();">
+    <div id="scrollableBody">
+        <div id="_icplayer" class="no-margin pull-left"></div>
+        <div class="clear"></div>
+    </div>
+</body>
+
+</html>

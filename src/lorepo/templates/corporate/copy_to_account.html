@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load apptags %}
+
+{% block content %}
+
+<h1 class="page_header">Copy content to account</h1>
+<div class="main clear" style="padding-top: 0"></div>
+
+<div>
+<form method="POST" action="/corporate/copy_to_account/{{content_id}}" name="copy">
+	<input type="hidden" name="next" value="{{next}}"/>
+
+	{{form}}
+
+	{% button 'Copy lesson' 'document.forms["copy"].submit()' %}
+</form>
+</div>
+
+{% endblock %}

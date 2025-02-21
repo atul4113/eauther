@@ -1,0 +1,31 @@
+@import "../../../common/templates/mdl-colors";
+
+app-lesson-pages {
+    app-pages-list {
+        display: grid;
+        margin: 15px 15px 15px 35px;
+    }
+
+    .merge-lesson-title {
+        margin-left: 10px;
+        font-size: 20px;
+        margin-top: 10px;
+        a {
+            text-decoration: none;
+            color: $blue-500;
+        }
+    }
+
+    h5 {
+        margin-left: 30px;
+    }
+
+    .none-info {
+        margin-left: 35px;
+    }
+
+    button {
+        margin: 10px 10px 10px 30px !important;
+    }
+
+}

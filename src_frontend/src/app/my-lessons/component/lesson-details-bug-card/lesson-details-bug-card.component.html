@@ -1,0 +1,27 @@
+<mat-card>
+    <mat-card-actions>
+        <button mat-button
+                color="primary"
+                (click)="onDelete()"
+                *ngIf="isOwner">
+            {{ translations | getLabel: "plain.my_lessons.panel.lesson_details.delete" }}
+        </button>
+    </mat-card-actions>
+
+    <mat-card-header>
+        <mat-card-subtitle>
+            {{ bug.username }},
+            {{ bug.createdDate | date: 'medium' }}
+        </mat-card-subtitle>
+
+        <mat-card-title>
+            {{ bug.title }}
+        </mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+        <p [innerHTML]="bug.description | safeHtml"></p>
+    </mat-card-content>
+</mat-card>
+
+

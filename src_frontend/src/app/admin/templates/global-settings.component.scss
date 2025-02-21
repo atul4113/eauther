@@ -1,0 +1,18 @@
+@import "../../common/templates/mdl-colors";
+
+#global-settings {
+
+    .app-loading-wrapper {
+        padding: 64px 0;
+        text-align: center;
+    }
+
+    .settings-list {
+        display: flex;
+        flex-direction: column;
+
+        .error-label {
+            color: $pink-400;
+        }
+    }
+}

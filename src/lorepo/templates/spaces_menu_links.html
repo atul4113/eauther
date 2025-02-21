@@ -1,0 +1,8 @@
+{% load apptags %}
+
+{% for space in spaces %}
+	<a href="/corporate/list/{{space.id}}"
+       class="mdl-navigation__link">
+        {{space.title}}
+    </a>
+{% endfor %}

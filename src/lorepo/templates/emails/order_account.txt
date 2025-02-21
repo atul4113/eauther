@@ -1,0 +1,7 @@
+Name: {{name}}
+Company: {{company}}
+Country: {{country}}
+E-mail: {{email}}
+Users: {{users}}
+Price: {{price}} euro
+Message: {{message}}

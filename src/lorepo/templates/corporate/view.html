@@ -1,0 +1,250 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load apptags %}
+{% load public %}
+{% load corporate %}
+{% block title %}{{content.title}}{% endblock %}
+
+{% block head %}
+    <script type="text/javascript" src="/media/js/util/screen.js"></script>
+    <script type="text/javascript">
+        var userAgent = window.navigator.userAgent;
+        $(document).ready(function() {
+            var page = parseInt(window.location.hash.substring(1), 10);
+            var $iframe = $('#lesson-iframe');
+            var viewPort = document.querySelector("meta[name=viewport]");
+            var iframeWindow = $iframe[0].contentWindow || $iframe[0].contentDocument;
+            var screenSizes = window.mAuthor.ScreenUtils.getScreenSizesDependingOnOrientation(userAgent);
+
+            $iframe.attr('src', $iframe.attr('src') + '#' + page);
+            $iframe.width(screenSizes.width);
+
+            function handleResize (data) {
+                var dimensions = data.split(';');
+                var width = dimensions[0];
+                var height = dimensions[1];
+
+                if (window.mAuthor.ScreenUtils.isMobileUserAgent(userAgent)) {
+                    var screenSizes = window.mAuthor.ScreenUtils.getScreenSizesDependingOnOrientation(userAgent);
+                    viewPort.setAttribute('content', 'width=' + screenSizes.width);
+                    $iframe.css({
+                        'width': width + 'px',
+                        'height': screenSizes.height + 'px'
+                    });
+                } else {
+                    viewPort.setAttribute('content', 'width=' + width);
+                    $iframe.css({
+                        'width': width + 'px',
+                        'height': height + 'px'
+                    });
+                }
+            }
+
+            function onMessageReceived (event) {
+                if (event.data.indexOf('RESIZE:') === 0 && !window.isStretchOrFullScreenMode) {
+                    handleResize (event.data.substring ('RESIZE:'.length));
+                    var height = parseInt($iframe.css('height'), 10);
+                    postIFrameMessage(height);
+                } else if (event.data.indexOf('PAGE_LOADED') === 0) {
+                    document.body.scrollTop = 0;
+                    var height = parseInt($iframe.css('height'), 10);
+                    postIFrameMessage(height);
+                    clearTimeout(window.resizedFinished);
+                    window.resizedFinished = setTimeout(function(){
+                        var height = parseInt($iframe.css('height'), 10);
+                        postIFrameMessage(height);
+                    }, 250);
+                }
+            }
+
+            function postIFrameMessage(height) {
+                var offset = $("#lesson-iframe").offset().top;
+                var postObject = {
+                    offsetTop: window.pageYOffset || document.documentElement.scrollTop,
+                    height: height,
+                    frameOffset: offset,
+                    notScaledOffset: offset,
+                    windowInnerHeight: window.innerHeight || 0
+                };
+
+                iframeWindow.postMessage('I_FRAME_SIZES:' + JSON.stringify(postObject), '*');
+            }
+            window.addEventListener('message', onMessageReceived, false);
+
+            window.addEventListener('scroll', function(event) {
+                var height = parseInt($iframe.css('height'), 10);
+                postIFrameMessage(height);
+            });
+
+            function postWindowWidth(data) {
+                iframeWindow.postMessage("WINDOW_WIDTH:" + JSON.stringify(data), '*');
+            }
+
+            window.onresize = function() {
+                var height = parseInt($iframe.css('height'), 10);
+                var screenSizes = window.mAuthor.ScreenUtils.getScreenSizesDependingOnOrientation(userAgent);
+                postWindowWidth(screenSizes.width);
+                postIFrameMessage(screenSizes.height);
+            };
+        });
+
+        function showEmbed(){
+            $(".embedInfo").slideToggle("slow");
+        }
+    </script>
+{% endblock %}
+
+{% block content %}
+    <script src="/media/js/messages.js"></script>
+    <div>
+        {% include "common/messages/display_messages.html" %}
+    </div>
+    <div id="messages"></div>
+
+    <div style="float: left">
+        <h1 class="page_header" >
+            {% space_path spaces %}
+        </h1>
+    </div>
+
+    <div style="float:right; margin-right: -4px">
+        <a role="button" class="btn btn-primary btn-sm" href="{{back_url}}">Back to list</a>
+    </div>
+
+    <div class="main clear" style="padding-top: 0px"></div>
+
+    <h2 style="margin:0px 0px 5px 5px; float:left">{{content.title}}</h2>
+
+    <div class="clear"></div>
+    <div class="myContent">
+
+        {% include 'common/mycontent/receiveMessage.html' %}
+
+        <div id="_icplayer">
+            <iframe src="/embed/corporate_embed/{{content.id}}" id="lesson-iframe" scrolling="no" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+        </div>
+
+        <div class="clear"></div>
+        <div>
+            {% if not is_company_locked %}
+                {% make_corporate_view_actions_menu sub_menus %}
+
+			<div class="pull-left horizontal-stack"><a role="button" class="btn btn-primary btn-sm" href="javascript:showEmbed()">Share</a></div>
+			<div class="pull-left horizontal-stack"><a role="button" class="btn btn-primary btn-sm" href="/support/addticket?lesson_url={{ settings.BASE_URL }}/embed/{{ content.id }}">Contact support</a></div>
+			<div class="pull-left horizontal-stack">
+			{% if copy_spaces|length == 0 %}
+				<a role="button" class="btn btn-primary btn-sm" href="/mycontent/copy/{{content.id}}">Make a copy</a>
+			{% else %}
+				<form name="form_copy_{{content.id}}" method="GET">
+					<select name="menu_copy_{{content.id}}"
+						onChange="top.location.href = this.form.menu_copy_{{content.id}}.options[this.form.menu_copy_{{content.id}}.selectedIndex].value;return false;">
+						<option>Copy to location...</option>
+						<option value="/mycontent/copy/{{content.id}}">
+							My Lessons
+						</option>
+						{% for division in copy_spaces %}
+							{% copy_spaces division request content.id %}
+						{% endfor %}
+					</select>
+				</form>
+            {% endif %}
+			{% endif %}
+			</div>
+			<div class="pull-left horizontal-stack">{% include 'common/mycontent/view_as.html' %}</div>
+            {% if not is_company_locked %}
+                <div class="pull-left horizontal-stack">{% include "common/mycontent/more_actions.html" %}</div>
+            {% endif %}
+		<div class="clear"></div>
+	</div>
+	
+	<div id="embedInfo" class="embedInfo" style="display:none;">
+		<div style="margin:10px 0;">
+		To embed this lesson into your website simply copy the following HTML code and
+		paste it into your page.
+		</div>
+		<textarea cols="75" rows="3" readonly><iframe width="580" height="420" src="{{ settings.BASE_URL }}/embed/{{ content.id }}" frameborder="0"></iframe></textarea>
+	</div>
+	
+	<div class="content infoPreview">
+	{% for cs in content.contentspace_set.all %}
+		{% if cs.space.is_corporate %}
+			<span><b>Publisher: </b>{{ cs.space.top_level }}</span>
+			<span><b>Author: </b>{{content.author.username}}</span>
+		{% else %}
+		{% if cs.space.is_private %}
+			<span><b>Author: </b>{{content.author.username}}</span>
+		{% endif %}
+		{% endif %}
+	{% endfor %}
+	
+			<span><b>Tags:</b>
+			{% for tag in content.tags|split:',' %} 
+				<a href="/public/?q={{tag}}&type={{content.content_type}}">{{tag}}</a>
+			{% endfor %}
+			</span>
+
+            <span><b>State:</b>
+                {% if state %}
+                    {{state}}
+                {% else %}
+                    No state assigned
+                {% endif %}
+			</span>
+
+            <span>
+			<b>Short Description:</b>
+			{{content.short_description|linebreaksbr}}
+		</span>
+
+            <span>
+			<b>Description:</b>
+			{{content.description|linebreaksbr}}
+		</span>
+
+            {% if non_public_spaces %}
+                <span>
+			<b>Assigned category:</b>
+                    {% for space in non_public_spaces %}
+                        {% if not forloop.first or not space.is_private %}
+                            {{space.title}}
+                        {% else %}
+                            My Lessons
+                        {% endif %}
+                        {% if not forloop.last %}::{% endif %}
+                    {% empty %}
+                        None
+                    {% endfor %}
+		</span>
+            {% endif %}
+
+            <span>
+			<b>Is public:</b>
+                {% if content.is_content_public %}
+                    Yes
+                {% else %}
+                    No
+                {% endif %}
+		</span>
+
+            <span>
+			{% get_template_for_content content %}
+		</span>
+        </div>
+
+        {% if Permission.BUGTRACK_ADD in user_permissions %}
+            <div id="bug-track-header">
+                {% include 'bug_track/add.html' %}
+            </div>
+        {% endif %}
+
+        {% if Permission.BUGTRACK_VIEW in user_permissions %}
+            <div id="content-bug-track">
+                {% include 'bug_track/index.html' %}
+            </div>
+        {% endif %}
+
+        <div class='clear'></div>
+
+    </div>
+
+{% endblock %}

@@ -1,0 +1,9 @@
+{% if show %}
+<optgroup label="{{division}}">
+{% for space in spaces %}
+<option value="/mycontent/copy/{{content_id}}/{{space.id}}">
+	{{space.title|truncatewords:4}}
+</option>
+{% endfor %}
+</optgroup>
+{% endif %}

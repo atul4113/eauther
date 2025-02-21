@@ -1,0 +1,365 @@
+[
+  {
+    "pk": 10, 
+    "model": "contenttypes.contenttype", 
+    "fields": {
+      "model": "corporatepublicspace", 
+      "name": "corporate public space", 
+      "app_label": "corporate"
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "contenttypes.contenttype", 
+    "fields": {
+      "model": "space", 
+      "name": "space", 
+      "app_label": "spaces"
+    }
+  }, 
+  {
+    "pk": 7, 
+    "model": "contenttypes.contenttype", 
+    "fields": {
+      "model": "spaceaccess", 
+      "name": "space access", 
+      "app_label": "spaces"
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "auth.user", 
+    "fields": {
+      "username": "admin", 
+      "first_name": "", 
+      "last_name": "", 
+      "is_active": true, 
+      "idxf_email_l_iexact": "admin@wp.pl", 
+      "idxf_username_l_iexact": "admin", 
+      "is_superuser": true, 
+      "is_staff": true, 
+      "last_login": "2012-10-11 14:46:37", 
+      "groups": [], 
+      "user_permissions": [], 
+      "password": "sha1$4acdf$1078ce292311229edf0d9d18ce1069f95fee08e8", 
+      "email": "admin@wp.pl", 
+      "date_joined": "2012-10-11 14:43:55"
+    }
+  }, 
+  {
+    "pk": "c62cc7d28bb754d98f010bc9afe9205d", 
+    "model": "sessions.session", 
+    "fields": {
+      "expire_date": "2012-10-25 14:52:00", 
+      "session_data": "NDFlYWFlOGY5YzNkMmE2NDRiYTIyMzJlYzQxYjM4MjJlYzE3ODYwOTqAAn1xAChVBXRva2VucQFV\nBXU4MWkycQJVDV9hdXRoX3VzZXJfaWRxA4oBAVUSX2F1dGhfdXNlcl9iYWNrZW5kcQRVKWRqYW5n\nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kcQV1Lg==\n"
+    }
+  }, 
+  {
+    "pk": 19, 
+    "model": "search.relationindex_mycontent_content_search_index", 
+    "fields": {
+      "is_featured": false, 
+      "idxf_spaces_path_l_contains": [
+        "13", 
+        "3"
+      ], 
+      "spaces": [
+        "13"
+      ], 
+      "file": 18, 
+      "description": "", 
+      "modified_date": "2012-10-11 14:52:18", 
+      "title": "Missing assets lesson", 
+      "tags": "", 
+      "public_version": null, 
+      "search_index_search_list_field": [
+        "lesson", 
+        "asset", 
+        "miss"
+      ], 
+      "version": 0, 
+      "short_description": "", 
+      "big_icon_href": null, 
+      "icon_href": null, 
+      "is_globally_public": false, 
+      "view_count": 0, 
+      "content_type": 1, 
+      "is_public": false, 
+      "associated_content": null, 
+      "is_deleted": false, 
+      "name": null, 
+      "author": 1, 
+      "is_template": false, 
+      "spaces_path": "13", 
+      "created_date": "2012-10-11 14:52:17"
+    }
+  }, 
+  {
+    "pk": 19, 
+    "model": "mycontent.content", 
+    "fields": {
+      "is_featured": false, 
+      "idxf_spaces_path_l_contains": [
+        "13", 
+        "3"
+      ], 
+      "spaces": [
+        "13"
+      ], 
+      "file": 18, 
+      "description": "", 
+      "modified_date": "2012-10-11 14:52:18", 
+      "title": "Missing assets lesson", 
+      "tags": "", 
+      "public_version": null, 
+      "version": 0, 
+      "short_description": "", 
+      "big_icon_href": null, 
+      "icon_href": null, 
+      "is_globally_public": false, 
+      "view_count": 0, 
+      "content_type": 1, 
+      "is_public": false, 
+      "associated_content": null, 
+      "is_deleted": false, 
+      "name": null, 
+      "author": 1, 
+      "is_template": false, 
+      "spaces_path": "13", 
+      "created_date": "2012-10-11 14:52:17"
+    }
+  }, 
+  {
+    "pk": 20, 
+    "model": "mycontent.contentspace", 
+    "fields": {
+      "content": 19, 
+      "is_deleted": false, 
+      "space": 13
+    }
+  }, 
+  {
+    "pk": 3, 
+    "model": "spaces.space", 
+    "fields": {
+      "modified_date": "2012-10-11 14:50:28", 
+      "right": 2, 
+      "is_deleted": false, 
+      "parent": null, 
+      "title": "Admin Co", 
+      "rank": 100, 
+      "top_level": 3, 
+      "created_date": "2012-10-11 14:50:28", 
+      "space_type": 3, 
+      "left": 1
+    }
+  }, 
+  {
+    "pk": 5, 
+    "model": "spaces.space", 
+    "fields": {
+      "modified_date": "2012-10-11 14:50:47", 
+      "right": 2, 
+      "is_deleted": false, 
+      "parent": null, 
+      "title": "Admin Public", 
+      "rank": 100, 
+      "top_level": 5, 
+      "created_date": "2012-10-11 14:50:47", 
+      "space_type": 2, 
+      "left": 1
+    }
+  }, 
+  {
+    "pk": 13, 
+    "model": "spaces.space", 
+    "fields": {
+      "modified_date": "2012-10-11 14:51:50", 
+      "right": 2, 
+      "is_deleted": false, 
+      "parent": null, 
+      "title": "admin", 
+      "rank": 100, 
+      "top_level": 13, 
+      "created_date": "2012-10-11 14:51:50", 
+      "space_type": 1, 
+      "left": 1
+    }
+  }, 
+  {
+    "pk": 8, 
+    "model": "spaces.spaceaccess", 
+    "fields": {
+      "modified_date": "2012-10-11 14:51:01", 
+      "is_deleted": false, 
+      "space": 3, 
+      "user": 1, 
+      "created_date": "2012-10-11 14:51:01", 
+      "access_right": 3
+    }
+  }, 
+  {
+    "pk": 15, 
+    "model": "spaces.spaceaccess", 
+    "fields": {
+      "modified_date": "2012-10-11 14:52:00", 
+      "is_deleted": false, 
+      "space": 13, 
+      "user": 1, 
+      "created_date": "2012-10-11 14:52:00", 
+      "access_right": 3
+    }
+  }, 
+  {
+    "pk": 17, 
+    "model": "filestorage.filestorage", 
+    "fields": {
+      "modified_date": "2012-10-11 14:54:04", 
+      "history_for": null, 
+      "version": null, 
+      "content_type": "text/xml", 
+      "created_date": "2012-10-11 14:52:17", 
+      "owner": 1, 
+      "contents": "<?xml version='1.0' encoding='UTF-8' ?><page layout='pixels' width='0' height='0'><modules><textModule id='Title' left='28' top='11' width='520' height='27' isVisible='true'><text draggable='false' gapWidth='0' isActivity='true' isDisabled='false' isCaseSensitive='false'>&lt;div style=&quot;text-align: center;&quot;&gt;Title&lt;/div&gt;</text></textModule><buttonModule id='PrevPage' left='0' top='358' width='57' height='39' isVisible='true'><button type='prevPage' text='' onclick=''/></buttonModule><buttonModule id='NextPage' left='520' top='358' width='57' height='39' isVisible='true'><button type='nextPage' text='' onclick=''/></buttonModule><imageModule id='Image1' left='29' top='80' width='183' height='189' isVisible='true'><image src='/file/serve/23' mode='stretch'/></imageModule><addonModule addonId='video' id='video1' left='251' top='80' width='288' height='218' isVisible='true'><properties><property name='Files' type='list'><template><property name='Ogg video' type='file' value=''/><property name='MP4 video' type='file' value=''/><property name='WebM video' type='file' value=''/><property name='Subtitles' type='text'></property><property name='Poster' type='image' value=''/><property name='ID' type='string' value=''/></template><items><item><property name='Ogg video' type='file' value='/file/serve/25'/><property name='MP4 video' type='file' value='/file/serve/27'/><property name='WebM video' type='file' value='/file/serve/29'/><property name='Subtitles' type='text'></property><property name='Poster' type='image' value=''/><property name='ID' type='string' value=''/></item></items></property><property name='Show video' type='string' value=''/><property name='Show time' type='string' value=''/><property name='Narration' type='narration'></property></properties></addonModule></modules></page>"
+    }
+  }, 
+  {
+    "pk": 18, 
+    "model": "filestorage.filestorage", 
+    "fields": {
+      "modified_date": "2012-10-11 14:54:03", 
+      "history_for": 19, 
+      "version": 1, 
+      "content_type": "text/xml", 
+      "created_date": "2012-10-11 14:52:17", 
+      "owner": 1, 
+      "contents": "<?xml version='1.0' encoding='UTF-8' ?><interactiveContent><metadata></metadata><addons><addon-descriptor addonId='video' href='/proxy/get?url=http://www.lorepo.com/public/video/getaddon'/></addons><pages><page name='Page 1' href='17' reportable='true'/><header ref='commons/header'/><footer ref='commons/footer'/></pages><assets><asset type='image' href='/file/serve/23'/></assets></interactiveContent>"
+    }
+  }, 
+  {
+    "pk": 23, 
+    "model": "filestorage.uploadedfile", 
+    "fields": {
+      "owner": 1, 
+      "content_type": "image/jpeg", 
+      "file": "f6hN5K3DNvV_k3571W1Ecg==/uploads/2012/10/11/14/53/10/playing.jpg", 
+      "filename": "playing.jpg"
+    }
+  }, 
+  {
+    "pk": 25, 
+    "model": "filestorage.uploadedfile", 
+    "fields": {
+      "owner": 1, 
+      "content_type": "video/ogg", 
+      "file": "gaG7A3zBimDJabzMT7SwGA==/uploads/2012/10/11/14/53/44/1.ogv", 
+      "filename": "1.ogv"
+    }
+  }, 
+  {
+    "pk": 27, 
+    "model": "filestorage.uploadedfile", 
+    "fields": {
+      "owner": 1, 
+      "content_type": "video/mp4", 
+      "file": "3Yq7-cF-JN5xm4vLZDIwMQ==/uploads/2012/10/11/14/53/49/1.mp4", 
+      "filename": "1.mp4"
+    }
+  }, 
+  {
+    "pk": 29, 
+    "model": "filestorage.uploadedfile", 
+    "fields": {
+      "owner": 1, 
+      "content_type": "video/webm", 
+      "file": "bAEo-SS80zdIjYGlq9gfWw==/uploads/2012/10/11/14/53/56/1.webm", 
+      "filename": "1.webm"
+    }
+  }, 
+  {
+    "pk": 11, 
+    "model": "corporate.corporatepublicspace", 
+    "fields": {
+      "public_category": 5, 
+      "company": 3
+    }
+  }, 
+  {
+    "pk": 16, 
+    "model": "admin.logentry", 
+    "fields": {
+      "action_flag": 1, 
+      "action_time": "2012-10-11 14:52:00", 
+      "object_repr": "admin:admin <owner>", 
+      "object_id": "15", 
+      "change_message": "", 
+      "user": 1, 
+      "content_type": 7
+    }
+  }, 
+  {
+    "pk": 14, 
+    "model": "admin.logentry", 
+    "fields": {
+      "action_flag": 1, 
+      "action_time": "2012-10-11 14:51:51", 
+      "object_repr": "admin", 
+      "object_id": "13", 
+      "change_message": "", 
+      "user": 1, 
+      "content_type": 2
+    }
+  }, 
+  {
+    "pk": 12, 
+    "model": "admin.logentry", 
+    "fields": {
+      "action_flag": 1, 
+      "action_time": "2012-10-11 14:51:12", 
+      "object_repr": "Admin Co:Admin Public", 
+      "object_id": "11", 
+      "change_message": "", 
+      "user": 1, 
+      "content_type": 10
+    }
+  }, 
+  {
+    "pk": 9, 
+    "model": "admin.logentry", 
+    "fields": {
+      "action_flag": 1, 
+      "action_time": "2012-10-11 14:51:01", 
+      "object_repr": "admin:Admin Co <owner>", 
+      "object_id": "8", 
+      "change_message": "", 
+      "user": 1, 
+      "content_type": 7
+    }
+  }, 
+  {
+    "pk": 6, 
+    "model": "admin.logentry", 
+    "fields": {
+      "action_flag": 1, 
+      "action_time": "2012-10-11 14:50:47", 
+      "object_repr": "Admin Public", 
+      "object_id": "5", 
+      "change_message": "", 
+      "user": 1, 
+      "content_type": 2
+    }
+  }, 
+  {
+    "pk": 4, 
+    "model": "admin.logentry", 
+    "fields": {
+      "action_flag": 1, 
+      "action_time": "2012-10-11 14:50:28", 
+      "object_repr": "Admin Co", 
+      "object_id": "3", 
+      "change_message": "", 
+      "user": 1, 
+      "content_type": 2
+    }
+  }
+]

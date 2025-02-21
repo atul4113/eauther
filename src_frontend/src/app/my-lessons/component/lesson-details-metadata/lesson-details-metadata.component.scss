@@ -1,0 +1,23 @@
+@import "../../../common/templates/mdl-colors.scss";
+
+app-lesson-details-metadata {
+    section {
+        display: flex;
+        flex-direction: column;
+        padding: 8px;
+
+        &:not(:first-child) {
+            border-top: 1px solid $grey-300;
+        }
+
+        &.base-info {
+            flex-direction: row;
+        }
+
+        &.metadata {
+            mat-form-field {
+                width: 100%;
+            }
+        }
+    }
+}

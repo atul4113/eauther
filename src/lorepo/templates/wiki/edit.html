@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load apptags %}
+
+
+{% block head %}
+ <script type="text/javascript" src="/media/js/wiki.js"></script>
+{% endblock %}
+
+{% block title %}
+	Edit {{ page.title }}
+{% endblock %}
+
+{% block content %}
+
+<h1 class="page_header">Edit Page</h1>
+<div class="main clear" style="padding-top: 0"></div>
+
+
+<form action="{{page.id}}" method="post" name="edit">
+	<div class="button-left">{% button 'Add File' 'parent.location="/doc/file"' '' '1,4em;' %}</div>
+	<div class="clear"></div>
+	{% csrf_token %}
+	<table>
+		<tr>
+			<td></td>
+			<td><input id="id_id" type="hidden" name="id" value="{{page.id}}"/></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>{{msg}}{{ form.title.errors }}</td>
+		</tr>
+		<tr>
+			<td><label for="id_title">{% trans "Title" %}:</label></td>
+			<td><input id="id_title" type="text" name="title" value="{{page.title}}" size="80"/></td>
+		</tr>
+		
+		
+		
+		<tr>
+			<td style="vertical-align:top"><label for="id_text">{% trans "Text" %}:</label></td>
+			<td><textarea id="id_text" name="text" rows="20" cols="80">{{page.text}} {% if img %} <img src="{{ img }}" /> {% endif %}</textarea></td>
+		</tr>
+		
+		<tr>
+			<td colspan="2">
+				<div class="button-left">
+				{% with page.id|stringformat:"s" as p %}
+					{% with "document.forms['edit'].action='"|add:p|add:"'"|add:"; document.forms['edit'].submit(); localStorage.clear();" as url %}
+						{% button 'Send' url %}
+					{% endwith %}
+				{% endwith %}
+					<input type="submit" value="{% trans "Send" %}" />
+				</div>
+				<div class="button-left">
+					{% button 'Preview' 'document.forms["edit"].action="/doc/preview"; document.forms["edit"].submit(); setWikiPage()' %}
+				</div>
+				<div class="button-left">
+					{% button 'Cancel' 'history.go(-1) ; localStorage.clear();' %}
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<a href="http://en.wikipedia.org/wiki/Markdown" target="_blank" class="normal">Markdown syntax</a>
+			</td>
+		</tr>
+	</table>
+</form>
+
+<script>
+$(document).ready(function() { getWikiPage(); });
+</script>
+
+{% endblock %}

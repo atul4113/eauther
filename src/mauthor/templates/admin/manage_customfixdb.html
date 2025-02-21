@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load apptags %}
+
+{% block content %}
+
+{% include "common/messages/display_messages.html" %}
+
+<div class="simple-content-wrapper simple-form-wrapper">
+    <i>
+        If you want to use this funcionality you have to inherit BackendTaskConfig in customfixdb\util.py to your class.
+        Then you have to implement your logic, add define your model data. Then you can run this fixd db using this page.
+        Add your customfixdb instance name and pagesize. You will receive email with information how much tasks was created.
+        All tasks will be processed parallel. After each task you will receive email with processing confirmation.
+    </i>
+    <br><br>
+    <form action="" method="post" class="form-horizontal">
+        <div class="control-group {% if wrong_page_size %} error{% endif %}">
+            <label class="control-label" for="minstructor">Page size:</label>
+            <div class="controls">
+                <input type="text" class="field span5" name="page_size" value="{{ page_size }}"/>
+                {% if wrong_page_size %}
+                    <span class="help-inline">{{wrong_page_size}}</span>
+                {% endif %}
+            </div>
+        </div>
+        <div class="control-group {% if wrong_config_instance_name %} error{% endif %}">
+            <label class="control-label" for="payments_active">Instance name:</label>
+            <div class="controls">
+                <input type="text" class="field span5" name="config_instance_name" value="{{ config_instance_name }}"/>
+                {% if wrong_config_instance_name %}
+                    <span class="help-inline">{{wrong_config_instance_name}}</span>
+                {% endif %}
+            </div>
+        </div>
+        <br>
+        <div class="control-group">
+            <div class="controls">
+                <button type="submit" class="btn btn-danger">Run</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

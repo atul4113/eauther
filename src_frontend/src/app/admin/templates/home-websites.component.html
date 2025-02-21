@@ -1,0 +1,66 @@
+<div id="home-websites">
+    <div class="page-title-bar flex-row with-dots">
+        <a class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored back-button" [routerLink]="'/panel'">
+           <i class="material-icons">chevron_left</i>
+        </a>
+
+        <div class="page-title-bar__header">
+            <h1> {{ translations | getLabel:"plain.admin.panel.home_websites.title" }} </h1>
+        </div>
+    </div>
+    <div putFooterBottom class="page-content">
+        <div *ngIf="!isInitialized" mdl class="app-loading-wrapper">
+            <app-loading></app-loading>
+        </div>
+
+        <div *ngIf="isInitialized"
+             mdl
+             class="mdl-grid">
+            <div class="mdl-cell mdl-cell--10-col-phone mdl-cell--10-col-tablet mdl-cell--10-col-desktop mdl-cell--1-offset-desktop ">
+
+                <h3 *ngIf="!homeWebsitesWithLanguages.length">
+                    {{ translations | getLabel: "plain.admin.panel.home_websites.no_language"}}
+                </h3>
+
+                <ng-container *ngIf="homeWebsitesWithLanguages.length">
+                    <mat-card *ngFor="let homeWebsitesWithLanguage of homeWebsitesWithLanguages">
+                        <mat-card-header>
+                            <mat-card-title>{{ homeWebsitesWithLanguage.language.description }}</mat-card-title>
+                            <mat-card-subtitle>{{ homeWebsitesWithLanguage.language.key }}</mat-card-subtitle>
+                        </mat-card-header>
+                        <mat-card-content>
+                            <mat-list>
+                                <mat-list-item *ngFor="let website of homeWebsitesWithLanguage.websites">
+                                    <span>
+                                        {{ translations | getLabel: "plain.admin.panel.home_websites.version" }}: {{ website.version }},
+                                        {{ translations | getLabel: "plain.admin.panel.home_websites.status" }}: {{ translations | getLabel: "plain.admin.panel.home_websites.status." + website.status }}
+                                    </span>
+                                    <a [disabled]="!website.displayPreviewButtons"
+                                       [href]="website.url"
+                                       target="_blank"
+                                       mat-raised-button>
+                                        {{ translations | getLabel: "plain.admin.panel.home_websites.preview_website" }}
+                                    </a>
+                                    <a [disabled]="!website.displayPreviewButtons"
+                                       [href]="website.previewHomePageUrl"
+                                       target="_blank"
+                                        mat-raised-button>
+                                        {{ translations | getLabel: "plain.admin.panel.home_websites.preview_home_page" }}
+                                    </a>
+                                    <simple-upload-file (startingUpload)="startingUpload(website)"
+                                                        (uploaded)="onUploaded($event, website)"
+                                                        [disabled]="!website.displayUploadButton">
+                                    </simple-upload-file>
+                                    <app-loading *ngIf="!website.displayUploadButton"></app-loading>
+                                    <span *ngIf="website.displayPreviewButtons">
+                                        ( <a [href]="website.url">{{ website.url }}</a> )
+                                    </span>
+                                </mat-list-item>
+                            </mat-list>
+                        </mat-card-content>
+                    </mat-card>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+</div>

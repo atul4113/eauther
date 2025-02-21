@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+
+<h2>{% trans "Thank you for registration" %}</h2>
+
+<p>
+	{% if request.LANGUAGE_CODE == 'pl' %}
+		Dziękujemy za zainteresowanie naszą stroną. Ponieważ nasz serwis jest aktualnie w wersji beta,
+		to ilość aktywnych kont jest ograniczona.
+		Obiecujemy odezwać się jak tylko będziemy gotowi na przyjęcie nowych użytkowników.
+		<br/>
+		Mamy nadzieję, że nastąpi to wkrótce!
+	{% else %}
+		Thank you for registration. Currently we are open only for beta testers.
+		We promise to let you know as soon as we are ready to start helping you create interactive content
+		<br/>
+		We hope to see you soon.
+	{% endif %}
+	
+</p>	
+
+{% endblock %}

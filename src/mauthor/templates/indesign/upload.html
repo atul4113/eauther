@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load apptags %}
+
+{% block content %}
+<h1 class="page_header">Import InDesign XML file</h1>
+<div class="main clear" style="padding-top: 0"></div>
+
+<div>
+	<form action="{{upload_url}}" method="POST" enctype="multipart/form-data" name="import">
+	{{form}}
+		{% button 'Upload' 'document.forms["import"].submit()' %}
+		<input type="hidden" name="next" value="{{next}}"/>
+		<input type="submit" value="import" />
+</div>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load apptags %}
+{% block content %}
+<div class="createDiv">
+<h2>Edit Addon</h2>
+
+<form method="post" action="/mycontent/{{addon.id}}/addonmetadata" name='metadata'>
+	{% csrf_token %}
+	<input type="hidden" name="next" value="{{ next }}" />
+	<div class="title-tags">
+		<label for="id_title">{% trans "Title" %}: 
+			{% for e in form.title.errors %}<span class="errorlist">&lArr; {{ e }}</span>{% endfor %}
+		</label>
+		<br/>
+		<input id="id_title" type="text" size="60" name="title" value="{{form.data.title}}"/>
+		<br />
+		<label for="id_tags">{% trans "Tags" %} 
+			<span style="font-size:0.8em">(Must be comma separated)</span>:
+		</label>
+		<br/>
+		<textarea rows="4" id="id_tags" name="tags">{{form.data.tags}}</textarea>
+	</div>
+	<div class="description-shortdescription">
+		<label for="id_short">{% trans "Short Description" %}:
+			{% for e in form.short_description.errors %}<span class="errorlist">&lArr; {{ e }}</span>{% endfor %}
+		</label>
+		<br/>
+		<textarea id="id_short" rows="4" name="short_description">{{form.data.short_description}}</textarea>
+		
+		<label for="id_desc">{% trans "Description" %}:</label>
+		<br/>
+		<textarea id="id_desc" rows="10" name="description">{{form.data.description}}</textarea>
+	</div>
+	<div style="float:left;">
+			{% button 'Send' 'document.forms["metadata"].submit()' %}
+		</div>
+		{% with next as next %}
+			{% with "location.href='"|add:next|add:"'" as url %}
+				<div style="float:right">{% button 'Cancel' url %}</div>
+			{% endwith %}
+		{% endwith %}
+</form>
+		<div class="content clear"></div>
+</div>
+
+{% endblock %}

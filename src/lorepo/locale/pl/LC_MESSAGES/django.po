@@ -1,0 +1,168 @@
+# Lokalizacja polska
+# Copyright (C) 2011 Krzysztof Langner
+# This file is distributed under the same license as the PACKAGE package.
+# Krzysztof Langner admin@lorepo.com, 2011.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-08-09 08:05-0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Krzysztof Langner admin@lorepo.com\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: pl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: mycontent/views.py:61 templates/mycontent/index.html:7
+msgid "New presentation"
+msgstr "Nowa prezentacja"
+
+#: mycontent/views.py:67
+msgid "Presentation "
+msgstr "Prezentacja "
+
+#: templates/base.html:7
+msgid "Interactive presentations - lorepo.com"
+msgstr "Interaktywne prezentacje - lorepo.com"
+
+#: templates/base.html:37
+msgid "Home"
+msgstr "Start"
+
+#: templates/base.html:37
+msgid "My presentations"
+msgstr "Moje prezentacje"
+
+#: templates/base.html:38
+msgid "Forum"
+msgstr "Forum"
+
+#: templates/base.html:42
+msgid "User"
+msgstr "Użytkownik"
+
+#: templates/base.html:43
+msgid "Logout"
+msgstr "Wyloguj"
+
+#: templates/base.html:45
+msgid "Login"
+msgstr "Zaloguj"
+
+#: templates/base.html:45
+msgid "Register"
+msgstr "Rejestracja"
+
+#: templates/forum/addpost.html:11
+msgid "Send replay"
+msgstr "Wyślij odpowiedź"
+
+#: templates/forum/addtopic.html:12 templates/mycontent/index.html:12
+#: templates/mycontent/rename.html:12 templates/public/index.html:8
+msgid "Title"
+msgstr "Tytuł"
+
+#: templates/forum/addtopic.html:16
+msgid "Text"
+msgstr "Tekst"
+
+#: templates/forum/addtopic.html:21 templates/home/index.html:34
+#: templates/mycontent/rename.html:17
+msgid "Send"
+msgstr "Wyślij"
+
+#: templates/forum/index.html:8 templates/forum/index.html.py:30
+msgid "Add topic"
+msgstr "Dodaj temat"
+
+#: templates/forum/index.html:13 templates/registration/login.html:7
+msgid "Topics"
+msgstr "Tematy"
+
+#: templates/forum/index.html:14
+msgid "Answers"
+msgstr "Odpowiedzi"
+
+#: templates/forum/index.html:15
+msgid "Last post"
+msgstr "Ostatni post"
+
+#: templates/forum/topic.html:10 templates/forum/topic.html.py:28
+msgid "Answer"
+msgstr "Odpowiedź"
+
+#: templates/home/index.html:9
+msgid "Create"
+msgstr "Utwórz"
+
+#: templates/home/index.html:11
+msgid "Interactive presentations"
+msgstr "Interaktywne prezentacje"
+
+#: templates/home/index.html:12
+msgid "Tests"
+msgstr "Testy"
+
+#: templates/home/index.html:13
+msgid "Quizzes"
+msgstr "Quizy"
+
+#: templates/home/index.html:15
+msgid "Used it"
+msgstr "Użyj do"
+
+#: templates/home/index.html:17
+msgid "Send link in e-mail"
+msgstr "Wyślij link w e-mailu"
+
+#: templates/home/index.html:18
+msgid "On your website, blog or facebook"
+msgstr "Na swojej stronie, blogu lub na facebooku"
+
+#: templates/home/index.html:19
+msgid "Download as SCORM package"
+msgstr "Pobierz jako paczkę SCORM"
+
+#: templates/home/index.html:21
+msgid "Check demo"
+msgstr "Sprawdź demo"
+
+#: templates/home/index.html:24
+msgid "Register for beta access"
+msgstr "Zarejestruj się na wersję beta"
+
+#: templates/mycontent/index.html:13
+msgid "Modified"
+msgstr "Zmodyfikowany"
+
+#: templates/mycontent/index.html:14
+msgid "Actions"
+msgstr "Akcje"
+
+#: templates/mycontent/index.html:24
+msgid "Preview"
+msgstr "Podgląd"
+
+#: templates/mycontent/index.html:25
+msgid "Rename"
+msgstr "Zmień nazwę"
+
+#: templates/mycontent/rename.html:6
+msgid "Rename presentation"
+msgstr "Zmień nazwę prezentacji"
+
+#: templates/public/index.html:9
+msgid "Author"
+msgstr "Autor"
+
+#: templates/public/index.html:11
+msgid "Description"
+msgstr "Opis"
+
+#: templates/user/registered.html:6
+msgid "Thank you for registration"
+msgstr "Dziękujemy za zarejestrowanie się"

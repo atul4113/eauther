@@ -1,0 +1,85 @@
+{% load apptags %}
+{% load course %}
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-4" id="left-column">
+			<div class="panel panel-default">
+				<div class="panel-heading"><strong>Available lessons</strong></div>
+				<div class="panel-body">
+					<ul id="available-lessons" class="sortable-list root">
+						{% build_lessons_list publications %}
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-2 addRemoveButtonsContainer" id="middle-column">
+			<div id="add-btn" class="vertical-stack">
+				<button type="button" class="btn btn-primary btn-sm btn-block">Add &rarr;</button>
+			</div>
+			<div id="remove-btn" class="vertical-stack">
+				<button type="button" class="btn btn-primary btn-sm btn-block">&larr; Remove</button>
+			</div>
+		</div>
+		<div class="col-md-4" id="right-column">
+			<div class="panel panel-default" id="eBook-container">
+				<div class="panel-heading"><strong>eBooks</strong></div>
+				<div class="panel-body">
+					<div id="eBook">
+						<div class="lessons">
+							{% for eBook in eBooks %}
+								<div class="lesson{% if eBook.is_deleted %} deleted{% endif %}" lesson-id="{{ eBook.id }}">
+									<span class="eBook-title">{{ eBook.name }}</span>
+									<a href="/course/edit_resources/{{ course.id }}/{{ eBook.id }}?next={{ request.path }}&next={{ back_url }}" 
+										class="edit-resources">
+									Edit Resources
+									</a>
+								</div>
+							{% endfor %}
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="panel panel-default">
+				<div class="panel-heading"><strong>Table of Contents</strong></div>
+				<div class="panel-body">
+					<div class="pull-left horizontal-stack">
+						<input id="name" type="text" />
+					</div>
+
+					<div class="pull-left horizontal-stack" id="add-chapter-btn">
+						<button type="button" class="btn btn-primary btn-sm">Add chapter</button>
+					</div>
+					
+					<div class="clearfix"></div>
+
+					<div class="separator"></div>
+					
+					<ul id="table-of-contents" class="sortable-list root">
+						{% build_list chapters course.id request.path project_id %}
+					</ul>
+					<div class="clearfix"></div>
+					<div class="pull-left horizontal-stack" id="save-toc-btn">
+						<button type="button" class="btn btn-primary btn-sm">Save</button>
+					</div>
+					<div class="pull-left horizontal-stack" id="save-loading">
+						<img src="/media/images/loading_small.gif" />
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="wrapper">
+	<div class="container">
+		<div class="list-wrapper table-of-contents full">
+			<div class="pull-left left-wrapper">
+
+
+			</div>
+		</div>
+	</div>
+</div>

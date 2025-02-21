@@ -1,0 +1,44 @@
+<div id="global-settings">
+    <div class="page-title-bar flex-row with-dots">
+        <a class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored back-button" [routerLink]="'/panel'">
+           <i class="material-icons">chevron_left</i>
+        </a>
+
+        <div class="page-title-bar__header">
+            <h1> {{ translations | getLabel:"plain.admin.panel.global_settings" }} </h1>
+        </div>
+    </div>
+    <div putFooterBottom class="page-content">
+        <div *ngIf="!isInitialized" mdl class="app-loading-wrapper">
+            <app-loading></app-loading>
+        </div>
+
+        <div *ngIf="isInitialized"
+             mdl
+             class="mdl-grid settings-list">
+            <div class="mdl-cell mdl-cell--8-col-phone mdl-cell--8-col-tablet mdl-cell--8-col-desktop mdl-cell--2-offset-desktop">
+                <div class="settings-list">
+                    <mat-form-field>
+                        <textarea [(ngModel)]="referrersString"
+                                  matInput
+                                  matTextareaAutosize
+                                  matAutosizeMinRows="6"
+                                  [placeholder]="translations.labels['plain.admin.panel.global_settings.referrers']"></textarea>
+                    </mat-form-field>
+                    <div *ngIf="!referrersStringIsValid"
+                         class="error-label">
+                        {{ translations | getLabel:"plain.languages.panel.json_syntax_error" }}
+                    </div>
+
+                    <div>
+                        <button (click)="submit()"
+                                [disabled]="!isFormValid()"
+                                mat-raised-button color="primary">
+                            {{ translations | getLabel:"plain.admin.panel.global_settings.submit" }}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

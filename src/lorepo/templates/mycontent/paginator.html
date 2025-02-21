@@ -1,0 +1,41 @@
+{% load apptags %}
+<div class="well well-sm">
+	<div class="text pull-left">
+		<div class="resources">{{objects_name}}:
+			{{current_page.start_index}}-{{current_page.end_index}}</div>
+	</div>
+	<div class="step-links pull-right">
+		{% if current_page.has_previous %}
+		<div class="prev">
+			<a href="?page={{ current_page.previous_page_number }}{{extra_params|request_params:1}}{{selected}}">&lt; prev</a>
+		</div>
+		{% endif %} {% if show_first %}
+		<div class="single-step">
+			<a href="?page=1{{extra_params|request_params:1}}{{selected}}">1</a>
+		</div>
+		<div class="single-step">...</div>
+		{% endif %} {% for page in current_page.page_range %}
+
+		<div class="single-step">
+
+			{% if page == current_page.number %} <a
+				href="?page={{ page }}{{extra_params|request_params:1}}"
+				class="current_page">{{ page }}</a> {% else %} <a
+				href="?page={{ page }}{{extra_params|request_params:1}}{{selected}}">{{ page }}</a> {% endif %}
+		</div>
+		{% endfor %} 
+		{% if show_last %}
+		<div class="single-step">...</div>
+		<div class="single-step">
+			<a
+				href="?page={{paginator.num_pages}}{{extra_params|request_params:1}}{{selected}}">{{paginator.num_pages}}</a>
+		</div>
+		{% endif %}
+		<div class="next">
+			{% if current_page.has_next %} 
+				<a href="?page={{ current_page.next_page_number }}{{extra_params|request_params:1}}{{selected}}">next &gt;</a> 
+			{% endif %}
+		</div>
+	</div>
+	<div class="clearfix"></div>
+</div>

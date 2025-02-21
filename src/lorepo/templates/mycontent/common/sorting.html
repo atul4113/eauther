@@ -1,0 +1,29 @@
+{% load apptags %}
+
+<div class="sorting">
+	<div class="param">
+		<strong>Sort by:</strong>
+	</div>
+	
+	<div class="param">
+	Title
+	{% if extra_params.order_by != 'title' %}
+		<a href="{{request.get_full_path|sorting_param_append:'title'}}">&uarr;</a>
+	{% endif %}
+	{% if extra_params.order_by != '-title' %}
+		<a href="{{request.get_full_path|sorting_param_append:'-title'}}">&darr;</a>
+	{% endif %}
+	</div>
+	
+	<div class="param">
+	Modified date
+	{% if extra_params.order_by != 'modified_date' %}
+		<a href="{{request.get_full_path|sorting_param_append:'modified_date'}}">&darr;</a>
+	{% endif %}
+	{% if extra_params.order_by != '-modified_date' %}
+		<a href="{{request.get_full_path|sorting_param_append:'-modified_date'}}">&uarr;</a>
+	{% endif %}
+	</div>
+	
+	<div class="clear"></div>
+</div>

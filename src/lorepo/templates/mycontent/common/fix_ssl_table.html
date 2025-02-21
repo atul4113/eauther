@@ -1,0 +1,39 @@
+<table width="100%">
+<tr>
+	<th>Lesson</th>
+	<th>Problem with CSS?</th>
+	<th>Problem with pages</th>
+{#	{% if superuser %}#}
+{#		<th>Fix now</th>#}
+{#	{% endif %}#}
+</tr>
+
+
+{% for lesson in lessons %}
+	<tr {% if forloop.counter|divisibleby:2 %}style="background-color: #eee"{% endif %}>
+		<td>
+			<a href="/{{ preview }}/{{ lesson.id }}" target="_blank">{{ lesson.title }}</a>
+		</td>
+		<td>
+			{% if lesson.fix_styles %}
+				<span style="cursor: pointer;" onclick="show_css({{ lesson.content_id }})" data-toggle="modal" data-target="#myModal">Show</span>
+			{% else %}
+				&nbsp;
+			{% endif %}
+		</td>
+		<td>
+			{% if lesson.fix_pages %}
+				<span style="cursor: pointer;" onclick="show_pages({{ lesson.content_id  }},'{{ lesson.fix_pages }}')" data-toggle="modal" data-target="#myModal">Show</span>
+				{% else %}
+				&nbsp;
+			{% endif %}
+		</td>
+{#		{% if superuser %}#}
+{#		<td>#}
+{#			<a href="/mycontent/{{ lesson.id }}/fix_ssl">Fix</a>#}
+{#		</td>#}
+{#		{% endif %}#}
+	</tr>
+{% endfor %}
+
+</table>

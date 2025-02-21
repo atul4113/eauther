@@ -1,0 +1,26 @@
+<div class="layout" (window:scroll)="mainScrolled($event)">
+    <app-drawer
+        [isHeaderCompact]="isHeaderCompact"
+        [user]="user"
+        [projects]="projects">
+    </app-drawer>
+
+    <app-header
+        [isCompact]="isHeaderCompact"
+        [user]="user"
+        [projects]="projects">
+    </app-header>
+
+    <info-messages
+        (toggleErrorMessage)="onToggleErrorMessage($event)">
+    </info-messages>
+
+    <div [ngStyle]="{'display': isErrorMessageVisible ? 'none' : 'block'}">
+        <router-outlet></router-outlet>
+    </div>
+
+    <app-footer
+        [user]="user">
+    </app-footer>
+</div>
+

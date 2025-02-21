@@ -1,0 +1,41 @@
+<ng-container *ngIf="structure">
+    <div *ngFor="let publication of structure.subspaces; let i = index"
+         [ngClass]="{'has-left-padding': hasLeftPadding}"
+         class="publication-container">
+        <div class="publication-name">
+            <i *ngIf="(!publication.subspaces || publication.subspaces.length > 0) && !publication._ui.isExpanded"
+               (click)="showSubspaces(publication)"
+               [ngClass]="{'blue-arrow': !hasLeftPadding}"
+               class="material-icons">arrow_drop_down</i>
+            <i *ngIf="publication.subspaces && publication.subspaces.length > 0 && publication._ui.isExpanded"
+               (click)="hideSubspaces(publication)"
+               [ngClass]="{'blue-arrow': !hasLeftPadding}"
+               class="material-icons">arrow_drop_up</i>
+            <div class="spinner" *ngIf="!publication.subspaces && publication._ui.isExpanded">
+                <mat-spinner [strokeWidth]="2" [diameter]="15" ></mat-spinner>
+            </div>
+            <i *ngIf="publication.subspaces && publication.subspaces.length == 0"
+               class="material-icons invisible">arrow_drop_up</i>
+            <a *ngIf="!selectable"
+                (click)="changePublication(); showLessons()"
+               [ngClass]="{'is-bold': publication.id == currentSpaceId && !shouldShowAddons}"
+               [routerLink]="'/corporate/list/' + publication.id">
+                {{ publication.name }}</a>
+            <mat-radio-button *ngIf="selectable" [checked]="publication.id === lesson.publicationId" [value]="publication.id" (change)="select(publication.id)" class="publication-name">
+                {{ publication.name }}
+            </mat-radio-button>
+        </div>
+
+        <app-project-structure *ngIf="publication._ui.isExpanded"
+                               [hasLeftPadding]="true"
+                               [projectId]="publication.id"
+                               [shouldShowAddons]="shouldShowAddons"
+                               (displayLessons)="showLessons()"
+                               (afterSubmodulesDownload)="publication.subspaces = $event"
+                               (onSelect)="select($event)"
+                               [selectable]="selectable"
+                               [lesson]="lesson"
+                               [currentSpaceId]="currentSpaceId">
+        </app-project-structure>
+    </div>
+</ng-container>

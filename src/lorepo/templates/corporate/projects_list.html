@@ -1,0 +1,25 @@
+{% load corporate %}
+
+{% for space in spaces %}
+<li id="list_{{space.id}}">
+	<div>
+		<table>
+			<tr>
+				<td>
+					<span class="wiki-page-more{% if space.id == selected_space.id and not is_trash and space.loaded_kids|length > 0%} down{% endif %}">
+					</span>
+				</td>
+				<td>
+					<a href="/corporate/list/{{space.id}}" id="{{space.id}}" {% if space.id == selected_space.id and not is_trash %}class="selected"{% endif %}>
+						{{space.title}}
+					</a>
+					<span style="display: none">[{{space.contents_count}}]</span>
+				</td>
+			</tr>
+		</table>
+	</div>
+	{% if space.loaded_kids %}
+		<ul>{% children_tag_projects_list space.loaded_kids selected_space is_trash 'False' %}</ul>
+	{% endif %}
+</li>
+{% endfor %}

@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load apptags %}
+
+{% block content %}
+<h1 class="page_header">Projects Management</h1>
+<div class="main clear" style="padding-top: 0"></div>
+
+{% include "common/messages/display_messages.html" %}
+
+<div id="toolbar">
+	<form method="post" action="/corporate/add/{{company.id}}" name="add">
+		<table style="margin:0 10px">
+			<tr>
+				<td>Project name:</td>
+				<td><input type="text" name="title" /></td>
+				<td>&nbsp;<button type="submit" class="btn btn-primary btn-sm">Add project</button></td>
+				<td><input type="submit" /></td>
+			</tr>
+			<tr>
+				<td colspan="4"><a href="/backup/restore?next={{request.path}}">Restore project</a></td>
+			</tr>
+		</table>
+	</form>
+</div>
+<div class="clear"></div>
+	{% for division in divisions %}
+		<ul class="categories">
+				<li class="title">{{division.title}}</li>
+				<li class="actions">
+					<a href="{{division.id}}/rename_space">{% trans "Rename" %}</a> |
+				    <a href="/corporate/projects/{{division.id}}">{% trans "Publications" %}</a> |
+					<a href="{{division.id}}/delete_space"  onclick="return confirm('Are you sure you want to delete project {{division.title}}? All contents from this project will become unavailable.')">{% trans "Delete" %}</a> |
+					<a href="/backup/{{division.id}}/select">{% trans "Backup" %}</a> |
+					<a href="/bulk/templates/{{division.id}}?next=/corporate/divisions">{% trans "Update templates" %}</a> |
+					<a href="/bulk/assets/{{division.id}}?next=/corporate/divisions">{% trans "Update assets" %}</a> |
+					<a href="{{division.id}}/toggle_include">
+						{% if division.include_contents_in_editor %}
+							Disable sharing addons and templates in editor
+						{% else %}
+							Enable sharing addons and templates in editor
+						{% endif %}
+					</a>
+				</li>
+		</ul>
+	{% endfor %}
+
+<div class="tableFooter">
+</div>
+
+{% endblock %}

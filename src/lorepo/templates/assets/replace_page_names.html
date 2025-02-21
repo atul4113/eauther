@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load apptags %}
+
+{% block content %}
+    <h1 class="page_header">Replace Page Name</h1>
+
+    <div class="main clear" style="padding-top: 0px"></div>
+
+    {% include "common/messages/display_messages.html" %}
+
+    <div id="replace-page-names">
+        <form method="post" action="" name="replace_page_names">
+            <table>
+                <tr>
+                    <td>Space ID:</td>
+                    <td><input type="text" name="space" /></td>
+                </tr>
+                <tr>
+                    <td>Prefix:</td>
+                    <td><input type="text" name="prefix" /></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><button type="submit" class="btn btn-primary btn-sm">Replace</button></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+
+    <div class="clear"></div>
+{% endblock content %}

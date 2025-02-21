@@ -1,0 +1,5 @@
+{
+	"href" : "/file/serve/{{file.id}}",
+	"contentType" : "{{file.content_type}}",
+	"fileName" : "{{file.filename}}"
+}

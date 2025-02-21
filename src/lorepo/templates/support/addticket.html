@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load apptags %}
+
+{% block content %}
+
+<h1 class="page_header">Add new ticket</h1>
+
+<div class="main clear" style="padding-top: 0"></div>
+
+{% include "common/messages/display_messages.html" %}
+<div class="col-sm-8 col-sm-offset-2 margin-top20">
+    <form action="addticket" method="post" name="edit" role="form" class="form-horizontal">
+        {% csrf_token %}
+
+        <div class="form-group">
+            <label for="id_ticket_type" class="col-sm-3 control-label"><strong>{% trans "Type" %}:</strong></label>
+            <div class="col-sm-5">
+                <select name="ticket_type" id="id_ticket_type" class="form-control">
+                    <option value="1">Bug</option>
+                    <option value="2">Question</option>
+                    <option value="3">Request</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="id_title" class="col-sm-3 control-label"><strong>{% trans "Title" %}:</strong></label>
+            <div class="col-sm-5">
+                <input id="id_title" type="text" name="title" value="{{ form.data.title }}" class="form-control" />
+            </div>
+            <div class="col-sm-4">
+                <span class="errorlist">{% for e in form.title.errors %}{{ e }}{% endfor %}</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="id_lesson_url" class="col-sm-3 control-label"><strong>{% trans "Lesson URL" %}:</strong></label>
+            <div class="col-sm-5">
+                <input id="id_lesson_url" type="text" name="lesson_url" value="{{ form.data.lesson_url }}" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="id_text" class="col-sm-3 control-label"><strong>{% trans "Text" %}:</strong></label>
+            <div class="col-sm-5">
+                <textarea id="id_text" type="text" rows="10" name="text" class="form-control">{{ form.data.text }}</textarea>
+            </div>
+            <div class="col-sm-4">
+                <span class="errorlist">{% for e in form.text.errors %}{{ e }}{% endfor %}</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-3 col-sm-5">
+                <button class="pull-left btn btn-primary" type="submit">Send</button>
+                <a class="pull-right btn btn-warning" href="/support">Cancel</a>
+            </div>
+        </div>
+
+    </form>
+</div>
+
+
+{% endblock %}

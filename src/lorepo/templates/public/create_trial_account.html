@@ -1,0 +1,51 @@
+{% extends "base_no_search.html" %}
+
+{% load apptags %}
+
+{% block content %}
+
+<script type="text/javascript">
+$(document).ready(function(){
+    var companyButton = $('.create-company-button');
+	$("#inputCompanyName").on('keyup', function () {
+        if($(this).val() == "") {
+            companyButton.attr("disabled", "disabled");
+        } else {
+            companyButton.removeAttr("disabled");
+        }
+    });
+
+    companyButton.attr("disabled", "disabled");
+});
+</script>
+
+<div id="trial_account">
+	<h1 class="page-header">
+		30 day FREE TRIAL
+	</h1>
+    <p class="paragraph-info">This is the final step of your 30 days FREE TRIAL Account set-up.</p>
+    <p>Please choose and type-in the name for your test/trial Company.
+        If you decide to continue working with us after the trial period, this test Company will become a regular virtual workspace, with separate hosting and storage space, dedicated solely to your actual company.</p>
+    <p class="paragraph-info">Once you will log-in you will have instant access to selection of our demo eLessons and some pre-designed Templates. To access them click PROJECTS menu and choose Sample Lessons or Sample Templates. Feel free to try them out. Check their functionality and discover what Functional Modules were used to achieve it. Use pre-designed Templates to create your own unique digital lessons. Do not worry, you can freely modify and save these samples as they are designated solely to your virtual workspace.</p>
+    <p class="paragraph-info">After you complete this final step you will receive a confirmation email with some valuable recommendations about your first steps with mAuthor.</p>
+    <p class="paragraph-info">To start using mAuthor quickly and learn its functionality we recommend you to take a tour along its useful Video Tutorials. They will help you to take your first steps and speed up your learning curve significantly. You will find there also some useful tips & tricks and ready-made solutions to be implemented in your first projects.</p>
+    <p class="paragraph-info">You may find them at: <a href="http://www.learnetic.com/mauthor-video-tutorials">http://www.learnetic.com/mauthor-video-tutorials</a></p>
+
+	<div class="wrapper">
+        <form method="post" action="/corporate/create_trial_account" class="trial-account-form">
+          <div class="control-group">
+            <label class="control-label" for="inputName">Please type in the name of your test/trial Company (Hint: Interactive Publishing Ltd.):</label>
+            <div class="controls">
+              <input type="text" id="inputCompanyName" placeholder="Name" name="space_name">
+            </div>
+          </div>
+          <div class="control-group">
+            <div class="controls">
+              <button type="submit" class="btn btn-large btn-primary create-company-button">Create</button>
+            </div>
+          </div>
+        </form>
+	</div>
+</div>
+
+{% endblock %}

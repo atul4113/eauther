@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load apptags %}
+
+{% block content %}
+    <h1 class="page_header">Set demo sample lessons</h1>
+
+    <div class="main clear" style="padding-top: 0px"></div>
+
+    {% include "common/messages/display_messages.html" %}
+
+    <div id="replace-page-names">
+        <form method="post" action="" name="set_demo_sample_lessons">
+            <table>
+                <tr>
+                    <td>My content demo lesson:</td>
+                    <td><input value="{{ lessons.my_content_demo_lesson }}" type="text" name="my_content_lesson" /></td>
+                    <td><a href="/embed/{{ lessons.my_content_demo_lesson }}">Preview</a></td>
+                </tr>
+                <tr>
+                    <td>Publication lesson 1:</td>
+                    <td><input value="{{ lessons.publication_lesson_first }}" type="text" name="publication_lesson_first" /></td>
+                    <td><a href="/embed/{{ lessons.publication_lesson_first }}">Preview</a></td>
+                </tr>
+                <tr>
+                    <td>Publication lesson 2:</td>
+                    <td><input value="{{ lessons.publication_lesson_second }}" type="text" name="publication_lesson_second" /></td>
+                    <td><a href="/embed/{{ lessons.publication_lesson_second }}">Preview</a></td>
+                </tr>
+                <tr>
+                    <td>Publication lesson 3:</td>
+                    <td><input value="{{ lessons.publication_lesson_third }}" type="text" name="publication_lesson_third" /></td>
+                    <td><a href="/embed/{{ lessons.publication_lesson_third }}">Preview</a></td>
+                </tr>
+                <tr>
+                    <td>Template lesson 1:</td>
+                    <td><input value="{{ lessons.template_lesson_first }}" type="text" name="template_lesson_first" /></td>
+                    <td><a href="/embed/{{ lessons.template_lesson_first }}">Preview</a></td>
+                </tr>
+                <tr>
+                    <td>Template lesson 2:</td>
+                    <td><input value="{{ lessons.template_lesson_second }}" type="text" name="template_lesson_second" /></td>
+                    <td><a href="/embed/{{ lessons.template_lesson_second }}">Preview</a></td>
+                </tr>
+                <tr>
+                    <td>Template lesson 3:</td>
+                    <td><input value="{{ lessons.template_lesson_third }}" type="text" name="template_lesson_third" /></td>
+                    <td><a href="/embed/{{ lessons.template_lesson_third }}">Preview</a></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><button type="submit" class="btn btn-primary btn-sm">Set lessons</button></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+
+    <div class="clear"></div>
+{% endblock content %}

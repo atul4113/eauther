@@ -1,0 +1,1 @@
+{% load i18n %} Activate your Account at mAuthor platform

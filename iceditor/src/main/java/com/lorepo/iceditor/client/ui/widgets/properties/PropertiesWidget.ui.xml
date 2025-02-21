@@ -1,0 +1,18 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+	
+	</ui:style>
+	<g:HTMLPanel styleName="properties-panel-container">
+		<div class="boxName" ui:field="title"></div>
+
+		<div id="propertiesPanel" class="panel">
+			<span id="moduleTypeLabel"></span>
+			<span ui:field="nodeName"></span>
+			<a ui:field="moduleDoc"></a>
+		</div>
+		<g:HTMLPanel ui:field="propertiesList" styleName="boxList">
+		</g:HTMLPanel>
+	</g:HTMLPanel>
+</ui:UiBinder> 

@@ -1,0 +1,11 @@
+{% load apptags %}
+
+<ul class="pagination">
+	<li {% if page == 1 %}class="disabled" style="pointer-events: none;"{% endif %}><a href="/search/search?q={{query}}&type=doc&page={{page|minusOne}}">&laquo;</a></li>
+
+	{% for p in page_range %}
+		<li {% if p == page %}class="active"{% endif %}><a href="/search/search?q={{query}}&type=doc&page={{p}}">{{p}}</a></li>
+	{% endfor %}
+
+	<li {% if page == total_pages %}class="disabled" style="pointer-events: none;"{% endif %}><a href="/search/search?q={{query}}&type=doc&page={{page|add:1}}">&raquo;</a></li>
+</ul>

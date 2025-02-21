@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% load apptags %}
+{% load markdown_deux_tags %}
+{% block head %}
+
+<script src="/mauthor_media/js/lessons_parsers/properties_parser/main.js"></script>
+<script src="/media/js/messages.js" type="text/javascript"></script>
+<link href="/mauthor_media/css/lessons_parsers/main.css" rel="stylesheet" type="text/css">
+{% endblock head %}
+
+{% block content %}
+
+<h1 class="page_header">Change properties</h1>
+<div class="main clear" style="padding-top: 0"></div>
+<div id="messages"></div>
+{% include "common/messages/display_messages.html" %}
+<div class="parse-instruction">
+<p>"List row number" and "Page number" inputs require natural numbers counted from 1. You can insert numbers separated by comma or range. Examples:
+    <span class="li">1,2,3</span>
+    <span class="li">[1-4]</span>
+    <span class="li">[start-3]</span>
+    <span class="li">[2-end]</span>
+    <span class="li">[start-end]</span>
+</p>
+<p> "Default Row Value" is optional value and are telling changer what value should be enter to missing property created by changer in list property.
+</p>
+<p>Other inputs require text whose changer will be searched in lessons. Special characters:
+    <span class="li"><b>^</b> - text start, for example: ^Lesson - means text starting with Lesson</span>
+    <span class="li"><b>$</b> - text end, for example: 2^ - means text ending with 2</span>
+    <span class="li"><b>[]</b> - alternative, for example [123] - means 1 or 2 or 3</span>
+    <b>Examples:</b>
+    <span class="li"><b>^Lesson 1$</b> - find text equal exactly to: <b>Lesson 1</b></span>
+    <span class="li"><b>^Lesson</b> - find text starting with Lesson, for example <b>Lesson 1</b>, <b>Lesson 23</b>, <b>LessonName</b></span>
+    <span class="li"><b>^Lesson [123]$</b> - find lesson whose name is <b>Lesson 1</b> or <b>Lesson 2</b> or <b>Lesson 3</b></span>
+</p>
+<p>You should not start two changers at the same time.</p>
+<p>Lessons currently being edited will not be changed.</p>
+<p>You will receive a relevant log with details about the changes made.</p>
+</div>
+<form method="post" action="/lessons_parsers/change_properties/{{ space_id }}" name="create">
+	{% csrf_token %}
+	<table>
+  		{{ form }}
+  	<tr><th></th><th>{% button "Parse" "properties_view_controller.onButtonSendClick()" %}</th></tr>
+  	</table>
+  	<input type="submit" />
+</form>
+
+ <table>
+    <tbody>
+    <tr>
+        <th>
+            <label> Private addon name:</label>
+        </th>
+        <td>
+            <input type="text" id="private_addon_name">
+        </td>
+    </tr>
+    <tr><th></th><th>{% button "Add to list" "properties_view_controller.onAddPrivateAddon()" %}</th></tr>
+    </tbody>
+ </table>
+{% endblock %}

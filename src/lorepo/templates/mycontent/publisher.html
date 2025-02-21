@@ -1,0 +1,5 @@
+{% if space %}
+	<label>Publisher:</label> <a href="/public/?publisher={{space.id}}&type={{content.content_type}}">{{ space }}</a>
+{% else %}
+	<label>Author:</label> <a href="/public/?author={{content.author.username}}&type={{content.content_type}}">{{content.author.username}}</a>
+{% endif %}

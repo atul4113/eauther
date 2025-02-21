@@ -1,0 +1,22 @@
+{% autoescape off %}
+Dear {{ user }},
+
+
+<p>
+{% if newsletter_email.emails_counter > 0 %}
+
+User emails have been successfully exported.
+
+You can get the emails at <a href="{{ newsletter_email.email_file.link }}">{{ newsletter_email.email_file.filename }}</a>
+{% else %}
+
+There are not new accounts created since: {{ newsletter_email.created_date|date:'Y-m-d H:i' }}
+
+{% endif %}
+</p>
+
+<p>
+--<br/>
+{{ settings.APP_NAME }}
+</p>
+{% endautoescape %}

@@ -1,0 +1,13 @@
+{% load i18n %}
+{% load apptags %}
+{% block content %}
+<p style="font-weight:900; font-size:medium; margin: 10px 0 10px 50px;">Change preferred language</p>
+<form method="post" action="profile" name="changeLanguage">
+		{% csrf_token %}
+		<table class="profile-edit-table">
+            {{ lang_form }}
+	  	<tr><th></th><th>{% button 'Change' 'document.forms["changeLanguage"].submit()' '' '' %}</th></tr>
+	  	</table>
+	  	<input type="submit" />
+</form>
+{% endblock %}

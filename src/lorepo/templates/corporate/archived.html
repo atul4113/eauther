@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load apptags %}
+
+{% block content %}
+<div style="float:left">
+<h1 class="page_header">Archived publications</h1>
+</div>
+<div style="float:right">
+{% if space_id %}
+	{% with space_id|stringformat:"s" as s %}
+		{% with "parent.location='/corporate/projects/"|add:s|add:"'" as url %}
+			{% button 'Publications' url %}
+		{% endwith %}
+	{% endwith %}
+{% endif %}
+</div>
+<div class="main clear" style="padding-top: 0"></div>
+
+	{% for space in spaces %}
+        {% if space.is_edited %}
+        {% else %}
+            <ul class="categories">
+                {% if space.parent != None %}
+                    <li>
+                    <span style="font-size:large; margin-right:20px;">{{space.title}} </span>
+                    </li>
+                    <li>
+                        <a href="/corporate/retrieve/{{space.id}}?{{ token_key }}={{ token }}&next=/corporate/projects/{{space_id}}">{% trans "Retrieve" %}</a> |
+                        <a href="/corporate/{{space.id}}/subproject">{% trans "Units" %}</a>
+                    </li>
+                {% endif %}
+            </ul>
+        {% endif %}
+	{% endfor %}
+
+<div class="tableFooter">
+</div>
+
+{% endblock %}

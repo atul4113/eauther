@@ -1,0 +1,8 @@
+{% load i18n %}
+<p>
+Hi there!
+</p>
+<p>
+There are too many User Accounts in your {{ company }} workspace on the mAuthor platform. The current upper limit of your trial workspace's User Accounts is: {{ maxAccount }}.
+Please remove all inactive User Accounts or contact us at mauthor@learnetic.com.
+</p>

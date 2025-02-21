@@ -1,0 +1,156 @@
+@import '../../templates/common';
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10000;
+    //padding-left: 32px!important;
+    @include shadow--2dp;
+
+    @media screen and (min-width: $desktop-breakpoint) {
+        &.is-compact .header__first-row {
+            display: none;
+            padding-left: 64px;
+        }
+
+        &.is-compact .header__second-row .company-admin {
+            display: block;
+        }
+
+        &.is-compact .header__second-row .search-form {
+            display: block;
+            padding-top: 16px;
+            color: $white;
+        }
+
+        &.is-compact .header__second-row .project-admin {
+            display: block;
+        }
+    }
+
+    mat-toolbar-row {
+        position: relative;
+    }
+
+    .logo-img {
+        max-height: 60px;
+    }
+
+    a {
+        color: black;
+        text-decoration: none;
+    }
+
+    mat-toolbar {
+        padding-right: 32px !important;
+
+        @media screen and (max-width: $desktop-breakpoint) {
+            height: 56px !important;
+            padding-right: 16px !important;
+            padding-left: 64px !important;
+
+            mat-toolbar-row {
+                height: 56px !important;
+            }
+        }
+    }
+
+    mat-toolbar.header__first-row {
+        background-color: $grey-900;
+        color: white;
+
+        mat-toolbar-row {
+            position: relative;
+        }
+
+        form.header-top-bar__search {
+            padding-top: 16px;
+        }
+
+        .header-top-bar__logo {
+            height: 45px;
+        }
+    }
+
+    mat-toolbar.header__second-row.is-smaller {
+        padding-left: 64px;
+    }
+
+    mat-toolbar.header__second-row {
+        background: $white;
+
+        a.header__main-menu-item {
+            line-height: 64px !important;
+            border-radius: 0 !important;
+
+            &:hover, &.active {
+                line-height: 58px !important;
+                border-bottom: 3px solid $blue-500;
+                margin-top: 2px !important;
+
+                .mat-button-focus-overlay {
+                    background-color: transparent !important;
+                }
+            }
+
+            @media screen and (max-width: $desktop-breakpoint) {
+                line-height: 56px !important;
+
+                &:hover, &.active {
+                    line-height: 50px !important;
+                }
+            }
+        }
+
+        .company-admin {
+            display: none;
+        }
+
+        .search-form {
+            display: none;
+        }
+
+        .project-admin {
+            display: none;
+        }
+
+        //@media screen and (max-height: $desktop-breakpoint) {
+        //    padding-left: 64px;
+        //}
+
+        .user-account-button {
+            display: none;
+        }
+
+    }
+
+    &.is-compact {
+        mat-toolbar.header__second-row {
+            background: $grey-900;
+
+            a.header__main-menu-item {
+                color: $white;
+
+                &:hover, &.active {
+                    border-bottom-color: $white;
+                }
+            }
+
+            .company-logo {
+                display: none;
+            }
+
+            .user-account-button {
+                display: block;
+                color: $white;
+            }
+        }
+    }
+
+    span.toolbar-spacer {
+        display: flex;
+        flex-grow: 1;
+    }
+}

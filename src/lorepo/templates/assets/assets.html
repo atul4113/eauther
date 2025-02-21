@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+{% load apptags %}
+{% load assets %}
+
+{% block content %}
+
+<h1 class="page_header">Assets for: {{content}}</h1>
+<div class="main clear" style="padding-top: 0"></div>
+
+{% include "common/messages/display_messages.html" %}
+
+<div class="left uploadAsset">
+<h3>Upload single asset</h3>
+<form method="post" action="{{ upload_url }}" name="upload_single" enctype="multipart/form-data">
+	{% csrf_token %}
+	<table class="upload-logo">
+		<tr>
+			<th><label for="id_title">Title: <span style="font-size:x-small;">(optional)</span></label></th>
+  			<td><input id="id_title" type="text" name="title"/></td>
+  		</tr>
+  		{{ form }}
+  	<tr><th></th>
+        <th>
+            <div class="button-left">
+                <button type="submit" class="btn btn-primary btn-sm" {% if currently_edited %}disabled{% endif %}>Upload</button>
+            </div>
+        </th>
+    </tr>
+  	</table>
+  	<input type="submit" />
+</form>
+</div>
+
+<div class="left uploadAssetPackage">
+<h3>Upload assets package</h3>
+<form method="post" action="{{ upload_package_url }}" name="upload_package" enctype="multipart/form-data">
+	{% csrf_token %}
+	<table class="upload-logo">
+  		{{ form }}
+  	<tr><th></th>
+        <th>
+            <div class="button-left">
+                <button type="submit" class="btn btn-primary btn-sm" {% if currently_edited %}disabled{% endif %}>Upload package</button>
+            </div>
+        </th>
+    </tr>
+  	</table>
+  	<input type="submit"/>
+</form>
+
+</div>
+
+<div class="clear"></div>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#filter").change(function(){
+		$("#filterForm").submit()
+	});
+});
+</script>
+
+<div>
+<form name="filter" id="filterForm" method="POST" action="/assets/{{content.id}}">
+    <strong>Filter assets</strong>: 
+	<select name="type" id="filter">
+		<option value="" {% if not content_type %}selected{% endif %}>All</option>
+		{% for available_type in available_types %}
+		<option value="{{available_type}}" {% if content_type == available_type %}selected{% endif %}>{{available_type}}</option>
+		{% endfor %}
+	</select>
+</form>
+</div>
+
+
+{% for asset in assets %}
+	<div class="asset">
+		<div class="asset-preview">
+			<a href="{{asset.href}}">
+			{% if asset.type == 'audio' %}
+					<img src="/media/images/audio_icon.png" alt="Audio"/>
+				{% else %}
+					{% if asset.type == 'video' %}
+						<img src="/media/images/video_icon.png" alt="Audio"/>
+					{% else %}
+						{% if asset.type == 'image' %}
+							<img src="{{asset.href|thumbnail_url:'139,99'}}" alt="image" class="asset-image"/>
+						{% else %}
+							{% if asset.type == 'svg+xml' %}
+								<object data="{{asset.href}}" type="image/svg+xml" height="99" width="139"></object>
+							{% else %}
+								<img src="/media/images/no_thumbnail.png" alt="Other" style="margin:0 20px; width:81px;"/>
+						{% endif %}
+					{% endif %}
+				{% endif %}
+			{% endif %}
+			</a>
+		</div>
+		<div>
+			<div class="word-break-all"><strong>File name:</strong> {{asset.file_name}}</div>
+			<div class="word-break-all"><strong>URL:</strong> <a href="{{asset.href}}">{{asset.href}}</a></div>
+			<div class="word-break-all"><strong>Title:</strong> {{asset.title}}</div>
+			<strong>Content type:</strong> {{asset.content_type}}<br/>
+			<br />
+            {% if not currently_edited %}
+			    [ <a href="/assets/delete/{{content.id}}/{{asset.href|urlencode:""}}">Delete asset</a> | <a href="/assets/rename/{{content.id}}/{{asset.href|urlencode:""}}">Edit title</a> ]
+            {% endif %}
+		</div>
+	</div>
+	{% if forloop.counter|mod:5 == 0 %}<div class="clear"></div>{% endif %}
+{% endfor %}
+
+
+<div class="main clear"></div>
+
+{% endblock %}

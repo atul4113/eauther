@@ -1,0 +1,35 @@
+<div id="info-messages">
+    <div *ngIf="message" class="message-wrapper">
+        <div [ngClass]="{'error': message.isError(), 'info': message.isInfo(), 'warning': message.isWarning(), 'success': message.isSuccess(),
+            'message-closeable': message.isCloseable()}" class="message mdl-shadow--4dp">
+            <span class="message-content">
+                {{ message.content }}
+            </span>
+            <button *ngIf="message.isCloseable()" (click)="closeInfoMessage()" class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored close-message">
+                <i class="material-icons">close</i>
+            </button>
+        </div>
+    </div>
+</div>
+
+<div id="app-error-messages" *ngIf="showErrorMessage">
+    <div class="page-content">
+        <section class="section-white">
+            <div *ngIf="errorMessageType === 500" class="error-500">
+                <h1>{{ translations | getLabel:'500.h1' }}</h1>
+                <p>{{ translations | getLabel:'500.server_error_info' }}</p>
+                <p>{{ translations | getLabel:'500.report_to' }} {{ serverEmail }}.</p>
+                <p>{{ translations | getLabel:'500.here_is_a_link' }}
+                    <a [routerLink]="'/home'">{{ translations | getLabel:'500.homepage' }}</a>.
+                </p>
+            </div>
+            <div *ngIf="errorMessageType === 404" class="error-404">
+                <h1>{{ translations | getLabel:'404.h1' }}</h1>
+                <p>{{ translations | getLabel:'404.info' }}</p>
+                <p>{{ translations | getLabel:'500.here_is_a_link' }}
+                    <a [routerLink]="'/home'">{{ translations | getLabel:'500.homepage' }}</a>.
+                </p>
+            </div>
+        </section>
+    </div>
+</div>

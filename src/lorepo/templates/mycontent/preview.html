@@ -1,0 +1,219 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load apptags %}
+{% load public %}
+{% load content %}
+{% load corporate %}
+{% block title %}{{content.title}}{% endblock %}
+
+{% block head %}
+    <script type="text/javascript" src="/media/js/util/screen.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var page = parseInt(window.location.hash.substring(1), 10);
+            var $iframe = $('#lesson-iframe');
+            var viewPort = document.querySelector("meta[name=viewport]");
+
+            var iframeWindow = $iframe[0].contentWindow || $iframe[0].contentDocument;
+
+            var userAgent = window.navigator.userAgent;
+            var screenSizes = window.mAuthor.ScreenUtils.getScreenSizesDependingOnOrientation(userAgent);
+
+            $iframe.width(screenSizes.width);
+            $iframe.height(screenSizes.height);
+
+            function handleResize (data) {
+                var dimensions = data.split(';');
+                var width = dimensions[0];
+                var height = dimensions[1];
+
+                var viewPortAndIframeSizes = window.mAuthor.ScreenUtils.getViewPortAndIframeSizes(width, height, userAgent);
+                viewPort.setAttribute('content', 'width=' + viewPortAndIframeSizes.viewPortWidth + ',height=' + viewPortAndIframeSizes.viewPortHeight);
+                $iframe.css({
+                    'width': viewPortAndIframeSizes.iframeWidth + 'px',
+                    'height': viewPortAndIframeSizes.iframeHeight + 'px'
+                });
+            }
+
+            function onMessageReceived (event) {
+                if (event.data.indexOf('RESIZE:') === 0 && !window.isStretchOrFullScreenMode) {
+                    handleResize(event.data.substring('RESIZE:'.length));
+                    var height = parseInt($iframe.css('height'), 10);
+                    postIFrameHeight(height);
+                    postWindowWidth();
+                } else if (event.data.indexOf('PAGE_LOADED') === 0) {
+                    document.body.scrollTop = 0;
+                    var height = parseInt($iframe.css('height'), 10);
+                    postIFrameHeight(height);
+                    clearTimeout(window.resizedFinished);
+                    window.resizedFinished = setTimeout(function(){
+                        var height = parseInt($iframe.css('height'), 10);
+                        postIFrameHeight(height);
+                    }, 250);
+                    postWindowWidth();
+                }
+            }
+
+            function postIFrameHeight(height) {
+                var offset = $("#lesson-iframe").offset().top;
+                var postObject = {
+                    offsetTop: window.pageYOffset || document.documentElement.scrollTop,
+                    height: height,
+                    frameOffset: offset,
+                    notScaledOffset: offset,
+                    windowInnerHeight: window.innerHeight || 0
+                };
+
+                postIFrameMessage('I_FRAME_SIZES:', postObject);
+            }
+
+            function postIFrameMessage(type, data) {
+                var message = type + JSON.stringify(data);
+                iframeWindow.postMessage(message, '*');
+            }
+
+            function postWindowWidth() {
+                var screenSizes = window.mAuthor.ScreenUtils.getScreenSizesDependingOnOrientation(userAgent);
+                postIFrameMessage("WINDOW_WIDTH:", screenSizes.width);
+            }
+
+            window.addEventListener('message', onMessageReceived, false);
+
+            window.addEventListener('scroll', function(event) {
+                var height = parseInt($iframe.css('height'), 10);
+                postIFrameHeight(height);
+            });
+
+            window.onresize = function() {
+                var height = parseInt($iframe.css('height'), 10);
+                postIFrameHeight(height);
+                postWindowWidth();
+            };
+
+            $iframe.attr('src', "/embed/corporate_embed/{{content.id}}#" + page);
+        });
+    </script>
+    {% include 'common/mycontent/receiveMessage.html' %}
+{% endblock %}
+
+{% block content %}
+
+    <div style="float: left">
+        <h1 class="page_header" >
+            {% space_path spaces %}
+        </h1>
+    </div>
+
+    <div style="float:right; margin-right: -4px">
+        <a role="button" class="btn btn-primary btn-sm" href="{{back_url}}">Back to list</a>
+    </div>
+
+    <div class="main clear" style="padding-top: 0px"></div>
+
+    {% include "common/messages/display_messages.html" %}
+    <script src="/media/js/messages.js"></script>
+    <div id="messages"></div>
+
+
+    <h2 style="margin:0px 0px 5px 5px; float:left">{{content.title}}</h2>
+
+    <div class="clear"></div>
+    <div class="myContent">
+
+        <div id="_icplayer">
+            <iframe id="lesson-iframe" scrolling="no" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+        </div>
+
+        <div class="clear"></div>
+        <div>
+            {% if not is_company_locked %}
+            {% make_corporate_view_actions_menu sub_menus %}
+			<div class="pull-left horizontal-stack"><a role="button" class="btn btn-primary btn-sm" href="/support/addticket?lesson_url={{ settings.BASE_URL }}/embed/{{content.id}}">Contact support</a></div>
+            <div class="pull-left horizontal-stack">
+			{% if copy_spaces|length == 0 %}
+				<a role="button" class="btn btn-primary btn-sm" href="/mycontent/copy/{{content.id}}">Make a copy</a>
+			{% else %}
+				<form name="form_copy_{{content.id}}" method="GET">
+					<select name="menu_copy_{{content.id}}"
+						onChange="top.location.href = this.form.menu_copy_{{content.id}}.options[this.form.menu_copy_{{content.id}}.selectedIndex].value;return false;">
+						<option>Copy to location...</option>
+						<option value="/mycontent/copy/{{content.id}}">
+							My Lessons
+						</option>
+						{% for division in copy_spaces %}
+							{% copy_spaces division request content.id %}
+						{% endfor %}
+					</select>
+				</form>
+			{% endif %}
+			</div>
+            {% endif %}
+            <div class="pull-left horizontal-stack">{% include 'common/mycontent/view_as.html' %}</div>
+            {% if not is_company_locked %}
+                <div class="pull-left horizontal-stack">{% include "common/mycontent/more_actions.html" %}</div>
+            {% endif %}
+            <div class="clearfix"></div>
+        </div>
+        <div class="clearfix"></div>
+
+        <div class="content infoPreview">
+            {% for cs in content.contentspace_set.all %}
+                {% if cs.space.is_corporate %}
+                    <span><b>Publisher: </b>{{ cs.space.top_level }}</span>
+                    <span><b>Author: </b>{{content.author.username}}</span>
+                {% else %}
+                    {% if cs.space.is_private %}
+                        <span><b>Author: </b>{{content.author.username}}</span>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+
+            <span><b>Tags:</b>
+                {% for tag in content.tags|split:',' %}
+                    <a href="/public/?q={{tag}}&type={{content.content_type}}">{{tag}}</a>
+                {% endfor %}
+			</span>
+
+            <span>
+			<b>Short Description:</b> 
+			{{content.short_description|linebreaksbr}}
+		</span>
+
+            <span>
+			<b>Description:</b> 
+			{{content.description|linebreaksbr}}
+		</span>
+
+            {% if non_public_spaces %}
+                <span>
+			<b>Assigned category:</b>
+                    {% for space in non_public_spaces %}
+                        {% if not forloop.first or not space.is_private %}
+                            {{space.title}}
+                        {% else %}
+                            My Lessons
+                        {% endif %}
+                        {% if not forloop.last %}::{% endif %}
+                    {% empty %}
+                        None
+                    {% endfor %}
+		</span>
+            {% endif %}
+
+            <span>
+			<b>Is public:</b>
+                {% if content.is_content_public %}
+                    Yes
+                {% else %}
+                    No
+                {% endif %}
+		</span>
+
+            <span>
+			{% get_template_for_content content %}
+		</span>
+        </div>
+
+    </div>
+
+{% endblock %}

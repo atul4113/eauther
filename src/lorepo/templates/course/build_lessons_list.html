@@ -1,0 +1,29 @@
+{% load course %}
+
+{% for publication in publications %}
+	<li class="publication-space" space-id="{{ publication.id }}">
+		<div class="modal1">
+		</div>
+		<div class="loading small">
+			<img class="small" src="/media/images/loading.gif" />
+		</div>
+	
+		<span class="load-kids {% if publication.open %}open loaded{% endif %}" space-id="{{ publication.id }}">
+			{% if publication.open %}-{% else %}+{% endif %}
+		</span>
+		<span class="publication">{{ publication }}</span>
+		<ul class="kids">
+			{% if publication.loaded_kids %}
+				{% build_lessons_list publication.loaded_kids %}
+			{% endif %}
+		</ul>
+		<div class="lessons">
+			{% for lesson in publication.lessons %}
+				<div class="lesson" lesson-id="{{ lesson.id }}">{{ lesson }}</div>
+			{% endfor %}
+		</div>
+	</li>
+	{% if not forloop.last %}
+	<li class="separator"></li>
+	{% endif %}
+{% endfor %}

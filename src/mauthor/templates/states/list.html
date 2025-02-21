@@ -1,0 +1,158 @@
+{% extends "base.html" %}
+{% load apptags %}
+
+{% block head %}
+<script type="text/javascript" language="javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
+<link href="/media/css/redmond/jquery-ui-1.8.19.custom.css" rel="stylesheet" type="text/css" />
+{% endblock %}
+
+{% block content %}
+
+<h1 class="page_header">Lesson states administration</h1>
+<div class="main clear" style="padding-top: 0"></div>
+
+{% include "common/messages/display_messages.html" %}
+
+<div>
+<form action="/states/sets" method="post" name="addset">
+	<table>
+		<tr>
+			<td>Set name: {{add_set_form.name}}</td>
+			<td>&nbsp;<button type="submit" class="btn btn-primary btn-sm">Add set</button></td>
+		</tr>
+	</table>
+</form>
+</div>
+
+<div class="states_set_list">
+{% for set in sets %}
+	{% if set.id == set_id %}
+		<b>{{set.name}}</b>
+        <a href="/states/delete_set/{{ set_id }}" onclick="return confirm('Are you sure you want to remove &#34;{{ set.name }}&#34; states set?')">
+			<img title="delete" alt="delete" src="/media/images/cross.png">
+		</a>
+        <br/>
+	{% else %}
+		<a href="/states/sets/{{set.id}}">{{set.name}}</a><br/>
+	{% endif %}
+{% endfor %}
+</div>
+
+<script>
+	$(document).ready(function() {
+		$("#sortable").sortable();
+		$("#sortable").disableSelection();
+		$("#sortable").bind("sortstop", function(event, ui) {
+			$.get('/states/update_rank/' + ui.item.attr('id') + '/' + ui.item.index())
+		});
+
+		$("#sortable > li > div.slider").each(function() {
+			var value = parseInt( $( this ).text(), 10 );
+			$( this ).empty().slider({
+				value: value,
+				min: 0,
+				max: 100,
+				range: "min",
+				animate: true,
+				slide: function (event, ui) {
+					var container = $(ui.handle).parent().parent();
+					container.find(".value").text(ui.value + ' %');
+				},
+				stop: function(event, ui) {
+					var container = $(ui.handle).parent().parent();
+					container.find(".value").text(ui.value + ' %');
+					$.get('/states/update_percentage/' + container.attr('id') + '/' + ui.value);
+					sumSliders();
+				}
+			});
+		});
+
+		function sumSliders() {
+			var sum = 0;
+			$("#sortable > li > div.slider").each(function() {
+				sum += $(this).slider("value");
+			});
+			$("#sliderSum").text(sum);
+			if (sum == 100) {
+				$("#sliderSum").addClass('correct');
+				$("#sliderSum").removeClass('incorrect');
+			} else {
+				$("#sliderSum").addClass('incorrect');
+				$("#sliderSum").removeClass('correct');
+			}
+		}
+		sumSliders();
+	});
+	</script>
+
+{% if set_id %}
+    <div>
+    <form action="/states/sets/{{ set_id }}" method="post" name="addset">
+        <table>
+            <tr>
+                <td>Change set name: {{edit_set_form.name}}</td>
+                <td>&nbsp;<button type="submit" class="btn btn-primary btn-sm">Save</button></td>
+            </tr>
+        </table>
+    </form>
+    </div>
+{% endif %}
+
+<div class="states_list">
+
+{% if states %}
+Drag and drop items to set their order
+<ul id="sortable">
+{% for state in states %}
+	<li id="{{state.id}}">
+		<div class="name">{{state.name}}</div>
+		<div class="delete">
+			<a href="/states/delete/{{state.id}}?next={{request.path}}">
+				<img src="/media/images/cross.png" alt="delete" title="delete"/>
+			</a>
+		</div>
+		<div class="rename">
+			<a href="/states/rename/{{state.id}}?next={{request.path}}">
+				<img src="/media/images/pencil.png" alt="edit" title="edit"/>
+			</a>
+		</div>
+		<div class="value">{{state.percentage}} %</div>
+		<div class="slider">{{state.percentage}}</div>
+		<div class="clear"></div>
+	</li>
+{% endfor %}
+</ul>
+
+<div class="sum">Sum of all values is <span id="sliderSum">0</span> %.</div>
+{% endif %}
+
+{% if not states %}
+	{% if set_id %}
+		No states defined for the selected set
+	{% else %}
+		No set selected
+	{% endif %}
+{% endif %}
+
+{% if set_id %}
+<form action="/states/sets/{{set_id}}" method="post" name="addstate">
+	<input type="hidden" name="set_id" value="{{set_id}}"/>
+	<table>
+		<tr>
+			<td>State name:</td>
+			<td>{{add_state_form.name}}</td>
+			<td>{{add_state_form.name.errors}}</td>
+		</tr>
+		<tr>
+			<td>Percentage:</td>
+			<td>{{add_state_form.percentage}}</td>
+			<td>{{add_state_form.percentage.errors}}</td>
+		</tr>
+		</tr>
+	</table>
+	<button type="submit" class="btn btn-primary btn-sm">Add state</button>
+</form>
+{% endif %}
+</div>
+
+{% endblock %}

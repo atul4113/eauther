@@ -1,0 +1,33 @@
+<addon xmlns="http://icplayer.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Text_To_Speech" xsi:schemaLocation="http://icplayer.com ../../tools/addon.xsd">
+<model>
+<property displayName="Configuration" isDefault="true" name="configuration" nameLabel="Text_To_Speech_configuration" type="list">
+<property name="ID" nameLabel="Text_To_Speech_property_id" type="string"/>
+<property displayName="Area" name="Area" nameLabel="Text_To_Speech_area" type="{Main, Header, Footer}"/>
+<property isLocalized="true" name="Title" nameLabel="Text_To_Speech_property_title" type="string"/>
+</property>
+<property isLocalized="true" name="EnterText" nameLabel="Text_To_Speech_property_enter_text" type="string"/>
+<property isLocalized="true" name="ExitText" nameLabel="Text_To_Speech_property_exit_text" type="string"/>
+<property isLocalized="true" name="NewPage" nameLabel="Text_To_Speech_property_new_page" type="string"/>
+<property isLocalized="true" name="PageLangTag" nameLabel="Text_To_Speech_property_page_lang_tag" type="string"/>
+</model>
+<css>
+.addon_Text_To_Speech {
+ position: relative;
+ width: 100%;
+ height: 100%;
+ }
+</css>
+<view/>
+<preview/>
+<presenter>
+		function AddonText_To_Speech_create(){
+			
+			var obj = function(){}
+
+			obj.run = function(view, model){
+			}
+
+			return obj;
+		}
+</presenter>
+</addon>

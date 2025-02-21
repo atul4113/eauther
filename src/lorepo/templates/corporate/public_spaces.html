@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load apptags %}
+{% load spaces %}
+{% load content %}
+{% block content %}
+
+<h1 class="page_header">Public lessons
+<span>
+{% for space in path_spaces %}
+	{% if forloop.first %}
+		[ <a href="/corporate/public/{{space.id}}">{{space.title}}</a>
+	{% else %}
+		:: <a href="/corporate/public/{{space.id}}">{{space.title}}</a>
+	{% endif %}
+	{% if forloop.last %}
+		]
+	{% endif %}
+{% endfor %}
+</span>
+</h1>
+<div class="main clear" style="padding-top: 0"></div>
+
+{% include "corporate/spaces_list.html" %}
+
+<div class="myContent">
+	<div class="container">
+		{% paginator_form request.path paginator current_page %}
+	{% if contents %}
+	{% for content in contents %} 
+		<div class="content">
+			<div class="content image">
+				{% get_icon request content %}
+			</div>
+			<div class="content info">
+				<span class="content-details"><b>Title: </b>
+				{% if content.content_type != 3 %}
+	               <a href="/embed/{{content.id}}">{{ content.title|truncatewords:5 }}</a>
+	               {% else %}
+	               <a href="/public/view_addon/{{content.id}}">{{ content.title|truncatewords:5 }}</a>
+	            {% endif %}
+                </span>
+				<span class="content-details"><b>{% publisher content "True" %}</b></span>
+				<span class="content-details"><b>Is public:</b> {% if content.is_content_public %}<p class="orange">Yes</p>{% else %} No {% endif %}</span>
+				<span class="content-details"><b>Description:</b> {{ content.description|truncatewords:5 }}</span>
+				<span class="content-details"><b>Tags:</b>
+				{% for tag in content.tags|split:',' %} 
+					<a href="/public/?q={{tag}}&type={{content.content_type}}">{{tag}}</a>
+				{% endfor %}
+				</span>
+				<span class="content-details content-details-modified"><b>Modified:</b> {{ content.modified_date|timesince }}</span>
+			</div>
+			
+		</div>
+		{% if not forloop.last %}
+		<div class="content clear"></div>
+		{% endif %}
+		{% endfor %}
+		{% else %}
+			<div style="height:200px;">&nbsp;</div>
+		{% endif %}
+		{% paginator paginator current_page %}
+	</div>
+	
+</div>
+
+<div class="main clear"></div>
+
+{% endblock %}

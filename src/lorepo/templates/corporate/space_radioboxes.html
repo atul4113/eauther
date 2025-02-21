@@ -1,0 +1,15 @@
+{% load corporate %}
+<ul class="no_symbol {% if is_first == 1 %}first{% endif %}">
+	{% if is_first %}
+		<li><input type="radio" name="spaces" value="None" {% if is_unit_selected == 0 %}checked{% endif %} /> <i>None</i></li>
+	{% endif %}
+	{% for space in spaces %}
+		<li>
+			<input type="radio" name="spaces" value="{{space.id}}" {% if space.pk == currentlySelected.pk %}checked{% endif %} /> {{space.title}}
+			{% if space.loaded_kids %}
+				{% render_radioboxes space.loaded_kids currentlySelected 0 is_unit_selected %}
+			{% endif %}
+		</li>
+	{% endfor %}
+	
+</ul>

@@ -1,0 +1,22 @@
+{% load i18n %}
+Please activate of your account at mAuthor platform by clicking the link below. If that doesn't work, copy and paste the link into your browser's address bar.
+{{ settings.BASE_URL }}{% url 'registration_activate' activation_key=activation_key %}
+You should receive an email with confirmation and further instructions to complete the registration process.
+
+{% blocktrans %}CAUTION: The activation link above is valid for {{ expiration_days }} days only. After that time, you need to start registration process again.{% endblocktrans %}
+
+
+NOTE: mAuthor service is owned and operated by Learnetic SA, who collects and stores the data you entered during the registration process.
+By signing up to mAuthor service you agree to receive occasional email messages from Learnetic about mAuthor or other information.
+You will always be able to unsubscribe from this mailing list.
+
+To start using mAuthor quickly and learn its functionality we recommend you to take a tour along its useful Video Tutorials.
+They will help you to take your first steps and speed up your learning curve significantly.
+You will find there also some useful tips & tricks and ready-made solutions to be implemented in your first projects.
+
+You may find them at: http://www.learnetic.com/mauthor-video-tutorials
+
+Thank you,
+mAuthor (by Learnetic) Team
+
+This email message was automatically sent by Learnetic because someone attempted to create an account on mAuthor using this email address. If you received this mail by mistake or do not want to create new account, simply ignore and delete this message.

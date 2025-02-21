@@ -1,0 +1,37 @@
+{% load translate %}{% autoescape off %}
+<p>{% get_label 'translations.confirmation.Dear' %} {{ user }},</p>
+
+<p>{% get_label 'translations.import.summary.info' %}</p>
+{% if import.added %}
+<h4>{% get_label 'translations.languages.Added_Translations' %}</h4>
+<ul>{% for info in import.added %}
+	<li>{{ info }}</li>{% endfor %}
+</ul>
+{% endif %}
+{% if import.not_valid %}
+<h4>{% get_label 'translations.languages.Not_valid_Translations' %}</h4>
+<ul>
+{% for info in import.not_valid %}
+	<li>{{ info }}</li>{% endfor %}
+</ul>
+{% endif %}
+{% if import.conflict_replaced %}
+<h4>{% get_label 'translations.languages.conflict_replaced' %}</h4>
+<ul>
+{% for info in import.conflict_replaced %}
+	<li>{{ info }}</li>{% endfor %}
+</ul>
+{% endif %}
+{% if import.conflict_omitted %}
+<h4>{% get_label 'translations.languages.conflict_omitted' %}</h4>
+<ul>
+{% for info in import.conflict_omitted %}
+	<li>{{ info }}</li>{% endfor %}
+</ul>
+{% endif %}
+
+{% if import.omitted %}
+<h4>{% get_label 'translations.languages.Omitted_Translations' %}</h4>
+<p>{% get_label 'translations.import.summary.Import_contained' %} {{ import.omitted|length }} {% get_label 'translations.import.summary.omitted_translations' %}</p>
+{% endif %}
+{% endautoescape %}

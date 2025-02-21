@@ -1,0 +1,13 @@
+{% for division in spaces %}
+	<strong><a href="/corporate/list/{{division.id}}">{{division.title}}</a></strong>
+	<ul class="dashboard-publications">
+	{% for publication in division.loaded_kids %}
+		<li>{{publication.title}} [<a href="/states/show_kanban/{{publication.id}}">Kanban</a>]</li>
+	{% endfor %}
+	</ul>
+{% endfor %}
+
+<div class="content-more">
+	<a href="/corporate/more_projects">more</a> 
+	<img src="/media/images/more-arrow.png" />
+</div>

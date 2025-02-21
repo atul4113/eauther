@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% load apptags %}
+{% load spaces %}
+{% load localization %}
+
+{% block head %}
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('#form-select-project').change(function(){
+				var selected = $('#select-project').find('option:selected').val();
+				if (selected !== '#') {
+					document.location = '/localization/create_xliff_trigger/{{ content.id }}/' + selected + '?next={{ go_back }}';
+				}
+			});
+		});
+	</script>
+{% endblock %}
+
+{% block content %}
+
+<h1 class="page_header">Select destination publication</h1>
+<div class="main clear" style="padding-top: 0"></div>
+
+<div class="select-project-error">
+	<a href="{{go_back}}">[Go Back]</a>
+</div>
+<div class="select-project-loading">
+	<img src="/media/images/loading.gif" />
+</div>
+
+<div class="select-project-wrapper">
+	<div class="text">
+		Localization process starts here. First of all you have to select destination publication
+		 for lesson you'd like to localize. Selecting one of the
+		 publication below will create a copy of <strong>{{content}}</strong> and move it to selected publication:
+	</div>
+	<div class="select">
+		<form name="form-select-project" method="POST" action="./{{content.id}}"  id="form-select-project">
+		<select name="select-project" id="select-project">
+			<option value="#">Select...</option>
+			{% for project in projects %}
+				{% localization_project project request %}
+			{% endfor %}
+		</select>
+	</div>
+	{% if space_id|is_space_owner_tag:request.user %}
+		<div class="separator"></div>
+		<div class="text">
+			You can also create <strong>a new publication</strong> for this purpose:
+		</div>
+		<div class="button pull-left">
+		{% with url="parent.location='/corporate/projects/"|add:space_id|add:"'" %}
+			{% button 'Create publication' url %}
+		{% endwith %}
+		</div>
+	{% endif %}
+</div>
+
+{% endblock %}

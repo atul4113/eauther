@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load apptags %}
+{% load utility %}
+
+{% block content %}
+<div class="alert alert-info alert-narrow alert-block">
+	This lesson is currently being edited by {{who_editing}}. If you modify it, {{username}} might lose all changes.
+	Are you sure you want to continue?
+</div>
+<a role="button" class="btn btn-primary btn-sm pull-left" href="{{full_path_to_editor}}&confirmed=True">Yes</a>
+<a role="button" class="btn btn-primary btn-sm pull-right" href="{{back}}">No</a>
+<div class="clearfix"></div> 
+{% endblock %}

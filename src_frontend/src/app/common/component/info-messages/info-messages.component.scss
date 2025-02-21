@@ -1,0 +1,64 @@
+@import "../../templates/mdl-colors";
+
+
+#info-messages {
+    position: fixed;
+    bottom: 32px;
+    right: 16px;
+    left: 16px;
+    z-index: 9999;
+
+    div.message-wrapper {
+        text-align: center;
+
+        div.message {
+            background: $white;
+            padding: 16px 32px;
+            margin-top: 8px;
+            overflow: auto;
+            display: inline-block;
+
+            &.message-closeable {
+                padding-right: 16px;
+            }
+
+            &.success {
+                background: $green-A700;
+                color: $white;
+            }
+
+            &.info {
+                background: $blue-A700;
+                color: $white;
+            }
+
+            &.warning {
+                background: $yellow-A700;
+                color: $black;
+            }
+
+            &.error {
+                background: $red-A700;
+                color: $white;
+            }
+
+            span.message-content {
+                line-height: 32px;
+            }
+
+            button.close-message {
+                float: right;
+                background: white;
+                margin-left: 16px;
+            }
+        }
+    }
+
+}
+
+#app-error-messages {
+    section {
+        overflow: auto;
+        text-align: center;
+    }
+}

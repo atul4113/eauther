@@ -1,0 +1,14 @@
+{
+  	"version": "1",
+	"items": [
+	{% for template in templates %} 
+      	{
+      		"id" : "{{template.id}}",
+      		"name" : "{{template.title}}",
+      		"icon_url": {% if template.icon_href != None %}"{{uri}}{{template.icon_href|slice:"1:"}}"{% else %}"{{uri}}media/content/default_presentation.png"{% endif %}, 
+      		"theme_url": "/file/{{ template.file.id }}",
+      		"category" : "{{ template.category }}"
+      	}{% if not forloop.last %},{% endif %}
+    {% endfor %}
+    ]
+}

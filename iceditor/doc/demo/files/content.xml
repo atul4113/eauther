@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<interactiveContent>
+
+<addons>
+</addons>
+
+
+<style>
+
+.ic_page{
+	background-color: #efefef;
+	font-size:18px;
+	width:	800px;
+	height:	600px;
+}
+
+.myText{
+	background-color:yellow;
+	border:1px solid blue;
+}
+
+.silver{
+	background-color:silver;
+}
+
+.lightgreen{
+background-color:lightgreen;
+}
+
+</style>
+
+<pages>
+	<page name="Page 1" href="page1.xml"/>
+	<page name="Page 2" href="page2.xml"/>
+</pages>
+
+</interactiveContent>

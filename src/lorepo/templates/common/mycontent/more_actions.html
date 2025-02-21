@@ -1,0 +1,98 @@
+{% if has_more_actions_permissions %}
+	<form name="form_{{content.id}}" method="GET">
+		<select id="menu_{{content.id}}" name="menu_{{content.id}}" style="max-width: 220px">
+			<option>More actions...</option>
+			{% if Permission.CONTENT_SHOW_HISTORY in user_permissions or is_owner %}
+				<option data-url="/mycontent/{{content.id}}/history">Show history</option>
+			{% endif %}
+			{% if Permission.CONTENT_EDIT in user_permissions or is_owner %}
+				<option	data-url="/mycontent/{{content.id}}/changeicon?next={{request.get_full_path}}">Edit Preview Icon</option>
+			{% endif %}
+			{% if show_merge %}
+				{% if Permission.CONTENT_EDIT in user_permissions or is_owner  %}
+					<option data-id="{{content.id}}" data-space="{{space_request.id}}" data-action="merge">Choose pages for merge</option>
+				{% endif %}
+			{% endif %}
+			{% if Permission.ASSET_BROWSE in user_permissions or is_owner  %}
+				<option data-url="/assets/{{content.id}}">Browse Assets</option>
+			{% endif %}
+			{% if Permission.EXCHANGE_EXPORT in user_permissions or is_owner %}
+				{% if request.user.is_staff or request.user.is_superuser %}
+                    <option	data-url="/exchange/list/{{content.id}}/womi?next={{request.get_full_path}}">Export WOMI</option>
+				    <option	data-url="/exchange/export/{{content.id}}/womi/pages">Export pages as WOMI</option>
+                {% endif %}
+                <option	data-url="/exchange/list/{{content.id}}/3?next={{request.get_full_path}}">Export xAPI/Offline</option>
+				<option	data-url="/exchange/list/{{content.id}}/2?next={{request.get_full_path}}">Export SCORM 2004/Offline</option>
+				<option	data-url="/exchange/list/{{content.id}}/1?next={{request.get_full_path}}">Export SCORM 1.2/Offline</option>
+                <option	data-url="/exchange/list/{{content.id}}/6?next={{request.get_full_path}}">Export HTML5/Offline</option>
+
+			{% endif %}
+			{% if space_request.space_type == 3 %}
+				{% if Permission.NARRATION_EXPORT in user_permissions %}
+				<optgroup label="Narration">
+					<option	data-url="/exchange_narration/export_to_csv/{{content.id}}?next={{request.get_full_path}}">Export Narration (CSV)</option>
+					<option	data-url="/exchange_narration/export_to_html/{{content.id}}?next={{request.get_full_path}}">Export Narration (HTML)</option>
+				</optgroup>
+				{% endif %}
+				<optgroup label="Localization">
+					{% if Permission.LOCALIZATION_CREATE in user_permissions %}
+					<option	data-url="/localization/start_localization/{{content.id}}/{{ division.id }}?next={{request.get_full_path}}">Start localization</option>
+					{% endif %}
+					{% if Permission.LOCALIZATION_EXPORT in user_permissions %}
+					<option	data-url="/localization/create_export/{{content.id}}?next={{request.get_full_path}}">Export to XLIFF</option>
+					{% endif %}
+					{% if content.original and Permission.LOCALIZATION_RESET %}
+					<option	data-url="/localization/reset_xliff_to_current/{{content.id}}?next={{request.get_full_path}}">Reset XLIFF to current</option>
+					<option data-url="/localization/reset_xliff_to_original/{{content.id}}?next={{request.get_full_path}}">Reset XLIFF to original</option>
+					{% endif %}
+				</optgroup>
+			{% endif %}
+			{% if Permission.ASSET_EDIT in user_permissions or is_owner  %}
+			<option	data-url="/mycontent/update_assets/{{content.id}}?next={{request.get_full_path}}">Update assets</option>
+			{% endif %}
+			{% if Permission.CONTENT_EDIT in user_permissions or is_owner  %}
+			<option	data-action="update_template">Update template</option>
+			{% endif %}
+			{% if request.user.is_staff %}
+			<option	data-url="/corporate/copy_to_account/{{content.id}}?next={{request.get_full_path}}">Copy to another account</option>
+			{% endif %}
+		</select>
+	</form>
+
+    <form id="update_template{{content.id}}" method="post" action="/mycontent/updatetemplate/{{content.id}}?next={{request.get_full_path}}" style="display: none">
+        <p><strong>Preferences that will be propagated with template:</strong></p>
+        {% include 'common/update_template_preferences.html' %}
+        <p><button type="submit" class="btn btn-primary">Update template</button></p>
+    </form>
+
+<script>
+$(document).ready(function() {
+    var MERGE_WARNING_MESSAGE = "Merging pages should be performed with single layout lessons. Merging lessons with many layouts may create unexpected result, it will be adjusted in short term.";
+	$('#menu_{{content.id}}').change(function() {
+		$('#update_template{{content.id}}').hide();
+		$('#pages{{content.id}}').hide();
+		var url = $(this).find(':selected').attr('data-url');
+		if (url == undefined) {
+            $('#pages' + id).hide();
+			var id = $(this).find(':selected').attr('data-id');
+			var space = $(this).find(':selected').attr('data-space');
+            var action = $(this).find(':selected').attr('data-action');
+			if (action == 'merge') {
+			    Messages.createWarningMessage(MERGE_WARNING_MESSAGE);
+				url = '/merger/extract/' + id + '/' + space + '/list';
+				$.get(url, function (data) {
+					$('#pages' + id).html(data);
+				});
+				$('#pages' + id).show();
+				$('#extract' + id).append('<input type="hidden" name="next" value="{{request.get_full_path}}"/>');
+			} else {
+				$('#' + action + '{{content.id}}').show();
+			}
+		} else {
+			document.location.href = url;
+		}
+		$(this).val('');
+	}).val(''); //reset select also on browser's button back
+});
+</script>
+{% endif %}

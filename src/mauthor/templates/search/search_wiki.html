@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load search %}
+{% block head %}
+    <link href="/media/css/material.css" rel="stylesheet" type="text/css"/>
+{% endblock %}
+
+{% block content %}
+
+    <h1 class="title">Search results</h1>
+
+    <div class="main clear" style="padding-top: 0"></div>
+
+    <div class="search_info">
+        Found {{ result.number_found }} results for phrase <b>{{ query }}</b><br/>
+    </div>
+
+    <div class="search_results">
+        {% for r in result.results %}
+            <div class="search_result">
+                <div class="search_description">
+                    <h4>
+                        <a href="/doc/{{ lang_code }}/{{ query }}/page/{{ r|get_field:"url" }}">{{ r|get_field:"title" }}</a>
+                    </h4>
+                    <p>{{ r|get_field:"text"|smart_truncate }}</p>
+                </div>
+                <div class="clear"></div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="search_paginator">
+        {% search_paginator_doc page result.number_found query %}
+    </div>
+
+{% endblock %}

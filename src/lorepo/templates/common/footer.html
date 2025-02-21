@@ -1,0 +1,55 @@
+{% load utility %}
+
+<div class="footer">
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-8">
+				<!-- <a href="/user/terms">Terms of use</a> | 
+				<a href="/user/privacy">Privacy policy</a> | 
+				<a href="/public/contact-us">Contact us</a> |
+				<a href="/about_us">About us</a> | 
+				<a href="/public/player">Player versions</a> -->
+				<a href="#">Terms of use</a> | 
+				<a href="#">Privacy policy</a> | 
+				<a href="#">Contact us</a> |
+				<a href="#">About us</a> | 
+				<a href="#">Player versions</a>
+				{% if request.user.is_superuser or request.user.is_staff %}
+				     | <a href="/support/admin">Support admin</a>
+				{% endif %}
+			</div>
+								
+			<div class="col-xs-4 text-right">	
+				Copyright &copy; 2012-{% now "Y" %} Alpha Publishing<br/>
+				{{ settings.APP_NAME }} build {% get_app_version_tag %}
+			</div>
+
+            {% if request.user.is_authenticated %}
+                <input type="hidden" id="announcement-reader-id" value="{{ request.user.id }}">
+                <input type="hidden" id="announcement-data" value="{{ request.latest_news_data }}">
+            {% endif %}
+
+			<div class="clearfix"></div>
+			<hr/>
+			<div class="col-sm-4">
+				<a href="#"><img src="/media/images/main-page/alpha_publishing_logo.svg"/></a><br/>
+				<span class="hidden-xs">Alpha Publishing is a world-leading educational software publisher and e-learning technology provider.</span>
+			</div>
+			<div class="col-sm-4">
+				Other Services:<br/>
+				<a href="https://www.ealpha.info" target="_blank"><img src="/media/images/main-page/eAlpha_logo.svg"/></a>
+				&nbsp; &nbsp;
+				<a href="#" target="_blank"><img src="/media/images/main-page/eAlpha_instructor_logo.svg"/></a>
+			</div>
+			<div class="col-sm-4">
+				Find us on:<br/>
+				<a href="#"><img src="/media/images/main-page/ma_main_footer_facebook.png" onmouseover="$(this).attr('src', '/media/images/main-page/ma_main_footer_facebook_over.png')" onmouseout="$(this).attr('src', '/media/images/main-page/ma_main_footer_facebook.png')"/></a>
+				<a href="#"><img src="/media/images/main-page/ma_main_footer_tweeter.png" onmouseover="$(this).attr('src', '/media/images/main-page/ma_main_footer_tweeter_over.png')" onmouseout="$(this).attr('src', '/media/images/main-page/ma_main_footer_tweeter.png')"/></a>
+				<a href="#"><img src="/media/images/main-page/ma_main_footer_linkedin.png" onmouseover="$(this).attr('src', '/media/images/main-page/ma_main_footer_linkedin_over.png')" onmouseout="$(this).attr('src', '/media/images/main-page/ma_main_footer_linkedin.png')"/></a>
+				<a href="#"><img src="/media/images/main-page/ma_main_footer_rss.png" onmouseover="$(this).attr('src', '/media/images/main-page/ma_main_footer_rss_over.png')" onmouseout="$(this).attr('src', '/media/images/main-page/ma_main_footer_rss.png')"/></a>
+				<a href="#"><img src="/media/images/main-page/ma_main_footer_yt.png" onmouseover="$(this).attr('src', '/media/images/main-page/ma_main_footer_yt_over.png')" onmouseout="$(this).attr('src', '/media/images/main-page/ma_main_footer_yt.png')"/></a>
+				<a href="#"><img src="/media/images/main-page/ma_main_footer_mail.png" onmouseover="$(this).attr('src', '/media/images/main-page/ma_main_footer_mail_over.png')" onmouseout="$(this).attr('src', '/media/images/main-page/ma_main_footer_mail.png')"/></a>
+			</div>
+		</div>
+	</div>
+</div>

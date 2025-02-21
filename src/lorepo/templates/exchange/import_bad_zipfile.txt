@@ -1,0 +1,10 @@
+{% autoescape off %}
+Dear {{ user }},
+<p>
+The uploaded file does not seem to be a zipfile and it has not been successfully imported at {{ app_name }}.
+</p>
+
+<p>
+Please try again or contact administrators.
+</p>
+{% endautoescape %}

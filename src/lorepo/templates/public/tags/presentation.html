@@ -1,0 +1,30 @@
+{% load apptags %}
+{% load content %}
+{% load public %}
+{% if forloop.counter|mod:5 == 0 %}
+<li class="last">
+{% else %}
+	{% if forloop.counter|mod:5 == 1 or forloop.first %}
+		<li class="first">
+	{% else %}
+		<li>
+	{% endif %}
+{% endif %}
+<div>
+	{% get_icon request content %}
+</div>
+<div class="presentation-title">
+    {% get_content_link content %}
+</div>
+<div class="presentation-space">
+	{% get_space_link_for_content content %}
+</div>
+<div class="presentation-author">
+	{% publisher content "true" %}
+</div>
+{% if request.user.is_superuser %}
+<div class="presentation-modified">
+	Modified: {{ content.modified_date|timesince }}
+</div>
+{% endif %}
+</li>

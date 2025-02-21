@@ -1,0 +1,16 @@
+{% autoescape off %}
+Dear {{ user }},
+<p>
+Lesson {{ content.title }} has not been successfully updated with your assets.
+</p>
+
+<p>
+The file you have uploaded is not a zip file.
+</p>
+
+<p>
+--<br/>
+{{ settings.APP_NAME }}
+</p>
+
+{% endautoescape %}

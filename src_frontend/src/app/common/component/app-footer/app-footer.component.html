@@ -1,0 +1,135 @@
+<footer>
+    <div class="mdl-grid">
+        <div class="mdl-cell mdl-cell--3-col footer-first-column">
+            <a href="#">
+                <img class="footer__logo"
+                     [src]="assetsUrl + '/images/alpha_publi_white.svg'"/>
+            </a>
+
+            <p>
+                {{ translations | getLabel: "plain.common.add_footer.learnetic_desc" }}
+            </p>
+
+        </div>
+
+        <div class="mdl-cell mdl-cell--3-col footer-second-column">
+            <mat-list dense>
+                <h3 mat-subheader> {{ translations | getLabel: "plain.common.add_footer.company" }} </h3>
+                <mat-list-item>
+                    <a mat-line
+                         href="#">
+                        {{ translations | getLabel: "plain.common.add_footer.about_us" }}
+                    </a>
+                </mat-list-item>
+                <mat-list-item>
+                    <a mat-line
+                         href="#">
+                        {{ translations | getLabel: "plain.common.add_footer.contact_us" }}
+                    </a>
+                </mat-list-item>
+                <mat-divider></mat-divider>
+                <mat-list-item>
+                    <a mat-line>
+                        {{ translations | getLabel: "plain.common.add_footer.find_us"}}
+                    </a>
+                </mat-list-item>
+                <mat-list-item class="footer-social__wrapper">
+                    <span mat-line>
+                        <a mat-button
+                            href="#" target="_blank"
+                             class="footer-social footer-social__facebook">
+                            <img [src]="assetsUrl + '/images/ma_main_footer_facebook.png'" class="normal"/>
+                            <img [src]="assetsUrl + '/images/ma_main_footer_facebook_over.png'" class="over"/>
+                        </a>
+                        <a mat-button
+                            href="#" target="_blank"
+                             class="footer-social footer-social__twitter">
+                            <img [src]="assetsUrl + '/images/ma_main_footer_twitter.png'" class="normal"/>
+                            <img [src]="assetsUrl + '/images/ma_main_footer_twitter_over.png'" class="over"/>
+                        </a>
+                        <a mat-button
+                            href="#" target="_blank"
+                             class="footer-social footer-social__linkedin">
+                            <img [src]="assetsUrl + '/images/ma_main_footer_linkedin.png'" class="normal"/>
+                            <img [src]="assetsUrl + '/images/ma_main_footer_linkedin_over.png'" class="over"/>
+                        </a>
+                        <a mat-button
+                            href="#" target="_blank"
+                             class="footer-social footer-social__rss">
+                            <img [src]="assetsUrl + '/images/ma_main_footer_rss.png'" class="normal"/>
+                            <img [src]="assetsUrl + '/images/ma_main_footer_rss_over.png'" class="over"/>
+                        </a>
+                        <a mat-button
+                            href="#" target="_blank"
+                             class="footer-social footer-social__youtube">
+                            <img [src]="assetsUrl + '/images/ma_main_footer_yt.png'" class="normal"/>
+                            <img [src]="assetsUrl + '/images/ma_main_footer_yt_over.png'" class="over"/>
+                        </a>
+                    </span>
+                </mat-list-item>
+            </mat-list>
+        </div>
+
+        <div class="mdl-cell mdl-cell--3-col footer-third-column">
+            <mat-list dense>
+                <h3 mat-subheader> {{  translations | getLabel:"plain.common.add_drawer.support" }}</h3>
+                <mat-list-item>
+                    <a mat-line
+                       href="#">
+                        {{ translations | getLabel:"plain.common.add_footer.terms_of_use" }}
+                    </a>
+                </mat-list-item>
+                <mat-list-item>
+                    <a mat-line
+                        href="#">
+                        {{  translations | getLabel: "plain.common.add_footer.privacy_policy" }}
+                    </a>
+                </mat-list-item>
+                <mat-list-item>
+                    <a mat-line href="#">
+                        {{  translations | getLabel: "plain.common.add_footer.player_versions" }}
+                    </a>
+                </mat-list-item>
+                <mat-list-item *ngIf="user.isAuthenticated && (user.permissions.isSuperUser || user.permissions.isStaff)">
+                    <!-- TODO: if request.user.is_superuser or request.user.is_staff -->
+                    <a mat-line href="/support/admin">
+                        {{  translations | getLabel: "plain.common.add_footer.support_admin" }}
+                    </a>
+                </mat-list-item>
+            </mat-list>
+        </div>
+
+        <div class="mdl-cell mdl-cell--3-col footer-fourth-column">
+            <mat-list dense>
+                <h3 mat-subheader>{{ translations | getLabel:"plain.common.add_footer.other_services" }}</h3>
+                <mat-list-item>
+                    <a mat-line
+                       href="#" target="_blank">
+                        <img class="footer__service-logo"
+                                [src]="assetsUrl + '/images/alpha_learning_white.svg'"/>
+                    </a>
+                </mat-list-item>
+                <mat-list-item>
+                    <a mat-line
+                        href="#" target="_blank">
+                        <img class="footer__service-logo"
+                                [src]="assetsUrl + '/images/e_alpha_inst_white.svg'"/>
+                    </a>
+                </mat-list-item>
+                <mat-list-item *ngIf="user.isAuthenticated && user.permissions.isSuperUser">
+                    <a mat-line [routerLink]="'/panel'">
+                        {{ translations | getLabel:"plain.admin.panel.admin_panel" }}
+                    </a>
+                </mat-list-item>
+
+            </mat-list>
+        </div>
+
+    </div>
+
+    <div class="footer-copyright">
+        <span>Copyright &copy; 2018-{{ currentYear }} Alpha Publishing</span>
+        <!--<span class="footer-copyright__build">build 1119</span>-->
+    </div>
+
+</footer>

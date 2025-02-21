@@ -1,0 +1,104 @@
+<div *ngIf="userPermissions && userPermissions.assetsUploadEditAssets" class="upload-wrapper">
+    <upload-file #uploadFileUniqueId [disabled]="isUploadDisabled" (selected)="onFileSelected($event)"></upload-file>
+    <span class="file-name" *ngIf="file">{{ file.name }}</span>
+    <span class="file-name" *ngIf="!file">Select file to upload</span>
+
+    <app-loading *ngIf="isFileUploading || isUploadDisabled" class="file-uploading-spinner"></app-loading>
+</div>
+
+<div class="search-wrapper">
+    <i class="material-icons">search</i>
+    <mat-form-field class="example-full-width">
+        <input matInput [placeholder]=" translations | getLabel:'plain.browse_labels.panel.search'"
+               [(ngModel)]="searchPhrase">
+    </mat-form-field>
+    <button [matMenuTriggerFor]="sortaction"
+            id="sort-options"
+            class="icon-link"
+            [matTooltip]=" translations | getLabel:'plain.my_lessons.panel.my_lessons.sort'"
+            [matTooltipPosition]="'below'"
+            mat-button>
+        <span *ngIf="assetsOrder.isNameDown()|| assetsOrder.isNameUp()"> {{ translations | getLabel: "plain.my_lessons.panel.my_lessons.name"}}</span>
+        <i *ngIf="assetsOrder.isNameDown()"
+           class="material-icons">arrow_downward</i>
+        <i *ngIf="assetsOrder.isNameUp()"
+           class="material-icons">arrow_upward</i>
+
+        <span *ngIf="assetsOrder.isDateDown() || assetsOrder.isDateUp()"> {{ translations | getLabel: "plain.my_lessons.panel.my_lessons.date"}}</span>
+        <i *ngIf="assetsOrder.isDateDown()"
+           class="material-icons">arrow_downward</i>
+        <i *ngIf="assetsOrder.isDateUp()"
+           class="material-icons">arrow_upward</i>
+    </button>
+
+    <mat-menu #sortaction="matMenu"
+              [overlapTrigger]="false">
+        <a *ngIf="!assetsOrder.isNameDown()"
+           (click)="sortAssetsByNameDown()"
+           mat-menu-item>
+            {{ translations | getLabel: "plain.my_lessons.panel.my_lessons.name"}}
+            <i class="material-icons">arrow_downward</i>
+        </a>
+        <a *ngIf="assetsOrder.isNameDown()"
+           (click)="sortAssetsByNameUp()"
+           mat-menu-item>
+            {{ translations | getLabel: "plain.my_lessons.panel.my_lessons.name"}}
+            <i class="material-icons">arrow_upward</i>
+        </a>
+        <a *ngIf="!assetsOrder.isDateDown()"
+           (click)="sortAssetsByDateDown()"
+           mat-menu-item>
+            {{ translations | getLabel: "plain.my_lessons.panel.my_lessons.date"}}
+            <i class="material-icons">arrow_downward</i>
+        </a>
+        <a *ngIf="assetsOrder.isDateDown()"
+           (click)="sortAssetsByDateUp()"
+           mat-menu-item>
+            {{ translations | getLabel: "plain.my_lessons.panel.my_lessons.date"}}
+            <i class="material-icons">arrow_upward</i>
+        </a>
+    </mat-menu>
+</div>
+
+<!--<mat-card *ngFor="let asset of assets | paginate: paginatedAssets:assetsPageSize"-->
+<app-loading *ngIf="!assetsLoaded" class="file-uploading-spinner-assets"></app-loading>
+<ng-container *ngIf="assetsLoaded && (userPermissions && userPermissions.assetsBrowseAssets)">
+    <mat-card *ngFor="let asset of assets"
+              class="asset-card">
+        <div class="content-wrapper">
+            <mat-card-title>
+                {{ asset.fileName }}
+            </mat-card-title>
+            <mat-card-subtitle>
+                {{ asset.title }}
+            </mat-card-subtitle>
+            <mat-card-content>
+                <div>
+                    {{ translations | getLabel:"plain.my_lessons.panel.lesson_details_assets.type" }} {{
+                    getAssetType(asset)
+                    }} {{ translations | getLabel:"plain.my_lessons.panel.lesson_details_assets.format" }} {{
+                    getAssetFormat(asset) }}
+                </div>
+                <div>
+                    Created date: {{ asset.createdDate | amDateFormat:'LL' }}
+                </div>
+                <div>
+                    Size: {{ asset.getFormattedSize() }}
+                </div>
+                <a target="_blank" [href]="asset.href">
+                    {{ asset.href }}
+                </a>
+            </mat-card-content>
+        </div>
+        <div class="image-wrapper">
+            <img [src]="getAssetImage(asset)" class="asset-img">
+        </div>
+    </mat-card>
+</ng-container>
+
+<!--<paginator *ngIf="assets.length > 0"-->
+<!--[list]="assets"-->
+<!--[buttonsCount]="5"-->
+<!--[pageSize]="assetsPageSize"-->
+<!--(pageChange)="paginatedAssets = $event">-->
+<!--</paginator>-->

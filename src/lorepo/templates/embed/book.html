@@ -1,0 +1,69 @@
+{% extends 'embed/template.html' %}
+
+{%block player %}
+    <script type="text/javascript">
+        var player;
+        var firstPageLoaded = false;
+        var semiResponsiveLayoutChooser;
+        var $window = $(window);
+
+        function icOnAppLoaded(){
+            function iframeResizeRequest(maxThreshold) {
+                var width = maxThreshold || parseInt($('#_icplayer').css('width'), 10);
+                var height = parseInt($('#_icplayer').css('height'), 10);
+                var viewport = document.querySelector("meta[name=viewport]");
+                viewport.setAttribute('content', 'width=' + width);
+                postResizeMessage(width, height);
+            }
+
+
+            // Load assessment
+            player = icCreateBook('_icplayer', {% if cover %}true{% else %}false{% endif %});
+            player.load('/file/{{content.file.id}}', getPageNumber());
+            player.onPageLoaded(function() {
+                if (!firstPageLoaded) {
+                    semiResponsiveLayoutChooser = new window.semiResponsive.LayoutChooser(player.getSemiResponsiveLayouts());
+                    var windowWidth = $window.width();
+                    var layoutID = semiResponsiveLayoutChooser.chooseLayout(windowWidth);
+                    player.changeLayout(layoutID);
+                    firstPageLoaded = true;
+                    window.onresize = function() {
+                        var windowWidth = $window.width();
+                        var layoutID = semiResponsiveLayoutChooser.chooseLayout(windowWidth);
+                        player.changeLayout(layoutID);
+                    };
+                    iframeResizeRequest(semiResponsiveLayoutChooser.maxThreshold);
+                } else {
+                    iframeResizeRequest();
+                }
+            });
+
+            player.onOutstretchHeight(function () {
+                iframeResizeRequest();
+            });
+
+            player.onPageScrollTo(function (top) {
+                window.scrollTo(0, top);
+            });
+
+
+            function receiveMessage(event) {
+                var WINDOW_WIDTH_EVENT = "WINDOW_WIDTH:";
+
+                if (!event.data) {
+                    return;
+                }
+
+                if (event.data.indexOf(WINDOW_WIDTH_EVENT) === 0) {
+                    if (semiResponsiveLayoutChooser) {
+                        var parentWindowWidth = JSON.parse(event.data.substring(WINDOW_WIDTH_EVENT.length, event.data.length));
+                        var layoutID = semiResponsiveLayoutChooser.chooseLayout(parentWindowWidth);
+                        player.changeLayout(layoutID);
+                    }
+                }
+            }
+
+            window.addEventListener("message", receiveMessage, false);
+        }
+    </script>
+{% endblock %}

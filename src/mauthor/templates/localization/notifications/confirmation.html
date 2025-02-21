@@ -1,0 +1,12 @@
+{% autoescape off %}
+<p>
+	Xliff document for presentation {{content.title}} has been successfully exported.
+</p>
+
+<p>
+	You can download the xliff document at 
+	<a href="https://www.{{app_name}}/file/serve/{{uploaded_file.id}}">
+		https://www.{{app_name}}/file/serve/{{uploaded_file.id}}
+	</a>
+</p>
+{% endautoescape %}

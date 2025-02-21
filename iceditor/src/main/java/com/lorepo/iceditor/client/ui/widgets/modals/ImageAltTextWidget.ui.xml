@@ -1,0 +1,17 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+	</ui:style>
+	<g:HTMLPanel ui:field="panel" styleName="modal-box prompt modal_alt_text_add">
+	    <span ui:field="title"></span><br/>
+	    <span ui:field="altTextLabel"></span><br/>
+	    <div class="altTextValue">
+			<textarea ui:field="altText"></textarea>
+		</div>
+		<div class="confirmationPanel">
+			<a class="accept"></a>
+			<a class="decline"></a>
+		</div>
+	</g:HTMLPanel>
+</ui:UiBinder> 

@@ -1,0 +1,88 @@
+@import "../../../common/templates/mdl-colors";
+
+app-lesson-card {
+    display: inline-flex;
+
+    .lesson-card {
+        width: 236px;
+        height: 168px;
+        margin: 8px;
+        padding: 16px;
+
+        .undelete-button {
+            color: $white;
+        }
+
+        .card-title {
+            width: 236px;
+            margin-bottom: 6px;
+            overflow: hidden !important;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            font-size: 16px;
+            line-height: 22px;
+        }
+
+        .content-body {
+            display: flex;
+            flex-direction: row;
+            margin-bottom: 8px;
+
+            .content-left {
+                display: flex;
+                flex-grow: 1;
+                flex-direction: column;
+                justify-content: space-between;
+
+                mat-card-content {
+                    margin-bottom: 0;
+                    color: $grey-500;
+                }
+            }
+
+            div.content-right {
+                display: flex;
+                flex-grow: 0;
+                width: 100px;
+                height: 100px;
+                border-radius: 50%;
+                background-size: cover;
+                background-position: center center;
+                background-repeat: no-repeat;
+            }
+        }
+
+        mat-card-actions {
+            background: $grey-500;
+            padding: 4px !important;
+            display: flex;
+
+            &.selected {
+                background-color: $blue-500;
+            }
+
+            a, button {
+                &[mat-icon-button] {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: $white;
+                    margin-right: 4px;
+                }
+
+                &.more-actions {
+                    margin-right: 0;
+                }
+            }
+
+            .actions-spacer {
+                display: flex;
+                flex-grow: 1;
+            }
+        }
+    }
+}
+
+.lesson-menu-item {
+    padding-left: 25px !important;
+}

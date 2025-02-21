@@ -1,0 +1,5 @@
+Name: {{name}}
+Company: {{company}}
+Country: {{country}}
+E-mail: {{email}}
+Message: {{message}}

@@ -1,0 +1,51 @@
+{% load corporate %}
+{% load content %}
+
+                          <div class="l">
+                            <div class="block-content-wrapper">
+                              <div class="blok-title"><div class="blok-title-inner">
+                                  <div class="t"><div class="r"><div class="l"><div class="tl"><div class="tr">
+                                            <div class="toplevel">
+                                            	<h2 class="list-title"><a href="/corporate/public/{{space.id}}">{{space.title}}</a></h2>
+                                            </div>
+                                            <div class="secondlevel">
+                                            <ul class="inline">
+                                              {% for kid in space.sorted_kids %}
+											  <li class="{% if forloop.first %}first {% endif %}{% if forloop.last %}last{% endif %}"><a href="/corporate/public/{{kid.id}}">{{kid.title}}</a></li>
+											  {% endfor %}
+                                            </ul>
+											</div>
+                                            <div class="more-link"><a href="/corporate/public/{{space.id}}">more</a></div>
+
+                                            <div class="clear"></div>
+
+                                </div></div></div></div></div>
+
+                                </div></div>
+
+                              <div class="br"><div class="bl">
+                                  <div class="blok-content"><div class="blok-content-inner">
+                                      <ul class="inline">
+									  {% for content in space.contents %}
+                                        <li class="{%if forloop.first %}first {% endif %}{%if forloop.last %}last{% endif %}">
+                                          <div class="presentation-image">
+                                           	{% get_icon request content %}
+                                          </div>
+                                          <div class="presentation-title">
+                                            {% if content.content_type != 3 %}
+			                                   <a href="/embed/{{content.id}}">{{content.title}}</a>
+			                                   {% else %}
+			                                   <a href="/public/view_addon/{{content.id}}">{{content.title}}</a>
+			                                {% endif %}
+                                          </div>
+                                          <div  class="presentation-author">
+                                            {% publisher content "True" %}
+                                          </div>
+                                        </li>
+    								  {% endfor %}
+                                      </ul>
+                                      <div class="clear"></div>
+                                  </div></div>
+                                </div></div>
+                            </div>
+                          </div>

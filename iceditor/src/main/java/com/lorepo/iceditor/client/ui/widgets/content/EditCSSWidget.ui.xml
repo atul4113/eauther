@@ -1,0 +1,50 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+	
+	</ui:style>
+	<g:HTMLPanel ui:field="panel" styleName="mainPage left editCSSPage">
+		<div class="mainPageHeader">
+			<h3 ui:field="title" />
+			<a ui:field="closeButton" class="mainPageCloseBtn closeWidgetLocker"/>
+		</div>
+		<div class="file-select-schemeless-urls-warning file-select-schemeless-urls-no-warning" ui:field="schemelessURLWarning"></div>
+		
+		<div class="edit-css-widget-contents-container">
+			<div class="edit-css-widget-contents-row edit-css-widget-header">
+				<div class="edit-css-widget-layout-container">
+					<div class="edit-css-widget-title">
+						Css:
+					</div>
+					<div class="edit-css-widget-select-with-options">
+						<g:ListBox ui:field="lessonStylesSelect"></g:ListBox>
+					</div>
+					
+					<div class="edit-css-action-buttons-container">
+						<!--
+							<a class="edit-css-action-button edit-css-action-add-new-style tooltip-bottom" data-tooltip="Add new CSS style" ui:field="addStyleButton"></a>
+							<a class="edit-css-action-button edit-css-action-delete-css-style tooltip-bottom" data-tooltip="Delete CSS style" ui:field="deleteStyleButton"></a>
+							<a class="edit-css-action-button edit-css-action-set-as-default tooltip-bottom" data-tooltip="Set as default CSS style" ui:field="setAsDefaultButton"></a> 
+						 -->
+						
+					</div>
+				</div>
+			</div>
+			
+			<div class="edit-css-widget-contents-row edit-css-widget-editor-container">
+				<div ui:field="tabContents" class="editCSSPage-editCSSPage-contents contents">
+					<textarea ui:field="editor"/>
+				</div>
+			</div>
+			
+			<div class="edit-css-widget-contents-row edit-css-widget-controls-container">
+				<div class="editCSSPage-editCssTip" ui:field="tip"></div>
+				<div class="editCSSPage-editCSSControls">
+					<a class="editCSSPage-editCSSControls-controlsBtn" ui:field="apply" />
+					<a class="editCSSPage-editCSSControls-controlsBtn" ui:field="save" />				
+				</div>
+			</div>
+		</div>
+	</g:HTMLPanel>
+</ui:UiBinder> 

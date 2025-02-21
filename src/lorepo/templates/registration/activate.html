@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+
+{% if account %}
+
+<h1>Account successfully activated</h1>
+<div class="main clear" style="padding-top: 0"></div>
+
+<p>Thank you. Your Account was successfully activated and you are almost there.</p>
+
+<p><b>Option A</b></p>
+<p>If you are visiting mAuthor for a 30 Days FREE TRIAL, please click login below and proceed according to the instructions.</p>
+<p>IMPORTANT: After you log in for the first time, you will be prompted to enter a name for a test/trial company and you will become its administrator. By doing so, you will be able to assign your colleagues (up to 10 persons) to this test/trial company, to evaluate it better and work together on Your first mAuthor digital lesson.</p>
+<p><a href="/accounts/login" class="btn btn-default" style="background-color: #428bca; color: white">{% trans "Log in" %}</a></p>
+<p><b>Option B</b></p>
+<p>If your Company/Organization is already using mAuthor platform, please contact your Company mAuthor’s administrator who will assign your Account to your Company workspace. Just let him/her know what name you selected during your registration process. AFTER he/she assigns you, NEXT TIME YOU LOG IN, your account will automatically connect you to your Company workspace.</p>
+<br><p>To start using mAuthor quickly and learn its functionality we recommend you to take a tour along its useful Video Tutorials. They will help you to take your first steps and speed up your learning curve significantly. You will find there also some useful tips & tricks and ready-made solutions to be implemented in your first projects.</p>
+<p>You may find them at: <a href="http://www.learnetic.com/mauthor-video-tutorials">http://www.learnetic.com/mauthor-video-tutorials</a></p>
+{% else %}
+
+<p>{% trans "Account activation failed" %}</p>
+
+{% endif %}
+
+{% endblock %}

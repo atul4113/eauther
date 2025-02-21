@@ -1,0 +1,29 @@
+@import "../../../common/templates/mdl-colors";
+
+app-corporate-projects-list {
+    table {
+        width: 100%;
+
+        td {
+            white-space: normal;
+
+            .material-icons {
+                color: $grey-500;
+            }
+        }
+        th {
+                background-color: $grey-300;
+        }
+
+        i.material-icons {
+            width: 24px;
+        }
+
+    }
+
+    .mat-menu-content{
+        app-loading {
+            margin: 2px 2px 2px 42px;
+        }
+    }
+}

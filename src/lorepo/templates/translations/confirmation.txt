@@ -1,0 +1,8 @@
+{% load translate %}{% autoescape off %}
+<p>{% get_label 'translations.confirmation.Dear' %} {{ user }},</p>
+<p>
+{% get_label 'translations.confirmation.labels_copied' %} {{ lang_key }} {% get_label 'translations.confirmation.labels_copied2' %}<br />
+{% get_label 'translations.confirmation.browse_them' %} <a href="{{ BASE_URL }}/panel/translations/_{{ lang_key }}/">{{ BASE_URL }}/panel/translations/_{{ lang_key }}/</a>
+</p>
+<p>{% get_label 'translations.confirmation.regards' %}</p>
+{% endautoescape %}

@@ -1,0 +1,85 @@
+<ng-container *ngIf="isEditMode">
+    <mat-form-field *ngIf="withTitle"
+                    [ngClass]="{'mat-form-field-invalid': !isTitleValid }">
+        <input matInput
+               [(ngModel)]="title"
+               [placeholder]=" translations | getLabel:'plain.my_lessons.panel.lesson_details_meta.title'"
+               required>
+
+        <mat-hint *ngIf="!isTitleValid"
+                  class="error">
+            {{ translations | getLabel:"plain.my_lessons.panel.lesson_details_meta.title_not_empty" }}
+        </mat-hint>
+    </mat-form-field>
+
+    <mat-form-field>
+            <textarea matInput
+                      [(ngModel)]="editData.tags"
+                      matTextareaAutosize matAutosizeMinRows="3"
+                      matAutosizeMaxRows="6"
+                      [placeholder]="translations | getLabel:'plain.my_lessons.panel.lesson_details.tags_comma_separated'">
+
+            </textarea>
+    </mat-form-field>
+
+    <mat-form-field>
+            <textarea matInput
+                      [(ngModel)]="editData.shortDescription"
+                      matTextareaAutosize matAutosizeMinRows="3"
+                      matAutosizeMaxRows="6"
+                      [placeholder]="translations | getLabel:'plain.my_lessons.panel.lesson_details.short_description'">
+
+            </textarea>
+    </mat-form-field>
+
+    <mat-form-field>
+            <textarea matInput
+                      [(ngModel)]="editData.description"
+                      matTextareaAutosize matAutosizeMinRows="6"
+                      matAutosizeMaxRows="10"
+                      [placeholder]="translations | getLabel:'plain.languages.panel.description'">
+
+            </textarea>
+    </mat-form-field>
+
+    <ng-container *ngIf="withCustomFields">
+        <app-lesson-details-metadata-custom-field *ngFor="let value of data.customValues"
+                                                  [value]="value">
+        </app-lesson-details-metadata-custom-field>
+    </ng-container>
+</ng-container>
+
+<div *ngIf="!isEditMode" class="data-vertical">
+    <ng-container *ngIf="withTitle">
+        <h6>{{ translations | getLabel:'plain.my_lessons.panel.lesson_details_meta.title' }}</h6>
+        <p>
+            {{ editData.title }}
+        </p>
+    </ng-container>
+
+    <h6>{{ translations | getLabel:'plain.my_lessons.panel.lesson_details.tags_comma_separated' }}</h6>
+    <p>
+        {{ editData.tags }}
+    </p>
+
+    <h6>{{ translations | getLabel:'plain.my_lessons.panel.lesson_details.short_description' }}</h6>
+    <p>
+        {{ editData.shortDescription }}
+    </p>
+
+    <h6>{{ translations | getLabel:'plain.languages.panel.description' }}</h6>
+    <p>
+        {{ editData.description }}
+    </p>
+
+    <ng-container *ngIf="withCustomFields">
+        <ng-container *ngFor="let value of data.customValues">
+            <h6>
+                {{ value.name }}
+            </h6>
+            <p>
+                {{ value.value }}
+            </p>
+        </ng-container>
+    </ng-container>
+</div>

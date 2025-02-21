@@ -1,0 +1,16 @@
+{% if messages %}
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('.system-message').fadeIn("slow");
+			$('.system-message .close').click(function() {
+				$(this).parent().fadeOut("slow");
+			})
+		});
+	</script>
+	{% for message in messages %}
+		<div class="system-message alert alert-{% if message.tags %}{{ message.tags }}{% endif %} alert-dismissable alert-narrow">
+			<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+			{{message}}
+		</div>
+	{% endfor %}
+{% endif %}

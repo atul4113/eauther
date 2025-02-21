@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load apptags %}
+
+{% block content %}
+
+<h1 class="page_header">Select target language</h1>
+<div class="main clear" style="padding-top: 0"></div>
+
+<div class="select-project-wrapper">
+	<div class="text {% if error %}errorlist{% endif %}">
+		Select target language for exporting XLIFF
+	</div>
+	<form name="select-language-form" method="POST" action="/localization/create_export/{{ content_id }}"  id="select-language-form">
+		<input type="hidden" value="{{ next }}" name="next" />
+	
+		<div class="select">
+			<select name="select-language" id="select-language">
+				<option value="#">Select...</option>
+				{% for language in languages %}
+					<option value="{{ language.0 }}">{{ language.0|upper }}</option>
+				{% endfor %}
+			</select>
+		</div>
+	</form>
+	
+	<div class="button">
+		{% button 'Export' 'javascript:forms["select-language-form"].submit()' %}
+	</div>
+</div>
+
+{% endblock %}

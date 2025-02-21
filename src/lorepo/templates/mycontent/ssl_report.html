@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block title %}Fix lessons for HTTPS{% endblock %}
+
+{% block head %}
+<script>
+$(document).ready(function(){
+	var modal_title = $('.modal-title');
+	var modal_body = $('.modal-body');
+
+	window.show_css = function show_css(content_id){
+		modal_title.html('Incorrect styles');
+		modal_body.html('Loading...');
+		$.get('/file/'+content_id, function (data) {
+			var lesson = $(data);
+			modal_body.html('<pre>'+lesson.find('style').text()+'</pre>');
+		})
+	};
+
+	window.show_pages = function show_pages(content_id, pages_numbers) {
+		var pages = pages_numbers.split(",");
+		modal_title.html('Incorrect pages');
+		modal_body.html('Loading...');
+		$.get('/file/'+content_id, function (data) {
+			var lesson = $(data);
+			var info = "";
+			for (var i=0; i<pages.length; i++) {
+				var page = parseInt(pages[i], 10);
+				info += $(lesson.find('page')[page]).attr('name') + '<br>';
+			}
+			modal_body.html(info);
+		})
+	}
+});
+</script>
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        <p>One fine body&hellip;</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+
+	<h1>Content needed to be fixed in {{ space }}</h1>
+
+	<p>{{ summary }}</p>
+
+	{% if templates %}
+		<h2>Templates</h2>
+		{% with templates as lessons %}
+			{% include 'mycontent/common/fix_ssl_table.html' %}
+		{% endwith %}
+	{% endif %}
+
+	{% if lessons %}
+		<h2>Lessons</h2>
+		{% include 'mycontent/common/fix_ssl_table.html' %}
+	{% endif %}
+
+{% endblock %}

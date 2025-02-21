@@ -1,0 +1,29 @@
+{% load apptags %}
+<iframe src="/corporate/bug_track_add_form" class="bug_track_form_frame">
+</iframe>
+		
+<form method="post" action="/corporate/view/{{content.id}}" name="add" id="hidden-bug-form">
+	<input type="hidden" name="next" value="{{back_url}}"/>
+	<input type="text" name="title" id="hidden-bug-form-input"/>
+	<textarea rows="1" cols="1" name="description"></textarea>
+</form>
+		
+<script type="text/javascript">
+	var iframeObject = document.getElementsByClassName('bug_track_form_frame')[0],
+		embedWindow = iframeObject.contentWindow || iframeObject.contentDocument;
+		
+	function receiveMessage(event) {
+		if (event.data.indexOf("REPORT_BUG") == 0) {
+			var splittedData = event.data.split('||||'),
+				title = splittedData[1],
+				description = splittedData[2];
+
+            var $hiddenBugForm = $('#hidden-bug-form');
+			$hiddenBugForm.find('#hidden-bug-form-input').val(title);
+			$hiddenBugForm.find('textarea').text(description);
+			document.forms["add"].submit();
+		}
+	}
+
+	window.addEventListener("message", receiveMessage, false);
+</script>

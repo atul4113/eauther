@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load apptags %}
+
+{% block head %}
+ <script type="text/javascript" src="/media/js/wiki.js"></script>
+{% endblock %}
+
+{% block content %}
+<h1 class="page_header">Add Page</h1>
+<div class="main clear" style="padding-top: 0"></div>
+
+<form action="add" method="post" name="add">
+	<div class="button-left">{% button 'Add File' 'parent.location="/doc/file"' '' '1,4em;' %}</div>
+	<div class="clear"></div>
+	{% csrf_token %}
+	<table>
+	<tr>
+			<td></td>
+			<td><input id="id_id" type="hidden" name="id" value=""/></td>
+		</tr>
+	<tr>
+		<td></td>
+		<td>
+		{% if 'title' in request.GET %}
+			This page doesn't exist yet. You can create it here.
+		{% endif %}
+			{{ form.title.errors }}
+			{{ form.text.errors }}
+		</td>
+	</tr>
+		<tr>
+			<td><label for="id_title">{% trans "Title" %}:</label></td>
+			<td><input id="id_title" type="text" name="title" value="{% if title %}{{ title }}{% endif %}{% if not title and form.title.value %}{{form.title.value}}{% endif %}" size="80"/></td>
+		</tr>
+		<tr>
+			<td style="vertical-align:top"><label for="id_text">{% trans "Text" %}:</label></td>
+			<td><textarea id="id_text" name="text" rows="20" cols="80">{{form.text.value}}</textarea></td>
+		</tr>
+		<tr>
+			<td  colspan="2">
+				<input type="submit" value="{% trans "Send" %}" />
+				<div class="button-left">
+					{% button 'Send' 'document.forms["add"].action="/doc/add";document.forms["add"].submit();localStorage.clear()' %}
+				</div>
+				<div class="button-left">
+					{% button 'Preview' 'document.forms["add"].action="/doc/preview";document.forms["add"].submit(); setWikiPage()' %}
+				</div>
+				<div class="button-left">
+					{% button 'Cancel' 'parent.location="/doc"; localStorage.clear()' %}
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<a href="http://en.wikipedia.org/wiki/Markdown" target="_blank" class="normal">Markdown syntax</a>
+			</td>
+		</tr>
+	</table>
+</form>
+
+<script>
+$(document).ready(function() { getWikiPage(); });
+</script>
+
+{% endblock %}

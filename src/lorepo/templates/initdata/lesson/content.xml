@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<interactiveContent version="2">
+    <styles>
+        <style id="default" name="default" isDefault="true" />
+    </styles>
+
+    <layouts>
+        <layout name="default" id="default" isDefault="true">
+            <style id="default"/>
+            <threshold width="800"></threshold>
+        </layout>
+    </layouts>
+
+	<pages>
+		{% if page %}
+		<page name='Page 1' href='{{page.id}}' />
+		{% endif %}
+		{% for page in pages %}
+		<page name='Page {{forloop.counter}}' href='{{page.id}}' />
+		{% endfor %}
+	</pages>
+</interactiveContent>

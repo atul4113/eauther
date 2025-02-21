@@ -1,0 +1,130 @@
+#application: mauthor-dev
+#version: 1276
+api_version: 1
+runtime: python27
+module: download
+threadsafe: false
+instance_class: B4_1G
+
+basic_scaling:
+  max_instances: '10'
+builtins:
+- remote_api: 'on'
+
+libraries:
+- name: lxml
+  version: "2.3"
+
+inbound_services:
+- warmup
+
+handlers:
+- url: /_ah/(mapreduce|queue|warmup|internalupload).*
+  script: wsgi.application
+  login: admin
+  secure: always
+- expiration: '0'
+  login: admin
+  secure: optional
+  static_dir: django/contrib/admin/media
+  url: /media/admin
+- expiration: 7d
+  login: admin
+  secure: optional
+  static_files: lorepo/templates/static_files/images/\1
+  upload: lorepo/templates/static_files/images/(.*)
+  url: /media/images/(.*)
+- expiration: 7d
+  login: admin
+  secure: optional
+  static_files: lorepo/templates/static_files/content/\1
+  upload: lorepo/templates/static_files/content/(.*)
+  url: /media/content/(.*)
+- expiration: 30d
+  login: admin
+  mime_type: font/eot
+  secure: optional
+  static_files: lorepo/templates/static_files/style/fonts/\1
+  upload: lorepo/templates/static_files/style/fonts/(.*\.eot)
+  url: /media/style/fonts/(.*\.eot)
+- expiration: 30d
+  login: admin
+  mime_type: font/woff
+  secure: optional
+  static_files: lorepo/templates/static_files/style/fonts/\1
+  upload: lorepo/templates/static_files/style/fonts/(.*\.woff)
+  url: /media/style/fonts/(.*\.woff)
+- expiration: 30d
+  login: admin
+  mime_type: font/ttf
+  secure: optional
+  static_files: lorepo/templates/static_files/style/fonts/\1
+  upload: lorepo/templates/static_files/style/fonts/(.*\.ttf)
+  url: /media/style/fonts/(.*\.ttf)
+- expiration: 30d
+  login: admin
+  secure: optional
+  static_files: lorepo/templates/static_files/style/fonts/\1
+  upload: lorepo/templates/static_files/style/fonts/(.*)
+  url: /media/style/fonts/(.*)
+- expiration: '0'
+  login: admin
+  secure: optional
+  static_files: lorepo/templates/static_files/icplayer/icplayer.nocache.js
+  upload: lorepo/templates/static_files/icplayer/icplayer.nocache.js
+  url: /media/icplayer/icplayer.nocache.js
+- expiration: '0'
+  login: admin
+  secure: optional
+  static_files: lorepo/templates/static_files/iceditor/iceditor.nocache.js
+  upload: lorepo/templates/static_files/iceditor/iceditor.nocache.js
+  url: /media/iceditor/iceditor.nocache.js
+- expiration: '0'
+  login: admin
+  secure: optional
+  static_files: lorepo/templates/static_files/addoneditor/addoneditor.nocache.js
+  upload: lorepo/templates/static_files/addoneditor/addoneditor.nocache.js
+  url: /media/addoneditor/addoneditor.nocache.js
+- expiration: '0'
+  login: admin
+  secure: optional
+  static_files: lorepo/templates/static_files/styles.css
+  upload: lorepo/templates/static_files/styles.css
+  url: /media/styles.css
+- login: admin
+  secure: optional
+  static_dir: lorepo/templates/static_files
+  url: /media
+- login: admin
+  secure: optional
+  static_dir: mauthor/templates/static_files
+  url: /mauthor_media
+- expiration: 7d
+  login: admin
+  secure: optional
+  static_files: lorepo/templates/static_files/favicon.ico
+  upload: lorepo/templates/static_files/favicon\.ico
+  url: /favicon\.ico
+- login: admin
+  secure: optional
+  static_files: lorepo/templates/static_files/robots.txt
+  upload: lorepo/templates/static_files/robots\.txt
+  url: /robots\.txt
+- url: /.*
+  script: wsgi.application
+  secure: always
+  login: admin
+
+skip_files:
+    - manage.py
+    - README.md
+    - install_deps
+    - requirements.txt
+    - sitepackages/google_appengine*
+    - \.storage.*
+    - \.git
+    - (.*)\.pyc
+    - templates/static_files/frontend/node_modules
+    - templates/static_files/frontend/bower_components
+    - templates/static_files/frontend/typings
+    - templates/static_files/frontend/app

@@ -1,0 +1,15 @@
+{% load utility %}{% load translate %}{% autoescape off %}
+    <p>{% get_label 'translations.add_notification.email.dear' %},</p>
+
+    <p>{{ news.title }}:<br /></p>
+
+    <ul>
+        {% for key, label in labels.items %}
+            <li>
+                <a href="{{ BASE_URL }}/translations/{{ key}}">"{{ key }}": "{{ label|escape }}"</a>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <p>{% get_label 'translations.add_notification.email.regards' %}</p>
+{% endautoescape %}

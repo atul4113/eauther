@@ -1,0 +1,6 @@
+{% load translate %}{% autoescape off %}
+<p>{% get_label 'translations.conflict.Dear' %} {{ user }},</p>
+<p>{% get_label 'translations.conflict.info' %}<br />
+<a href="{{ BASE_URL }}{{ url }}">{{ BASE_URL }}{{ url }}</a>
+</p>
+{% endautoescape %}

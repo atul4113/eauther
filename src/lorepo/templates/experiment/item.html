@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>{{item.name}}</h1>
+
+<table>
+	<tr>
+		<td>Name:</td>
+		<td>{{item.name}}</td>
+	</tr>
+	<tr>
+		<td>Title:</td>
+		<td>{{item.title}}</td>
+	</tr>
+	<tr>
+		<td>Description:</td>
+		<td>{{item.description}}</td>
+	</tr>
+</table>
+
+<h2>Stats</h2>
+
+<table width="100%" border="1">
+	<tr>
+		<th>Date:</th>
+		<th>Cohort:</th>
+		<th>Value 1:</th>
+		<th>Value 2:</th>
+		<th>Value 3:</th>
+		<th>Value 4:</th>
+		<th>Value 5:</th>
+	</tr>
+</table>
+
+
+{% endblock %}

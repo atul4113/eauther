@@ -1,0 +1,54 @@
+@import "../../templates/mdl-colors";
+
+
+.popup-mask {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 11000;
+    display: flex;
+    align-items: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    padding: 8px;
+
+    .popup {
+        display: block;
+        margin: 0 auto;
+        background: white;
+        border-radius: 1px;
+        max-width: 400px;
+        width: 100%;
+
+        .popup-title {
+            font-size: 18px;
+            padding: 16px;
+        }
+
+        .popup-content {
+            padding: 16px;
+
+            .error-message {
+                color: $red-800;
+                font-weight: bold;
+            }
+        }
+
+        .popup-actions {
+            padding: 8px;
+            text-align: right;
+
+            .mdl-button--primary,
+            .mdl-button--accent {
+                font-weight: bold;
+            }
+
+            .mdl-button--primary {
+                margin-left: 16px;
+            }
+        }
+    }
+}

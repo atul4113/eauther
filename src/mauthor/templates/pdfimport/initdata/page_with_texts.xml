@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<page layout="pixels" width="{{page.size.0}}" height="{{page.size.1}}">
+	<modules>
+		{% for rect in page.rects %}
+		<shapeModule id='shape-{{rect.id}}' left='{{rect.left}}' top='{{rect.top}}'
+			width='{{rect.width}}' height='{{rect.height}}' right='0' bottom='0'
+			isVisible='true' isLocked='false'
+			style='background-color: rgb({{rect.fill.0}}, {{rect.fill.1}}, {{rect.fill.2}});'>
+			<layout type='LTWH'>
+				<left relative='' property='left' />
+				<top relative='' property='top' />
+				<right relative='' property='right' />
+				<bottom relative='' property='bottom' />
+			</layout>
+		</shapeModule>
+		{% endfor %}
+		{% for image in page.images %}
+		<imageModule id='image-{{image.id}}' left='{{image.left}}' top='{{image.top}}'
+			width='{{image.width}}' height='{{image.height}}' right='0' bottom='0'
+			isVisible='true' isLocked='false'>
+			<layout type='LTWH'>
+				<left relative='' property='left' />
+				<top relative='' property='top' />
+				<right relative='' property='right' />
+				<bottom relative='' property='bottom' />
+			</layout>
+			<image src='/file/serve/{{image.file.id}}' mode='stretch' />
+		</imageModule>
+		{% endfor %}
+		{% for curve in page.curves %}
+		<addonModule addonId='SVG2' id='SVG-{{curve.id}}' left='{{curve.left}}' top='{{curve.top}}'
+			width='{{curve.width}}' height='{{curve.height}}' right='0' bottom='0' isVisible='true'
+			isLocked='false'>
+			<layout type='LTWH'>
+				<left relative='' property='left' />
+				<top relative='' property='top' />
+				<right relative='' property='right' />
+				<bottom relative='' property='bottom' />
+			</layout>
+			<properties>
+				<property name='SVG file' displayName='' type='file'
+					value='/file/serve/{{curve.file.id}}' />
+				<property name='Skip aspect ratio' displayName='' type='boolean'
+					value='' />
+			</properties>
+		</addonModule>
+		{% endfor %}
+		{% for text in page.texts %}
+		<textModule id="text-{{text.id}}" left="{{text.left}}" top="{{text.top}}"
+			width="{{text.width}}" height="{{text.height}}">
+			<text>{{text.text}}</text>
+		</textModule>
+		{% endfor %}
+		<buttonModule id="PrevPage" left="0" top="0" width="40"
+			height="40" right="0" bottom="0" isVisible="true" isLocked="false">
+			<layout type="LTWH">
+				<left relative="" property="left" />
+				<top relative="" property="top" />
+				<right relative="" property="right" />
+				<bottom relative="" property="bottom" />
+			</layout>
+			<button type="prevPage" text="" onclick="" />
+		</buttonModule>
+		<buttonModule id="NextPage" left="50" top="0" width="40"
+			height="40" right="0" bottom="0" isVisible="true" isLocked="false">
+			<layout type="LTWH">
+				<left relative="" property="left" />
+				<top relative="" property="top" />
+				<right relative="" property="right" />
+				<bottom relative="" property="bottom" />
+			</layout>
+			<button type="nextPage" text="" onclick="" />
+		</buttonModule>
+	</modules>
+</page>

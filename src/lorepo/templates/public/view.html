@@ -1,0 +1,212 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load apptags %}
+{% load public %}
+{% load corporate %}
+{% block title %}{{content.title}}{% endblock %}
+
+{% block head %}
+	<script type="text/javascript" language="javascript" src="/media/icplayer/icplayer.nocache.js"></script>
+
+    <script type="text/javascript" language="javascript">
+    		var player;
+      		function icOnAppLoaded(){
+	        	// Load assessment
+	        	var page = parseInt(window.location.hash.substring(1), 10);
+	        	if (page != NaN) {
+	        		page = page - 1;
+	        	} else {
+	        		page = 0;
+	        	}
+    	    	player = icCreatePlayer('_icplayer');
+        		{% if is_public and content.public_version %}
+        		player.load('/file/{{content.public_version.id}}', page);
+        		{% else %}
+        		player.load('/file/{{content.file.id}}', page);
+        		{% endif %}
+      		}
+	</script>
+
+	{% include 'common/math_jax.html' %}
+{% endblock %}
+
+{% block content %}
+
+<h1 class="page_header" >
+{% if content.content_type == 1 %}
+	{% space_path spaces %}
+{% else %}
+	{% space_path spaces 2 %}
+{% endif %}
+</h1>
+
+<div class="main clear" style="padding-top: 0px"></div>
+
+<h2 style="margin:0px 0px 5px 5px; float:left">{{content.title}}</h2>
+
+<div class="clear"></div>
+<div class="myContent">
+	
+	<div id="_icplayer"></div>
+	
+	<div class="clear"></div>
+	<div class="viewActions">
+		<table class="button table">
+		<tr>
+			<td>
+			{% with id=content.id|stringformat:"s" %}
+				{% with url="parent.location='"|add:"/embed/"|add:id %}
+					{% if is_public %}
+						{% with public_url=url|add:"?public=1'" %}
+							{% button 'Mobile view' public_url 'font-size:small' %}
+						{% endwith%}
+					{% else %}
+						{% with preview_url=url|add:"'" %}
+							{% button 'Mobile view' preview_url 'font-size:small' %}
+						{% endwith%}
+					{% endif %}
+				{% endwith %}
+			</td>
+			<td>
+				{% with url="parent.location='"|add:"/public/full/"|add:id %}
+					{% if is_public %}
+						{% with public_url=url|add:"?public=1'" %}
+							{% button 'Full window' public_url 'font-size:small' %}
+						{% endwith%}
+					{% else %}
+						{% with preview_url=url|add:"'" %}
+							{% button 'Full window' preview_url 'font-size:small' %}
+						{% endwith%}
+					{% endif %}
+				{% endwith %}
+			{% endwith %}
+			</td>
+		
+			<td>
+			{% if copy_space|length == 0 or copy_space|length == 1 %}
+				{% with id=content.id|stringformat:"s" %}
+					{% with url='parent.location="'|add:"/mycontent/copy/"|add:id|add:'"' %}
+						{% button 'Make a copy' url %}
+					{% endwith %}
+				{% endwith %}
+				{% else %}
+				<form name="form_copy_{{addon.id}}" method="GET" style="padding:5px 0px">
+					<select name="menu_copy_{{addon.id}}" 
+						onChange="top.location.href = this.form.menu_copy_{{addon.id}}.options[this.form.menu_copy_{{addon.id}}.selectedIndex].value;return false;">
+						<option>Copy to location...</option>
+						<option value="/mycontent/copy/{{content.id}}/{{private_space.id}}">
+							My Lessons
+						</option>
+						{% for division in copy_spaces %}
+							{% copy_spaces division request content.id %}
+						{% endfor %}
+					</select>
+				</form>
+				{% endif %}
+			</td>
+		</tr>
+		</table> 
+		<div class="clear"></div>
+	</div>
+	
+	<div class="content infoPreview">
+	{% for cs in content.contentspace_set.all %}
+		{% if cs.space.is_corporate %}
+			<span><b>Publisher: </b><a href="/public/?publisher={{cs.space.top_level.id}}&type={{content.content_type}}">{{ cs.space.top_level }}</a></span>
+			<span><b>Author: </b> <a href="/public/?author={{content.author.username}}&type={{content.content_type}}">{{content.author.username}}</a></span>
+		{% else %}
+		{% if cs.space.is_private %}
+			<span><b>Author: </b> <a href="/public/?author={{content.author.username}}&type={{content.content_type}}">{{content.author.username}}</a></span>
+		{% endif %}
+		{% endif %}
+	{% endfor %}
+	
+			<span><b>Tags:</b>
+			{% for tag in content.tags|split:',' %} 
+				<a href="/public/?q={{tag}}&type={{content.content_type}}">{{tag}}</a>
+			{% endfor %}
+			</span>
+		
+		<span>
+			<b>Short Description:</b> 
+			{{content.short_description|linebreaksbr}}
+		</span>
+	
+		<span><b>Description:</b> 
+			{{content.description|linebreaksbr}}
+		</span>
+
+		{% if non_public_spaces %}
+		<span>
+			<b>Assigned category:</b> 
+			{% for space in non_public_spaces %}
+				{% if not forloop.first or not space.is_private %}
+					{{space.title}}
+				{% else %}
+					My Lessons
+				{% endif %}
+				{% if not forloop.last %}::{% endif %}
+			{% empty %}
+				None
+			{% endfor %}
+		</span>
+		{% endif %}
+
+		<span>
+			<b>Assigned public category:</b> 
+			{% for space in public_spaces %}
+				<a href="/public/spaces/{{space.id}}">{{space.title}}</a>
+				{% if not forloop.last %}::{% endif %}
+			{% empty %}
+				None
+			{% endfor %}
+		</span>
+
+		<span>
+			<b>Is public:</b> 
+			{% if content.is_content_public %}
+				Yes
+			{% else %}
+				No
+			{% endif %}
+		</span>
+
+		{% if user.is_superuser %}
+		<span>
+		<b>Is Featured:</b>
+		{% if content.is_featured %}
+			<a href="/mycontent/{{content.id}}/makefeatured"><b>Yes</b></a>
+		{% else %}
+			<a href="/mycontent/{{content.id}}/makefeatured">No</a>
+		{% endif %}
+		</span>
+		{% endif %}
+		
+		<span>
+			{% get_template_for_content content %}
+		</span>
+		
+
+			{% if related_presentations %}
+			<div class="ColCenter">
+			<a href="/public/?q={% for tag in content.tags|split:',' %}{{tag}}{% endfor %}&type={{content.content_type}}" class="thumbnails">Related lessons:</a>
+			<div class="more-link" style="float:right;"><a href="/public/?q={% for tag in content.tags|split:',' %}{{tag}}{% endfor %}&type={{content.content_type}}">more</a></div>
+			<div class="main clear" style="padding-top: 0px"></div>
+				{% content_thumbnails request related_presentations "inline-search" %}
+			</div>
+			{% endif %}
+			
+			{% if from_the_same_publisher %}
+			<div class="ColCenter">
+			<a href="/public/?publisher={% for cs in content.contentspace_set.all %}{% if cs.space.is_corporate %}{{cs.space.top_level.id}}{% endif %}{% endfor %}&type={{content.content_type}}" class="thumbnails">From the same publisher:</a>
+			<div class="more-link" style="float:right;"><a href="/public/?publisher={% for cs in content.contentspace_set.all %}{% if cs.space.is_corporate %}{{cs.space.top_level.id}}{% endif %}{% endfor %}&type={{content.content_type}}">more</a></div>
+			<div class="main clear" style="padding-top: 0px"></div>
+				{% content_thumbnails request from_the_same_publisher "inline-search" %}
+			</div>
+			{% endif %}
+	
+	</div>
+
+</div>
+
+{% endblock %}

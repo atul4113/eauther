@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+{% load apptags %}
+
+{% block content %}
+
+<h1 class="page_header">Plans &amp; Pricing</h1>
+<div class="main clear" style="padding-top: 0"></div>
+
+<div class="centered">
+<h2 class="bigger">Choose your preferred Account type</h2>
+</div>
+
+
+<div class="plans_column">
+
+<div class="centered">
+<h1>Standard</h1>
+<h2>Price: Free (Forever)</h2>
+</div>
+
+<ul>
+<li>Unlimited access to Multiplatform Interactive Content Editor</li>
+<li>Unlimited number of public lessons</li>
+<li>Up to 10 private lessons</li>
+<li>Ability to assign lessons and get the results</li>
+<li>Ability to embed lessons in any website</li>
+<li>Disc Quota up to 1 GB</li>
+</ul>
+
+<div class="centered">
+{% if request.user.is_authenticated %}
+	<div class="vcentered" style="height: 40px"><b>You already have this option</b></div>
+{% else %}
+	{% button 'Sign Up' 'location.href=\"/accounts/login\"' '' '88px' %}
+{% endif %}
+<div class="clear"></div>
+</div>
+
+</div>
+<div class="plans_column">
+
+<div class="centered">
+<h1>Individual</h1>
+<h2>Price: ... / month</h2>
+</div>
+
+<ul>
+<li>Unlimited access to Multiplatform Interactive Content Editor</li>
+<li>Unlimited number of public lessons</li>
+<li>Unlimited Number of private lessons</li>
+<li>Ability to assign lessons and get the results</li>
+<li>Ability to embed lessons in any website</li>
+<li>Ability to download SCORM packages</li>
+<li>Disc Quota up to 1 GB</li>
+</ul>
+
+<div class="centered">
+{% button 'Sign Up' 'location.href=\"/public/contact-us\"' '' '88px' %}
+</div>
+
+</div>
+<div class="plans_column">
+
+<div class="centered">
+<h1>Corporate</h1>
+<h2>Price: ... / month</h2>
+</div>
+
+<ul>
+<li>Unlimited access to Multiplatform Interactive Content Editor</li>
+<li>Unlimited number of public lessons</li>
+<li>Unlimited Number of private lessons</li>
+<li>Ability to assign lessons and get the results</li>
+<li>Ability to embed lessons in any website</li>
+<li>Ability to download SCORM packages</li>
+<li>Disc Quota up to 10 GB</li>
+<li>Collaborative space to work on lessons for up to 5 users</li> 
+</ul>
+
+<div class="centered">
+{% button 'Sign Up' 'location.href=\"/public/contact-us\"' '' '88px' %}
+</div>
+
+</div>
+<div class="plans_column">
+
+<div class="centered">
+<h1>Enterprise</h1>
+<h2>Price: ... / month</h2>
+</div>
+
+<ul>
+<li>Unlimited access to Multiplatform Interactive Content Editor</li>
+<li>Unlimited number of public lessons</li>
+<li>Unlimited Number of private lessons</li>
+<li>Ability to assign lessons and get the results</li>
+<li>Ability to embed lessons in any website</li>
+<li>Disc Quota up to 20 GB</li>
+<li>Ability to download SCORM packages</li> 
+<li>Collaborative space to work on lessons for unlimited number of users</li>
+<li>Ability to create courses as a collections of lessons</li>
+</ul>
+
+<div class="centered">
+{% button 'Sign Up' 'location.href=\"/public/contact-us\"' '' '88px' %}
+</div>
+
+</div>
+
+<div class="clear"></div>
+
+<div class="centered">
+	<h3><a href="/public/contact-us">Contact us</a> for more information about pricing and conditions. </h3>
+</div>
+{% endblock %}

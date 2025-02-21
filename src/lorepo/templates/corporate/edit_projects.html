@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load apptags %}
+{% load corporate %}
+{% load content %}
+
+{% block content %}
+<div style="float:left">
+<h1 class="page_header">Project Administraton Panel: [{{project}}]</h1>
+</div>
+<div style="float:right">
+	{% make_dropdown_menu 'Actions' sub_menus %}
+</div>
+<div class="main clear" style="padding-top: 0"></div>
+
+{% include "common/messages/display_messages.html" %}
+
+<div id="toolbar">
+		<form method="post" action="add{% if project.id %}/{{project.id}}{% endif %}" name="add">
+			<input type="hidden" name="next" value="/corporate/projects/{{space_id}}"/>
+			<table style="border-spacing: 10px; border-collapse: separate; margin:10px 10px">
+				<tr>
+					<td>Publication name: </td>
+					<td><input type="text" name="title" /> </td>
+					<td><button type="submit" class="btn btn-primary btn-sm">Add publication</button></td>
+					<td><input type="submit" /></td>
+				</tr>
+			</table>
+		</form>
+</div>
+<div class="clear"></div>
+	{% for space in spaces %}
+        {% if space.is_edited %}
+        {% else %}
+            <ul class="categories">
+                {% if space.parent != None %}
+                    <li>
+                    <span style="font-size:large; margin-right:20px;">{{space.title}} </span>
+                    </li>
+                    <li>
+                        <a href="{{space.id}}/rename_project?next=/corporate/projects/{{project.id}}">Rename</a> |
+                        <a href="/corporate/{{space.id}}/subproject">Units</a> |
+                        <a href="/states/project/{{space.id}}?next=/corporate/projects/{{project.id}}">Select states set</a> |
+                        <a href="/corporate/archive/{{space.id}}?{{ token_key }}={{ token }}&next=/corporate/projects/{{project.id}}"
+                        onclick="return confirm('Are you sure you want to archive publication {{space.title}}? It will not be visible in the list together with lessons it contains')">
+                            Archive
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+        {% endif %}
+	{% endfor %}
+
+<div class="tableFooter">
+</div>
+
+{% endblock %}

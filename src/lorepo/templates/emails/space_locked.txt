@@ -1,0 +1,23 @@
+{% load i18n %}
+<p>
+Hi there!
+</p>
+<p>
+Your access to mAuthor platform has expired and we have temporary locked your account.
+Please contact us in case you would like to unlock it and extend your subscription.
+</p>
+<p>
+We hope you have found mAuthor powerful and attractive. However, if you haven’t found it attractive or meeting your expectations we will be very grateful for your short massage with some opinion from your side. Your voice is very important to us and we appreciate your help in that matter.
+</p>
+<p>
+Thank you very much again, for your cooperation.
+With very best regards,
+</p>
+<p>
+mAuthor’s Customer Satisfaction Team
+e-mail: mauthor@learnetic.com
+phone: +48 58 764 75 00
+</p>
+<p>
+PS. Please note that we will keep the eContent you have created for the next 90 days. If you have created something valuable to you, but did not downloaded it as a SCORM package, please let us know and we will help you to retrieve your work.
+</p>

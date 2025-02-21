@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% load apptags %}
+{% load admin_tag %}
+
+{% block content %}
+
+
+<div class="createDiv">
+<h2>Spaces tree</h2>
+
+{% spaces_tree_tag spaces %}
+
+<div class="content clear"></div>
+</div>
+
+{% endblock %}

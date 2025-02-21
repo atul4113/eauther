@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% include "common/messages/display_messages.html" %}
+        <h1>You are currently editing the following content</h1>
+    <ul>
+        {% for ce in currently_editing %}
+            <li><strong>{{ ce.content }}</strong> (since {{ ce.edited_since }})</li>
+        {% endfor %}
+    </ul>
+
+	<div class="text-center">
+        <a href="?force=1" class="btn btn-primary btn-big">Stop editing and logout &raquo;</a>
+    </div>
+{% endblock %}

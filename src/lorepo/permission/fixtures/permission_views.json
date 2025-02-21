@@ -1,0 +1,1466 @@
+[
+  {
+    "pk": 43, 
+    "model": "contenttypes.contenttype", 
+    "fields": {
+      "model": "content", 
+      "name": "content", 
+      "app_label": "mycontent"
+    }
+  }, 
+  {
+    "pk": 42, 
+    "model": "contenttypes.contenttype", 
+    "fields": {
+      "model": "group", 
+      "name": "group", 
+      "app_label": "auth"
+    }
+  }, 
+  {
+    "pk": 41, 
+    "model": "contenttypes.contenttype", 
+    "fields": {
+      "model": "permission", 
+      "name": "permission", 
+      "app_label": "auth"
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "contenttypes.contenttype", 
+    "fields": {
+      "model": "space", 
+      "name": "space", 
+      "app_label": "spaces"
+    }
+  }, 
+  {
+    "pk": 5, 
+    "model": "contenttypes.contenttype", 
+    "fields": {
+      "model": "spaceaccess", 
+      "name": "space access", 
+      "app_label": "spaces"
+    }
+  }, 
+  {
+    "pk": 52, 
+    "model": "contenttypes.contenttype", 
+    "fields": {
+      "model": "user", 
+      "name": "user", 
+      "app_label": "auth"
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "auth.user", 
+    "fields": {
+      "username": "kgebert", 
+      "first_name": "", 
+      "last_name": "", 
+      "is_active": true, 
+      "idxf_email_l_iexact": "karol.gebert@solwit.com", 
+      "idxf_username_l_iexact": "kgebert", 
+      "is_superuser": true, 
+      "is_staff": true, 
+      "last_login": "2013-07-29 11:37:54", 
+      "groups": [], 
+      "user_permissions": [], 
+      "password": "sha1$d7056$177d353e2c102581794673856c485a0f5ea81de0", 
+      "email": "karol.gebert@solwit.com", 
+      "date_joined": "2013-07-10 13:56:17"
+    }
+  }, 
+  {
+    "pk": 8, 
+    "model": "auth.user", 
+    "fields": {
+      "username": "test", 
+      "first_name": "", 
+      "last_name": "", 
+      "is_active": true, 
+      "idxf_email_l_iexact": "test@test.pl", 
+      "idxf_username_l_iexact": "test", 
+      "is_superuser": false, 
+      "is_staff": false, 
+      "last_login": "2013-07-29 11:30:36", 
+      "groups": [], 
+      "user_permissions": [], 
+      "password": "sha1$3bca7$85c169edeceaf50bef724309347fa11a490d8fc2", 
+      "email": "test@test.pl", 
+      "date_joined": "2013-07-10 12:02:29"
+    }
+  }, 
+  {
+    "pk": 18, 
+    "model": "auth.user", 
+    "fields": {
+      "username": "test2", 
+      "first_name": "", 
+      "last_name": "", 
+      "is_active": true, 
+      "idxf_email_l_iexact": "test@test.pl", 
+      "idxf_username_l_iexact": "test2", 
+      "is_superuser": false, 
+      "is_staff": false, 
+      "last_login": "2013-07-29 11:37:07", 
+      "groups": [], 
+      "user_permissions": [], 
+      "password": "sha1$5d333$7270cf6cad4452a070ffa21eb280f68808a34a3b", 
+      "email": "test@test.pl", 
+      "date_joined": "2013-07-10 12:03:53"
+    }
+  }, 
+  {
+    "pk": 74, 
+    "model": "auth.user", 
+    "fields": {
+      "username": "test3", 
+      "first_name": "", 
+      "last_name": "", 
+      "is_active": true, 
+      "idxf_email_l_iexact": "test@test.pl", 
+      "idxf_username_l_iexact": "test3", 
+      "is_superuser": false, 
+      "is_staff": false, 
+      "last_login": "2013-07-26 07:27:55", 
+      "groups": [], 
+      "user_permissions": [], 
+      "password": "sha1$da927$3a3690dc2f2f2996163d22fc058817ba88d17290", 
+      "email": "test@test.pl", 
+      "date_joined": "2013-07-26 07:25:56"
+    }
+  }, 
+  {
+    "pk": "33dde5a219622a66a7f276e20d13946e", 
+    "model": "sessions.session", 
+    "fields": {
+      "expire_date": "2013-07-24 12:07:20", 
+      "session_data": "NzJlM2QzMzJkYzA2Y2M3M2NiM2VjZjY1M2I5ZDFlZTZiYjM1ZTAyMzqAAn1xAChVEl9hdXRoX3Vz\nZXJfYmFja2VuZHEBVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEC\nVQ1fYXV0aF91c2VyX2lkcQOKAQFVD19zZXNzaW9uX2V4cGlyeXEESwB1Lg==\n"
+    }
+  }, 
+  {
+    "pk": "6a018d19541a5982e7e26e41d75a554e", 
+    "model": "sessions.session", 
+    "fields": {
+      "expire_date": "2013-08-12 09:21:33", 
+      "session_data": "YTg4OGE1NTAwMWVmNGI4ZmIyYThhMmQyZTUzOGFlNWI4ZGEyYTM4MTqAAn1xAChVD19zZXNzaW9u\nX2V4cGlyeXEBSwBVDV9hdXRoX3VzZXJfaWRxAooBAVUSX2F1dGhfdXNlcl9iYWNrZW5kcQNVKWRq\nYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kcQRVDHRva2VuX2VkaXRvcnEF\nVQVMMTdkY3EGdS4=\n"
+    }
+  }, 
+  {
+    "pk": "aeac43b2ddec0eadf81e74b4838417c2", 
+    "model": "sessions.session", 
+    "fields": {
+      "expire_date": "2013-08-12 11:37:54", 
+      "session_data": "ZTdlY2YyZDhjMjJjZjZiOThiZmJlY2Y5OGM0OWY2YWU4OGQxZjI3ZTqAAn1xAChVEl9hdXRoX3Vz\nZXJfYmFja2VuZHEBVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEC\nVQ1fYXV0aF91c2VyX2lkcQNLAVUPX3Nlc3Npb25fZXhwaXJ5cQRLAHUu\n"
+    }
+  }, 
+  {
+    "pk": "e7c437a40be1db0b31abb9e735ac4e4f", 
+    "model": "sessions.session", 
+    "fields": {
+      "expire_date": "2013-08-09 15:30:14", 
+      "session_data": "NmFmYjhhZmExNjRiZjZjZGNlMmM4Mjk4ODVmMGI2NmU0MTAxODEyZDqAAn1xAChVEl9hdXRoX3Vz\nZXJfYmFja2VuZHEBVTpwZXJtaXNzaW9uX2JhY2tlbmRfbm9ucmVsLmJhY2tlbmRzLk5vbnJlbFBl\ncm1pc3Npb25CYWNrZW5kcQJVDV9hdXRoX3VzZXJfaWRxA0sBVQ9fc2Vzc2lvbl9leHBpcnlxBEsA\ndS4=\n"
+    }
+  }, 
+  {
+    "pk": 27, 
+    "model": "search.relationindex_mycontent_content_search_index", 
+    "fields": {
+      "is_featured": false, 
+      "idxf_spaces_path_l_contains": [
+        "3"
+      ], 
+      "spaces": [
+        "3"
+      ], 
+      "file": 26, 
+      "description": "", 
+      "modified_date": "2013-07-24 11:50:31", 
+      "title": "test", 
+      "tags": "", 
+      "public_version": null, 
+      "xliff_file": null, 
+      "version": 0, 
+      "short_description": "", 
+      "big_icon_href": null, 
+      "icon_href": null, 
+      "is_globally_public": false, 
+      "view_count": 0, 
+      "content_type": 1, 
+      "is_public": false, 
+      "associated_content": null, 
+      "is_deleted": false, 
+      "name": null, 
+      "search_index_search_list_field": [
+        "test"
+      ], 
+      "author": 1, 
+      "is_template": false, 
+      "passing_score": 0, 
+      "spaces_path": "3", 
+      "created_date": "2013-07-24 11:50:30", 
+      "original": null
+    }
+  }, 
+  {
+    "pk": 32, 
+    "model": "search.relationindex_mycontent_content_search_index", 
+    "fields": {
+      "is_featured": false, 
+      "idxf_spaces_path_l_contains": [
+        "3"
+      ], 
+      "spaces": [
+        "3"
+      ], 
+      "file": 31, 
+      "description": "", 
+      "modified_date": "2013-07-24 11:51:54", 
+      "title": "asd", 
+      "tags": "", 
+      "public_version": null, 
+      "xliff_file": null, 
+      "version": 0, 
+      "short_description": "", 
+      "big_icon_href": null, 
+      "icon_href": null, 
+      "is_globally_public": false, 
+      "view_count": 0, 
+      "content_type": 1, 
+      "is_public": false, 
+      "associated_content": null, 
+      "is_deleted": false, 
+      "name": null, 
+      "search_index_search_list_field": [
+        "asd"
+      ], 
+      "author": 1, 
+      "is_template": false, 
+      "passing_score": 0, 
+      "spaces_path": "3", 
+      "created_date": "2013-07-24 11:51:54", 
+      "original": null
+    }
+  }, 
+  {
+    "pk": 37, 
+    "model": "search.relationindex_mycontent_content_search_index", 
+    "fields": {
+      "is_featured": false, 
+      "idxf_spaces_path_l_contains": [
+        "3"
+      ], 
+      "spaces": [
+        "3"
+      ], 
+      "file": 36, 
+      "description": "", 
+      "modified_date": "2013-07-24 11:52:43", 
+      "title": "asd", 
+      "tags": "", 
+      "public_version": null, 
+      "xliff_file": null, 
+      "version": 0, 
+      "short_description": "", 
+      "big_icon_href": null, 
+      "icon_href": null, 
+      "is_globally_public": false, 
+      "view_count": 0, 
+      "content_type": 1, 
+      "is_public": false, 
+      "associated_content": null, 
+      "is_deleted": false, 
+      "name": null, 
+      "search_index_search_list_field": [
+        "asd"
+      ], 
+      "author": 1, 
+      "is_template": false, 
+      "passing_score": 0, 
+      "spaces_path": "3", 
+      "created_date": "2013-07-24 11:52:42", 
+      "original": null
+    }
+  }, 
+  {
+    "pk": 61, 
+    "model": "search.relationindex_mycontent_content_search_index", 
+    "fields": {
+      "is_featured": false, 
+      "idxf_spaces_path_l_contains": [
+        "3"
+      ], 
+      "spaces": [
+        "3"
+      ], 
+      "file": 60, 
+      "description": "", 
+      "modified_date": "2013-07-25 13:25:53", 
+      "title": "test", 
+      "tags": "", 
+      "public_version": null, 
+      "xliff_file": null, 
+      "version": 0, 
+      "short_description": "", 
+      "big_icon_href": null, 
+      "icon_href": null, 
+      "is_globally_public": false, 
+      "view_count": 0, 
+      "content_type": 3, 
+      "is_public": false, 
+      "associated_content": null, 
+      "is_deleted": false, 
+      "name": "test", 
+      "search_index_search_list_field": [
+        "test"
+      ], 
+      "author": 1, 
+      "is_template": false, 
+      "passing_score": 0, 
+      "spaces_path": "3", 
+      "created_date": "2013-07-25 13:25:53", 
+      "original": null
+    }
+  }, 
+  {
+    "pk": 64, 
+    "model": "search.relationindex_mycontent_content_search_index", 
+    "fields": {
+      "is_featured": false, 
+      "idxf_spaces_path_l_contains": [
+        "12,58,59", 
+        "2,58,59", 
+        ",58,59", 
+        "58,59", 
+        "8,59", 
+        ",59", 
+        "59", 
+        "9"
+      ], 
+      "spaces": [
+        "12", 
+        "58", 
+        "59"
+      ], 
+      "file": 63, 
+      "description": "", 
+      "modified_date": "2013-07-25 13:26:17", 
+      "title": "test2", 
+      "tags": "", 
+      "public_version": null, 
+      "xliff_file": null, 
+      "version": 0, 
+      "short_description": "", 
+      "big_icon_href": null, 
+      "icon_href": null, 
+      "is_globally_public": false, 
+      "view_count": 0, 
+      "content_type": 3, 
+      "is_public": false, 
+      "associated_content": null, 
+      "is_deleted": false, 
+      "name": "test2", 
+      "search_index_search_list_field": [
+        "test2"
+      ], 
+      "author": 1, 
+      "is_template": false, 
+      "passing_score": 0, 
+      "spaces_path": "12,58,59", 
+      "created_date": "2013-07-25 13:26:17", 
+      "original": null
+    }
+  }, 
+  {
+    "pk": 68, 
+    "model": "search.relationindex_mycontent_content_search_index", 
+    "fields": {
+      "is_featured": false, 
+      "idxf_spaces_path_l_contains": [
+        "12,58,59", 
+        "2,58,59", 
+        ",58,59", 
+        "58,59", 
+        "8,59", 
+        ",59", 
+        "59", 
+        "9"
+      ], 
+      "spaces": [
+        "12", 
+        "58", 
+        "59"
+      ], 
+      "file": 67, 
+      "description": "", 
+      "modified_date": "2013-07-25 13:27:12", 
+      "title": "test", 
+      "tags": "", 
+      "public_version": null, 
+      "xliff_file": null, 
+      "version": 0, 
+      "short_description": "", 
+      "big_icon_href": null, 
+      "icon_href": null, 
+      "is_globally_public": false, 
+      "view_count": 2, 
+      "content_type": 1, 
+      "is_public": false, 
+      "associated_content": null, 
+      "is_deleted": false, 
+      "name": null, 
+      "search_index_search_list_field": [
+        "test"
+      ], 
+      "author": 1, 
+      "is_template": false, 
+      "passing_score": 0, 
+      "spaces_path": "12,58,59", 
+      "created_date": "2013-07-25 13:27:11", 
+      "original": null
+    }
+  }, 
+  {
+    "pk": 9, 
+    "model": "registration.registrationprofile", 
+    "fields": {
+      "activation_key": "ALREADY_ACTIVATED", 
+      "user": 8
+    }
+  }, 
+  {
+    "pk": 19, 
+    "model": "registration.registrationprofile", 
+    "fields": {
+      "activation_key": "ALREADY_ACTIVATED", 
+      "user": 18
+    }
+  }, 
+  {
+    "pk": 75, 
+    "model": "registration.registrationprofile", 
+    "fields": {
+      "activation_key": "ALREADY_ACTIVATED", 
+      "user": 74
+    }
+  },
+  {
+    "pk": 27, 
+    "model": "mycontent.content", 
+    "fields": {
+      "is_featured": false, 
+      "idxf_spaces_path_l_contains": [
+        "3"
+      ], 
+      "spaces": [
+        "3"
+      ], 
+      "file": 26, 
+      "description": "", 
+      "modified_date": "2013-07-24 11:50:31", 
+      "title": "test", 
+      "tags": "", 
+      "public_version": null, 
+      "xliff_file": null, 
+      "version": 0, 
+      "short_description": "", 
+      "big_icon_href": null, 
+      "icon_href": null, 
+      "is_globally_public": false, 
+      "view_count": 0, 
+      "content_type": 1, 
+      "is_public": false, 
+      "associated_content": null, 
+      "is_deleted": false, 
+      "name": null, 
+      "author": 1, 
+      "is_template": false, 
+      "passing_score": 0, 
+      "spaces_path": "3", 
+      "created_date": "2013-07-24 11:50:30", 
+      "original": null
+    }
+  }, 
+  {
+    "pk": 32, 
+    "model": "mycontent.content", 
+    "fields": {
+      "is_featured": false, 
+      "idxf_spaces_path_l_contains": [
+        "3"
+      ], 
+      "spaces": [
+        "3"
+      ], 
+      "file": 31, 
+      "description": "", 
+      "modified_date": "2013-07-24 11:51:54", 
+      "title": "asd", 
+      "tags": "", 
+      "public_version": null, 
+      "xliff_file": null, 
+      "version": 0, 
+      "short_description": "", 
+      "big_icon_href": null, 
+      "icon_href": null, 
+      "is_globally_public": false, 
+      "view_count": 0, 
+      "content_type": 1, 
+      "is_public": false, 
+      "associated_content": null, 
+      "is_deleted": false, 
+      "name": null, 
+      "author": 1, 
+      "is_template": false, 
+      "passing_score": 0, 
+      "spaces_path": "3", 
+      "created_date": "2013-07-24 11:51:54", 
+      "original": null
+    }
+  }, 
+  {
+    "pk": 37, 
+    "model": "mycontent.content", 
+    "fields": {
+      "is_featured": false, 
+      "idxf_spaces_path_l_contains": [
+        "3"
+      ], 
+      "spaces": [
+        "3"
+      ], 
+      "file": 36, 
+      "description": "", 
+      "modified_date": "2013-07-24 11:52:43", 
+      "title": "asd", 
+      "tags": "", 
+      "public_version": null, 
+      "xliff_file": null, 
+      "version": 0, 
+      "short_description": "", 
+      "big_icon_href": null, 
+      "icon_href": null, 
+      "is_globally_public": false, 
+      "view_count": 0, 
+      "content_type": 1, 
+      "is_public": false, 
+      "associated_content": null, 
+      "is_deleted": false, 
+      "name": null, 
+      "author": 1, 
+      "is_template": false, 
+      "passing_score": 0, 
+      "spaces_path": "3", 
+      "created_date": "2013-07-24 11:52:42", 
+      "original": null
+    }
+  }, 
+  {
+    "pk": 61, 
+    "model": "mycontent.content", 
+    "fields": {
+      "is_featured": false, 
+      "idxf_spaces_path_l_contains": [
+        "3"
+      ], 
+      "spaces": [
+        "3"
+      ], 
+      "file": 60, 
+      "description": "", 
+      "modified_date": "2013-07-25 13:25:53", 
+      "title": "test", 
+      "tags": "", 
+      "public_version": null, 
+      "xliff_file": null, 
+      "version": 0, 
+      "short_description": "", 
+      "big_icon_href": null, 
+      "icon_href": null, 
+      "is_globally_public": false, 
+      "view_count": 0, 
+      "content_type": 3, 
+      "is_public": false, 
+      "associated_content": null, 
+      "is_deleted": false, 
+      "name": "test", 
+      "author": 1, 
+      "is_template": false, 
+      "passing_score": 0, 
+      "spaces_path": "3", 
+      "created_date": "2013-07-25 13:25:53", 
+      "original": null
+    }
+  }, 
+  {
+    "pk": 64, 
+    "model": "mycontent.content", 
+    "fields": {
+      "is_featured": false, 
+      "idxf_spaces_path_l_contains": [
+        "12,58,59", 
+        "2,58,59", 
+        ",58,59", 
+        "58,59", 
+        "8,59", 
+        ",59", 
+        "59", 
+        "9"
+      ], 
+      "spaces": [
+        "12", 
+        "58", 
+        "59"
+      ], 
+      "file": 63, 
+      "description": "", 
+      "modified_date": "2013-07-25 13:26:17", 
+      "title": "test2", 
+      "tags": "", 
+      "public_version": null, 
+      "xliff_file": null, 
+      "version": 0, 
+      "short_description": "", 
+      "big_icon_href": null, 
+      "icon_href": null, 
+      "is_globally_public": false, 
+      "view_count": 0, 
+      "content_type": 3, 
+      "is_public": false, 
+      "associated_content": null, 
+      "is_deleted": false, 
+      "name": "test2", 
+      "author": 1, 
+      "is_template": false, 
+      "passing_score": 0, 
+      "spaces_path": "12,58,59", 
+      "created_date": "2013-07-25 13:26:17", 
+      "original": null
+    }
+  }, 
+  {
+    "pk": 68, 
+    "model": "mycontent.content", 
+    "fields": {
+      "is_featured": false, 
+      "idxf_spaces_path_l_contains": [
+        "12,58,59", 
+        "2,58,59", 
+        ",58,59", 
+        "58,59", 
+        "8,59", 
+        ",59", 
+        "59", 
+        "9"
+      ], 
+      "spaces": [
+        "12", 
+        "58", 
+        "59"
+      ], 
+      "file": 67, 
+      "description": "", 
+      "modified_date": "2013-07-25 13:27:12", 
+      "title": "test", 
+      "tags": "", 
+      "public_version": null, 
+      "xliff_file": null, 
+      "version": 0, 
+      "short_description": "", 
+      "big_icon_href": null, 
+      "icon_href": null, 
+      "is_globally_public": false, 
+      "view_count": 2, 
+      "content_type": 1, 
+      "is_public": false, 
+      "associated_content": null, 
+      "is_deleted": false, 
+      "name": null, 
+      "author": 1, 
+      "is_template": false, 
+      "passing_score": 0, 
+      "spaces_path": "12,58,59", 
+      "created_date": "2013-07-25 13:27:11", 
+      "original": null
+    }
+  }, 
+  {
+    "pk": 28, 
+    "model": "mycontent.contentspace", 
+    "fields": {
+      "content": 27, 
+      "is_deleted": false, 
+      "space": 3
+    }
+  }, 
+  {
+    "pk": 33, 
+    "model": "mycontent.contentspace", 
+    "fields": {
+      "content": 32, 
+      "is_deleted": false, 
+      "space": 3
+    }
+  }, 
+  {
+    "pk": 38, 
+    "model": "mycontent.contentspace", 
+    "fields": {
+      "content": 37, 
+      "is_deleted": false, 
+      "space": 3
+    }
+  }, 
+  {
+    "pk": 62, 
+    "model": "mycontent.contentspace", 
+    "fields": {
+      "content": 61, 
+      "is_deleted": false, 
+      "space": 3
+    }
+  }, 
+  {
+    "pk": 65, 
+    "model": "mycontent.contentspace", 
+    "fields": {
+      "content": 64, 
+      "is_deleted": false, 
+      "space": 59
+    }
+  }, 
+  {
+    "pk": 69, 
+    "model": "mycontent.contentspace", 
+    "fields": {
+      "content": 68, 
+      "is_deleted": false, 
+      "space": 59
+    }
+  }, 
+  {
+    "pk": 3, 
+    "model": "spaces.space", 
+    "fields": {
+      "modified_date": "2013-07-25 13:25:53", 
+      "right": 0, 
+      "is_deleted": false, 
+      "parent": null, 
+      "title": "kgebert", 
+      "rank": 100, 
+      "top_level": 3, 
+      "include_contents_in_editor": false, 
+      "created_date": "2013-07-10 13:58:32", 
+      "contents_count": 4, 
+      "path": "[]", 
+      "space_type": 1, 
+      "left": 0
+    }
+  }, 
+  {
+    "pk": 10, 
+    "model": "spaces.space", 
+    "fields": {
+      "modified_date": "2013-07-10 12:02:30", 
+      "right": 0, 
+      "is_deleted": false, 
+      "parent": null, 
+      "title": "test", 
+      "rank": 100, 
+      "top_level": 10, 
+      "include_contents_in_editor": false, 
+      "created_date": "2013-07-10 12:02:30", 
+      "contents_count": 0, 
+      "path": [
+        null
+      ], 
+      "space_type": 1, 
+      "left": 0
+    }
+  }, 
+  {
+    "pk": 12, 
+    "model": "spaces.space", 
+    "fields": {
+      "modified_date": "2013-07-25 13:27:11", 
+      "right": 0, 
+      "is_deleted": false, 
+      "parent": null, 
+      "title": "Karol Corporation", 
+      "rank": 100, 
+      "top_level": 12, 
+      "include_contents_in_editor": false, 
+      "created_date": "2013-07-10 12:03:14", 
+      "contents_count": 2, 
+      "path": [
+        null
+      ], 
+      "space_type": 3, 
+      "left": 0
+    }
+  }, 
+  {
+    "pk": 13, 
+    "model": "spaces.space", 
+    "fields": {
+      "modified_date": "2013-07-10 12:03:14", 
+      "right": 0, 
+      "is_deleted": false, 
+      "parent": null, 
+      "title": "Karol Corporation Public", 
+      "rank": 100, 
+      "top_level": 13, 
+      "include_contents_in_editor": false, 
+      "created_date": "2013-07-10 12:03:14", 
+      "contents_count": 0, 
+      "path": [
+        null
+      ], 
+      "space_type": 2, 
+      "left": 0
+    }
+  }, 
+  {
+    "pk": 20, 
+    "model": "spaces.space", 
+    "fields": {
+      "modified_date": "2013-07-10 12:03:53", 
+      "right": 0, 
+      "is_deleted": false, 
+      "parent": null, 
+      "title": "test2", 
+      "rank": 100, 
+      "top_level": 20, 
+      "include_contents_in_editor": false, 
+      "created_date": "2013-07-10 12:03:53", 
+      "contents_count": 0, 
+      "path": [
+        null
+      ], 
+      "space_type": 1, 
+      "left": 0
+    }
+  }, 
+  {
+    "pk": 58, 
+    "model": "spaces.space", 
+    "fields": {
+      "modified_date": "2013-07-25 13:27:11", 
+      "right": 0, 
+      "is_deleted": false, 
+      "parent": 12, 
+      "title": "Project", 
+      "rank": 100, 
+      "top_level": 12, 
+      "include_contents_in_editor": false, 
+      "created_date": "2013-07-25 13:12:39", 
+      "contents_count": 2, 
+      "path": [
+        12, 
+        58
+      ], 
+      "space_type": 3, 
+      "left": 0
+    }
+  }, 
+  {
+    "pk": 59, 
+    "model": "spaces.space", 
+    "fields": {
+      "modified_date": "2013-07-25 13:27:11", 
+      "right": 0, 
+      "is_deleted": false, 
+      "parent": 58, 
+      "title": "Publication", 
+      "rank": 100, 
+      "top_level": 12, 
+      "include_contents_in_editor": false, 
+      "created_date": "2013-07-25 13:12:53", 
+      "contents_count": 2, 
+      "path": [
+        12, 
+        58, 
+        59
+      ], 
+      "space_type": 3, 
+      "left": 0
+    }
+  }, 
+  {
+    "pk": 76, 
+    "model": "spaces.space", 
+    "fields": {
+      "modified_date": "2013-07-26 07:25:57", 
+      "right": 0, 
+      "is_deleted": false, 
+      "parent": null, 
+      "title": "test3", 
+      "rank": 100, 
+      "top_level": 76, 
+      "include_contents_in_editor": false, 
+      "created_date": "2013-07-26 07:25:56", 
+      "contents_count": 0, 
+      "path": [
+        76
+      ], 
+      "space_type": 1, 
+      "left": 0
+    }
+  }, 
+  {
+    "pk": 6, 
+    "model": "spaces.spaceaccess", 
+    "fields": {
+      "modified_date": "2013-07-26 14:33:43", 
+      "is_deleted": false, 
+      "roles": [
+        112
+      ], 
+      "space": 3, 
+      "user": 1, 
+      "created_date": "2013-07-10 13:58:42", 
+      "access_right": 3
+    }
+  }, 
+  {
+    "pk": 11, 
+    "model": "spaces.spaceaccess", 
+    "fields": {
+      "modified_date": "2013-07-26 14:33:43", 
+      "is_deleted": false, 
+      "roles": [
+        112
+      ], 
+      "space": 10, 
+      "user": 8, 
+      "created_date": "2013-07-10 12:02:30", 
+      "access_right": 3
+    }
+  }, 
+  {
+    "pk": 14, 
+    "model": "spaces.spaceaccess", 
+    "fields": {
+      "modified_date": "2013-07-26 14:33:43", 
+      "is_deleted": false, 
+      "roles": [
+        113
+      ], 
+      "space": 12, 
+      "user": 1, 
+      "created_date": "2013-07-10 12:03:14", 
+      "access_right": 3
+    }
+  }, 
+  {
+    "pk": 17, 
+    "model": "spaces.spaceaccess", 
+    "fields": {
+      "modified_date": "2013-07-26 14:33:44", 
+      "is_deleted": false, 
+      "roles": [
+        114
+      ], 
+      "space": 12, 
+      "user": 8, 
+      "created_date": "2013-07-10 12:03:28", 
+      "access_right": 1
+    }
+  }, 
+  {
+    "pk": 21, 
+    "model": "spaces.spaceaccess", 
+    "fields": {
+      "modified_date": "2013-07-26 14:33:44", 
+      "is_deleted": false, 
+      "roles": [
+        112
+      ], 
+      "space": 20, 
+      "user": 18, 
+      "created_date": "2013-07-10 12:03:53", 
+      "access_right": 3
+    }
+  }, 
+  {
+    "pk": 77, 
+    "model": "spaces.spaceaccess", 
+    "fields": {
+      "modified_date": "2013-07-26 14:33:44", 
+      "is_deleted": false, 
+      "roles": [
+        112
+      ], 
+      "space": 76, 
+      "user": 74, 
+      "created_date": "2013-07-26 07:25:57", 
+      "access_right": 3
+    }
+  }, 
+  {
+    "pk": 78, 
+    "model": "spaces.spaceaccess", 
+    "fields": {
+      "modified_date": "2013-07-26 14:33:45", 
+      "is_deleted": false, 
+      "roles": [
+        115
+      ], 
+      "space": 58, 
+      "user": 18, 
+      "created_date": "2013-07-26 07:29:42", 
+      "access_right": 2
+    }
+  }, 
+  {
+    "pk": 79, 
+    "model": "spaces.spaceaccess", 
+    "fields": {
+      "modified_date": "2013-07-26 14:33:45", 
+      "is_deleted": false, 
+      "roles": [
+        113
+      ], 
+      "space": 59, 
+      "user": 74, 
+      "created_date": "2013-07-26 07:30:27", 
+      "access_right": 3
+    }
+  }, 
+  {
+    "pk": 25, 
+    "model": "filestorage.filestorage", 
+    "fields": {
+      "modified_date": "2013-07-24 11:50:29", 
+      "history_for": null, 
+      "version": null, 
+      "content_type": "text/xml", 
+      "created_date": "2013-07-24 11:50:29", 
+      "owner": 1, 
+      "contents": "<?xml version='1.0' encoding='UTF-8' ?> \n\n<page>\n\t<modules>\n\t\n\t\t<textModule id=\"Title\" left=\"5\" top=\"3\" width=\"90\" height=\"7\" style=\"\">\n\t\t\t<text>&lt;div style=&quot;text-align: center;&quot;&gt;Title&lt;/div&gt;</text>\n\t\t</textModule>\t\n\t\t<buttonModule id=\"PrevPage\" left=\"0\" top=\"90\" width=\"10\" height=\"10\" style=\"\">\n\t\t\t<button type=\"prevPage\" text=\"\"/>\n\t\t</buttonModule>\n\t\t<buttonModule id=\"NextPage\" left=\"90\" top=\"90\" width=\"10\" height=\"10\" style=\"\">\n\t\t\t<button type=\"nextPage\" text=\"\"/>\n\t\t</buttonModule>\n\t</modules> \n</page>\n"
+    }
+  }, 
+  {
+    "pk": 26, 
+    "model": "filestorage.filestorage", 
+    "fields": {
+      "modified_date": "2013-07-24 11:50:29", 
+      "history_for": 27, 
+      "version": 1, 
+      "content_type": "text/xml", 
+      "created_date": "2013-07-24 11:50:29", 
+      "owner": 1, 
+      "contents": "<?xml version=\"1.0\" encoding=\"utf-8\"?><interactiveContent name=\"test\">\n\n\t<style href=\"/media/content/styles/default/content.css\"/>\n\n\t<pages>\n\t\t\n\t\t<page href=\"25\" name=\"Page 1\"/>\n\t\t\n\t\t\n\t</pages>\n</interactiveContent>"
+    }
+  }, 
+  {
+    "pk": 30, 
+    "model": "filestorage.filestorage", 
+    "fields": {
+      "modified_date": "2013-07-24 11:51:54", 
+      "history_for": null, 
+      "version": null, 
+      "content_type": "text/xml", 
+      "created_date": "2013-07-24 11:51:54", 
+      "owner": 1, 
+      "contents": "<?xml version='1.0' encoding='UTF-8' ?> \n\n<page>\n\t<modules>\n\t\n\t\t<textModule id=\"Title\" left=\"5\" top=\"3\" width=\"90\" height=\"7\" style=\"\">\n\t\t\t<text>&lt;div style=&quot;text-align: center;&quot;&gt;Title&lt;/div&gt;</text>\n\t\t</textModule>\t\n\t\t<buttonModule id=\"PrevPage\" left=\"0\" top=\"90\" width=\"10\" height=\"10\" style=\"\">\n\t\t\t<button type=\"prevPage\" text=\"\"/>\n\t\t</buttonModule>\n\t\t<buttonModule id=\"NextPage\" left=\"90\" top=\"90\" width=\"10\" height=\"10\" style=\"\">\n\t\t\t<button type=\"nextPage\" text=\"\"/>\n\t\t</buttonModule>\n\t</modules> \n</page>\n"
+    }
+  }, 
+  {
+    "pk": 31, 
+    "model": "filestorage.filestorage", 
+    "fields": {
+      "modified_date": "2013-07-24 11:51:54", 
+      "history_for": 32, 
+      "version": 1, 
+      "content_type": "text/xml", 
+      "created_date": "2013-07-24 11:51:54", 
+      "owner": 1, 
+      "contents": "<?xml version=\"1.0\" encoding=\"utf-8\"?><interactiveContent name=\"asd\">\n\n\t<style href=\"/media/content/styles/default/content.css\"/>\n\n\t<pages>\n\t\t\n\t\t<page href=\"30\" name=\"Page 1\"/>\n\t\t\n\t\t\n\t</pages>\n</interactiveContent>"
+    }
+  }, 
+  {
+    "pk": 35, 
+    "model": "filestorage.filestorage", 
+    "fields": {
+      "modified_date": "2013-07-24 11:52:42", 
+      "history_for": null, 
+      "version": null, 
+      "content_type": "text/xml", 
+      "created_date": "2013-07-24 11:52:42", 
+      "owner": 1, 
+      "contents": "<?xml version='1.0' encoding='UTF-8' ?> \n\n<page>\n\t<modules>\n\t\n\t\t<textModule id=\"Title\" left=\"5\" top=\"3\" width=\"90\" height=\"7\" style=\"\">\n\t\t\t<text>&lt;div style=&quot;text-align: center;&quot;&gt;Title&lt;/div&gt;</text>\n\t\t</textModule>\t\n\t\t<buttonModule id=\"PrevPage\" left=\"0\" top=\"90\" width=\"10\" height=\"10\" style=\"\">\n\t\t\t<button type=\"prevPage\" text=\"\"/>\n\t\t</buttonModule>\n\t\t<buttonModule id=\"NextPage\" left=\"90\" top=\"90\" width=\"10\" height=\"10\" style=\"\">\n\t\t\t<button type=\"nextPage\" text=\"\"/>\n\t\t</buttonModule>\n\t</modules> \n</page>\n"
+    }
+  }, 
+  {
+    "pk": 36, 
+    "model": "filestorage.filestorage", 
+    "fields": {
+      "modified_date": "2013-07-24 11:52:42", 
+      "history_for": 37, 
+      "version": 1, 
+      "content_type": "text/xml", 
+      "created_date": "2013-07-24 11:52:42", 
+      "owner": 1, 
+      "contents": "<?xml version=\"1.0\" encoding=\"utf-8\"?><interactiveContent name=\"asd\">\n\n\t<style href=\"/media/content/styles/default/content.css\"/>\n\n\t<pages>\n\t\t\n\t\t<page href=\"35\" name=\"Page 1\"/>\n\t\t\n\t\t\n\t</pages>\n</interactiveContent>"
+    }
+  }, 
+  {
+    "pk": 60, 
+    "model": "filestorage.filestorage", 
+    "fields": {
+      "modified_date": "2013-07-25 13:25:53", 
+      "history_for": 61, 
+      "version": 1, 
+      "content_type": "text/xml", 
+      "created_date": "2013-07-25 13:25:53", 
+      "owner": 1, 
+      "contents": "<?xml version=\"1.0\" encoding=\"UTF-8\" ?> \n<addon id=\"test\">\n\n\t<metadata>\n\t\t<title>Hello world Addon</title>\n\t\t<description>\n\t\t\tEnter addon description here\n\t\t</description>\n\t</metadata>\n\t\n\t<model>\n\t\t<property name=\"Text\" type=\"string\"/>\n\t</model>\n\t\n\t<view>\n\t\t&lt;p&gt;test&lt;/p&gt;\n\t</view>\n\t\n\t<preview>\n\t\t&lt;p&gt;Addon test&lt;/p&gt;\n\t</preview>\n\t\n\t<presenter>\n\t\tfunction Addontest_create(){\n\t\t\t\n\t\t\tvar presenter = function(){}\n\n\t\t\tvar element;\n\t\t\t\n\t\t\tpresenter.run = function(view, model){\n\t\t\t\t\n\t\t\t\telement = view.getElementsByTagName('p')[0];\n\t\t\t\telement.innerHTML = model['Text'];\n\t\t\t}\n\n\t\t\tpresenter.setShowErrorsMode = function(){\n\t\t\t\telement.innerHTML = 'setShowErrorsMode';\n\t\t\t}\n\t\t\t\n\t\t\tpresenter.setWorkMode = function(){\n\t\t\t\telement.innerHTML = 'setWorkMode';\n\t\t\t}\n\t\t\t\n\t\t\tpresenter.reset = function(){\n\t\t\t\telement.innerHTML = 'Reset';\n\t\t\t}\n\t\t\t\n\t\t\tpresenter.getErrorCount = function(){\n\t\t\t\treturn 7;\n\t\t\t}\n\t\t\t\n\t\t\tpresenter.getMaxScore = function(){\n\t\t\t\treturn 3;\n\t\t\t}\n\t\t\t\n\t\t\tpresenter.getScore = function(){\n\t\t\t\treturn 1;\n\t\t\t}\n\t\t\t\n\t\t\tpresenter.getState = function(){\n\t\t\t\telement.innerHTML = 'Get state';\n\t\t\t\treturn \"State saved\";\n\t\t\t}\n\n\t\t\tpresenter.setState = function(state){\n\t\t\t\telement.innerHTML = 'Set state';\n\t\t\t}\n\n\t\t\treturn presenter;\n\t\t}\n\t\t\n\t</presenter>\n\t\n</addon>\n"
+    }
+  }, 
+  {
+    "pk": 63, 
+    "model": "filestorage.filestorage", 
+    "fields": {
+      "modified_date": "2013-07-25 13:26:17", 
+      "history_for": 64, 
+      "version": 1, 
+      "content_type": "text/xml", 
+      "created_date": "2013-07-25 13:26:17", 
+      "owner": 1, 
+      "contents": "<?xml version=\"1.0\" encoding=\"UTF-8\" ?> \n<addon id=\"test2\">\n\n\t<metadata>\n\t\t<title>Hello world Addon</title>\n\t\t<description>\n\t\t\tEnter addon description here\n\t\t</description>\n\t</metadata>\n\t\n\t<model>\n\t\t<property name=\"Text\" type=\"string\"/>\n\t</model>\n\t\n\t<view>\n\t\t&lt;p&gt;test&lt;/p&gt;\n\t</view>\n\t\n\t<preview>\n\t\t&lt;p&gt;Addon test2&lt;/p&gt;\n\t</preview>\n\t\n\t<presenter>\n\t\tfunction Addontest2_create(){\n\t\t\t\n\t\t\tvar presenter = function(){}\n\n\t\t\tvar element;\n\t\t\t\n\t\t\tpresenter.run = function(view, model){\n\t\t\t\t\n\t\t\t\telement = view.getElementsByTagName('p')[0];\n\t\t\t\telement.innerHTML = model['Text'];\n\t\t\t}\n\n\t\t\tpresenter.setShowErrorsMode = function(){\n\t\t\t\telement.innerHTML = 'setShowErrorsMode';\n\t\t\t}\n\t\t\t\n\t\t\tpresenter.setWorkMode = function(){\n\t\t\t\telement.innerHTML = 'setWorkMode';\n\t\t\t}\n\t\t\t\n\t\t\tpresenter.reset = function(){\n\t\t\t\telement.innerHTML = 'Reset';\n\t\t\t}\n\t\t\t\n\t\t\tpresenter.getErrorCount = function(){\n\t\t\t\treturn 7;\n\t\t\t}\n\t\t\t\n\t\t\tpresenter.getMaxScore = function(){\n\t\t\t\treturn 3;\n\t\t\t}\n\t\t\t\n\t\t\tpresenter.getScore = function(){\n\t\t\t\treturn 1;\n\t\t\t}\n\t\t\t\n\t\t\tpresenter.getState = function(){\n\t\t\t\telement.innerHTML = 'Get state';\n\t\t\t\treturn \"State saved\";\n\t\t\t}\n\n\t\t\tpresenter.setState = function(state){\n\t\t\t\telement.innerHTML = 'Set state';\n\t\t\t}\n\n\t\t\treturn presenter;\n\t\t}\n\t\t\n\t</presenter>\n\t\n</addon>\n"
+    }
+  }, 
+  {
+    "pk": 66, 
+    "model": "filestorage.filestorage", 
+    "fields": {
+      "modified_date": "2013-07-25 13:27:56", 
+      "history_for": null, 
+      "version": null, 
+      "content_type": "text/xml", 
+      "created_date": "2013-07-25 13:27:10", 
+      "owner": 1, 
+      "contents": "<?xml version='1.0' encoding='UTF-8' ?><page layout='pixels' width='0' height='0'><modules><textModule id='Title' left='28' top='11' width='520' height='27' isVisible='true'><text draggable='false' gapWidth='0' isActivity='true' isIgnorePunctuation='false' isDisabled='false' isCaseSensitive='false'><![CDATA[<div style=\"text-align: center;\">Title</div>]]></text></textModule><buttonModule id='PrevPage' left='0' top='358' width='57' height='39' isVisible='true'><button type='prevPage' text='' onclick=''/></buttonModule><buttonModule id='NextPage' left='520' top='358' width='57' height='39' isVisible='true'><button type='nextPage' text='' onclick=''/></buttonModule><addonModule addonId='test2' id='test21' left='215' top='112' width='100' height='100' isVisible='true'><properties><property name='Text' type='string' value=''/></properties></addonModule></modules></page>"
+    }
+  }, 
+  {
+    "pk": 67, 
+    "model": "filestorage.filestorage", 
+    "fields": {
+      "modified_date": "2013-07-25 13:27:54", 
+      "history_for": 68, 
+      "version": 1, 
+      "content_type": "text/xml", 
+      "created_date": "2013-07-25 13:27:10", 
+      "owner": 1, 
+      "contents": "<?xml version='1.0' encoding='UTF-8' ?><interactiveContent name='test'><metadata></metadata><addons><addon-descriptor addonId='test2' href='/proxy/get?url=http://localhost:8000/mycontent/test2/getaddon'/></addons><pages><page id='t5Jy93' name='Page 1' href='66' preview='' reportable='true'/><header ref='commons/header'/><footer ref='commons/footer'/></pages><assets></assets></interactiveContent>"
+    }
+  }, 
+  {
+    "pk": 15, 
+    "model": "corporate.corporatepublicspace", 
+    "fields": {
+      "public_category": 13, 
+      "company": 12
+    }
+  }, 
+  {
+    "pk": 16, 
+    "model": "corporate.companyproperties", 
+    "fields": {
+      "valid_until": null, 
+      "modified_date": "2013-07-10 12:03:14", 
+      "company": 12, 
+      "max_accounts": null, 
+      "created_date": "2013-07-10 12:03:14"
+    }
+  }, 
+  {
+    "pk": 112, 
+    "model": "permission.role", 
+    "fields": {
+      "modified_date": "2013-07-26 14:33:44", 
+      "company": null, 
+      "permissions": [
+        1, 
+        2, 
+        3, 
+        18, 
+        23, 
+        8, 
+        9, 
+        12, 
+        6, 
+        10, 
+        7, 
+        5, 
+        11, 
+        4, 
+        21, 
+        19, 
+        20, 
+        22, 
+        13, 
+        14, 
+        25, 
+        28, 
+        29, 
+        26, 
+        27, 
+        24, 
+        15, 
+        16, 
+        17, 
+        30, 
+        31
+      ], 
+      "name": "owner", 
+      "created_date": "2013-07-26 14:33:42"
+    }
+  }, 
+  {
+    "pk": 113, 
+    "model": "permission.role", 
+    "fields": {
+      "modified_date": "2013-07-26 14:33:45", 
+      "company": 12, 
+      "permissions": [
+        1, 
+        2, 
+        3, 
+        18, 
+        23, 
+        8, 
+        9, 
+        12, 
+        6, 
+        10, 
+        7, 
+        5, 
+        11, 
+        4, 
+        21, 
+        19, 
+        20, 
+        22, 
+        13, 
+        14, 
+        25, 
+        28, 
+        29, 
+        26, 
+        27, 
+        24, 
+        15, 
+        16, 
+        17, 
+        30, 
+        31
+      ], 
+      "name": "owner", 
+      "created_date": "2013-07-26 14:33:43"
+    }
+  }, 
+  {
+    "pk": 114, 
+    "model": "permission.role", 
+    "fields": {
+      "modified_date": "2013-07-26 14:33:44", 
+      "company": 12, 
+      "permissions": [
+        4, 
+        23
+      ], 
+      "name": "read", 
+      "created_date": "2013-07-26 14:33:43"
+    }
+  }, 
+  {
+    "pk": 115, 
+    "model": "permission.role", 
+    "fields": {
+      "modified_date": "2013-07-26 14:33:45", 
+      "company": 12, 
+      "permissions": [
+        1, 
+        2, 
+        3, 
+        23, 
+        11, 
+        18, 
+        4, 
+        8, 
+        9, 
+        12, 
+        6, 
+        10, 
+        7, 
+        5, 
+        11, 
+        13, 
+        14, 
+        25, 
+        28, 
+        29, 
+        26, 
+        27, 
+        24, 
+        16, 
+        17, 
+        31
+      ], 
+      "name": "write", 
+      "created_date": "2013-07-26 14:33:44"
+    }
+  }, 
+  {
+    "pk": 72, 
+    "model": "states.state", 
+    "fields": {
+      "modified_date": "2013-07-25 13:58:32", 
+      "percentage": 20, 
+      "name": "LALAL", 
+      "rank": 0, 
+      "created_date": "2013-07-25 13:58:32"
+    }
+  }, 
+  {
+    "pk": 71, 
+    "model": "states.statesset", 
+    "fields": {
+      "modified_date": "2013-07-25 13:58:13", 
+      "company": 12, 
+      "name": "ASD", 
+      "created_date": "2013-07-25 13:58:13"
+    }
+  }, 
+  {
+    "pk": 73, 
+    "model": "states.statetoset", 
+    "fields": {
+      "state": 72, 
+      "states_set": 71
+    }
+  }, 
+  {
+    "pk": 57, 
+    "model": "admin.logentry", 
+    "fields": {
+      "action_flag": 2, 
+      "action_time": "2013-07-24 13:13:07", 
+      "object_repr": "mycontent | content | Create Content", 
+      "object_id": "44", 
+      "change_message": "Changed name and codename.", 
+      "user": 1, 
+      "content_type": 41
+    }
+  }, 
+  {
+    "pk": 56, 
+    "model": "admin.logentry", 
+    "fields": {
+      "action_flag": 2, 
+      "action_time": "2013-07-24 13:09:54", 
+      "object_repr": "test", 
+      "object_id": "8", 
+      "change_message": "Changed groups.", 
+      "user": 1, 
+      "content_type": 52
+    }
+  }, 
+  {
+    "pk": 54, 
+    "model": "admin.logentry", 
+    "fields": {
+      "action_flag": 2, 
+      "action_time": "2013-07-24 13:09:30", 
+      "object_repr": "kgebert", 
+      "object_id": "1", 
+      "change_message": "Changed groups.", 
+      "user": 1, 
+      "content_type": 52
+    }
+  }, 
+  {
+    "pk": 51, 
+    "model": "admin.logentry", 
+    "fields": {
+      "action_flag": 1, 
+      "action_time": "2013-07-24 13:09:15", 
+      "object_repr": "Test", 
+      "object_id": "49", 
+      "change_message": "", 
+      "user": 1, 
+      "content_type": 42
+    }
+  }, 
+  {
+    "pk": 48, 
+    "model": "admin.logentry", 
+    "fields": {
+      "action_flag": 2, 
+      "action_time": "2013-07-24 13:08:08", 
+      "object_repr": "mycontent | content | create_content", 
+      "object_id": "44", 
+      "change_message": "Changed codename.", 
+      "user": 1, 
+      "content_type": 41
+    }
+  }, 
+  {
+    "pk": 46, 
+    "model": "admin.logentry", 
+    "fields": {
+      "action_flag": 2, 
+      "action_time": "2013-07-24 13:03:04", 
+      "object_repr": "mycontent | content | create_content", 
+      "object_id": "44", 
+      "change_message": "Changed name.", 
+      "user": 1, 
+      "content_type": 41
+    }
+  }, 
+  {
+    "pk": 45, 
+    "model": "admin.logentry", 
+    "fields": {
+      "action_flag": 1, 
+      "action_time": "2013-07-24 12:57:55", 
+      "object_repr": "mycontent | content | Create content", 
+      "object_id": "44", 
+      "change_message": "", 
+      "user": 1, 
+      "content_type": 41
+    }
+  }, 
+  {
+    "pk": 7, 
+    "model": "admin.logentry", 
+    "fields": {
+      "action_flag": 1, 
+      "action_time": "2013-07-10 13:58:42", 
+      "object_repr": "kgebert:kgebert <owner>", 
+      "object_id": "6", 
+      "change_message": "", 
+      "user": 1, 
+      "content_type": 5
+    }
+  }, 
+  {
+    "pk": 4, 
+    "model": "admin.logentry", 
+    "fields": {
+      "action_flag": 1, 
+      "action_time": "2013-07-10 13:58:32", 
+      "object_repr": "kgebert", 
+      "object_id": "3", 
+      "change_message": "", 
+      "user": 1, 
+      "content_type": 2
+    }
+  }
+]

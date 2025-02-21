@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<style>
+table.fixdb_table {
+	width: 100%;
+}
+table.fixdb_table td,
+table.fixdb_table th {
+	padding: 3px;
+}
+
+table.fixdb_table th {
+	text-align: center;
+}
+
+</style>
+
+{% endblock %}
+
+{% block content %}
+<table class="fixdb_table">
+<tr>
+	<th>#</th>
+	<th>Start</th>
+	<th>End</th>
+	<th>Info</th>
+</tr>
+
+{% for log in logs %}
+	<tr>
+	<td style="color: {{ log.color }}; background-color: {{ log.bg_color }}">{{ forloop.revcounter }}</td>
+	<td>{{ log.created_date|date:"Y-m-d H:i:s" }}</td>
+	<td>{% if log.created_date|date:"Y-m-d H:i:s" != log.modified_date|date:"Y-m-d H:i:s" %}
+		{{ log.modified_date|date:"Y-m-d H:i:s" }}
+	{% else %}
+		&nbsp;
+	{% endif %}</td>
+	<td>
+		{% with log.data as data %}
+			{% include data_template %}
+		{% endwith %}
+	</td>
+	</tr>
+{% endfor %}
+</table>
+{% endblock %}

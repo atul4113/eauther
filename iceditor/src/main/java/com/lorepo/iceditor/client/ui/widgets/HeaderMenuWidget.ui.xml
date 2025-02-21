@@ -1,0 +1,27 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+	
+	</ui:style>
+	<g:HTMLPanel>
+		<div id="headerMenu">
+			<div id="settingsBtn" class="headerButton">
+				<div id="setingsIcon"></div><a class="button" ui:field="settings"></a>
+			</div>
+			<div id="saveBtn" class="headerButton">
+				<a ui:field="save" class="button"></a>
+			</div>
+			<div id="previewBtn" class="headerButton">
+				<a class="button" ui:field="preview"></a>
+				<a class="dropDownArrow" ui:field="previewDropDownArrow"></a>
+				<a class="dropDownButton" ui:field="previewInNewTab"></a>
+			</div>
+			<div id="closeBtn" class="headerButton">
+				<a class="button" ui:field="close"></a>
+				<a class="dropDownArrow" ui:field="closeDropDownArrow"></a>
+				<a class="dropDownButton" ui:field="abandonAllChanges"></a>
+			</div>
+		</div>
+	</g:HTMLPanel>
+</ui:UiBinder> 

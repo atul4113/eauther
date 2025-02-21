@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+
+<addon id="test1">
+	
+	<resources>
+		<image src="/file/12"/>
+		<image src="/file/13"/>
+	</resources>
+	
+	<model>
+		<property name="Filename" type="file"/>
+		<property name="Title" type="string"/>
+		<property name="Options" type="list">
+			<property name="Name" type="string" value="This is name"/>
+			<property name="Icon" type="image" value="icon.jpg"/>
+		</property>
+	</model>
+	
+	<css>
+	 .myclass{background-color:red};
+	</css>
+	
+	<view>
+		&lt;div&gt;View&lt;/div&gt;
+	</view>
+	
+	<preview>
+		&lt;div&gt;Preview&lt;/div&gt;
+	</preview>
+	
+	<presenter>
+		function ic_test1_create(){
+			
+			var obj = function(){}
+
+			obj.run = function(view, model){
+			}
+
+			return obj;
+		}
+	</presenter>
+	
+</addon>

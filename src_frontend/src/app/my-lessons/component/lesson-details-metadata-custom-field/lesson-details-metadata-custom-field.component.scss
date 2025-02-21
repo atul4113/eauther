@@ -1,0 +1,14 @@
+app-lesson-details-metadata-custom-field {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    mat-form-field {
+        flex-grow: 1;
+    }
+
+    mat-slide-toggle {
+        flex-grow: 0;
+        margin-left: 16px;
+    }
+}

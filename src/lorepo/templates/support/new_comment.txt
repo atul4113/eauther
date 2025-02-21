@@ -1,0 +1,19 @@
+{% autoescape off %}
+Dear {{ user }},
+<p>
+New comment to "{{ticket.title}}" has been added. 
+</p>
+
+<p>
+"{{comment.text|urlize|linebreaks}}"
+</p>
+
+<p>
+You will be notified about further changes to ticket's status.
+</p>
+
+<p>
+--<br/>
+mAuthor support
+</p>
+{% endautoescape %}

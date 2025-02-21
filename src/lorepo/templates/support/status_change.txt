@@ -1,0 +1,13 @@
+{% load support %}
+
+{% autoescape off %}
+Dear {{ user }},
+<p>
+Status of your ticket "{{ticket.title}}" has been changed from "{{old_status|print_status}}" to "{{status|print_status}}".
+</p>
+
+<p>
+--<br/>
+mAuthor support
+</p>
+{% endautoescape %}

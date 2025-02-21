@@ -1,0 +1,35 @@
+<div class="labelBox">
+    <div class="listTitle"><strong>Categories:</strong></div>
+    <div class="edit">
+    	{% if not space_id or space_id|is_space_owner_tag:user %}
+   			<a href="/spaces/{{space_request.top_level.id}}" style="font-size:x-small;">Edit</a>
+   		{% else %}
+   			&nbsp;
+   		{% endif %}
+    </div>
+	<table class="list all" style="border-spacing: 0; border-collapse: separate">
+    	{% if space_request.parent or is_trash %}
+    		<tr><td class="leftColumn"><a href="/mycontent/{{space_request.top_level.id}}">All</a></td></tr>
+    	{% else %}
+  			<tr><td class="leftColumn"><b>All</b></td></tr>
+    	{% endif %}
+    </table>
+    <table class="list" style="border-spacing: 0; border-collapse: separate">
+    	{% for space in spaces %} 
+    		{% if space.parent != None %}
+	    		{% if space.id == space_id %}
+	    			<tr><td class="leftColumn"><b>{{space.title}}</b></td></tr>
+	    		{% else %}
+	    			<tr><td class="leftColumn"><a href="/mycontent/{{space.id}}">{{space.title}}</a></td></tr>
+	    		{% endif %}
+	    	{% endif %}
+		{% endfor %}
+    </table>
+    <table class="list trash"  style="border-spacing: 0; border-collapse: separate">
+    	{% if is_trash %}
+    		<tr><td class="leftColumn"><b>Trash</b></td></tr>
+    	{% else %}
+    		<tr><td class="leftColumn"><a href="/mycontent/{{space_request.top_level.id}}/trash">Trash</a></td></tr>
+    	{% endif %}
+    </table>
+</div>

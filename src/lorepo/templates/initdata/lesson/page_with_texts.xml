@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+
+<page layout="pixels">
+	<modules>
+		{% for text in texts %}
+            <textModule id="{{ text.id }}" left="10" top="10" width="80" height="100" style="">
+            {% autoescape off %}
+                <text>{{ text.text }}</text>
+            {% endautoescape %}
+            </textModule>
+		{% endfor %}
+	</modules>
+</page>

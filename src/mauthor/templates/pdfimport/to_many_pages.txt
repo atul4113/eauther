@@ -1,0 +1,10 @@
+{% autoescape off %}
+Dear {{ user }},
+<p>
+PDF {{ content }} have more than 100 pages and has NOT been imported at {{ app_name }}.
+</p>
+
+<p>
+Please try again or contact administrators.
+</p>
+{% endautoescape %}

@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% load apptags %}
+{% load spaces %}
+
+{% block content %}
+
+<h1 class="page_header">Company details</h1>
+<div class="main clear" style="padding-top: 0"></div>
+
+{% include "common/messages/display_messages.html" %}
+
+<div class="company_details">
+	<dl class="dl-horizontal">
+		<dt>Name</dt>
+		<dd>{{company.title}}</dd>
+		
+		<dt>Valid until</dt>
+		<dd>{{properties.valid_until|default:"unlimited"}}</dd>
+		
+		<dt>Max accounts</dt>
+		<dd>{{properties.max_accounts|default:"unlimited"}}</dd>
+		
+		<dt>Contents</dt>
+		<dd>{{contents}}</dd>
+		
+		<dt>Users</dt>
+		<dd>
+			{{users|length}}
+			<ul>
+			{% for user in users %}
+				<li>{{user.username}}, last login: {{user.last_login}}, email: {{ user.email }} ( {% for role in user.roles %} {{ role }} {% endfor %})</li>
+			{% endfor %}
+			</ul>
+		</dd>
+        <dt>Locale</dt>
+		<dd>{{properties.language_code}}</dd>
+	</dl>
+
+	{% if company_id|is_space_owner_tag:user or user.is_superuser %}
+		<a role="button" class="btn btn-primary btn-sm" href="/company/edit/{{company.id}}">Edit details</a>
+        {% if user.is_superuser %}
+            <a role="button" class="btn btn-warning btn-sm" href="/spaces/make_company_user_space_permissions/{{company.id}}">Recalculate Access Rights</a>
+        {% endif %}
+	{% endif %}
+</div>
+{% endblock %}

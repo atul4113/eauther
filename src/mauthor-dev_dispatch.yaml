@@ -1,0 +1,4 @@
+application: mauthor-dev
+dispatch:
+  - url: "dev.mauthor.com/*"
+    module: newinterfaceservice

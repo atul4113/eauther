@@ -1,0 +1,40 @@
+<ng-container *ngIf="userPermissions && userPermissions.contentShowLessonsHistory">
+    <mat-card *ngFor="let version of versions | paginate: paginatedHistory:historyPageSize" class="history-card">
+        <div class="content-wrapper">
+            <mat-card-title>
+                {{ translations | getLabel: "plain.my_lessons.panel.lesson_details.version" }} {{ version.version }}
+                <span *ngIf="lesson.fileId === version.id" class="current-info">
+               {{ translations | getLabel: "plain.my_lessons.panel.lesson_details.current" }}
+            </span>
+            </mat-card-title>
+            <mat-card-content>
+                <div>
+                    {{ translations | getLabel: "plain.my_lessons.panel.lesson_details.modified2" }} {{
+                    version.modifiedDate | amDateFormat: 'YYYY-MM-DD HH:mm' }} UTC
+                </div>
+                <div>
+                    {{ translations | getLabel: "plain.my_lessons.panel.lesson_details.by" }} {{ version.owner }}
+                </div>
+                <mat-card-actions>
+                    <a mat-button color="accent" [href]="'/embed/' + lesson.id + '/' + version.id"
+                       target="_blank">
+                        {{ translations | getLabel: "plain.my_lessons.panel.lesson_details.preview" }}
+                    </a>
+                    <a class="set-as-current-button" mat-button color="primary"
+                       *ngIf="lesson.fileId !== version.id && (userPermissions && userPermissions.contentSetLessonsCurrentVersion)"
+                       (click)="setCurrentVersion(lesson.id, version.id)">
+                        {{ translations | getLabel: "plain.my_lessons.panel.lesson_details.set_a_current" }}
+                    </a>
+                </mat-card-actions>
+            </mat-card-content>
+        </div>
+    </mat-card>
+
+
+    <paginator *ngIf="versions.length > 0"
+               [list]="versions"
+               [buttonsCount]="5"
+               [pageSize]="historyPageSize"
+               (pageChange)="paginatedHistory = $event">
+    </paginator>
+</ng-container>

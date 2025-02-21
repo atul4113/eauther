@@ -1,0 +1,598 @@
+[
+  {
+    "pk": 22, 
+    "model": "contenttypes.contenttype", 
+    "fields": {
+      "model": "space", 
+      "name": "space", 
+      "app_label": "spaces"
+    }
+  }, 
+  {
+    "pk": 25, 
+    "model": "contenttypes.contenttype", 
+    "fields": {
+      "model": "spaceaccess", 
+      "name": "space access", 
+      "app_label": "spaces"
+    }
+  }, 
+  {
+    "pk": 21, 
+    "model": "auth.user", 
+    "fields": {
+      "username": "kgebert", 
+      "first_name": "", 
+      "last_name": "", 
+      "is_active": true, 
+      "idxf_email_l_iexact": "karol.gebert@solwit.pl", 
+      "idxf_username_l_iexact": "kgebert", 
+      "is_superuser": true, 
+      "is_staff": true, 
+      "last_login": "2012-10-31 11:23:39", 
+      "groups": [], 
+      "user_permissions": [], 
+      "password": "sha1$16b61$ffcb11b6d5fea00148732015a4c7291469c71fd8", 
+      "email": "karol.gebert@solwit.pl", 
+      "date_joined": "2012-10-31 11:23:20"
+    }
+  }, 
+  {
+    "pk": "86f8dd1bf8210d0f6805ea8110e0e10b", 
+    "model": "sessions.session", 
+    "fields": {
+      "expire_date": "2012-11-14 11:38:17", 
+      "session_data": "NGE2ODZiOTVhODJlY2Y2N2IyZGI3MzAzM2YxODZhZmYwNDU5OTk3NzqAAn1xAChVD19zZXNzaW9u\nX2V4cGlyeXEBSwBVBXRva2VucQJVBTU4aGFMcQNVDV9hdXRoX3VzZXJfaWRxBIoBFVUSX2F1dGhf\ndXNlcl9iYWNrZW5kcQVVKWRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5k\ncQZ1Lg==\n"
+    }
+  }, 
+  {
+    "pk": 30, 
+    "model": "search.relationindex_mycontent_content_search_index", 
+    "fields": {
+      "modified_date": "2012-10-31 12:28:55", 
+      "is_featured": false, 
+      "big_icon_href": null, 
+      "is_deleted": false, 
+      "file": 57, 
+      "title": "test 1", 
+      "author": 21, 
+      "public_version": null, 
+      "view_count": 0, 
+      "name": null, 
+      "search_index_search_list_field": [
+        "test", 
+        "1"
+      ], 
+      "is_template": false, 
+      "is_globally_public": false, 
+      "content_type": 1, 
+      "created_date": "2012-10-31 11:24:19", 
+      "short_description": "", 
+      "is_public": false, 
+      "icon_href": null, 
+      "associated_content": null, 
+      "tags": "", 
+      "description": ""
+    }
+  }, 
+  {
+    "pk": 34, 
+    "model": "search.relationindex_mycontent_content_search_index", 
+    "fields": {
+      "modified_date": "2012-10-31 12:22:09", 
+      "is_featured": false, 
+      "big_icon_href": null, 
+      "is_deleted": false, 
+      "file": 37, 
+      "title": "Connection", 
+      "author": 21, 
+      "public_version": null, 
+      "view_count": 0, 
+      "name": "Connection", 
+      "search_index_search_list_field": [
+        "connect"
+      ], 
+      "is_template": false, 
+      "is_globally_public": false, 
+      "content_type": 3, 
+      "created_date": "2012-10-31 12:22:02", 
+      "short_description": "", 
+      "is_public": false, 
+      "icon_href": null, 
+      "associated_content": null, 
+      "tags": "", 
+      "description": ""
+    }
+  }, 
+  {
+    "pk": 42, 
+    "model": "search.relationindex_mycontent_content_search_index", 
+    "fields": {
+      "modified_date": "2012-10-31 12:24:55", 
+      "is_featured": false, 
+      "big_icon_href": null, 
+      "is_deleted": false, 
+      "file": 45, 
+      "title": "TrueFalse", 
+      "author": 21, 
+      "public_version": null, 
+      "view_count": 0, 
+      "name": "TrueFalse", 
+      "search_index_search_list_field": [
+        "truefals"
+      ], 
+      "is_template": false, 
+      "is_globally_public": false, 
+      "content_type": 3, 
+      "created_date": "2012-10-31 12:24:51", 
+      "short_description": "", 
+      "is_public": false, 
+      "icon_href": null, 
+      "associated_content": null, 
+      "tags": "", 
+      "description": ""
+    }
+  }, 
+  {
+    "pk": 50, 
+    "model": "search.relationindex_mycontent_content_search_index", 
+    "fields": {
+      "modified_date": "2012-10-31 12:28:40", 
+      "is_featured": false, 
+      "big_icon_href": null, 
+      "is_deleted": false, 
+      "file": 55, 
+      "title": "Glossary", 
+      "author": 21, 
+      "public_version": null, 
+      "view_count": 0, 
+      "name": "Glossary", 
+      "search_index_search_list_field": [
+        "glossari"
+      ], 
+      "is_template": false, 
+      "is_globally_public": false, 
+      "content_type": 3, 
+      "created_date": "2012-10-31 12:27:36", 
+      "short_description": "", 
+      "is_public": false, 
+      "icon_href": null, 
+      "associated_content": null, 
+      "tags": "", 
+      "description": ""
+    }
+  }, 
+  {
+    "pk": 30, 
+    "model": "mycontent.content", 
+    "fields": {
+      "modified_date": "2012-10-31 12:28:55", 
+      "is_featured": false, 
+      "big_icon_href": null, 
+      "is_deleted": false, 
+      "file": 57, 
+      "title": "test 1", 
+      "author": 21, 
+      "public_version": null, 
+      "view_count": 0, 
+      "name": null, 
+      "is_template": false, 
+      "is_globally_public": false, 
+      "content_type": 1, 
+      "created_date": "2012-10-31 11:24:19", 
+      "short_description": "", 
+      "is_public": false, 
+      "icon_href": null, 
+      "associated_content": null, 
+      "tags": "", 
+      "description": ""
+    }
+  }, 
+  {
+    "pk": 34, 
+    "model": "mycontent.content", 
+    "fields": {
+      "modified_date": "2012-10-31 12:22:09", 
+      "is_featured": false, 
+      "big_icon_href": null, 
+      "is_deleted": false, 
+      "file": 37, 
+      "title": "Connection", 
+      "author": 21, 
+      "public_version": null, 
+      "view_count": 0, 
+      "name": "Connection", 
+      "is_template": false, 
+      "is_globally_public": false, 
+      "content_type": 3, 
+      "created_date": "2012-10-31 12:22:02", 
+      "short_description": "", 
+      "is_public": false, 
+      "icon_href": null, 
+      "associated_content": null, 
+      "tags": "", 
+      "description": ""
+    }
+  }, 
+  {
+    "pk": 42, 
+    "model": "mycontent.content", 
+    "fields": {
+      "modified_date": "2012-10-31 12:24:55", 
+      "is_featured": false, 
+      "big_icon_href": null, 
+      "is_deleted": false, 
+      "file": 45, 
+      "title": "TrueFalse", 
+      "author": 21, 
+      "public_version": null, 
+      "view_count": 0, 
+      "name": "TrueFalse", 
+      "is_template": false, 
+      "is_globally_public": false, 
+      "content_type": 3, 
+      "created_date": "2012-10-31 12:24:51", 
+      "short_description": "", 
+      "is_public": false, 
+      "icon_href": null, 
+      "associated_content": null, 
+      "tags": "", 
+      "description": ""
+    }
+  }, 
+  {
+    "pk": 50, 
+    "model": "mycontent.content", 
+    "fields": {
+      "modified_date": "2012-10-31 12:28:40", 
+      "is_featured": false, 
+      "big_icon_href": null, 
+      "is_deleted": false, 
+      "file": 55, 
+      "title": "Glossary", 
+      "author": 21, 
+      "public_version": null, 
+      "view_count": 0, 
+      "name": "Glossary", 
+      "is_template": false, 
+      "is_globally_public": false, 
+      "content_type": 3, 
+      "created_date": "2012-10-31 12:27:36", 
+      "short_description": "", 
+      "is_public": false, 
+      "icon_href": null, 
+      "associated_content": null, 
+      "tags": "", 
+      "description": ""
+    }
+  }, 
+  {
+    "pk": 31, 
+    "model": "mycontent.contentspace", 
+    "fields": {
+      "content": 30, 
+      "is_deleted": false, 
+      "space": 23
+    }
+  }, 
+  {
+    "pk": 35, 
+    "model": "mycontent.contentspace", 
+    "fields": {
+      "content": 34, 
+      "is_deleted": false, 
+      "space": 23
+    }
+  }, 
+  {
+    "pk": 43, 
+    "model": "mycontent.contentspace", 
+    "fields": {
+      "content": 42, 
+      "is_deleted": false, 
+      "space": 23
+    }
+  }, 
+  {
+    "pk": 51, 
+    "model": "mycontent.contentspace", 
+    "fields": {
+      "content": 50, 
+      "is_deleted": false, 
+      "space": 23
+    }
+  }, 
+  {
+    "pk": 23, 
+    "model": "spaces.space", 
+    "fields": {
+      "modified_date": "2012-10-31 11:23:57", 
+      "right": 2, 
+      "is_deleted": false, 
+      "parent": null, 
+      "title": "kgebert", 
+      "rank": 20, 
+      "top_level": 23, 
+      "created_date": "2012-10-31 11:23:57", 
+      "space_type": 1, 
+      "left": 1
+    }
+  }, 
+  {
+    "pk": 26, 
+    "model": "spaces.spaceaccess", 
+    "fields": {
+      "modified_date": "2012-10-31 11:24:06", 
+      "is_deleted": false, 
+      "space": 23, 
+      "user": 21, 
+      "created_date": "2012-10-31 11:24:06", 
+      "access_right": 3
+    }
+  }, 
+  {
+    "pk": 28, 
+    "model": "filestorage.filestorage", 
+    "fields": {
+      "modified_date": "2012-10-31 11:24:19", 
+      "history_for": null, 
+      "version": null, 
+      "content_type": "text/xml", 
+      "created_date": "2012-10-31 11:24:19", 
+      "owner": 21, 
+      "contents": "<?xml version='1.0' encoding='UTF-8' ?> \n\n<page>\n\t<modules> \n\t\n\t\t<textModule id=\"Title\" left=\"5\" top=\"3\" width=\"90\" height=\"7\" style=\"\">\n\t\t\t<text>&lt;div style=&quot;text-align: center;&quot;&gt;Title&lt;/div&gt;</text>\n\t\t</textModule>\t\n\t\t<buttonModule id=\"PrevPage\" left=\"0\" top=\"90\" width=\"10\" height=\"10\" style=\"\">\n\t\t\t<button type=\"prevPage\" text=\"\"/>\n\t\t</buttonModule>\n\t\t<buttonModule id=\"NextPage\" left=\"90\" top=\"90\" width=\"10\" height=\"10\" style=\"\">\n\t\t\t<button type=\"nextPage\" text=\"\"/>\n\t\t</buttonModule>\n    </modules> \n</page>\n"
+    }
+  }, 
+  {
+    "pk": 29, 
+    "model": "filestorage.filestorage", 
+    "fields": {
+      "modified_date": "2012-10-31 11:24:19", 
+      "history_for": 30, 
+      "version": 1, 
+      "content_type": "text/xml", 
+      "created_date": "2012-10-31 11:24:19", 
+      "owner": 21, 
+      "contents": "<?xml version='1.0' encoding='UTF-8' ?>\n<interactiveContent>\n\t<style href=\"/media/content/styles/default/content.css\"/>\n\t\n\t<pages>\n    \t<page name='Page 1' href='28'/> \n    </pages>\n</interactiveContent>"
+    }
+  }, 
+  {
+    "pk": 33, 
+    "model": "filestorage.filestorage", 
+    "fields": {
+      "modified_date": "2012-10-31 12:22:02", 
+      "history_for": 34, 
+      "version": 1, 
+      "content_type": "text/xml", 
+      "created_date": "2012-10-31 12:22:02", 
+      "owner": 21, 
+      "contents": "<?xml version=\"1.0\" encoding=\"UTF-8\" ?> \n<addon id=\"Connection\">\n\n\t<metadata>\n\t\t<title>Hello world Addon</title>\n\t\t<description>\n\t\t\tEnter addon description here\n\t\t</description>\n\t</metadata>\n\t\n\t<model>\n\t\t<property name=\"Text\" type=\"string\"/>\n\t</model>\n\t\n\t<view>\n\t\t&lt;p&gt;test&lt;/p&gt;\n\t</view>\n\t\n\t<preview>\n\t\t&lt;p&gt;Addon Connection&lt;/p&gt;\n\t</preview>\n\t\n\t<presenter>\n\t\tfunction AddonConnection_create(){\n\t\t\t\n\t\t\tvar presenter = function(){}\n\n\t\t\tpresenter.run = function(view, model){\n\t\t\t\t\n\t\t\t\telement = view.getElementsByTagName('p')[0];\n\t\t\t\telement.innerHTML = model['Text'];\n\t\t\t}\n\n\t\t\tpresenter.setShowErrorsMode = function(){\n\t\t\t\telement.innerHTML = 'setShowErrorsMode';\n\t\t\t}\n\t\t\t\n\t\t\tpresenter.setWorkMode = function(){\n\t\t\t\telement.innerHTML = 'setWorkMode';\n\t\t\t}\n\t\t\t\n\t\t\tpresenter.reset = function(){\n\t\t\t\telement.innerHTML = 'Reset';\n\t\t\t}\n\t\t\t\n\t\t\tpresenter.getErrorCount = function(){\n\t\t\t\treturn 7;\n\t\t\t}\n\t\t\t\n\t\t\tpresenter.getMaxScore = function(){\n\t\t\t\treturn 3;\n\t\t\t}\n\t\t\t\n\t\t\tpresenter.getScore = function(){\n\t\t\t\treturn 1;\n\t\t\t}\n\t\t\t\n\t\t\treturn presenter;\n\t\t}\n\t\t\n\t</presenter>\n\t\n</addon>\n"
+    }
+  }, 
+  {
+    "pk": 37, 
+    "model": "filestorage.filestorage", 
+    "fields": {
+      "modified_date": "2012-10-31 12:23:22", 
+      "history_for": 34, 
+      "version": 2, 
+      "content_type": "text/xml", 
+      "created_date": "2012-10-31 12:22:09", 
+      "owner": 21, 
+      "contents": "<?xml version='1.0' encoding='UTF-8' ?><addon id='Connection'><metadata></metadata><model><property name='Single connection mode' type='boolean' isLocalized='false'/><property name='Left column' type='list'><property name='id' type='string' isLocalized='false'/><property name='content' type='html' isLocalized='false'/><property name='connects to' type='string' isLocalized='false'/><property name='additional class' type='string' isLocalized='false'/></property><property name='Right column' type='list'><property name='id' type='string' isLocalized='false'/><property name='content' type='html' isLocalized='false'/><property name='connects to' type='string' isLocalized='false'/><property name='additional class' type='string' isLocalized='false'/></property><property name='Columns width' type='list'><property name='left' type='string' isLocalized='false'/><property name='middle' type='string' isLocalized='false'/><property name='right' type='string' isLocalized='false'/></property><property name='Default connection color' type='string' isLocalized='false'/><property name='Correct connection color' type='string' isLocalized='false'/><property name='Incorrect connection color' type='string' isLocalized='false'/><property name='Connection thickness' type='string' isLocalized='false'/></model><libs><js src='jcanvas.js'/></libs><resources></resources><css>.connectionContainer {\n    height: 100%;\n    width: 100%;\n    padding: 0px;\n    border-collapse:collapse;\n    border-spacing: 0px;\n    direction: ltr;\n}\n \n.connectionContainer .connectionLeftColumn {\n    width: 33%;\n    height: 100%;\n    padding: 0px;\n}\n \n.connectionContainer .connectionMiddleColumn {\n    width: 34%;\n    height: 100%;\n    padding: 0px;\n}\n \n.connectionContainer .connectionRightColumn {\n    width: 33%;\n    padding: 0px;\n    height: 100%;\n}\n \n.connectionContainer .connections {\n    width: 100%;\n    height: 100%;\n}\n \n.connectionContainer .connectionItem {\n    width: 100%;\n    padding: 0px;\n    border-collapse:collapse;\n    border-spacing: 0px;\n    border: solid 1px black;\n}\n \n.connectionContainer .content {\n    height: 100%;\n    width: 100%;\n    border-collapse:collapse;\n    border-spacing: 0px;\n}\n \n.connectionContainer .content .connectionItemWrapper {\n    padding: 0px;\n}</css><view>          &lt;table class=&quot;connectionContainer&quot;&gt;\n  &lt;tr&gt;\n    &lt;td class=&quot;connectionLeftColumn&quot;&gt;\n        &lt;table class=&quot;content&quot;&gt;&lt;/table&gt;\n    &lt;/td&gt;\n    &lt;td class=&quot;connectionMiddleColumn&quot;&gt;\n        &lt;canvas class=&quot;connections&quot;&gt;&lt;/canvas&gt;\n    &lt;/td&gt;\n    &lt;td class=&quot;connectionRightColumn&quot;&gt;\n        &lt;table class=&quot;content&quot;&gt;&lt;/table&gt;\n    &lt;/td&gt;\n  &lt;/tr&gt;\n&lt;/table&gt;</view><preview>          &lt;table class=&quot;connectionContainer&quot;&gt;\n  &lt;tr&gt;\n    &lt;td class=&quot;connectionLeftColumn&quot;&gt;\n        &lt;table class=&quot;content&quot;&gt;&lt;/table&gt;\n    &lt;/td&gt;\n    &lt;td class=&quot;connectionMiddleColumn&quot;&gt;\n        &lt;canvas class=&quot;connections&quot;&gt;&lt;/canvas&gt;\n    &lt;/td&gt;\n    &lt;td class=&quot;connectionRightColumn&quot;&gt;\n        &lt;table class=&quot;content&quot;&gt;&lt;/table&gt;\n    &lt;/td&gt;\n  &lt;/tr&gt;\n&lt;/table&gt;</preview><presenter>          /**\n * Connection Addon\n * @version 1.3.8\n */\n \n/**\n * Model version: 2\n * Last modified: 2012-06-22 10:55\n *\n */\nfunction AddonConnection_create(){\n    var presenter = function() {};\n \n    var isAlreadyInitialized = false;\n    var playerController;\n    var eventBus; // Modules communication\n    var addonID;\n \n    presenter.uniqueIDs = [];\n    presenter.elements = [];\n \n    var connections;\n    var singleMode = false;\n    var selectedItem = null;\n \n    presenter.lastReceivedEvent = null;\n    presenter.isMouseDown = false;\n \n    presenter.lineStack = new LineStack();\n    presenter.correctConnections = new LineStack();\n    var isSelectionPossible = true;\n    var isRTL = false;\n \n    var connectionColor = &quot;#000&quot;;\n    var correctConnection = &quot;#0d0&quot;;\n    var incorrectConnection = &quot;#d00&quot;;\n    var connectionThickness = &quot;1px&quot;;\n \n    presenter.ERROR_MESSAGES = {\n        &apos;ID not unique&apos; : &apos;One or more IDs are not unique.&apos;\n    };\n \n    presenter.upgradeModel = function(model) {\n        return presenter.upgradeFrom_01(model);\n    };\n \n    presenter.upgradeFrom_01 = function (model) {\n        var upgradedModel = {};\n        $.extend(true, upgradedModel, model); // Deep copy of model object\n \n        if (!upgradedModel[&quot;Columns width&quot;]) {\n            upgradedModel[&quot;Columns width&quot;] = [{\n                left: &quot;&quot;,\n                middle: &quot;&quot;,\n                right: &quot;&quot;\n            }];\n        }\n \n        return upgradedModel;\n    };\n \n    function LineStack() {\n        this.stack = [];\n        this.ids = [];\n \n        this.push = function(line) {\n            var pair = [];\n            for (var i = 0; i &lt; presenter.elements.length; i++) {\n                if (presenter.elements[i].element.get(0) == line.from.get(0) || presenter.elements[i].element.get(0) == line.to.get(0)) {\n                    pair.push(presenter.elements[i].id);\n                    if(pair.length == 2) { break; }\n                }\n            }\n            this.ids.push(pair);\n            this.stack.push(line);\n        };\n \n        this.length = function() {\n            return this.stack.length;\n        };\n \n        this.get = function(i) {\n            return this.stack[i];\n        };\n \n        this.remove = function(line) {\n            var linePosition = this.stack.indexOf(line);\n            this.stack.splice(linePosition, 1);\n            var lineFromID = $(line.from).find(&apos;.innerWrapper&apos;).html();\n            var lineToID = $(line.to).find(&apos;.innerWrapper&apos;).html();\n            var pair = [lineFromID, lineToID];\n \n            for (var i = 0; i &lt; this.ids.length; i++) {\n                if ((this.ids[i][0] == pair[0] &amp;&amp; this.ids[i][1] == pair[1]) ||\n                    (this.ids[i][0] == pair[1] &amp;&amp; this.ids[i][1] == pair[0])) {\n                    this.ids.splice(i, 1);\n                    break;\n                }\n            }\n        };\n \n        this.clear = function() {\n            this.ids.splice(0, this.ids.length);\n            this.stack.splice(0, this.stack.length);\n        };\n \n        this.hasLine = function(line) {\n            for (var i = 0, stackLength = this.stack.length; i &lt; stackLength; i++) {\n                if ((this.stack[i].from.get(0) == line.from.get(0) &amp;&amp; this.stack[i].to.get(0) == line.to.get(0)) ||\n                    (this.stack[i].from.get(0) == line.to.get(0) &amp;&amp; this.stack[i].to.get(0) == line.from.get(0))) {\n                    return [this.stack[i]];\n                }\n            }\n            return [];\n        };\n \n        this.hasPair = function(pair) {\n            for(var i = 0; i &lt; this.ids.length; i++) {\n                if(this.ids[i][0] == pair[0] &amp;&amp; this.ids[i][1] == pair[1] ||\n                    this.ids[i][1] == pair[0] &amp;&amp; this.ids[i][0] == pair[1]) {\n                    return true;\n                }\n            }\n            return false;\n        };\n \n        this.isItemUsed = function(line) {\n            var lines = [];\n            for (var i = 0; i &lt; this.stack.length; i++) {\n                if ((this.stack[i].from.get(0) == line.from.get(0) || this.stack[i].to.get(0) == line.to.get(0)) ||\n                    (this.stack[i].from.get(0) == line.to.get(0) || this.stack[i].to.get(0) == line.from.get(0))) {\n                    lines.push(this.stack[i])\n                }\n            }\n            return lines;\n        }\n    }\n \n    function Line(from, to) {\n        this.from = from;\n        this.to = to;\n \n        this.connects = function(element) {\n            return from.get(0) == element.get(0) || to.get(0) == element.get(0);\n        };\n \n        this.otherSide = function(element) {\n            if (from.get(0) == element.get(0)) {\n                return to;\n            }\n            return from;\n        }\n    }\n \n    presenter.setPlayerController = function(controller) {\n        playerController = controller;\n    };\n \n    presenter.setColumnsWidth = function(view, columnsWidth) {\n        var leftColumn = $(view).find(&quot;.connectionLeftColumn:first&quot;);\n        var middleColumn = $(view).find(&quot;.connectionMiddleColumn:first&quot;);\n        var rightColumn = $(view).find(&quot;.connectionRightColumn:first&quot;);\n \n        var leftWidth = columnsWidth[0].left;\n        var middleWidth = columnsWidth[0].middle;\n        var rightWidth = columnsWidth[0].right;\n \n        if(!leftWidth)\n            leftWidth = &quot;auto&quot;;\n        if(!middleWidth)\n            middleWidth = &quot;auto&quot;;\n        if(!rightWidth)\n            rightWidth = &quot;auto&quot;;\n \n        $(leftColumn).css(&apos;width&apos;, leftWidth);\n        $(middleColumn).css(&apos;width&apos;, middleWidth);\n        $(rightColumn).css(&apos;width&apos;, rightWidth);\n    };\n \n \n    presenter.run = function(view, model){\n        presenter.view = view;\n        presenter.model = model;\n \n        eventBus = playerController.getEventBus();\n        addonID = model.ID;\n \n        presenter.initialize(presenter.view, presenter.model, false);\n        presenter.registerListeners(presenter.view);\n    };\n \n    presenter.createPreview = function(view, model) {\n        presenter.view = view;\n        presenter.model = model;\n        presenter.initialize(presenter.view, presenter.model, true);\n    };\n \n \n    presenter.initialize = function(view, model, isPreview) {\n \n        MathJax.Hub.Register.MessageHook(&quot;End Process&quot;, function(){\n            if(!isAlreadyInitialized) {\n                presenter.initializeView(view, model);\n                if(isPreview){\n                    presenter.drawConfiguredConnections();\n                }\n            }\n            isAlreadyInitialized = true;\n        });\n \n        isRTL = $(view).css(&apos;direction&apos;).toLowerCase() === &apos;rtl&apos;;\n        connections = $(view).find(&apos;.connections:first&apos;);\n \n        model = presenter.upgradeModel(model);\n \n        this.setSingleMode(model[&apos;Single connection mode&apos;]);\n        this.loadElements(view, model, &apos;connectionLeftColumn&apos;, &apos;Left column&apos;, false);\n        this.loadElements(view, model, &apos;connectionRightColumn&apos;, &apos;Right column&apos;, true);\n \n        this.setColumnsWidth(view, model[&quot;Columns width&quot;]);\n \n        if (model[&apos;Connection thickness&apos;] != &apos;&apos;) {\n            connectionThickness = model[&apos;Connection thickness&apos;];\n        }\n        if (model[&apos;Default connection color&apos;] != &apos;&apos;) {\n            connectionColor = model[&apos;Default connection color&apos;];\n        }\n        if (model[&apos;Correct connection color&apos;] != &apos;&apos;) {\n            correctConnection = model[&apos;Correct connection color&apos;];\n        }\n        if (model[&apos;Incorrect connection color&apos;] != &apos;&apos;) {\n            incorrectConnection = model[&apos;Incorrect connection color&apos;];\n        }\n        this.gatherCorrectConnections();\n    };\n \n    /**\n     * Searches elements collection for given element;\n     *\n     * @return {\n     *   -1 if element is not found in set\n     *   id otherwise\n     * }\n     */\n    function getElementID(element) {\n        for (var i = 0; i &lt; presenter.elements.length; i++) {\n            if (presenter.elements[i].element[0] == element) {\n                return presenter.elements[i].id;\n            }\n        }\n        return -1;\n    }\n \n    function getElementById(id) {\n        for (var i = 0; i &lt; presenter.elements.length; i++) {\n            if( presenter.elements[i].id == id) {\n                return presenter.elements[i].element;\n            }\n        }\n        return -1;\n    }\n \n    presenter.ELEMENT_SIDE = {\n        LEFT: 0,\n        RIGHT: 1\n    };\n \n    presenter.establishElementSide = function (elementID, modelLeftSide, modelRightSide) {\n        var i, arrayLength;\n \n        for (i = 0, arrayLength = modelLeftSide.length; i &lt; arrayLength; i += 1) {\n            if (modelLeftSide[i].id === elementID) {\n                return presenter.ELEMENT_SIDE.LEFT;\n            }\n        }\n \n        for (i = 0, arrayLength = modelRightSide.length; i &lt; arrayLength; i += 1) {\n            if (modelRightSide[i].id === elementID) {\n                return presenter.ELEMENT_SIDE.RIGHT;\n            }\n        }\n    };\n \n    presenter.createEventData = function(source, elementFromID, elementToID, model, value, score) {\n        var leftColumn = model[&quot;Left column&quot;];\n        var rightColumn = model[&quot;Right column&quot;];\n \n        var fromElementSide = presenter.establishElementSide(elementFromID, leftColumn, rightColumn);\n        var itemStr = &quot;&quot;;\n        switch(fromElementSide) {\n            case presenter.ELEMENT_SIDE.LEFT:\n                itemStr = elementFromID + &apos;-&apos; + elementToID;\n                break;\n            case presenter.ELEMENT_SIDE.RIGHT:\n                itemStr = elementToID + &apos;-&apos; + elementFromID;\n                break;\n        }\n \n        return {\n            &apos;source&apos;: source,\n            &apos;item&apos;: itemStr,\n            &apos;value&apos;: value.toString(),\n            &apos;score&apos;: score.toString()\n        };\n    };\n \n    function sendEvent(fromElement, toElement, value, score) {\n        var connectionFromID = getElementID(fromElement);\n        var connectionToID = getElementID(toElement);\n        var eventData = presenter.createEventData(addonID, connectionFromID, connectionToID, presenter.model, value, score);\n        eventBus.sendEvent(&apos;ValueChanged&apos;, eventData);\n    }\n \n    function sendAllOKEvent () {\n        var eventData = {\n            &apos;source&apos;: addonID,\n            &apos;item&apos;: &apos;all&apos;,\n            &apos;value&apos;: &apos;&apos;,\n            &apos;score&apos;: &apos;&apos;\n        };\n \n        eventBus.sendEvent(&apos;ValueChanged&apos;, eventData);\n    }\n \n    function isTap(evt) {\n        return (presenter.lastReceivedEvent &amp;&amp;\n            presenter.lastReceivedEvent == &apos;touchstart&apos; &amp;&amp;\n            evt.type == &apos;touchend&apos;)\n    }\n \n    function isClick(evt) {\n        return (presenter.lastReceivedEvent &amp;&amp;\n            presenter.lastReceivedEvent == &apos;mousedown&apos; &amp;&amp;\n            evt.type == &apos;mouseup&apos;)\n    }\n \n    function markSelectedElement(element) {\n        var elementToMark = $(element).closest(&apos;.connectionItem&apos;);\n        var elementColumn = $(elementToMark).closest(&apos;.content&apos;);\n        var selectedElement = $(elementColumn).find(&apos;.selected&apos;);\n        if(selectedElement.length == 0) {\n            $(elementToMark).addClass(&apos;selected&apos;);\n        } else if($(elementToMark).attr(&apos;id&apos;) != $(selectedElement).attr(&apos;id&apos;)) {\n            $(selectedElement).removeClass(&apos;selected&apos;);\n            $(elementToMark).addClass(&apos;selected&apos;);\n        }\n    }\n \n    function clearMarks(selectedElements) {\n        for(var i = 0; i &lt; selectedElements.length; i++) {\n            $(selectedElements[i]).removeClass(&apos;selected&apos;);\n        }\n    }\n \n \n    function handleClick(evt) {\n        if (!isSelectionPossible) {\n            return;\n        }\n \n        var clickedElement = $(evt.target).closest(&apos;.connectionItem&apos;);\n \n        if (!$(clickedElement).hasClass(&apos;selected&apos;) &amp;&amp; selectedItem == null) {\n            // zaznaczony pierwszy element\n            $(clickedElement).parent().find(&apos;.connectionItem&apos;).removeClass(&apos;selected&apos;);\n            $(clickedElement).addClass(&apos;selected&apos;);\n            selectedItem = $(clickedElement);\n            return;\n        }\n        if (selectedItem != null &amp;&amp; $(clickedElement).get(0) == selectedItem.get(0)) {\n            // ponownie klikni00c42122ty ju00c500bc zaznaczony element\n            $(clickedElement).removeClass(&apos;selected&apos;);\n            selectedItem = null;\n            return;\n        }\n        if (selectedItem != null &amp;&amp;\n            ($(clickedElement).parents(&apos;.connectionLeftColumn&apos;).get(0) == selectedItem.parents(&apos;.connectionLeftColumn&apos;).get(0) ||\n                $(clickedElement).parents(&apos;.connectionRightColumn&apos;).get(0) == selectedItem.parents(&apos;.connectionRightColumn&apos;).get(0))) {\n            // klikni00c42122ty element w tej samej kolumnie\n            var linesToSwitch = [];\n            if (singleMode) {\n                for (var i = 0; i &lt; presenter.lineStack.length(); i++) {\n                    if (presenter.lineStack.get(i).connects(selectedItem)) {\n                        linesToSwitch.push(presenter.lineStack.get(i))\n                    }\n                }\n            }\n \n            selectedItem.removeClass(&apos;selected&apos;);\n            if (linesToSwitch.length == 0) {\n                $(clickedElement).addClass(&apos;selected&apos;);\n                selectedItem = $(clickedElement);\n                return;\n            } else {\n                for (i in linesToSwitch) {\n                    presenter.lineStack.remove(linesToSwitch[i]);\n                    pushConnection(new Line($(clickedElement), linesToSwitch[i].otherSide(selectedItem)), false);\n                }\n            }\n        } else {\n            var line = new Line($(clickedElement), selectedItem);\n            var value = presenter.lineStack.hasLine(line).length === 0 ? &apos;1&apos; : &apos;0&apos;;\n            var score = presenter.correctConnections.hasLine(line).length &gt; 0 ? 1 : 0;\n            var shouldDraw = true;\n            if (singleMode) {\n                var usedInLines = presenter.lineStack.isItemUsed(line);\n                if (usedInLines.length == 2) {\n                    shouldDraw = false\n                }\n            }\n            if (shouldDraw) {\n                pushConnection(line, false);\n                sendEvent(selectedItem[0], clickedElement[0], value, score);\n \n                if (presenter.isAllOK()) {\n                    sendAllOKEvent();\n                }\n            }\n        }\n        redraw();\n        selectedItem.removeClass(&apos;selected&apos;);\n        selectedItem = null\n    }\n \n    function handleTouches(evt) {\n        evt.preventDefault();\n \n        var touch = evt.originalEvent.touches[0] || evt.originalEvent.changedTouches[0];\n        var currentSelectedElement = document.elementFromPoint(touch.clientX, touch.clientY);\n \n        markSelectedElement(currentSelectedElement);\n \n        var selectedElements = presenter.$connectionContainer.find(&apos;.selected&apos;);\n \n        if(isTap(evt)) {\n            presenter.lastReceivedEvent = null;\n            clearMarks(selectedElements);\n            $(evt.target).closest(&apos;.connectionItem&apos;).trigger(&apos;click&apos;);\n        } else {\n            presenter.lastReceivedEvent = evt.type;\n            if(selectedElements.length == 2 &amp;&amp;\n                evt.type == &apos;touchend&apos;) {\n                var line = new Line($(selectedElements[0]), $(selectedElements[1]));\n                handleSendingEvents(selectedElements, line);\n                pushConnection(line, false);\n                redraw();\n                clearMarks(selectedElements);\n            }\n        }\n    }\n \n    function setMouseDown(evt) {\n        if(evt.type == &apos;mousedown&apos;) {\n            presenter.isMouseDown = true;\n        } else if(evt.type == &apos;mouseup&apos;) {\n            presenter.isMouseDown = false;\n        }\n    }\n \n    function handleMouseDragActions(evt) {\n        evt.preventDefault();\n \n        setMouseDown(evt);\n \n        if(presenter.isMouseDown &amp;&amp; presenter.lastReceivedEvent) {\n            var currentSelectedElement = document.elementFromPoint(evt.clientX, evt.clientY);\n            markSelectedElement(currentSelectedElement);\n        }\n \n        var selectedElements = presenter.$connectionContainer.find(&apos;.selected&apos;);\n \n        if(isClick(evt)) {\n            presenter.lastReceivedEvent = null;\n            presenter.$connectionContainer.off(&apos;click&apos;);\n        } else {\n            presenter.lastReceivedEvent = evt.type;\n        }\n \n \n        if(selectedElements.length == 2 &amp;&amp;\n            evt.type == &apos;mouseup&apos;) {\n            var line = new Line($(selectedElements[0]), $(selectedElements[1]));\n            handleSendingEvents(selectedElements, line);\n            pushConnection(line, false);\n            redraw();\n            clearMarks(selectedElements);\n        }\n    }\n \n    function handleSendingEvents(selectedElements, line) {\n        var value = presenter.lineStack.hasLine(line).length === 0 ? &apos;1&apos; : &apos;0&apos;;\n        var score = presenter.correctConnections.hasLine(line).length &gt; 0 ? 1 : 0;\n        sendEvent(selectedElements[1], selectedElements[0], value, score);\n        if (presenter.isAllOK()) {\n            sendAllOKEvent();\n        }\n    }\n \n    presenter.registerListeners = function(view) {\n        presenter.$connectionContainer = $(view).find(&apos;.connectionContainer&apos;);\n \n \n        presenter.$connectionContainer.on(&apos;touchstart touchend touchmove&apos;, function(evt){\n            handleTouches(evt);\n        });\n \n        presenter.$connectionContainer.on(&apos;click&apos;, function(evt) {\n            handleClick(evt);\n        });\n \n        presenter.$connectionContainer.on(&apos;mousedown mousemove mouseup&apos;, function(evt){\n            handleMouseDragActions(evt);\n        });\n    };\n \n    presenter.setSingleMode = function(singleModeString) {\n        singleMode = (singleModeString.toLowerCase() === &apos;true&apos;)\n    };\n \n    presenter.addClassToElement = function(element, additionalClass) {\n        if(additionalClass) {\n            $(element).addClass(additionalClass);\n        }\n \n        return element;\n    };\n \n    presenter.loadElements = function(view, model, columnClass, columnModel, isRightColumn) {\n        var column = $(view).find(&apos;.&apos; + columnClass + &apos;:first&apos;).find(&apos;.content:first&apos;)\n        for (var i = 0, columnLength = model[columnModel].length; i &lt; columnLength; i++) {\n            var id = model[columnModel][i][&apos;id&apos;];\n            if(!this.isIDUnique(id)) {\n                return $(this.view).html(this.ERROR_MESSAGES[&apos;ID not unique&apos;]);\n            }\n            var element = $(&apos;&lt;table class=&quot;connectionItem&quot; id=&quot;connection-&apos; + id + &apos;&quot;&gt;&lt;/div&gt;&apos;);\n            var row = $(&apos;&lt;tr&gt;&lt;/tr&gt;&apos;);\n            element.append(row);\n            var innerElement = $(&apos;&lt;td class=&quot;inner&quot;&gt;&lt;/td&gt;&apos;);\n            var innerWrapper = $(&apos;&lt;div class=&quot;innerWrapper&quot;&gt;&lt;/div&gt;&apos;);\n            innerWrapper = presenter.addClassToElement(innerWrapper, model[columnModel][i][&apos;additional class&apos;]);\n            $(innerWrapper).css(&apos;direction&apos;, isRTL ? &apos;rtl&apos; : &apos;ltr&apos;);\n            innerWrapper.html(model[columnModel][i][&apos;content&apos;]);\n            innerElement.append(innerWrapper);\n            var iconElement = $(&apos;&lt;td class=&quot;icon&quot;&gt;&lt;/td&gt;&apos;);\n            var iconWrapper = $(&apos;&lt;div class=&quot;iconWrapper&quot;&gt;&lt;/div&gt;&apos;);\n            iconElement.append(iconWrapper);\n            if (isRightColumn) {\n                row.append(iconElement);\n                row.append(innerElement);\n            } else {\n                row.append(innerElement);\n                row.append(iconElement);\n            }\n            presenter.elements.push({\n                element: element,\n                id: id,\n                connects: model[columnModel][i][&apos;connects to&apos;]\n            });\n            var newRow = $(&apos;&lt;tr&gt;&lt;/tr&gt;&apos;);\n            var newCell = $(&apos;&lt;td class=&quot;connectionItemWrapper&quot;&gt;&lt;/td&gt;&apos;);\n            newCell.append(element);\n            newRow.append(newCell);\n            column.append(newRow);\n        }\n    };\n \n    presenter.isIDUnique = function(id) {\n        if(id == &apos;&apos;) return true;\n        if($.inArray(id, presenter.uniqueIDs) &lt; 0) {\n            presenter.uniqueIDs.push(id);\n            return true;\n        } else {\n            return false;\n        }\n    };\n \n    presenter.initializeView = function(view, model) {\n        var leftColumnHeight = $(view).find(&apos;.connectionLeftColumn:first&apos;).outerHeight();\n        var rightColumnHeight = $(view).find(&apos;.connectionRightColumn:first&apos;).outerHeight();\n        var height = leftColumnHeight &gt; rightColumnHeight ? leftColumnHeight : rightColumnHeight;\n        var leftColumnWidth = $(view).find(&apos;.connectionLeftColumn:first&apos;).outerWidth(true);\n        var rightColumnWidth = $(view).find(&apos;.connectionRightColumn:first&apos;).outerWidth(true);\n        var width = model[&apos;Width&apos;] - leftColumnWidth - rightColumnWidth;\n        connections.attr(&apos;height&apos;, height);\n        connections.attr(&apos;width&apos;, width);\n        connections.translateCanvas({\n            x: 0.5, y: 0.5\n        });\n    };\n \n    presenter.gatherCorrectConnections = function() {\n        var elements = presenter.elements;\n        for (var i = 0, elementsLength = elements.length; i &lt; elementsLength; i++) {\n            var connects = elements[i][&apos;connects&apos;].split(&apos;,&apos;);\n            for (var j = 0; j &lt; connects.length; j++) {\n                if (connects[j] != &quot;&quot; &amp;&amp;\n                    $.inArray(connects[j], presenter.uniqueIDs) &gt;= 0) {\n                    var pair = [elements[i][&apos;id&apos;], connects[j]];\n                    var line = new Line(\n                        getElementById(pair[0]),\n                        getElementById(pair[1])\n                    );\n \n \n                    if(!presenter.correctConnections.hasPair(pair)){\n                        presenter.correctConnections.push(line);\n                    }\n                }\n            }\n        }\n    };\n \n    presenter.drawConfiguredConnections = function() {\n        for (var i = 0; i &lt; presenter.correctConnections.length(); i++) {\n            pushConnection(presenter.correctConnections.get(i), true)\n        }\n        redraw();\n    };\n \n    function getElementSnapPoint(element) {\n        var offset = element.offset();\n        var snapPoint = [0, 0];\n        if (element.parents(&apos;.connectionLeftColumn&apos;).length &gt; 0) {\n            snapPoint = [offset.left + element.outerWidth(true), offset.top + element.outerHeight()/2]\n        }\n        if (element.parents(&apos;.connectionRightColumn&apos;).length &gt; 0) {\n            snapPoint = [offset.left, offset.top + element.outerHeight()/2]\n        }\n        return snapPoint\n    }\n \n    function pushConnection(line, isPreview) {\n        var addLine = true, linesToRemove = [], existingLines;\n        if (singleMode) {\n            existingLines = presenter.lineStack.isItemUsed(line);\n            if (existingLines.length &gt; 0) {\n                if(!isPreview) {\n                    linesToRemove.push.apply(linesToRemove, existingLines)\n                }\n                if (presenter.lineStack.hasLine(line).length &gt; 0) {\n                    addLine = false\n                }\n            }\n        } else {\n            existingLines = presenter.lineStack.hasLine(line);\n            if (existingLines.length &gt; 0) {\n                if(!isPreview) {\n                    linesToRemove.push.apply(linesToRemove, existingLines);\n                }\n                addLine = false;\n            }\n        }\n        for (var i = 0; i &lt; linesToRemove.length; i++) {\n            presenter.lineStack.remove(linesToRemove[i]);\n        }\n        if (addLine) {\n            presenter.lineStack.push(line);\n        }\n    }\n \n    function redraw() {\n        connections.clearCanvas();\n        for (var i = 0; i &lt; presenter.lineStack.length(); i++) {\n            drawLine(presenter.lineStack.get(i), connectionColor)\n        }\n    }\n \n    function drawLine(line, color) {\n        var from = getElementSnapPoint(line.from)\n        var to = getElementSnapPoint(line.to)\n        var canvasOffset = connections.offset();\n        connections.drawLine({\n            strokeStyle: color,\n            strokeWidth: connectionThickness,\n            x1: to[0] - canvasOffset.left, y1: to[1] - canvasOffset.top,\n            x2: from[0] - canvasOffset.left, y2: from[1] - canvasOffset.top\n        })\n    }\n \n    presenter.setShowErrorsMode = function(){\n        connections.clearCanvas();\n \n        for (var i = 0; i &lt; presenter.lineStack.length(); i++) {\n            var line = presenter.lineStack.get(i);\n \n            if (presenter.correctConnections.hasLine(line).length &gt; 0) {\n                drawLine(presenter.lineStack.get(i), correctConnection);\n            } else {\n                drawLine(presenter.lineStack.get(i), incorrectConnection);\n            }\n        }\n \n        isSelectionPossible = false\n    };\n \n    presenter.setWorkMode = function(){\n        redraw();\n        isSelectionPossible = true\n    };\n \n    presenter.reset = function(){\n        presenter.lineStack.clear();\n        isSelectionPossible = true;\n        redraw()\n    };\n \n    presenter.getErrorCount = function(){\n        var errors = 0;\n        for (var i = 0; i &lt; presenter.lineStack.length(); i++) {\n            var line = presenter.lineStack.get(i);\n            if (presenter.correctConnections.hasLine(line).length == 0) {\n                errors++;\n            }\n        }\n        return errors;\n    };\n \n    presenter.getMaxScore = function(){\n        return presenter.correctConnections.length();\n    };\n \n    presenter.getScore = function(){\n        var score = 0;\n        for (var i = 0; i &lt; presenter.lineStack.length(); i++) {\n            var line = presenter.lineStack.get(i);\n            if (presenter.correctConnections.hasLine(line).length &gt; 0) {\n                score++;\n            }\n        }\n        return score;\n    };\n \n    presenter.getState = function() {\n        var id = [];\n        for (var i = 0; i &lt; presenter.lineStack.ids.length; i++) {\n            id.push(presenter.lineStack.ids[i].join(&apos;:&apos;))\n        }\n        return id;\n    };\n \n    presenter.setState = function(state) {\n        MathJax.Hub.Register.MessageHook(&quot;End Process&quot;, function(){\n            if (state != &apos;&apos;) {\n                var id = state.split(&apos;,&apos;);\n                for (var i = 0; i &lt; id.length; i++) {\n                    var pair = id[i].split(&apos;:&apos;);\n                    pushConnection(new Line(getElementById(pair[0]), getElementById(pair[1])), false);\n                }\n            }\n            redraw();\n        });\n    };\n \n    presenter.validateAdditionalClass = function(view, additionalClass) {\n        var additionalClassElements = $(view).find(&apos;.&apos; + additionalClass);\n        var isAdditionalClass = $(view).find(&apos;.&apos; + additionalClass).length &gt; 0;\n \n        if (!isAdditionalClass) {\n            return { isPresent : false, count : 0 };\n        }\n \n        return { isPresent: true, count : additionalClassElements.length };\n    };\n \n    presenter.validateView = function(view, searchingKeyword) {\n        var validatedAdditionalClass = presenter.validateAdditionalClass(view, searchingKeyword);\n        if (!validatedAdditionalClass.isPresent) {\n            return { isPresent: false, count: validatedAdditionalClass.count };\n        }\n        return { isPresent: true, count: validatedAdditionalClass.count };\n    };\n \n    presenter.getElementById = function(id) {\n        return getElementById(id);\n    };\n \n    presenter.isAllOK = function () {\n        return presenter.getMaxScore() === presenter.getScore() &amp;&amp; presenter.getErrorCount() === 0;\n    };\n \n    presenter.executeCommand = function(name, params) {\n        if (!isSelectionPossible) {\n            return;\n        }\n \n        var commands = {\n            &apos;isAllOK&apos;: presenter.isAllOK\n        };\n \n        Commands.dispatch(commands, name, params, presenter);\n    };\n \n    return presenter;\n}\n        </presenter></addon>"
+    }
+  }, 
+  {
+    "pk": 39, 
+    "model": "filestorage.filestorage", 
+    "fields": {
+      "modified_date": "2012-10-31 12:24:13", 
+      "history_for": 30, 
+      "version": 2, 
+      "content_type": "text/xml", 
+      "created_date": "2012-10-31 12:23:29", 
+      "owner": 21, 
+      "contents": "<?xml version='1.0' encoding='UTF-8' ?><interactiveContent><metadata></metadata><addons><addon-descriptor addonId='Connection' href='/proxy/get?url=http://localhost:8000/mycontent/Connection/getaddon'/></addons><pages><page name='Page 1' href='40' reportable='true'/><header ref='commons/header'/><footer ref='commons/footer'/></pages><assets></assets></interactiveContent>"
+    }
+  }, 
+  {
+    "pk": 40, 
+    "model": "filestorage.filestorage", 
+    "fields": {
+      "modified_date": "2012-10-31 12:24:13", 
+      "history_for": null, 
+      "version": null, 
+      "content_type": "text/xml", 
+      "created_date": "2012-10-31 12:23:29", 
+      "owner": 21, 
+      "contents": "<?xml version='1.0' encoding='UTF-8' ?><page layout='pixels' width='1000' height='0'><modules><textModule id='Title' left='28' top='11' width='520' height='27' isVisible='true'><text draggable='false' gapWidth='0' isActivity='true' isDisabled='false' isCaseSensitive='false'>&lt;div style=&quot;text-align: center;&quot;&gt;Title&lt;/div&gt;</text></textModule><buttonModule id='PrevPage' left='0' top='358' width='57' height='39' isVisible='true'><button type='prevPage' text='' onclick=''/></buttonModule><buttonModule id='NextPage' left='520' top='358' width='57' height='39' isVisible='true'><button type='nextPage' text='' onclick=''/></buttonModule><addonModule addonId='Connection' id='Connection1' left='67' top='229' width='241' height='165' isVisible='true'><properties><property name='Single connection mode' type='boolean' value=''/><property name='Left column' type='list'><template><property name='id' type='string' value=''/><property name='content' type='html'></property><property name='connects to' type='string' value=''/><property name='additional class' type='string' value=''/></template><items><item><property name='id' type='string' value=''/><property name='content' type='html'>Karol&lt;br&gt;</property><property name='connects to' type='string' value=''/><property name='additional class' type='string' value=''/></item><item><property name='id' type='string' value=''/><property name='content' type='html'>Michal</property><property name='connects to' type='string' value=''/><property name='additional class' type='string' value=''/></item></items></property><property name='Right column' type='list'><template><property name='id' type='string' value=''/><property name='content' type='html'></property><property name='connects to' type='string' value=''/><property name='additional class' type='string' value=''/></template><items><item><property name='id' type='string' value=''/><property name='content' type='html'>Mateusz&lt;br&gt;</property><property name='connects to' type='string' value=''/><property name='additional class' type='string' value=''/></item><item><property name='id' type='string' value=''/><property name='content' type='html'>Lukasz</property><property name='connects to' type='string' value=''/><property name='additional class' type='string' value=''/></item></items></property><property name='Columns width' type='list'><template><property name='left' type='string' value=''/><property name='middle' type='string' value=''/><property name='right' type='string' value=''/></template><items><item><property name='left' type='string' value=''/><property name='middle' type='string' value=''/><property name='right' type='string' value=''/></item></items></property><property name='Default connection color' type='string' value=''/><property name='Correct connection color' type='string' value=''/><property name='Incorrect connection color' type='string' value=''/><property name='Connection thickness' type='string' value=''/></properties></addonModule></modules></page>"
+    }
+  }, 
+  {
+    "pk": 41, 
+    "model": "filestorage.filestorage", 
+    "fields": {
+      "modified_date": "2012-10-31 12:24:51", 
+      "history_for": 42, 
+      "version": 1, 
+      "content_type": "text/xml", 
+      "created_date": "2012-10-31 12:24:51", 
+      "owner": 21, 
+      "contents": "<?xml version=\"1.0\" encoding=\"UTF-8\" ?> \n<addon id=\"TrueFalse\">\n\n\t<metadata>\n\t\t<title>Hello world Addon</title>\n\t\t<description>\n\t\t\tEnter addon description here\n\t\t</description>\n\t</metadata>\n\t\n\t<model>\n\t\t<property name=\"Text\" type=\"string\"/>\n\t</model>\n\t\n\t<view>\n\t\t&lt;p&gt;test&lt;/p&gt;\n\t</view>\n\t\n\t<preview>\n\t\t&lt;p&gt;Addon TrueFalse&lt;/p&gt;\n\t</preview>\n\t\n\t<presenter>\n\t\tfunction AddonTrueFalse_create(){\n\t\t\t\n\t\t\tvar presenter = function(){}\n\n\t\t\tpresenter.run = function(view, model){\n\t\t\t\t\n\t\t\t\telement = view.getElementsByTagName('p')[0];\n\t\t\t\telement.innerHTML = model['Text'];\n\t\t\t}\n\n\t\t\tpresenter.setShowErrorsMode = function(){\n\t\t\t\telement.innerHTML = 'setShowErrorsMode';\n\t\t\t}\n\t\t\t\n\t\t\tpresenter.setWorkMode = function(){\n\t\t\t\telement.innerHTML = 'setWorkMode';\n\t\t\t}\n\t\t\t\n\t\t\tpresenter.reset = function(){\n\t\t\t\telement.innerHTML = 'Reset';\n\t\t\t}\n\t\t\t\n\t\t\tpresenter.getErrorCount = function(){\n\t\t\t\treturn 7;\n\t\t\t}\n\t\t\t\n\t\t\tpresenter.getMaxScore = function(){\n\t\t\t\treturn 3;\n\t\t\t}\n\t\t\t\n\t\t\tpresenter.getScore = function(){\n\t\t\t\treturn 1;\n\t\t\t}\n\t\t\t\n\t\t\treturn presenter;\n\t\t}\n\t\t\n\t</presenter>\n\t\n</addon>\n"
+    }
+  }, 
+  {
+    "pk": 45, 
+    "model": "filestorage.filestorage", 
+    "fields": {
+      "modified_date": "2012-10-31 12:25:45", 
+      "history_for": 42, 
+      "version": 2, 
+      "content_type": "text/xml", 
+      "created_date": "2012-10-31 12:24:55", 
+      "owner": 21, 
+      "contents": "<?xml version='1.0' encoding='UTF-8' ?><addon id='TrueFalse'><metadata></metadata><model><property name='Multi' type='boolean' isLocalized='false'/><property name='Questions' type='list'><property name='Question' type='string' isLocalized='false'/><property name='Answer' type='string' isLocalized='false'/></property><property name='Choices' type='list'><property name='Choice' type='string' isLocalized='false'/></property></model><libs></libs><resources></resources><css>.ic_page{\n    direction:ltr;\n}\n \n#container * {\n    direction:inherit;\n}\n \n.tf_radio,\n.tf_checkbox {\n    margin:0 0 1em 0;\n    width: 100%;\n    height: 100%;\n    text-align:left;\n    position: absolute;\n    left: 0;\n    top: 0;\n    border-spacing:0 5px;\n}\n \n.tf_radio_row,\n.tf_checkbox_row {\n}\n \n.tf_radio_image,\n.tf_checkbox_image {\n    cursor:pointer;\n    border-collapse: separate;\n    width:70px;\n    min-width:70px;\n    height:26px;\n    min-height:26px;\n    border-bottom:1px solid #111;\n    border-top:1px solid #111;\n \n}\n \n.tf_radio_image.last,\n.tf_checkbox_image.last {\n    border-radius: 0 10px 10px 0;\n    -moz-border-radius: 0 10px 10px 0;\n    border-right:1px solid #111;\n}\n \n.tf_radio_text,\n.tf_checkbox_text {\n    margin:5px 0 0 4px;\n    width:70px;\n    min-width:70px;\n    height:26px;\n    min-height:26px;\n    text-align:center;\n}\n \n.tf_radio_question.first,\n.tf_checkbox_question.first {\n    border:0;\n}\n \n.tf_radio_question,\n.tf_checkbox_question {\n    margin-top:5px;\n    border-bottom:1px solid #111;\n    border-top:1px solid #111;\n    border-left:1px solid #111;\n    padding:10px;\n    border-radius: 10px 0 0 10px;\n    -moz-border-radius: 10px 0 0 10px;\n}\n \n.tf_radio_image.up div {\n    background-image: url(&quot;http://www.lorepo.com/file/serve/381257&quot;);\n}\n \n.tf_radio_image.up.disabled div {\n    background-image: url(&quot;http://www.lorepo.com/file/serve/377333&quot;);\n}\n \n.tf_radio_image.down div {\n    background-image: url(&quot;http://www.lorepo.com/file/serve/379360&quot;);\n}\n \n.tf_radio_image.down.correct div {\n    background-image: url(&quot;http://www.lorepo.com/file/serve/383372&quot;);\n}\n \n.tf_radio_image.down.wrong div {\n    background-image: url(&quot;http://www.lorepo.com/file/serve/382347&quot;);\n}\n \n.tf_checkbox_image.up div {\n    background-image: url(&quot;http://www.lorepo.com/file/serve/387002&quot;);\n}\n \n.tf_checkbox_image.up.disabled div {\n    background-image: url(&quot;http://www.lorepo.com/file/serve/385002&quot;);\n}\n \n.tf_checkbox_image.down div {\n    background-image: url(&quot;http://www.lorepo.com/file/serve/354620&quot;);\n}\n \n.tf_checkbox_image.down.correct div {\n    background-image: url(&quot;http://www.lorepo.com/file/serve/382349&quot;);\n}\n \n.tf_checkbox_image.down.wrong div {\n    background-image: url(&quot;http://www.lorepo.com/file/serve/354618&quot;);\n}\n \n.tf_checkbox_image div,\n.tf_radio_image div {\n    width: 100%;\n    height: 100%;\n    background: no-repeat left center;\n}</css><view></view><preview></preview><presenter>            /**\n * TrueFalse Addon\n * @version 1.0.1\n */\n \nfunction AddonTrueFalse_create() {\n    var presenter = function () {};\n \n    var type = &quot;&quot;;\n    var possibleChoices = [];\n    var multi = false;\n    var questions = [];\n    var globalView;\n \n    var playerController;\n    var eventBus; // Modules communication\n    var textParser = null; // Links to Glossary Addon\n \n    var QUESTION_AND_CHOICES_REQUIRED = &quot;At least 1 question and 2 choices are required.&quot;;\n    var INDEX_OUT_OF_RANGE = &quot;Index is out of range.&quot;;\n \n    presenter.isSelectionCorrect = function (question, selection) {\n        var answers = question.Answer.split(&apos;,&apos;);\n \n        for (var i = 0; i &lt; answers.length; i++) {\n            if (parseInt(answers[i], 10) === selection) {\n                return true;\n            }\n        }\n \n        return false;\n    };\n \n    var score = function () {\n        var score = { &apos;score&apos;:0, &apos;maxScore&apos;:0, &apos;errorCount&apos;:0 };\n        for (var i = 0; i &lt; questions.length + 1; i++) {\n            var j = 0;\n            var row = $(globalView).find(&apos;#&apos; + i);\n            if (i &gt; 0) {\n                var values = (questions[i - 1].Answer).split(&apos;,&apos;);\n                score.maxScore += values.length;\n                row.children().each(function () {\n                    if (isCorrectAnswer($(this), values, j)) {\n                        score.score += 1;\n                    } else if (isWrongAnswer($(this), values, j)) {\n                        score.errorCount += 1;\n                    }\n                    j++;\n                });\n            }\n        }\n        return score;\n    };\n \n    var workMode = function (reset) {\n        $(&quot;.tf_&quot; + type + &quot;_image&quot;).each(function () {\n            var image = $(this);\n            image.removeClass(&quot;disabled&quot;).removeClass(&quot;wrong&quot;).removeClass(&quot;correct&quot;);\n            if (reset) {\n                image.removeClass(&quot;down&quot;).addClass(&quot;up&quot;);\n            }\n        });\n    };\n \n    var markElements = function () {\n        for (var i = 0; i &lt; questions.length + 1; i++) {\n            var j = 0;\n            var row = $(globalView).find(&apos;#&apos; + i);\n            if (i &gt; 0) {\n                var values = (questions[i - 1].Answer).split(&apos;,&apos;);\n                row.children().each(function () {\n                    $(this).addClass(&quot;disabled&quot;);\n                    if (isCorrectAnswer($(this), values, j)) {\n                        $(this).addClass(&quot;correct&quot;);\n                    } else if (isWrongAnswer($(this), values, j)) {\n                        $(this).addClass(&quot;wrong&quot;);\n                    }\n                    j++;\n                });\n            }\n        }\n    };\n \n    function whichQuestion(row, table) {\n        var questionNumber = 0;\n \n        $(table).find(&apos;tr&apos;).each(function(index) {\n            if($(this)[0] == $(row)[0]) {\n                questionNumber = index;\n \n                return false;\n            }\n        });\n \n        return questionNumber;\n    }\n \n    function whichAnswer(element, row) {\n        var answerNumber = 0;\n \n        $(row).find(&apos;.tf_&apos; + type + &apos;_image&apos;).each(function(index) {\n            if($(this)[0] == $(element)[0]) {\n                answerNumber = index + 1; // Answers are counted from 1 to n\n \n                return false;\n            }\n        });\n \n        return answerNumber;\n    }\n \n    presenter.createEventData = function (item, wasSelected, isSelectionCorrect) {\n        return {\n            &apos;source&apos;: presenter.addonID,\n            &apos;item&apos;: item,\n            &apos;value&apos;: wasSelected ? &apos;0&apos; : &apos;1&apos;,\n            &apos;score&apos;: isSelectionCorrect ? &apos;1&apos; : &apos;0&apos;\n        };\n    };\n \n    presenter.createAllOKEventData = function () {\n        return {\n            &apos;source&apos;: presenter.addonID,\n            &apos;item&apos;: &apos;all&apos;,\n            &apos;value&apos;: &apos;&apos;,\n            &apos;score&apos;: &apos;&apos;\n        };\n    };\n \n    function handleClickActions(view) {\n        $(view).find(&quot;.tf_&quot; + type + &quot;_image&quot;).click(function () {\n            var sendEvent = true;\n            var wasSelected = false;\n \n            if (!$(this).hasClass(&quot;disabled&quot;)) {\n                if (multi) {\n                    if ($(this).hasClass(&quot;down&quot;)) {\n                        wasSelected = true;\n                        $(this).removeClass(&quot;down&quot;).addClass(&quot;up&quot;);\n                    } else {\n                        $(this).removeClass(&quot;up&quot;).addClass(&quot;down&quot;);\n                    }\n                } else {\n                    sendEvent = !$(this).hasClass(&quot;down&quot;);\n \n                    $(this).parent().find(&quot;.tf_&quot; + type + &quot;_image&quot;).each(function () {\n                        $(this).removeClass(&quot;down&quot;).addClass(&quot;up&quot;);\n                    });\n \n                    $(this).removeClass(&quot;up&quot;).addClass(&quot;down&quot;);\n                }\n \n                if (sendEvent) {\n                    var selectedQuestion = whichQuestion($(this).parent(), $(this).parent().parent());\n                    var selectedAnswer = whichAnswer($(this), $(this).parent());\n                    var itemStr = selectedQuestion.toString() + &apos;-&apos; + selectedAnswer.toString();\n \n                    var isSelectionCorrect = presenter.isSelectionCorrect(questions[selectedQuestion - 1], parseInt(selectedAnswer, 10));\n \n                    var eventData = presenter.createEventData(itemStr, wasSelected, isSelectionCorrect);\n                    eventBus.sendEvent(&apos;ValueChanged&apos;, eventData);\n \n                    if (presenter.isAllOK()) {\n                        var allOKEventData = presenter.createAllOKEventData();\n                        eventBus.sendEvent(&apos;ValueChanged&apos;, allOKEventData);\n                    }\n                }\n            }\n        });\n    }\n \n    function generatePossibleChoicesRow(row) {\n        row.append(&apos;&lt;td class=&quot;tf_&apos; + type + &apos;_question first&quot;&gt;&amp;nbsp;&lt;/td&gt;&apos;);\n \n        for (var k = 0; k &lt; possibleChoices.length; k++) {\n            row.append(&apos;&lt;td class=&quot;tf_&apos; + type + &apos;_text&quot;&gt;&apos; + possibleChoices[k].Choice + &apos;&lt;/td&gt;&apos;);\n        }\n    }\n \n    function generateQuestionElement(row, rowID) {\n        var question = questions[rowID - 1].Question;\n \n        if (textParser !== null) { // Actions performed only in Player mode\n            question = textParser.parse(question);\n        }\n \n        row.append(&apos;&lt;td class=&quot;tf_&apos; + type + &apos;_question&quot;&gt;&apos; + question + &apos;&lt;/td&gt;&apos;);\n    }\n \n    function generateRowContent(row, rowID) {\n        generateQuestionElement(row, rowID);\n        for (var i = 0; i &lt; possibleChoices.length; i++) {\n            if (i === (possibleChoices.length - 1)) {\n                row.append(&apos;&lt;td class=&quot;tf_&apos; + type + &apos;_image up last&quot;&gt;&lt;/td&gt;&apos;);\n            } else {\n                row.append(&apos;&lt;td class=&quot;tf_&apos; + type + &apos;_image up&quot;&gt;&lt;/td&gt;&apos;);\n            }\n            var innerElement = document.createElement(&apos;div&apos;);\n            $(row).find(&apos;td:last-child&apos;).append(innerElement);\n        }\n    }\n \n    function generateTableContent(table, view) {\n        for (var rowID = 0; rowID &lt; questions.length + 1; rowID++) {\n            $(table).append(&apos;&lt;tr class=&quot;tf_&apos; + type + &apos;_row&quot; id=&apos; + rowID + &apos;&gt;&lt;/tr&gt;&apos;);\n            var row = $(view).find(&apos;#&apos; + rowID);\n \n            if (rowID === 0) {\n                generatePossibleChoicesRow(row);\n            } else {\n                var answers = (questions[rowID - 1].Answer).split(&apos;,&apos;);\n \n                for (var m = 0; m &lt; answers.length; m++) {\n                    var answer = parseInt(answers[m]);\n                    if (answer &gt; possibleChoices.length || answer &lt;= 0) {\n                        $(view).html(INDEX_OUT_OF_RANGE)\n \n                        break;\n                    }\n                }\n \n                generateRowContent(row, rowID);\n            }\n        }\n    }\n \n    var makeView = function (view, model, preview) {\n        possibleChoices = model.Choices;\n        questions = model.Questions;\n \n        if (notAllRequiredParameters(questions, possibleChoices)) {\n            return $(view).html(QUESTION_AND_CHOICES_REQUIRED);\n        }\n \n        globalView = view;\n        multi = model.Multi === &apos;True&apos;;\n        type = multi ? &quot;checkbox&quot; : &quot;radio&quot;;\n        var table = document.createElement(&apos;table&apos;);\n \n        $(table).addClass(&apos;tf_&apos; + type);\n        $(table).attr(&quot;cellspacing&quot;, 0).attr(&quot;cellpadding&quot;, 0);\n        $(view).append(table);\n \n        generateTableContent(table, view);\n \n        if (!preview) {\n            handleClickActions(view);\n        }\n \n        if (textParser !== null) { // Actions performed only in Player mode\n            textParser.connectLinks(view);\n        }\n    };\n \n    presenter.setPlayerController = function(controller) {\n        playerController = controller;\n    };\n \n    presenter.run = function (view, model) {\n        eventBus = playerController.getEventBus();\n        textParser = playerController.getTextParser();\n        presenter.addonID = model.ID;\n        makeView(view, model, false);\n    };\n \n    function isCorrectAnswer(element, values, index) {\n        return values.indexOf(index.toString()) &gt;= 0 &amp;&amp; element.hasClass(&quot;down&quot;);\n    }\n \n    function isWrongAnswer(element, values, index) {\n        return values.indexOf(index.toString()) &lt; 0 &amp;&amp; element.hasClass(&quot;down&quot;);\n    }\n \n    function notAllRequiredParameters(questions, possibleChoices) {\n        return !questions[0].Question || possibleChoices.length &lt; 2 || !possibleChoices[0].Choice || !possibleChoices[1].Choice;\n    }\n \n    function getSelectedElements() {\n        var selectedElements = [];\n        var i = 0;\n        $(&quot;.tf_&quot; + type + &quot;_image&quot;).each(function () {\n            selectedElements[i] = $(this).hasClass(&quot;down&quot;);\n            i++;\n        });\n        return selectedElements;\n    }\n \n    presenter.createPreview = function (view, model) {\n        makeView(view, model, true);\n    };\n \n    presenter.getState = function () {\n        return getSelectedElements();\n    };\n \n    presenter.setState = function (state) {\n        var i = 0;\n        var selectedElements = state.split(&quot;,&quot;);\n \n        $(&quot;.tf_&quot; + type + &quot;_image&quot;).each(function () {\n            if (selectedElements[i] == &quot;true&quot;) {\n                $(this).addClass(&quot;down&quot;);\n            }\n \n            i++;\n        });\n    };\n \n    presenter.setShowErrorsMode = function () {\n        presenter.isErrorMode = true;\n        markElements();\n    };\n \n    presenter.setWorkMode = function () {\n        presenter.isErrorMode = false;\n        workMode(false);\n    };\n \n    presenter.reset = function () {\n        presenter.isErrorMode = false;\n        workMode(true);\n    };\n \n    presenter.getErrorCount = function () {\n        return score().errorCount;\n    };\n \n    presenter.getMaxScore = function () {\n        return score().maxScore;\n    };\n \n    presenter.getScore = function () {\n        return score().score;\n    };\n \n    presenter.executeCommand = function(name, params) {\n        if (presenter.isErrorMode) {\n            return;\n        }\n \n        var commands = {\n            &apos;isAllOK&apos;: presenter.isAllOK\n        };\n \n        Commands.dispatch(commands, name, params, presenter);\n    };\n \n    presenter.isAllOK = function () {\n        return presenter.getMaxScore() === presenter.getScore() &amp;&amp; presenter.getErrorCount() === 0;\n    };\n \n    return presenter;\n}</presenter></addon>"
+    }
+  }, 
+  {
+    "pk": 47, 
+    "model": "filestorage.filestorage", 
+    "fields": {
+      "modified_date": "2012-10-31 12:25:59", 
+      "history_for": 30, 
+      "version": 3, 
+      "content_type": "text/xml", 
+      "created_date": "2012-10-31 12:25:50", 
+      "owner": 21, 
+      "contents": "<?xml version='1.0' encoding='UTF-8' ?><interactiveContent><metadata></metadata><addons><addon-descriptor addonId='Connection' href='/proxy/get?url=http://localhost:8000/mycontent/Connection/getaddon'/><addon-descriptor addonId='TrueFalse' href='/proxy/get?url=http://localhost:8000/mycontent/TrueFalse/getaddon'/></addons><pages><page name='Page 1' href='48' reportable='true'/><header ref='commons/header'/><footer ref='commons/footer'/></pages><assets></assets></interactiveContent>"
+    }
+  }, 
+  {
+    "pk": 48, 
+    "model": "filestorage.filestorage", 
+    "fields": {
+      "modified_date": "2012-10-31 12:27:14", 
+      "history_for": null, 
+      "version": null, 
+      "content_type": "text/xml", 
+      "created_date": "2012-10-31 12:25:50", 
+      "owner": 21, 
+      "contents": "<?xml version='1.0' encoding='UTF-8' ?><page layout='pixels' width='1000' height='0'><modules><textModule id='Title' left='28' top='11' width='520' height='27' isVisible='true'><text draggable='false' gapWidth='0' isActivity='true' isDisabled='false' isCaseSensitive='false'>&lt;div style=&quot;text-align: center;&quot;&gt;Title&lt;/div&gt;</text></textModule><buttonModule id='PrevPage' left='0' top='358' width='57' height='39' isVisible='true'><button type='prevPage' text='left' onclick=''/></buttonModule><buttonModule id='NextPage' left='520' top='358' width='57' height='39' isVisible='true'><button type='nextPage' text='right' onclick=''/></buttonModule><addonModule addonId='Connection' id='Connection1' left='67' top='229' width='241' height='165' isVisible='true'><properties><property name='Single connection mode' type='boolean' value=''/><property name='Left column' type='list'><template><property name='id' type='string' value=''/><property name='content' type='html'></property><property name='connects to' type='string' value=''/><property name='additional class' type='string' value=''/></template><items><item><property name='id' type='string' value=''/><property name='content' type='html'>Karol&lt;br&gt;</property><property name='connects to' type='string' value=''/><property name='additional class' type='string' value=''/></item><item><property name='id' type='string' value=''/><property name='content' type='html'>Michal</property><property name='connects to' type='string' value=''/><property name='additional class' type='string' value=''/></item></items></property><property name='Right column' type='list'><template><property name='id' type='string' value=''/><property name='content' type='html'></property><property name='connects to' type='string' value=''/><property name='additional class' type='string' value=''/></template><items><item><property name='id' type='string' value=''/><property name='content' type='html'>Mateusz&lt;br&gt;</property><property name='connects to' type='string' value=''/><property name='additional class' type='string' value=''/></item><item><property name='id' type='string' value=''/><property name='content' type='html'>Lukasz</property><property name='connects to' type='string' value=''/><property name='additional class' type='string' value=''/></item></items></property><property name='Columns width' type='list'><template><property name='left' type='string' value=''/><property name='middle' type='string' value=''/><property name='right' type='string' value=''/></template><items><item><property name='left' type='string' value=''/><property name='middle' type='string' value=''/><property name='right' type='string' value=''/></item></items></property><property name='Default connection color' type='string' value=''/><property name='Correct connection color' type='string' value=''/><property name='Incorrect connection color' type='string' value=''/><property name='Connection thickness' type='string' value=''/></properties></addonModule><addonModule addonId='TrueFalse' id='TrueFalse1' left='331' top='229' width='233' height='127' isVisible='true'><properties><property name='Multi' type='boolean' value=''/><property name='Questions' type='list'><template><property name='Question' type='string' value=''/><property name='Answer' type='string' value=''/></template><items><item><property name='Question' type='string' value='Is it true?'/><property name='Answer' type='string' value='1'/></item></items></property><property name='Choices' type='list'><template><property name='Choice' type='string' value=''/></template><items><item><property name='Choice' type='string' value='True'/></item><item><property name='Choice' type='string' value='False'/></item></items></property></properties></addonModule></modules></page>"
+    }
+  }, 
+  {
+    "pk": 49, 
+    "model": "filestorage.filestorage", 
+    "fields": {
+      "modified_date": "2012-10-31 12:27:36", 
+      "history_for": 50, 
+      "version": 1, 
+      "content_type": "text/xml", 
+      "created_date": "2012-10-31 12:27:36", 
+      "owner": 21, 
+      "contents": "<?xml version=\"1.0\" encoding=\"UTF-8\" ?> \n<addon id=\"Glossary\">\n\n\t<metadata>\n\t\t<title>Hello world Addon</title>\n\t\t<description>\n\t\t\tEnter addon description here\n\t\t</description>\n\t</metadata>\n\t\n\t<model>\n\t\t<property name=\"Text\" type=\"string\"/>\n\t</model>\n\t\n\t<view>\n\t\t&lt;p&gt;test&lt;/p&gt;\n\t</view>\n\t\n\t<preview>\n\t\t&lt;p&gt;Addon Glossary&lt;/p&gt;\n\t</preview>\n\t\n\t<presenter>\n\t\tfunction AddonGlossary_create(){\n\t\t\t\n\t\t\tvar presenter = function(){}\n\n\t\t\tpresenter.run = function(view, model){\n\t\t\t\t\n\t\t\t\telement = view.getElementsByTagName('p')[0];\n\t\t\t\telement.innerHTML = model['Text'];\n\t\t\t}\n\n\t\t\tpresenter.setShowErrorsMode = function(){\n\t\t\t\telement.innerHTML = 'setShowErrorsMode';\n\t\t\t}\n\t\t\t\n\t\t\tpresenter.setWorkMode = function(){\n\t\t\t\telement.innerHTML = 'setWorkMode';\n\t\t\t}\n\t\t\t\n\t\t\tpresenter.reset = function(){\n\t\t\t\telement.innerHTML = 'Reset';\n\t\t\t}\n\t\t\t\n\t\t\tpresenter.getErrorCount = function(){\n\t\t\t\treturn 7;\n\t\t\t}\n\t\t\t\n\t\t\tpresenter.getMaxScore = function(){\n\t\t\t\treturn 3;\n\t\t\t}\n\t\t\t\n\t\t\tpresenter.getScore = function(){\n\t\t\t\treturn 1;\n\t\t\t}\n\t\t\t\n\t\t\treturn presenter;\n\t\t}\n\t\t\n\t</presenter>\n\t\n</addon>\n"
+    }
+  }, 
+  {
+    "pk": 53, 
+    "model": "filestorage.filestorage", 
+    "fields": {
+      "modified_date": "2012-10-31 12:28:35", 
+      "history_for": 50, 
+      "version": 2, 
+      "content_type": "text/xml", 
+      "created_date": "2012-10-31 12:27:42", 
+      "owner": 21, 
+      "contents": "<?xml version='1.0' encoding='UTF-8' ?><addon id='Glossary'><metadata></metadata><model><property name='List of words' type='list'><property name='ID' type='string' isLocalized='false'/><property name='Text' type='string' isLocalized='false'/><property name='Description' type='text' isLocalized='false'/></property><property name='Visible' type='boolean' isLocalized='false'/></model><libs><js src='jquery.mobile-1.1.1.min.js'/><js src='commons.js'/></libs><resources></resources><css></css><view>&lt;div class=&quot;modal-dialog&quot;&gt;&lt;/div&gt;</view><preview>&lt;div class=&quot;modal-dialog&quot;&gt;&lt;/div&gt;</preview><presenter>            /**\n * Glossary Addon\n * @version 1.2.5\n */\n \nfunction AddonGlossary_create(){\n    var presenter = function() {};\n    presenter.$ICPage = null;\n    presenter.lastReceivedEvent = null;\n    presenter.isPinchZoom = false;\n \n    var playerController;\n    var eventBus;\n \n    presenter.ERROR_MESSAGES = {\n        UNIQUE_ID: &quot;Id of each word must be unique.&quot;\n    };\n \n    presenter.addTitle = function(element, title) {\n        $(element).attr(&apos;title&apos;, title);\n    };\n \n    presenter.addDescription = function(element, description) {\n        $(element).html(description);\n        this.updateLaTeX(description);\n    };\n \n    presenter.updateLaTeX = function(text) {\n        var div = MathJax.HTML.Element(&quot;div&quot;, {id: &quot;MathDiv&quot;}, [text] );\n        var math = MathJax.Hub.getAllJax(div)[0];\n        MathJax.Hub.Queue([&quot;Typeset&quot;, MathJax.Hub, math]);\n    };\n \n    presenter.validateModel = function(model) {\n        var validated = true;\n        var idList = [];\n        for(var i = 0; i &lt; model[&quot;List of words&quot;].length; i++) {\n            var id = model[&quot;List of words&quot;][i][&quot;ID&quot;];\n            if(idList.indexOf(id) &gt;= 0) { // check if id already exist in model\n                validated = false;\n                break;\n            }\n            idList[i] = id;\n        }\n        return validated;\n    };\n \n    presenter.setDisplay = function(element, display) {\n        var currentDisplay = $(element).css(&apos;display&apos;) === &apos;block&apos;;\n        if (currentDisplay != display) {\n            $(element).css({\n                &quot;display&quot;:&quot;block&quot;,\n                &quot;width&quot;:&quot;95%&quot;,\n                &quot;height&quot;:&quot;90%&quot;\n            });\n        }\n    };\n \n    presenter.getDialogDataById = function(id) {\n        var model = this.model;\n        var listOfWords = model[&quot;List of words&quot;];\n        var dialogData = {\n            &quot;title&quot; : &quot;&quot;,\n            &quot;description&quot; : &quot;&quot;\n        };\n        for(var i = 0; i &lt; listOfWords.length; i++) {\n            var elementID = listOfWords[i].ID;\n            if(elementID == id) {\n                dialogData.title = listOfWords[i].Text;\n                dialogData.description = listOfWords[i].Description;\n                return dialogData;\n            }\n        }\n        return dialogData;\n    };\n \n    presenter.findICPage = function () {\n        presenter.$ICPage = $(presenter.$view.parent(&apos;.ic_page:first&apos;)[0]);\n    };\n \n    presenter.openDialogEventHandler = function(event, ui) {\n        var $dialog  = $(event.target).closest(&apos;.ui-dialog&apos;);\n \n        var presentationPosition = $(presenter.$ICPage).offset();\n        var presentationWidth = $(presenter.$ICPage).outerWidth();\n        var presentationHeight = $(presenter.$ICPage).outerHeight();\n \n        var dialogWidth = $dialog.outerWidth();\n        var dialogHeight = $dialog.outerHeight();\n        var scrollTop = $(top.window).scrollTop();\n \n        var windowHeight = $(top.window).height();\n        var visibleArea = presenter.estimateVisibleArea(presentationPosition.top, presentationHeight, scrollTop, windowHeight);\n        var availableHeight = visibleArea.bottom - visibleArea.top;\n \n        if (dialogHeight &gt;= availableHeight) {\n            dialogHeight = presenter.calculateReducedDialogHeight($dialog, availableHeight);\n            $dialog.css({\n                height: dialogHeight + &apos;px&apos;\n            });\n        }\n \n        var topPosition = parseInt((windowHeight - dialogHeight) / 2, 10);\n        var presentationHorizontalOffset = parseInt((presentationWidth - dialogWidth) / 2, 10);\n        var leftPosition = presentationPosition.left + presentationHorizontalOffset;\n \n        // adjust top position if Player was embedded in iframe (i.e. EverTeach)\n        if (window !== top.window) {\n            var iframe = window.parent.document.getElementsByTagName(&apos;iframe&apos;);\n            var offset = parseInt($(iframe).offset().top, 10);\n            var iframeDialogHeight = parseInt($dialog.height(), 10);\n            iframeDialogHeight += DOMOperationsUtils.calculateOuterDistances(DOMOperationsUtils.getOuterDimensions($dialog)).vertical;\n \n            topPosition -= offset - scrollTop;\n \n            if (topPosition &lt; 0) {\n                topPosition = 0;\n            } else if (topPosition &gt; $(window).height() - iframeDialogHeight) {\n                topPosition = $(window).height() - iframeDialogHeight;\n            }\n        }\n \n        $dialog.css({\n            position: &apos;fixed&apos;,\n            left: leftPosition + &apos;px&apos;,\n            top: topPosition + &apos;px&apos;\n        });\n \n        // due to the inability to close the dialog, when any video is under close button\n        var videos = presenter.$ICPage.find(&apos;video&apos;);\n        $.each(videos, function(){\n            $(this).removeAttr(&apos;controls&apos;);\n        });\n \n    };\n \n    presenter.closeDialogEventHandler = function() {\n        // due to the inability to close the dialog, when any video is under close button\n        var videos = presenter.$ICPage.find(&apos;video&apos;);\n        $.each(videos, function(){\n            $(this).attr(&apos;controls&apos;, &apos;controls&apos;);\n        });\n        presenter.dialog.css(&quot;maxHeight&quot;, &quot;none&quot;);\n    };\n \n    presenter.show = function(id){\n        var dialog = this.dialog;\n        var dialogData = presenter.getDialogDataById(id);\n        dialog.dialog(&quot;option&quot;, &quot;title&quot;, dialogData.title);\n        presenter.addDescription(dialog, dialogData.description);\n        dialog.dialog(&quot;open&quot;);\n    };\n \n    presenter.initializeView = function(view, model) {\n        presenter.model = model;\n        presenter.$view = $(view);\n        presenter.findICPage();\n        presenter.title = &quot;&quot;;\n        presenter.description = &quot;&quot;;\n \n        var dialog = presenter.$view.find(&quot;.modal-dialog&quot;);\n        dialog.dialog({\n            modal: true,\n            autoOpen: false,\n            draggable: false,\n            width: model.Width,\n            minHeight: &apos;auto&apos;,\n            resizable: false,\n            open: presenter.openDialogEventHandler,\n            close: presenter.closeDialogEventHandler\n        });\n        $(view).append(dialog.dialog(&quot;widget&quot;));\n        presenter.dialog = dialog;\n    };\n \n    presenter.calculateReducedDialogHeight = function($dialog, pageHeight) {\n        var titleHeight = $dialog.find(&quot;.ui-dialog-titlebar&quot;).outerHeight();\n        var padding = parseInt($dialog.css(&quot;padding-top&quot;)) + parseInt($dialog.css(&quot;padding-bottom&quot;));\n \n        var $content = $dialog.find(&apos;.ui-dialog-content&apos;);\n        var contentPadding = parseInt($content.css(&apos;paddingTop&apos;), 10) + parseInt($content.css(&apos;paddingBottom&apos;), 10);\n        var contentBorder = parseInt($content.css(&apos;borderTopWidth&apos;), 10) + parseInt($content.css(&apos;borderBottomWidth&apos;), 10);\n        var contentMargin = parseInt($content.css(&apos;marginTop&apos;), 10) + parseInt($content.css(&apos;marginBottom&apos;), 10);\n \n        return pageHeight - padding - titleHeight - contentPadding - contentBorder - contentMargin;\n    };\n \n    presenter.estimateVisibleArea = function(presentationTop, presentationHeight, scrollTop, windowHeight) {\n        var borders = {\n            top: presentationTop,\n            bottom: presentationTop + presentationHeight\n        };\n \n        if (presentationTop &lt; scrollTop) {\n            borders.top = scrollTop;\n        }\n \n        if (presentationTop + presentationHeight &gt; scrollTop + windowHeight) {\n            borders.bottom = scrollTop + windowHeight;\n        }\n \n        return borders;\n    };\n \n    presenter.createPreview = function(view, model) {\n        var validated = presenter.validateModel(model);\n        if(validated) {\n            var dialog = $(view).find(&quot;.modal-dialog&quot;);\n            var visible = ModelValidationUtils.validateBoolean(model[&quot;Visible&quot;]);\n            var title = model[&quot;List of words&quot;][0][&quot;Text&quot;];\n            var description = model[&quot;List of words&quot;][0][&quot;Description&quot;];\n \n            presenter.addTitle(dialog, title);\n            presenter.addDescription(dialog, description);\n \n            dialog.dialog({\n                modal: false,\n                autoOpen: false,\n                zIndex : 0,\n                stack: false,\n                draggable: false,\n                width: model.Width,\n                resizable: false\n            });\n \n            var preview = dialog.dialog(&quot;widget&quot;);\n            presenter.setDisplay(preview, visible);\n \n            $(view).append(preview);\n        } else {\n            $(view).html(presenter.ERROR_MESSAGES[&quot;UNIQUE_ID&quot;]);\n        }\n    };\n \n    presenter.showCommand = function (params) {\n        presenter.show(params[0]);\n    };\n \n    presenter.executeCommand = function(name, params) {\n        var commands = {\n            &apos;show&apos;: presenter.showCommand\n        };\n \n        Commands.dispatch(commands, name, params, presenter);\n    };\n \n    presenter.setPlayerController = function(controller) {\n        playerController = controller;\n    };\n \n    presenter.onEventReceived = function(eventName, eventData) {\n        presenter.show(eventData.word);\n    };\n \n    function areTwoFingersOnTheScreen(event) {\n        return !!(event.originalEvent.touches.length &gt;= 2);\n    }\n \n    function isTap(event) {\n        return presenter.lastReceivedEvent == &quot;touchstart&quot;\n            &amp;&amp; event.type == &quot;touchend&quot;\n            &amp;&amp; !presenter.isPinchZoom;\n    }\n \n    presenter.shouldCloseDialog = function(event) {\n        if(event.type == &quot;click&quot; || isTap(event)) return true;\n \n        if(areTwoFingersOnTheScreen(event)) {\n            this.isPinchZoom = true;\n            return false;\n        }\n \n        this.isPinchZoom = false;\n        this.lastReceivedEvent = event.type;\n        return false;\n    };\n \n    function bindEvents() {\n        $(&quot;.ui-widget-overlay&quot;).live(&quot;click touchstart touchend touchmove&quot;, function(event){\n            if(presenter.shouldCloseDialog(event)){\n                presenter.dialog.dialog(&quot;close&quot;);\n            }\n        });\n    }\n \n    presenter.run = function(view, model){\n        presenter.initializeView(view, model);\n        eventBus = playerController.getEventBus();\n        eventBus.addEventListener(&apos;Definition&apos;, this);\n        bindEvents();\n    };\n \n    return presenter;\n}</presenter></addon>"
+    }
+  }, 
+  {
+    "pk": 55, 
+    "model": "filestorage.filestorage", 
+    "fields": {
+      "modified_date": "2012-10-31 12:28:40", 
+      "history_for": 50, 
+      "version": 3, 
+      "content_type": "text/xml", 
+      "created_date": "2012-10-31 12:28:40", 
+      "owner": 21, 
+      "contents": "<?xml version='1.0' encoding='UTF-8' ?><addon id='Glossary'><metadata></metadata><model><property name='List of words' type='list'><property name='ID' type='string' isLocalized='false'/><property name='Text' type='string' isLocalized='false'/><property name='Description' type='text' isLocalized='false'/></property><property name='Visible' type='boolean' isLocalized='false'/></model><libs><js src='jquery.mobile-1.1.1.min.js'/><js src='commons.js'/></libs><resources></resources><css></css><view>&lt;div class=&quot;modal-dialog&quot;&gt;&lt;/div&gt;</view><preview>&lt;div class=&quot;modal-dialog&quot;&gt;&lt;/div&gt;</preview><presenter>            /**\n * Glossary Addon\n * @version 1.2.5\n */\n \nfunction AddonGlossary_create(){\n    var presenter = function() {};\n    presenter.$ICPage = null;\n    presenter.lastReceivedEvent = null;\n    presenter.isPinchZoom = false;\n \n    var playerController;\n    var eventBus;\n \n    presenter.ERROR_MESSAGES = {\n        UNIQUE_ID: &quot;Id of each word must be unique.&quot;\n    };\n \n    presenter.addTitle = function(element, title) {\n        $(element).attr(&apos;title&apos;, title);\n    };\n \n    presenter.addDescription = function(element, description) {\n        $(element).html(description);\n        this.updateLaTeX(description);\n    };\n \n    presenter.updateLaTeX = function(text) {\n        var div = MathJax.HTML.Element(&quot;div&quot;, {id: &quot;MathDiv&quot;}, [text] );\n        var math = MathJax.Hub.getAllJax(div)[0];\n        MathJax.Hub.Queue([&quot;Typeset&quot;, MathJax.Hub, math]);\n    };\n \n    presenter.validateModel = function(model) {\n        var validated = true;\n        var idList = [];\n        for(var i = 0; i &lt; model[&quot;List of words&quot;].length; i++) {\n            var id = model[&quot;List of words&quot;][i][&quot;ID&quot;];\n            if(idList.indexOf(id) &gt;= 0) { // check if id already exist in model\n                validated = false;\n                break;\n            }\n            idList[i] = id;\n        }\n        return validated;\n    };\n \n    presenter.setDisplay = function(element, display) {\n        var currentDisplay = $(element).css(&apos;display&apos;) === &apos;block&apos;;\n        if (currentDisplay != display) {\n            $(element).css({\n                &quot;display&quot;:&quot;block&quot;,\n                &quot;width&quot;:&quot;95%&quot;,\n                &quot;height&quot;:&quot;90%&quot;\n            });\n        }\n    };\n \n    presenter.getDialogDataById = function(id) {\n        var model = this.model;\n        var listOfWords = model[&quot;List of words&quot;];\n        var dialogData = {\n            &quot;title&quot; : &quot;&quot;,\n            &quot;description&quot; : &quot;&quot;\n        };\n        for(var i = 0; i &lt; listOfWords.length; i++) {\n            var elementID = listOfWords[i].ID;\n            if(elementID == id) {\n                dialogData.title = listOfWords[i].Text;\n                dialogData.description = listOfWords[i].Description;\n                return dialogData;\n            }\n        }\n        return dialogData;\n    };\n \n    presenter.findICPage = function () {\n        presenter.$ICPage = $(presenter.$view.parent(&apos;.ic_page:first&apos;)[0]);\n    };\n \n    presenter.openDialogEventHandler = function(event, ui) {\n        var $dialog  = $(event.target).closest(&apos;.ui-dialog&apos;);\n \n        var presentationPosition = $(presenter.$ICPage).offset();\n        var presentationWidth = $(presenter.$ICPage).outerWidth();\n        var presentationHeight = $(presenter.$ICPage).outerHeight();\n \n        var dialogWidth = $dialog.outerWidth();\n        var dialogHeight = $dialog.outerHeight();\n        var scrollTop = $(top.window).scrollTop();\n \n        var windowHeight = $(top.window).height();\n        var visibleArea = presenter.estimateVisibleArea(presentationPosition.top, presentationHeight, scrollTop, windowHeight);\n        var availableHeight = visibleArea.bottom - visibleArea.top;\n \n        if (dialogHeight &gt;= availableHeight) {\n            dialogHeight = presenter.calculateReducedDialogHeight($dialog, availableHeight);\n            $dialog.css({\n                height: dialogHeight + &apos;px&apos;\n            });\n        }\n \n        var topPosition = parseInt((windowHeight - dialogHeight) / 2, 10);\n        var presentationHorizontalOffset = parseInt((presentationWidth - dialogWidth) / 2, 10);\n        var leftPosition = presentationPosition.left + presentationHorizontalOffset;\n \n        // adjust top position if Player was embedded in iframe (i.e. EverTeach)\n        if (window !== top.window) {\n            var iframe = window.parent.document.getElementsByTagName(&apos;iframe&apos;);\n            var offset = parseInt($(iframe).offset().top, 10);\n            var iframeDialogHeight = parseInt($dialog.height(), 10);\n            iframeDialogHeight += DOMOperationsUtils.calculateOuterDistances(DOMOperationsUtils.getOuterDimensions($dialog)).vertical;\n \n            topPosition -= offset - scrollTop;\n \n            if (topPosition &lt; 0) {\n                topPosition = 0;\n            } else if (topPosition &gt; $(window).height() - iframeDialogHeight) {\n                topPosition = $(window).height() - iframeDialogHeight;\n            }\n        }\n \n        $dialog.css({\n            position: &apos;fixed&apos;,\n            left: leftPosition + &apos;px&apos;,\n            top: topPosition + &apos;px&apos;\n        });\n \n        // due to the inability to close the dialog, when any video is under close button\n        var videos = presenter.$ICPage.find(&apos;video&apos;);\n        $.each(videos, function(){\n            $(this).removeAttr(&apos;controls&apos;);\n        });\n \n    };\n \n    presenter.closeDialogEventHandler = function() {\n        // due to the inability to close the dialog, when any video is under close button\n        var videos = presenter.$ICPage.find(&apos;video&apos;);\n        $.each(videos, function(){\n            $(this).attr(&apos;controls&apos;, &apos;controls&apos;);\n        });\n        presenter.dialog.css(&quot;maxHeight&quot;, &quot;none&quot;);\n    };\n \n    presenter.show = function(id){\n        var dialog = this.dialog;\n        var dialogData = presenter.getDialogDataById(id);\n        dialog.dialog(&quot;option&quot;, &quot;title&quot;, dialogData.title);\n        presenter.addDescription(dialog, dialogData.description);\n        dialog.dialog(&quot;open&quot;);\n    };\n \n    presenter.initializeView = function(view, model) {\n        presenter.model = model;\n        presenter.$view = $(view);\n        presenter.findICPage();\n        presenter.title = &quot;&quot;;\n        presenter.description = &quot;&quot;;\n \n        var dialog = presenter.$view.find(&quot;.modal-dialog&quot;);\n        dialog.dialog({\n            modal: true,\n            autoOpen: false,\n            draggable: false,\n            width: model.Width,\n            minHeight: &apos;auto&apos;,\n            resizable: false,\n            open: presenter.openDialogEventHandler,\n            close: presenter.closeDialogEventHandler\n        });\n        $(view).append(dialog.dialog(&quot;widget&quot;));\n        presenter.dialog = dialog;\n    };\n \n    presenter.calculateReducedDialogHeight = function($dialog, pageHeight) {\n        var titleHeight = $dialog.find(&quot;.ui-dialog-titlebar&quot;).outerHeight();\n        var padding = parseInt($dialog.css(&quot;padding-top&quot;)) + parseInt($dialog.css(&quot;padding-bottom&quot;));\n \n        var $content = $dialog.find(&apos;.ui-dialog-content&apos;);\n        var contentPadding = parseInt($content.css(&apos;paddingTop&apos;), 10) + parseInt($content.css(&apos;paddingBottom&apos;), 10);\n        var contentBorder = parseInt($content.css(&apos;borderTopWidth&apos;), 10) + parseInt($content.css(&apos;borderBottomWidth&apos;), 10);\n        var contentMargin = parseInt($content.css(&apos;marginTop&apos;), 10) + parseInt($content.css(&apos;marginBottom&apos;), 10);\n \n        return pageHeight - padding - titleHeight - contentPadding - contentBorder - contentMargin;\n    };\n \n    presenter.estimateVisibleArea = function(presentationTop, presentationHeight, scrollTop, windowHeight) {\n        var borders = {\n            top: presentationTop,\n            bottom: presentationTop + presentationHeight\n        };\n \n        if (presentationTop &lt; scrollTop) {\n            borders.top = scrollTop;\n        }\n \n        if (presentationTop + presentationHeight &gt; scrollTop + windowHeight) {\n            borders.bottom = scrollTop + windowHeight;\n        }\n \n        return borders;\n    };\n \n    presenter.createPreview = function(view, model) {\n        var validated = presenter.validateModel(model);\n        if(validated) {\n            var dialog = $(view).find(&quot;.modal-dialog&quot;);\n            var visible = ModelValidationUtils.validateBoolean(model[&quot;Visible&quot;]);\n            var title = model[&quot;List of words&quot;][0][&quot;Text&quot;];\n            var description = model[&quot;List of words&quot;][0][&quot;Description&quot;];\n \n            presenter.addTitle(dialog, title);\n            presenter.addDescription(dialog, description);\n \n            dialog.dialog({\n                modal: false,\n                autoOpen: false,\n                zIndex : 0,\n                stack: false,\n                draggable: false,\n                width: model.Width,\n                resizable: false\n            });\n \n            var preview = dialog.dialog(&quot;widget&quot;);\n            presenter.setDisplay(preview, visible);\n \n            $(view).append(preview);\n        } else {\n            $(view).html(presenter.ERROR_MESSAGES[&quot;UNIQUE_ID&quot;]);\n        }\n    };\n \n    presenter.showCommand = function (params) {\n        presenter.show(params[0]);\n    };\n \n    presenter.executeCommand = function(name, params) {\n        var commands = {\n            &apos;show&apos;: presenter.showCommand\n        };\n \n        Commands.dispatch(commands, name, params, presenter);\n    };\n \n    presenter.setPlayerController = function(controller) {\n        playerController = controller;\n    };\n \n    presenter.onEventReceived = function(eventName, eventData) {\n        presenter.show(eventData.word);\n    };\n \n    function areTwoFingersOnTheScreen(event) {\n        return !!(event.originalEvent.touches.length &gt;= 2);\n    }\n \n    function isTap(event) {\n        return presenter.lastReceivedEvent == &quot;touchstart&quot;\n            &amp;&amp; event.type == &quot;touchend&quot;\n            &amp;&amp; !presenter.isPinchZoom;\n    }\n \n    presenter.shouldCloseDialog = function(event) {\n        if(event.type == &quot;click&quot; || isTap(event)) return true;\n \n        if(areTwoFingersOnTheScreen(event)) {\n            this.isPinchZoom = true;\n            return false;\n        }\n \n        this.isPinchZoom = false;\n        this.lastReceivedEvent = event.type;\n        return false;\n    };\n \n    function bindEvents() {\n        $(&quot;.ui-widget-overlay&quot;).live(&quot;click touchstart touchend touchmove&quot;, function(event){\n            if(presenter.shouldCloseDialog(event)){\n                presenter.dialog.dialog(&quot;close&quot;);\n            }\n        });\n    }\n \n    presenter.run = function(view, model){\n        presenter.initializeView(view, model);\n        eventBus = playerController.getEventBus();\n        eventBus.addEventListener(&apos;Definition&apos;, this);\n        bindEvents();\n    };\n \n    return presenter;\n}</presenter></addon>"
+    }
+  }, 
+  {
+    "pk": 57, 
+    "model": "filestorage.filestorage", 
+    "fields": {
+      "modified_date": "2012-10-31 12:29:53", 
+      "history_for": 30, 
+      "version": 4, 
+      "content_type": "text/xml", 
+      "created_date": "2012-10-31 12:28:55", 
+      "owner": 21, 
+      "contents": "<?xml version='1.0' encoding='UTF-8' ?><interactiveContent><metadata></metadata><addons><addon-descriptor addonId='Connection' href='/proxy/get?url=http://localhost:8000/mycontent/Connection/getaddon'/><addon-descriptor addonId='TrueFalse' href='/proxy/get?url=http://localhost:8000/mycontent/TrueFalse/getaddon'/><addon-descriptor addonId='Glossary' href='/proxy/get?url=http://localhost:8000/mycontent/Glossary/getaddon'/></addons><pages><page name='Page 1' href='58' id='random' reportable='true'/><header ref='commons/header'/><footer ref='commons/footer'/></pages><assets></assets></interactiveContent>"
+    }
+  }, 
+  {
+    "pk": 58, 
+    "model": "filestorage.filestorage", 
+    "fields": {
+      "modified_date": "2012-10-31 12:29:53", 
+      "history_for": null, 
+      "version": null, 
+      "content_type": "text/xml", 
+      "created_date": "2012-10-31 12:28:56", 
+      "owner": 21, 
+      "contents": "<?xml version='1.0' encoding='UTF-8' ?><page layout='pixels' width='1000' height='0'><modules><textModule id='Title' left='28' top='11' width='520' height='27' isVisible='true'><text draggable='false' gapWidth='0' isActivity='true' isDisabled='false' isCaseSensitive='false'>&lt;div style=&quot;text-align: center;&quot;&gt;Title&lt;/div&gt;</text></textModule><buttonModule id='PrevPage' left='0' top='358' width='57' height='39' isVisible='true'><button type='prevPage' text='left' onclick=''/></buttonModule><buttonModule id='NextPage' left='520' top='358' width='57' height='39' isVisible='true'><button type='nextPage' text='right' onclick=''/></buttonModule><addonModule addonId='Connection' id='Connection1' left='67' top='229' width='241' height='165' isVisible='true'><properties><property name='Single connection mode' type='boolean' value=''/><property name='Left column' type='list'><template><property name='id' type='string' value=''/><property name='content' type='html'></property><property name='connects to' type='string' value=''/><property name='additional class' type='string' value=''/></template><items><item><property name='id' type='string' value=''/><property name='content' type='html'>Karol&lt;br&gt;</property><property name='connects to' type='string' value=''/><property name='additional class' type='string' value=''/></item><item><property name='id' type='string' value=''/><property name='content' type='html'>Michal</property><property name='connects to' type='string' value=''/><property name='additional class' type='string' value=''/></item></items></property><property name='Right column' type='list'><template><property name='id' type='string' value=''/><property name='content' type='html'></property><property name='connects to' type='string' value=''/><property name='additional class' type='string' value=''/></template><items><item><property name='id' type='string' value=''/><property name='content' type='html'>Mateusz&lt;br&gt;</property><property name='connects to' type='string' value=''/><property name='additional class' type='string' value=''/></item><item><property name='id' type='string' value=''/><property name='content' type='html'>Lukasz</property><property name='connects to' type='string' value=''/><property name='additional class' type='string' value=''/></item></items></property><property name='Columns width' type='list'><template><property name='left' type='string' value=''/><property name='middle' type='string' value=''/><property name='right' type='string' value=''/></template><items><item><property name='left' type='string' value=''/><property name='middle' type='string' value=''/><property name='right' type='string' value=''/></item></items></property><property name='Default connection color' type='string' value=''/><property name='Correct connection color' type='string' value=''/><property name='Incorrect connection color' type='string' value=''/><property name='Connection thickness' type='string' value=''/></properties></addonModule><addonModule addonId='TrueFalse' id='TrueFalse1' left='331' top='229' width='233' height='127' isVisible='true'><properties><property name='Multi' type='boolean' value=''/><property name='Questions' type='list'><template><property name='Question' type='string' value=''/><property name='Answer' type='string' value=''/></template><items><item><property name='Question' type='string' value='Is it true?'/><property name='Answer' type='string' value='1'/></item></items></property><property name='Choices' type='list'><template><property name='Choice' type='string' value=''/></template><items><item><property name='Choice' type='string' value='True'/></item><item><property name='Choice' type='string' value='False'/></item></items></property></properties></addonModule><choiceModule id='Choice1' left='9' top='53' width='100' height='100' isVisible='true'><options><option value='1'><text>A</text><feedback></feedback></option><option value='0'><text>B</text><feedback></feedback></option></options></choiceModule><orderingModule id='Ordering1' left='132' top='52' width='100' height='100' isVisible='true'><ordering isVertical='true' optionalOrder=''/><item>1</item><item>2</item><item>3</item></orderingModule><sourceListModule id='Source list1' left='260' top='54' width='100' height='100' isVisible='true'><items removable='True' vertical='False' ><item text='Item 1'/><item text='Item 2'/><item text='Item 3'/></items></sourceListModule><reportModule id='Report1' left='552' top='20' width='100' height='100' isVisible='true'><labels><label name='ErrorCount' value='No of errors'/><label name='CheckCount' value='No of checks'/><label name='Results' value='Results:'/><label name='Total' value='Total:'/></labels></reportModule><addonModule addonId='Glossary' id='Glossary1' left='677' top='235' width='209' height='150' isVisible='true'><properties><property name='List of words' type='list'><template><property name='ID' type='string' value=''/><property name='Text' type='string' value=''/><property name='Description' type='text'></property></template><items><item><property name='ID' type='string' value='1'/><property name='Text' type='string' value='Key'/><property name='Description' type='text'>Key is a key to victory</property></item></items></property><property name='Visible' type='boolean' value=''/></properties></addonModule></modules></page>"
+    }
+  }, 
+  {
+    "pk": 59, 
+    "model": "filestorage.uploadedfile", 
+    "fields": {
+      "owner": null, 
+      "title": null, 
+      "content_type": "application/x-liff+xml", 
+      "file": "LXzRTKwxbX8AmhvXLWJtzW7TomcgoTmo6KKjDLKEUBKd41Oonli82xsVX4akFUm8", 
+      "filename": null
+    }
+  }, 
+  {
+    "pk": 60, 
+    "model": "filestorage.uploadedfile", 
+    "fields": {
+      "owner": null, 
+      "title": null, 
+      "content_type": "application/x-liff+xml", 
+      "file": "WkfdYP4XfVzd6MVmKxva3SFxE9MBXS0WxBCKb0Z8kl4wx5rbMtiPv2xeD6ky7YIf", 
+      "filename": null
+    }
+  }, 
+  {
+    "pk": 61, 
+    "model": "filestorage.uploadedfile", 
+    "fields": {
+      "owner": null, 
+      "title": null, 
+      "content_type": "application/x-liff+xml", 
+      "file": "X2b7Lp8kt6dxM8ePBcFV2jeHkHQYCDnTkSTH2M8YMe7X9noYeaMH8ZhhWo78PPrB", 
+      "filename": null
+    }
+  }, 
+  {
+    "pk": 62, 
+    "model": "filestorage.uploadedfile", 
+    "fields": {
+      "owner": null, 
+      "title": null, 
+      "content_type": "application/x-liff+xml", 
+      "file": "cF2SpP3X8r8JodlHBMit7Tw73H3IoYZgDHH0RJ9BkwcpjhFZnkQiLi51cNKINUNO", 
+      "filename": null
+    }
+  }, 
+  {
+    "pk": 27, 
+    "model": "admin.logentry", 
+    "fields": {
+      "action_flag": 1, 
+      "action_time": "2012-10-31 11:24:06", 
+      "object_repr": "kgebert:kgebert <owner>", 
+      "object_id": "26", 
+      "change_message": "", 
+      "user": 21, 
+      "content_type": 25
+    }
+  }, 
+  {
+    "pk": 24, 
+    "model": "admin.logentry", 
+    "fields": {
+      "action_flag": 1, 
+      "action_time": "2012-10-31 11:23:57", 
+      "object_repr": "kgebert", 
+      "object_id": "23", 
+      "change_message": "", 
+      "user": 21, 
+      "content_type": 22
+    }
+  }
+]

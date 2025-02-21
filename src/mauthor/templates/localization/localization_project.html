@@ -1,0 +1,9 @@
+{% if show %}
+	<optgroup label="{{project}}">
+	{% for space in spaces %}
+	<option value="{{space.id}}">
+		{{space.title|truncatewords:4}}
+	</option>
+	{% endfor %}
+	</optgroup>
+{% endif %}

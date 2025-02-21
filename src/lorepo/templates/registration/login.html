@@ -1,0 +1,59 @@
+{% extends "base_no_container.html" %}
+{% load i18n %}
+{% load apptags %}
+
+{% block content %}
+<div class="content-container">
+    <div id="authorization-container" class="panel panel-primary">
+        <div class="panel-heading">
+            <h1>Login</h1>
+
+            <h5>Here you can login to our site</h5>
+        </div>
+        <div class="alert {% if form.non_field_errors %}alert-block{% endif %} alert-warning">
+            {{ form.non_field_errors }}
+        </div>
+        <form method="post" action="/accounts/login" name="login" role="form">
+            {% csrf_token %}
+            <div class="form-group">
+                <label>Username:</label>
+                <input id="id_username" type="text" name="username" placeholder="Username" class="form-control" />
+                {% if form.username.errors %}
+                {% for error in form.username.errors %}
+                    {{ error }}
+                {% endfor %}
+            {% endif %}
+            </div>
+            <div class="form-group">
+                <label>Password:</label>
+                <input id="id_password" type="password" name="password" placeholder="Password" class="form-control" />
+                {% if form.password.errors %}
+                    {% for error in form.password.errors %}
+                        {{ error }}
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <div class="checkbox">
+                <label>
+                    Remember Me {{ form.remember_me }}
+                </label>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Log In</button>
+            </div>
+            <input type="hidden" name="next" value="{{ next }}" />
+        </form>
+
+        <div class="panel-footer">
+            <p>
+                {% trans "Forgot password" %}?
+                <a href="/user/reset_password">{% trans "Reset it" %}</a>!
+            </p>
+            <p>
+                {% trans "Not member" %}?
+                <a href="{% url 'registration_register' %}">{% trans "Register" %}</a>!
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}

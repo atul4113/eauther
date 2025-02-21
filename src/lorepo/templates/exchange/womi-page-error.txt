@@ -1,0 +1,10 @@
+{% autoescape off %}
+Dear {{ user }},
+<p>
+Exporting page {{ page_index }} from lesson {{ content.title }} as WOMI failed.
+</p>
+
+<p>
+Please try again or contact administrators.
+</p>
+{% endautoescape %}

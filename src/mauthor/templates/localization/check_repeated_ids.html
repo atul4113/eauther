@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load apptags %}
+{% load utility %}
+
+{% block content %}
+<div>
+	<div class="alert warning" style="display:block">
+		This lesson has repeated IDs of HTML elements. This is incorrect and may cause unexpected problems.
+		Please go back and fix it in <a href="/mycontent/{{ content_id }}/editor?next={{ back_url }}">Editor</a>.
+		
+		<p>List of repeated IDs:</p>
+		
+		{% for repeated in repeated_ids %}
+			<div><b>Page:</b> {{ repeated.page }}, <b>ID:</b> {{ repeated.id }}</div>
+		{% endfor %}
+		
+	</div>
+	<div class="button-left">
+		{% with request.get_full_path|remove_request_token|stringformat:"s" as s %}
+			{% with "parent.location='"|add:s|add:"&confirmed=True'" as url %}
+				{% button 'Continue Anyway' url %}
+			{% endwith %}
+		{% endwith %}
+	</div>
+	<div class="button-right">
+		{% with back_url|stringformat:"s" as s %}
+			{% with "parent.location='"|add:s|add:"'" as url %}
+				{% button 'Go Back' url %}
+			{% endwith %}
+		{% endwith %}
+	</div>
+</div>
+{% endblock %}

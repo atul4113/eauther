@@ -1,0 +1,33 @@
+<mat-form-field *ngIf="editValue.fieldType.isShortText()">
+    <input matInput
+           [(ngModel)]="editValue.value"
+           [disabled]="!editValue.isEnabled"
+           [placeholder]="editValue.name">
+</mat-form-field>
+
+<mat-form-field *ngIf="editValue.fieldType.isLongText()">
+    <textarea matInput
+              [(ngModel)]="editValue.value"
+              [disabled]="!editValue.isEnabled"
+              [placeholder]="editValue.name"
+              matTextareaAutosize
+              matAutosizeMinRows="3"
+              matAutosizeMaxRows="6"></textarea>
+</mat-form-field>
+
+<mat-form-field *ngIf="editValue.fieldType.isSelect()">
+    <mat-select
+        [(value)]="editValue.value"
+        [disabled]="!editValue.isEnabled"
+        [placeholder]="editValue.name">
+        <mat-option *ngFor="let value of values"
+            [value]="value">
+            {{ value }}
+        </mat-option>
+    </mat-select>
+</mat-form-field>
+
+
+<mat-slide-toggle
+    [(ngModel)]="editValue.isEnabled"
+    color="primary"></mat-slide-toggle>

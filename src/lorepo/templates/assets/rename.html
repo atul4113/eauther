@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load apptags %}
+
+{% block content %}
+
+<h1 class="page_header">Edit asset title</h1>
+<div class="main clear" style="padding-top: 0"></div>
+
+
+<form name="rename" method="POST" action="/assets/rename/{{content.id}}/{{asset.href}}">
+	<input type="text" name="title" value="{{asset.title}}"/>
+</form>
+<div class="button-left">
+	{% button 'Rename' 'document.forms["rename"].submit()' %}
+</div>
+<div class="main clear"></div>
+
+{% endblock %}

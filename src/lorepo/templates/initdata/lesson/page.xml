@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<page layout="percentage" scoring="percentage" version="3">
+    <layouts>
+        <layout id="default" width="0" height="0" isDefault="true"/>
+    </layouts>
+	<modules>
+		<textModule id="Title">
+            <layouts>
+                <layout id="default" isVisible="true" isLocked="false">
+                    <absolute  left="223" top="4" width="131" height="25" right="0" bottom="0"/>
+                    <relative type="LTWH">
+                        <left relative="" property="left" />
+                        <top relative="" property="top" />
+                        <right relative="" property="right" />
+                        <bottom relative="" property="bottom" />
+                    </relative>
+                </layout>
+            </layouts>
+			<text draggable="false" gapWidth="0" isActivity="true"
+				isIgnorePunctuation="false" isDisabled="false" isCaseSensitive="false"
+				openLinksinNewTab="true">
+				Title
+			</text>
+		</textModule>
+		<buttonModule id="PrevPage" >
+            <layouts>
+                <layout id="default" isVisible="true" isLocked="false">
+                    <absolute left="7" top="345" width="44" height="44" right="0" bottom="0" />
+                    <relative type="LTWH">
+                        <left relative="" property="left" />
+                        <top relative="" property="top" />
+                        <right relative="" property="right" />
+                        <bottom relative="" property="bottom" />
+                    </relative>
+                </layout>
+            </layouts>
+			<button type="prevPage" text="" onclick="" />
+		</buttonModule>
+		<buttonModule id="NextPage" >
+            <layouts>
+                <layout id="default" isVisible="true" isLocked="false">
+                    <absolute left="522" top="343" width="44" height="44" right="0" bottom="0"/>
+                    <relative type="LTWH">
+                        <left relative="" property="left" />
+                        <top relative="" property="top" />
+                        <right relative="" property="right" />
+                        <bottom relative="" property="bottom" />
+                    </relative>
+                </layout>
+            </layouts>
+			<button type="nextPage" text="" onclick="" />
+		</buttonModule>
+	</modules>
+</page>

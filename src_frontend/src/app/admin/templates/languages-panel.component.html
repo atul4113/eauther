@@ -1,0 +1,135 @@
+<div id="admin-panel">
+    <div class="page-title-bar flex-row with-dots">
+
+        <a class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored back-button" [routerLink]="'/panel/translations/'">
+           <i class="material-icons">chevron_left</i>
+        </a>
+
+        <div class="page-title-bar__header">
+            <h1> {{ translations | getLabel:"plain.translations.panel.translations_panel" }}</h1>
+        </div>
+    </div>
+    <div putFooterBottom class="page-content">
+        <div *ngIf="!isInitialized"
+             mdl
+             class="app-loading-wrapper">
+            <app-loading></app-loading>
+        </div>
+
+        <div *ngIf="isInitialized"
+             mdl>
+            <div class="mdl-grid">
+
+                <div class="mdl-cell mdl-cell--10-col-phone mdl-cell--10-col-tablet mdl-cell--10-col-desktop mdl-cell--1-offset-desktop ">
+                    <h4>{{ translations | getLabel:"plain.translations.panel.languages_panel"  }}</h4>
+
+                    <div>
+                        <div>
+                            <table mdl class="mdl-data-table mdl-js-data-table mdl-shadow--2dp mdl-cell mdl-cell--12-col data-table-info">
+                                <thead>
+                                <tr class="data-table-info-header">
+                                    <th class="mdl-data-table__cell--non-numeric">
+                                        <span class="content-vertical-align-middle">{{ translations | getLabel:"plain.languages.panel.lang_key"  }}</span>
+                                    </th>
+
+                                    <th class="mdl-data-table__cell--non-numeric">
+                                        <span class="content-vertical-align-middle">{{ translations | getLabel:"plain.languages.panel.description"  }}</span>
+                                    </th>
+
+                                    <th class="mdl-data-table__cell--non-numeric">
+                                        <span class="content-vertical-align-middle">{{ translations | getLabel:"plain.languages.panel.export_labels"  }}</span>
+                                    </th>
+
+                                    <th class="mdl-data-table__cell--non-numeric">
+                                        <span class="content-vertical-align-middle">{{ translations | getLabel:"plain.languages.panel.action"  }}</span>
+                                    </th>
+
+                                </tr>
+                                </thead>
+
+                                <tbody>
+                                <tr *ngFor="let lang of languages; let i = index; let last = last" [mdlup]="last" [mdlup-always]="true">
+
+                                    <td class="mdl-data-table__cell--non-numeric">
+                                        {{ lang.key }}
+                                    </td>
+
+                                    <td class="mdl-data-table__cell--non-numeric">
+                                        <div class="content-vertical-align-middle">
+                                            {{ lang.description }}
+                                        </div>
+                                    </td>
+
+                                    <td class="mdl-data-table__cell--non-numeric">
+                                        <button (click)="exportLabels(lang)" class="mdl-button mdl-js-button mdl-button--accent button-lowercase"> {{ lang.key }}.json </button>
+                                    </td>
+
+                                    <td class="mdl-data-table__cell--non-numeric">
+                                        <div *ngIf="lang.isDefault" class="default-language">{{ translations | getLabel:"plain.languages.panel.default_cant_delete"  }}</div>
+                                        <button *ngIf="!lang.isDefault" (click)="deleteLanguage(lang)" class="mdl-button mdl-js-button ">{{ translations | getLabel:"plain.languages.panel.delete"  }}</button>
+                                    </td>
+
+                                </tr>
+                                </tbody>
+                            </table>
+
+                            <form class="input-group">
+
+                                <div class="mdl-textfield mdl-js-textfield">
+                                    <input [(ngModel)]="newLanguageKey" class="mdl-textfield__input" type="text" id="langKey" name="langKey">
+                                    <label class="mdl-textfield__label" for="langKey">{{ translations | getLabel:"plain.languages.panel.language_key"  }}</label>
+                                </div>
+
+                                <div class="mdl-textfield mdl-js-textfield">
+                                    <input [(ngModel)]="newLanguageDescription" class="mdl-textfield__input" type="text" id="langDesc" name="langDesc">
+                                    <label class="mdl-textfield__label" for="langDesc">{{ translations | getLabel:"plain.languages.panel.language_description"  }}</label>
+                                </div>
+
+                                <button (click)="addLanguage()" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+                                    {{ translations | getLabel:"plain.languages.panel.add_language"  }}
+                                </button>
+
+                            </form>
+                        </div>
+                    </div>
+
+                    <h4>{{ translations | getLabel:"plain.languages.panel.import_labels"  }}</h4>
+
+                    <div *ngIf="selectedLanguage">
+                        {{ translations | getLabel:"plain.languages.panel.select_language"  }}
+
+                        <a id="language-change" class="mdl-button mdl-js-button language-dropdown-list">
+                            <span> {{ selectedLanguage.key }} </span>
+                            <i class="material-icons">expand_more</i>
+                        </a>
+                        <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect "  for="language-change">
+                            <a *ngFor="let lang of languages;" (click)="selectedLanguage = lang ;" class="mdl-menu__item language-dropdown-list" >
+                                {{ lang.key }}
+                            </a>
+                        </ul>
+                        <br/>
+
+                        <div class="mdl-textfield mdl-js-textfield import-textarea ">
+                            <textarea [ngModel]="translationsTextarea" (ngModelChange)="translationsTextboxChange($event)" class="mdl-textfield__input" type="text" rows="6" maxrows="8" id="translations-textarea"></textarea>
+                            <label class="mdl-textfield__label" for="translations-textarea">{{ translations | getLabel:"plain.languages.panel.paste_translation_in_json"  }}</label>
+                        </div>
+                        <br/>
+
+                       <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="notification-checkbox">
+                            <input [(ngModel)]="notificationCheckbox" type="checkbox" id="notification-checkbox" class="mdl-checkbox__input" checked>
+                            <span class="mdl-checkbox__label">
+                                {{ translations | getLabel:"plain.languages.panel.create_notification"  }}
+                            </span>
+                        </label>
+
+                        <button (click)="importLanguage()" [disabled]="!importLabelsStatus" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored import-button">Import</button>
+                        <span *ngIf="!importLabelsStatus">
+                            {{ translations | getLabel:"plain.languages.panel.json_syntax_error"  }}
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

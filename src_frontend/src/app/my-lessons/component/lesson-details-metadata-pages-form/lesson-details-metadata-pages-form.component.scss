@@ -1,0 +1,22 @@
+@import "../../../common/templates/mdl-colors";
+
+app-lesson-details-metadata-pages-form {
+    div.wrapper {
+        margin-bottom: 16px;
+        border-bottom: 1px dotted $grey-300;
+
+        &:last-child {
+            border-bottom-width: 0;
+        }
+
+        h5 {
+            font-size: 16px;
+            line-height: 24px;
+            margin: 8px 0;
+        }
+
+        app-lesson-details-metadata-base-form {
+            margin-bottom: 16px;
+        }
+    }
+}

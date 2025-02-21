@@ -1,0 +1,5 @@
+<select class="entered-value" name="entered_value{{suffix}}" {% if unused %} disabled {% endif %}>
+{% for value in values %}
+	<option {% if value.strip == selected %}selected{% endif %} {% if language_bidi %}dir="rtl"{% endif %}>{{value}}</option>
+{% endfor %}
+</select>

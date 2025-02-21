@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load apptags %}
+{% load spaces %}
+
+{% block content %}
+
+<h1 class="page_header">Public categories for {{company.title}}</h1>
+<div class="main clear" style="padding-top: 0"></div>
+
+<div id="toolbar">
+	<form action="add_public" method="post">
+		Category name:
+		<input type="text" name="title"/>
+		<button>Add category</button>
+	</form>
+</div>
+		{% children_tag spaces %}
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load apptags %}
+
+{% block content %}
+
+<h2>Share your space with friends !</h2>
+
+<form action="{{request.path}}" method="post">
+<table border="0">
+		<tr>
+			<td><label for="user">User name: </label></td>
+			<td><input type="text" name="user" id="user"/></td>
+			<td><span style="color:red">{% for error in form.user.errors %}{{ error }}{% endfor %}</span></td>
+		</tr>
+		
+		<tr>
+			<td><label for="space">Space:</label></td>
+			<td><select name="space" id="space">
+		    {% for space in spaces %}
+		        {% ifequal space.id selected_space.id %}
+		            <option value="{{space.id}}" selected="selected">Space {{space.id}}: {{space.title}}</option>
+		        {% else %}
+		            <option value="{{space.id}}">{{space.title}}</option>
+		        {% endifequal %}
+		    {% endfor %}
+			</select></td>
+			<td></td>
+		</tr>
+		
+		<tr>
+			<td><label for="access">Access rights:</label></td>
+			<td><select name="access" id="access">
+				<option value="1"> read </option>
+				<option value="2"> write </option>
+			</select></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><button>Add access rights</button></td>
+			<td></td>
+		</tr>
+	
+</table>
+</form>
+
+{% endblock %}

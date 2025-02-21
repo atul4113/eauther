@@ -1,0 +1,64 @@
+<mat-card class="card">
+    <mat-card-title class="card-title">
+        {{ translations | getLabel: "plain.corporate.panel.tiles.create_new_lesson" }}
+    </mat-card-title>
+    <mat-card-content class="icon-content">
+        <a mat-fab [routerLink]="'/mycontent/addcontent/' + privateSpace.id + '/next/mycontent~' + privateSpace.id"
+            class="card-content-button add">
+            <i class="material-icons">library_add</i>
+        </a>
+    </mat-card-content>
+    <mat-card-content class="card-content">
+        {{ translations | getLabel: "plain.corporate.panel.tiles.create_new_lesson_description" }}
+    </mat-card-content>
+</mat-card>
+
+<mat-card class="card">
+    <mat-card-title class="card-title">
+        {{ translations | getLabel: "plain.corporate.panel.tiles.edit_last_lesson"}}
+    </mat-card-title>
+    <mat-card-content class="icon-content">
+        <a *ngIf="!lastEditedLesson || !editLessonToken" mat-fab class="card-content-button edit">
+            <i class="material-icons">mode_edit</i>
+        </a>
+        <a *ngIf="lastEditedLesson && editLessonToken" mat-fab
+           [href]="'/mycontent/' + lastEditedLesson.id + '/editor?' + editLessonToken.tokenKey + '=' + editLessonToken.token + '&next=/corporate'"
+           class="card-content-button edit" target="_blank">
+            <i class="material-icons">mode_edit</i>
+        </a>
+    </mat-card-content>
+    <mat-card-content class="card-content">
+        {{ translations | getLabel: "plain.corporate.panel.tiles.edit_last_lesson_description" }}
+        <div *ngIf="lastEditedLesson" class="lesson-title">
+            {{lastEditedLesson.title}}
+        </div>
+    </mat-card-content>
+</mat-card>
+
+<mat-card class="card">
+    <mat-card-title class="card-title">
+        {{ translations | getLabel: "plain.corporate.panel.tiles.interactive_tutorials"}}
+    </mat-card-title>
+    <mat-card-content class="icon-content">
+        <a mat-fab href="/doc/en/page/Interactive-Tutorials" class="card-content-button tutorial" target="_blank">
+            <i class="material-icons">star_border</i>
+        </a>
+    </mat-card-content>
+    <mat-card-content class="card-content">
+        {{ translations | getLabel: "plain.corporate.panel.tiles.interactive_tutorials_description" }}
+    </mat-card-content>
+</mat-card>
+
+<mat-card class="card">
+    <mat-card-title class="card-title">
+        Modules Examples
+    </mat-card-title>
+    <mat-card-content class="icon-content">
+        <a mat-fab href="/doc/en/page/Sample-Lessons?no_menu" class="card-content-button tour">
+            <i class="material-icons">filter_none</i>
+        </a>
+    </mat-card-content>
+    <mat-card-content class="card-content">
+        {{ translations | getLabel: "plain.corporate.panel.tiles.modules_examples_description" }}
+    </mat-card-content>
+</mat-card>

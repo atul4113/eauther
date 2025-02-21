@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load apptags %}
+{% load spaces %}
+
+{% block content %}
+
+<h1 class="page_header">Projects Administration Panel</h1>
+<div class="main clear" style="padding-top: 0"></div>
+
+<ul>
+	{% if has_manage_access_rights %}
+	    <li><a href="/permission">Manage access rights</a></li>
+	{% endif %}
+    {% for sa in space_accesses %}
+        <li>
+            <strong>{{ sa.space }}</strong>
+            {% if sa|has_permission:"BULK_ASSETS_UPDATE" %}
+                <a href="/bulk/assets/{{ sa.space.id }}">Update assets</a>
+            {% endif %}
+            {% if sa|has_permission:"BULK_TEMPLATE_UPDATE" %}
+                <a href="/bulk/templates/{{ sa.space.id }}">Update template</a>
+            {% endif %}
+            {% if sa|has_permission:"SPACE_EDIT" or sa|has_permission:"SPACE_REMOVE" %}
+				{% if sa.space.is_second_level %}
+				    <a href="/corporate/projects/{{sa.space.id}}">Manage publications</a>
+				{% else %}
+					<a href="/corporate/{{sa.space.id}}/subproject">Manage Units</a>
+				{% endif %}
+            {% endif %}
+        </li>
+    {% endfor %}
+    {% if is_company_admin %}
+        <li>
+	        <a href="/corporate/divisions">Manage Projects</a>
+	    </li>
+    {% endif %}
+</ul>
+
+{% endblock %}

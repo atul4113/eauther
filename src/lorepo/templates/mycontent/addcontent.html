@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load apptags %}
+{% block content %}
+<div class="createDiv">
+<h2>Create lesson</h2>
+
+<form method="post" action="/mycontent/addcontent{% if space_id %}/{{space_id}}{% endif %}" name="create">
+	{% csrf_token %}
+	<input type="hidden" value="{{next}}" name="next" />
+	<div class="title-tags">
+		<label for="id_title">{% trans "Title" %}: 
+			<span class="errorlist">{% for e in form.title.errors %} {{ e }}{% endfor %}</span>
+		</label>
+		<br/>
+		<input id="id_title" type="text" size="60" name="title" value="{{form.data.title}}" autofocus="autofocus" />
+		<div class="clear"></div>
+
+		<label for="id_template">Template: 
+			<span class="errorlist">{% for e in form.template.errors %} {{ e }}{% endfor %}</span>
+		</label>
+		<br/>
+		<select id="id_template" name="template" disabled="disabled">
+			<option value="">Default</option>
+		</select>
+		<img id="loading-gif" src="/media/images/loading_small.gif"/>
+		<div class="clear"></div>
+
+		<label for="id_tags">{% trans "Tags" %} <span style="font-size:0.8em">(Must be comma separated)</span>:
+			<span class="errorlist">{% for e in form.tags.errors %} {{ e }}{% endfor %}</span>
+		</label>
+		<br/>
+		<textarea rows="4" id="id_tags" name="tags">{{form.data.tags}}</textarea>
+	</div>
+
+	<div class="description-shortdescription">		
+		<label for="id_short">{% trans "Short Description" %}:
+			<span class="errorlist">{% for e in form.short_description.errors %} {{ e }}{% endfor %}</span>
+		</label>
+		<br/>
+		<textarea id="id_short" style="width:100%;" rows="4" name="short_description">{{form.data.short_description}}</textarea>
+		
+			<div class="clear"></div>
+		
+		<label for="id_desc">{% trans "Description" %}:
+			<span class="errorlist">{% for e in form.description.errors %} {{ e }}{% endfor %}</span>
+		</label>
+		<br/>
+		<textarea id="id_desc" style="width:100%;" rows="10" name="description">{{form.data.description}}</textarea>
+			<div>
+				<label>Score type:
+					{% for e in form.passing_score.errors %}
+						<span class="errorlist">&lArr; {{ e }}</span>
+					{% endfor %}
+				</label><br/>
+				<select id="id_score_type" name="score_type">
+					<option value="last" selected>last</option>
+					<option value="first">first</option>
+				</select>
+			</div>
+			<div>
+				<label>Passing score: <span style="font-size:0.8em">(0-100 without percent sign)</span>
+					{% for e in form.passing_score.errors %}
+						<span class="errorlist">&lArr; {{ e }}</span>
+					{% endfor %}
+				</label><br/>
+				<input id="id_passing_score" type="text" name="passing_score" value="0"/> %
+			</div>
+	</div>
+	
+		<div class="clear"></div>
+		
+	<div style="float:left">
+		<button type="submit" class="btn btn-primary btn-sm">Create</button>
+	</div>
+	<a role="button" class="btn btn-primary btn-sm pull-right" href="{{next}}">Cancel</a>
+</form>
+
+<div class="clearfix"></div>
+</div>
+
+<script>
+$(document).ready(function() {
+	$.getJSON('/editor/api/templates', function(data) {
+		var length = data.items.length;
+		var privates = $('<optgroup label="Private"/>');
+		var publics = $('<optgroup label="Public"/>');
+		for (var i = 0; i < length; i++) {
+			var option = $('<option/>');
+			option.attr('value', data.items[i].id);
+			option.text(data.items[i].name);
+			if (data.items[i].category === "Private") {
+				privates.append(option);
+			} else {
+				publics.append(option);
+			}
+		}
+		$("#id_template").append(publics);
+		$("#id_template").append(privates);
+		$('#id_template').prop('disabled', false);
+		$('#loading-gif').hide();
+	});
+});
+</script>
+
+{% endblock %}

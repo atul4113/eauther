@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load backup %}
+{% load apptags %}
+
+{% block content %}
+
+<h1 class="page_header">Select publications for backup</h1>
+<div class="main clear" style="padding-top: 0"></div>
+
+<script>
+$(document).ready(function() {
+	$('ul.no_symbol li input').click(function() {
+		if ($(this).is(':checked')) {
+			$(this).parent().find('input[name=spaces]').attr('checked', true);
+			$(this).parents('li').find('input[name=spaces]:first').attr('checked', true);
+		} else {
+			$(this).parent().find('input[name=spaces]').attr('checked', false);
+		}
+	});
+});
+</script>
+
+<p>
+Select categories that should be included in backup. If you select a category on a deeper level the hierarchy up to the root will be
+exported too to maintain the hierarchy.
+</p>
+
+<p>
+Select the "Backup resources" checkbox to create additional packages that will include all lesson resources.
+</p>
+
+<form action="/backup/{{project.id}}" method="post" name="backup">
+	<input type="hidden" name="spaces" value="{{project.id}}"/>
+	<p>
+	Select SCORM version:<br/>
+	<input type="radio" name="version" value="2" checked="checked">SCORM 2004
+	<input type="radio" name="version" value="1">SCORM 1.2
+	</p>
+	<br/>
+	<input type="checkbox" name="include_player" value="1"/>Include player (this should be checked if you want to use packages in different systems)
+	<br/>
+	<input type="checkbox" name="resources" value="1"/>Backup resources
+	<br/>
+	{% render_checkboxes publications %}
+	<input type="submit" value="Backup" />
+	{% button 'Backup' 'document.forms["backup"].submit()' %}
+</form>
+
+{% endblock %}

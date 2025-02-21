@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<interactiveContent>
+
+<style>
+.ic_page{
+	width:	800px;
+	height:	600px;
+	background-color:black;
+	background-image:none;
+	color: white;
+	font-size: 28px;
+}
+
+.ic_button_nextpage{
+	background-image	:url('/content/templates/black/next_page.gif');
+	background-repeat	:no-repeat;
+	background-position	:center; 	
+}
+
+.ic_button_nextpage-down-hovering
+{
+	background-image	:url('/content/templates/black/next_page_down.gif');
+}
+
+.ic_button_nextpage-up-disabled
+{
+	background-image	:none;
+}
+
+.ic_button_prevpage{
+	background-image	:url('/content/templates/black/prev_page.gif');
+	background-repeat	:no-repeat;
+	background-position	:center; 	
+}
+
+.ic_button_prevpage-down-hovering
+{
+	background-image	:url('/content/templates/black/prev_page_down.gif');
+}
+
+.ic_button_prevpage-up-disabled
+{
+	background-image	:none;
+}
+
+</style>
+
+<pages>
+	<page name="page1" href="page1.xml"/>
+</pages>
+</interactiveContent>

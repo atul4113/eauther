@@ -1,0 +1,84 @@
+@import "../../../common/templates/mdl-colors";
+
+app-lesson-details {
+    .app-loading-wrapper {
+        width: 481px;
+        text-align: center;
+    }
+
+
+
+    .details-header {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        padding: 8px 12px;
+
+        .title {
+            display: flex;
+            flex-grow: 1;
+            flex-direction: column;
+
+            .lesson-title {
+                display: flex;
+                font-size: 20px;
+                line-height: 24px;
+                color: $blue-400;
+            }
+
+            .lesson-publication {
+                display: flex;
+                font-size: 12px;
+                line-height: 16px;
+            }
+        }
+
+        button[mat-icon-button] {
+            flex-grow: 0;
+        }
+    }
+
+    .tabs {
+        display: flex;
+        flex-direction: column;
+
+        .tabs-nav {
+            display: flex;
+            flex-direction: row;
+            margin-bottom: 2px;
+
+            button[mat-button] {
+                height: 47px;
+                display: flex;
+                flex-grow: 1;
+                justify-content: center;
+                border-radius: 0!important;
+                color: $grey-600;
+                border-bottom: 1px solid $grey-300;
+
+                &.active {
+                    height: 46px;
+                    border-bottom: 2px solid $blue-500;
+                    color: $grey-800;
+                    background: $white;
+                }
+
+                &:hover {
+                    background: $blue-50;
+
+                    .mat-button-focus-overlay {
+                        background: transparent !important;
+                    }
+                }
+            }
+        }
+
+        .tab {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            max-width: 481px;
+        }
+    }
+
+}

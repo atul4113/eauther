@@ -1,0 +1,27 @@
+@import "../../../common/templates/mdl-colors";
+
+div#interactive-content {
+    .app-content-page {
+        padding: 8px;
+
+        .section-title {
+            padding: 20px 0 5px 20px;
+            font-size: 18px;
+        }
+
+        .section-content {
+            display: flex;
+            margin-left: 10px;
+
+            mat-card {
+                min-width: 275px;
+                max-height: 100px;
+                margin: 10px;
+
+                mat-card-subtitle {
+                    font-size: 17px;
+                }
+            }
+        }
+    }
+}

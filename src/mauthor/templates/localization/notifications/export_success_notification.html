@@ -1,0 +1,11 @@
+{% autoescape off %}
+<p>
+	{{subject}}
+</p>
+<p>
+	You can download the xliff document at 
+	<a href="{{ settings.BASE_URL }}/file/serve/{{uploaded_file_id}}">
+		{{ settings.BASE_URL }}/file/serve/{{uploaded_file_id}}
+	</a>
+</p>
+{% endautoescape %}

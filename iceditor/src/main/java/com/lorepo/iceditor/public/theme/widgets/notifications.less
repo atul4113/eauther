@@ -1,0 +1,88 @@
+@import "images-urls";
+
+/* NOTIFICATIONS */
+#notificationsWrapper{
+	position: absolute;
+	left: 50%;
+	z-index: 1000;
+}
+.notification-box{
+	display: none;
+	position: relative;
+	left: -50%;
+	text-align: center;
+	font-family: Verdana;
+	font-size: 12px;
+}
+.notification-box .notification{
+	display: inline-block;
+	max-width: 600px;
+	width: auto;
+	margin-top: 8px;
+	padding: 6px 8px 6px 32px;
+	color: #fff;
+}
+
+.notification-box.closeable .notification {
+    padding-right: 25px;
+	position: relative;
+}
+
+.notification-box.success .notification{
+	background: #bae32c @notification-success no-repeat;
+	background-size: 14px 14px;
+	background-position: 8px center;
+	color: #333;
+
+}
+.notification-box.warning .notification{
+	background: #e5cb1a @notification-warning no-repeat;
+	background-size: 14px 14px;
+	background-position: 8px center;
+	color: #333;
+}
+.notification-box.notice .notification{
+	background: #2dade3 @notification-info no-repeat;
+	background-size: 14px 14px;
+	background-position: 8px center;
+}
+.notification-box.error .notification{
+	background: #e3762d @notification-error no-repeat;
+	background-size: 14px 14px;
+	background-position: 8px center;
+}
+
+.notification-box a.closeNotificationBtn{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+	cursor: pointer;
+	display: block;
+	font-size: 10px;
+	font-weight: bold;
+	margin-left: 10px;
+	width: 14px;
+	height: 14px;
+	text-align: center;
+	padding-top: 2px;
+	background: @notification-close-white no-repeat;
+	background-size: 10px 10px;
+	background-position: center center;
+}
+
+.notification-box a.plainCloseNotificationBtn,
+.notification-box a.notShowNotificationBtn {
+	cursor: pointer;
+	display: inline-block;
+	font-size: 11px;
+	font-weight: bold;
+	margin-top: 5px;
+	text-align: center;
+	padding: 3px;
+	background-color: #424242;
+	color: #FFF;
+}
+
+.notification-box.success a.closeNotificationBtn, .notification-box.warning a.closeNotificationBtn{
+	background-image: @notification-close;
+}

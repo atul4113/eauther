@@ -1,0 +1,46 @@
+{% autoescape off %}
+Dear {{ user }},
+<p>
+Page names replacement for space "{{ config.space.title }}" has finished. Below is status information about the procedure.
+</p>
+
+<p>Lessons were replacement took place:</p>
+{% if log.replaced %}
+<ul>
+    {% for lesson in log.replaced %}
+        <li>{{ lesson.title }}: <a href="{{ settings.BASE_URL }}/embed/{{ lesson.id }}">{{ settings.BASE_URL }}/embed/{{ lesson.id }}</a></li>
+    {% endfor %}
+</ul>
+{% else %}
+    No lessons
+{% endif %}
+
+<p>Lessons which were edited and replacement didn't take place:</p>
+{% if log.edited %}
+<ul>
+    {% for lesson in log.edited %}
+        <li>{{ lesson.title }}: <a href="{{ settings.BASE_URL }}/embed/{{ lesson.id }}">{{ settings.BASE_URL }}/embed/{{ lesson.id }}</a></li>
+    {% endfor %}
+</ul>
+{% else %}
+    No lessons
+{% endif %}
+
+<p>Lessons during processing which errors occurred:</p>
+{% if log.errors %}
+<ul>
+    {% for info in log.errors %}
+        <li>{{ info.lesson.title }}: <a href="{{ settings.BASE_URL }}/embed/{{ info.lesson.id }}">{{ settings.BASE_URL }}/embed/{{ info.lesson.id }}</a></li>
+        <li>Message: {{ info.message }}</li>
+        <li>Trackeback (for development purposes: {{ info.traceback }}</li>
+    {% endfor %}
+</ul>
+{% else %}
+    No lessons
+{% endif %}
+
+<p>
+--<br/>
+{{ settings.APP_NAME }}
+</p>
+{% endautoescape %}

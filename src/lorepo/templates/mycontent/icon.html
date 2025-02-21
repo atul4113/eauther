@@ -1,0 +1,17 @@
+{% load assets %}
+{% if content.content_type == 3 %}
+<a href="/{{space_type}}/view_addon/{{content.id}}">
+	{% if content.icon_href != None %}
+		<img src='{{content.icon_href|thumbnail_url:"64,64"}}' style="border:0 none;" />
+	{% else %}
+		<img src="/media/content/default_small_addon.png" style="border:0 none;" />
+	{% endif %}
+{% else %}
+	<a href="/{{space_type}}/view/{{content.id}}?next={{request.get_full_path}}">
+	{% if content.icon_href != None %}
+		<img src='{{content.icon_href|thumbnail_url:"146,109"}}' style="border:1px solid lightgray;"/>
+	{% else %}
+		<img src="/media/content/default_presentation.png" style="border:1px solid lightgray;"/>
+	{% endif %}
+{% endif %}
+</a>

@@ -1,0 +1,22 @@
+{% for wiki in wiki_pages %}
+<li id="list_{{wiki.id}}">
+	<div>
+		<span class="wiki-page-more"></span>
+        <a class="wiki-link {% if wiki.id == selected_page.id %}selected{% endif %}" href="/doc/{{ lang_code }}/page/{{wiki.url}}" id="{{wiki.id}}" ><div class="wiki-link-title">{{wiki.title}}</div></a>
+        {% if translations_edit %} (
+        {% for key, value in wiki.get_translations.items %}
+            <a href="/doc/edit/{{ value.id }}" class="lang-xs" lang="{{ key }}">
+                {% if value.needs_update %}<img src="/media/images/cross.png" />{% endif %}
+            </a>
+        {% endfor %})
+        {% endif %}
+	</div>
+	{% if wiki.loaded_kids %}
+        {% if translations_edit %}
+            <ul>{% edit_toc wiki.loaded_kids%}</ul>
+        {% else %}
+		    <ul>{% toc wiki.loaded_kids selected_page lang_code%}</ul>
+        {% endif %}
+	{% endif %}
+</li>
+{% endfor %}

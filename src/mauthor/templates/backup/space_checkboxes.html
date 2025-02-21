@@ -1,0 +1,9 @@
+<ul class="no_symbol">
+{% for space in spaces %}
+	<li><input type="checkbox" name="spaces" value="{{space.id}}"/>{{space.title}}
+	{% if space.loaded_kids %}
+		{% render_checkboxes space.loaded_kids %}
+	{% endif %}
+	</li>
+{% endfor %}
+</ul>

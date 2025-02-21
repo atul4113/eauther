@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+{% load apptags %}
+
+{% block head %}
+<script src="/media/js/jquery-ui-1.8.19.custom.js"></script>
+{% endblock %}
+
+{% block content %}
+
+<h1 class="page_header">Define metadata</h1>
+<div class="main clear" style="padding-top: 0"></div>
+
+<div id="validationError" class="alert error" style="display: none">
+	All name and value fields are required. Please correct the errors below.
+</div>
+
+<div>
+<a id="add-short-text-field" href="#">Add short text field</a> | 
+<a id="add-long-text-field" href="#">Add long text field</a> | 
+<a id="add-select-field" href="#">Add select field</a>
+</div>
+
+<form method="post" action="/metadata/store" name="metadata" id="metadata">
+<div id="metadata-container">
+</div>
+<button type="submit" class="btn btn-primary btn-sm">Save</button> <input type="checkbox" name="batch_update"/> <label>Batch update lessons and lesson pages</label>
+</form>
+
+<div id="short-text-field" class="metadata-element">
+	<div class="field-type">Short text</div>
+	<div class="remove-wrapper"><a class="remove" href="#"><img alt="x" src="/media/images/cross.png" title="Remove"/></a></div>
+	<div class="clear"></div>
+
+	<input type="hidden" name="type" value="0"/>
+	Name: <input type="text" name="name" {% if language_bidi %}dir="rtl"{% endif %}/>
+	Description: <input type="text" name="description" {% if language_bidi %}dir="rtl"{% endif %}/>
+	<input type="hidden" name="values"/>
+</div>
+
+<div id="long-text-field" class="metadata-element">
+	<div class="field-type">Long text</div>
+	<div class="remove-wrapper"><a class="remove" href="#"><img alt="x" src="/media/images/cross.png" title="Remove"/></a></div>
+	<div class="clear"></div>
+
+	<input type="hidden" name="type" value="1"/>
+	Name: <input type="text" name="name" {% if language_bidi %}dir="rtl"{% endif %}/>
+	Description: <input type="text" name="description" {% if language_bidi %}dir="rtl"{% endif %}/>
+	<input type="hidden" name="values"/>
+</div>
+
+<div id="select-field" class="metadata-element">
+	<div class="field-type">Select field</div>
+	<div class="remove-wrapper"><a class="remove" href="#"><img alt="x" src="/media/images/cross.png" title="Remove"/></a></div>
+	<div class="clear"></div>
+
+	<input type="hidden" name="type" value="2"/>
+	Name: <input type="text" name="name" {% if language_bidi %}dir="rtl"{% endif %}/>
+	Description: <input type="text" name="description" {% if language_bidi %}dir="rtl"{% endif %}/>
+	Values (comma separated): <input type="text" name="values" {% if language_bidi %}dir="rtl"{% endif %}/>
+</div>
+
+<style>
+#short-text-field, #long-text-field, #select-field {
+	display: none;
+}
+</style>
+
+<script>
+$(document).ready(function() {
+	$("#add-short-text-field").click(function() {
+		createElement('#short-text-field');
+	});
+
+	$("#add-long-text-field").click(function() {
+		createElement('#long-text-field');
+	});
+
+	$("#add-select-field").click(function() {
+		createElement('#select-field');
+	});
+	
+	var createElement = function(source) {
+		var newField = $(source).clone();
+		$('#metadata-container').append(newField);
+		newField.show();
+		newField.find(".remove").click(removeHandler);
+		newField.removeAttr("id");
+		return newField;
+	}
+	
+	var removeHandler = function() {
+		$(this).parent().parent().remove();
+	};
+	
+	var types = ["#short-text-field", "#long-text-field", "#select-field"]
+	
+	{% for definition in definitions %}
+		var field{{definition.order}} = createElement(types[{{definition.field_type}}]);
+		field{{definition.order}}.find("input[name='name']").val('{{definition.name}}');
+		field{{definition.order}}.find("input[name='description']").val('{{definition.description}}');
+		field{{definition.order}}.find("input[name='values']").val('{{definition.value}}');
+	{% endfor %}
+	
+	$('#metadata-container').sortable({
+		placeholder: "metadata-element metadata-placeholder",
+	});
+	$('#metadata-container').disableSelection();
+});
+
+function validateAndSubmit() {
+	var valid = true;
+	$("#metadata input[name='name']").each(function() {
+		if ($(this).val() === '') {
+			valid = false;
+			$(this).addClass('metadata-error');
+		}
+	});
+	$("#metadata input[name='values'][type='text']").each(function() {
+		if ($(this).val() === '') {
+			valid = false;
+			$(this).addClass('metadata-error');
+		}
+	});
+	if (valid) {
+		$('#metadata').submit();
+	} else {
+		$('#validationError').show();
+	}
+}
+</script>
+
+{% endblock %}

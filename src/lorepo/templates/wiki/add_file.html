@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load apptags %}
+{% load markdown_deux_tags %}
+
+{% block content %}
+<h1 class="page_header">Add File</h1>
+<div class="main clear" style="padding-top: 0"></div>
+
+<div>
+{% button 'Go Back' 'history.go(-1)' %}
+<p>If you want to put one of those files into your Wiki Page:</p>
+<p>1) Copy text from input below the file/image.</p>
+<p>2) Go back.</p>
+<p>3) Paste anywhere you want.</p>
+<p>4) <a href="/doc/upload?next={{request.path}}">Or upload a new file</a></p>
+<ul style="list-style:none;">
+{% for file in files %}
+	<li style="margin:20px 0">
+	{% if 'image' in file.content_type %}
+		<div>
+			<img src="/file/serve/{{file.id}}" width="128" height="96" />
+		</div>
+		<div>
+			<input type="text" value="<img src='/file/serve/{{file.id}}' />" size="40" />
+		</div>
+	{% else %}
+		<div>
+			This file is not an image.
+		</div>
+		<div>
+			<input type="text" value="<a href='/file/serve/{{file.id}}'>Download</a>" size="40" />
+		</div>
+		
+	{% endif %}
+	</li>
+{% endfor %}
+</ul>
+
+</div>
+{% endblock %}

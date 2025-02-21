@@ -1,0 +1,21 @@
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#filter option").each(function(){
+		if(this.id == {{selected}}) {
+			$(this).attr('selected', 'selected');
+		}
+	});
+	$("#filter").change(function(){
+		var url = $("#filter option:selected").val();
+		location.href = url;
+	});
+});
+</script>
+{% load apptags %}
+<form name="filter" method="GET">
+	<select name="filter_select" style="max-width: 220px" id="filter">
+			<option value="/public?type=1&page={{current_page}}{{extra_params|request_params:1}}" id="1">Lessons</option>
+			<option value="/public?type=2&page={{current_page}}{{extra_params|request_params:1}}" id="2">Templates</option>
+			<option value="/public?type=3&page={{current_page}}{{extra_params|request_params:1}}" id="3">Addons</option>
+	</select>
+</form>

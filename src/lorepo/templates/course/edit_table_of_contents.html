@@ -1,0 +1,871 @@
+{% extends "base.html" %}
+
+{% load apptags %}
+{% load course %}
+
+{% block head %}
+<script type="text/javascript" src="//code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+<script type="text/javascript" src="/media/js/lib/jquery-ui-nestedSortable.js"></script>
+<script type="text/javascript">
+
+	$(document).ready(function() {
+		// check if eBook has lessons
+
+		var toc_changed = false;
+
+        var isChromium = window.chrome,
+            winNav = window.navigator,
+            vendorName = winNav.vendor,
+            isOpera = winNav.userAgent.indexOf("OPR") > -1,
+            isIEedge = winNav.userAgent.indexOf("Edge") > -1,
+            isIOSChrome = winNav.userAgent.match("CriOS");
+
+        var isSafari = !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/);
+
+		function confirmExit() {
+			if (toc_changed) return "Course Table of Contents has been changed. Are you sure you want to exit without saving?";
+		}
+		window.onbeforeunload = confirmExit;
+		
+		function checkEbookLessons() {
+			if( $('#eBook').find('.lesson').length > 0 ) {
+				$('#eBook-container .icon-container').removeClass('hidden');
+			} else {
+				$('#eBook-container .icon-container').addClass('hidden');
+			}
+		}
+		
+		checkEbookLessons();
+		checkIfduplicatedLessonsInToc();
+		
+		// initialize nested sortable
+		$('ul#table-of-contents').disableSelection();
+		$('#course-index #eBook-container').disableSelection();
+		$('.load-lessons').disableSelection();
+
+		$('ul#table-of-contents').nestedSortable({
+			disableNesting: 'no-nest',
+			forcePlaceholderSize: true,
+			handle: 'div',
+			helper: 'clone',
+			items: 'li',
+			listType: 'ul',
+			placeholder: 'placeholder',
+			revert: 250,
+			tabSize: 30,
+			tolerance: 'pointer',
+			toleranceElement: '> div'
+		}); 
+		
+		// open/close hidden elements
+		$('#table-of-contents span.open').click(function() {
+			var listElement = $(this).parent().parent();
+			var isOpen = false;
+			
+			if ( $(this).html() == '+' ) {
+				listElement.find('.hidden:first').removeClass('hidden');
+				$(this).html('-');
+				isOpen = true;
+			} else if ( $(this).html() == '-' ) {
+				listElement.find('ul').addClass('hidden');
+				$(this).html('+');
+				isOpen = false;
+			}
+			$.post('/course/set_structure_state', {
+				'course_id' : '{{ course.id }}', 
+				'node_id' : listElement.attr('chapter-id'), 
+				'structure_state' : isOpen ? 'open' : 'close',
+				'cache_key_prefix' : 'course_toc'
+			});
+		});
+		
+		function getNewChapterId() {
+			var currentChapters = $('#table-of-contents li'),
+				newChapterId = 1;
+			
+			if (currentChapters.length == 0) {
+				return newChapterId;
+			} else {
+				var ids = [];
+				$.each(currentChapters, function() {
+					var chapterId = parseInt($(this).attr('chapter-id'), 10);
+					ids.push(chapterId);
+				});
+				return Math.max.apply(Math, ids) + 1;
+			}
+		}
+		
+		// add chapter click and keydown logic
+		var tableOfContents = $('#table-of-contents');
+		var addChapterBtn = $('#add-chapter-btn');
+		var nameInput = $('input#name');
+		
+		function addChapter(name, parent) {
+			if (!parent) {
+				parent = tableOfContents;
+			}
+			if ($.trim(name) == '') {
+				displayAlert('alert-warning', 'Chapter Name can NOT be empty.')
+			} else {
+				var id = getNewChapterId(),
+					li = $('<li></li>'),
+					div = $('<div class="chapter"></div>'),
+					removeChapterDiv = $('<div class="remove-chapter pull-right"></div>'),
+                    updateChapterButton = $('<button type="button" class="btn btn-link btn-xs update-chapter" aria-label="Left Align">'),
+                    updateChapterIcon = $('<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>'),
+					removeChapter = $('<a href="#" chapter-id="' + id + '">Remove</a>'),
+					spanOpen = $('<span class="open">&nbsp;</span>');
+				
+				removeChapter.on('click', function(e) {
+					e.preventDefault();
+					$('li[chapter-id="' + id + '"]').remove();
+				});
+                updateChapterButton.append(updateChapterIcon);
+                removeChapterDiv.append(removeChapter);
+				nameInput.val('');
+				nameInput.focus();
+				li.attr('id', name + '-' + id);
+				li.attr('chapter-id', id);
+				div.html(spanOpen);
+				div.append('<span class="chapter-name">' + name + '</span>');
+				div.append(removeChapterDiv);
+                div.append(updateChapterButton);
+                div.append('<div class="lessons ui-sortable mock-lessons" style="height: 30px"></div>');
+				li.append(div);
+
+                $(updateChapterButton).on('click', function() {
+                    updateChapterNameHandler($(this));
+                });
+
+                makeElementsSortable($(div).find('.lessons'));
+
+				parent.append(li);
+				return li;
+			}
+		}
+		
+		addChapterBtn.click(function() {
+			addChapter(nameInput.val(), false);
+			toc_changed = true;
+		});
+		
+		nameInput.on('keydown', function(e) {
+			if (e.which == 10 || e.which == 13) {
+				e.preventDefault();
+				addChapter(nameInput.val(), false);
+				toc_changed = true;
+			}
+		});
+		
+		// save table of contents click logic
+		
+		var saveBtn = $('#save-toc-btn');
+		saveBtn.click(function() {
+			$('#save-loading').show();
+
+			var parsedTableOfContents = tableOfContents.nestedSortable('serialize', { startDepthCount: 1 }),
+				lessons = getLessons(),
+				eBooks = getEbooks();
+
+			var response = $.post('/course/save_table_of_contents/{{ course.id }}', { 
+				'toc' : parsedTableOfContents,
+				'lessons' : JSON.stringify(lessons),
+				'eBooks' : JSON.stringify(eBooks)
+			});
+
+			response.done(function() {
+				toc_changed = false;
+				document.location = '{{ request.get_full_path }}';
+			});
+
+		});
+		
+		function showLoading(container) {
+			var loadingGif = $(container).find('.loading');
+			var modal = $(container).find('.modal1');
+			
+			$(container).css('position', 'relative');
+			$(loadingGif).css({
+				'margin-left' : - (loadingGif.width() / 2) + 'px',
+				'margin-top' : - (loadingGif.height() / 2) + 'px'
+			});
+			$(loadingGif).show();
+			$(modal).show();
+		}
+		
+		function hideLoading(container) {
+			var loadingGif = $(container).find('.loading');
+			var modal = $(container).find('.modal1');
+			$(loadingGif).hide();
+			$(modal).hide();
+		}
+		
+		function getLessons() {
+			var lessonsElements = $('#table-of-contents .lesson');
+			var lessons = [];
+			$.each(lessonsElements, function() {
+				var lesson = {
+					'id' : $(this).attr('lesson-id'),
+					'name' : $(this).html().trim(),
+					'parent' : $(this).parents('li:first').attr('chapter-id')
+				}
+				lessons.push(lesson);
+			});
+			return lessons;
+		}
+		
+		function getEbooks() {
+			var eBooksElements = $('#eBook .lesson');
+			var eBooks = [];
+			$.each(eBooksElements, function() {
+				var eBook = {
+					'id' : $(this).attr('lesson-id'),
+					'name' : $(this).children('.eBook-title').html().trim()
+				}
+				eBooks.push(eBook);
+			});
+			return eBooks;
+		}
+		
+		// scroll add/remove buttons
+		var lastScrollTop = 0;
+		var buttons = $('.buttons');
+		var lastPosition = null,
+			st = null,
+			diff = null;
+		
+		$(window).scroll(function(event) {
+			lastPosition = parseInt(buttons.css('top'), 10);
+			st = $(this).scrollTop();
+			diff = st - lastScrollTop;
+			buttons.css('top', lastPosition + diff + 'px');
+	
+			lastScrollTop = st;
+		});
+
+		// correct the width of list containers 
+
+		$.each($('.list-container'), function() {
+			$(this).css('width', $(this).width() - 2 + 'px' );
+		});
+		
+		// select lesson
+		
+		$('.lessons div.lesson').on('click', function(e) {
+			if ( !$(e.target).hasClass('edit-resources') ){
+				$(this).toggleClass('selected');
+			}
+		});
+
+		$('#available-lessons').on('click', '.publication', function(e){
+			var publication_space = $(this).parent('.publication-space'),
+				publication_space_id = publication_space.attr('space-id');
+			$('#available-lessons .publication-space.selected').
+					not('[space-id="'+publication_space_id+'"]').
+					removeClass('selected');
+			publication_space.toggleClass('selected');
+		});
+
+		function addLessons(lessons, chapter) {
+			var lessons_div = $('<div></div>');
+			lessons_div.addClass('lessons');
+			$.each(lessons, function(){
+				var lesson_div = $('<div></div>');
+				lesson_div.addClass('lesson');
+				lesson_div.attr('lesson-id',this['lesson-id']);
+				lesson_div.text(this.name);
+				lessons_div.append(lesson_div);
+                lesson_div.off('click');
+                lesson_div.on('click', function (e) {
+                    if ( !$(e.target).hasClass('edit-resources') ){
+                        $(this).toggleClass('selected');
+                    }
+                });
+			});
+            makeElementsSortable(lessons_div);
+			chapter.append(lessons_div);
+            $(chapter).find('.mock-lessons').remove();
+		}
+
+		function makeChapters(chapters, selectedChapter) {
+			$.each(chapters, function() {
+
+				var chapter = addChapter(this.name, selectedChapter);
+				if (this.lessons) {
+					addLessons(this.lessons, chapter);
+				}
+				if (this.kids) {
+					chapter.append('<ul></ul>');
+					makeChapters(this.kids, chapter.find('ul:first'));
+				}
+			});
+		}
+
+		// add/remove lesson
+		var addBtn = $('#add-btn');
+		addBtn.click(function() {
+			var selected_lessons = $('#available-lessons div.lesson.selected'),
+				selected_space = $('#available-lessons .publication-space.selected:first'),
+				space_id = selected_space.attr('space-id'),
+				lessons = [],
+				selectedChapter = $('li div.chapter-selected:first'),
+				chapterID = selectedChapter.parent().attr('chapter-id'),
+				eBook = $('#eBook-container'),
+				notUniqueLessons = [];
+
+			if (space_id) {
+				var response = $.get('/course/get_space/{{ course.id }}/' + space_id);
+
+				response.fail(function() {
+					displayAlert('alert-error', 'An error occured. Please try again or contact administration.');
+					return false;
+				});
+
+				response.done(function(data) {
+					var main_chapter = JSON.parse(data);
+					if (!chapterID) {
+						makeChapters([main_chapter], false);
+					}
+					else {
+						makeChapters([main_chapter], selectedChapter);
+					}
+					var section_name = selected_space.children('.publication:first').text();
+					displayAlert('alert-info', section_name + " has been added to course structure");
+					selected_space.removeClass('selected');
+				});
+				toc_changed = true;
+				return false;
+			}
+
+			$.each(selected_lessons, function() {
+				var id = $(this).attr('lesson-id');
+				if (chapterID && selectedChapter.find('.lessons [lesson-id="' + id + '"]').length > 0) {
+					notUniqueLessons.push(selectedChapter.find('.lessons [lesson-id="' + id + '"]').html());
+					return;
+				} 
+				
+				lessons.push(id + '|' + $(this).html().trim());
+			});
+			
+			if (lessons.length == 0) {
+				displayAlert('alert-warning', 'At least one lesson must be selected.');
+				if (notUniqueLessons.length > 0) {
+					displayAlert('alert-warning', 'These lessons ' + notUniqueLessons + ' are already in the chapter you have selected.');
+				}
+				return false;
+			}
+			
+			if (!chapterID && !eBook.hasClass('selected')) {
+				displayAlert('alert-warning', 'Chapter or eBook must be selected.');
+				return false;
+			}
+			
+			if (chapterID && eBook.hasClass('selected')) {
+				displayAlert('alert-warning', 'Chapter and eBook are selected. Please select one of them.');
+				return false;
+			}
+			
+			var lessonsContainer = null,
+				cloned = selected_lessons.clone(false),
+				url = null;
+			
+			selected_lessons.addClass('color', '#adadad');
+			
+			if (chapterID) {
+				url = '/course/add_lesson/' + chapterID + '/{{ course.id }}';
+				lessonsContainer = getOrCreate(selectedChapter);
+                $(lessonsContainer).css('height', 'initial');
+				selectedChapter.append(lessonsContainer);
+			} else {
+				url = '/course/add_lesson/eBook/{{ course.id }}';
+				lessonsContainer = getOrCreate(eBook);
+                $(lessonsContainer).css('height', 'initial');
+				eBook.find('div#eBook').append(lessonsContainer);
+			}
+
+			if (chapterID) {
+				var filtered = filterAlreadyIn(cloned, $(selectedChapter));
+                $(filtered).on('click', function (e) {
+                    if ( !$(e.target).hasClass('edit-resources') ){
+                        $(this).toggleClass('selected');
+                    }
+                });
+
+				lessonsContainer.append(filtered);
+				displayAlert('alert-info', filtered.length + ' lessons has been added to chapter ' + selectedChapter.find('.chapter-name').html());
+			} else {
+				var filtered = filterAlreadyIn(cloned, $('#eBook'));
+
+				$.each(filtered, function() {
+					var wrapper = $('<span></span>');
+					wrapper.addClass('eBook-title');
+					wrapper.html($(this).html());
+					$(this).html(wrapper);
+					var editResources = $('<a>Edit Resources</a>');
+					var eBookID = $(this).attr('lesson-id');
+					editResources.attr('href', '/course/edit_resources/{{ course.id }}/' + eBookID + '?next={{ request.path }}');
+					editResources.addClass('edit-resources');
+					$(this).append(editResources);
+                    $(this).on('click', function (e) {
+                        if ( !$(e.target).hasClass('edit-resources') ){
+                            $(this).toggleClass('selected');
+                        }
+                    });
+				});
+
+				lessonsContainer.append(filtered);
+				displayAlert('alert-info', filtered.length + ' lessons has been added to eBook');
+			}
+
+			lessonsContainer.addClass('lessons');
+
+			$('.lesson.selected').removeClass('selected');
+			selectedChapter.removeClass('chapter-selected');
+			eBook.removeClass('selected');
+
+			checkEbookLessons();
+			checkIfduplicatedLessonsInToc();
+
+			toc_changed = true;
+		});
+		
+		function checkIfduplicatedLessonsInToc() {
+			var tocLessons = $('#table-of-contents').find('.lesson'),
+			lesson_ids = [];
+			
+			$.each(tocLessons, function (){
+				lesson_ids.push($(this).attr('lesson-id'));
+			});
+			
+			var sortedLesson_ids = lesson_ids.sort();
+			
+			for (var i = 0; i < tocLessons.length; i++) {
+			    if (sortedLesson_ids[i + 1] == sortedLesson_ids[i]) {
+			    	displayAlert('alert-warning','One lesson has been added repeatedly in Table of Contents. Exporting this course to mCourser will be impossible.');
+			    	break;
+			    }
+			}
+		}
+		
+		function filterAlreadyIn(elements, container) {
+			var currentIDs = [];
+			$.each( $(container).find('.lesson'), function() {
+				currentIDs.push( $(this).attr('lesson-id') );
+			});
+			
+			return $.map(elements, function(element) {
+				if( currentIDs.indexOf($(element).attr('lesson-id')) == -1 ) {
+					return element;
+				}
+			});
+		}
+		
+		function getOrCreate(container) {
+			if ( container.find('.lessons').length > 0 ) {
+				return container.find('.lessons');
+			} else {
+				return $('<div></div>');
+			}
+		}
+		
+		var removeBtn = $('#remove-btn');
+		removeBtn.click(function() {
+			var lessonsSelected = $('#table-of-contents div.lesson.selected'),
+				lessonsIDs = [],
+				eBooksSelected = $('#eBook div.lesson.selected'),
+				eBooksIDs = [];
+			
+			$.each(lessonsSelected, function(){
+				lessonsIDs.push($(this).attr('lesson-id'));
+			});
+			
+			$.each(eBooksSelected, function(){
+				eBooksIDs.push($(this).attr('lesson-id'));
+			});
+			
+			$.post('/course/remove_lessons/{{ course.id }}', {
+				'lessons' : lessonsIDs,
+				'eBooks' : eBooksIDs
+			});
+			
+			function removeElements (elements) {
+				var parent = elements.parent();
+				elements.remove();
+				if (parent.children().length == 0) {
+                    parent.css('height', '30px');
+				}
+			}
+			
+			if (lessonsSelected.length > 0) {
+				removeElements(lessonsSelected);
+				displayAlert('alert-info', lessonsIDs.length + ' lessons has been removed.');
+			}
+			
+			if (eBooksSelected.length > 0) {
+				removeElements(eBooksSelected);
+				displayAlert('alert-info', eBooksIDs.length + ' eBooks has been removed.');
+			}
+
+			checkEbookLessons();
+		});
+		
+		// mark chapter to add lessons
+		$('ul#table-of-contents').on('click', 'div.chapter', function(e) {
+			e.stopPropagation();
+			var current = $('.chapter-selected:first');
+			current.removeClass('chapter-selected');
+			if (current[0] != this && $(e.target).hasClass('chapter') || $(e.target).hasClass('chapter-name')) {
+				$(this).addClass('chapter-selected');
+			}
+		});
+		
+		// mark eBook as selected
+		$('#course-index #eBook-container').click(function(e) {
+			if ( !$(e.target).hasClass('lesson') &&
+					!$(e.target).hasClass('edit-resources') &&
+					!$(e.target).hasClass('eBook-title') ) {
+				$(this).toggleClass('selected')
+			}
+		});
+		
+		// display alert
+		function displayAlert(type, text) {
+			var alertBox = $('.alert');
+			alertBox.removeClass();
+			alertBox.addClass('alert alert-narrow');
+			alertBox.find('.text').html(text);
+			alertBox.addClass(type);
+			alertBox.fadeIn("slow");
+			alertBox.find('.close').click(function() {
+				$(this).parent().fadeOut("slow");
+			});
+		}
+		
+		// load kids
+
+        var $loadKidsElement = $('.load-kids');
+        $loadKidsElement.html('+');
+        $loadKidsElement.removeClass('open');
+        $loadKidsElement.removeClass('loaded');
+
+		$('#available-lessons').on('click', '.load-kids', function() {
+			var id = $(this).attr('space-id');
+			var response = $.post('/course/get_kids/' + id);
+			var lessonsContainer = $(this).parent().children('.lessons');
+			var li = $(this).parent();
+			var kidsContainer = li.children('.kids');
+			
+			if ( $(this).hasClass('open') ) {
+				$(this).html('+');
+				$(this).removeClass('open');
+				lessonsContainer.addClass('hidden');
+				kidsContainer.addClass('hidden');
+			} else if ( $(this).hasClass('loaded') ) {
+				$(this).html('-');
+				$(this).addClass('open');
+				lessonsContainer.removeClass('hidden');
+				kidsContainer.removeClass('hidden');
+			} else {
+				$(this).html('-');
+				$(this).addClass('open');
+				$(this).addClass('loaded');
+				lessonsContainer.removeClass('hidden');
+				
+				showLoading(li);
+				
+				response.done(function(data) {
+                    var kids = JSON.parse(data)['kids'];
+
+                    $.each(kids, function() {
+						var elementList = $('<li></li>');
+						var loadKidsSpan = $('<span></span>');
+						var publicationSpan = $('<span></span>');
+						var kidsUl = $('<ul></ul>');
+						var lessonsDiv = $('<div></div>');
+						loadKidsSpan.addClass('load-kids');
+						loadKidsSpan.attr('space-id', this.id);
+						if ( this.hasKids || this.hasLessons ) {
+							loadKidsSpan.html('+');
+						} else {
+							loadKidsSpan.html('&nbsp;');
+						}
+						publicationSpan.addClass('publication');
+						publicationSpan.html(this.title);
+						kidsUl.addClass('kids');
+						lessonsDiv.addClass('lessons');
+
+						elementList.addClass('publication-space');
+						elementList.attr('space-id', this.id);
+
+						elementList.append(loadKidsSpan);
+						elementList.append(publicationSpan);
+						elementList.append(kidsUl);
+						elementList.append(lessonsDiv);
+						
+						kidsContainer.append(elementList);
+					});
+					
+					$.post('/course/get_publication_lessons/' + id).done(function(data) {
+                        var parsedData = JSON.parse(data),
+						    lessons = parsedData.lessons ? parsedData.lessons : [];
+
+						$.each(lessons, function() {
+							var lessonContainer = $('<div></div>');
+							lessonContainer.attr('lesson-id', this.id);
+							lessonContainer.addClass('lesson');
+							lessonContainer.html(this.title);
+							lessonsContainer.append(lessonContainer);
+							$(lessonContainer).on('click', function() {
+								$(this).toggleClass('selected');
+							});
+						});
+
+						hideLoading(li);
+
+                        $('#available-lessons').find('.lesson').draggable({
+                            connectToSortable: '#table-of-contents .lessons, #eBook .lessons',
+                            helper: "clone",
+                            start: function (event, ui) {
+                                if(isIOSChrome){
+                                    ui.position.top -= $(window).scrollTop();
+                                } else if((isChromium !== null && isChromium !== undefined && vendorName === "Google Inc." && isOpera == false && isIEedge == false) || isSafari) {
+                                    ui.position.top -= $(window).scrollTop();
+                                }
+                            },
+                            drag: function(event, ui) {
+                                if(isIOSChrome){
+                                    ui.position.top = ui.offset.top;
+                                } else if((isChromium !== null && isChromium !== undefined && vendorName === "Google Inc." && isOpera == false && isIEedge == false) || isSafari) {
+                                    ui.position.top = ui.offset.top;
+                                }
+                            },
+                            stop: function (event, ui) {
+                                if($(ui.helper).parent().parent().is('div#eBook')) {
+                                    createEbook($(ui.helper));
+                                }
+                            },
+                            revert: "invalid",
+                            appendTo: "body"
+		                });
+					});
+					
+				});
+			
+			}
+			
+			$.post('/course/set_structure_state', {
+				'course_id' : '{{ course.id }}', 
+				'node_id' : $(this).attr('space-id'), 
+				'structure_state' : $(this).hasClass('open') ? 'open' : 'close',
+				'cache_key_prefix' : 'course_al'
+			});
+		});
+
+        $(window).on('scroll', function () {
+            var scroll = window.scrollY,
+                $container = $('.addRemoveButtonsContainer');
+            if(scroll > 200) {
+                var topPosition = $container.position().top;
+                var currentPosition = topPosition + (scroll-topPosition) - 190;
+                $container.css("top", currentPosition + "px");
+            } else {
+                $container.css("top", 0);
+            }
+        });
+
+        $('.chapter').each(function() {
+            if(!$(this).find('.lesson').length > 0) {
+                $(this).append('<div class="lessons ui-sortable mock-lessons" style="height: 30px"></div>');
+            }
+        });
+
+        $('#available-lessons').find('.lesson').draggable({
+            connectToSortable: '#table-of-contents .lessons, #eBook .lessons',
+            helper: "clone",
+            start: function (event, ui) {
+                if(isIOSChrome){
+                    ui.position.top = ui.offset.top;
+                } else if((isChromium !== null && isChromium !== undefined && vendorName === "Google Inc." && isOpera == false && isIEedge == false) || isSafari) {
+                    ui.position.top = ui.offset.top;
+                }
+            },
+            drag: function(event, ui) {
+                if(isIOSChrome){
+                    ui.position.top -= $(window).scrollTop();
+                } else if((isChromium !== null && isChromium !== undefined && vendorName === "Google Inc." && isOpera == false && isIEedge == false) || isSafari) {
+                    ui.position.top -= $(window).scrollTop();
+                }
+            },
+            stop: function (event, ui) {
+                if($(ui.helper).parent().parent().is('div#eBook')) {
+                    createEbook($(ui.helper));
+                }
+            },
+            revert: "invalid",
+            appendTo: "body"
+        });
+
+        function createEbook(element) {
+            var wrapper = $('<span></span>');
+            wrapper.addClass('eBook-title');
+            wrapper.html(element.html());
+            element.html(wrapper);
+            var editResources = $('<a>Edit Resources</a>');
+            var eBookID = element.attr('lesson-id');
+            editResources.attr('href', '/course/edit_resources/{{ course.id }}/' + eBookID + '?next={{ request.path }}');
+            editResources.addClass('edit-resources');
+            element.append(editResources);
+            element.parent().css('height', 'initial');
+            $(element).off('click');
+            $(element).on('click', function (e) {
+                if ( !$(e.target).hasClass('edit-resources') ){
+                    $(this).toggleClass('selected');
+                }
+            });
+        }
+
+        var ebookContainer = $('#eBook');
+
+        ebookContainer.find('.lessons').sortable({
+            connectWith: '#table-of-contents .lessons',
+            receive: function (e, ui) {
+                var element = $(this).data().uiSortable.currentItem;
+                if($(ui.item).find('.edit-resources').length == 0 && ($(ui.sender).parent().hasClass('chapter') || $(ui.sender).parent().parent().find('.chapter').length > 0)) {
+                    createEbook($(ui.item));
+                }else if (!$(element).parent().hasClass('chapter')) {
+                    createEbook($(element));
+                }
+            },
+            placeholder: 'placeholder'
+		});
+
+        function checkIfproperMock() {
+            $('#table-of-contents').find('.lessons').each(function() {
+                if ($(this).height() == 0) {
+                    $(this).height('30px');
+                }
+            });
+        }
+
+        makeElementsSortable($('#table-of-contents').find('.lessons'));
+
+        function makeElementsSortable(element) {
+            $(element).sortable({
+                connectWith: '#table-of-contents .lessons, #eBook .lessons',
+                receive: function (e, ui) {
+                    ui.sender.data('copied', true);
+                    var element = $(this).data().uiSortable.currentItem;
+                    if($(ui.item).find('.edit-resources').length > 0) {
+                        $(ui.item).find('.edit-resources').remove();
+                        $(ui.item).html($(ui.item).find('.eBook-title').html());
+                        $(ui.item).find('.eBook-title').remove();
+                    }
+                    checkIfduplicatedLessonsInToc();
+
+                    $(this).css('height', 'initial');
+
+                    $(element).off('click');
+                    $(element).on('click', function (e) {
+                        if ( !$(e.target).hasClass('edit-resources') ){
+                            $(this).toggleClass('selected');
+                        }
+                    });
+                },
+                out: function(e, ui) {
+                    if ($(ui.item).parent().height() == 0) {
+                        $(ui.item).parent().height('30px');
+                    }
+                    var element = $(this).data().uiSortable.currentItem;
+                    if ($(element).parent().height() == 0) {
+                        $(element).parent().height('30px');
+                    }
+                },
+                remove: function(e, ui) {
+                    checkIfproperMock();
+                },
+                placeholder: 'placeholder'
+            });
+        }
+
+        if(ebookContainer.find('.lessons').height() == 0) {
+            ebookContainer.find('.lessons').height('30px');
+        }
+
+        function updateChapterNameHandler(updateChapterButton) {
+            var chapterElement = updateChapterButton.parent(),
+                inputField = $('<input type="text" class="form-control pull-left update-chapter-input">'),
+                currentName = chapterElement.find('.chapter-name').text(),
+                acceptChapterButton = $('<button type="button" class="btn btn-link btn-xs accept-chapter" aria-label="Left Align">'),
+                acceptChapterIcon = $('<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>');
+
+            acceptChapterButton.append(acceptChapterIcon);
+            chapterElement.find('.open').css('float', 'left');
+            chapterElement.find('.chapter-name').after(acceptChapterButton);
+            chapterElement.find('.chapter-name').after(inputField);
+            chapterElement.find('.chapter-name').hide();
+            inputField.val(currentName);
+            inputField.focus();
+            chapterElement.find('.chapter-name').parent().find('.update-chapter').hide();
+
+            acceptChapterButton.on('click', function () {
+                onAcceptHandler();
+            });
+
+            inputField.keypress(function(e) {
+                if(e.which == 13) {
+                    onAcceptHandler();
+                }
+            });
+
+            function onAcceptHandler() {
+                var updateChapterName = inputField.val();
+                chapterElement.find('.chapter-name').text(updateChapterName);
+                acceptChapterButton.remove();
+                inputField.remove();
+                chapterElement.find('.chapter-name').show();
+                chapterElement.find('.chapter-name').parent().find('.update-chapter').show();
+                chapterElement.find('.open').css('float', 'initial');
+
+                var newId = updateChapterName + "-" + chapterElement.parent().attr('chapter-id');
+
+                chapterElement.parent().attr("id", newId);
+            }
+        }
+
+        $('.update-chapter').on('click', function() {
+            updateChapterNameHandler($(this));
+        });
+	});
+</script>
+
+{% include 'common/math_jax.html' %}
+
+{% endblock %}
+
+{% block content %}
+
+<div id="course-index">
+	{% include "common/messages/display_messages.html" %}
+	<h1 class="page-header">
+		<div class="pull-left">
+			Edit Table of Contents for Course: {{ course.name }}
+		</div>
+		<div class="pull-right">
+			<a role="button" class="btn btn-primary btn-sm" href="/course/list/{{project_id}}">Back</a>
+		</div>
+	</h1>
+
+	<div class="alert alert-narrow">
+		<span class="close">&times;</span>
+		<span class="text"></span>
+	</div>
+	
+	{% include 'course/add_lessons.html' %}
+
+	{% if lessons_in_trash %}
+		<div class="lesson deleted">* - Lessons in <a href="/corporate/list/{{ project_id }}/trash">Trash</a></div>
+	{% endif %}
+	
+</div>
+
+{% endblock %}

@@ -1,0 +1,56 @@
+from django.conf.urls import patterns, include, url
+from django.views.generic import TemplateView
+
+# handler404 = 'django.views.defaults.page_not_found'
+# handler500 = 'djangotoolbox.errorviews.server_error'
+
+urlpatterns = patterns('',
+    url(r'^_ah/', include('djangae.urls')),
+    (r'^api/docs/', include('rest_framework_docs.urls')),
+    (r'^api/v2/', include('lorepo.api.v2.urls', namespace='v2')),
+    # (r'^api/v3/', include('mcurriculum.api.v2.urls', namespace='v3')), # For Future Use
+    (r'^cron/', include('lorepo.cron.urls')),
+    (r'^backendhome/', include('lorepo.home.urls')),
+    (r'^file/', include('lorepo.filestorage.urls')),
+    (r'^user/', include('lorepo.user.urls')),
+    (r'^mycontent/{0,1}', include('lorepo.mycontent.urls')),
+    (r'^assets/', include('lorepo.assets.urls')),
+    (r'^public/{0,1}', include('lorepo.public.urls')),
+    (r'^support/{0,1}', include('lorepo.support.urls')),
+    (r'^editor/', include('lorepo.editor.urls')),
+    (r'^embed/', include('lorepo.embed.urls')),
+    (r'^present/(?P<content_id>\d+)$', 'lorepo.embed.views.present'),
+    (r'^labels/', include('lorepo.labels.urls')),
+    (r'^doc/{0,1}', include('libraries.wiki.urls')),
+    (r'^spaces/{0,1}', include('lorepo.spaces.urls')),
+    (r'^translations/{0,1}', include('lorepo.translations.urls')),
+    (r'^pricing/{0,1}$', TemplateView.as_view(template_name='public/plans_and_pricing.html')),
+    (r'^about_us$', TemplateView.as_view(template_name='public/aboutus.html')),
+    (r'^accounts/register/$', 'lorepo.user.views.register'),
+    (r'^accounts/login/session/{0,1}$', 'lorepo.user.views.custom_login'),
+    url(r'^accounts/login/{0,1}$', 'lorepo.user.views.custom_login', name='auth_login'),
+    (r'^accounts/', include('registration.urls')),
+    (r'^corporate/', include('lorepo.corporate.urls')),  # should come as one of the lasts, overrides spaces
+    (r'^exchange/', include('lorepo.exchange.urls')),
+    (r'^merger/', include('lorepo.merger.urls')),
+    (r'^newsletter/', include('lorepo.newsletter.urls')),
+    (r'^proxy/', include('libraries.proxy.urls')),
+    (r'^lessons_parsers/', include('mauthor.lessons_parsers.urls')),
+    (r'^states/', include('mauthor.states.urls')),
+    (r'^bug_track/', include('mauthor.bug_track.urls')),
+    (r'^backup/', include('mauthor.backup.urls')),
+    (r'^company/', include('mauthor.company.urls')),
+    (r'^logger/', include('libraries.logger.urls')),
+    (r'^localization/', include('mauthor.localization.urls')),
+    (r'^exchange_narration/', include('mauthor.exchange_narration.urls')),
+    (r'^indesign/', include('mauthor.indesign.urls')),
+    (r'^pdfimport/', include('mauthor.pdfimport.urls')),
+    (r'^permission/{0,1}', include('lorepo.permission.urls')),
+    (r'^course/{0,1}', include('lorepo.course.urls')),
+    (r'^bulk/{0,1}', include('mauthor.bulk.urls')),
+    (r'^metadata/', include('mauthor.metadata.urls')),
+    (r'^search/', include('mauthor.search.urls')),
+    (r'^customfixdb/', include('mauthor.customfixdb.urls')),
+    (r'^gce/', include('mauthor.gce.urls')),
+)
+

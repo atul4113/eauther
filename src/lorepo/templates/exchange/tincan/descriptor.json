@@ -1,0 +1,14 @@
+  [
+    {
+        "src": "lorepo/templates/exchange/tincan/tincan-min.js",
+        "dest": "javascript/tincan/tincan-min.js"
+    },
+    {
+        "src": "lorepo/templates/exchange/tincan/xapi.js",
+        "dest": "javascript/tincan/xapi.js"
+    },
+    {
+        "src": "lorepo/templates/exchange/tincan/tincan-min.map",
+        "dest": "javascript/tincan/tincan-min.map"
+    }
+ ]

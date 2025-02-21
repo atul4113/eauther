@@ -1,0 +1,19 @@
+<form name="form_view_as_{{content.id}}" method="GET">
+	<select id="view_as_{{content.id}}" name="view_as_{{content.id}}" style="max-width: 220px">
+		<option>View as...</option>
+		<option data-url="/embed/{{content.id}}">Single page</option>
+		<option data-url="/embed/book/{{content.id}}">Double page</option>
+		<option data-url="/embed/book/{{content.id}}?cover=1">Double page with cover</option>
+		<option data-url="/present/{{content.id}}">Presentation</option>
+	</select>
+</form>
+
+<script>
+$(document).ready(function() {
+	$('#view_as_{{content.id}}').change(function() {
+		var url = $(this).find(':selected').attr('data-url');
+		document.location.href = url;
+		$(this).val('');
+	}).val(''); //reset select also on browser's button back
+});
+</script>

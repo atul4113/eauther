@@ -1,0 +1,11 @@
+{% autoescape off %}
+Dear {{ user }},
+<p>
+Your ticket "{{ticket.title}}" has been created. You will be notified about further changes to it's status.
+</p>
+
+<p>
+--<br/>
+mAuthor support
+</p>
+{% endautoescape %}

@@ -1,0 +1,412 @@
+[
+  {
+    "pk": 5629499534213120, 
+    "model": "auth.user", 
+    "fields": {
+      "username": "kgebert", 
+      "first_name": "", 
+      "last_name": "", 
+      "is_active": true, 
+      "idxf_email_l_iexact": "karol.gebert@solwit.com", 
+      "idxf_username_l_iexact": "kgebert", 
+      "is_superuser": true, 
+      "is_staff": true, 
+      "last_login": "2014-02-28 13:34:35", 
+      "groups": [], 
+      "user_permissions": [], 
+      "password": "sha1$39f0f$b6e4afcb3c9f6c6878711aa3487180f35b09a8e7", 
+      "email": "karol.gebert@solwit.com", 
+      "date_joined": "2014-02-28 13:31:15"
+    }
+  }, 
+  {
+    "pk": "16e35f7bfc4da9cbe7066c20e49abda2", 
+    "model": "sessions.session", 
+    "fields": {
+      "expire_date": "2014-03-14 13:34:41", 
+      "session_data": "MTY0NWFhNTFmZjA5ZWRhNjgyNzcwYWUwODk1ZjdhZDRkZWQwYTNiMjqAAn1xAChVDV9hdXRoX3Vz\nZXJfaWRxAYoHAAAAAAAAFFUMdG9rZW5fZWRpdG9ycQJVBWpsOFhscQNVEl9hdXRoX3VzZXJfYmFj\na2VuZHEEVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEFVRh2YWx1\nZXNfcGVyX3BhZ2VfcHJvamVjdHNxBlUEMTAwMHEHVQ1sYXN0X3NwYWNlX2lkcQiKBwAAAAAAgBNV\nD19zZXNzaW9uX2V4cGlyeXEJSwBVD2xhc3RfcHJvamVjdF9pZHEKfXELigcAAAAAAIATigcAAAAA\nAIAXc3Uu\n"
+    }
+  }, 
+  {
+    "pk": 6473924464345088, 
+    "model": "search.relationindex_mycontent_content_search_index", 
+    "fields": {
+      "is_featured": false, 
+      "idxf_spaces_path_l_contains": [
+        "5066549580791808", 
+        "066549580791808", 
+        "66549580791808", 
+        "6549580791808", 
+        "549580791808", 
+        "49580791808", 
+        "9580791808", 
+        "580791808", 
+        "80791808", 
+        "0791808", 
+        "791808", 
+        "91808", 
+        "1808", 
+        "808", 
+        "08", 
+        "8"
+      ], 
+      "spaces": [
+        "5066549580791808"
+      ], 
+      "file": 5348024557502464, 
+      "description": "", 
+      "modified_date": "2014-02-28 13:31:19", 
+      "title": "Sample Lesson", 
+      "tags": "", 
+      "public_version": null, 
+      "xliff_file": null, 
+      "version": 0, 
+      "short_description": "", 
+      "big_icon_href": null, 
+      "icon_href": null, 
+      "is_globally_public": false, 
+      "view_count": 0, 
+      "content_type": 1, 
+      "is_public": false, 
+      "associated_content": null, 
+      "is_deleted": false, 
+      "name": null, 
+      "search_index_search_list_field": [
+        "sampl", 
+        "lesson"
+      ], 
+      "author": 5629499534213120, 
+      "is_template": false, 
+      "passing_score": 0, 
+      "spaces_path": "5066549580791808", 
+      "created_date": "2014-02-28 13:31:19", 
+      "original": null
+    }
+  }, 
+  {
+    "pk": 6473924464345088, 
+    "model": "mycontent.content", 
+    "fields": {
+      "is_featured": false, 
+      "idxf_spaces_path_l_contains": [
+        "5066549580791808", 
+        "066549580791808", 
+        "66549580791808", 
+        "6549580791808", 
+        "549580791808", 
+        "49580791808", 
+        "9580791808", 
+        "580791808", 
+        "80791808", 
+        "0791808", 
+        "791808", 
+        "91808", 
+        "1808", 
+        "808", 
+        "08", 
+        "8"
+      ], 
+      "spaces": [
+        "5066549580791808"
+      ], 
+      "file": 5348024557502464, 
+      "description": "", 
+      "modified_date": "2014-02-28 13:31:19", 
+      "title": "Sample Lesson", 
+      "tags": "", 
+      "public_version": null, 
+      "xliff_file": null, 
+      "version": 0, 
+      "short_description": "", 
+      "big_icon_href": null, 
+      "icon_href": null, 
+      "is_globally_public": false, 
+      "view_count": 0, 
+      "content_type": 1, 
+      "is_public": false, 
+      "associated_content": null, 
+      "is_deleted": false, 
+      "name": null, 
+      "author": 5629499534213120, 
+      "is_template": false, 
+      "passing_score": 0, 
+      "spaces_path": "5066549580791808", 
+      "created_date": "2014-02-28 13:31:19", 
+      "original": null
+    }
+  }, 
+  {
+    "pk": 4644337115725824, 
+    "model": "mycontent.contentspace", 
+    "fields": {
+      "content": 6473924464345088, 
+      "is_deleted": false, 
+      "space": 5066549580791808
+    }
+  }, 
+  {
+    "pk": 5066549580791808, 
+    "model": "spaces.space", 
+    "fields": {
+      "modified_date": "2014-02-28 13:31:19", 
+      "right": 0, 
+      "is_deleted": false, 
+      "parent": null, 
+      "title": "kgebert", 
+      "rank": 100, 
+      "top_level": 5066549580791808, 
+      "include_contents_in_editor": false, 
+      "created_date": "2014-02-28 13:31:19", 
+      "contents_count": 1, 
+      "path": [
+        5066549580791808
+      ], 
+      "space_type": 1, 
+      "left": 0
+    }
+  }, 
+  {
+    "pk": 5488762045857792, 
+    "model": "spaces.space", 
+    "fields": {
+      "modified_date": "2014-02-28 13:31:19", 
+      "right": 0, 
+      "is_deleted": false, 
+      "parent": 5770237022568448, 
+      "title": "Project 1", 
+      "rank": 100, 
+      "top_level": 5770237022568448, 
+      "include_contents_in_editor": false, 
+      "created_date": "2014-02-28 13:31:19", 
+      "contents_count": 0, 
+      "path": [
+        5770237022568448, 
+        5488762045857792
+      ], 
+      "space_type": 3, 
+      "left": 0
+    }
+  }, 
+  {
+    "pk": 5770237022568448, 
+    "model": "spaces.space", 
+    "fields": {
+      "modified_date": "2014-02-28 13:31:19", 
+      "right": 0, 
+      "is_deleted": false, 
+      "parent": null, 
+      "title": "kgebert Corporation", 
+      "rank": 100, 
+      "top_level": 5770237022568448, 
+      "include_contents_in_editor": false, 
+      "created_date": "2014-02-28 13:31:19", 
+      "contents_count": 0, 
+      "path": [
+        5770237022568448
+      ], 
+      "space_type": 3, 
+      "left": 0
+    }
+  }, 
+  {
+    "pk": 6614661952700416, 
+    "model": "spaces.space", 
+    "fields": {
+      "modified_date": "2014-02-28 13:31:19", 
+      "right": 0, 
+      "is_deleted": false, 
+      "parent": 5488762045857792, 
+      "title": "Publication 1", 
+      "rank": 100, 
+      "top_level": 5770237022568448, 
+      "include_contents_in_editor": false, 
+      "created_date": "2014-02-28 13:31:19", 
+      "contents_count": 0, 
+      "path": [
+        5770237022568448, 
+        5488762045857792, 
+        6614661952700416
+      ], 
+      "space_type": 3, 
+      "left": 0
+    }
+  }, 
+  {
+    "pk": 4785074604081152, 
+    "model": "spaces.spaceaccess", 
+    "fields": {
+      "modified_date": "2014-02-28 13:31:19", 
+      "is_deleted": false, 
+      "roles": [
+        6192449487634432
+      ], 
+      "space": 5066549580791808, 
+      "user": 5629499534213120, 
+      "created_date": "2014-02-28 13:31:19", 
+      "access_right": 3
+    }
+  }, 
+  {
+    "pk": 6333186975989760, 
+    "model": "spaces.spaceaccess", 
+    "fields": {
+      "modified_date": "2014-02-28 13:31:19", 
+      "is_deleted": false, 
+      "roles": [
+        5207287069147136
+      ], 
+      "space": 5770237022568448, 
+      "user": 5629499534213120, 
+      "created_date": "2014-02-28 13:31:19", 
+      "access_right": 3
+    }
+  }, 
+  {
+    "pk": 5348024557502464, 
+    "model": "filestorage.filestorage", 
+    "fields": {
+      "modified_date": "2014-02-28 13:31:19", 
+      "history_for": 6473924464345088, 
+      "version": 1, 
+      "content_type": "text/xml", 
+      "created_date": "2014-02-28 13:31:19", 
+      "owner": 5629499534213120, 
+      "contents": "<?xml version=\"1.0\" encoding=\"utf-8\"?><interactiveContent name=\"Sample Lesson\">\n\n\t<style href=\"/media/content/styles/default/content.css\"/>\n\n\t<pages>\n\t\t\n\t\t<page href=\"5910974510923776\" name=\"Page 1\"/>\n\t\t\n\t\t\n\t</pages>\n</interactiveContent>"
+    }
+  }, 
+  {
+    "pk": 5910974510923776, 
+    "model": "filestorage.filestorage", 
+    "fields": {
+      "modified_date": "2014-02-28 13:31:19", 
+      "history_for": null, 
+      "version": null, 
+      "content_type": "text/xml", 
+      "created_date": "2014-02-28 13:31:19", 
+      "owner": 5629499534213120, 
+      "contents": "<?xml version='1.0' encoding='UTF-8' ?> \n\n<page>\n\t<modules>\n\t\n\t\t<textModule id=\"Title\" left=\"5\" top=\"3\" width=\"90\" height=\"7\" style=\"\">\n\t\t\t<text>&lt;div style=&quot;text-align: center;&quot;&gt;Title&lt;/div&gt;</text>\n\t\t</textModule>\t\n\t\t<buttonModule id=\"PrevPage\" left=\"0\" top=\"90\" width=\"10\" height=\"10\" style=\"\">\n\t\t\t<button type=\"prevPage\" text=\"\"/>\n\t\t</buttonModule>\n\t\t<buttonModule id=\"NextPage\" left=\"90\" top=\"90\" width=\"10\" height=\"10\" style=\"\">\n\t\t\t<button type=\"nextPage\" text=\"\"/>\n\t\t</buttonModule>\n\t</modules> \n</page>\n"
+    }
+  }, 
+  {
+    "pk": 6051711999279104, 
+    "model": "corporate.companyproperties", 
+    "fields": {
+      "valid_until": null, 
+      "modified_date": "2014-02-28 13:31:19", 
+      "company": 5770237022568448, 
+      "max_accounts": null, 
+      "created_date": "2014-02-28 13:31:19"
+    }
+  }, 
+  {
+    "pk": 4925812092436480, 
+    "model": "corporate.companyuser", 
+    "fields": {
+      "username": "kgebert", 
+      "modified_date": "2014-02-28 13:31:19", 
+      "space_access_list": [
+        6333186975989760
+      ], 
+      "company": 5066549580791808, 
+      "space_list": [
+        5770237022568448
+      ], 
+      "user": 5629499534213120, 
+      "created_date": "2014-02-28 13:31:19"
+    }
+  }, 
+  {
+    "pk": 5207287069147136, 
+    "model": "permission.role", 
+    "fields": {
+      "modified_date": "2014-02-28 13:31:19", 
+      "company": 5770237022568448, 
+      "permissions": [
+        1, 
+        2, 
+        3, 
+        18, 
+        23, 
+        35, 
+        34, 
+        33, 
+        8, 
+        9, 
+        12, 
+        6, 
+        10, 
+        7, 
+        5, 
+        11, 
+        4, 
+        21, 
+        19, 
+        20, 
+        22, 
+        32, 
+        13, 
+        14, 
+        25, 
+        28, 
+        29, 
+        26, 
+        27, 
+        24, 
+        15, 
+        16, 
+        17, 
+        30, 
+        31
+      ], 
+      "name": "owner", 
+      "created_date": "2014-02-28 13:31:19"
+    }
+  }, 
+  {
+    "pk": 6192449487634432, 
+    "model": "permission.role", 
+    "fields": {
+      "modified_date": "2014-02-28 13:31:19", 
+      "company": null, 
+      "permissions": [
+        1, 
+        2, 
+        3, 
+        18, 
+        23, 
+        35, 
+        34, 
+        33, 
+        8, 
+        9, 
+        12, 
+        6, 
+        10, 
+        7, 
+        5, 
+        11, 
+        4, 
+        21, 
+        19, 
+        20, 
+        22, 
+        32, 
+        13, 
+        14, 
+        25, 
+        28, 
+        29, 
+        26, 
+        27, 
+        24, 
+        15, 
+        16, 
+        17, 
+        30, 
+        31
+      ], 
+      "name": "owner", 
+      "created_date": "2014-02-28 13:31:19"
+    }
+  }
+]

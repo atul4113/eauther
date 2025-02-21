@@ -1,0 +1,124 @@
+{% load i18n %}
+{% load apptags %}
+{% load logo %}
+{% load corporate %}
+{% load spaces %}
+{% load cache %}
+{% load utility %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head profile="http://www.w3.org/1999/xhtml/vocab">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+    <meta name="format-detection" content="telephone=no" />
+    <title>{% block title %}{% trans "eAuthor - Create once, publish many" %}{% endblock %}</title>
+    {% include 'common/scripts.html' %}
+    {% include 'common/stylesheets.html' %}
+    {% block head %}
+    {% endblock %}
+	<link rel="stylesheet" href="/media/assets_md/material/material.roboto.font.css"/>
+    <link rel="stylesheet" href="/media/assets_md/material/material.icons.css"/>
+    <link rel="stylesheet" href="/media/css/header_md_like.css"/>
+    <script type="text/javascript" src="/media/js/header_md_like.js"></script>
+</head>
+
+<body class="html front sidebar-second">
+
+{% include 'common/header_md_like.html' %}
+
+<div class="content-container">
+<div class="container">
+
+	<div id="page-wrapper">
+	
+		<div id="page">
+
+		<!--[if lte IE 8]>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$('#wrongBrowser').fadeIn("slow");
+			});
+		</script>
+		<div>
+			<div class="alert error" id="wrongBrowser">
+				You are using Internet Explorer in version lower then 9. Please upgrade your browser.
+			</div>
+		</div>
+		<![endif]-->
+
+			<div id="main-wrapper">
+				<div id="main" class="clearfix">
+				
+					{% if request.user.is_authenticated %}
+                        {% if not request.user.company|is_company_locked_for_user %}
+                        <div class="row">
+                            {% if request.user|has_logo %}
+                            <div class="col-md-3">
+                                {% get_logo user %}
+                            </div>
+                            <div class="col-md-9">
+                                <table class="search-box"><tr><td>
+                                <form class="form" role="form" action="/search/search">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" placeholder="Search ..." name="q"/>
+                                        {% if request|is_doc_type %}
+                                        <input type="hidden" name="type" value="doc"/>
+                                        {% endif %}
+                                        <span class="input-group-btn">
+                                            <button type="submit" class="btn btn-primary">Search</button>
+                                        </span>
+                                    </div>
+                                </form>
+                                </td></tr></table>
+                            </div>
+                            {% else %}
+                            <div class="col-md-12">
+                                <table class="search-box"><tr><td>
+                                <form class="form" role="form" action="/search/search">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" placeholder="Search ..." name="q"/>
+                                        {% if request|is_doc_type %}
+                                        <input type="hidden" name="type" value="doc"/>
+                                        {% endif %}
+                                        <span class="input-group-btn">
+                                            <button type="submit" class="btn btn-primary">Search</button>
+                                        </span>
+                                    </div>
+                                </form>
+                                </td></tr></table>
+                            </div>
+                            {% endif %}
+                        </div>
+                        {% endif %}
+                    {% else %}
+                        <div class="col-md-12">
+                            <table class="search-box"><tr><td>
+                            <form class="form" role="form" action="/search/search">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="Search ..." name="q"/>
+                                    <input type="hidden" name="type" value="doc"/>
+                                    <span class="input-group-btn">
+                                        <button type="submit" class="btn btn-primary">Search</button>
+                                    </span>
+                                </div>
+                            </form>
+                            </td></tr></table>
+                        </div>
+					{% endif %}
+				
+					{% block content %}
+					{% endblock %}
+				</div>
+			</div><!-- /#main, /#main-wrapper -->
+
+		</div>
+	</div><!-- /#page, /#page-wrapper -->
+</div>
+</div>
+
+{% include 'common/footer.html' %}
+
+</body>
+</html>

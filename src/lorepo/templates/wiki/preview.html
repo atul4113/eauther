@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load apptags %}
+{% load markdown_deux_tags %}
+
+{% block content %}
+
+<div class="wikiPage">
+	<h1 class="page_header">{{page.title}}</h1>
+	<div class="main clear" style="padding-top: 0"></div>
+	
+	<div style="width:1,4em; float:left">{% button 'Go back' 'history.go(-1)' %}</div>
+	<div class="clear"></div>
+	
+	<div>
+	<h4>{{ page.title }}</h4>
+	{{page.text|markdown:"tables"}}
+	</div>	
+
+</div>
+
+{% endblock %}

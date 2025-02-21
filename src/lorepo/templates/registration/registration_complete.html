@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+<h1>You're Almost Done!</h1>
+<div class="main clear" style="padding-top: 0"></div>
+
+<p>
+	E-mail that contains a confirmation link has been sent.
+</p>
+<p>
+	In order to activate your account, check your email and click on the activation link.
+	If you don't see that email in your inbox shortly, check your spam folder or try to register again.
+</p>
+<p>
+	Still have a problem? <a href="mailto:{{ settings.SERVER_EMAIL }}">Contact us to get help</a>
+</p>
+<p>Thank you.</p>
+
+{% endblock %}

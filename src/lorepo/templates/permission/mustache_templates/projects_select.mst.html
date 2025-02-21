@@ -1,0 +1,26 @@
+<option value="none">---</option>
+[[#isCompanyAdmin]]
+    [[#company.have]]
+    <optgroup label="Company">
+        <option value="[[company.id]]">[[company.name]]</option>
+    </optgroup>
+    [[/company.have]]
+[[/isCompanyAdmin]]
+
+[[#have_projects]]
+    <optgroup label="Projects">
+        [[#projects]]
+        <option value="[[id]]">[[name]]</option>
+        [[/projects]]
+    </optgroup>
+[[/have_projects]]
+
+[[#projects]]
+    [[#have_publications]]
+        <optgroup label="[[name]]">
+            [[#publications]]
+                <option value="[[id]]">[[name]]</option>
+            [[/publications]]
+        </optgroup>
+    [[/have_publications]]
+[[/projects]]

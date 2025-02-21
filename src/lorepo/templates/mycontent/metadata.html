@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load apptags %}
+{% load spaces %}
+{% load metadata %}
+
+{%  block head %}
+    <script type="text/javascript">
+		$(document).ready(function() {
+    			$('.remove').click(function() {
+				$(this).parent().parent().addClass('removed'); // we move up to the div class="metadata-element"
+                $(this).parent().addClass('hidden');
+                $(this).parent().parent().find('.add-wrapper').removeClass('hidden');
+                $(this).parent().parent().find('#unused').attr('value','true');
+                $(this).parent().parent().find('.entered-value').attr('disabled','true');
+			});
+
+            $('.add').click(function() {
+				$(this).parent().parent().removeClass('removed'); // we move up to the div class="metadata-element"
+                $(this).parent().addClass('hidden');
+                $(this).parent().parent().find('.remove-wrapper').removeClass('hidden');
+                $(this).parent().parent().find('#unused').attr('value','false');
+                $(this).parent().parent().find('.entered-value').removeAttr('disabled');
+			});
+		});
+	</script>
+{%  endblock head %}
+
+{% block content %}
+
+<div class="createDiv">
+<h2>Edit lesson metadata</h2>
+
+<form method="post" action="/mycontent/{{content.id}}/metadata" name="metadata">
+	{% csrf_token %}
+	<input type="hidden" name="next" value="{{ next }}" />
+		<div class="title-tags">
+			<label for="id_title">{% trans "Title" %}: {% for e in form.title.errors %}
+				<span class="errorlist">&lArr; {{ e }}</span>{% endfor %}
+			</label>
+			<br/>
+			<input id="id_title" type="text" size="60" name="title" value="{{form.data.title}}" {% if language_bidi %}dir="rtl"{% endif %}/>
+			<br />
+			<label>{% trans "Tags" %} 
+				<span style="font-size:0.8em">(Must be comma separated)</span>:
+			</label>
+			<br/>
+			<textarea rows="4" id="id_tags" name="tags" {% if language_bidi %}dir="rtl"{% endif %}>{{form.data.tags}}</textarea>
+		</div>
+		<div class="description-shortdescription">
+			<label for="id_short">{% trans "Short Description" %}:{% for e in form.short_description.errors %}
+				<span class="errorlist">&lArr; {{ e }}</span>{% endfor %}</label>
+			<br/>
+			
+			<textarea id="id_short" cols="63" rows="4" name="short_description" {% if language_bidi %}dir="rtl"{% endif %}>{{form.data.short_description}}</textarea>
+			<label >{% trans "Description" %}:</label>
+			<br/>
+			<textarea cols="63" rows="10" name="description" {% if language_bidi %}dir="rtl"{% endif %}>{{form.data.description}}</textarea>
+			<div>
+				<label>Score type:
+					{% for e in form.passing_score.errors %}
+						<span class="errorlist">&lArr; {{ e }}</span>
+					{% endfor %}
+				</label><br/>
+				<select id="id_score_type" name="score_type">
+					<option value="last" {% if content.get_score_type == 'last'%}selected{% endif %}>last</option>
+					<option value="first" {% if content.get_score_type == 'first'%}selected{% endif %}>first</option>
+				</select>
+			</div>
+			<div>
+				<label>Passing score: <span style="font-size:0.8em">(0-100 without percent sign)</span>
+					{% for e in form.passing_score.errors %}
+						<span class="errorlist">&lArr; {{ e }}</span>
+					{% endfor %}
+				</label><br/>
+				<input id="id_passing_score" type="text" name="passing_score" value="{{form.data.passing_score}}"/> %
+			</div>
+		</div>
+		<div class="category-is_template">
+			<div>
+				<label>{% trans "Category" %}:</label>
+				<br/>
+				<select name="space_id">
+					{% for space in spaces %}
+						{% if space.parent == None %}
+							<option value="{{space.id}}" {% if space.id == priv_space.id %}selected{% endif %}>--</option>
+						{% endif %}
+					{% endfor %}				
+					{% for space in spaces %}
+						{% if space.parent != None %}
+							<option value="{{space.id}}" {% if space.id == priv_space.id %}selected{% endif %}>{{space.title}}</option>
+						{% endif %}
+					{% endfor %}
+				</select>
+			</div>
+		</div>
+		<div class="category-is_template">
+			<div>
+				<input type="checkbox" name="is_template" {% if is_template %}checked{% endif %}/><label>Is Template</label><br/>
+			</div>
+		</div>
+		<div class="category-is_template">
+			<div>
+				<input id="id_enable_page_metadata" type="checkbox" name="enable_page_metadata" {% if content.enable_page_metadata %}checked{% endif %}/><label>Enable page metadata</label><br/>
+			</div>
+			{% if definitions %}
+			<div>
+				<h3>Custom metadata</h3>
+				{% for definition in definitions %}
+					{% render_definition_form definition language_bidi %}
+				{% endfor %}
+			</div>
+			{% endif %}
+		</div>
+		
+
+		<a role="button" class="btn btn-primary btn-sm pull-left" href="javascript:$('.entered-value').removeAttr('disabled');jQuery(this).hide();document.forms['metadata'].submit();">Send</a>
+		<a role="button" class="btn btn-primary btn-sm pull-right" href="/mycontent/{{content.id}}/cancelediting?next={{next}}">Cancel</a>
+</form>
+		<div class="clearfix"></div>
+</div>
+
+{% endblock %}

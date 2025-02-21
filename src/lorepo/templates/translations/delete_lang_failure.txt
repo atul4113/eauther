@@ -1,0 +1,6 @@
+{% load translate %}{% autoescape off %}
+<p>{% get_label 'translations.creating_failure.dear' %} {{ user }},</p>
+<p>{% get_label 'translations.del_lang_failure.language' %} {{ lang_key }} {% get_label 'translations.del_lang_failure.not_success' %} {{ app_name }}.</p>
+
+<p>{% get_label 'translations.del_lang_failure.try_again' %}</p>
+{% endautoescape %}

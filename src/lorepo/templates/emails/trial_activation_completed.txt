@@ -1,0 +1,32 @@
+Thank you! You have successfully completed the 30 days FREE TRIAL activation process.
+Now you can freely work with the pre-installed eContent samples and create your own digital lessons.
+
+Please refer to the Documentation section within mAuthor platform for immediate help.
+We are also waiting for your queries which you can submit in Support section of mAuthor platform, or send them directly to our Support Team at support@learnetic.com.
+
+To help you with your first steps in mAuthor we are getting ready the Video Tutorials. They should be ready soon, so we will inform you once they are available.
+
+FIRST STEPS & USEFUL HINTS:
+
+1) When you log-in into mAuthor platform for the first time you will have instant access to selection of our demo eLessons and some pre-designed Templates. To access them click PROJECTS menu and choose Sample Lessons or Sample Templates.
+
+2) If you click the thumbnail of a Lesson you will open this lesson to check how it works. Play a bit its functionality.
+
+3) If you want to open the Lesson in mAuthor Editor please click the Drop Down Button named ACTIONS, at the bottom of the Lesson screen, and select Edit Lesson. It will take you to the mAuthor Editor loaded with the Lesson you selected.
+
+4) Feel free to try them out. Check their functionality and discover what Functional Modules were used to achieve it. Use also pre-designed Templates to create your own unique digital lessons.
+Do not worry, you can freely modify and save these samples as they are designated solely to your virtual workspace.
+
+RECOMMENDATIONS:
+
+30 days Trail should allow you to build your first, fully functional electronic Lesson. So, from the very beginning, try to build something valuable, something that you can show to your colleagues or decision makers in your organization. In case you decide to stay with us all work you created during the trail period will be available for your regular subscription.
+In case you do not decide to subscribe, do not worry. At the end of your trial period you may export your first lesson as a SCORM 2004 package - a widely accepted eLearning standard.
+So, your time investment is never lost and your valuable eContent will stay with you anyway.
+
+To start using mAuthor quickly and learn its functionality we recommend you to take a tour along its useful Video Tutorials.
+They will help you to take your first steps and speed up your learning curve significantly.
+You will find there also some useful tips & tricks and ready-made solutions to be implemented in your first projects.
+
+You may find them at: http://www.learnetic.com/mauthor-video-tutorials
+
+Good luck!

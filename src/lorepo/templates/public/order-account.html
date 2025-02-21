@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% load apptags %}
+
+
+{% block content %}
+
+<script type="text/javascript">
+$(document).ready(function(){
+    var orders = {
+        '1-monthly' : 390,
+        '1-yearly' : 4490,
+        '1-3 years' : 11225,
+        '3-monthly' : 1000,
+        '3-yearly' : 10000,
+        '3-3 years' : 25000,
+        '5-monthly' : 1500,
+        '5-yearly' : 15000,
+        '5-3 years' : 37500,
+        '10-monthly' : 2500,
+        '10-yearly' : 25000,
+        '10-3 years' : 62500,
+        '20-monthly' : 4000,
+        '20-yearly' : 40000,
+        '20-3 years' : 100000,
+        '40-monthly' : 5000,
+        '40-yearly' : 50000,
+        '40-3 years' : 125000
+    };
+
+    function setPrice () {
+        var users = $("#id_users").val(),
+        plan = 'yearly',
+        priceElement = $('.order-price'),
+        priceHidden = $('#id_price');
+
+        if (users != '' && plan != '') {
+            var order = users + '-' + plan;
+            priceElement.text(orders[order] + ' €');
+            priceHidden.val(orders[order]);
+        } else {
+            priceElement.text(0 + ' €');
+            priceHidden.val(0);
+        }
+    }
+
+    $('#id_plan').on('change', function (){
+        setPrice();
+    });
+
+    $('#id_users').on('change', function (){
+        setPrice();
+    });
+
+    $('.price-row').hide();
+    setPrice();
+});
+</script>
+
+<h1 class="page_header">Order account</h1>
+<div class="main clear" style="padding-top: 0px"></div>
+
+<div class="order-account">
+		<div class="header-message-order-form">Use the form below to order the account!</div>
+		<form id="orderForm" action="/public/order_account" method="POST" class="order-form">
+            <table class="order-table">
+            <tr>
+                <th>{{form.name.label}}:</th>
+                <td>{{form.name.errors}}{{form.name}}</td>
+            </tr>
+            <tr><th>{{form.company.label}}:</th><td>{{form.company.errors}}{{form.company}}</td></tr>
+            <tr><th>{{form.country.label}}:</th><td>{{form.country.errors}}{{form.country}}</td></tr>
+            <tr><th>{{form.email.label}}:</th><td>{{form.email.errors}}{{form.email}}</td></tr>
+            <tr><th>{{form.users.label}}:</th><td>{{form.users.errors}}{{form.users}}</td></tr>
+            <!--<tr><th>{{form.plan.label}}:</th><td>{{form.plan.errors}}{{form.plan}}</td></tr>-->
+            <tr class="price-row"><th>{{form.price.label}}:</th><td>{{form.price.errors}}{{form.price}}</td></tr>
+            <tr><th>Price:</th><td><div class="order-price"></div></td></tr>
+            <tr><th>{{form.message.label}}:</th><td>{{form.message.errors}}{{form.message}}</td></tr>
+            <tr class="recaptcha-row"><th></th><td>{{form.captcha}}</td></tr>
+            <tr><th>&nbsp;</th><td></td></tr>
+            </table>
+            <div class="order-form-button">
+                <button class="btn btn-large btn-info button-order-account">Order your account</button>
+            </div>
+		</form>
+
+	<div class="clear">&nbsp;</div>
+</div>
+
+{% endblock %}

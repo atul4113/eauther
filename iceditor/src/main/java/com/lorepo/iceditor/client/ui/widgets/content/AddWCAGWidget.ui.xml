@@ -1,0 +1,19 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+	
+	</ui:style>
+	<g:HTMLPanel ui:field="panel" styleName="mainPage left">
+		<div class="mainPageHeader">
+				<h3 ui:field="title"></h3>
+				<a class="mainPageCloseBtn closeWidgetLocker"></a>
+			</div>
+				<div id="addWCAGPage-contents" class="contents scrollable">
+					<g:HTMLPanel ui:field="modulesList" styleName="tableList"></g:HTMLPanel>
+				</div>
+			<div class="settingsControls">
+				<a class="controlsBtn" ui:field="addTTS" />		
+			</div>
+	</g:HTMLPanel>
+</ui:UiBinder> 

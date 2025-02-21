@@ -1,0 +1,390 @@
+{% load spaces %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1.0">
+    <meta name="format-detection" content="telephone=no">
+    {% if meta_seo %}{{ meta_seo }}{% endif %}
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/media/js/util/screen.js"></script>
+
+    {% include 'common/math_jax.html' %}
+    <script type="text/javascript" src="/media/js/semi-responsive/semi-responsive-layout-chooser.js"></script>
+    <script type="text/javascript" src="/media/js/jquery.ba-resize.min.js"></script>
+    <script type="text/javascript" src="/media/icplayer/icplayer.nocache.js"></script>
+
+        <style>
+            html {
+                margin: 0;
+                -webkit-overflow-scrolling: touch !important;
+                overflow: auto !important;
+                height: 100% !important;
+            }
+
+            body {
+                margin: 0;
+                -webkit-overflow-scrolling: touch !important;
+                overflow: auto !important;
+                min-height: 100% !important;
+            }
+
+            #content-view {
+                "left": "0px",
+                "overflow": "hidden",
+                "position": "absolute",
+                "top": "0px"
+            }
+
+            #_icplayer {
+                display: table;
+            }
+
+            .no-margin {
+                margin: 0;
+                padding: 0;
+            }
+
+            .pull-left {
+                float: left;
+            }
+
+            .clear {
+                clear: both;
+            }
+        </style>
+
+<style type="text/css">
+<!--
+
+/*
+    I began with the goal to prevent font scaling in Landscape orientation.
+    To do this, see: http://stackoverflow.com/questions/2710764/
+
+    Later, I just wanted to magnify font-size for the iPad, leaving
+    the iPhone rendering to the css code.  So ...
+
+    (max-device-width:480px) = iphone.css
+    (min-device-width:481px) and
+        (max-device-width:1024px) and
+            (orientation:portrait) = ipad-portrait.css
+    (min-device-width:481px) and
+        (max-device-width:1024px) and
+            (orientation:landscape) = ipad-landscape.css
+    (min-device-width:1025px) = ipad-landscape.css
+
+*/
+
+@media only screen and (min-device-width: 481px)
+{
+    html {
+        -webkit-text-size-adjust: 100%;   /* none for no scaling */
+    }
+}
+
+-->
+</style>
+    {% if request.user and request.user.company.id|is_test_company %}
+        <script type='text/javascript'>
+            window.__wtw_lucky_site_id = 76522;
+
+            (function () {
+                var wa = document.createElement ('script');
+                wa.type = 'text/javascript';
+                wa.async = true;
+                wa.src = 'https://d10lpsik1i8c69.cloudfront.net/w.js';
+                var s = document.getElementsByTagName ('script')[0];
+                s.parentNode.insertBefore (wa, s);
+            }) ();
+        </script>
+    {% endif %}
+</head>
+
+<body class="no-margin">
+
+<div id="content-view">
+    <div id="content">
+        <div id="_icplayer" class="no-margin pull-left"></div>
+        <div class="clear"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var viewPort = document.querySelector ("meta[name=viewport]");
+
+    var $content = $ ("#content");
+    var $contentView = $ ("#content-view");
+
+    var userAgent = window.navigator.userAgent;
+
+    function onMessageReceived (event) {
+        if (event.data.indexOf ('RESIZE:') === 0) {
+            handleResize (event.data.substring ('RESIZE:'.length));
+        } else if (event.data.indexOf ('SCROLLTOP:') === 0) {
+            handleScrollTop (event.data.substring ('SCROLLTOP:'.length));
+        } else if (event.data.indexOf ('PAGE_LOADED') === 0) {
+            document.body.scrollTop = 0;
+        }
+    }
+
+    function handleScrollTop (data) {
+        var top = parseInt (data),
+          frameTop = $content.offset ().top,
+          position = top + frameTop;
+
+        window.scrollTo (0, position);
+    }
+
+    function handleResize (data) {
+        var dimensions = data.split (';');
+        var width = dimensions[0];
+        var height = dimensions[1];
+
+        scaleIframe(width, height);
+    }
+
+    function getViewPortContent (ua, width) {
+        if (!( /iPhone|iPad|iPod/.test (navigator.platform) && /OS [1-5]_[0-9_]* like Mac OS X/i.test (ua) && ua.indexOf ("AppleWebKit") > -1 )) {
+            var contentTag = viewPort.getAttribute ('content');
+            var newContent = contentTag.replace ("/width=[^,]+/", 'width' + width);
+            return newContent;
+        } else {
+            return 'width=' + width;
+        }
+
+    }
+
+    function scaleIframe (width, height) {
+        var screenSizes = window.mAuthor.ScreenUtils.getScreenSizesDependingOnOrientation(userAgent);
+        var windowWidth = screenSizes.width;
+
+        var scale = windowWidth / width;
+
+        $content.css('transform', 'scale(' + scale + ')');
+        $content.css('transform-origin', 'top left');
+        $content.css('-webkit-transform', 'scale(' + scale + ')');
+        $content.css('-webkit-transform-origin', 'top left');
+
+        var newWidth = scale * width;
+        var newHeight = scale * height;
+
+        $contentView.width(newWidth);
+        $contentView.height(newHeight);
+        $contentView.css({
+            "overflow": "hidden"
+        });
+
+        viewPort.setAttribute ('content', getViewPortContent (userAgent, newWidth));
+        setScaleInformation(width, height, scale);
+    }
+
+    function setScaleInformation (width, height, scale) {
+        var scaleX = $contentView[0].getBoundingClientRect().width / width;
+        var scaleY = $contentView[0].getBoundingClientRect().height / height;
+
+        var scaleInformation = {
+            scaleX: scaleX,
+            scaleY: scaleY,
+            transform: 'scale(' + scale + ')',
+            transformOrigin: 'top left'
+        };
+
+        player.getPlayerServices().setScaleInformation(scaleInformation);
+
+    }
+
+    function postWindowWidth () {
+        var type = "WINDOW_WIDTH:";
+        var screenSizes = window.mAuthor.ScreenUtils.getScreenSizesDependingOnOrientation (userAgent);
+
+        var message = type + JSON.stringify (screenSizes);
+
+        receiveMessage({
+            data: message
+        });
+    }
+
+    window.addEventListener ("resize", function () {
+        postWindowWidth ();
+    });
+
+    window.addEventListener ("orientationchange", function () {
+        postWindowWidth();
+    }, false);
+
+    /*! A fix for the iOS orientationchange zoom bug.
+     Script by @scottjehl, rebound by @wilto.
+     MIT / GPLv2 License.
+     https://github.com/scottjehl/iOS-Orientationchange-Fix
+    */
+    (function (w) {
+
+        // This fix addresses an iOS bug, so return early if the UA claims it's something else.
+        var ua = navigator.userAgent;
+        if (!( /iPhone|iPad|iPod/.test (navigator.platform) && /OS [1-5]_[0-9_]* like Mac OS X/i.test (ua) && ua.indexOf ("AppleWebKit") > -1 )) {
+            return;
+        }
+
+        var doc = w.document;
+
+        if (!doc.querySelector) {
+            return;
+        }
+
+        var meta = doc.querySelector ("meta[name=viewport]"),
+          initialContent = meta && meta.getAttribute ("content"),
+          disabledZoom = initialContent + ",maximum-scale=1",
+          enabledZoom = initialContent + ",maximum-scale=10",
+          enabled = true,
+          x, y, z, aig;
+
+        if (!meta) {
+            return;
+        }
+
+        function restoreZoom () {
+            meta.setAttribute ("content", enabledZoom);
+            enabled = true;
+        }
+
+        function disableZoom () {
+            meta.setAttribute ("content", disabledZoom);
+            enabled = false;
+        }
+
+        function checkTilt (e) {
+            aig = e.accelerationIncludingGravity;
+            x = Math.abs (aig.x);
+            y = Math.abs (aig.y);
+            z = Math.abs (aig.z);
+
+            // If portrait orientation and in one of the danger zones
+            if ((!w.orientation || w.orientation === 180) && ( x > 7 || ( ( z > 6 && y < 8 || z < 8 && y > 6 ) && x > 5 ) )) {
+                if (enabled) {
+                    disableZoom ();
+                }
+            }
+            else if (!enabled) {
+                restoreZoom ();
+            }
+        }
+
+        w.addEventListener ("orientationchange", restoreZoom, false);
+        w.addEventListener ("devicemotion", checkTilt, false);
+    })();
+
+
+    function getPageNumberWithCommons () {
+        var page, hash = window.location.hash, isCommons = false;
+
+        if (hash.substring (1, 9) === 'commons_') {
+            isCommons = true;
+            page = parseInt (hash.substring (9), 10);
+        } else {
+            page = parseInt (hash.substring (1), 10);
+        }
+
+
+        if (!isNaN (page)) {
+            page = page - 1;
+        } else {
+            page = 0;
+        }
+
+        return {
+            'isCommons': isCommons,
+            'index': page
+        };
+    }
+
+
+    function postResizeMessage (width, height) {
+        var message = "RESIZE:" + width + ";" + height;
+        onMessageReceived ({
+            data: message
+        });
+    }
+
+    function postPageLoadedMessage () {
+        var message = "PAGE_LOADED";
+        onMessageReceived ({
+            data: message
+        });
+    }
+
+    var player;
+    var semiResponsiveLayoutChooser;
+
+    function chooseLayout (layoutChooser, screenConfiguration) {
+        var isMobile = screenConfiguration.orientation !== window.mAuthor.ScreenUtils.ORIENTATION_TYPES.NOT_MOBILE;
+        var isVertical = screenConfiguration.orientation === window.mAuthor.ScreenUtils.ORIENTATION_TYPES.PORTRAIT;
+        var isHorizontal = screenConfiguration.orientation === window.mAuthor.ScreenUtils.ORIENTATION_TYPES.LANDSCAPE;
+
+        return layoutChooser.chooseLayout (screenConfiguration.width, isMobile, isVertical, isHorizontal);
+    }
+
+    function iframeResizeRequest () {
+        var $icPlayer = $ ('#_icplayer > .ic_player');
+        var width = $icPlayer.width();
+        var height = $icPlayer.height();
+
+        postResizeMessage (width, height);
+    }
+
+
+    function icOnAppLoaded () {
+        var page = getPageNumberWithCommons ();
+
+        player = icCreatePlayer ('_icplayer');
+
+        if (page.isCommons) {
+            player.loadCommonPage ('/file/{% if version %}{{version}}{% else %}{{content.file.id}}{% endif %}', page.index);
+        } else {
+            player.load ('/file/{% if version %}{{version}}{% else %}{{content.file.id}}{% endif %}', page.index);
+        }
+
+        var firstPageLoaded = false;
+        player.onPageLoaded (function () {
+            if (!firstPageLoaded) {
+                semiResponsiveLayoutChooser = new window.semiResponsive.LayoutChooser(player.getSemiResponsiveLayouts ());
+                var screenConfiguration = window.mAuthor.ScreenUtils.getScreenSizesDependingOnOrientation (navigator.userAgent);
+                var layoutID = chooseLayout (semiResponsiveLayoutChooser, screenConfiguration);
+                var changed = player.changeLayout (layoutID);
+
+                firstPageLoaded = true;
+            }
+            postPageLoadedMessage ();
+            iframeResizeRequest();
+        });
+
+        player.onOutstretchHeight (function () {
+            iframeResizeRequest ();
+        });
+
+        player.onPageScrollTo (function (top) {
+            onMessageReceived ({
+                data: 'SCROLLTOP:' + top
+            });
+        });
+    }
+
+
+    function receiveMessage (event) {
+        var WINDOW_WIDTH_EVENT = "WINDOW_WIDTH:";
+
+        if (!event.data) {
+            return;
+        }
+
+        if (event.data.indexOf (WINDOW_WIDTH_EVENT) === 0) {
+            if (semiResponsiveLayoutChooser) {
+                var screenConfiguration = JSON.parse (event.data.substring (WINDOW_WIDTH_EVENT.length, event.data.length));
+                var layoutID = chooseLayout (semiResponsiveLayoutChooser, screenConfiguration);
+                var changed = player.changeLayout (layoutID);
+            }
+        }
+        iframeResizeRequest();
+    }
+</script>
+</body>
+</html>

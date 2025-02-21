@@ -1,0 +1,165 @@
+{% load indesign %}
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>mAuthor - Import InDesgin Document</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta name="format-detection" content="telephone=no">
+		<link href="/mauthor_media/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+		<link href="/mauthor_media/bootstrap/css/bootstrap-responsive.css" rel="stylesheet"/>
+		<script src="/mauthor_media/jquery-ui/js/jquery-1.9.1.js"></script>
+		<style>
+		.page {
+			border: solid 1px #ccc;
+			margin-top: 20px;
+			border-radius: 7px;
+			overflow: hidden;
+		}
+		.page .header {
+			background-color: #eee;
+			padding: 5px;
+			font-weight: bold;
+		}
+		.page .container {
+			min-height: 80px;
+			padding: 10px;
+		}
+		.element:hover {
+			cursor: move;
+			background-color: #f3f3f5;
+		}
+		.used {
+			color: #ccc;
+		}
+		.navbar-inner .button {
+			padding-right: 15px;
+		}
+		</style>
+	</head>
+	<body>
+		<div class="navbar navbar-static-top navbar-inverse">
+			<div class="navbar-inner">
+				<span class="brand">mAuthor - InDesign Import</span>
+
+				<div class="button pull-right">
+					<a class="btn btn-success" id="addPage">Add page</a>
+					<a class="btn btn-primary" href="javascript:document.getElementById('new-lesson').submit()" id="openInEditor">Open in editor</a>
+					<a class="btn btn-primary" id="save">Save</a>
+					<a class="btn btn-warning" href="/mycontent">Cancel</a>
+				</div>
+  			</div>
+		</div>
+
+		<div class="container-fluid">
+			<div class="row-fluid">
+				<div class="span10">
+					<h3>Imported XML</h3>
+					{% structure root "_" %}
+				</div>
+				<div class="span2">
+					<h3>New Lesson</h3>
+					<form id="new-lesson" name="new-lesson" method="POST" action="/indesign/create_lesson">
+						<input type="hidden" value="{{space_id}}" name="space_id"/>
+						<input type="hidden" value="{{next}}" name="next"/>
+						<div id="pages">
+							<div class="page" data-page-number="0">
+								<div class="header">
+									Page 1
+									<button type="button" class="close" data-dismiss="page">&times;</button>
+								</div>
+								<div class="container"></div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<script>
+		$(document).ready(function() {
+			function dropItem(event, ui) {
+				var items = $(this).find('b').length;
+				var pageNumber = $(this).attr('data-page-number');
+
+				var idInput = $('<input type="hidden"/>');
+				var textInput = $('<input type="hidden"/>');
+
+				idInput.attr('value', ui.draggable.find('b').html());
+				idInput.attr('name', 'page[' + pageNumber + '][' + items + '][\'id\']');
+
+				var elementText = ui.draggable.find('span').html();
+				textInput.attr('value', elementText);
+				textInput.attr('name', 'page[' + pageNumber + '][' + items + '][\'text\']');
+
+				var container = $(this).find('.container');
+
+				var element = $('<div class="element"></div>');
+				var clone = ui.draggable.find('b').first().clone();
+				clone.attr('title', elementText);
+				var closeButton = $('<span class="badge badge-important">&times;</button> ');
+				closeButton.click(function() {
+					$(this).parent().remove();
+				});
+				element.append(closeButton);
+				element.append('&nbsp;')
+				element.append(clone);
+				element.append(idInput);
+				element.append(textInput);
+				container.append(element);
+
+				ui.draggable.find('.element').first().addClass('used');
+			}
+
+			function addPage() {
+				var last = $('#pages').find('div.page:last-child');
+				var pageNumber = -1;
+				console.log(last.length)
+				if (last.length !== 0) {
+					pageNumber = parseInt(last.attr('data-page-number'));
+				}
+
+				var newPage = $('<div class="page" data-page-number="' + (pageNumber+1) + '"></div>');
+				var closeButton = $('<button type="button" class="close" data-dismiss="page">&times;</button>');
+				closeButton.click(removePage);
+
+				var header = $('<div class="header">Page ' + (pageNumber+2) + '</div>');
+				header.append(closeButton);
+				newPage.append(header);
+				newPage.append('<div class="container"></div>');
+				$('#pages').append(newPage);
+				newPage.droppable({
+					drop: dropItem
+				});
+			}
+
+			$('#addPage').click(addPage);
+
+			$('#save').click(function() {
+				$("#new-lesson").append('<input type="hidden" name="skip_editor" value="1"/>');
+				$("#new-lesson").submit();
+			});
+
+			function removePage() {
+				$(this).parent().parent().remove();
+			}
+			$('.close').click(removePage);
+
+			$('.draggable').draggable({
+				cursor: "move",
+				cursorAt: { top:0, left: 0},
+				helper: function(event, ui) {
+					return $(this).find('b').clone();
+				},
+			});
+
+			$('.page').droppable({
+				drop: dropItem
+			});
+		});
+		</script>
+
+    	<script src="/mauthor_media/bootstrap/js/bootstrap.min.js"></script>
+    	<script src="/mauthor_media/jquery-ui/js/jquery-ui-1.10.3.custom.min.js"></script>
+	</body>
+</html>

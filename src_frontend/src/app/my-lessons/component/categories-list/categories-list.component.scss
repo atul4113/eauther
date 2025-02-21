@@ -1,0 +1,37 @@
+@import "../../../common/templates/mdl-colors";
+
+app-categories-list {
+    .header-container {
+        display: flex;
+
+        .icon-link {
+            padding-top: 10px;
+        }
+    }
+
+    .is-bold {
+        font-weight: bold;
+    }
+
+    .mat-list {
+        padding: 0;
+
+        .mat-list-item-content {
+            padding: 0 !important;
+        }
+
+        .other-categories {
+            padding-left: 24px;
+        }
+
+        .mat-list-item {
+            height: 30px !important;
+            font-size: 15px !important;
+
+            .category-link {
+                text-decoration: none;
+                color: black;
+            }
+        }
+    }
+}

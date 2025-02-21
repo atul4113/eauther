@@ -1,0 +1,87 @@
+{% extends "base_no_search.html" %}
+
+{% load apptags %}
+
+{% block content %}
+
+<div id="pricing_plans">
+	<h1 class="page-header">
+		Pricing plans
+	</h1>
+
+	<div class="wrapper">
+        <p class="pricing_header">
+            mAuthor is the world's best and most advanced authoring platform designed to create highly interactive content.
+            Thanks to the <b>WYSIWIG</b> editing mode and template approach, mAuthor allows an average editorial person
+            <b>without any software development skills</b> to create from <b>10 to 30 highly interactive Learning Objects
+            (screens) daily</b> with various activities from the palette of over 100 interactivity types. Such content can be then
+            exported for ofine and online use into any <b>SCORM</b> or <b>xAPI</b> compatible platform.
+        </p>
+        <table class="table pricing">
+          <thead>
+            <tr>
+                <th class="users head">Users</th>
+                <th class="monthly-plan head">Monthly Plan</th>
+                <th class="yearly-plan head">Yearly Plan</th>
+                <th class="three-years-plan head">3 years Plan</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+                <td class="users">1</td>
+                <td class="monthly-plan">€ 390</td>
+                <td class="yearly-plan">€ 4,490</td>
+                <td class="three-years-plan">€ 11,225</td>
+            </tr>
+            <tr>
+                <td class="users brighter">3</td>
+                <td class="monthly-plan brighter">€ 1000</td>
+                <td class="yearly-plan brighter">€ 10,000</td>
+                <td class="three-years-plan brighter">€ 25,000</td>
+            </tr>
+            <tr>
+                <td class="users">5</td>
+                <td class="monthly-plan">€ 1,500</td>
+                <td class="yearly-plan">€ 15,000</td>
+                <td class="three-years-plan">€ 37,500</td>
+            </tr>
+            <tr>
+                <td class="users brighter">10</td>
+                <td class="monthly-plan brighter">€ 2,500</td>
+                <td class="yearly-plan brighter">€ 25,000</td>
+                <td class="three-years-plan brighter">€ 62,500</td>
+            </tr>
+            <tr>
+                <td class="users">20</td>
+                <td class="monthly-plan">€ 4,000</td>
+                <td class="yearly-plan">€ 40,000</td>
+                <td class="three-years-plan">€ 100,000</td>
+            </tr>
+            <tr>
+                <td class="users brighter">40</td>
+                <td class="monthly-plan brighter">€ 5,000</td>
+                <td class="yearly-plan brighter">€ 50,000</td>
+                <td class="three-years-plan brighter">€ 125,000</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p class="covers-text">LICENCE PRICE COVERS</p>
+        <ul class="benefits-list">
+            <li>100 GB disc space</li>
+            <li>3 online training sessions about 2 hours each</li>
+            <li>Service operation time 99%</li>
+            <li>E-mail help desk with 48 hours reaction time</li>
+        </ul>
+
+        <div class="order-buttons">
+            {% if not request.user.company %}
+              <a href="/accounts/register" class="btn btn-large btn-primary">Create 30 days Trial Demo Account</a>
+                <div class="or-text">or</div>
+            {% endif %}
+          <a href="/public/order_account" class="btn btn-large btn-info button-order-account">Order your account</a>
+        </div>
+	</div>
+</div>
+
+{% endblock %}

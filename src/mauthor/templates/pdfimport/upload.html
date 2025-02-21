@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load apptags %}
+
+{% block head %}
+    <link href="/media/css/import_pdf/main.css" rel="stylesheet" type="text/css" xmlns="http://www.w3.org/1999/html"/>
+    <script src="/media/js/messages.js" type="text/javascript"></script>
+{% endblock %}
+
+{% block content %}
+<h1 class="page_header">Import PDF file</h1>
+<div class="import_pdf_information_message">Maximum PDF size is 50MB and 100 pages.</div>
+<div class="main clear" style="padding-top: 0"></div>
+
+{% include "common/messages/display_messages.html" %}
+<script>
+    (function (window) {
+        $( document ).ready(function () {
+             $(".button_click").on('click', uploadPDF);
+        });
+
+        function uploadPDF() {
+            if ($(".button_click").attr('disabled')) {
+                window.Messages.clean();
+                window.Messages.createWarningMessage("PDF size greater than 50MB. Please upload smaller PDF");
+            } else {
+                $('#upload_pdf_form').hide();
+                $('.pdf_upload_gif_div').show();
+                window.Messages.clean();
+                window.Messages.createInfoMessage("Uploading file. Please wait.");
+                document.forms["import"].submit()
+            }
+        }
+        $(document).ready(function () {
+            $('#id_file').bind('change', function() {
+                var fileSize = this.files[0].size / 1024 / 1024;
+
+                if(fileSize > 50) {
+                    window.Messages.clean();
+                    window.Messages.createWarningMessage("PDF size greater than 50MB. Please upload smaller PDF");
+                    $(".button_click").attr('disabled', 'disabled');
+                } else {
+                    $(".button_click").removeAttr('disabled')
+                }
+            });
+        });
+
+    })(window);
+</script>
+<div id="messages"></div>
+
+<div class="pdf_upload_gif_div" id="role-ajax-loader-img"><img class="wait_animation_gif" src="/media/ajax-loader-transparent.gif"></div>
+<div>
+	<form action="{{upload_url}}" method="POST" enctype="multipart/form-data" name="import" id="upload_pdf_form">
+	{{form}}
+		{% button "Upload" "" %}
+		<input type="hidden" name="next" value="{{next}}"/>
+		<input type="submit" value="import" id="upload_pdf_button"/>
+    </form>
+</div>
+{% endblock %}

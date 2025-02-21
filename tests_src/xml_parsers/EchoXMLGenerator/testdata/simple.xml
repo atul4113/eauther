@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE student [
+  <!NOTATION gif89a  PUBLIC "-//CompuServe//NOTATION Graphics Interchange Format 89a//EN" "gif">
+  <!ENTITY gif89a SYSTEM "gif89a.gif" NDATA gif89a>
+  <!--'student' must have one
+    child element type 'id'-->
+  <!ELEMENT student (id,c)+>
+  <!--'id' may only contain text
+    that is not markup in its content-->
+  <!ELEMENT id EMPTY>
+  <!ELEMENT c ANY>
+    <!ENTITY writer "Donald Duck.">
+    <!ENTITY copyright "Copyright W3Schools.">
+    <!ENTITY % residential_content "address, footage, rooms, baths">
+    <!ENTITY % names SYSTEM "names.dtd">
+    <!ENTITY % names2 PUBLIC "public_ID" "URI">
+
+    %names2;
+]>
+<student>
+  <id>&writer;&copyright;%names;</id>
+<f:table xmlns:f="https://www.w3schools.com/furniture">
+  <f:name>African Coffee Table</f:name>
+  <f:width>80</f:width>
+  <f:length>120</f:length>
+</f:table>
+</student>

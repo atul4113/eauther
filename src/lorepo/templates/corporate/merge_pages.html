@@ -1,0 +1,38 @@
+</br>
+<div class="labelBox">
+    <div class="listTitle"><strong>Merge Lessons:</strong></div>
+    <div class="edit">
+   			{% if Permission.CONTENT_EDIT in user_permissions or is_owner %}
+   			    <a href="/merger/merge/{% if space_request.id %}{{ space_request.id }}{% endif %}?next={{ request.path }}" style="font-size:x-small;">Merge</a>
+   		    {% else %}
+                &nbsp;
+            {% endif %}
+    </div>
+    <ul>
+        {% for lesson in request.session.merge_lessons %}
+            <li>{% if forloop.first %} <b>{{ lesson.title }}</b> {% else %} {{ lesson.title }} {% endif %}
+            {% if lesson.pages %}
+                <ul>
+                pages: {% for num in lesson.pages %}{{ num|add:"1"}}{% if not forloop.last %},{% endif %} {% endfor %}
+                </ul>
+            {% endif %}
+            {% if lesson.common_pages %}
+                <ul>
+                commons:{% for num in lesson.common_pages %} {{ num|add:"1" }}{%  if not forloop.last %},{% endif %}{%  endfor %}
+                </ul>
+            {% endif %}
+            </li>
+		{% endfor %}
+    </ul>
+
+    <table class="list trash">
+    	<tr><td class="leftColumn">
+    	<img src="/media/icons/bin_closed.png" alt=""/>
+    	{% if is_trash %}
+    		<b>Cancel Merge</b>
+    	{% else %}
+    		<a href="/merger/merge_undo/?next={{ request.path }}">Cancel Merge</a>
+    	{% endif %}
+    	</td></tr>
+    </table>
+</div>

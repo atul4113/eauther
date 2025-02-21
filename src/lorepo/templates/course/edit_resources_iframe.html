@@ -1,0 +1,45 @@
+{% extends 'embed/template.html' %}
+
+{% block player %}
+    <script type="text/javascript">
+
+        function UpdateResourcesMessage(pageNumber) {
+            var parent = getOpener();
+
+            if (parent != null) {
+                var message = "PAGE:" + pageNumber;
+                parent.postMessage(message, '*');
+            }
+        }
+
+
+        var player;
+        function icOnAppLoaded(){
+            function iframeResizeRequest() {
+                var width = parseInt($('#_icplayer').css('width'), 10);
+                var height = parseInt($('#_icplayer').css('height'), 10);
+                var viewport = document.querySelector("meta[name=viewport]");
+                viewport.setAttribute('content', 'width=' + width);
+                postResizeMessage(width, height);
+
+            }
+
+            player = icCreatePlayer('_icplayer');
+            player.load('/file/{{content.file.id}}', getPageNumber());
+            player.onPageLoaded(function() {
+                iframeResizeRequest();
+                UpdateResourcesMessage(player.getPlayerServices().getCurrentPageIndex());
+
+                $('#_icplayer').resize(function(e) {
+                    width = parseInt($('#_icplayer').css('width'), 10);
+                    height = parseInt($('#_icplayer').css('height'), 10);
+                    postResizeMessage(width, height);
+                });
+            });
+
+            player.onOutstretchHeight(function () {
+                iframeResizeRequest();
+            });
+        }
+    </script>
+{% endblock %}

@@ -1,0 +1,343 @@
+[
+  {
+    "pk": 2, 
+    "model": "contenttypes.contenttype", 
+    "fields": {
+      "model": "space", 
+      "name": "space", 
+      "app_label": "spaces"
+    }
+  }, 
+  {
+    "pk": 5, 
+    "model": "contenttypes.contenttype", 
+    "fields": {
+      "model": "spaceaccess", 
+      "name": "space access", 
+      "app_label": "spaces"
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "auth.user", 
+    "fields": {
+      "username": "kgebert", 
+      "first_name": "", 
+      "last_name": "", 
+      "is_active": true, 
+      "idxf_email_l_iexact": "karol.gebert@solwit.com", 
+      "idxf_username_l_iexact": "kgebert", 
+      "is_superuser": true, 
+      "is_staff": true, 
+      "last_login": "2013-07-10 12:07:20", 
+      "groups": [], 
+      "user_permissions": [], 
+      "password": "sha1$d7056$177d353e2c102581794673856c485a0f5ea81de0", 
+      "email": "karol.gebert@solwit.com", 
+      "date_joined": "2013-07-10 13:56:17"
+    }
+  }, 
+  {
+    "pk": 8, 
+    "model": "auth.user", 
+    "fields": {
+      "username": "test", 
+      "first_name": "", 
+      "last_name": "", 
+      "is_active": true, 
+      "idxf_email_l_iexact": "test@test.pl", 
+      "idxf_username_l_iexact": "test", 
+      "is_superuser": false, 
+      "is_staff": false, 
+      "last_login": "2013-07-10 12:02:29", 
+      "groups": [], 
+      "user_permissions": [], 
+      "password": "sha1$3bca7$85c169edeceaf50bef724309347fa11a490d8fc2", 
+      "email": "test@test.pl", 
+      "date_joined": "2013-07-10 12:02:29"
+    }
+  }, 
+  {
+    "pk": 18, 
+    "model": "auth.user", 
+    "fields": {
+      "username": "test2", 
+      "first_name": "", 
+      "last_name": "", 
+      "is_active": true, 
+      "idxf_email_l_iexact": "test@test.pl", 
+      "idxf_username_l_iexact": "test2", 
+      "is_superuser": false, 
+      "is_staff": false, 
+      "last_login": "2013-07-10 12:04:12", 
+      "groups": [], 
+      "user_permissions": [], 
+      "password": "sha1$5d333$7270cf6cad4452a070ffa21eb280f68808a34a3b", 
+      "email": "test@test.pl", 
+      "date_joined": "2013-07-10 12:03:53"
+    }
+  }, 
+  {
+    "pk": "33dde5a219622a66a7f276e20d13946e", 
+    "model": "sessions.session", 
+    "fields": {
+      "expire_date": "2013-07-24 12:07:20", 
+      "session_data": "NzJlM2QzMzJkYzA2Y2M3M2NiM2VjZjY1M2I5ZDFlZTZiYjM1ZTAyMzqAAn1xAChVEl9hdXRoX3Vz\nZXJfYmFja2VuZHEBVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEC\nVQ1fYXV0aF91c2VyX2lkcQOKAQFVD19zZXNzaW9uX2V4cGlyeXEESwB1Lg==\n"
+    }
+  }, 
+  {
+    "pk": 9, 
+    "model": "registration.registrationprofile", 
+    "fields": {
+      "activation_key": "ALREADY_ACTIVATED", 
+      "user": 8
+    }
+  }, 
+  {
+    "pk": 19, 
+    "model": "registration.registrationprofile", 
+    "fields": {
+      "activation_key": "ALREADY_ACTIVATED", 
+      "user": 18
+    }
+  }, 
+  {
+    "pk": 22, 
+    "model": "support.ticket", 
+    "fields": {
+      "last_comment_date": "2013-07-10 12:07:41", 
+      "created_date": "2013-07-10 12:07:29", 
+      "company": 12, 
+      "author": 1, 
+      "title": "test 1"
+    }
+  }, 
+  {
+    "pk": 23, 
+    "model": "support.comment", 
+    "fields": {
+      "ticket": 22, 
+      "text": "test", 
+      "author": 1, 
+      "created_date": "2013-07-10 12:07:29"
+    }
+  }, 
+  {
+    "pk": 24, 
+    "model": "support.comment", 
+    "fields": {
+      "ticket": 22, 
+      "text": "test", 
+      "author": 1, 
+      "created_date": "2013-07-10 12:07:41"
+    }
+  }, 
+  {
+    "pk": 3, 
+    "model": "spaces.space", 
+    "fields": {
+      "modified_date": "2013-07-10 13:58:32", 
+      "right": 0, 
+      "is_deleted": false, 
+      "parent": null, 
+      "title": "kgebert", 
+      "rank": 100, 
+      "top_level": 3, 
+      "include_contents_in_editor": false, 
+      "created_date": "2013-07-10 13:58:32", 
+      "contents_count": 0, 
+      "path": "[]", 
+      "space_type": 1, 
+      "left": 0
+    }
+  }, 
+  {
+    "pk": 10, 
+    "model": "spaces.space", 
+    "fields": {
+      "modified_date": "2013-07-10 12:02:30", 
+      "right": 0, 
+      "is_deleted": false, 
+      "parent": null, 
+      "title": "test", 
+      "rank": 100, 
+      "top_level": 10, 
+      "include_contents_in_editor": false, 
+      "created_date": "2013-07-10 12:02:30", 
+      "contents_count": 0, 
+      "path": [
+        null
+      ], 
+      "space_type": 1, 
+      "left": 0
+    }
+  }, 
+  {
+    "pk": 12, 
+    "model": "spaces.space", 
+    "fields": {
+      "modified_date": "2013-07-10 12:03:14", 
+      "right": 0, 
+      "is_deleted": false, 
+      "parent": null, 
+      "title": "Karol Corporation", 
+      "rank": 100, 
+      "top_level": 12, 
+      "include_contents_in_editor": false, 
+      "created_date": "2013-07-10 12:03:14", 
+      "contents_count": 0, 
+      "path": [
+        null
+      ], 
+      "space_type": 3, 
+      "left": 0
+    }
+  }, 
+  {
+    "pk": 13, 
+    "model": "spaces.space", 
+    "fields": {
+      "modified_date": "2013-07-10 12:03:14", 
+      "right": 0, 
+      "is_deleted": false, 
+      "parent": null, 
+      "title": "Karol Corporation Public", 
+      "rank": 100, 
+      "top_level": 13, 
+      "include_contents_in_editor": false, 
+      "created_date": "2013-07-10 12:03:14", 
+      "contents_count": 0, 
+      "path": [
+        null
+      ], 
+      "space_type": 2, 
+      "left": 0
+    }
+  }, 
+  {
+    "pk": 20, 
+    "model": "spaces.space", 
+    "fields": {
+      "modified_date": "2013-07-10 12:03:53", 
+      "right": 0, 
+      "is_deleted": false, 
+      "parent": null, 
+      "title": "test2", 
+      "rank": 100, 
+      "top_level": 20, 
+      "include_contents_in_editor": false, 
+      "created_date": "2013-07-10 12:03:53", 
+      "contents_count": 0, 
+      "path": [
+        null
+      ], 
+      "space_type": 1, 
+      "left": 0
+    }
+  }, 
+  {
+    "pk": 6, 
+    "model": "spaces.spaceaccess", 
+    "fields": {
+      "modified_date": "2013-07-10 13:58:42", 
+      "is_deleted": false, 
+      "space": 3, 
+      "user": 1, 
+      "created_date": "2013-07-10 13:58:42", 
+      "access_right": 3
+    }
+  }, 
+  {
+    "pk": 11, 
+    "model": "spaces.spaceaccess", 
+    "fields": {
+      "modified_date": "2013-07-10 12:02:30", 
+      "is_deleted": false, 
+      "space": 10, 
+      "user": 8, 
+      "created_date": "2013-07-10 12:02:30", 
+      "access_right": 3
+    }
+  }, 
+  {
+    "pk": 14, 
+    "model": "spaces.spaceaccess", 
+    "fields": {
+      "modified_date": "2013-07-10 12:03:14", 
+      "is_deleted": false, 
+      "space": 12, 
+      "user": 1, 
+      "created_date": "2013-07-10 12:03:14", 
+      "access_right": 3
+    }
+  }, 
+  {
+    "pk": 17, 
+    "model": "spaces.spaceaccess", 
+    "fields": {
+      "modified_date": "2013-07-10 12:03:28", 
+      "is_deleted": false, 
+      "space": 12, 
+      "user": 8, 
+      "created_date": "2013-07-10 12:03:28", 
+      "access_right": 1
+    }
+  }, 
+  {
+    "pk": 21, 
+    "model": "spaces.spaceaccess", 
+    "fields": {
+      "modified_date": "2013-07-10 12:03:53", 
+      "is_deleted": false, 
+      "space": 20, 
+      "user": 18, 
+      "created_date": "2013-07-10 12:03:53", 
+      "access_right": 3
+    }
+  }, 
+  {
+    "pk": 15, 
+    "model": "corporate.corporatepublicspace", 
+    "fields": {
+      "public_category": 13, 
+      "company": 12
+    }
+  }, 
+  {
+    "pk": 16, 
+    "model": "corporate.companyproperties", 
+    "fields": {
+      "valid_until": null, 
+      "modified_date": "2013-07-10 12:03:14", 
+      "company": 12, 
+      "max_accounts": null, 
+      "created_date": "2013-07-10 12:03:14"
+    }
+  }, 
+  {
+    "pk": 7, 
+    "model": "admin.logentry", 
+    "fields": {
+      "action_flag": 1, 
+      "action_time": "2013-07-10 13:58:42", 
+      "object_repr": "kgebert:kgebert <owner>", 
+      "object_id": "6", 
+      "change_message": "", 
+      "user": 1, 
+      "content_type": 5
+    }
+  }, 
+  {
+    "pk": 4, 
+    "model": "admin.logentry", 
+    "fields": {
+      "action_flag": 1, 
+      "action_time": "2013-07-10 13:58:32", 
+      "object_repr": "kgebert", 
+      "object_id": "3", 
+      "change_message": "", 
+      "user": 1, 
+      "content_type": 2
+    }
+  }
+]

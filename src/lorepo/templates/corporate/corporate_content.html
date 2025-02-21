@@ -1,0 +1,26 @@
+{% load corporate %}
+
+<div class="single-element">
+	{% if content.content_type == 3 %}
+	<div class="addon-image">
+	{% get_icon request content %}
+	{% else %}
+	<div class="template-image">
+	{% get_icon request content %}
+	{% endif %}
+	</a>
+	</div>
+	{% if content.content_type == 3 %}
+	<div class="addon-title">
+		<a href="/public/view_addon/{{content.id}}"> {{ content.title }} </a>
+		<span>
+		{% publisher content "True" %}
+		</span>
+	</div>
+	{% else %}
+	<div class="template-title">
+		<a href="/embed/{{content.id}}"> {{ content.title }} </a>
+	</div>
+	{% endif %}
+	
+</div>

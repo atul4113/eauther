@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Server Error</h1>
+<p>
+The server encountered an internal error or misconfiguration and was unable to complete your request.
+</p>
+<p>
+Please report this problem to {{ settings.SERVER_EMAIL }}
+</p>
+
+<p>Here's a link to the <a href='/'>homepage</a>.</p>
+
+{% endblock %}

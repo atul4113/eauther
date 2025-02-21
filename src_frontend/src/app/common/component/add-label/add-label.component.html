@@ -1,0 +1,22 @@
+
+<div class="input-group">
+
+    <div class="mdl-textfield mdl-js-textfield">
+        <input [(ngModel)]="newLabelKey" class="mdl-textfield__input" type="text" id="new-label-key">
+        <label class="mdl-textfield__label" for="new-label-key">
+            {{ translations | getLabel: "plain.browse_labels.panel.key_name" }}
+        </label>
+    </div>
+
+    <div class="mdl-textfield mdl-js-textfield">
+        <input [(ngModel)]="newLabelValue" class="mdl-textfield__input" type="text" id="new-label-value">
+        <label class="mdl-textfield__label" for="new-label-value">
+            {{ translations | getLabel: "plain.browse_labels.panel.translation_value" }}
+        </label>
+    </div>
+
+    <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" (click)="addNewLabel()">
+        {{  translations | getLabel: "plain.common.add_label.add_translations" }}
+    </button>
+
+</div>

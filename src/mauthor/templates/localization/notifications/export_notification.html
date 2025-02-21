@@ -1,0 +1,15 @@
+{% autoescape off %}
+<p>
+	{{subject}}
+</p>
+{% if uploaded_file_id %}
+<p>
+	You can download the xliff document at 
+	<a href="https://www.{{app_name}}/file/serve/{{uploaded_file_id}}">
+		https://www.{{app_name}}/file/serve/{{uploaded_file_id}}
+	</a>
+</p>
+{% else %}
+	To get more information about the problem, please contact our administration.
+{% endif %}
+{% endautoescape %}

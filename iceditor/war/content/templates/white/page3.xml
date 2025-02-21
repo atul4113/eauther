@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<page>
+
+	<modules>
+		
+		<textModule left="10" top="10" width="80" height="30">
+			<text>
+			Summary page
+			</text>
+		</textModule>
+		
+		<buttonModule  left="0" top="90" width="10" height="10" style="">
+			<button type="prevPage" text=""/>
+		</buttonModule>
+		
+		<buttonModule  left="90" top="90" width="10" height="10" style="">
+			<button type="nextPage" text=""/>
+		</buttonModule>
+		
+	</modules>
+
+</page>

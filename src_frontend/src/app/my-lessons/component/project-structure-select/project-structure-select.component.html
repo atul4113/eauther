@@ -1,0 +1,31 @@
+<div *ngFor="let publication of structure; let i = index"
+     [ngClass]="{'has-left-padding': hasLeftPadding}"
+     class="publication-container">
+    <i *ngIf="publication.subspaces && !publication._ui.isExpanded"
+       (click)="showSubspaces(publication)"
+       [ngClass]="{'blue-arrow': !hasLeftPadding}"
+       class="material-icons">arrow_drop_down</i>
+    <i *ngIf="publication.subspaces && publication._ui.isExpanded"
+       (click)="hideSubspaces(publication)"
+       [ngClass]="{'blue-arrow': !hasLeftPadding}"
+       class="material-icons">arrow_drop_up</i>
+    <i *ngIf="!publication.subspaces"
+       class="material-icons invisible">arrow_drop_up</i>
+    <mat-radio-button [checked]="publication.id === lesson.publicationId" [value]="publication.id" class="publication-name">
+
+        <!--<a (click)="changePublication(); showLessons()" [ngClass]="{'is-bold': publication.id == currentSpaceId && !shouldShowAddons}"-->
+           <!--[routerLink]="'/corporate/list/' + publication.id">-->
+            {{ publication.name }}
+        <!--</a>-->
+    </mat-radio-button>
+ <!--&& publication._ui.isExpanded-->
+    <app-project-structure-select *ngIf="publication.subspaces && publication._ui.isExpanded"
+                           [structure]="publication.subspaces"
+                           [lesson]="lesson"
+                           [hasLeftPadding]="true"
+                           [projectId]="projectId"
+                           [shouldShowAddons]="shouldShowAddons"
+                           (displayLessons)="showLessons()"
+                           [currentSpaceId]="currentSpaceId">
+    </app-project-structure-select>
+</div>

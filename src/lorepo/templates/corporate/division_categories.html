@@ -1,0 +1,33 @@
+{% load corporate %}
+
+{% block head %}
+<script type="text/javascript" src="/media/js/project-list.js"></script>
+{% endblock %}
+
+<div class="labelBox">
+    <div class="listTitle"><strong>Publications:</strong></div>
+    <div class="edit">
+    	{% if Permission.SPACE_EDIT in user_permissions %}
+   			<a href="{% url 'corporate_projects' division.id %}" style="font-size:x-small;">Edit</a>
+   		{% else %}
+   			&nbsp;
+   		{% endif %}
+    </div>
+
+    <div class="tree">
+		<ul id="wiki-pages-list-root-not-sortable" class="not-sortable">
+			{% children_tag_projects_list spaces space_request is_trash 'False' %}
+		</ul>
+   	</div>
+
+    <table class="list trash">
+    	<tr><td class="leftColumn">
+    	<img src="/media/icons/bin_closed.png" alt=""/>
+    	{% if is_trash %}
+    		<b>Trash</b>
+    	{% else %}
+    		<a href="/corporate/list/{{division.id}}/trash">Trash</a>
+    	{% endif %}
+    	</td></tr>
+    </table>
+</div>

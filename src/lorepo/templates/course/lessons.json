@@ -1,0 +1,10 @@
+{
+	"lessons" : [
+		{% for lesson in lessons %}
+			{
+				"id" : {{ lesson.id }},
+				"title" : "{{ lesson.title }}"
+			}{% if not forloop.last %},{% endif %}
+		{% endfor %}
+	]
+}

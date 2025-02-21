@@ -1,0 +1,45 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+	
+	</ui:style>
+	<g:HTMLPanel ui:field="panel" styleName="mainPage">
+		<div class="mainPageWindow" ui:field="mainPageWindow">
+			<div class="mainPageHeader">
+				<h3 ui:field="title"></h3>
+				<a class="mainPageCloseBtn closeWidgetLocker"></a>
+			</div>
+			<div id="layoutPage-contents" class="contents">
+				<div style="position: relative;">
+					<label class="gwt-Label" style="position: absolute; left: 5px; top: 8px;" for="headerName" ui:field="useLabel" />
+					<label class="gwt-Label" style="position: absolute; left: 105px; top: 8px;" for="headerName" ui:field="relativeToLabel" />
+					<label class="gwt-Label" style="position: absolute; left: 220px; top: 8px;" for="headerName" ui:field="sideLabel" />
+
+					<input class="gwt-CheckBox" style="position: absolute; left: 5px; top: 35px;" type="checkbox" ui:field="hasLeftCheck"/>
+					<label class="gwt-Label" style="position: absolute; left: 30px; top: 35px;" for="leftOption" ui:field="leftLabel" />
+					<g:ListBox ui:field="leftModuleBox"></g:ListBox>
+					<g:ListBox ui:field="leftSideBox"></g:ListBox>
+
+					<input class="gwt-CheckBox" style="position: absolute; left: 5px; top: 65px;" type="checkbox" ui:field="hasRightCheck"/>
+					<label class="gwt-Label" style="position: absolute; left: 30px; top: 65px;" for="rightOption" ui:field="rightLabel" />
+					<g:ListBox ui:field="rightModuleBox"></g:ListBox>
+					<g:ListBox ui:field="rightSideBox"></g:ListBox>
+
+					<input class="gwt-CheckBox" style="position: absolute; left: 5px; top: 95px;" type="checkbox" ui:field="hasTopCheck"/>
+					<label class="gwt-Label" style="position: absolute; left: 30px; top: 95px;" for="topOption" ui:field="topLabel" />
+					<g:ListBox ui:field="topModuleBox"></g:ListBox>
+					<g:ListBox ui:field="topSideBox"></g:ListBox>
+
+					<input class="gwt-CheckBox" style="position: absolute; left: 5px; top: 125px;" type="checkbox" ui:field="hasBottomCheck"/>
+					<label class="gwt-Label" style="position: absolute; left: 30px; top: 125px;" for="topOption" ui:field="bottomLabel" />
+					<g:ListBox ui:field="bottomModuleBox"></g:ListBox>
+					<g:ListBox ui:field="bottomSideBox"></g:ListBox>
+				</div>
+			</div>
+			<div class="settingsControls">
+				<a class="layoutButton" ui:field="save" />				
+			</div>
+		</div>
+	</g:HTMLPanel>
+</ui:UiBinder> 

@@ -1,0 +1,284 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load apptags %}
+{% load spaces %}
+{% load metadata %}
+
+{% block head %}
+	<script type="text/javascript">
+		$(document).ready(function() {
+			function Loading() {
+				this.start = function(container) {
+					var loadingContainer = container.find('.loading');
+					loadingContainer.css('display', 'inline-block');
+				}
+				
+				this.stop = function(container) {
+					var loadingContainer = container.find('.loading');
+					loadingContainer.hide();
+				}
+			}
+			
+			var loading = new Loading(),
+				publicationsSelect = $('.publications select[name="publications"]'),
+				selectUnit = $('.assign-to .show-units');
+			
+			function loadPublications(publicationsSelect, projectId) {
+				publicationsSelect.html($('<option value="">Loading Publications...</option>'));
+				
+				var response = $.get('/corporate/get_publications_for_project_json', { 'projectId' : projectId });
+				
+				loading.start($('.publications label'));
+				
+				response.done(function(data) {
+					loading.stop($('.publications label'));
+					publicationsSelect.html('');
+					
+					$('.assign-to .publications').removeClass('hidden');
+					$.each(JSON.parse(data)['publications'], function(index, publication) {
+						var publicationOption = $('<option></option>');
+						
+						publicationOption.val(publication.id);
+						publicationOption.text(publication.title);
+
+						if (publication.id == {{ assigned_publication.pk }}) {
+							publicationOption.attr('selected', true);
+						}
+
+						$('.publications select[name="publications"]').append(publicationOption);
+						publicationsSelect.addClass('loaded');
+					});
+					if ({{ assigned_project.pk }} != projectId) {
+                        $('input[name="space_id"]').val( $('.assign-to select[name="publications"]').find('option:selected').val() );
+                    }
+				});
+				
+				response.fail(function(error) {
+					loading.stop($('.publications label'));
+				});
+			}
+			
+			function loadUnits(publicationId) {
+				var response = $.get('/corporate/select_unit/{{ content.id }}/' + publicationId);
+				
+				loading.start($('.select-unit label'));
+				
+				response.done(function(data) {
+					var selectUnitContainer = $('.select-unit-container');
+					selectUnitContainer.html(data);
+					selectUnitContainer.removeClass('hidden');
+					$('.show-units').addClass('hidden');
+					$('.select-unit div.hide-units').removeClass('hidden');
+					loading.stop($('.select-unit label'));
+				});
+				
+				response.fail(function(error) {
+					loading.stop($('.select-unit label'));
+				});
+				
+			}
+			
+			function hideUnits() {
+				$('.assign-to .show-units').removeClass('hidden');
+				$('.select-unit div.hide-units').addClass('hidden');
+				$('.assign-to .select-unit-container').addClass('hidden');
+			}
+			
+			(function ShowHideUnitsClicksLogic() {
+				$('.select-unit div.show-units').click(function(e) {
+					e.stopPropagation();
+					var publicationId = $('.assign-to select[name="publications"] option:selected').val();
+					
+					loadUnits(publicationId);
+				});
+				
+				$('.select-unit div.hide-units').click(function(e) {
+					e.stopPropagation();
+					
+					hideUnits();
+				});
+			})();
+			
+			(function setCurrentlySelectedSpaces() {
+				{% if assigned_project and assigned_publication and assigned_unit %}
+					loadPublications(publicationsSelect, {{ assigned_project.pk }});
+					$('.show-units').removeClass('hidden');
+				{% else %}
+					{% if assigned_project and assigned_publication %}
+						loadPublications(publicationsSelect, {{ assigned_project.pk }}),
+						selectUnit.removeClass('hidden');
+					{% endif %}
+				{% endif %}
+			})();
+			
+			(function whenSelectInputChangeLogic() {
+				$('.assign-to select[name="projects"]').change(function() {
+					var projectId = $(this).find('option:selected').val();
+
+					if ( !publicationsSelect.hasClass('loaded') ) {
+						loadPublications(publicationsSelect, projectId);
+					} else {
+						$('.assign-to .publications').removeClass('hidden');
+						hideUnits();
+						loadPublications(publicationsSelect, projectId);
+					}
+				});
+				
+				$('.assign-to select[name="publications"]').change(function() {
+					var publicationId = $(this).find('option:selected').val();
+					$('.select-unit-container').addClass('hidden');
+					selectUnit.removeClass('hidden');
+					$('.select-unit div.hide-units').addClass('hidden');
+					$('.assign-to .select-unit').removeClass('hidden');
+					$('input[name="space_id"]').val(publicationId);
+				});
+			})();
+			
+			$('.assign-to .select-unit-container').on('click', 'input[type="radio"]', function() {
+				if ( $(this).val() != 'None' ) {
+					$('input[name="space_id"]').val( $(this).val() );
+				} else {
+					$('input[name="space_id"]').val( $('.assign-to select[name="publications"]').find('option:selected').val() );
+				}
+			});
+			
+			$('.remove').click(function() {
+				$(this).parent().parent().addClass('removed'); // we move up to the div class="metadata-element"
+                $(this).parent().addClass('hidden');
+                $(this).parent().parent().find('.add-wrapper').removeClass('hidden');
+                $(this).parent().parent().find('#unused').attr('value','true');
+                $(this).parent().parent().find('.entered-value').attr('disabled','true');
+			});
+
+            $('.add').click(function() {
+				$(this).parent().parent().removeClass('removed'); // we move up to the div class="metadata-element"
+                $(this).parent().addClass('hidden');
+                $(this).parent().parent().find('.remove-wrapper').removeClass('hidden');
+                $(this).parent().parent().find('#unused').attr('value','false');
+                $(this).parent().parent().find('.entered-value').removeAttr('disabled');
+			});
+		});
+	</script>
+{% endblock %}
+
+{% block content %}
+
+<div class="createDiv">
+	<h2>Edit lesson metadata </h2>
+	
+	<form method="post" action="/corporate/{{content.id}}/metadata" name="metadata">
+		{% csrf_token %}
+		<input type="hidden" name="next" value="{{ next }}" />
+			<div class="title-tags">
+				<label for="id_title">{% trans "Title" %}:
+					{% for e in form.title.errors %}<span class="errorlist">&lArr; {{ e }}</span>{% endfor %}
+				</label>
+				<br/>
+				<input id="id_title" type="text" size="60" name="title" value="{{form.data.title}}" {% if language_bidi %}dir="rtl"{% endif %}/>
+				<br />
+				<label>{% trans "Tags" %} 
+					<span style="font-size:0.8em">(Must be comma separated)</span>:
+				</label>
+				<br/>
+				<textarea rows="4" id="id_tags" name="tags" {% if language_bidi %}dir="rtl"{% endif %}>{{form.data.tags}}</textarea>
+			</div>
+			<div class="description-shortdescription">
+				<label for="id_short">{% trans "Short Description" %}:
+					{% for e in form.short_description.errors %}<span class="errorlist">&lArr; {{ e }}</span>{% endfor %}
+				</label>
+				<br/>
+				<textarea id="id_short" rows="4" name="short_description" {% if language_bidi %}dir="rtl"{% endif %}>{{form.data.short_description}}</textarea>
+				
+				<label >{% trans "Description" %}:</label>
+				<br/>
+				<textarea cols="63" rows="10" name="description" {% if language_bidi %}dir="rtl"{% endif %}>{{form.data.description}}</textarea>
+			</div>
+			<div>
+				<label>Score type:
+					{% for e in form.passing_score.errors %}
+						<span class="errorlist">&lArr; {{ e }}</span>
+					{% endfor %}
+				</label><br/>
+				<select id="id_score_type" name="score_type">
+					<option value="last" {% if content.get_score_type == 'last'%}selected{% endif %}>last</option>
+					<option value="first" {% if content.get_score_type == 'first'%}selected{% endif %}>first</option>
+				</select>
+			</div>
+			<div class="is_template">
+				<input type="checkbox" name="is_template" {% if form.data.is_template %}checked{% endif %}/><label>Is Template</label><br/>
+			</div>
+			<div>
+				<input id="id_enable_page_metadata" type="checkbox" name="enable_page_metadata" {% if content.enable_page_metadata %}checked{% endif %}/><label>Enable page metadata</label><br/>
+			</div>
+			<div class="assign-to clearfix">
+				<h4>Assign to:</h4>
+				<div>
+					<label>{% trans "Project" %}:</label><br/>
+					<select name="projects">
+						{% for project in projects %}
+							<option value="{{ project.pk }}" {% if project.pk == assigned_project.pk %}selected{% endif %}>
+								{{ project }}
+							</option>
+						{% endfor %}
+					</select>
+				</div>
+				<div class="publications">
+					<label>{% trans 'Publication' %}:
+						<div class="loading">
+							<img src="/media/images/loading_small.gif" />
+						</div>
+					</label>
+					
+					<br/>
+					
+					<select name="publications">
+						<option value="">
+							Select Publication...
+						</option>
+					</select>
+				</div>
+				<div class="select-unit clearfix">
+					<label>{% trans 'Unit' %}:
+						<div class="loading">
+							<img src="/media/images/loading_small.gif" />
+						</div>
+					</label>
+					
+					<br />
+					
+					<div class="pull-left hidden show-units">
+						<a role="button" class="btn btn-primary btn-sm">Show Units</a>
+					</div>
+					<div class="pull-left hidden hide-units">
+						<a role="button" class="btn btn-primary btn-sm">Hide Units</a>
+					</div>
+				</div>
+				<div class="select-unit-container hidden">
+
+				</div>
+				<h5>
+					{% if not assigned_space %}
+						Currently not assigned to anything.
+					{% else %}
+						Currently assigned to: {{ assigned_space }}
+						<input type="hidden" name="space_id" value="{{ assigned_space.pk }}" />
+					{% endif %}
+				</h5>
+
+				{% if definitions %}
+				<div>
+					<h3>Custom metadata</h3>
+					{% for definition in definitions %}
+						{% render_definition_form definition language_bidi %}
+					{% endfor %}
+				</div>
+				{% endif %}
+			</div>
+
+			<a role="button" class="btn btn-primary btn-sm pull-left" href="javascript:$('.entered-value').removeAttr('disabled');jQuery(this).hide();document.forms['metadata'].submit();">Send</a>
+			<a role="button" class="btn btn-primary btn-sm pull-right" href="/mycontent/{{content.id}}/cancelediting?next={{next}}">Cancel</a>
+	</form>
+	<div class="content clear"></div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load apptags %}
+
+{% block content %}
+<h1 class="page_header">Support</h1>
+<div class="main clear" style="padding-top: 0"></div>
+
+<div class="contact_us">
+	
+		
+		<div class="support-box">
+		
+			<form id="supportForm" action="/corporate/support" method="POST" class="contact_form">
+			
+			<table>
+			<tr><th>&nbsp;</th><td><h2>Use the form below or <a href="/public/contact-us">contact us</a> directly!</h2></td></tr>
+				<tr><th>{{form.name.label}}:</th><td>{{form.name.errors}}{{form.name}}</td></tr>
+				<tr><th>{{form.company.label}}:</th><td>{{form.company.errors}}{{form.company}}</td></tr>
+				<tr><th>{{form.email.label}}:</th><td>{{form.email.errors}}{{form.email}}</td></tr>
+				<tr><th>{{form.message.label}}:</th><td>{{form.message.errors}}{{form.message}}</td></tr>
+				<tr><th>{{form.math_captcha_field.label}}:</th><td>{{ form.non_field_errors }}{{form.math_captcha_field}}</td></tr>
+				<tr><th>&nbsp;</th>
+				<td>
+				{% button 'Send' 'document.getElementById(\"supportForm\").submit()' '' 'width:auto; float:left;' %}
+				</td>
+				</tr>
+			</table>
+			</form>
+		</div>
+	<div class="clear">&nbsp;</div>
+</div>
+{% endblock %}

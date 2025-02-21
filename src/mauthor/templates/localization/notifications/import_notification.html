@@ -1,0 +1,30 @@
+{% autoescape off %}
+<p>
+	{{subject}}
+</p>
+	<p>
+		{% if important_informations %}
+			{% if success %} However {% else %} And {% endif %} there were several problems.
+		{% endif %}
+	</p>
+	{% if success %}
+	<p>
+		You can find your new presentation here: 
+		<a href="http://www.{{app_name}}/mycontent/view/{{content_id}}">
+			https://www.{{app_name}}/mycontent/view/{{content_id}}
+		</a>
+	</p>
+	{% endif %}
+{% if important_informations %}
+	<p>
+		Important information:
+	</p>
+	<ul>
+		{% for info in important_informations %}
+			<li>
+				{{ info }}
+			</li>
+		{% endfor %}
+	</ul>
+{% endif %}
+{% endautoescape %}

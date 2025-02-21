@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<interactiveContent>
+	<addons>
+		<addon-descriptor addonId='SVG2' href='http://{{ server_name }}/media/iceditor/addons/SVG2.xml'/>
+	</addons>
+	<style href="/media/content/styles/default/content.css">
+		.ic_page {
+			font-size: 10px;
+		}
+		.addon_SVG2 .svgContainer {
+			border: none;
+		}
+	</style>
+	<pages>
+		{% if page %}
+		<page name='Page 1' href='{{page.id}}' />
+		{% endif %}
+		{% for page in pages %}
+		<page name='Page {{forloop.counter}}' href='{{page.id}}' />
+		{% endfor %}
+	</pages>
+</interactiveContent>

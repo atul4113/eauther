@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load apptags %}
+{% load utility %}
+
+{% block content %}
+<div class="alert alert-info alert-narrow alert-block">
+	Editing session needs to be closed before the lesson can be published.
+	This lesson is currently being edited by {{username}}.
+</div>
+<div class="template-title">
+	<a role="button" class="btn btn-primary btn-sm" href="{{back}}">Back</a>
+</div>
+<div class="clearfix"></div> 
+{% endblock %}

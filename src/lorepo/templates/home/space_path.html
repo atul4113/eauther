@@ -1,0 +1,32 @@
+{% for space in spaces %}
+	{% if forloop.first %}
+		{% if space.is_public %}
+			<a href="/public?type={{ content_type }}">
+			Public {{ content_name }}
+			</a>{% if not forloop.last %} <span> [ <a href="/corporate/public/{{space.id}}">{{space.title}} </a> :: {% endif %}
+		{% endif %}
+		{% if space.is_corporate %}
+			<a href="/corporate/list/{{space.project.id}}">{{space.project.title}}</a> {% if not forloop.last %} <span>[  {% endif %}
+		{% endif %}
+		{% if space.is_private %}
+			<a href="/mycontent">My Lessons</a> {% if not forloop.last %} <span> [ {% endif %}
+		{% endif %}
+		{% if not forloop.last and not forloop.first %}
+			::
+		{% endif %}
+	{% else %}
+			{% if space.is_public %}
+			 	 <a href="/corporate/public/{{space.id}}">{{space.title}}</a> 
+			{% else %}
+				 <a href="/corporate/list/{{space.id}}">{{space.title}}</a> 
+			{% endif %}
+		{% if not forloop.last and not forloop.first %}
+			::
+		{% endif %}
+	{% endif %}
+		{% if forloop.last and not forloop.first %}
+			] </span>
+		{% endif %}
+{% empty %}
+	Public Lesson
+{% endfor %}

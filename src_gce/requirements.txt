@@ -1,0 +1,9 @@
+Flask==0.10.1
+gunicorn==19.3.0
+google-cloud-storage==0.22.0
+google-api-python-client==1.5.5
+alphabet-detector==0.0.5
+lxml==3.6.0
+Pillow==3.3.0
+numpy==1.11.1
+six==1.10.0

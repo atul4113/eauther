@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% load apptags %}
+{% load spaces %}
+
+{% block head %}
+<script type="text/javascript">
+	$(document).ready(function() {
+		$.post('/localization/get_differences/{{localized.id}}', function(data) {
+			$('.show-differences-loading').hide();
+			if(data != '') {
+				var differences = data.split(',');
+				var differencesList = $('<ul>');
+				$.each(differences, function(i) {
+					var checkbox = $('<input type="checkbox" name="to_update" value="' + i + '" />');
+					var listElement = $('<li>' + this + '</li>');
+					listElement.append(checkbox);
+					differencesList.append(listElement);
+				});
+				var inputNext = $('<input type="hidden" value="{{back_url}}" name="next" />');
+				$('#update').html(differencesList);
+				$('#update').append(inputNext);
+			} else {
+				$('.differences-list-wrapper').html('No differences found.');
+				$('.button-left').hide();
+			}
+		});
+	});
+</script>
+{% endblock %}
+
+{% block content %}
+
+<div class="left">
+	<h1 class="page_header">Differences</h1>
+</div>
+
+<div class="button-right">
+	{% with url="parent.location='"|add:back_url|add:"'" %}
+		{% button 'Back' url %}
+	{% endwith %}
+</div>
+
+<div class="main clear" style="padding-top: 0"></div>
+
+<div class="show-differences-loading">
+	<img src="/media/images/loading.gif" />
+</div>
+
+<div class="differences-list-wrapper">
+	<form action="/localization/update_xliff" id="update" name="update" method="POST">
+	
+	</form>
+</div>
+
+<div class="button-left">
+	{% button 'Update' 'document.forms["update"].submit()' %}
+</div>
+
+{% endblock %}

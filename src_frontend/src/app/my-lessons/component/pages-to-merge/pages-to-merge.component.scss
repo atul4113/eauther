@@ -1,0 +1,20 @@
+@import "../../../common/templates/mdl-colors";
+
+app-pages-to-merge {
+    p {
+        margin: 0 0 0 10px;
+    }
+
+    button {
+        margin-top: 10px !important;
+        margin-bottom: 30px !important;
+    }
+
+    h6 {
+        font-size: 17px;
+        a {
+            text-decoration: none;
+            color: $blue-500;
+        }
+    }
+}

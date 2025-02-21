@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+	<h1 class="page_header">Export Narration Success</h1>
+	<div class="main clear" style="padding-top: 0"></div>
+	
+	<div id="exchange-narration">
+		<div>
+			<h4>Download this file:</h4>
+			<a href="/file/{{ export_file.id }}">{{ export_file }}</a>
+			
+			<h3>File preview:</h3>
+			{% if export_type == 'html' %}
+				<div class="preview">{{ export_file.contents|safe }}</div>
+			{% else %}
+				<pre>{{ export_file.contents }}</pre>
+			{% endif %}
+
+		</div>
+	</div>
+{% endblock %}

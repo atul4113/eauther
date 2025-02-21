@@ -1,0 +1,207 @@
+{% extends 'base.html' %}
+{% load apptags %}
+{% load course %}
+
+{% block head %}
+<script type="text/javascript">
+
+	var pageNumber = 0;
+
+	$(document).ready(function() {
+		$('#add-resources-modal .close').click(function() {
+			hideModal();
+		});
+		
+		$('#add-resources-modal .open').click(function() {
+			var listToToggle = $(this).parent().parent().children('.hidden');
+			if ( $(this).html() == '+' ) {
+				$(this).html('-');
+				listToToggle.show();
+			} else {
+				$(this).html('+');
+				listToToggle.hide();
+			}
+		});
+		
+	});
+	
+	function hideModal() {
+		var addResourcesModal = $('#add-resources-modal'),
+		shadow = $('#add-resources-shadow');
+	
+		addResourcesModal.hide();
+		shadow.appendTo( $('#edit-resources') );
+		shadow.hide();
+	}
+	
+	function saveResources() {
+		var inputs = $('#edit-resources .root .lesson input'),
+			idsToAdd = [],
+			idsToRemove = [];
+		$.each(inputs, function() {
+			var value = $(this).val();
+			if ( $(this).attr('checked') ) {
+				idsToAdd.push( value );
+			} else {
+				idsToRemove.push( value );
+			}
+		});
+		
+		var response = $.post('/course/save_resources', {
+			'ids_to_add' : idsToAdd,
+			'ids_to_remove' : idsToRemove,
+			'course_id' : '{{ course.id }}',
+			'eBook_id' : '{{ eBook.id }}',
+			'page_index' : pageNumber
+		});
+		
+		response.done(function() {
+			hideModal();
+			updateCurrentResources();
+		});
+		
+	}
+	
+	function openManageResourcesModal() {
+		setCurrentResources();
+		$('#add-resources-modal').show();
+		var shadow = $('#add-resources-shadow');
+		shadow.appendTo($('body'));
+		shadow.show();
+	}
+	
+	function setCurrentResources() {
+		var ids = [];
+		$.each( $('.resource'), function() {
+			ids.push($(this).attr('resource-id'));
+		});
+
+		$.each( $('#edit-resources .root .lesson input'), function() {
+			if ( ids.indexOf( $(this).attr('value') ) >= 0 ) {
+				$(this).attr('checked', 'checked');
+			} else {
+				$(this).attr('checked', false);
+			}
+		});
+	}
+	
+	function updateCurrentResources() {
+		var response = $.get('/course/get_resources/{{ course.id }}/{{ eBook.id }}/' + pageNumber),
+			resourcesWrapper = $('.resources'),
+			currentResourcesWrapper = $('#current-resources');
+
+		resourcesWrapper.html('');
+		currentResourcesWrapper.css('height', '80px');
+		
+		response.done(function(data) {
+			var currentResources = JSON.parse(data);
+			$.each(currentResources, function() {
+				var wrapper = $('<div></div>'),
+					link = $('<a></a>');
+				
+				link.attr('href', '/corporate/view/' + this.id);
+				link.attr('target', '_blank');
+				link.html(this.name);
+				wrapper.addClass('resource');
+				wrapper.attr('resource-id', this.id);
+				wrapper.append(link);
+				resourcesWrapper.append(wrapper);
+				
+				currentResourcesWrapper.css('height', ( wrapper.outerHeight(true) + $('#current-resources').outerHeight(true) + 5 ) + 'px' );
+			});
+		
+		});
+	}
+
+
+    function receiveMessage(event) {
+        if (event.data.indexOf("RESIZE:") == 0) {
+            var re = new RegExp('RESIZE:(\\d+);(\\d+)'),
+                match = re.exec(event.data.toString()),
+                width = match[1],
+                height = match[2];
+
+            viewport = document.querySelector("meta[name=viewport]");
+                    viewport.setAttribute('content', 'width=' + width);
+
+            $('#lesson-iframe').css({
+                'width': width + 'px'
+            });
+
+            $('#lesson-iframe').animate({height: height + 'px'}, 300);
+
+            $('#body-center, #body-wrapper').css({
+                'max-width': width + 'px'
+            });
+
+            window.top.scrollTo(0, 0);
+        }
+		else if (event.data.indexOf("PAGE:") == 0) {
+			pageNumber = parseInt(event.data.replace("PAGE:",""), 10);
+            $('#current-resources').removeClass('hidden');
+            updateCurrentResources();
+		}
+    }
+
+    window.addEventListener("message", receiveMessage, false);
+
+</script>
+
+{% endblock %}
+
+{% block content %}
+<div id="edit-resources" class="">
+
+	<div id="add-resources-shadow"></div>
+
+	<div id="add-resources-modal">
+		<div class="container clearfix">
+			<div class="close">&times;</div>
+			<h3 class="description">
+				Select lessons to add as resources or deselect to remove from resources
+			</h3>
+			<ul class="root">
+				{% build_add_resources_tree chapters %}
+			</ul>
+			<div class="pull-left">
+				{% button 'Save' 'javascript:saveResources()' %}
+			</div>
+		</div>
+	</div>
+
+	<div class="clearfix">
+		<h1 class="page-header">
+			<div class="pull-left">
+				Edit resources for {{ eBook }}
+				{{ current_resources }}
+			</div>
+			<div class="pull-right back-btn">
+				{% with 'document.location="'|add:back_url|add:'"' as url %}
+					{% button 'Back' url %}
+				{% endwith %}
+			</div>
+		</h1>
+	
+		<div id="_icplayer" class="relative">
+			<div id="current-resources" class="hidden">
+				<div class="relative full-height">
+					<div class="content-box-title">
+						<strong>Current Resources</strong>
+					</div>
+
+					<div class="resources">
+						
+					</div>
+
+					<div class="manage-resources-btn">
+						{% button 'Manage Resources' 'javascript:openManageResourcesModal()' %}
+					</div>
+				</div>
+			</div>
+			<iframe src="/course/edit_resources_iframe/{{eBook.id}}" id="lesson-iframe" scrolling="no" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+		</div>
+	</div>
+	
+</div>
+
+{% endblock %}

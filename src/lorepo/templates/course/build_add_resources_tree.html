@@ -1,0 +1,28 @@
+{% load course %}
+
+{% for chapter in chapters %}
+	<li id="{{ chapter.name }}-{{ chapter.node_id }}" chapter-id="{{ chapter.node_id }}">
+		<div class="chapter">
+			<span class="open">{% if chapter.kids|length > 0 %}{% if chapter.open %}-{% else %}+{% endif %}{% else %}&nbsp;{% endif %}</span>
+			<span class="chapter-name">{{ chapter.name }}</span>
+			{% if chapter.lessons|length > 0 %}
+				<div class="lessons clearfix">
+					{% for lesson in chapter.lessons %}
+						<div lesson-id="{{ lesson.id }}" class="lesson">
+							<span class="pull-left lesson-name">
+								<a href="/corporate/view/{{ lesson.id }}" target="_blank">{{ lesson.name }}</a>
+							</span>
+							<input type="checkbox" class="pull-right" value="{{ lesson.id }}" />
+						</div>
+						<div class="clearfix"></div>
+					{% endfor %}
+				</div>
+			{% endif %}
+		</div>
+		{% if chapter.kids|length > 0 %}
+			<ul class="{% if not chapter.open %}hidden{% endif %}">
+				{% build_add_resources_tree chapter.kids %}
+			</ul>
+		{% endif %}
+	</li>
+{% endfor %}

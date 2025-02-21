@@ -1,0 +1,11 @@
+{
+	"version": "1",
+	"publications": [
+	{% for publication in publications %}
+		{
+			"id" : "{{ publication.pk }}",
+			"title" : "{{ publication }}"
+		}{% if not forloop.last %},{% endif %}
+	{% endfor %}
+	]
+}

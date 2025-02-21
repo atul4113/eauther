@@ -1,0 +1,332 @@
+<project name="lorepo" default="dist" basedir="..">
+	<property name="icplayer" location="icplayer" />
+	<property name="icplayer.war" location="icplayer/war" />
+	<property name="iceditor.war" location="iceditor/war" />
+	<property name="addoneditor.war" location="AddonEditor/war" />
+
+	<property name="website.static" location="website-corporate/src/lorepo/templates/static_files" />
+	<property name="website.static_mAuthor" location="website-corporate/src/mauthor/templates/static_files" />
+    <property name="website.exchange" location="website-corporate/src/lorepo/templates/exchange" />
+
+    <property name="website.src" location="website-corporate/src"/>
+    <property name="website.src_frontend" location="website-corporate/src_frontend"/>
+    <property name="website.frontend" location="${website.static_mAuthor}/frontend/dist"/>
+	<property name="test.packages" value="lorepo libraries mauthor"/>
+	<property name="website.dir" location="website-corporate"/>
+
+    <property name="libs.dest" location="icplayer/src/main/java/com/lorepo/icplayer/public/libs" />
+	<property name="build.folder" location="icplayer/src/main/java/com/lorepo/icplayer/public/build" />
+    <property name="iceditor.static.addons.min.file" location="${website.static}/iceditor/build/dist/addons.min.xml"/>
+    <property name="icplayer.static.addons.min.file" location="${website.static}/icplayer/build/dist/addons.min.xml"/>
+	<property name="addons.dest" location="icplayer/src/main/java/com/lorepo/icplayer/public/addons" />
+    <property name="addons.dist" location="${build.folder}/dist/addons.min.xml"/>
+
+    <property name="default-properties.dest" location="iceditor/src/main/java/com/lorepo/iceditor/public/modules"/>
+
+	<!-- <import file="../player-distribution/build.xml"/>
+	<import file="../editor-distribution/build.xml"/>
+    <import file="../addon-editor-distribution/build.xml"/>
+    <import file="../deploy-tools/build.xml" /> -->
+
+	<!-- Copy icplayer packages from player distributions project -->
+	<target name="copy-icplayer" depends="build">
+		<antcall target="copy-latest">
+		    <param name="destination" value="${website.static}/icplayer" />
+		</antcall>
+		<antcall target="copy-latest-zip">
+		    <param name="destination" value="${website.static}" />
+		</antcall>
+        <antcall target="copy-latest-zip">
+		    <param name="destination" value="${website.exchange}" /> <!--to enable this for direct file read-->
+		</antcall>
+		<mkdir dir="${website.static}/player" />
+		<antcall target="copy-release-notes">
+			<param name="destination" value="${website.static}/player" />
+		</antcall>
+	</target>
+
+	<target name="copy-iceditor" depends="ed.build">
+		<antcall target="ed.copy-latest-editor">
+		    <param name="ed.destination" value="${website.static}/iceditor" />
+		</antcall>
+	</target>
+
+    <target name="reload-iceditor-default-properties" description="Copies addons and modules default properties definitions XMLs">
+        <ant dir="iceditor" target="validate-default-properties-xml"/>
+
+        <echo>Copying addons and modules default properties XMLs ...</echo>
+
+        <copy todir="${website.static}/iceditor/modules">
+		    <fileset dir="${default-properties.dest}" />
+		</copy>
+	</target>
+
+	<target name="reload-addons" description="Compiles and copies addons at runtime to Player and Editor">
+		<ant dir="icplayer" target="addons.compress"/>
+
+		<echo>Copying files to Player ...</echo>
+		<copy todir="${website.static}/icplayer/addons">
+		    <fileset dir="${addons.dest}" />
+		</copy>
+		<echo>Copying files to Editor ...</echo>
+		<copy todir="${website.static}/iceditor/addons">
+		    <fileset dir="${addons.dest}" />
+		</copy>
+
+        <echo>Copying addons mins xml file ...</echo>
+        <copy file="${addons.dist}" tofile="${icplayer.static.addons.min.file}"/>
+        <copy file="${addons.dist}" tofile="${iceditor.static.addons.min.file}"/>
+	</target>
+
+    <target name="reload-editor-css" >
+		<ant dir="iceditor" target="frontend-css"/>
+		<copy todir="${website.static}/iceditor/dist">
+			<fileset dir="iceditor/src/main/java/com/lorepo/iceditor/public/dist/"/>
+		</copy>
+	</target>
+
+    <target name="reload-libs" description="Copies libraries at runtime to Player and Editor" >
+        <ant dir="icplayer" target="bundle-libs"/>
+        <copy todir="${website.static}/icplayer/build">
+            <fileset dir="${build.folder}"/>
+        </copy>
+
+		<copy todir="${website.static}/icplayer/libs">
+			<fileset dir="${libs.dest}"/>
+		</copy>
+		<copy todir="${website.static}/iceditor/libs">
+			<fileset dir="${libs.dest}"/>
+		</copy>
+	</target>
+
+	<target name="reload-js" depends="reload-addons, reload-libs">
+	</target>
+	
+	<!-- Compiles and copies a clean version of AddonEditor without the need to use addon-editor-distributions -->
+	<target name="compile-and-copy-addon-editor">
+        <ant dir="AddonEditor"/>
+
+		<delete dir="${website.static}/addoneditor" />
+		<copy todir="${website.static}/addoneditor">
+		    <fileset dir="${addoneditor.war}/addoneditor"/>
+		</copy>
+	</target>
+
+    <target name="copy-addon-editor" depends="aed.build">
+		<antcall target="aed.copy-latest">
+		    <param name="aed.destination" value="${website.static}/addoneditor" />
+		</antcall>
+	</target>
+
+    <target name="getAppName" unless="appName">
+        <input addProperty="appName" message="Type the app (instance) name:"/>
+    </target>
+
+    <target name="getAppVersion" unless="appVersion">
+        <input addProperty="appVersion" message="Type the app (instance) version:"/>
+    </target>
+
+    <target name="deploy">
+        <echo message="Deploying current application version" />
+        <deploy-current-version application="${application}" />
+    </target>
+
+    <target name="deploy-version" depends="getAppVersion">
+        <echo message="Deploying version ${appVersion}" />
+        <update-application-version application="${application}" version="${appVersion}" />
+    </target>
+
+    <target name="update-application-app-yaml">
+        <update-module-version module="app.yaml" application="${application}" version="${version}" />
+    </target>
+
+    <target name="update-application-backup-yaml">
+        <update-module-version module="backup.yaml" application="${application}" version="${version}" />
+    </target>
+
+    <target name="update-application-download-yaml">
+        <update-module-version module="download.yaml" application="${application}" version="${version}" />
+    </target>
+
+    <target name="update-application-localization-yaml">
+        <update-module-version module="localization.yaml" application="${application}" version="${version}" />
+    </target>
+
+    <target name="change-application-name" description="Params: -Dapplication">
+        <change-application-name application="${application}" />
+    </target>
+
+    <target name="delete-version" depends="get-application-names">
+        <for list="${applications}" param="application">
+            <sequential>
+                <echo message="Removing version ${version} from application @{application}" />
+                <remove-application-version application="@{application}" version="${version}" />
+            </sequential>
+        </for>
+    </target>
+
+    <target name="get-application-names">
+        <exec executable="python" outputproperty="applications">
+            <arg value="${website.src}/shared_settings.py" />
+            <arg value="get_application_names" />
+        </exec>
+    </target>
+
+    <target name="deploy-all-applications" depends="get-application-names">
+        <for list="${applications}" param="application">
+            <sequential>
+                <echo message="Deploying application @{application} version ${version}"/>
+                <!--<antcall target="change-frontend-version">
+                    <param name="version" value="${version}"/>
+                </antcall>-->
+                <deploy-new-version application="@{application}"  version="${version}" />
+            </sequential>
+        </for>
+    </target>
+
+    <target name="deploy-next-applications" depends="get-next-application-names">
+        <for list="${applications}" param="application">
+            <sequential>
+                <echo message="Deploying application @{application} version ${version}"/>
+                <antcall target="change-frontend-version">
+                    <param name="version" value="${version}"/>
+                </antcall>
+                <deploy-new-version application="@{application}"  version="${version}" />
+            </sequential>
+        </for>
+    </target>
+
+    <target name="update-indexes" depends="get-application-names">
+        <for list="${applications}" param="application">
+            <sequential>
+                <echo message="Updating indexes on application @{application}" />
+                <update-indexes application="@{application}" />
+            </sequential>
+        </for>
+    </target>
+
+    <target name="update-cron" depends="get-application-names">
+        <for list="${applications}" param="application">
+            <sequential>
+                <echo message="Updating cron on application @{application}" />
+                <update-cron application="@{application}" />
+            </sequential>
+        </for>
+    </target>
+
+    <target name="set-default-version" depends="get-application-names">
+        <for list="${applications}" param="application">
+            <sequential>
+                <echo message="Setting version ${version} as default for application @{application}" />
+                <set-application-default-version application="@{application}" version="${version}" />
+            </sequential>
+        </for>
+    </target>
+
+    <target name="update-version" depends="getAppVersion">
+        <change-version version="${appVersion}" />
+    </target>
+
+    <target name="get-next-application-names">
+        <exec executable="python" outputproperty="applications">
+            <arg value="${website.src}/shared_settings.py" />
+            <arg value="get_next_applications" />
+            <arg value="${start-app}"/>
+        </exec>
+    </target>
+
+    <target name="rollback" depends="getAppName">
+        <rollback application="${appName}" />
+    </target>
+
+    <target name="deploy-delete" depends="delete-version, deploy"/>
+
+	<target name="copy" depends="copy-icplayer,copy-iceditor,copy-addon-editor">
+	</target>
+
+	<target name="test">
+		<exec executable="python" failonerror="true">
+			<arg value="${website.src}/manage.py"/>
+			<arg value="test"/>
+			<arg value="lorepo"/>
+			<arg value="libraries"/>
+			<arg value="mauthor"/>
+		</exec>
+	</target>
+
+	<target name="unittest">
+		<exec executable="python" failonerror="true">
+			<arg value="${website.src}/manage.py"/>
+			<arg value="test"/>
+			<arg value="lorepo"/>
+			<arg value="libraries"/>
+			<arg value="mauthor"/>
+			<arg value="-aunit"/>
+		</exec>
+	</target>
+
+    <target name="apidoc">
+        <exec executable="bash" dir="${website.src}">
+            <arg value="apidoc.sh"/>
+        </exec>
+    </target>
+
+	<target name="dist" depends="copy">
+	</target>
+
+	<target name="dist-full" depends="dist,test">
+	</target>
+
+	<target name="clean">
+		<delete dir="${website.static}/iceditor" />
+		<delete dir="${website.static}/icplayer" />
+		<delete dir="${website.static}/addoneditor" />
+	</target>
+
+    <target name="change-frontend-version">
+        <replaceregexp file="${website.src}/app.yaml"
+                       match="url: /media/frontend/build/(.*)"
+                       replace="url: /media/frontend/build/${version}"
+                       byline="true"/>
+        <antcall target="change-frontend-app-version">
+            <param name="version" value="${version}" />
+            <param name="app-path" value="${website.src_frontend}/src" />
+        </antcall>
+        <antcall target="change-frontend-app-version">
+            <param name="version" value="${version}" />
+            <param name="app-path" value="${website.frontend}" />
+        </antcall>
+        <replaceregexp file="${website.src_frontend}/.angular-cli.json"
+                       match="/media/frontend/build/(.*)/dist/"
+                       replace="/media/frontend/build/${version}/dist/"
+                       byline="false"/>
+        <replaceregexp file="${website.frontend}/inline.bundle.js"
+                       match="/media/frontend/build/(.*)/dist/"
+                       replace="/media/frontend/build/${version}/dist/"
+                       byline="false"/>
+        <replaceregexp file="${website.src_frontend}/dist/inline.bundle.js"
+                       match="/media/frontend/build/(.*)/dist/"
+                       replace="/media/frontend/build/${version}/dist/"
+                       byline="false"/>
+    </target>
+
+    <target name="change-frontend-app-version">
+        <replaceregexp file="${app-path}/index.html"
+                       match="/media/frontend/build/(.*)/libs"
+                       replace="/media/frontend/build/${version}/libs"
+                       byline="true"/>
+        <replaceregexp file="${app-path}/index.html"
+                       match="/media/frontend/build/(.*)/css"
+                       replace="/media/frontend/build/${version}/css"
+                       byline="true"/>
+        <replaceregexp file="${app-path}/index.html"
+                       match="/media/frontend/build/(.*)/assets"
+                       replace="/media/frontend/build/${version}/assets"
+                       byline="true"/>
+        <replaceregexp file="${app-path}/index.html"
+                       match="/media/frontend/build/([^/]*)/dist"
+                       replace="/media/frontend/build/${version}/dist"
+                       byline="false"/>
+    </target>
+
+</project>

@@ -1,0 +1,14 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+	
+	</ui:style>
+	<g:HTMLPanel ui:field="panel" styleName="fileItemContainer">
+		<div class="fileItemLabel"></div>
+		<div class="fileItemImageContainer">
+			<img class="fileItemImage" />
+		</div>
+		<input type="text" class="fileItemPath" value="/file/serve/1831714" readonly="true"/>
+	</g:HTMLPanel>
+</ui:UiBinder> 

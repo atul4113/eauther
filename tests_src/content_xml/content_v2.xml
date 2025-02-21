@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<interactiveContent name="Meetings - Getting started (semi-responsive)" scoreType="last" version="2">
+    <metadata>
+        <entry key="useGrid" value="true"/>
+        <entry key="snapToGrid" value="true"/>
+        <entry key="gridSize" value="20"/>
+        <entry key="staticHeader" value="false"/>
+        <entry key="staticFooter" value="false"/>
+        <entry key="useRulers" value="true"/>
+        <entry key="snapToRulers" value="true"/>
+        <entry key="theme.href" value="/file/5073949583212544"/>
+    </metadata>
+    <addons>
+        <addon-descriptor addonId="Page_Counter"
+                          href="/proxy/get?url=http://www.mauthor.com/media/iceditor/addons/Page_Counter.xml"/>
+        <addon-descriptor addonId="Navigation_Bar"
+                          href="/proxy/get?url=http://www.mauthor.com/media/iceditor/addons/Navigation_Bar.xml"/>
+        <addon-descriptor addonId="Connection" href="/proxy/get?url=http://www.mauthor.com/media/iceditor/addons/Connection.xml"/>
+        <addon-descriptor addonId="text_identification"
+                          href="/proxy/get?url=http://www.mauthor.com/media/iceditor/addons/text_identification.xml"/>
+        <addon-descriptor addonId="Double_State_Button"
+                          href="/proxy/get?url=http://www.mauthor.com/media/iceditor/addons/Double_State_Button.xml"/>
+        <addon-descriptor addonId="Advanced_Connector"
+                          href="/proxy/get?url=http://www.mauthor.com/media/iceditor/addons/Advanced_Connector.xml"/>
+        <addon-descriptor addonId="Audio" href="/proxy/get?url=http://www.mauthor.com/media/iceditor/addons/Audio.xml"/>
+        <addon-descriptor addonId="Show_Answers"
+                          href="/proxy/get?url=http://www.mauthor.com/media/iceditor/addons/Show_Answers.xml"/>
+        <addon-descriptor addonId="Table" href="/proxy/get?url=http://www.mauthor.com/media/iceditor/addons/Table.xml"/>
+        <addon-descriptor addonId="Hierarchical_Lesson_Report"
+                          href="/proxy/get?url=http://www.mauthor.com/media/iceditor/addons/Hierarchical_Lesson_Report.xml"/>
+        <addon-descriptor addonId="Paragraph" href="/proxy/get?url=//www.mauthor.com/media/iceditor/addons/Paragraph.xml"/>
+        <addon-descriptor addonId="Hierarchical_Table_Of_Contents"
+                          href="/proxy/get?url=//www.mauthor.com/media/iceditor/addons/Hierarchical_Table_Of_Contents.xml"/>
+    </addons>
+    <styles>
+        <style id="default" isDefault="true" name="default">default-string-style</style>
+        <style id="320-style" name="320">320-string-style</style>
+        <style id="T2-style" name="T2">T2-string-style</style>
+        <style id="DFBD7B95-5781-45CF-8AE3-4AAD6F9CA4BE" name="TT">TT-string-style</style>
+    </styles>
+    <layouts>
+        <layout id="default" isDefault="true" name="default">
+            <style id="default"/>
+            <threshold width="1600"/>
+            <deviceOrientation value="horizontal"/>
+        </layout>
+        <layout id="320" name="320">
+            <style id="320-style"/>
+            <threshold width="222"/>
+            <deviceOrientation value="vertical"/>
+        </layout>
+        <layout id="TT" name="TT">
+            <style id="320-style"/>
+            <threshold width="11"/>
+        </layout>
+        <layout id="T2" name="T2">
+            <style id="T2-style"/>
+            <threshold width="22"/>
+        </layout>
+    </layouts>
+    <pages>
+        <page id="aecOAT" name="Page 1" href="6106363146272768" preview="/file/serve/6087032423579648" modulesMaxScore="0"
+              pageWeight="1" reportable="false"/>
+        <page id="L3UxALexHPm2BgMV" name="Page 2" href="5950736549806080" preview="" modulesMaxScore="0" pageWeight="1"
+              reportable="true"/>
+        <page id="2xCQmmkNvKd4ipvC" name="Page 3" href="5332477886595072" preview="" modulesMaxScore="0" pageWeight="1"
+              reportable="true"/>
+        <header ref="commons/header"/>
+        <footer ref="commons/footer"/>
+    </pages>
+    <assets>
+        <asset contentType="image/png" fileName="test1.png" href="/test_url1" title="" type="image"/>
+        <asset contentType="image/svg+xml" fileName="test2.svg" href="/test_url2" title="" type="image"/>
+    </assets>
+</interactiveContent>

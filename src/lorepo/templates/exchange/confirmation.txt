@@ -1,0 +1,14 @@
+{% autoescape off %}
+Dear {{ user }},
+<p>
+Presentation "{{exported_content.content.title}}" has been successfully exported.
+</p>
+
+<p>
+You can download the exported package at <a href="{{ settings.BASE_URL }}/file/serve/{{exported_content.export.id}}">{{ settings.BASE_URL }}/file/serve/{{exported_content.export.id}}</a>
+</p>
+
+<p>
+List of previously created packages is available at <a href="{{ settings.BASE_URL }}/exchange/list/{{exported_content.content.id}}"> {{ settings.BASE_URL }}/exchange/list/{{exported_content.content.id}} </a>
+</p>
+{% endautoescape %}

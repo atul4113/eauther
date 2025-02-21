@@ -1,0 +1,48 @@
+@import "../../../common/templates/mdl-colors";
+
+section#accounts-login {
+    div.page-content {
+        padding: 15px;
+        background: $white;
+
+        mat-form-field {
+            width: 250px;
+        }
+
+        form {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+
+            div.error {
+                color: $red-600;
+                padding: 8px;
+            }
+
+            ul.mdl-list {
+                padding: 0;
+                margin: 0;
+
+                li.mdl-list__item {
+                    padding-top: 0;
+                    padding-bottom: 0;
+                }
+            }
+
+            div.bottom-actions {
+                margin-top: 16px;
+                padding-top: 8px;
+                border-top: 1px solid $grey-300;
+            }
+        }
+
+        .sso-login-button {
+          min-width: 190px;
+        }
+
+        .custom-login-button {
+            width: 250px;
+            margin-bottom: 50px;
+        }
+    }
+}

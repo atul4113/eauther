@@ -1,0 +1,713 @@
+[
+  {
+    "pk": 5, 
+    "model": "contenttypes.contenttype", 
+    "fields": {
+      "model": "contenttype", 
+      "name": "content type", 
+      "app_label": "contenttypes"
+    }
+  }, 
+  {
+    "pk": 10, 
+    "model": "contenttypes.contenttype", 
+    "fields": {
+      "model": "group", 
+      "name": "group", 
+      "app_label": "auth"
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "contenttypes.contenttype", 
+    "fields": {
+      "model": "logentry", 
+      "name": "log entry", 
+      "app_label": "admin"
+    }
+  }, 
+  {
+    "pk": 12, 
+    "model": "contenttypes.contenttype", 
+    "fields": {
+      "model": "message", 
+      "name": "message", 
+      "app_label": "auth"
+    }
+  }, 
+  {
+    "pk": 9, 
+    "model": "contenttypes.contenttype", 
+    "fields": {
+      "model": "permission", 
+      "name": "permission", 
+      "app_label": "auth"
+    }
+  }, 
+  {
+    "pk": 26, 
+    "model": "contenttypes.contenttype", 
+    "fields": {
+      "model": "space", 
+      "name": "space", 
+      "app_label": "spaces"
+    }
+  }, 
+  {
+    "pk": 34, 
+    "model": "contenttypes.contenttype", 
+    "fields": {
+      "model": "spaceaccess", 
+      "name": "space access", 
+      "app_label": "spaces"
+    }
+  }, 
+  {
+    "pk": 11, 
+    "model": "contenttypes.contenttype", 
+    "fields": {
+      "model": "user", 
+      "name": "user", 
+      "app_label": "auth"
+    }
+  }, 
+  {
+    "pk": 6, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_contenttype", 
+      "name": "Can add content type", 
+      "content_type": 5
+    }
+  }, 
+  {
+    "pk": 16, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_group", 
+      "name": "Can add group", 
+      "content_type": 10
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_logentry", 
+      "name": "Can add log entry", 
+      "content_type": 1
+    }
+  }, 
+  {
+    "pk": 22, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_message", 
+      "name": "Can add message", 
+      "content_type": 12
+    }
+  }, 
+  {
+    "pk": 13, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_permission", 
+      "name": "Can add permission", 
+      "content_type": 9
+    }
+  }, 
+  {
+    "pk": 19, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_user", 
+      "name": "Can add user", 
+      "content_type": 11
+    }
+  }, 
+  {
+    "pk": 7, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_contenttype", 
+      "name": "Can change content type", 
+      "content_type": 5
+    }
+  }, 
+  {
+    "pk": 17, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_group", 
+      "name": "Can change group", 
+      "content_type": 10
+    }
+  }, 
+  {
+    "pk": 3, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_logentry", 
+      "name": "Can change log entry", 
+      "content_type": 1
+    }
+  }, 
+  {
+    "pk": 23, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_message", 
+      "name": "Can change message", 
+      "content_type": 12
+    }
+  }, 
+  {
+    "pk": 14, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_permission", 
+      "name": "Can change permission", 
+      "content_type": 9
+    }
+  }, 
+  {
+    "pk": 20, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_user", 
+      "name": "Can change user", 
+      "content_type": 11
+    }
+  }, 
+  {
+    "pk": 8, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_contenttype", 
+      "name": "Can delete content type", 
+      "content_type": 5
+    }
+  }, 
+  {
+    "pk": 18, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_group", 
+      "name": "Can delete group", 
+      "content_type": 10
+    }
+  }, 
+  {
+    "pk": 4, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_logentry", 
+      "name": "Can delete log entry", 
+      "content_type": 1
+    }
+  }, 
+  {
+    "pk": 24, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_message", 
+      "name": "Can delete message", 
+      "content_type": 12
+    }
+  }, 
+  {
+    "pk": 15, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_permission", 
+      "name": "Can delete permission", 
+      "content_type": 9
+    }
+  }, 
+  {
+    "pk": 21, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_user", 
+      "name": "Can delete user", 
+      "content_type": 11
+    }
+  }, 
+  {
+    "pk": 25, 
+    "model": "auth.user", 
+    "fields": {
+      "username": "test", 
+      "first_name": "", 
+      "last_name": "", 
+      "is_active": true, 
+      "idxf_email_l_iexact": "test@test.pl", 
+      "idxf_username_l_iexact": "test", 
+      "is_superuser": true, 
+      "is_staff": true, 
+      "last_login": "2012-05-18 09:52:32", 
+      "groups": [], 
+      "user_permissions": [], 
+      "password": "sha1$99829$ef675de1c85d5c95ee5fc916fc1bf90dcfc2befd", 
+      "email": "test@test.pl", 
+      "date_joined": "2012-05-18 09:52:08"
+    }
+  }, 
+  {
+    "pk": 31, 
+    "model": "auth.user", 
+    "fields": {
+      "username": "kgebert", 
+      "first_name": "", 
+      "last_name": "", 
+      "is_active": true, 
+      "idxf_email_l_iexact": "kgebert@kgebert.pl", 
+      "idxf_username_l_iexact": "kgebert", 
+      "is_superuser": false, 
+      "is_staff": false, 
+      "last_login": "2012-05-18 09:58:49", 
+      "groups": [], 
+      "user_permissions": [], 
+      "password": "sha1$4dcd1$0a2eb33c43a9752992a423b422e0a08b312ee4d5", 
+      "email": "kgebert@kgebert.pl", 
+      "date_joined": "2012-05-18 09:53:51"
+    }
+  }, 
+  {
+    "pk": "81e1e88a29c2109e3451bb0582bad660", 
+    "model": "sessions.session", 
+    "fields": {
+      "expire_date": "2012-06-01 09:59:19", 
+      "session_data": "NTE5NDA2NDUzYWQ4N2Y0NDg0ZjRjNTZlZTVmMTZjY2RjOWQ5Njk1MDqAAn1xAC4=\n"
+    }
+  }, 
+  {
+    "pk": 41, 
+    "model": "search.relationindex_mycontent_content_search_index", 
+    "fields": {
+      "modified_date": "2012-05-18 09:56:47", 
+      "is_featured": false, 
+      "big_icon_href": null, 
+      "is_deleted": false, 
+      "file": 40, 
+      "title": "testPrezentacja", 
+      "author": 25, 
+      "public_version": 40, 
+      "view_count": 0, 
+      "name": null, 
+      "search_index_search_list_field": [
+        "testprezentacja"
+      ], 
+      "is_template": false, 
+      "is_globally_public": false, 
+      "content_type": 1, 
+      "created_date": "2012-05-18 09:56:47", 
+      "short_description": "", 
+      "is_public": false, 
+      "icon_href": null, 
+      "associated_content": null, 
+      "tags": "", 
+      "description": ""
+    }
+  }, 
+  {
+    "pk": 45, 
+    "model": "search.relationindex_mycontent_content_search_index", 
+    "fields": {
+      "modified_date": "2012-05-18 09:58:03", 
+      "is_featured": false, 
+      "big_icon_href": null, 
+      "is_deleted": false, 
+      "file": 44, 
+      "title": "testPrezentacja 2", 
+      "author": 25, 
+      "public_version": 44, 
+      "view_count": 0, 
+      "name": null, 
+      "search_index_search_list_field": [
+        "testprezentacja", 
+        "2"
+      ], 
+      "is_template": false, 
+      "is_globally_public": false, 
+      "content_type": 1, 
+      "created_date": "2012-05-18 09:58:02", 
+      "short_description": "", 
+      "is_public": false, 
+      "icon_href": null, 
+      "associated_content": null, 
+      "tags": "", 
+      "description": ""
+    }
+  }, 
+  {
+    "pk": 49, 
+    "model": "search.relationindex_mycontent_content_search_index", 
+    "fields": {
+      "modified_date": "2012-05-18 09:59:03", 
+      "is_featured": false, 
+      "big_icon_href": null, 
+      "is_deleted": false, 
+      "file": 48, 
+      "title": "kgebertPrezentacja", 
+      "author": 31, 
+      "public_version": 48, 
+      "view_count": 0, 
+      "name": null, 
+      "search_index_search_list_field": [
+        "kgebertprezentacja"
+      ], 
+      "is_template": false, 
+      "is_globally_public": false, 
+      "content_type": 1, 
+      "created_date": "2012-05-18 09:59:02", 
+      "short_description": "", 
+      "is_public": false, 
+      "icon_href": null, 
+      "associated_content": null, 
+      "tags": "", 
+      "description": ""
+    }
+  }, 
+  {
+    "pk": 41, 
+    "model": "mycontent.content", 
+    "fields": {
+      "modified_date": "2012-05-18 09:56:47", 
+      "is_featured": false, 
+      "big_icon_href": null, 
+      "is_deleted": false, 
+      "file": 40, 
+      "title": "testPrezentacja", 
+      "author": 25, 
+      "public_version": 40, 
+      "view_count": 0, 
+      "name": null, 
+      "is_template": false, 
+      "is_globally_public": false, 
+      "content_type": 1, 
+      "created_date": "2012-05-18 09:56:47", 
+      "short_description": "", 
+      "is_public": false, 
+      "icon_href": null, 
+      "associated_content": null, 
+      "tags": "", 
+      "description": ""
+    }
+  }, 
+  {
+    "pk": 45, 
+    "model": "mycontent.content", 
+    "fields": {
+      "modified_date": "2012-05-18 09:58:03", 
+      "is_featured": false, 
+      "big_icon_href": null, 
+      "is_deleted": false, 
+      "file": 44, 
+      "title": "testPrezentacja 2", 
+      "author": 25, 
+      "public_version": 44, 
+      "view_count": 0, 
+      "name": null, 
+      "is_template": false, 
+      "is_globally_public": false, 
+      "content_type": 1, 
+      "created_date": "2012-05-18 09:58:02", 
+      "short_description": "", 
+      "is_public": false, 
+      "icon_href": null, 
+      "associated_content": null, 
+      "tags": "", 
+      "description": ""
+    }
+  }, 
+  {
+    "pk": 49, 
+    "model": "mycontent.content", 
+    "fields": {
+      "modified_date": "2012-05-18 09:59:03", 
+      "is_featured": false, 
+      "big_icon_href": null, 
+      "is_deleted": false, 
+      "file": 48, 
+      "title": "kgebertPrezentacja", 
+      "author": 31, 
+      "public_version": 48, 
+      "view_count": 0, 
+      "name": null, 
+      "is_template": false, 
+      "is_globally_public": false, 
+      "content_type": 1, 
+      "created_date": "2012-05-18 09:59:02", 
+      "short_description": "", 
+      "is_public": false, 
+      "icon_href": null, 
+      "associated_content": null, 
+      "tags": "", 
+      "description": ""
+    }
+  }, 
+  {
+    "pk": 42, 
+    "model": "mycontent.contentspace", 
+    "fields": {
+      "content": 41, 
+      "is_deleted": false, 
+      "space": 27
+    }
+  }, 
+  {
+    "pk": 46, 
+    "model": "mycontent.contentspace", 
+    "fields": {
+      "content": 45, 
+      "is_deleted": false, 
+      "space": 27
+    }
+  }, 
+  {
+    "pk": 50, 
+    "model": "mycontent.contentspace", 
+    "fields": {
+      "content": 49, 
+      "is_deleted": false, 
+      "space": 29
+    }
+  }, 
+  {
+    "pk": 27, 
+    "model": "spaces.space", 
+    "fields": {
+      "modified_date": "2012-05-18 09:53:05", 
+      "right": 2, 
+      "is_deleted": false, 
+      "parent": null, 
+      "title": "testSpace", 
+      "rank": 20, 
+      "top_level": 27, 
+      "created_date": "2012-05-18 09:53:05", 
+      "space_type": 1, 
+      "left": 1
+    }
+  }, 
+  {
+    "pk": 29, 
+    "model": "spaces.space", 
+    "fields": {
+      "modified_date": "2012-05-18 09:53:29", 
+      "right": 2, 
+      "is_deleted": false, 
+      "parent": null, 
+      "title": "kgebertSpace", 
+      "rank": 20, 
+      "top_level": 29, 
+      "created_date": "2012-05-18 09:53:29", 
+      "space_type": 1, 
+      "left": 1
+    }
+  }, 
+  {
+    "pk": 35, 
+    "model": "spaces.spaceaccess", 
+    "fields": {
+      "modified_date": "2012-05-18 09:55:11", 
+      "is_deleted": false, 
+      "space": 27, 
+      "user": 25, 
+      "created_date": "2012-05-18 09:55:11", 
+      "access_right": 3
+    }
+  },
+  {
+    "pk": 666, 
+    "model": "spaces.spaceaccess", 
+    "fields": {
+      "modified_date": "2012-05-18 09:55:11", 
+      "is_deleted": false, 
+      "space": 27, 
+      "user": 31, 
+      "created_date": "2012-05-18 09:55:11", 
+      "access_right": 2
+    }
+  },
+  {
+    "pk": 667, 
+    "model": "spaces.spaceaccess", 
+    "fields": {
+      "modified_date": "2012-05-18 09:55:11", 
+      "is_deleted": false, 
+      "space": 29, 
+      "user": 25, 
+      "created_date": "2012-05-18 09:55:11", 
+      "access_right": 2
+    }
+  },
+  {
+    "pk": 37, 
+    "model": "spaces.spaceaccess", 
+    "fields": {
+      "modified_date": "2012-05-18 09:55:52", 
+      "is_deleted": false, 
+      "space": 29, 
+      "user": 31, 
+      "created_date": "2012-05-18 09:55:52", 
+      "access_right": 3
+    }
+  }, 
+  {
+    "pk": 39, 
+    "model": "filestorage.filestorage", 
+    "fields": {
+      "modified_date": "2012-05-18 09:56:47", 
+      "history_for": null, 
+      "version": null, 
+      "content_type": "text/xml", 
+      "created_date": "2012-05-18 09:56:47", 
+      "owner": 25, 
+      "contents": "<?xml version='1.0' encoding='UTF-8' ?> \n\n<page>\n\t<modules> \n\t\n\t\t<textModule id=\"Title\" left=\"5\" top=\"3\" width=\"90\" height=\"7\" style=\"\">\n\t\t\t<text>&lt;div style=&quot;text-align: center;&quot;&gt;Title&lt;/div&gt;</text>\n\t\t</textModule>\t\n\t\t<buttonModule id=\"PrevPage\" left=\"0\" top=\"90\" width=\"10\" height=\"10\" style=\"\">\n\t\t\t<button type=\"prevPage\" text=\"\"/>\n\t\t</buttonModule>\n\t\t<buttonModule id=\"NextPage\" left=\"90\" top=\"90\" width=\"10\" height=\"10\" style=\"\">\n\t\t\t<button type=\"nextPage\" text=\"\"/>\n\t\t</buttonModule>\n    </modules> \n</page>\n"
+    }
+  }, 
+  {
+    "pk": 40, 
+    "model": "filestorage.filestorage", 
+    "fields": {
+      "modified_date": "2012-05-18 09:56:47", 
+      "history_for": 41, 
+      "version": 1, 
+      "content_type": "text/xml", 
+      "created_date": "2012-05-18 09:56:47", 
+      "owner": 25, 
+      "contents": "<?xml version='1.0' encoding='UTF-8' ?>\n<interactiveContent>\n\t<style href=\"/media/content/styles/default/content.css\"/>\n\t\n\t<pages>\n    \t<page name='Page 1' href='39'/> \n    </pages>\n</interactiveContent>"
+    }
+  }, 
+  {
+    "pk": 43, 
+    "model": "filestorage.filestorage", 
+    "fields": {
+      "modified_date": "2012-05-18 09:58:02", 
+      "history_for": null, 
+      "version": null, 
+      "content_type": "text/xml", 
+      "created_date": "2012-05-18 09:58:02", 
+      "owner": 25, 
+      "contents": "<?xml version='1.0' encoding='UTF-8' ?> \n\n<page>\n\t<modules> \n\t\n\t\t<textModule id=\"Title\" left=\"5\" top=\"3\" width=\"90\" height=\"7\" style=\"\">\n\t\t\t<text>&lt;div style=&quot;text-align: center;&quot;&gt;Title&lt;/div&gt;</text>\n\t\t</textModule>\t\n\t\t<buttonModule id=\"PrevPage\" left=\"0\" top=\"90\" width=\"10\" height=\"10\" style=\"\">\n\t\t\t<button type=\"prevPage\" text=\"\"/>\n\t\t</buttonModule>\n\t\t<buttonModule id=\"NextPage\" left=\"90\" top=\"90\" width=\"10\" height=\"10\" style=\"\">\n\t\t\t<button type=\"nextPage\" text=\"\"/>\n\t\t</buttonModule>\n    </modules> \n</page>\n"
+    }
+  }, 
+  {
+    "pk": 44, 
+    "model": "filestorage.filestorage", 
+    "fields": {
+      "modified_date": "2012-05-18 09:58:02", 
+      "history_for": 45, 
+      "version": 1, 
+      "content_type": "text/xml", 
+      "created_date": "2012-05-18 09:58:02", 
+      "owner": 25, 
+      "contents": "<?xml version='1.0' encoding='UTF-8' ?>\n<interactiveContent>\n\t<style href=\"/media/content/styles/default/content.css\"/>\n\t\n\t<pages>\n    \t<page name='Page 1' href='43'/> \n    </pages>\n</interactiveContent>"
+    }
+  }, 
+  {
+    "pk": 47, 
+    "model": "filestorage.filestorage", 
+    "fields": {
+      "modified_date": "2012-05-18 09:59:02", 
+      "history_for": null, 
+      "version": null, 
+      "content_type": "text/xml", 
+      "created_date": "2012-05-18 09:59:02", 
+      "owner": 31, 
+      "contents": "<?xml version='1.0' encoding='UTF-8' ?> \n\n<page>\n\t<modules> \n\t\n\t\t<textModule id=\"Title\" left=\"5\" top=\"3\" width=\"90\" height=\"7\" style=\"\">\n\t\t\t<text>&lt;div style=&quot;text-align: center;&quot;&gt;Title&lt;/div&gt;</text>\n\t\t</textModule>\t\n\t\t<buttonModule id=\"PrevPage\" left=\"0\" top=\"90\" width=\"10\" height=\"10\" style=\"\">\n\t\t\t<button type=\"prevPage\" text=\"\"/>\n\t\t</buttonModule>\n\t\t<buttonModule id=\"NextPage\" left=\"90\" top=\"90\" width=\"10\" height=\"10\" style=\"\">\n\t\t\t<button type=\"nextPage\" text=\"\"/>\n\t\t</buttonModule>\n    </modules> \n</page>\n"
+    }
+  }, 
+  {
+    "pk": 48, 
+    "model": "filestorage.filestorage", 
+    "fields": {
+      "modified_date": "2012-05-18 09:59:02", 
+      "history_for": 49, 
+      "version": 1, 
+      "content_type": "text/xml", 
+      "created_date": "2012-05-18 09:59:02", 
+      "owner": 31, 
+      "contents": "<?xml version='1.0' encoding='UTF-8' ?>\n<interactiveContent>\n\t<style href=\"/media/content/styles/default/content.css\"/>\n\t\n\t<pages>\n    \t<page name='Page 1' href='47'/> \n    </pages>\n</interactiveContent>"
+    }
+  }, 
+  {
+    "pk": 38, 
+    "model": "admin.logentry", 
+    "fields": {
+      "action_flag": 1, 
+      "action_time": "2012-05-18 09:55:52", 
+      "object_repr": "kgebert:kgebertSpace <owner>", 
+      "object_id": "37", 
+      "change_message": "", 
+      "user": 25, 
+      "content_type": 34
+    }
+  }, 
+  {
+    "pk": 36, 
+    "model": "admin.logentry", 
+    "fields": {
+      "action_flag": 1, 
+      "action_time": "2012-05-18 09:55:11", 
+      "object_repr": "test:testSpace <owner>", 
+      "object_id": "35", 
+      "change_message": "", 
+      "user": 25, 
+      "content_type": 34
+    }
+  }, 
+  {
+    "pk": 33, 
+    "model": "admin.logentry", 
+    "fields": {
+      "action_flag": 2, 
+      "action_time": "2012-05-18 09:54:13", 
+      "object_repr": "kgebert", 
+      "object_id": "31", 
+      "change_message": "Changed email.", 
+      "user": 25, 
+      "content_type": 11
+    }
+  }, 
+  {
+    "pk": 32, 
+    "model": "admin.logentry", 
+    "fields": {
+      "action_flag": 1, 
+      "action_time": "2012-05-18 09:53:52", 
+      "object_repr": "kgebert", 
+      "object_id": "31", 
+      "change_message": "", 
+      "user": 25, 
+      "content_type": 11
+    }
+  }, 
+  {
+    "pk": 30, 
+    "model": "admin.logentry", 
+    "fields": {
+      "action_flag": 1, 
+      "action_time": "2012-05-18 09:53:29", 
+      "object_repr": "kgebertSpace", 
+      "object_id": "29", 
+      "change_message": "", 
+      "user": 25, 
+      "content_type": 26
+    }
+  }, 
+  {
+    "pk": 28, 
+    "model": "admin.logentry", 
+    "fields": {
+      "action_flag": 1, 
+      "action_time": "2012-05-18 09:53:05", 
+      "object_repr": "testSpace", 
+      "object_id": "27", 
+      "change_message": "", 
+      "user": 25, 
+      "content_type": 26
+    }
+  }
+]

@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load apptags %}
+
+{% block content %}
+
+<h1 class="page_header">Access Rights Management</h1>
+<div class="main clear" style="padding-top: 0"></div>
+<form action="{{request.path}}" method="post">
+<table border="0">
+		<tr>
+			<td><label for="user">User name: </label></td>
+			<td><input type="text" name="user" id="user"/></td>
+			<td><span style="color:red">{% for key, value in form.errors.items %}{{ value }}{% endfor %}</span></td>
+		</tr>
+		<tr>
+			<td><label for="space">Space:</label></td>
+			<td><select name="space" id="space">
+			{% if company %}
+			<optgroup label="Company">
+		        {% ifequal company.id selected_space.id %}
+		            <option value="{{company.id}}" selected="selected">Space {{company.id}}: {{company.title}}</option>
+		        {% else %}
+		            <option value="{{company.id}}">{{company.title}}</option>
+		        {% endifequal %}
+		    </optgroup>
+		    {% endif %}
+		    {% if divisions %}
+			<optgroup label="Projects">
+		    {% for space in divisions %}
+		        {% ifequal space.id selected_space.id %}
+		            <option value="{{space.id}}" selected="selected">Space {{space.id}}: {{space.title}}</option>
+		        {% else %}
+		            <option value="{{space.id}}">{{space.title}}</option>
+		        {% endifequal %}
+		    {% endfor %}
+		    </optgroup>
+		    {% for division in divisions %}
+		    <optgroup label="{{division}}">
+		    	{% for space in division.publications %}
+			    	{% ifequal space.id selected_space.id %}
+			            <option value="{{space.id}}" selected="selected">Space {{space.id}}: {{space.title}}</option>
+			        {% else %}
+			            <option value="{{space.id}}">{{space.title}}</option>
+			        {% endifequal %}
+			     {% endfor %}
+		    </optgroup>
+		    {% endfor %}
+		    {% endif %}
+			</select></td>
+			<td></td>
+		</tr>
+		
+		<tr>
+			<td><label for="access">Access rights:</label></td>
+			<td><select name="access" id="access">
+				<option value="1"> read </option>
+				<option value="2"> write </option>
+				<option value="3"> owner </option>
+			</select></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><button>Add access rights</button></td>
+			<td></td>
+		</tr>
+	
+</table>
+</form>
+<h2>List of assigned access rights</h2>
+<table id="spaceusers">
+<tr>
+	<th><strong>Username</strong></th>
+	<th><strong>Project/Publication</strong></th>
+	<th><strong>Type of access</strong></th>
+	<th><strong>Actions</strong></th>
+</tr>
+	{% for user in users %}
+		<tr>
+			<td>{{user.username}}</td>
+			{% for sa in user.corporate_sa_set %}
+				{% if not forloop.first %}<tr><td></td>{% endif %}
+					<td>{{ sa.space }}</td>
+					<td>{{sa.get_access_right_display}}</td>
+					{% ifnotequal request.user user %}
+					<td>
+						<a href="/corporate/editaccess/{{sa.id}}">Edit</a> /
+						<a href="/corporate/removeaccess/{{sa.id}}" onclick="return confirm('Are you sure?')">Remove</a> 
+					</td>
+					{% endifnotequal %}
+			{% if not forloop.first %}</tr>{% endif %}
+			{% endfor %}
+		</tr>
+	{% endfor %}
+</table>
+{% endblock %}

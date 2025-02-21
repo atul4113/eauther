@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% include "common/messages/display_messages.html" %}
+
+    {% if user.is_superuser %}
+        <ul>
+            <li><a href="/panel/home_websites">Manage Home Page</a></li>
+            <li><a href="/user/profile">View your profile</a></li>
+            <li><a href="/user/change_global_template">Change global template</a></li>
+        </ul>
+        <ul>
+            <li><a href="/corporate/create_company">Create company</a></li>
+            <li><a href="/corporate/create_company_owner">Create company owner</a></li>
+            <li><a href="/company/list_companies">List companies</a></li>
+        </ul>
+        <ul>
+            <li>
+                <form method="get" action="/user/editxml" name="editxml">
+                FileStorage ID to edit: <input type="text" name="id"/>
+                <input type="button" value="Edit" onclick="editxml.submit()"/>
+                </form>
+            </li>
+            <li><a href="/assets/replace">Replace assets</a></li>
+            <li><a href="/assets/replace_page_names">Replace page names</a></li>
+        </ul>
+        <ul>
+            <li><a href="/corporate/clear_news_cache">Clear news cache</a></li>
+        </ul>
+        <ul>
+            <li><a href="/corporate/set_demo_sample_lessons">Set demo account sample lessons</a></li>
+        </ul>
+        <ul>
+            <li>
+                <form method="post" action="/user/trigger" name="trigger">
+                    Path: <input type="text" name="path"/><br/>
+                    Queue: <input type="text" name="queue"/><br/>
+                    Backend: <input type="text" name="backend"/><br/>
+                    <input type="button" value="Trigger" onclick="trigger.submit()"/>
+                </form>
+            </li>
+        </ul>
+    {% endif %}
+{% endblock content %}

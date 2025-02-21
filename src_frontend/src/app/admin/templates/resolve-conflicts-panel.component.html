@@ -1,0 +1,144 @@
+<div id="admin-panel">
+    <div class="page-title-bar flex-row with-dots">
+
+        <a class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored back-button" [routerLink]="'/panel/translations/'">
+           <i class="material-icons">chevron_left</i>
+        </a>
+
+        <div class="page-title-bar__header">
+            <h1> {{ translations | getLabel:"plain.admin.translations.panel_title" }} </h1>
+        </div>
+    </div>
+    <div putFooterBottom class="page-content">
+        <div *ngIf="!isInitialized" mdl class="app-loading-wrapper">
+            <app-loading></app-loading>
+        </div>
+
+        <div *ngIf="isInitialized && !isResolved" mdl>
+            <div class="mdl-grid">
+
+                <div
+                    class="mdl-cell mdl-cell--10-col-phone mdl-cell--10-col-tablet mdl-cell--10-col-desktop mdl-cell--1-offset-desktop ">
+
+                    <h4> {{ translations | getLabel:"plain.admin.translations.import_translations" }} </h4>
+                    <div class="mdl-cell mdl-cell--12-col-phone mdl-cell--12-col-tablet mdl-cell--12-col-desktop">
+
+                        <table mdl
+                               class="mdl-data-table mdl-js-data-table mdl-shadow--2dp mdl-cell mdl-cell--12-col data-table-info">
+                            <thead>
+                            <tr class="data-table-info-header">
+                                <th class="mdl-data-table__cell--non-numeric ">
+                                    <span class="content-vertical-align-middle"> {{ translations | getLabel:"plain.admin.translations.language" }} </span>
+                                </th>
+
+                                <th class="mdl-data-table__cell--non-numeric ">
+                                    <span class="content-vertical-align-middle"> {{ translations | getLabel:"plain.admin.translations.key_name" }} </span>
+                                </th>
+
+                                <th class="mdl-data-table__cell--non-numeric ">
+                                    <span class="content-vertical-align-middle"> {{ translations | getLabel:"plain.admin.translations.new_value" }} </span>
+                                </th>
+
+                                <th class="mdl-data-table__cell--non-numeric clickable">
+                                    <span class="content-vertical-align-middle"> {{ translations | getLabel:"plain.admin.translations.old_value" }} </span>
+                                </th>
+
+                                <th class="mdl-data-table__cell--non-numeric middle-value-cell">
+                                    <span class="content-vertical-align-middle"> {{ translations | getLabel:"plain.admin.translations.replace_with_new_value" }} </span>
+                                </th>
+
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            <tr *ngFor="let con of conflicts | paginate: paginatedConflictsPage:pageSize; let i = index; let last = last"
+                                [mdlup]="last" [mdlup-always]="true">
+
+                                <td class="mdl-data-table__cell--non-numeric">
+                                    {{ con.languageKey }}
+                                </td>
+
+                                <td class="mdl-data-table__cell--non-numeric">
+                                    {{ con.name }}
+                                </td>
+
+                                <td class="mdl-data-table__cell--non-numeric">
+                                    {{ con.newValue }}
+                                </td>
+
+                                <td class="mdl-data-table__cell--non-numeric">
+                                    {{ con.oldValue }}
+                                </td>
+
+                                <td class="mdl-data-table__cell--non-numeric middle-value-cell">
+                                    <mat-checkbox color="primary" [(ngModel)]="con.replace"></mat-checkbox>
+                                </td>
+
+                            </tr>
+                            </tbody>
+
+                        </table>
+
+                        <paginator *ngIf="conflicts" [list]="conflicts" [buttonsCount]="5" [pageSize]="pageSize"
+                                   (pageChange)="paginatedConflictsPage = $event"></paginator>
+
+                        <button (click)="finishImport()"
+                                class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored long-button">
+                            {{ translations | getLabel:"plain.admin.translations.import_selected" }}
+                        </button>
+
+                        <div *ngIf="notValid.length > 0">
+                            <h4>
+                                {{ translations | getLabel:"plain.admin.translations.not_valid" }}
+                            </h4>
+                            <ul>
+                                <li *ngFor="let nv of notValid">
+                                    {{ nv }}
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div *ngIf="omitted.length > 0">
+                            <h4>Omitted labels</h4>
+                            <ul>
+                                <li *ngFor="let o of omitted">
+                                    {{ o }}
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div *ngIf="added.length > 0">
+                            <h4>
+                                {{ translations | getLabel:"plain.admin.translations.new_labels_without_conflicts" }}
+                            </h4>
+                            <ul>
+                                <li *ngFor="let a of added">
+                                    {{ a }}
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div *ngIf="isResolved" mdl>
+
+            <div class="mdl-grid">
+
+                <div class="mdl-cell mdl-cell--10-col-phone mdl-cell--10-col-tablet mdl-cell--10-col-desktop mdl-cell--1-offset-desktop ">
+
+                    <h4> {{ translations | getLabel:"plain.admin.translations.import_translations" }} </h4>
+
+                    {{ translations | getLabel:"plain.admin.translations.import_translations_success_msg" }}
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>

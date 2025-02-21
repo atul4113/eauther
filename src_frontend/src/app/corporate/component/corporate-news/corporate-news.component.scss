@@ -1,0 +1,62 @@
+@import "../../../common/templates/mdl-colors";
+
+app-corporate-news {
+    display: flex;
+    flex-direction: column;
+
+    .news-card {
+        margin-bottom: 20px;
+        display: inline-flex;
+        padding: 0;
+        width: 490px;
+        max-height: 195px;
+
+        .button-container {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        img.mat-card-image {
+            width: 200px;
+            display: block;
+            margin: 0 8px 0 0;
+        }
+
+        .content-container {
+            display: flex;
+            flex-direction: column;
+            width: 464px;
+            padding-left: 13px;
+            padding-top: 15px;
+            padding-right: 21px;
+
+            .button-container {
+                display: block;
+                //position: absolute;
+                bottom: 0;
+                margin-bottom: 13px !important;
+
+                a {
+                    color: $blue-300;
+                }
+            }
+
+            .mat-card-title {
+                font-size: 17px;
+                margin-bottom: 8px;
+            }
+
+            .mat-card-content {
+                font-size: 13px;
+                margin-bottom: 8px;
+            }
+
+            .mat-card-subtitle {
+                margin-bottom: 8px;
+            }
+
+            .news-description {
+            }
+        }
+    }
+}

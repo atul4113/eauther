@@ -1,0 +1,33 @@
+@import "../../templates/mdl-colors";
+
+paginator-base {
+    display: inline-block;
+
+    .paginator {
+        padding: 8px;
+        display: inline-block;
+
+        .mdl-button.mdl-js-button.mdl-button--primary {
+            min-width: 0;
+            height: 30px;
+            line-height: 30px;
+            padding: 0 8px;
+            color: $grey-800;
+            display: block;
+            float: left;
+
+            &.action-button {
+                padding:  0 4px;
+
+                &[disabled] {
+                    color: $grey-400;
+                }
+            }
+
+            &.mdl-button--accent {
+                background-color: $pink-500;
+                color: $white;
+            }
+        }
+    }
+}

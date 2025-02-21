@@ -1,0 +1,10 @@
+/.gaedata_dev
+*.bak
+/rest_framework/authtoken/migrations/*
+/django/contrib/sites/migrations/*
+/csreports/migrations/*
+/sitepackages/django\contrib\auth\migrations/*
+/rest_framework\authtoken\migrations/*
+/sitepackages\django\contrib\contenttypes\migrations/*
+/sitepackages\django\contrib\redirects\migrations/*
+/sitepackages\cspreports\migrations/*

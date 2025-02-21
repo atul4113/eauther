@@ -1,0 +1,13 @@
+<div class="merge-lesson-title">
+    <a [href]='"/present/" + lesson.id' target="_blank">{{ lesson.title }}</a>
+</div>
+<h5> {{ translations | getLabel: "plain.my_lessons.panel.lesson_pages.pages"}}</h5>
+<app-pages-list [lesson]="lesson" [pages]="pages"></app-pages-list>
+<h5> {{ translations | getLabel: "plain.my_lessons.panel.lesson_pages.commons"}}</h5>
+<app-pages-list *ngIf="commons.length > 0" [lesson]="lesson" [pages]="commons"></app-pages-list>
+<div class="none-info" *ngIf="commons.length === 0">{{ translations | getLabel:
+    "plain.my_lessons.panel.my_lessons.none"}}
+</div>
+<button mat-raised-button (click)="selectAll()">
+    {{ translations | getLabel: "plain.my_lessons.panel.lesson_list.select_all"}}
+</button>

@@ -1,0 +1,36 @@
+<script type="text/javascript">
+
+    function receiveMessage(event) {
+        if (event.data.indexOf("RESIZE:") == 0) {
+            var re = new RegExp('RESIZE:(\\d+);(\\d+)'),
+                match = re.exec(event.data.toString()),
+                width = match[1],
+                height = match[2];
+
+            var viewport = document.querySelector("meta[name=viewport]");
+            viewport.setAttribute('content', 'width=' + width);
+
+            $('#lesson-iframe').css({
+                'width': width + 'px'
+            });
+
+            $('#lesson-iframe').animate({height: height + 'px'}, 300);
+
+            $('#body-center, #body-wrapper').css({
+                'max-width': width + 'px'
+            });
+        } else if (event.data.indexOf("SCROLLTOP:") == 0) {
+        	handleScrollTop(event.data.substring('SCROLLTOP:'.length));
+        }
+    }
+    
+    function handleScrollTop (data) {
+        var top = parseInt(data),
+                frameTop = $('#lesson-iframe').offset().top,
+                position = top + frameTop;
+
+        window.scrollTo(0, position);
+    }
+
+    window.addEventListener("message", receiveMessage, false);
+</script>

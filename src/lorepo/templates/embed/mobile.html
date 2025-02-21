@@ -1,0 +1,128 @@
+<!--
+KNOWN ISSUES
+Appearance of soft keyboard on an android devices triggers a resize event
+In Portait orientation this may cause change to landscape orientation and reloading of the layout
+window.mAuthor.ScreenUtils.isSoftKeyboardResize() is used to detect if the resize is caused by the keyboard
+-->
+{% extends 'embed/template.html' %}
+
+{% block styles %}
+    <style>
+        body {
+            background: #FFFFFF;
+        }
+        #_icplayer {
+            display: table;
+        }
+    </style>
+{% endblock %}
+
+
+{%block player %}
+    <script type="text/javascript">
+        var player;
+        var userAgent = window.navigator.userAgent;
+        var semiResponsiveLayoutChooser;
+        var viewportmeta = document.querySelector("meta[name=viewport]");
+
+        function chooseLayout(layoutChooser, screenConfiguration) {
+            var isMobile = screenConfiguration.orientation !== window.mAuthor.ScreenUtils.ORIENTATION_TYPES.NOT_MOBILE;
+            var isVertical = screenConfiguration.orientation === window.mAuthor.ScreenUtils.ORIENTATION_TYPES.PORTRAIT;
+            var isHorizontal = screenConfiguration.orientation === window.mAuthor.ScreenUtils.ORIENTATION_TYPES.LANDSCAPE;
+
+            return layoutChooser.chooseLayout(screenConfiguration.width, isMobile, isVertical, isHorizontal);
+        }
+
+        function setViewPortSizesAfterScreenChanges() {
+            var $icPlayer = $('#_icplayer');
+            var width = parseInt($icPlayer.css('width'), 10);
+            var content = 'width=' + width + ',maximum-scale=1';
+            if (screen && screen.width/width < 1.0) {
+                content += ', initial-scale='+screen.width/width;
+            }
+            viewportmeta.setAttribute('content', content);
+        }
+
+        function icOnAppLoaded() {
+            function iframeResizeRequest() {
+                var $icPlayer = $('#_icplayer');
+                var width = parseInt($icPlayer.css('width'), 10);
+                var height = parseInt($icPlayer.css('height'), 10);
+                setViewPortSizesAfterScreenChanges();
+                postResizeMessage(width, height);
+            }
+
+            var firstPageLoaded = false;
+            var page = getPageNumberWithCommons();
+
+            player = icCreatePlayer('_icplayer');
+
+            if (page.isCommons) {
+                player.loadCommonPage('/file/{% if version %}{{version}}{% else %}{{content.file.id}}{% endif %}', page.index);
+            } else {
+                player.load('/file/{% if version %}{{version}}{% else %}{{content.file.id}}{% endif %}', page.index);
+            }
+
+            player.onPageLoaded(function onPageLoadedHandler() {
+                if (!firstPageLoaded) {
+                    semiResponsiveLayoutChooser = new window.semiResponsive.LayoutChooser(player.getSemiResponsiveLayouts());
+                    var screenSizes = window.mAuthor.ScreenUtils.getScreenSizesDependingOnOrientation(userAgent);
+
+                    //initialize currentScreenSize value
+                    window.mAuthor.ScreenUtils.isSoftKeyboardResize();
+
+                    var layoutID = chooseLayout(semiResponsiveLayoutChooser, screenSizes);
+                    var changed = player.changeLayout(layoutID);
+
+                    firstPageLoaded = true;
+                    window.onresize = function onResizeHandler() {
+                        if (window.mAuthor.ScreenUtils.isSoftKeyboardResize()) {
+                            return;
+                        }
+                        var screenSizes = window.mAuthor.ScreenUtils.getScreenSizesDependingOnOrientation(userAgent);
+                        var layoutID = chooseLayout(semiResponsiveLayoutChooser, screenSizes);
+                        var changed = player.changeLayout(layoutID);
+                        if (changed) {
+                            setViewPortSizesAfterScreenChanges();
+                        }
+                    };
+                }
+                iframeResizeRequest();
+                postPageLoadedMessage();
+            });
+
+            player.onOutstretchHeight(function () {
+                iframeResizeRequest();
+            });
+
+            player.onPageScrollTo(function (top) {
+                var parent = getOpener();
+
+                if (window != parent) {
+                    parent.postMessage('SCROLLTOP:' + top, "*");
+                } else {
+                    window.scrollTo(0, top);
+                }
+            });
+
+            function receiveMessage(event) {
+                var WINDOW_WIDTH_EVENT = "WINDOW_WIDTH:";
+
+                if (!event.data) {
+                    return;
+                }
+
+                if (event.data.indexOf(WINDOW_WIDTH_EVENT) === 0) {
+                    if (semiResponsiveLayoutChooser) {
+                        var configuration = JSON.parse(event.data.substring(WINDOW_WIDTH_EVENT.length, event.data.length));
+                        var layoutID = chooseLayout(semiResponsiveLayoutChooser, configuration);
+                        player.changeLayout(layoutID);
+                        iframeResizeRequest();
+                    }
+                }
+            }
+
+            window.addEventListener("message", receiveMessage, false);
+        }
+    </script>
+{% endblock %}

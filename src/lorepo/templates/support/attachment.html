@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load apptags %}
+
+{% block content %}
+
+<h1 class="page_header">Add attachment</h1>
+<div class="main clear" style="padding-top: 0"></div>
+
+{% include "common/messages/display_messages.html" %}
+
+<form action="{{upload_url}}" method="post" name="edit"  enctype="multipart/form-data">
+	<table class="upload-logo">
+		{{ form }}
+		<tr>
+			<td><strong>Title:</strong></td>
+			<td><input type="text" name="title"/></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<div class="pull-left">{% button 'Upload' 'jQuery(this).hide();document.forms["edit"].submit();' %}</div>
+				<div class="pull-left">
+					{% with url='parent.location="/support/ticket/'|add:ticket|add:'"' %}
+						{% button 'Cancel' url %}
+					{% endwith %}
+				</div>
+				<div class="clear"></div>
+			</td>
+		</tr>
+	</table>
+	<input type="submit" value="upload" />
+</form>
+
+
+{% endblock %}

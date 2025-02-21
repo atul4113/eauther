@@ -1,0 +1,28 @@
+{% autoescape off %}
+<p>
+	{{subject}}
+</p>
+		{% if important_informations %}
+			<p>
+				However there were several problems.
+			</p>
+		{% endif %}
+	<p>
+		You can find your new presentation here: 
+		<a href="{{ settings.BASE_URL }}/mycontent/view/{{content_id}}">
+			{{ settings.BASE_URL }}/mycontent/view/{{content_id}}
+		</a>
+	</p>
+{% if important_informations %}
+	<p>
+		Important information:
+	</p>
+	<ul>
+		{% for info in important_informations %}
+			<li>
+				{{ info }}
+			</li>
+		{% endfor %}
+	</ul>
+{% endif %}
+{% endautoescape %}

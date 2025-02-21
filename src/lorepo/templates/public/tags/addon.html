@@ -1,0 +1,31 @@
+{% load apptags %}
+{% load content %}
+{% if forloop.counter|mod:4 == 0 %}
+<li class="addon-last">
+{% else %}
+	{% if forloop.counter|mod:4 == 1 or forloop.first %}
+		<li class="addon-first">
+	{% else %}
+		<li class="addon">
+	{% endif %}
+{% endif %}
+<div class="addon-image">
+	{% get_icon request content %}
+</div>
+<div class="addon-description">
+<div class="addon-title">
+    <a href="/public/view_addon/{{content.id}}">{{content.title}}</a>
+</div>
+<div class="addon-views">
+	<label>Views:</label> {{content.view_count}}
+</div>
+<div class="addon-author">
+	{% publisher content "True" %}
+</div>
+{% if request.user.is_superuser %}
+<div class="addon-modified">
+	Modified: {{ content.modified_date|timesince }}
+</div>
+</div>
+{% endif %}
+</li>

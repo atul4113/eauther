@@ -1,0 +1,77 @@
+<section class="base-info">
+    <app-lesson-details-metadata-icon
+        [lesson]="lesson"
+        [userPermissions]="userPermissions"
+        (iconChange)="onIconChange($event)">
+    </app-lesson-details-metadata-icon>
+
+    <app-lesson-details-metadata-base-info
+        [translations]="translations"
+        [lesson]="lesson"
+        [userPermissions]="userPermissions"
+        [versions]="versions">
+    </app-lesson-details-metadata-base-info>
+</section>
+
+<section *ngIf="lesson.contentType.isLesson()" class="properties">
+    <app-lesson-details-metadata-title
+        [translations]="translations"
+        [isEditMode]="isEditPropertiesMode"
+        [isLoading]="isSavingProperties"
+        [userPermissions]="userPermissions"
+        (editModeChange)="editPropertiesModeChange()"
+        (save)="saveProperties()">
+        {{ translations | getLabel:"plain.my_lessons.panel.lesson_details_meta.properties" }}
+    </app-lesson-details-metadata-title>
+
+    <app-lesson-details-metadata-properties
+        [translations]="translations"
+        [isProject]="isProject"
+        [lesson]="lesson">
+    </app-lesson-details-metadata-properties>
+</section>
+
+<section class="metadata">
+    <app-lesson-details-metadata-title
+        [translations]="translations"
+        [isEditMode]="isEditMode"
+        [isLoading]="isSavingMetadata || !metadata"
+        [canSave]="isMetadataFormValid"
+        [userPermissions]="userPermissions"
+        (editModeChange)="onEditModeChange()"
+        (save)="saveMetadata()">
+        {{ translations | getLabel:"plain.my_lessons.panel.lesson_details_meta.metadata" }}
+    </app-lesson-details-metadata-title>
+
+    <app-lesson-details-metadata-form
+        *ngIf="metadata"
+        [translations]="translations"
+        [lesson]="lesson"
+        [metadata]="metadata"
+        [isProject]="isProject"
+        (isValidChange)="isMetadataFormValidChanged($event)">
+    </app-lesson-details-metadata-form>
+</section>
+
+<section *ngIf="lesson.contentType.isLesson() && lesson.enablePageMetadata" class="metadata">
+    <app-lesson-details-metadata-title
+        [translations]="translations"
+        [isEditMode]="isEditPagesMode"
+        [isLoading]="isSavingPagesMetadata || (!pages && isPagesMetadataOpen)"
+        [isToggleMode]="true"
+        [userPermissions]="userPermissions"
+        [canSave]="isPagesMetadataFormValid"
+        (editModeChange)="onEditPagesModeChange()"
+        (toggleModeChange)="onTogglePagesModeChange($event)"
+        (save)="savePagesMetadata()">
+        {{ translations | getLabel:"plain.my_lessons.panel.lesson_details_meta.pages_metadata" }}
+    </app-lesson-details-metadata-title>
+
+    <app-lesson-details-metadata-pages-form
+        *ngIf="isPagesMetadataOpen && pages"
+        [translations]="translations"
+        [lesson]="lesson"
+        [pages]="pages"
+        [isProject]="isProject"
+    ></app-lesson-details-metadata-pages-form>
+</section>

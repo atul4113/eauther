@@ -1,0 +1,29 @@
+{% load apptags %}
+ <script type="text/javascript">
+ $(document).ready(function(){
+		$(".go-to-page-arrow").click(function(){
+			var form = $("#go-to-page")
+			if( $("#paginator-page").val() == {{current_page.number}} ) {
+				$("#paginator-page").val({{current_page.number}} + 1);
+			}
+			form.submit();
+		});
+	});
+</script>
+<div class="well well-sm">
+	<div class="text pull-left">
+		<div class="resources">Lessons: {{current_page.start_index}}-{{current_page.end_index}}</div>
+	</div>
+ 	<div class="pull-right">
+   		<div class="go-to-page-text">Page: </div>
+		<form action="/mycontent/goToPage" id="go-to-page" name="go">
+			<input type="hidden" value="{{path}}" name="next" />
+			<input type="hidden" value="{{extra_params|request_params:1}}" name="extra_params" />
+			<input type="hidden" value="{{selected}}" name="type" />
+   			<input name="page" type="text" id="paginator-page" class="current_page" value="{{current_page.number}}" />
+		</form>
+		<div class="go-to-page-arrow">&gt;</div>
+		<div class="go-to-page-num_pages">of&nbsp;{{paginator.num_pages}}</div>
+	</div>
+	<div class="clearfix"></div>
+</div>

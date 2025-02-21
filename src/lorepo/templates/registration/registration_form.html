@@ -1,0 +1,56 @@
+{% extends "base_no_container.html" %}
+{% load i18n %}
+{% load apptags %}
+{% block content %}
+
+<div class="content-container">
+    <div id="authorization-container" class="panel panel-primary">
+        <div class="panel-heading">
+            <h1>Registration</h1>
+
+            <h5>Please insert information to create new account</h5>
+        </div>
+        <div class="alert {% if form.non_field_errors %}alert-block{% endif %} alert-warning">
+            {{ form.non_field_errors }}
+        </div>
+        <form method="post" action="." name="register" role="form">
+            {% csrf_token %}
+            <div class="form-group">
+                <label>Username:</label>
+                <input id="id_username" type="text" name="username" placeholder="Username" class="form-control" value="{{ form.username.value|default:'' }}" />
+                {{ form.username.errors }}
+            </div>
+            <div class="form-group">
+                <label>E-mail:</label>
+                <input id="id_email" type="text" name="email" placeholder="E-mail" class="form-control" value="{{ form.email.value|default:'' }}" />
+                {{ form.email.errors }}
+            </div>
+            <div class="form-group">
+                <label>E-mail (again):</label>
+                <input id="id_email2" type="text" name="email2" placeholder="E-mail (again)" class="form-control" value="{{ form.email2.value|default:'' }}" />
+                {{ form.email2.errors }}
+            </div>
+            <div class="form-group">
+                <label>Password:</label>
+                <input id="id_password1" type="password" name="password1" placeholder="Password" class="form-control" />
+                {{ form.password1.errors }}
+            </div>
+            <div class="form-group">
+                <label>Password (again):</label>
+                <input id="id_password2" type="password" name="password2" placeholder="Password (again)" class="form-control" />
+                {{ form.password2.errors }}
+            </div>
+            <div class="form-group">
+                <label>
+                    {{form.tos}} I have read and agree to the <a href="/user/terms">Terms of use</a>
+                </label>
+                {{ form.tos.errors }}
+            </div>
+            <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            <input type="hidden" name="next" value="/mycontent" />
+        </form>
+    </div>
+</div>
+{% endblock %}

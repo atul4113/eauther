@@ -1,0 +1,5 @@
+{% load apptags %}
+
+{% for space in spaces %}
+	<li><a href="/corporate/list/{{space.id}}">{{space.title}}</a></li>
+{% endfor %}

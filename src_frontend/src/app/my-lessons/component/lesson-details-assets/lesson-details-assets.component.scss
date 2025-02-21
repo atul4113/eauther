@@ -1,0 +1,75 @@
+@import "../../../common/templates/mdl-colors";
+
+app-lesson-details-assets {
+    .file-uploading-spinner-assets {
+        margin-left: 200px;
+    }
+
+    .upload-wrapper {
+        padding-left: 16px;
+        padding-top: 10px;
+
+        upload-file {
+            .file-upload-input {
+                display: none;
+            }
+        }
+
+        .file-name {
+            margin-left: 10px;
+        }
+    }
+
+    .search-wrapper {
+        display: flex;
+        align-items: center;
+        padding: 16px;
+
+        .mat-input-container {
+            width: 100%;
+            margin-left: 8px;
+        }
+    }
+
+    .asset-card {
+        min-height: 88px;
+        width: 407px;
+        margin: 8px;
+        display: flex;
+        flex-direction: row;
+        padding: 16px !important;
+
+        .content-wrapper {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            width: calc(100% - 108px);
+        }
+
+        .mat-card-title {
+            word-break: break-all;
+        }
+
+        .image-wrapper {
+            width: 100px;
+            height: 100px;
+
+            .asset-img {
+                margin-left: 8px;
+                max-height: 100%;
+                max-width: 100%;
+            }
+        }
+
+        a {
+            text-decoration: none;
+            color: $grey-500;
+        }
+
+        .mat-card-footer {
+            padding-left: 24px;
+            margin-bottom: 5px;
+            color: $grey-500;
+        }
+    }
+}

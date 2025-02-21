@@ -1,0 +1,24 @@
+{% autoescape off %}
+
+<p>
+Ticket URL: <a href="{{ settings.BASE_URL }}/support/admin/ticket/{{ticket.id}}">{{ settings.BASE_URL }}/support/admin/ticket/{{ticket.id}}</a>
+</p>
+
+<p>
+Author: {{ticket.author}}
+</p>
+
+{% if ticket.company %}
+<p>
+Company: {{ticket.company}}
+</p>
+{% endif %}
+
+<p>
+Title: {{ticket.title}}
+</p>
+
+<p>
+Comment: {{comment.text|urlize|linebreaks}}
+</p>
+{% endautoescape %}

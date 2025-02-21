@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+	
+	
+	<file datatype="plaintext" original="2403" product-version="123" source-language="en" target-language="fr">
+		
+		
+		<body>
+			
+		
+			<!-- <group id="page_number">
+				<trans-unit id="module_id|property_name|{list_name}">
+					<source>Title</source>
+					<target></target>
+				</trans-unit>
+			</group> -->
+			
+			<group id="metadata|metadata">
+				<trans-unit id="title">
+					<source>Title</source>
+					<target>Titre</target>
+				</trans-unit>
+				<trans-unit id="tags">
+					<source>title, french</source>
+					<target>titre, francais</target>
+				</trans-unit>
+				<trans-unit id="description">
+					<source>description</source>
+					<target>sorte</target>
+				</trans-unit>
+				<trans-unit id="short_description">
+					<source>short</source>
+					<target>court</target>
+				</trans-unit>
+			</group>
+			<group id="Page 1|random">
+				<trans-unit id="Title:textModule|Text" approved="no"><source xml:lang="en">
+						&lt;div style="text-align: center;"&gt;Title&lt;/div&gt;
+					</source><target state="needs-translation" xml:lang="fr"> &lt;div style="text-align: center;"&gt;Titre&lt;/div&gt; </target><?sid 1541061-0?></trans-unit>
+				<trans-unit id="Connection1:Connection|Left column|html|content|1" approved="no"><source xml:lang="en">
+						red&lt;br&gt;
+					</source><target state="needs-translation" xml:lang="fr">rogue</target><?sid 1541061-0?></trans-unit>
+				<trans-unit id="Connection1:Connection|Left column|html|content|4" approved="no"><source xml:lang="en">
+						yellow
+					</source><target state="needs-translation" xml:lang="fr">jaune</target><?sid 1541061-0?></trans-unit>
+				<trans-unit id="Connection1:Connection|Right column|html|content|1" approved="no"><source xml:lang="en">
+						sun&lt;br&gt;
+					</source><target state="needs-translation" xml:lang="fr">soleil</target><?sid 1541061-0?></trans-unit>
+				<trans-unit id="Connection1:Connection|Right column|html|content|3" approved="no"><source xml:lang="en">
+						rose
+					</source><target state="needs-translation" xml:lang="fr">rose</target><?sid 1541061-0?></trans-unit>
+				<trans-unit id="TrueFalse1:TrueFalse|Questions|html|Question|0" approved="no"><source xml:lang="en">
+						What's your favourite color?
+					</source><target state="needs-translation" xml:lang="fr">Quelle est votre couleur preferee?</target><?sid 1541061-0?></trans-unit>
+				<trans-unit id="TrueFalse1:TrueFalse|Choices|html|Choice|0" approved="no"><source xml:lang="en">
+						blue
+					</source><target state="needs-translation" xml:lang="fr">bleu</target><?sid 1541061-0?></trans-unit>
+				<trans-unit id="TrueFalse1:TrueFalse|Choices|html|Choice|1" approved="no"><source xml:lang="en">
+						red
+					</source><target state="needs-translation" xml:lang="fr">rogue</target><?sid 1541061-0?></trans-unit>
+				<trans-unit id="TrueFalse1:TrueFalse|Choices|html|Choice|2" approved="no"><source xml:lang="en">
+						green
+					</source><target state="needs-translation" xml:lang="fr">vert</target><?sid 1541061-0?></trans-unit>
+				<trans-unit id="Glossary1:Glossary|List of words|html|Text|1" approved="no"><source xml:lang="en">
+						thunder bird
+					</source><target state="needs-translation" xml:lang="fr">tonnerre oiseau</target><?sid 1541061-0?></trans-unit>
+				<trans-unit id="Glossary1:Glossary|List of words|html|Description|2" approved="no"><source xml:lang="en">
+						an electric bird
+					</source><target state="needs-translation" xml:lang="fr">un oiseau electrique</target><?sid 1541061-0?></trans-unit>
+			</group>
+		</body>
+		
+	
+	</file>
+	
+
+</xliff>

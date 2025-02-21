@@ -1,0 +1,54 @@
+@import "../../../common/templates/mdl-colors";
+
+div#create-lesson {
+    form {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        max-width: 600px;
+        margin: 15px auto auto auto;
+
+        div.error {
+            color: $red-600;
+        }
+
+        ul.mdl-list {
+            padding: 0;
+            margin: 0;
+
+            li.mdl-list__item {
+                padding-top: 0;
+                padding-bottom: 0;
+            }
+        }
+
+        .bottom-actions {
+            margin: 10px 10px 25px 10px;
+
+            .create-button {
+                color: white;
+                float: left;
+                background-color: $blue-500;
+            }
+
+            .cancel-button {
+                color: white;
+                float: right;
+                background-color: $pink-500;
+            }
+
+            .create-button-disabled {
+                float: left;
+            }
+
+            .cancel-button-disabled {
+                float: right;
+            }
+
+            .app-loading-wrapper {
+                margin-left: 5px;
+                float: left;
+            }
+        }
+    }
+}

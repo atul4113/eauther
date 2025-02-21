@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load apptags %}
+
+{% block content %}
+
+<h1 class="page_header">Edit company details</h1>
+<div class="main clear" style="padding-top: 0"></div>
+
+<div class="company_details">
+<form method="post" action="/company/edit/{{company.id}}" name="create">
+	{% csrf_token %}
+	<table>
+  		{{ form }}
+        <tr><th>Company language:</th><td>
+        <select name="language">
+            {% for lang in languages %}
+              <option value="{{ lang.0 }}" {% if lang.0 == properties.language_code%}selected{% endif %}>{{ lang.1 }}</option>
+            {% endfor %}
+        </select>
+        </td></tr>
+      	<tr><th></th><th>{% button 'Save' 'document.forms["create"].submit()' %}</th></tr>
+  	</table>
+  	<input type="submit" />
+</form>
+</div>
+{% endblock %}

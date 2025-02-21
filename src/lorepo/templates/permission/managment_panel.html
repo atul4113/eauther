@@ -1,0 +1,252 @@
+{% extends "base.html" %}
+{% load apptags %}
+{% load content %}
+
+{% block head %}
+    <link href="/media/js/mCurriculum/mCurriculumModal.css" rel="stylesheet" type="text/css" xmlns="http://www.w3.org/1999/html"/>
+    <link href="/media/css/permission/main.css" rel="stylesheet" type="text/css" xmlns="http://www.w3.org/1999/html"/>
+    <script src="/media/js/libraries/mustache.min.js" type="text/javascript"></script>
+    <script src="/media/js/permission/app.js" type="text/javascript"></script>
+    <script src="/media/js/messages.js" type="text/javascript"></script>
+    <script src="/media/js/mCurriculum/mCurriculumModal.js"></script>
+{% endblock %}
+
+{% block content %}
+
+    <div id="permission-index">
+        <h1 class="page-header">
+            Access Rights Management
+        </h1>
+
+        <div id="messages">
+
+
+        </div>
+
+        <div class="wrapper">
+            <div class="container">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#add-user-panel" data-toggle="tab">Add User</a></li>
+                    <li><a href="#add-role-panel" data-toggle="tab">Roles</a></li>
+                    <li><a href="#users-panel" data-toggle="tab">Users</a></li>
+                    <li><a href="#projects-panel" data-toggle="tab">Projects</a></li>
+                </ul>
+
+                <div class="tab-content">
+                    <div class="tab-pane fade in active" id="add-user-panel">
+                        <div class="pull-left"><h4>Add New User</h4></div>
+                        <div class="pull-left ajax-loader-img" id="add-user-ajax-loader-img"><img src="/media/ajax-loader-transparent.gif"></div>
+                        <div class="clear"></div>
+
+                        <form class="pull-center">
+                            <div>
+                                <div>
+                                    <span class="field_label">Username:</span>
+                                    <input id="add-user-username-input" class="field" type="text" name="user"/>
+                                </div>
+
+                                <div id="project-publication-select-container">
+                                    <span class="field_label">Project/Publication:</span>
+                                    <select id="project-publication-select" class="field" name="space">
+
+                                    </select>
+
+                                </div>
+
+                                <div id="add-user-roles-container">
+                                </div>
+
+                                <div class="clear margin-top20"></div>
+                                <div class="row">
+                                    <div class="pull-center">
+                                        <button id="add-user-button" class="btn btn-primary btn-sm">Add</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="tab-pane fade in" id="add-role-panel">
+                        <div class="pull-left" id="back-button-container-edit-role"><button class="btn btn-large btn-primary edit-role-back-button">Back</button></div>
+                        <div class="pull-left"><h4>Roles Panel</h4></div>
+                        <div class="pull-left ajax-loader-img" id="role-ajax-loader-img"><img src="/media/ajax-loader-transparent.gif"></div>
+                        <div class="roles-navigation pull-right">
+                            <button id="add-role-button" class="pull-left btn btn-large btn-link">Add</button>
+                            <button id="edit-role-button" class="pull-left btn btn-large btn-primary active">Edit</button>
+                        </div>
+                        <div class="clear"></div>
+
+                        <form class="pull-center" id="add-role-form">
+                            <div>
+                                <div>
+                                    <span class="field_label">Name:</span>
+                                    <input id="add-role-name-input" class="field" type="text"/>
+                                </div>
+
+                                <div id="add-role-roles-container">
+                                </div>
+                                    <div class="pull-center">
+                                        * - Permission can be applied only on company level.<br/>
+                                        ** - Permission can be applied only on project or company levels.
+                                    </div>
+                                </div>
+                                <div class="clear margin-top20"></div>
+                                <div class="row">
+                                    <div class="pull-center">
+                                        <button id="add-role-save-button" class="btn btn-success btn-sm">Save</button>
+                                        <button id="add-role-discard-button" class="btn btn-link btn-sm">Discard</button>
+                                    </div>
+                                </div>
+                        </form>
+
+                       <form class="pull-center" id="edit-role-form">
+                            <table class="table company-users full-expanded" id="edit-role-table" class="field">
+
+                            </table>
+
+                           <div>
+                               <div id="edit-role-form-content">
+
+                               </div>
+
+                               <div id="edit-role-form-controls">
+                                   <div class="margin-top20">
+                                       <div class="pull-center">
+                                           * - Permission can be applied only on company level.<br />
+                                           ** - Permission can be applied only on project or company levels.
+                                       </div>
+                                   </div>
+                                   <div class="clear margin-top20"></div>
+                                   <div class="row">
+                                       <div class="pull-center">
+                                           <button id="edit-role-save-button" class="btn btn-success btn-sm">Save</button>
+                                           <button id="edit-role-discard-button" class="btn btn-link btn-sm">Discard</button>
+                                       </div>
+                                   </div>
+                               </div>
+                           </div>
+                        </form>
+                    </div>
+
+                    <div class="tab-pane fade in" id="users-panel">
+                        <div class="pull-left"><h4>User Permission Panel</h4></div>
+                        <div class="pull-left ajax-loader-img" id="users-panel-ajax-loader-img"><img src="/media/ajax-loader-transparent.gif"></div>
+                        <div class="clear"></div>
+                        <div>
+                            <div>
+                                <div class="users-panel-select-and-button">
+                                    <div id="users-tab-select-for-user-container"></div>
+                                    <button id="delete-user-button" class="btn-danger btn" disabled>Remove from company</button>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+
+                            <div class="clearfix"></div>
+                            <div class="full-expanded" >
+                                <table id="user-permission-table" class="table company-users table-condensed" style="border-collapse:collapse;">
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="tab-pane fade in" id="projects-panel">
+                        <div class="pull-left"><h4>Project Permission Panel</h4></div>
+                        <div class="pull-left ajax-loader-img" id="projects-panel-ajax-loader-img"><img src="/media/ajax-loader-transparent.gif"></div>
+                        <div class="clear"></div>
+                        <div>
+                            <div class="pull-center">
+                                <span class="field_label">Project:</span>
+                                <select class="field" id="projects-tab-select-for-project">
+
+                                </select>
+                            </div>
+
+                            <div class="clearfix"></div>
+                            <div class="full-expanded">
+                                <table id="project-permission-table" class="table company-users table-condensed" style="border-collapse:collapse;">
+
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            Mustache.tags = ['[[', ']]'];
+            var rolesJSON = '{% filter escapejs %}{{ roles }}{% endfilter %}';
+            var projectsJSON = '{% filter escapejs %}{{ projects }}{% endfilter %}';
+            var companyJSON = '{% filter escapejs %}{{ company }}{% endfilter %}';
+            var permissionsLevel = '{% filter escapejs %}{{ permissions_level }}{% endfilter %}';
+            var permissions = '{% filter escapejs %}{{ permissions }}{% endfilter %}';
+            var companyUsers = '{% filter escapejs %}{{ company_users }}{% endfilter %}';
+            var isCompanyAdmin = '{% filter escapejs %}{{ is_company_admin }}{% endfilter %}';
+
+            var app = new window.lorepo.Permissions({
+                "is_company_admin": JSON.parse(isCompanyAdmin),
+                "roles": JSON.parse(rolesJSON),
+                "projects": JSON.parse(projectsJSON),
+                "company": JSON.parse(companyJSON),
+                "permissions_level": JSON.parse(permissionsLevel),
+                "permissions": JSON.parse(permissions),
+                "companyUsers": JSON.parse(companyUsers),
+                "addRoleRolesContainer": $("#add-role-roles-container"),
+                "addUserToSpaceSelect": $("#project-publication-select"),
+
+                "addUserRolesContainer": $("#add-user-roles-container"),
+                "addRoleForm": $("#add-role-form"),
+                "editRoleTable": $("#edit-role-table"),
+                "editRoleFormContent": $("#edit-role-form-content"),
+                "editRoleForm": $("#edit-role-form"),
+                "editRoleFormControls": $("#edit-role-form-controls"),
+                "editRoleBackButtonContainer": $("#back-button-container-edit-role"),
+
+                "rolesPanelAddButton": $("#add-role-button"),
+                "rolesPanelEditButton": $("#edit-role-button"),
+                "selectInUsersPanelContainer": $("#users-tab-select-for-user-container"),
+                "deleteUserButton": $("#delete-user-button"),
+                "selectInProjectsPanel": $("#projects-tab-select-for-project"),
+                "usersPanelTable": $("#user-permission-table"),
+                "projectsPanelTable": $("#project-permission-table"),
+
+                "templates": {
+                    "editRoleTable": '{% filter escapejs %}{% include 'permission/mustache_templates/edit_role_table.mst.html' %}{% endfilter %}',
+                    "roles": '{% filter escapejs %}{% include 'permission/mustache_templates/roles_checkboxes.mst.html' %}{% endfilter %}',
+                    "projectsSelect": '{% filter escapejs %}{% include 'permission/mustache_templates/projects_select.mst.html' %}{% endfilter %}',
+                    "roleForm": '{% filter escapejs %}{% include 'permission/mustache_templates/role_form.mst.html' %}{% endfilter %}',
+                    "editRoleForm": '{% filter escapejs %}{% include 'permission/mustache_templates/edit_role_form.mst.html' %}{% endfilter %}',
+                    "selectInUsersPanel": '{% filter escapejs %}{% include 'permission/mustache_templates/users_panel_select.mst.html' %}{% endfilter %}',
+                    "tableInUsersPanel": '{% filter escapejs %}{% include 'permission/mustache_templates/users_tab_table.mst.html' %}{% endfilter %}',
+                    "selectValues": '{% filter escapejs %}{% include 'permission/mustache_templates/select_values.mst.html' %}{% endfilter %}',
+                    "tableInProjectsPanel": '{% filter escapejs %}{% include 'permission/mustache_templates/projects_tab_table.mst.html' %}{% endfilter %}',
+                    "ajaxLoader": '{% filter escapejs %}{% include 'permission/mustache_templates/ajax-loader.mst.html' %}{% endfilter %}',
+                },
+
+
+                addUserUsernameInput: $("#add-user-username-input"),
+                addRoleNameInput: $("#add-role-name-input"),
+                buttons: {
+                    addRoleDiscard: $("#add-role-discard-button"),
+                    addRoleSave: $("#add-role-save-button"),
+                    editRoleSave: $("#edit-role-save-button"),
+                    editRoleDiscard: $("#edit-role-discard-button"),
+                    addUserToSpace: $("#add-user-button")
+                },
+
+                ajaxLoadersImages: {
+                    role: $("#role-ajax-loader-img"),
+                    addUser: $("#add-user-ajax-loader-img"),
+                    usersPanel: $("#users-panel-ajax-loader-img"),
+                    projectsPanel: $("#projects-panel-ajax-loader-img")
+                },
+            });
+
+            app.init();
+        });
+
+    </script>
+
+{% endblock %}

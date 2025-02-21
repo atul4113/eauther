@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load apptags %}
+{% load spaces %}
+{% load corporate %}
+
+{% block content %}
+
+{% include "common/messages/display_messages.html" %}
+<h1 class="page_header">Units for [{{project}}]</h1>
+<div class="main clear" style="padding-top: 0"></div>
+<div id="toolbar">
+        {% button 'Back' 'window.history.back();' %}
+		<form method="post" action="/corporate/projects/add{% if project %}/{{ project.id }}{% endif %}" name="add">
+			<table style="margin:0px 10px">
+				<tr>
+					<td>Unit name:</td>
+					<td><input type="hidden" name="next" value="{{ request.path }}" />
+					<td><input type="text" name="title" /></td>
+					<td>{% button 'Add unit' 'document.forms["add"].submit()' %}</td>
+					<td><input type="submit" /></td>
+				</tr>
+			</table>
+		</form>
+</div>
+<div class="main clear"></div>
+	{% for space in spaces %}
+        {% if space.is_deleted %}
+        {% else %}
+            <div>
+            <h2>{{space.title}} <span class="rank">[{{space.rank}}]</span></h2>
+            <a href="/corporate/{{ space.id}}/add_subproject?project={{project.id}}">add chapter</a> |
+            <a href="/corporate/projects/{{ space.id}}/rename_section?next=/corporate/{{project.id}}/subproject">rename</a> |
+            <a href="/corporate/projects/{{ space.id}}/section_rank?next=/corporate/{{project.id}}/subproject">change rank</a> |
+            <a href="/corporate/delete/{{ space.id}}?next=/corporate/{{project.id}}/subproject&{{ token_key }}={{ token }}"  onclick="return confirm('Are you sure you want to delete category \'{{space.title}}\'?')">delete</a>
+            {% if space.kids.all.count %}
+                <div class="ajaxload" data-space="{{ space.id }}" >
+                    <div style="margin: 10px">Loading...</div>
+                </div>
+            {% endif %}
+            </div>
+            <div class="main clear"></div>
+        {% endif %}
+	{% endfor %}
+{% endblock %}
+
+{% block head %}
+<script type="text/javascript">
+    $(document).ready(function(){
+		$('.ajaxload').each(function(){
+			var $this=$(this);
+			var id = $this.attr('data-space');
+            $.ajax({
+                url: '/corporate/{{ project.id }}/ajax_subprojects',
+                type: "GET",
+                data: {
+                    "id": id,
+                    "{{ token_key }}": "{{ token }}"
+                },
+                "success": function(response){
+                    $this.html(response);
+                }
+            });
+		})
+	})
+</script>
+{% endblock %}
