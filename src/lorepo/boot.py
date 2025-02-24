@@ -2,11 +2,10 @@ import sys
 from os.path import dirname, abspath, join, exists
 
 PROJECT_DIR = dirname(dirname(abspath(__file__)))
-print(PROJECT_DIR)
 
 SITEPACKAGES_DIR = join(PROJECT_DIR, "sitepackages")
 APPENGINE_DIR = join(SITEPACKAGES_DIR, "google_appengine")
-print(APPENGINE_DIR)
+
 
 def fix_path():
     if exists(APPENGINE_DIR) and APPENGINE_DIR not in sys.path:

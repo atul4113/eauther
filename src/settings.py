@@ -7,16 +7,16 @@ from .lorepo.app_identity import mock_get_application_id
 from .shared_settings import SHARED_SETTINGS
 import logging
 from lxml import etree
-import environ
-
-env = environ.Env()
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-print("BASE_DIR", BASE_DIR)
-environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
-file_yaml = env("", default="")
-
-print("DJANGAE_APP_YAML_LOCATION")
-print(os.environ.get("DJANGAE_APP_YAML_LOCATION"), "21212")
+# import environ
+#
+# env = environ.Env()
+# BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# print("BASE_DIR", BASE_DIR)
+# environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
+# file_yaml = env("", default="")
+#
+# print("DJANGAE_APP_YAML_LOCATION")
+# print(os.environ.get("DJANGAE_APP_YAML_LOCATION"), "21212")
 
 APPLICATION_ID = mock_get_application_id()
 
