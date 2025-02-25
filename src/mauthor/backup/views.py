@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 import json
+import os
 import re
 import io
 import xml.dom.minidom
-from google.appengine.api.modules import get_current_module_name
-
+from google.cloud import storage
+from django.core.files.uploadedfile import UploadedFile
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponseRedirect, HttpResponse,\
@@ -17,7 +18,6 @@ from lorepo.filestorage.forms import UploadForm
 from mauthor.backup.models import ProjectBackup, ExportedPackage
 from xml.etree import ElementTree
 from zipfile import ZipFile
-from google.appengine.ext import blobstore
 from lorepo.corporate.signals import company_structure_changed
 from lorepo.mycontent.models import Content
 import datetime
@@ -145,7 +145,7 @@ def backup_structure(request, project_id, project_backup_id, user_id):
         project_backup = ProjectBackup.objects.get(pk=project_backup_id)
         project_backup.backup = backup
         project_backup.save()
-        trigger_backend_task('/backup/notify/%s/%s/%s' % (project_backup.id, user.id, project.id), name='summary_%s' % project_backup.id, target=get_versioned_module(get_current_module_name()), queue_name='backup')
+        trigger_backend_task('/backup/notify/%s/%s/%s' % (project_backup.id, user.id, project.id), name='summary_%s' % project_backup.id, target=get_versioned_module(module_name = os.getenv('GAE_MODULE_NAME')), queue_name='backup')
     except Exception:
         import traceback
         send_failure_notification(user_id, traceback.format_exc(), project_id)
@@ -227,13 +227,30 @@ def _save_zip(my_zip, stream, unique_id):
     store_file_from_stream(file_name, 'application/zip', stream)
     return file_name
 
-def _store_backup(file_name, with_save=True):
+def _store_backup(file_name, bucket_name='your_bucket_name', with_save=True):
+    # Initialize a GCS client
+    client = storage.Client()
+
+    # Get the bucket object
+    bucket = client.get_bucket(bucket_name)
+
+    # Create a blob (file object) from the bucket
+    blob = bucket.blob(file_name)
+
+    # Upload the file to GCS
+    # Assuming the file exists on local disk (you can replace this with your actual file object)
+    with open(file_name, 'rb') as file:
+        blob.upload_from_file(file)
+
+    # Create an UploadedFile object to return
     upfile = UploadedFile()
-    upfile.file = str(blobstore.create_gs_key('/gs' + file_name))
-    upfile.path = file_name
+    upfile.name = file_name
+    upfile.file = blob
     upfile.content_type = 'application/zip'
+
     if with_save:
-        upfile.save()
+        upfile.save()  # This would save the object in your Django model or wherever it's required.
+
     return upfile
 
 @backend

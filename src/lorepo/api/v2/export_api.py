@@ -1,5 +1,5 @@
 import json
-from django.conf.urls import url
+from django.urls import path
 from django.utils.decorators import method_decorator
 from libraries.utility.environment import  get_versioned_module
 from libraries.utility.queues import trigger_backend_task
@@ -8,7 +8,7 @@ from lorepo.exchange.serializers import PayloadExportSerializer
 from lorepo.permission.decorators import has_space_access
 from lorepo.permission.models import Permission
 from lorepo.permission.util import get_company_for_user
-from rest_framework import views
+from drf_spectacular import views
 from rest_framework.exceptions import ValidationError
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -99,8 +99,7 @@ class ExportView(views.APIView):
 #
 #     def get(self, request, *args, **kwargs):
 #         return Response({})
-
 urlpatterns = [
-    url(r'^lesson/(?P<content_id>\d+)$', ExportView.as_view(), name='export'),
-    # url(r'^callback_test$', ExportTestView.as_view(), name='callback_test'),
-    ]
+    path('lesson/<int:content_id>/', ExportView.as_view(), name='export'),
+    # path('callback_test/', ExportTestView.as_view(), name='callback_test'),
+]

@@ -29,7 +29,7 @@ class Space(models.Model):
     contents_count = models.IntegerField(default=0)
     include_contents_in_editor = models.BooleanField(default=False)
     path = ListField(models.IntegerField()) # this is list of integers, not strings like in Content.spaces
-    is_test = models.NullBooleanField(null=True)
+    is_test = models.BooleanField(null=True, blank=True)
 
     def __str__(self):
         return str(self).encode('utf-8')

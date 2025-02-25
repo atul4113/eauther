@@ -27,10 +27,11 @@ class SupportForm(MathCaptchaForm):
     email = forms.EmailField()
     message = forms.CharField(widget=forms.Textarea)
     
+
 class ContactForm(SupportForm):
     l = sorted(COUNTRY_CHOICES, key=lambda e: e[1])
     l.insert(0, ('', '-- Select country --'))
-    country = forms.ChoiceField(l)
+    country = forms.ChoiceField(choices=l)  # Pass choices as a keyword argument
 
 
 class OrderForm(forms.Form):
@@ -40,9 +41,9 @@ class OrderForm(forms.Form):
     message = forms.CharField(widget=forms.Textarea, required=False)
     l = sorted(COUNTRY_CHOICES, key=lambda e: e[1])
     l.insert(0, ('', 'Select country'))
-    country = forms.ChoiceField(l)
+    country = forms.ChoiceField(choices=l)
     u = USERS_CHOICES
-    users = forms.ChoiceField(u, required=True)
+    users = forms.ChoiceField(choices=u, required=True)
     price = forms.CharField(required=False)
     captcha = ReCaptchaField()
 

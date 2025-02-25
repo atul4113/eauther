@@ -1,68 +1,30 @@
-"""
-URLConf for Django user registration and authentication.
+# URLConf for Django user registration and authentication.
 
-If the default behavior of the registration views is acceptable to
-you, simply use a line like this in your root URLConf to set up the
-default URLs for registration::
-
-    (r'^accounts/', include('registration.urls')),
-
-This will also automatically set up the views in
-``django.contrib.auth`` at sensible default locations.
-
-But if you'd like to customize the behavior (e.g., by passing extra
-arguments to the various views) or split up the URLs, feel free to set
-up your own URL patterns for these views instead. If you do, it's a
-good idea to use the names ``registration_activate``,
-``registration_complete`` and ``registration_register`` for the
-various steps of the user-signup process.
-
-"""
-
-
-from django.conf.urls import *
+from django.urls import re_path, path
 from django.contrib.auth import views as auth_views
 from django.views.generic import TemplateView
+from registration.views import activate, register
+from remember_me.views import remember_me_login  # Import the actual function
 
-from registration.views import activate
-from registration.views import register
+urlpatterns = [
+    # Activation keys get matched by \w+ instead of the more specific
+    # [a-fA-F0-9]{40} because a bad activation key should still get to the view;
+    # that way it can return a sensible "invalid key" message instead of a confusing 404.
+    re_path(r'^activate/(?P<activation_key>\w+)/$', activate, name='registration_activate'),
 
+    # Custom login view (if necessary)
+    path('login/', remember_me_login, name='remember_me_login'),
 
-urlpatterns = patterns('',
-                       # Activation keys get matched by \w+ instead of the more specific
-                       # [a-fA-F0-9]{40} because a bad activation key should still get to the view;
-                       # that way it can return a sensible "invalid key" message instead of a
-                       # confusing 404.
-                       url(r'^activate/(?P<activation_key>\w+)/$',
-                           activate,
-                           name='registration_activate'),
-                       url( r'^login/$', 'remember_me.views.remember_me_login', name = 'remember_me_login' ),
-                       url(r'^logout/$',
-                           auth_views.logout,
-                           {'template_name': 'registration/logout.html'},
-                           name='auth_logout'),
-                       url(r'^password/change/$',
-                           auth_views.password_change,
-                           name='auth_password_change'),
-                       url(r'^password/change/done/$',
-                           auth_views.password_change_done,
-                           name='password_change_done'),
-                       url(r'^password/reset/$',
-                           auth_views.password_reset,
-                           name='password_reset'),
-                       url(r'^password/reset/confirm/(?P<uidb64>[0-9A-Za-z]+)-(?P<token>.+)/$',
-                           auth_views.password_reset_confirm,
-                           name='password_reset_confirm'),
-                       url(r'^password/reset/complete/$',
-                           auth_views.password_reset_complete,
-                           name='password_reset_complete'),
-                       url(r'^password/reset/done/$',
-                           auth_views.password_reset_done,
-                           name='password_reset_done'),
-                       url(r'^register/$',
-                           register,
-                           name='registration_register'),
-                       url(r'^register/complete/$',
-                           TemplateView.as_view(template_name='registration/registration_complete.html'),
-                           name='registration_complete'),
-                       )
+    # Auth views (logout, password change, reset, etc.)
+    path('logout/', auth_views.LogoutView.as_view(template_name='registration/logout.html'), name='auth_logout'),
+    path('password/change/', auth_views.PasswordChangeView.as_view(), name='auth_password_change'),
+    path('password/change/done/', auth_views.PasswordChangeDoneView.as_view(), name='password_change_done'),
+    path('password/reset/', auth_views.PasswordResetView.as_view(), name='password_reset'),
+    re_path(r'^password/reset/confirm/(?P<uidb64>[0-9A-Za-z]+)-(?P<token>.+)/$', auth_views.PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
+    path('password/reset/complete/', auth_views.PasswordResetCompleteView.as_view(), name='password_reset_complete'),
+    path('password/reset/done/', auth_views.PasswordResetDoneView.as_view(), name='password_reset_done'),
+
+    # Registration views
+    path('register/', register, name='registration_register'),
+    path('register/complete/', TemplateView.as_view(template_name='registration/registration_complete.html'), name='registration_complete'),
+]

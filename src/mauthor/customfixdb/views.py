@@ -2,7 +2,6 @@ from django.contrib import messages
 from django.shortcuts import render
 from django.contrib.auth.models import User
 from django.http import HttpResponse
-from libraries.utility.cursors import set_cursor, get_cursor
 from libraries.utility.decorators import backend
 from libraries.utility.helpers import get_object_or_none
 from libraries.utility.queues import trigger_backend_task
@@ -16,7 +15,14 @@ import settings
 FIXDB_QUEUE = 'search'
 FIXDB_MODULE = 'backup'
 
+def get_cursor(self):
+    """Returns the current cursor (page number)."""
+    return self._cursor
 
+
+def set_cursor(self, cursor):
+    """Sets the cursor (page number)."""
+    self._cursor = int(cursor)
 @backend
 def generic_async(request, user_id, page_size, instance_name, cursor=None, task_number = 0):
     user = get_object_or_none(User, pk=user_id)

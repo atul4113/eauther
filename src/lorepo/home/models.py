@@ -32,7 +32,7 @@ class WebSite(models.Model):
     uploaded_zip = models.ForeignKey(UploadedFile, null=True, on_delete=models.DO_NOTHING)
     version = models.CharField(max_length=200, null=False, choices=[('Version 1', 'v1'), ('Version 2', 'v2')])
     status = models.CharField(max_length=50, default=Status.EMPTY)
-    language = models.ForeignKey(SupportedLanguages, null=True)
+    language = models.ForeignKey(SupportedLanguages, null=True, on_delete=models.CASCADE)
 
     @property
     def bucket_manager(self):

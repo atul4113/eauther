@@ -2,9 +2,11 @@ from django.http import HttpResponseBadRequest
 from rest_framework.request import Request
 from rest_framework import generics
 from rest_framework_jwt.settings import api_settings
-from django.conf.urls import patterns, url, include
+from django.urls import path
 from rest_framework.response import Response
 from rest_framework.authentication import SessionAuthentication
+from rest_framework_jwt.views import obtain_jwt_token
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
 jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER
@@ -34,11 +36,9 @@ jwt_response_payload_handler = api_settings.JWT_RESPONSE_PAYLOAD_HANDLER
       ]
     }
 """
-urlpatterns = patterns('rest_framework_jwt.views',
-    url(r'^obtain-token/', 'obtain_jwt_token'),
-)
-
-
+urlpatterns = [
+    path('obtain-token/', obtain_jwt_token),
+]
 """
 @api {get} /api/v2/jwt/refresh_jwt_token/ /jwt/refresh_jwt_token/
 @apiName Refresh token
@@ -67,35 +67,31 @@ urlpatterns = patterns('rest_framework_jwt.views',
 
 
 
-urlpatterns += patterns('rest_framework_jwt.views',
-        url(r'^refresh-token/', 'refresh_jwt_token'),
-)
-
+urlpatterns = [
+    path('refresh-token/', TokenRefreshView.as_view(), name='token_refresh'),
+]
 
 class SessionToken(generics.GenericAPIView):
     """
     @api {get} /api/v2/jwt/session_token /jwt/session_token
     @apiName Session token
-    @apiDescription get session token
+    @apiDescription Get a session token
     @apiGroup Token
-    @apiParam {String} token (required) - token what status is expired
+    @apiParam {String} token (required) - token that has expired
 
     @apiSuccessExample {json} Success-Response:
       HTTP/1.1 200 OK
         {
-          token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo2MDU0OTc2MTc0NDI0MDY0LCJlbWFpbCI6Im1pY2hhbC56YXJ6eWNraUBzb2x3aXQuY29tIiwidXNlcm5hbWUiOiJhIiwib3JpZ19pYXQiOjE0NjkwMjg5MjUsImV4cCI6MTQ2OTAzMTkyNX0.rid7lFBVSEME7AQxaHM55M61G2V-lyJ69JgIsv5SJg0"
+          "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9..."
         }
 
     @apiErrorExample {json} Error-Response:
       HTTP/1.1 400 Bad Request
         {
-          non_field_errors: [
-            "Unable to login with provided credentials."
-          ]
+          "non_field_errors": ["Unable to login with provided credentials."]
         }
     """
     authentication_classes = (SessionAuthentication,)
-    box_type = None
 
     def get(self, request):
         if not request.user.is_authenticated():
@@ -107,9 +103,8 @@ class SessionToken(generics.GenericAPIView):
         return Response(response_data)
 
 
-urlpatterns += [
-        url(r'^session_token$', SessionToken.as_view(), name='session_token')
-    ]
-
-
-
+urlpatterns = [
+    path('obtain-token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),  # ✅ Uses SimpleJWT
+    path('refresh-token/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('session_token/', SessionToken.as_view(), name='session_token'),
+]

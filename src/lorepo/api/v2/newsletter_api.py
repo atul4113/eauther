@@ -1,9 +1,9 @@
 import time
-from django.conf.urls import url
+from django.urls import path
 
 from lorepo.newsletter.serializers import NewsletterGETSerializer
 from lorepo.newsletter.utils import NewsletterEmailProcessor
-from rest_framework import views
+from drf_spectacular import views
 from rest_framework.permissions import IsAdminUser
 from rest_framework.response import Response
 import libraries.utility.cacheproxy as cache
@@ -60,5 +60,5 @@ class EmailsView(views.APIView):
 
 
 urlpatterns = [
-    url(r'^emails$', EmailsView.as_view()),
-    ]
+    path('emails', EmailsView.as_view(), name='emails'),
+]

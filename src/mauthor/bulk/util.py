@@ -1,6 +1,5 @@
 import json
-
-from google.appengine.api.modules import get_current_module_name
+import os
 
 from django.contrib.auth.models import User
 from django.views.generic import TemplateView
@@ -33,7 +32,7 @@ class BulkUpdate(TemplateView):
 
     def dispatch(self, request, *args, **kwargs):
         if self.run_context == "backend":
-            if get_current_module_name() == 'default':
+            if os.getenv('GAE_MODULE_NAME') == 'default':
                 if not request.META['SERVER_SOFTWARE'].startswith('Development'):
                     return HttpResponseNotFound()
             request.user = get_object_or_404(User, pk = kwargs['user_id'])

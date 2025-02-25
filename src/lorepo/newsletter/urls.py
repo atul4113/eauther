@@ -1,7 +1,7 @@
-from django.conf.urls import patterns
+from django.urls import path
+from lorepo.newsletter.views import index, get_emails_async
 
-
-urlpatterns = patterns('lorepo.newsletter.views',
-    (r'^$', 'index'),
-    (r'^get_emails_async/(?P<newsletter_email_id>\d+)$', 'get_emails_async'),
-   )
+urlpatterns = [
+    path('', index),
+    path('get_emails_async/<int:newsletter_email_id>/', get_emails_async),
+]

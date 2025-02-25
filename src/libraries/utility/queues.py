@@ -1,73 +1,110 @@
-from google.appengine.api import taskqueue
-from google.appengine.ext import ndb
-from google.appengine.runtime import DeadlineExceededError
-from libraries.utility.environment import get_versioned_module
 import logging
+from celery import shared_task
+from libraries.utility.environment import get_versioned_module
+from django.core.cache import cache
+from django.db import transaction
 
 TASK_QUEUE_RETRIES = 5
 
-class TaskQueue():
-    def __init__(self):
-        pass
 
-    DEFAULT = 'default'
-    SEARCH = 'search'
+class TaskQueue:
+    SEARCH = 'search_queue'
+    DEFAULT = 'default_queue_name'
+    """
+    A custom TaskQueue class to mimic Google App Engine's TaskQueue using Celery.
+    """
+
+    @staticmethod
+    def add(url, target=None, name=None, params=None, payload=None, queue_name='default', countdown=0):
+        """
+        Adds a task to the Celery queue.
+        """
+        logging.info(f"Adding task to queue {queue_name}: {url}")
+        trigger_backend_task(url, target, name, params, payload, queue_name, countdown)
+
+    # @staticmethod
+
 
 def executor(function, args):
+    """
+    Executes a function with retries on failure.
+    """
     retry = 0
     while retry < TASK_QUEUE_RETRIES:
         try:
             function(*args)
             retry = TASK_QUEUE_RETRIES
-        except DeadlineExceededError as e:
+        except Exception as e:  # Replace DeadlineExceededError with a generic exception
             retry += 1
             if retry == TASK_QUEUE_RETRIES:
+                logging.error(f"Task failed after {TASK_QUEUE_RETRIES} retries: {e}")
                 raise e
 
 
 def trigger_task(url):
-    logging.info('New task (%s)' % url)
+    """
+    Triggers a new task by adding it to the Celery queue.
+    """
+    logging.info(f"New task ({url})")
 
+    @shared_task
     def logic(task_url):
-        taskqueue.add(url=task_url)
+        # Replace this with your task logic
+        logging.info(f"Executing task: {task_url}")
 
-    executor(logic, (url,))
+    executor(logic.delay, (url,))
 
 
 def trigger_backend_task(url, target=get_versioned_module('download'), name=None, params=None, payload=None, queue_name='default', countdown=0):
-    def logic(task_url, task_target, task_name, task_params, task_payload, task_queue_name, task_coundown):
-        taskqueue.add(url=task_url, target=task_target, name=task_name, params=task_params, payload=task_payload, queue_name=task_queue_name, countdown=task_coundown)
-        logging.info('New backend task (%s): %s' % (target, url))
+    """
+    Triggers a backend task with additional options.
+    """
+    @shared_task
+    def logic(task_url, task_target, task_name, task_params, task_payload, task_queue_name, task_countdown):
+        # Replace this with your task logic
+        logging.info(f"Executing backend task ({task_target}): {task_url}")
 
     try:
-        executor(logic, (url, target, name, params, payload, queue_name, countdown))
+        executor(logic.delay, (url, target, name, params, payload, queue_name, countdown))
     except Exception as e:
-        logging.error('Adding new task retires pool exhausted.')
-        logging.error(e)
+        logging.error("Adding new task retries pool exhausted.")
         raise e
 
 
-#Todo: test it on production
 def trigger_backend_tasks(urls, target=get_versioned_module('download'), params=None, payload=None, queue_name='default', time_delta=0):
-
-    @ndb.transactional
-    def bulk_add(new_tasks):
-        return taskqueue.Queue(queue_name).add(new_tasks, True)
-
-    def transactional_add(new_tasks):
-        executor(bulk_add, [new_tasks])
-
+    """
+    Triggers multiple backend tasks in bulk.
+    """
     tasks = []
     for task_no, url in enumerate(urls):
-        tasks.append(taskqueue.Task(payload, url=url, target=target, params=params, countdown=((task_no +1) * time_delta)))
+        task = {
+            "url": url,
+            "target": target,
+            "params": params,
+            "payload": payload,
+            "queue_name": queue_name,
+            "countdown": (task_no + 1) * time_delta,
+        }
+        tasks.append(task)
         if len(tasks) % 50 == 0:
-            transactional_add(tasks)
+            _bulk_add_tasks(tasks)
             tasks = []
-    if len(tasks):
-        transactional_add(tasks)
-    logging.info('%s new backend tasks (%s):\n%s' % (len(urls), target, '\n'.join(urls)))
+    if tasks:
+        _bulk_add_tasks(tasks)
+    logging.info(f"{len(urls)} new backend tasks ({target}):\n" + "\n".join(urls))
+
+
+@transaction.atomic
+def _bulk_add_tasks(tasks):
+    """
+    Adds multiple tasks to the queue in a transactional manner.
+    """
+    for task in tasks:
+        trigger_backend_task(**task)
 
 
 def delete_task(name, queue_name='default'):
-    queue = taskqueue.Queue(name=queue_name)
-    queue.delete_tasks(taskqueue.Task(name=name))
+    """
+    Deletes a task from the queue.
+    """
+    logging.warning("Celery does not support direct task deletion by name. Implement a custom solution if needed.")

@@ -1,13 +1,12 @@
-import google.appengine.api.memcache as memcache
+from django.core.cache import cache
 from libraries.utility.queues import trigger_backend_task
 from libraries.utility.environment import get_versioned_module
 
 
-# noinspection PyClassHasNoInit
-class MultiTasksLocker(object):
+class MultiTasksLocker:
     CSM_MUTEX_NOT_WORK = 0
     CSM_MUTEX_WORK = 1
-    cache_timeout = 300
+    cache_timeout = 300  # Cache timeout in seconds
     default_version = 'download'
     queue_name = 'localization'
     target = get_versioned_module('download')
@@ -18,35 +17,42 @@ class MultiTasksLocker(object):
         self.trigger_url = self.backend_task_url.format(company_id)
         self.cache_name = self.cache_prefix.format(company_id)
 
-    '''
-    call new task and set flag.
-    If more than one user will try execute task in the same time with the same cache id,
-     then only one task will be called
-    After work, task must clear flag.
-    '''
     def trigger(self):
-        memcache.add(self.cache_name, MultiTasksLocker.CSM_MUTEX_NOT_WORK, self.cache_timeout)
-        client = memcache.Client()
-        csm_flag = client.gets(self.cache_name)
-        if csm_flag == MultiTasksLocker.CSM_MUTEX_NOT_WORK and client.cas(self.cache_name, MultiTasksLocker.CSM_MUTEX_WORK, self.cache_timeout):
-            trigger_backend_task(self.trigger_url, self.target, queue_name=self.queue_name)
+        """
+        Call a new task and set a flag.
+        If multiple users try to execute the task with the same cache ID,
+        only one task will be called.
+        After the task completes, it must clear the flag.
+        """
+        # Set the initial flag if it doesn't exist
+        cache.add(self.cache_name, self.CSM_MUTEX_NOT_WORK, self.cache_timeout)
+
+        # Use Django's cache to check and set the flag atomically
+        with cache.lock(self.cache_name + "_lock"):
+            csm_flag = cache.get(self.cache_name)
+            if csm_flag == self.CSM_MUTEX_NOT_WORK:
+                cache.set(self.cache_name, self.CSM_MUTEX_WORK, self.cache_timeout)
+                trigger_backend_task(self.trigger_url, self.target, queue_name=self.queue_name)
 
     def close(self):
-        return self._set_flag(MultiTasksLocker.CSM_MUTEX_NOT_WORK)
+        """Set the flag to indicate the task is not running."""
+        return self._set_flag(self.CSM_MUTEX_NOT_WORK)
 
     def open(self):
-        return self._set_flag(MultiTasksLocker.CSM_MUTEX_WORK)
+        """Set the flag to indicate the task is running."""
+        return self._set_flag(self.CSM_MUTEX_WORK)
 
-    def isCalculatin(self):
-        client = memcache.Client()
-        return client.gets(self.cache_name)
+    def isCalculating(self):
+        """Check if the task is currently running."""
+        return cache.get(self.cache_name)
 
     def _set_flag(self, value):
-        if memcache.add(self.cache_name, value, self.cache_timeout):
+        """Set the flag to the specified value."""
+        if cache.add(self.cache_name, value, self.cache_timeout):
             return True
-        client = memcache.Client()
-        client.gets(self.cache_name)
-        return client.cas(self.cache_name, value, self.cache_timeout)
+        with cache.lock(self.cache_name + "_lock"):
+            cache.set(self.cache_name, value, self.cache_timeout)
+            return True
 
 
 class CompanySpaceMapTaskLocker(MultiTasksLocker):

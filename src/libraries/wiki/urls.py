@@ -1,29 +1,32 @@
-from django.conf.urls import patterns
+# libraries/wiki/urls.py
 
+from django.urls import re_path
+from libraries.wiki import views  # Regular views
+from libraries.wiki.api import page, section, private_addon  # API views
 
-urlpatterns = patterns('libraries.wiki.views',
-    (r'^$', 'index'),
-    (r'^(?P<lang_code>[A-Za-z]{2})/{0,1}$', 'index'),
-    (r'^add/{0,1}$', 'addPage'),
-    (r'^page$', 'index'),
-    (r'^page/index$', 'pageIndex'),
-    (r'^page/(?P<url>.+)$', 'index'),
-    (r'^(?P<lang_code>[A-Za-z]{2})/page/(?P<url>.+)$', 'index'),
-    (r'^(?P<lang_code>[A-Za-z]{2})/(?P<highlight_word>.+)/page/(?P<url>.+)$', 'index'),
-    (r'^edit/(?P<page_id>\d+)$', 'edit'),
-    (r'^(?P<lang_code>[A-Za-z]{2})/edit/(?P<page_id>\d+)$', 'edit'),
-    (r'^upload/{0,1}$', 'upload'),
-    (r'^file/{0,1}$', 'add_file'),
-    (r'^preview$', 'preview_page'),
-    (r'^table_of_contents', 'table_of_contents'),
-    (r'^remove_from_table_of_contents', 'remove_from_toc'),
-    (r'^edit_table_of_contents', 'edit_toc'),
-    (r'^delete/(?P<page_id>\d+)$', 'delete'),
-    (r'^fixdb_reload_wiki', 'fixdb_reload_wiki'),
-)
+urlpatterns = [
+    # Regular views
+    re_path(r'^$', views.index),  # Homepage for wiki
+    re_path(r'^(?P<lang_code>[A-Za-z]{2})/{0,1}$', views.index),  # Language-specific homepage
+    re_path(r'^add/{0,1}$', views.addPage),  # Add page view
+    re_path(r'^page$', views.index),  # Page listing
+    re_path(r'^page/index$', views.pageIndex),  # Specific page index
+    re_path(r'^page/(?P<url>.+)$', views.index),  # Wiki page view
+    re_path(r'^(?P<lang_code>[A-Za-z]{2})/page/(?P<url>.+)$', views.index),  # Language-specific page view
+    re_path(r'^(?P<lang_code>[A-Za-z]{2})/(?P<highlight_word>.+)/page/(?P<url>.+)$', views.index),  # Highlighted page view
+    re_path(r'^edit/(?P<page_id>\d+)$', views.edit),  # Edit page view
+    re_path(r'^(?P<lang_code>[A-Za-z]{2})/edit/(?P<page_id>\d+)$', views.edit),  # Edit page with language code
+    re_path(r'^upload/{0,1}$', views.upload),  # Upload page view
+    re_path(r'^file/{0,1}$', views.add_file),  # File upload view
+    re_path(r'^preview$', views.preview_page),  # Preview page view
+    re_path(r'^table_of_contents$', views.table_of_contents),  # Table of contents view
+    re_path(r'^remove_from_table_of_contents$', views.remove_from_toc),  # Remove page from TOC
+    re_path(r'^edit_table_of_contents$', views.edit_toc),  # Edit TOC view
+    re_path(r'^delete/(?P<page_id>\d+)$', views.delete),  # Delete page view
+    re_path(r'^fixdb_reload_wiki$', views.fixdb_reload_wiki),  # Reload wiki from DB
 
-urlpatterns += patterns('libraries.wiki.api',
-    (r'^api/(?P<lang_code>[A-Za-z]{2})/page/(?P<url>.+)$', 'page'),
-    (r'^api/(?P<lang_code>[A-Za-z]{2})/section/(?P<url>.+)$', 'section'),
-    (r'^api/private/(?P<content_id>\d+)$', 'private_addon')
-)
+    # API Views (adjusted to match your API requirements)
+    re_path(r'^api/(?P<lang_code>[A-Za-z]{2})/page/(?P<url>.+)$', page),  # Page API
+    re_path(r'^api/(?P<lang_code>[A-Za-z]{2})/section/(?P<url>.+)$', section),  # Section API
+    re_path(r'^api/private/(?P<content_id>\d+)$', private_addon),  # Private Addon API
+]

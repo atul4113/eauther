@@ -1,8 +1,8 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.core.files.storage import default_storage
 from django.http import HttpResponseRedirect, HttpResponse
-from django.shortcuts import render, get_object_or_404
-from google.appengine.ext import blobstore
+from django.shortcuts import render, get_object_or_404, redirect
 from libraries.utility.decorators import backend
 from libraries.utility.queues import trigger_backend_task
 from .forms import PDFUploadForm
@@ -17,38 +17,56 @@ MAX_PDF_SIZE = 53 * 1024 * 1024
 MAX_PAGES = 100
 
 
+
+
 @login_required
 def upload(request, space_id, pdf_id=None):
+    """
+    Handles PDF file uploads and triggers a background task for processing.
+    """
     form = None
     if request.method == 'POST':
         form = PDFUploadForm(request.POST, request.FILES)
         if form.is_valid():
-            model = form.save(False)
+            # Save the uploaded file to the storage backend
+            uploaded_file = request.FILES['file']
+            file_name = default_storage.save(f'pdf_uploads/{uploaded_file.name}', uploaded_file)
 
+            # Create a new PDFModel instance
+            model = form.save(commit=False)
             model.owner = request.user
-            model.content_type = request.FILES['file'].content_type
-            model.filename = request.FILES['file'].name
+            model.content_type = uploaded_file.content_type
+            model.filename = uploaded_file.name
+            model.file_path = file_name  # Store the file path in the model
             model.save()
 
+            # Trigger a background task for PDF processing
             parameters = {
-                "file_name": request.FILES['file'].name,
+                "file_name": uploaded_file.name,
                 "space_id": space_id,
                 "user_id": request.user.id,
-                "file_id": model.id
+                "file_id": model.id,
+                "file_path": file_name,  # Pass the file path to the background task
             }
+            trigger_backend_task(
+                '/pdfimport/upload/check_pdf',
+                target=get_versioned_module('download'),
+                queue_name='download',
+                params=parameters
+            )
 
-            trigger_backend_task('/pdfimport/upload/check_pdf', target=get_versioned_module('download'), queue_name='download', params=parameters)
-            messages.info(request, 'PDF import will run in background. You will be notified by email about the result')
-            return HttpResponseRedirect('/mycontent')
+            # Notify the user
+            messages.info(request, 'PDF import will run in the background. You will be notified by email about the result.')
+            return redirect('/mycontent')
 
+    # If not a POST request, initialize the form
     if form is None:
         form = PDFUploadForm()
 
-    upload_url = blobstore.create_upload_url(request.path,max_bytes_total=MAX_PDF_SIZE)
+    # Render the upload template
     return render(request, 'pdfimport/upload.html', {
-        'upload_url' : upload_url,
-        'form' : form,
-        'pdf_id': pdf_id
+        'form': form,
+        'pdf_id': pdf_id,
     })
 
 

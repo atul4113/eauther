@@ -6,20 +6,14 @@ import datetime
 
 import zlib
 
-from django.contrib.auth.decorators import user_passes_test, login_required
 from django.shortcuts import render, get_object_or_404
-from django.core.paginator import Paginator
 from django.http import HttpResponse, \
     HttpResponsePermanentRedirect, HttpResponseRedirect
 from django.template.loader import render_to_string
-from google.appengine._internal.django.utils.datastructures import DotExpandedDict
 from itertools import islice
 
 import settings
 from libraries.utility.decorators import backend
-from libraries.utility.queues import trigger_backend_task
-from libraries.utility.redirect import get_redirect_url
-from lorepo.filestorage.models import UploadedFile
 from lorepo.public.util import send_message
 from lorepo.translations.utils import save_translated_image_to_cache, change_session_lang, \
     get_sys_label, get_user_lang, delete_cache_translated_image, get_static_language, get_safely_translation, \

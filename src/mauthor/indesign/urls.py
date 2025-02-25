@@ -1,9 +1,9 @@
-from django.conf.urls import patterns, url
+from django.urls import path
+from mauthor.indesign.views import upload, editor, create_lesson
 
-
-urlpatterns = patterns('mauthor.indesign.views',
-    (r'^upload$', 'upload'),
-    (r'^upload/(?P<space_id>\d+)$', 'upload'),
-    (r'^editor/(?P<file_id>\d+)$', 'editor'),
-    (r'^create_lesson$', 'create_lesson'),
-)
+urlpatterns = [
+    path('upload/', upload),
+    path('upload/<int:space_id>/', upload),
+    path('editor/<int:file_id>/', editor),
+    path('create_lesson/', create_lesson),
+]

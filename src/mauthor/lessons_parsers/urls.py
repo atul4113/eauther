@@ -1,14 +1,20 @@
-from django.conf.urls import patterns, url
-from mauthor.lessons_parsers.views import ChangePropertiesView, RemoveDescriptorsView
-
-urlpatterns = patterns('mauthor.lessons_parsers.views',
-    url(r'^change_properties/(?P<space_id>\d+)$', ChangePropertiesView.as_view()),
-    (r'^fix_properties_async/(?P<user_id>\d+)/(?P<space_id>\d+)$', 'fix_properties_async'),
-    url(r'^remove_descriptors/(?P<space_id>\d+)$', RemoveDescriptorsView.as_view()),
-    (r'^remove_descriptors_async/(?P<user_id>\d+)/(?P<space_id>\d+)$', 'remove_descriptors_async')
+from django.urls import path
+from mauthor.lessons_parsers.views import (
+    ChangePropertiesView,
+    RemoveDescriptorsView,
+    fix_properties_async,  # Import the view function
+    remove_descriptors_async,  # Import the view function
 )
+from mauthor.lessons_parsers.api import get_properties, addon_exist
 
-urlpatterns += patterns('mauthor.lessons_parsers.api',
-    (r'^get_properties', 'get_properties'),
-    (r'^addon_exist', 'addon_exist')
-)
+urlpatterns = [
+    # View URLs
+    path('change_properties/<int:space_id>/', ChangePropertiesView.as_view()),
+    path('fix_properties_async/<int:user_id>/<int:space_id>/', fix_properties_async),  # Use the imported function
+    path('remove_descriptors/<int:space_id>/', RemoveDescriptorsView.as_view()),
+    path('remove_descriptors_async/<int:user_id>/<int:space_id>/', remove_descriptors_async),  # Use the imported function
+
+    # API URLs
+    path('get_properties', get_properties),
+    path('addon_exist', addon_exist),
+]

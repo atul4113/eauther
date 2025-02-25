@@ -1,15 +1,11 @@
 from collections import OrderedDict
-
-from django.conf.urls import url
-from google.appengine.api.app_identity import get_application_id
-
+from django.urls import path
 import settings
 from libraries.utility.environment import get_app_version
 from lorepo.global_settings.models import GlobalSettings
 from lorepo.translations.models import SupportedLanguages
-from rest_framework import views
+from drf_spectacular import views
 from rest_framework.response import Response
-
 
 class SettingsView(views.APIView):
     """
@@ -41,7 +37,7 @@ class SettingsView(views.APIView):
     }
     """
     def get(self, request):
-
+        # Prepare the response data
         response_data = OrderedDict((
             ('lang', settings.USER_DEFAULT_LANG),
             ('email', settings.SERVER_EMAIL),
@@ -49,12 +45,14 @@ class SettingsView(views.APIView):
         ))
 
         response_data['version'] = get_app_version()
-        response_data['application_id'] = get_application_id()
+        # Removed get_application_id() as it is specific to App Engine
+        # You can include a fallback or custom application ID if needed
+        response_data['application_name'] = settings.APP_NAME  # or another way to get the app name
         response_data['supported_languages'] = SupportedLanguages.get_languages_json()
         response_data['referrers'] = GlobalSettings.get_cached().referrers
 
         return Response(response_data)
 
 urlpatterns = [
-    url(r'^$', SettingsView.as_view(), name='settings'),
+    path('settings', SettingsView.as_view(), name='settings'),
 ]

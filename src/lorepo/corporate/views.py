@@ -20,7 +20,6 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from lorepo.filestorage.forms import UploadForm
 from lorepo.corporate.models import CorporateLogo, CorporatePublicSpace,\
     CompanyProperties, PROJECT_ADMIN_PERMISSIONS, SpaceJob, JOB_TYPE, DemoAccountLessons
-from google.appengine.api import blobstore
 from lorepo.corporate.utils import set_uploaded_file, is_in_public_category,\
     get_spaces_path_for_corporate_content, get_contents,\
     get_publication_for_space, get_division_for_space,\
@@ -176,26 +175,46 @@ def view_addon(request, addon_id):
 @has_space_access(Permission.CORPORATE_UPLOAD_LOGO, True)
 def upload(request):
     """
-    Handler wywolywany po uploadzie obrazka dla CorporateLogo
+    Handler called after uploading an image for CorporateLogo.
     """
+    # Get the company (space) associated with the logged-in user
     space = request.user.company
-        
+
+    # Retrieve all corporate logos for the company
     corporate_logo_list = CorporateLogo.objects.filter(space=space)
-        
+
     if request.method == 'POST':
+        # Check if any files were uploaded
         if len(request.FILES) > 0:
+            # Process the uploaded file
             form = UploadForm(request.POST, request.FILES)
-            uploaded_file = form.save(False)
-            uploaded_file.filename = request.FILES['file'].name
-            set_uploaded_file(uploaded_file, request.user, corporate_logo_list, space, request.FILES['file'].content_type)
-            return HttpResponseRedirect('/corporate/upload')
+            if form.is_valid():
+                uploaded_file = form.save(commit=False)
+                uploaded_file.filename = request.FILES['file'].name  # Set the filename
+                # Associate the uploaded file with the user, company, and content type
+                set_uploaded_file(uploaded_file, request.user, corporate_logo_list, space,
+                                  request.FILES['file'].content_type)
+                # Save the file to the default storage
+                file_path = default_storage.save(uploaded_file.filename, request.FILES['file'])
+                # Optionally, save the file path to the database
+                uploaded_file.file_path = file_path
+                uploaded_file.save()
+                # Redirect to the upload page after processing
+                return HttpResponseRedirect('/corporate/upload')
+            else:
+                # Handle invalid form submission
+                return render(request, 'corporate/upload.html', {
+                    'form': form,
+                    'error': 'Invalid form submission.',
+                })
         else:
+            # If no files were uploaded, redirect to the upload page
             return HttpResponseRedirect('/corporate/upload')
     else:
-        upload_url = blobstore.create_upload_url('/corporate/upload')
+        # Initialize the upload form
         form = UploadForm()
+        # Render the upload template with the form
         return render(request, 'corporate/upload.html', {
-            'upload_url': upload_url,
             'form': form,
         })
 

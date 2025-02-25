@@ -1,5 +1,6 @@
-from django.conf.urls import patterns
+from django.urls import path
+from lorepo.home import views
 
-urlpatterns = patterns('lorepo.home.views',
-    (r'^unpack_website/(?P<website_id>\d+)$', 'unpack_website'),
-)
+urlpatterns = [
+    path('unpack_website/<int:website_id>/', views.unpack_website, name='unpack_website'),
+]

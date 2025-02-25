@@ -1,12 +1,15 @@
-from django.conf.urls import patterns, url
+from django.urls import path, re_path
+from mauthor.pdfimport.views import upload, check_pdf_async
+from mauthor.pdfimport.api import gce_callback, error_message_exception
 
-urlpatterns = patterns('mauthor.pdfimport.views',
-    (r'^upload/(?P<space_id>\d+)$', 'upload'),
-    (r'^upload/check_pdf$', 'check_pdf_async'),
+urlpatterns = [
+    # View URLs
+    path('upload/<int:space_id>/', upload),
+    path('upload/check_pdf/', check_pdf_async),
+]
 
-)
-
-urlpatterns += patterns('mauthor.pdfimport.api',
-    (r'^api/gce_callback/(?P<space_id>\d+)/(?P<user_id>\d+)/(?P<file_name>\d+)$', 'gce_callback'),
-    (r'^api/error_message/exception', 'error_message_exception'),
-)
+urlpatterns += [
+    # API URLs
+    re_path(r'^api/gce_callback/(?P<space_id>\d+)/(?P<user_id>\d+)/(?P<file_name>\d+)$', gce_callback),
+    path('api/error_message/exception/', error_message_exception),
+]

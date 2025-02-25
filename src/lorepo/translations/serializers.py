@@ -3,7 +3,6 @@ import json
 from django.shortcuts import get_object_or_404
 
 from libraries.utility.helpers import get_object_or_none
-from lorepo.filestorage.models import UploadedFile
 from lorepo.translations.images import images_labels
 from lorepo.translations.models import SupportedLanguages, ImportTable, TranslatedLang, TranslatedImages
 from rest_framework import serializers

@@ -1,10 +1,10 @@
-from django.conf.urls import url
+from .urls import path
 from django.contrib.auth.models import User
 from django.contrib.auth.tokens import default_token_generator
-from django.contrib.sites.models import get_current_site
+from django.contrib.sites.shortcuts import get_current_site
 from django.shortcuts import get_object_or_404
 from django.template import loader, Context
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 import settings
 from libraries.utility.helpers import get_object_or_none
@@ -22,7 +22,7 @@ from rest_framework.exceptions import ValidationError
 from rest_framework.fields import EmailField
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
-from rest_framework import serializers as s
+from drf_spectacular import serializers as s
 
 
 class UserData(MiddlewareMixin, views.APIView):
@@ -227,7 +227,7 @@ class ResetPassword(generics.GenericAPIView):
 
     def _split_token(self, token):
         uidb64, pass_token = token.split('-', 1)
-        uid = force_text(urlsafe_base64_decode(uidb64))
+        uid = force_str(urlsafe_base64_decode(uidb64))
         return uid, pass_token
 
     def _get_user(self, user_id):
@@ -358,11 +358,11 @@ class UserLogo(MiddlewareMixin, views.APIView):
 
 
 urlpatterns = [
-    url(r'^$', UserData.as_view(), name='user_data'),
-    url(r'^edit$', EditUser.as_view(), name='edit_user'),
-    url(r'^password$', UserPassword.as_view(), name='user_password'),
-    url(r'^remind_login$', RemindLogin.as_view(), name='remind_login$'),
-    url(r'^reset_password$', ResetPassword.as_view(), name='reset_password$'),
-    url(r'^reset_password/(?P<username>.+)?$', ResetPassword.as_view(), name='reset_password$'),
-    url(r'^logo$', UserLogo.as_view(), name='logo'),
+    path('', UserData.as_view(), name='user_data'),
+    path('edit/', EditUser.as_view(), name='edit_user'),
+    path('password/', UserPassword.as_view(), name='user_password'),
+    path('remind_login/', RemindLogin.as_view(), name='remind_login'),
+    path('reset_password/', ResetPassword.as_view(), name='reset_password'),
+    path('reset_password/<str:username>/', ResetPassword.as_view(), name='reset_password'),
+    path('logo/', UserLogo.as_view(), name='logo'),
 ]

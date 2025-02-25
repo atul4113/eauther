@@ -1,11 +1,11 @@
 from lorepo.user.models import UserLanguage
 from registration.forms import RegistrationFormTermsOfService
 from django import forms
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.utils.safestring import mark_safe
 from django.contrib.auth.models import User
 from django.contrib.auth.tokens import default_token_generator
-from django.contrib.sites.models import get_current_site
+from django.contrib.sites.shortcuts import get_current_site
 from django.template import loader
 from django.utils.http import urlsafe_base64_encode
 from django.template.context import Context

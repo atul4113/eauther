@@ -1,6 +1,7 @@
-from django.conf.urls import patterns, url, url
+from django.urls import re_path
+from mauthor.exchange_narration import views
 
-urlpatterns = patterns('mauthor.exchange_narration.views',
-    url(r'^export_to_csv/(?P<content_id>\d+)/{0,1}$', 'export', { 'export_type' : 'csv' }),
-    url(r'^export_to_html/(?P<content_id>\d+)/{0,1}$', 'export', { 'export_type' : 'html' }),
-)
+urlpatterns = [
+    re_path(r'^export_to_csv/(?P<content_id>\d+)/{0,1}$', views.export, {'export_type': 'csv'}),
+    re_path(r'^export_to_html/(?P<content_id>\d+)/{0,1}$', views.export, {'export_type': 'html'}),
+]

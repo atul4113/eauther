@@ -1,4 +1,3 @@
-from google.appengine.ext import blobstore
 from django.shortcuts import render, get_object_or_404
 from lorepo.filestorage.forms import UploadForm
 from django.http import HttpResponseRedirect
@@ -23,21 +22,31 @@ from mauthor.indesign.utils import convert_post_data
 def upload(request, space_id=None):
     if request.method == 'POST':
         form = UploadForm(request.POST, request.FILES)
-        model = form.save(False)
-        model.owner = request.user
-        model.content_type = request.FILES['file'].content_type
-        model.filename = request.FILES['file'].name
-        model.save()
-        return HttpResponseRedirect('/indesign/editor/%s?space_id=%s&next=%s' % (model.id, space_id, get_redirect_url(request)))
+
+        if form.is_valid():  # Ensure form validation
+            model = form.save(commit=False)  # Save instance without committing to DB yet
+            model.owner = request.user
+            model.content_type = request.FILES['file'].content_type
+            model.filename = request.FILES['file'].name
+            model.save()
+
+            # Generate the redirect URL using reverse
+            redirect_url = reverse('indesign:editor', args=[model.id])
+            redirect_url += f'?space_id={space_id}&next={get_redirect_url(request)}'
+
+            return redirect(redirect_url)
     else:
         form = UploadForm()
-        upload_url = blobstore.create_upload_url('/indesign/upload/%s?next=%s' % (space_id, get_redirect_url(request)))
-        return render(request, 'indesign/upload.html', {
-                         'upload_url' : upload_url,
-                         'form' : form,
-                         'space_id' : space_id,
-                         'next' : get_redirect_url(request)
-                        })
+
+    upload_url = reverse('indesign:upload', args=[space_id])  # Assuming 'upload' is a named URL
+    upload_url = f'{upload_url}?next={get_redirect_url(request)}'
+
+    return render(request, 'indesign/upload.html', {
+        'upload_url': upload_url,
+        'form': form,
+        'space_id': space_id,
+        'next': get_redirect_url(request)
+    })
 
 @login_required
 def editor(request, file_id):

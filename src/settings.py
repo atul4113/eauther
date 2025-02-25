@@ -3,10 +3,15 @@ import sys
 import datetime
 import mimetypes
 from djangae.settings_base import *  # Set up some AppEngine specific stuff
-from .lorepo.app_identity import mock_get_application_id
-from .shared_settings import SHARED_SETTINGS
+from lorepo.app_identity import mock_get_application_id
+from shared_settings import SHARED_SETTINGS
 import logging
 from lxml import etree
+from pathlib import Path
+import pymysql
+pymysql.install_as_MySQLdb()
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
+BASE_DIR = Path(__file__).resolve().parent.parent
 # import environ
 #
 # env = environ.Env()
@@ -17,6 +22,19 @@ from lxml import etree
 #
 # print("DJANGAE_APP_YAML_LOCATION")
 # print(os.environ.get("DJANGAE_APP_YAML_LOCATION"), "21212")
+APP_NAME = 'mauthorexample.com'
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'eauthor_db',
+        'USER': 'itilite',
+        'PASSWORD': 'marwa1234',
+        'HOST': 'localhost',
+        'PORT': '3306',
+    }
+}
+
 
 APPLICATION_ID = mock_get_application_id()
 
@@ -61,8 +79,9 @@ DJANGAE_DISABLE_CONSTRAINT_CHECKS = True
 
 INSTALLED_APPS = (
     'djangae', # Djangae needs to come before django apps in django 1.7 and above
-    'djangae.task',
     'markdown_deux',
+    'drf_spectacular',
+    'django.contrib.sites',
     'django.contrib.contenttypes',
     'django.contrib.auth',
     'django.contrib.sessions',
@@ -86,6 +105,7 @@ INSTALLED_APPS = (
     'lorepo.public',
     'lorepo.spaces',
     'lorepo.support',
+    'lorepo.newsletter',
     'lorepo.user',
     'lorepo.filestorage',
     'lorepo.cron',
@@ -97,6 +117,7 @@ INSTALLED_APPS = (
     'lorepo.translations',
     'lorepo.global_settings',
     'lorepo.util',
+    'mauthor.customfixdb',
     'mauthor.backup',
     'mauthor.bug_track',
     'mauthor.bulk',
@@ -114,7 +135,6 @@ INSTALLED_APPS = (
     'libraries.utility',
     'libraries.wiki',
     'captcha',
-    'rest_framework',
     'rest_framework_docs',
 )
 
@@ -131,7 +151,13 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'lorepo.HTTPSRedirectMiddleware.HTTPSRedirect',
 )
-
+# settings.py
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'unique-snowflake',
+    }
+}
 PASSWORD_HASHERS = (
     'django.contrib.auth.hashers.SHA1PasswordHasher',
     'django.contrib.auth.hashers.PBKDF2PasswordHasher',
@@ -145,7 +171,7 @@ PASSWORD_HASHERS = (
 )
 
 ALLOWED_HOSTS = ['*']
-
+SITE_ID = 1
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -171,10 +197,11 @@ TEMPLATES = [
 
 
 REST_FRAMEWORK = {
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
     ),
-    'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.NamespaceVersioning',
+    'DEFAULT_VERSIONING_CLASS': 'rest_framework_custom.versioning.NamespaceVersioning',
     'DEFAULT_RENDERER_CLASSES': (
         'rest_framework.renderers.JSONRenderer',
     ),
@@ -192,7 +219,15 @@ REST_FRAMEWORK_DOCS = {
 SECURE_CHECKS = [
 
 ]
-
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Your API',
+    'DESCRIPTION': 'Your API description',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+    'SWAGGER_UI_SETTINGS': {
+        'deepLinking': True,
+    },
+}
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 
 AUTHENTICATION_BACKENDS = ('django.contrib.auth.backends.ModelBackend', )
@@ -244,13 +279,14 @@ mimetypes.add_type('image/svg+xml', '.svg', True)
 
 CACHES = {
     'default': {
-        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
-        'TIMEOUT': 0,
-        'VERSION': 10
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'unique-snowflake',
     }
 }
 
+
 LANGUAGE_CODE = 'en'
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 gettext_noop = lambda s: s
 LANGUAGES = (       #available to administrators

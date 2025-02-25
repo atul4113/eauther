@@ -6,9 +6,11 @@ from django.shortcuts import get_object_or_404
 from libraries.utility.queues import trigger_task
 from lorepo.spaces.models import Space
 
-company_structure_changed = django.dispatch.Signal(providing_args=['company_id', 'user_id'])
-access_rights_changed = django.dispatch.Signal(providing_args=['user_id'])
-kids_for_space_changed = django.dispatch.Signal(providing_args=['space_id'])
+
+company_structure_changed = django.dispatch.Signal()
+access_rights_changed = django.dispatch.Signal()
+kids_for_space_changed = django.dispatch.Signal()
+
 
 def user_spaces_flush(user):
     cache.delete_for_user(user, 'copy_spaces')

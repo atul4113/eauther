@@ -1,9 +1,9 @@
-from django.conf.urls import patterns
+from django.urls import re_path
+from lorepo.merger.views import extract_pages, list_merge_pages, merge_undo, merge
 
-
-urlpatterns = patterns('lorepo.merger.views',
-    (r'^extract/(?P<content_id>\d+)/(?P<space_id>\d+)$', 'extract_pages'),
-    (r'^extract/(?P<content_id>\d+)/(?P<space_id>\d+)/list', 'list_merge_pages'),
-    (r'^merge_undo/$', 'merge_undo'),
-    (r'^merge/(?P<space_id>\d+)$', 'merge'),
-)
+urlpatterns = [
+    re_path(r'^extract/(?P<content_id>\d+)/(?P<space_id>\d+)$', extract_pages),
+    re_path(r'^extract/(?P<content_id>\d+)/(?P<space_id>\d+)/list', list_merge_pages),
+    re_path(r'^merge_undo/$', merge_undo),
+    re_path(r'^merge/(?P<space_id>\d+)$', merge),
+]

@@ -1,9 +1,8 @@
-from django.conf.urls import patterns
+from django.urls import re_path
+from lorepo.labels import views
 
-
-urlpatterns = patterns('lorepo.labels.views',
-    (r'^$', 'index'),
-    (r'^add$', 'addLabel'),
-    (r'^(?P<label_id>\d+)/rename$', 'rename'),
-)
-
+urlpatterns = [
+    re_path(r'^$', views.index),
+    re_path(r'^add$', views.addLabel),
+    re_path(r'^(?P<label_id>\d+)/rename$', views.rename),
+]

@@ -1,6 +1,6 @@
+import requests
 from django.http import HttpResponse
 from django.views.generic import TemplateView
-from google.appengine.api import urlfetch
 from libraries.utility.decorators import localhost_required
 from django.utils.decorators import method_decorator
 
@@ -19,12 +19,12 @@ class BasedViewRedirect(TemplateView):
         url = "http://localhost:8002%s" % path
 
         try:
-            response = urlfetch.fetch(url=url, method=method, payload=payload)
-        except urlfetch.Error as err:
+            # Use the requests library to send the HTTP request
+            response = requests.request(method, url, data=payload)
+        except requests.RequestException as err:
             response = None
 
         if response is None:
             return HttpResponse("OK", status=500)
         else:
             return HttpResponse("OK", status=response.status_code)
-

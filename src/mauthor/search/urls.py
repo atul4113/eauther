@@ -1,7 +1,9 @@
-from django.conf.urls import patterns, url
+from django.urls import path, re_path
+from mauthor.search import views  # Import the views module
 
-urlpatterns = patterns('mauthor.search.views',
-    (r'^put/(?P<content_id>\d+)$', 'put'),
-    (r'^rebuild$', 'rebuild_search_from_date'),
-    (r'^search$', 'search'),
-)
+urlpatterns = [
+    # Use re_path for regex-based URL patterns
+    re_path(r'^put/(?P<content_id>\d+)$', views.put, name='put'),
+    path('rebuild', views.rebuild_search_from_date, name='rebuild_search_from_date'),
+    path('search', views.search, name='search'),
+]

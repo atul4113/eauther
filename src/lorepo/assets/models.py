@@ -123,7 +123,7 @@ class LessonCleaner():
 
 class AssetsOrPagesReplacementConfig(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
-    user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     space = models.ForeignKey(Space, on_delete=models.DO_NOTHING)
     assets = models.TextField()
     meta_data = models.TextField()

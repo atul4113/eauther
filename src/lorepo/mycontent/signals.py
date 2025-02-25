@@ -1,12 +1,14 @@
 import django.dispatch
 import libraries.utility.cacheproxy as cache
 
-content_updated = django.dispatch.Signal(providing_args=['content_id', 'content_type'])
-addon_published = django.dispatch.Signal(providing_args=['company_id'])
-addon_deleted = django.dispatch.Signal(providing_args=['company_id'])
-template_updated = django.dispatch.Signal(providing_args=['company_id'])
-metadata_updated = django.dispatch.Signal(providing_args=['content_id'])
-metadata_updated_async = django.dispatch.Signal(providing_args=['content_id'])
+
+content_updated = django.dispatch.Signal()
+addon_published = django.dispatch.Signal()
+addon_deleted = django.dispatch.Signal()
+template_updated = django.dispatch.Signal()
+metadata_updated = django.dispatch.Signal()
+metadata_updated_async = django.dispatch.Signal()
+
 
 
 def flush_content_cache(sender, **kwargs):

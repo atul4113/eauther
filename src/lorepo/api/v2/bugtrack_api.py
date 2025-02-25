@@ -1,4 +1,4 @@
-from django.conf.urls import url
+from django.urls import path
 from django.utils.decorators import method_decorator
 
 from mauthor.bug_track.models import Bug
@@ -107,6 +107,6 @@ class BugView(views.APIView):
 
 
 urlpatterns = [
-    url(r'^$', BugsView.as_view(), name='bugs'),
-    url(r'^/(?P<bug_id>\d+)$', BugView.as_view(), name='bug'),
+    path('', BugsView.as_view(), name='bugs'),
+    path('<int:bug_id>/', BugView.as_view(), name='bug'),
 ]

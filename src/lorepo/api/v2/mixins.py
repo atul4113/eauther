@@ -8,7 +8,7 @@ class MiddlewareMixin(object):
         """
         `.dispatch()` is pretty much the same as Django's regular dispatch,
         but with extra hooks for startup, finalize, and exception handling.
-        Code based on rest_framework.views.APIView.dispatch
+        Code based on rest_framework_custom.views.APIView.dispatch
         """
         self.args = args
         self.kwargs = kwargs

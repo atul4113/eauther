@@ -1,7 +1,7 @@
 import json
 import zlib
 
-from django.conf.urls import url
+from django.urls import path, re_path
 
 import settings
 from libraries.utility.environment import get_versioned_module
@@ -720,11 +720,11 @@ class ImageLabels(views.APIView):
         return Response(images_labels)
 
 urlpatterns = [
-    url(r'^(?P<lang_id>\d+){0,1}$', TranslationsView.as_view(), name='translations'),
-    url(r'^languages(/(?P<lang_id>\d+))?$', LanguagesView.as_view(), name='languages'),
-    url(r'^import/resolve_conflicts/(?P<id>\d+)$', ResolveConflictsView.as_view(), name='resolve'),
-    url(r'^import$', ImportView.as_view(), name='import'),
-    url(r'^label(/(?P<label>[\w\/\.\-]+))?$', LabelView.as_view(), name='label'),
-    url(r'^image(/(?P<id>\d+))?$', ImageView.as_view(), name='image'),
-    url(r'^image/labels$', ImageLabels.as_view(), name='image'),
+    re_path(r'^(?P<lang_id>\d+){0,1}$', TranslationsView.as_view(), name='translations'),
+    re_path(r'^languages(/(?P<lang_id>\d+))?$', LanguagesView.as_view(), name='languages'),
+    re_path(r'^import/resolve_conflicts/(?P<id>\d+)$', ResolveConflictsView.as_view(), name='resolve'),
+    path('import', ImportView.as_view(), name='import'),
+    re_path(r'^label(/(?P<label>[\w\/\.\-]+))?$', LabelView.as_view(), name='label'),
+    re_path(r'^image(/(?P<id>\d+))?$', ImageView.as_view(), name='image'),
+    path('image/labels', ImageLabels.as_view(), name='image'),
 ]

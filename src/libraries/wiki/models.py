@@ -12,7 +12,7 @@ class WikiPage(models.Model):
     title = models.CharField(max_length=200)
     text = models.TextField()
     modified_date = models.DateTimeField(null=True)
-    author = models.ForeignKey(User)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
     is_toc = models.BooleanField(default=False)
     url = models.CharField(max_length=200)
     parent = models.ForeignKey('self', null=True, blank=True, related_name="kids", on_delete=models.DO_NOTHING)
@@ -193,7 +193,7 @@ class WikiFile(models.Model):
 
 
 class WikiPageTranslatedIndex(Indexable):
-    wiki_page_translated_entity = models.ForeignKey(WikiPageTranslated, null=True, blank=True)
+    wiki_page_translated_entity = models.ForeignKey(WikiPageTranslated, null=True, blank=True, on_delete=models.CASCADE)
 
     _search_indexed_fields = ['title',
                               'text',

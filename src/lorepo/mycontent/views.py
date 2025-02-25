@@ -1,14 +1,13 @@
 # -*- coding: utf-8 -*-
 import json
 import uuid
-
+from requests.exceptions import Timeout
 from django.template.loader import render_to_string
 from django.utils.translation import get_language_info
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.http import HttpResponseRedirect, HttpResponse, Http404
 from django.shortcuts import get_object_or_404, render
 from django.views.generic.base import TemplateView
-from google.appengine.runtime import DeadlineExceededError
 from lorepo.api.v2.jwt_api import jwt_payload_handler, jwt_encode_handler
 from lorepo.corporate.decorators import HasSpacePermissionMixin
 from lorepo.embed.decorators import check_is_public
@@ -50,7 +49,6 @@ from lorepo.corporate.utils import get_publication_for_space, get_contents,\
 from mauthor.utility.decorators import LoginRequiredMixin
 from querystring_parser import parser
 from lorepo.permission.models import Permission
-from google.appengine.ext import blobstore
 from lorepo.mycontent.signals import addon_published, addon_deleted,\
     metadata_updated
 import urllib.request, urllib.parse, urllib.error
@@ -72,7 +70,6 @@ from lorepo.mycontent.util import set_new_token_and_return_path
 from libraries.utility.decorators import backend
 from libraries.utility.environment import get_versioned_module
 from mauthor.utility.db_safe_iterator import safe_iterate
-from google.appengine.api import urlfetch
 
 
 def trash(request, space_id=None):
@@ -692,60 +689,84 @@ def changeIcon(request, content_id):
 def changeAddonIcon(request, content_id):
     return _changeIcon(request, content_id, (64, 64))
 
+
 def _changeIcon(request, content_id, size):
     """
-    Handler wywolywany po uploadzie ikony podgladu contentu
+    Handler invoked after uploading the content preview icon.
+    This method handles file uploads, processes the image, and updates the content icon.
     """
     content = Content.get_cached_or_404(id=content_id)
+
+    # Create the appropriate upload URL based on the icon size
     if size[0] == 64:
-        upload_url = blobstore.create_upload_url('/mycontent/' + str(content.id) + '/change_addon_icon')
+        upload_url = '/mycontent/' + str(content.id) + '/change_addon_icon'
     else:
-        upload_url = blobstore.create_upload_url('/mycontent/' + str(content.id)+ '/changeicon')
-        
+        upload_url = '/mycontent/' + str(content.id) + '/changeicon'
+
     form = UploadForm()
-      
+
     if request.method == 'POST':
         form = UploadForm(request.POST, request.FILES)
-        if len(request.FILES) > 0: 
-            model = form.save(False)
+
+        # Handle the uploaded file
+        if len(request.FILES) > 0:
+            model = form.save(False)  # Save the form but don't commit to the DB yet
             model.owner = request.user
-            
+
+            # Extract the file's name and content type
             filename = request.FILES['file'].name
             content_type = request.FILES['file'].content_type
-            m = re.search('\.(gif|png|jpg|jpeg|webp|bmp|ico|tiff|tif)$', filename)
+
+            # Check if the file is one of the allowed image formats and modify the extension to '.png' if necessary
+            m = re.search(r'\.(gif|png|jpg|jpeg|webp|bmp|ico|tiff|tif)$', filename)
             if m:
                 ext = m.group(0)
-                if ext != '.png':
+                if ext != '.png':  # If it's not a PNG, replace it with PNG
                     filename = filename.replace(ext, '.png')
                     content_type = 'image/png'
 
             model.content_type = content_type
             model.filename = filename
 
+            # Save the file model to the database
             model.save()
-            model.path = resize_image(model, size[0], size[1])
-            model.file = str(blobstore.create_gs_key('/gs' + model.path))
-            model.save()
-            content.modified_date = datetime.datetime.now()
-            content.icon_href = "/file/serve/" + str(model.id)
-            content.save()
-            metadata_updated.send(sender=None, content_id=content_id)
-            return HttpResponseRedirect(form.data["next"] if "next" in form.data else "/")
-    next_url = request.GET.get('next') if 'next' in request.GET else form.data['next']  
-        
-    return render(request, 'mycontent/changeicon.html', 
-                  {
-                   "content" : content, 
-                "upload_url" : upload_url,
-                     "width" : size[0],
-                    "height" : size[1],
-                      "next" : next_url,
-                      "form" : form
-                })
 
-@login_required
-@has_space_access(Permission.CONTENT_COPY, token_key='copy_content')
-def copy(request, content_id, space_id = None):
+            # Resize the image based on the provided size and save it
+            model.path = resize_image(model, size[0], size[1])
+
+            # Store the file in the media directory using Django's default FileSystemStorage
+            fs = FileSystemStorage()
+            filename = fs.save(model.path, request.FILES['file'])
+            model.file = fs.url(filename)  # Generate the file URL
+
+            model.save()
+
+            # Update the content object with the new icon URL
+            content.modified_date = datetime.datetime.now()
+            content.icon_href = fs.url(model.file)  # Use the file URL generated by FileSystemStorage
+            content.save()
+
+            # Send signal that metadata has been updated
+            metadata_updated.send(sender=None, content_id=content_id)
+
+            # Redirect to the next page or the default redirect path
+            return HttpResponseRedirect(form.data["next"] if "next" in form.data else "/")
+
+    # If the form wasn't submitted, get the "next" URL to redirect to
+    next_url = request.GET.get('next') if 'next' in request.GET else form.data.get('next')
+
+    # Render the upload form template
+    return render(request, 'mycontent/changeicon.html', {
+        "content": content,
+        "upload_url": upload_url,
+        "width": size[0],
+        "height": size[1],
+        "next": next_url,
+        "form": form
+    })
+
+
+def copy(request, content_id, space_id=None):
     if space_id is None:
         space = get_private_space_for_user(request.user)
     else:
@@ -758,32 +779,35 @@ def copy(request, content_id, space_id = None):
         copy.add_title_to_xml()
 
     copy_metadata(content, copy)
-
     add_content_to_space(copy, space)
 
     payload = jwt_payload_handler(request.user)
     jwt_token = jwt_encode_handler(payload)
 
     try:
-        result = urlfetch.fetch(
-            url='https://newinterface-dot-lorepocorporate.appspot.com/api/v2/my_content/refresh_content_index/%s' % copy.pk,
-            method=urlfetch.POST, headers={'Authorization': 'JWT %s' % jwt_token})
-        if result.status_code != 200:
+        url = f'https://newinterface-dot-lorepocorporate.appspot.com/api/v2/my_content/refresh_content_index/{copy.pk}'
+        headers = {'Authorization': f'JWT {jwt_token}'}
+
+        response = requests.post(url, headers=headers)
+
+        if response.status_code != 200:
             logging.error("Fetch url error %s" % content.pk)
-    except:
-        import traceback
+    except requests.RequestException as e:
         logging.error("Something went wrong %s" % content.pk)
+        logging.error(str(e))
         logging.error(traceback.format_exc())
 
     metadata_updated.send(sender=None, content_id=copy.id)
 
     messages.success(request, 'Lesson <%s> copied' % content.title)
 
-    space_id = space.id
-    redirect_to = '/mycontent/%(space_id)s' % locals() if space.is_private() else '/corporate/list/%(space_id)s' % locals()
+    # Determine redirect based on space visibility
+    if space.is_private():
+        redirect_to = reverse('mycontent:space', kwargs={'space_id': space.id})
+    else:
+        redirect_to = reverse('corporate:list', kwargs={'space_id': space.id})
 
-    return get_redirect(request, redirect_to)
-
+    return redirect(redirect_to)
 
 @login_required
 @check_is_public
@@ -1194,7 +1218,7 @@ def fix_being_edited(request):
             for cu in old_cus[:100]:
                 cu.delete()
                 i+=1
-    except DeadlineExceededError:
+    except Timeout:
         ret = "%s<br><strong>Max time Exception</strong>" % ret
     finally:
         ret = "%s<br>Deleted rows: %s" % (ret, i)

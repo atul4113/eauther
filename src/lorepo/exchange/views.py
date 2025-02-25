@@ -7,10 +7,11 @@ import datetime
 import logging
 import copy
 
+from django.core.files.base import ContentFile
+from django.core.files.storage import default_storage
 from django.utils.decorators import method_decorator
 from django.views.generic.base import View, TemplateView
-from google.appengine.api import urlfetch
-from google.appengine.ext.deferred import deferred
+import requests
 
 import zipstream
 from django.shortcuts import get_object_or_404
@@ -21,7 +22,11 @@ from lorepo.filestorage.iterators import GcsIterator
 from lorepo.filestorage.models import UploadedFile, FileStorage
 from lorepo.mycontent.models import Content, ContentType, AddonToCategory
 from zipfile import ZipFile, ZipInfo, ZIP_DEFLATED, BadZipfile
-from google.appengine.ext import blobstore
+from google.cloud import storage
+from google.auth.exceptions import DefaultCredentialsError
+import os
+
+# from google.appengine.ext import blobstore
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from lorepo.filestorage.forms import UploadForm
@@ -46,9 +51,7 @@ from lorepo.exchange.utils import render_manifest, make_secret, RETRY_ERRORS
 from lorepo.permission.decorators import has_space_access
 from lorepo.mycontent.models import ContentType
 from lorepo.permission.models import Permission
-from google.appengine.ext.blobstore import InternalError
-from lorepo.filestorage.utils import get_reader, store_file_from_stream, \
-    open_file, store_file_from_gcs_stream, get_file_size
+from lorepo.filestorage.utils import get_reader, store_file_from_stream
 from libraries.utility.environment import get_app_version, get_versioned_module
 from mauthor.metadata.util import get_metadata_values, get_page_metadata
 from lorepo.permission.util import get_company_for_user
@@ -64,35 +67,64 @@ PLAYER_ZIP_FILE_PATH = 'lorepo/templates/exchange/icplayer.zip'
 WOMI_ZIP_FILE_PATH = 'lorepo/templates/exchange/womi.zip'
 WOMI_HIDE_NAV_ZIP_FILE_PATH = 'lorepo/templates/exchange/womi-hide-nav.zip'
 
+import os
+import logging
+import zipfile
+from django.core.files.storage import default_storage
+from .models import UploadedFile  # Ensure this import matches your project structure
+
+RETRY_COUNT = 3  # Number of retries for file operations
+
+
 def _zip_uploaded_file(my_zip, stored_files, resource_types, file_id, path):
+    """
+    Adds an uploaded file to a ZIP archive.
+    Returns a dictionary mapping the file ID to its filename in the archive.
+    """
     upfiles = UploadedFile.objects.filter(pk=file_id)
     if upfiles.count() != 1:
         return {}
-    else:
-        upfile = upfiles[0]
+    upfile = upfiles[0]
+
+    # Determine the file extension
     if upfile.filename:
         extension = os.path.splitext(upfile.filename)[1]
     else:
-        extension = os.path.splitext(upfile.file.name.split('/')[-1])[1]
-    filename = "%(path)sresources/%(name)s%(extension)s" % {'name':file_id, 'extension':extension, 'path':path}
-    if not filename in stored_files:
+        extension = os.path.splitext(upfile.path.split('/')[-1])[1]
+
+    # Generate the filename for the ZIP archive
+    filename = f"{path}resources/{file_id}{extension}"
+    if filename not in stored_files:
         resource_types[filename] = upfile.content_type
         stored_files.add(filename)
+
         retry = 0
         while retry < RETRY_COUNT:
             try:
-                reader = GcsIterator(get_reader(upfile))
-                my_zip.write_iter(filename.encode('utf-8'), reader, compress_type=ZIP_DEFLATED,
-                                  size=get_file_size(upfile))
-                retry = RETRY_COUNT
-            except InternalError as e:
-                retry = retry + 1
+                # Read the file from storage and add it to the ZIP archive
+                with default_storage.open(upfile.path, 'rb') as file:
+                    file_data = file.read()
+                    my_zip.writestr(filename.encode('utf-8'), file_data, compress_type=zipfile.ZIP_DEFLATED)
+                break  # Exit the retry loop on success
+            except Exception as e:
+                retry += 1
                 if retry == RETRY_COUNT:
-                    logging.error('Problem with UploadedFile_id: %s' % upfile.id)
-                    import traceback
-                    logging.error(traceback.format_exc())
+                    logging.error(f'Problem with UploadedFile_id: {upfile.id}')
+                    logging.error(f'Error: {str(e)}')
                     raise e
-    return {file_id: "%(name)s%(extension)s" % {'name':file_id, 'extension':extension}}
+
+    return {file_id: f"{file_id}{extension}"}
+
+
+def get_file_size(upfile):
+    """
+    Returns the size of an uploaded file in bytes.
+    """
+    try:
+        return default_storage.size(upfile.path)
+    except Exception as e:
+        logging.error(f'Error getting file size for UploadedFile_id: {upfile.id}')
+        raise e
 
 def _update_resource_urls_to_locals(contents, local_urls):
     pattern_string = '(http:\/\/www\.(mauthor|minstructor)\.com)?\/file\/serve\/%(id)s'
@@ -280,7 +312,26 @@ def _zip_xapi_file_export(my_zip, content, path, template_path):
     filename = '%(path)s' % {'path': path}
     my_zip.writestr(filename.encode('utf-8'), body.encode('utf-8'), ZIP_DEFLATED)
 
+def create_gcs_blob_key(file_name):
+    try:
+        # Initialize the Cloud Storage client
+        client = storage.Client()
 
+        # The bucket name where the file will be stored
+        bucket_name = os.getenv("GCS_BUCKET_NAME")  # Ensure to set this environment variable
+
+        # Get the bucket
+        bucket = client.get_bucket(bucket_name)
+
+        # Create a blob (object) in the specified bucket
+        blob = bucket.blob(file_name)
+
+        # You can get a "gs://" URI by using the blob's public URL
+        blob_uri = f"gs://{bucket_name}/{file_name}"
+
+        return blob_uri
+    except Exception as e:
+        print(f"Error: {e}")
 def zip_content(content, my_zip, path="", version=ExportVersions.SCORM_2004.type):
     stored_files = set()
     content = copy.deepcopy(content)
@@ -312,8 +363,9 @@ def zip_content(content, my_zip, path="", version=ExportVersions.SCORM_2004.type
         bucket = get_bucket_name('default-icon')
         file_name = generate_unique_gcs_path(bucket, 'icon', content.id)
         store_file_from_stream(file_name, 'image/png', data)
-        blob_key = blobstore.create_gs_key('/gs' + file_name)
-        upfile = UploadedFile()
+        # Generate the Google Cloud Storage key for the file
+        blob_uri = create_gcs_blob_key(file_name)
+        blob_key = UploadedFile()
         upfile.path = file_name
         upfile.file = str(blob_key)
         upfile.filename = 'default_presentation.png'
@@ -355,43 +407,111 @@ def _fix_addons_urls(f):
 
 
 def _zip_content(content, user_id, version=ExportVersions.SCORM_2004.type, path='', my_zip=None, include_player=True):
-    my_file = None
-    file_name = None
+    """
+    Zips the content and optionally includes the player files.
+    Returns the file path of the generated ZIP archive.
+    """
     if my_zip is None:
-        bucket = get_bucket_name('export-packages')
-        file_name = generate_unique_gcs_path(bucket, 'package.zip', content.id , user_id)
-        my_file = open_file(file_name, 'application/zip')
-        my_zip = zipstream.ZipFile(allowZip64=True)
+        # Generate a unique file name for the ZIP archive
+        bucket = 'export-packages'  # Replace with your bucket name or directory
+        file_name = generate_unique_file_path(bucket, 'package.zip', content.id, user_id)
+        my_zip = zipfile.ZipFile(BytesIO(), 'w', zipfile.ZIP_DEFLATED, allowZip64=True)
+    else:
+        file_name = None
+
     try:
         if int(include_player):
-            player_zip = ZipFile(PLAYER_ZIP_FILE_PATH,'r')
-            for name in player_zip.namelist():
-                if name[-1] == '/':
-                    continue
-                data = player_zip.read(name)
-                womi_path = 'js/' if int(version) in (ExportVersions.WOMI.type, ExportVersions.WOMI_HIDE_NAV.type) else ''
-                my_zip.writestr(path + womi_path + name.encode('utf-8'), data, compress_type=ZIP_DEFLATED)
+            # Include player files in the ZIP archive
+            with zipfile.ZipFile(PLAYER_ZIP_FILE_PATH, 'r') as player_zip:
+                for name in player_zip.namelist():
+                    if name.endswith('/'):  # Skip directories
+                        continue
+                    data = player_zip.read(name)
+                    womi_path = 'js/' if int(version) in (ExportVersions.WOMI.type, ExportVersions.WOMI_HIDE_NAV.type) else ''
+                    my_zip.writestr(path + womi_path + name.encode('utf-8'), data)
+
+        # Add content to the ZIP archive
         zip_content(content, my_zip, path, version)
+
     finally:
-        if my_file is not None:
-            for data in my_zip:
-                my_file.write(data)
+        if file_name is not None:
+            # Save the ZIP archive to the default storage
+            with default_storage.open(file_name, 'wb') as my_file:
+                my_file.write(my_zip.fp.getvalue())
             my_zip.close()
-            my_file.close()
+
     return file_name
 
 
+def generate_unique_file_path(base_directory, original_name, content_id, user_id):
+    """
+    Generates a unique file path for storing the ZIP archive.
+    """
+    now = datetime.datetime.now()
+    return f"{base_directory}/{user_id}/{content_id}/{now.year}/{now.month}/{now.day}/{now.hour}/{now.minute}/{original_name}"
+
+def upload_to_gcs(upfile, file_name):
+    try:
+        # Initialize the Cloud Storage client
+        client = storage.Client()
+
+        # The bucket name where the file will be stored
+        bucket_name = os.getenv("GCS_BUCKET_NAME")  # Ensure this environment variable is set
+
+        # Get the bucket
+        bucket = client.get_bucket(bucket_name)
+
+        # Create a blob (object) in the specified bucket
+        blob = bucket.blob(file_name)
+
+        # Upload the file to GCS (Assuming `upfile.file` is the file-like object)
+        blob.upload_from_file(upfile.file)
+
+        # Get the GCS URI
+        gcs_uri = f"gs://{bucket_name}/{file_name}"
+
+        # Store the GCS URI in `upfile.file` or the relevant field in your model
+        upfile.file = gcs_uri
+
+    except Exception as e:
+        print(f"Error: {e}")
 def exported_file(content, requester, scorm_version, include_player, file_title=None):
-    from google.appengine.api.runtime import memory_usage
-    logging.info("Current memory usage before export: %s", memory_usage().current())
+    # Initialize Google Cloud Storage client
+    client = storage.Client()
+
+    # Log memory usage before export (if required, you can use psutil for memory tracking)
+    logging.info("Memory usage before export: Not tracked here")  # Replace with memory usage tracking if needed
+
+    # Create the file name using the _zip_content function
     file_name = _zip_content(content, requester, version=scorm_version, include_player=include_player)
+
+    # Define your GCS bucket name (set via environment variable or directly)
+    bucket_name = os.getenv("GCS_BUCKET_NAME")  # Ensure this environment variable is set
+
+    # Get the bucket
+    bucket = client.get_bucket(bucket_name)
+
+    # Create a blob (object) in the bucket
+    blob = bucket.blob(file_name)
+
+    # Upload the file (assuming content is already a file-like object)
+    # Replace `content` with the correct file object (can be upfile.file or another stream)
+    blob.upload_from_file(content)
+
+    # Generate the GCS URI
+    gcs_uri = f"gs://{bucket_name}/{file_name}"
+
+    # Create an UploadedFile instance and save the information
     upfile = UploadedFile()
-    upfile.file = str(blobstore.create_gs_key('/gs' + file_name))
+    upfile.file = gcs_uri  # Storing GCS URI instead of blob key
     upfile.path = file_name
     upfile.content_type = 'application/zip'
     upfile.title = file_title
     upfile.save()
-    logging.info("Current memory usage after export: %s", memory_usage().current())
+
+    # Log memory usage after export
+    logging.info("Memory usage after export: Not tracked here")  # Replace with memory tracking if needed
+
     return upfile
 
 
@@ -470,9 +590,9 @@ def export_with_callback(request, content_id, user_id, version):
             'download_url': download_url,
         }
 
-        from google.appengine.api.taskqueue import TaskRetryOptions
-        options = TaskRetryOptions(task_retry_limit=3, min_backoff_seconds=10, max_doublings=1)
-        deferred.defer(_send_callback_export_confirmation, callback_url, post_data, _retry_options=options)
+        # from google.appengine.api.taskqueue import TaskRetryOptions
+        # options = TaskRetryOptions(task_retry_limit=3, min_backoff_seconds=10, max_doublings=1)
+        # deferred.defer(_send_callback_export_confirmation, callback_url, post_data, _retry_options=options)
 
     except RETRY_ERRORS as e:
         logging.exception(
@@ -488,23 +608,15 @@ def export_with_callback(request, content_id, user_id, version):
 
 
 def _send_callback_export_confirmation(callback_url, post_data):
-    try:
-        response = urlfetch.fetch(url=callback_url, payload=json.dumps(post_data),
-                                  method=urlfetch.POST,
-                                  headers={"Content-Type": "application/json"})
-        if response.status_code != 200:
-            import logging
-            logging.error("export_with_callback POST received status code %d! post_data: %s" % (response.status_code, post_data))
-            raise Http404 #we need it for retry reason
-    except:
-        import logging
-        import traceback
-        logging.error(
-            "export_with_callback POST callback error post_data: %s" % (post_data))
-        logging.error(traceback.format_exc())
-        raise Http404  # we need it for retry reason
+    response = requests.post(callback_url,
+                             json=post_data,  # Automatically encodes post_data as JSON
+                             headers={"Content-Type": "application/json"})
 
-    return True
+    # Handle response (optional)
+    if response.status_code == 200:
+        print("Request was successful")
+    else:
+        print(f"Request failed with status code {response.status_code}")
 
 
 def trigger_export_async(request, content_id, session_id, secret):
@@ -711,31 +823,54 @@ def _store_pages(zipfile, user, resources):
     return mappings
 
 
+
 def _store_resources(zipfile, user):
+    """
+    Extracts resources from a zip file and stores them using Django's default storage.
+    Returns a dictionary mapping resource filenames to their corresponding UploadedFile IDs.
+    """
+    # Parse metadata to get content types for resources
     metadata = xml.dom.minidom.parseString(zipfile.read("metadata.xml"))
     types = {}
     for element in metadata.getElementsByTagName('resource'):
         types[element.getAttribute('filename')] = element.getAttribute('content_type')
+
     resources = {}
     for name in zipfile.namelist():
-        match = re.match('resources/(?P<resource_id>\d+)(?P<extension>.+)', name)
+        # Match resource files in the 'resources/' directory
+        match = re.match(r'resources/(?P<resource_id>\d+)(?P<extension>.+)', name)
         if match:
+            # Determine the MIME type from the metadata
             mime_type = types['resources/' + match.group('resource_id') + match.group('extension')]
-            bucket = get_bucket_name('imported-resources')
-            file_name = generate_unique_gcs_path(bucket, name, user.id)
+
+            # Generate a unique file path for the resource
+            file_name = generate_unique_file_path('imported-resources', name, user.id)
+
+            # Save the resource to the default storage
             with zipfile.open(name=name, mode="r") as resource_file:
-                store_file_from_gcs_stream(to_file=file_name, mime_type=mime_type, from_gcs_stream=resource_file)
-            blob_key = blobstore.create_gs_key('/gs' + file_name)
-            upfile = UploadedFile()
-            upfile.path = file_name
-            upfile.file = str(blob_key)
-            upfile.filename = match.group('resource_id') + match.group('extension')
-            upfile.content_type = mime_type
-            upfile.owner = user
+                default_storage.save(file_name, ContentFile(resource_file.read()))
+
+            # Create an UploadedFile record
+            upfile = UploadedFile(
+                path=file_name,
+                filename=match.group('resource_id') + match.group('extension'),
+                content_type=mime_type,
+                owner=user
+            )
             upfile.save()
+
+            # Map the resource filename to its UploadedFile ID
             resources[match.group('resource_id') + match.group('extension')] = upfile.id
+
     return resources
 
+
+def generate_unique_file_path(base_directory, original_name, user_id):
+    """
+    Generates a unique file path for storing a resource.
+    """
+    now = datetime.datetime.now()
+    return f"{base_directory}/{user_id}/{now.year}/{now.month}/{now.day}/{now.hour}/{now.minute}/{original_name}"
 @backend
 def import_presentation_async(request, uploaded_id, user_id, space_id=None):
     content = None

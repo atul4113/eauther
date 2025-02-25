@@ -1,9 +1,8 @@
-from dbindexer import autodiscover
-autodiscover()
+from django.db.models import Q
 
-# search for "search_indexes.py" in all installed apps
-from . import search
-search.autodiscover()
-
-from . import autoload
-autoload.autodiscover("signals")
+# Example search functionality
+def search_models(query):
+    from myapp.models import MyModel
+    return MyModel.objects.filter(
+        Q(name__icontains=query) | Q(description__icontains=query)
+    )

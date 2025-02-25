@@ -1,6 +1,6 @@
 /.gaedata_dev
 *.bak
-/rest_framework/authtoken/migrations/*
+/rest_framework_custom/authtoken/migrations/*
 /django/contrib/sites/migrations/*
 /csreports/migrations/*
 /sitepackages/django\contrib\auth\migrations/*

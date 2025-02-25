@@ -1,7 +1,7 @@
-from django.conf.urls import url
+from django.urls import path
 
 from lorepo.api.v2.home_websites.views import HomeWebsitesView
 
 urlpatterns = [
-    url(r'^$', HomeWebsitesView.as_view()),
+    path('', HomeWebsitesView.as_view()),
 ]

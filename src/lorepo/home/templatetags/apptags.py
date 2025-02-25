@@ -4,7 +4,7 @@ from lorepo.spaces.util import get_space_for_content
 from lorepo.spaces.models import Space
 from lorepo.mycontent.models import Content, ContentType
 import re
-import md5
+import hashlib
 import urllib.parse
 import urllib.request, urllib.parse, urllib.error
  
@@ -142,7 +142,7 @@ def get_range(to, from_=0):
 def avatar(author):
     email = str.lower(author.email)
     email = str.strip(email)
-    hash = md5.md5(email)
+    hash = hashlib.md5(email.encode()).hexdigest()
     return "http://www.gravatar.com/avatar/" + hash.hexdigest() + "?d=identicon"
 
 @register.inclusion_tag("home/space_path.html")

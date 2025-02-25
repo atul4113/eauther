@@ -1,6 +1,6 @@
-from django.conf.urls import patterns
+from django.urls import path
+from libraries.proxy.views import get
 
-
-urlpatterns = patterns('libraries.proxy.views',
-    (r'^get$', 'get'),
-)
+urlpatterns = [
+    path('get/', get),
+]

@@ -11,7 +11,7 @@ import settings
 from django.db import models
 from lorepo.mycontent.models import Content
 from django.template.loader import render_to_string
-from BeautifulSoup import BeautifulSoup, Tag
+from bs4 import BeautifulSoup, Tag
 import re
 
 class ExportNarration(object):

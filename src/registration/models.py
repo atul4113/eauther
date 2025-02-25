@@ -1,12 +1,14 @@
 import datetime
 import random
 import re
-import sha
+import hashlib
+import random
+
 
 from django.conf import settings
 from django.db import models
 from django.template.loader import render_to_string
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import User
 
 
@@ -135,8 +137,10 @@ class RegistrationManager(models.Manager):
         username and a random salt.
         
         """
-        salt = sha.new(str(random.random())).hexdigest()[:5]
-        activation_key = sha.new(salt+user.username).hexdigest()
+
+        salt = hashlib.sha1(str(random.random()).encode()).hexdigest()[:5]
+        activation_key = hashlib.sha1((salt + user.username).encode()).hexdigest()
+
         return self.create(user=user,
                            activation_key=activation_key)
         
@@ -207,8 +211,8 @@ class RegistrationProfile(models.Model):
     
     """
     ACTIVATED = "ALREADY_ACTIVATED"
-    
-    user = models.ForeignKey(User, unique=True, verbose_name=_('user'))
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE, unique=True, verbose_name=_('user'))
     activation_key = models.CharField(_('activation key'), max_length=40)
     
     objects = RegistrationManager()

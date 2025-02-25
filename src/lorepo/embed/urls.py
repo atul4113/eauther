@@ -1,12 +1,12 @@
-from django.conf.urls import patterns
+from django.urls import path
 
+from . import views
 
-urlpatterns = patterns('lorepo.embed.views',
-    (r'^(?P<content_id>\d+)$', 'mobile'),
-    (r'^(?P<content_id>\d+)/(?P<version>\d+)$', 'mobile'),
-    (r'^editor/(?P<content_id>\d+)$', 'editor'),
-    (r'^corporate_embed/(?P<content_id>\d+)/$', 'corporate_embed'),
-    (r'^book/(?P<content_id>\d+)$', 'book'),
-    (r'^iframe/(?P<content_id>\d+)$', 'iframe'),
-)
-
+urlpatterns = [
+    path('<int:content_id>/', views.mobile, name='mobile'),
+    path('<int:content_id>/<int:version>/', views.mobile, name='mobile_version'),
+    path('editor/<int:content_id>/', views.editor, name='editor'),
+    path('corporate_embed/<int:content_id>/', views.corporate_embed, name='corporate_embed'),
+    path('book/<int:content_id>/', views.book, name='book'),
+    path('iframe/<int:content_id>/', views.iframe, name='iframe'),
+]

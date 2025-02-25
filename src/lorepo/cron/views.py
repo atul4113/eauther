@@ -1,13 +1,13 @@
+from django.core.files.storage import default_storage
 from django.core.mail import mail_admins, send_mail
 from django.template.defaultfilters import filesizeformat
 from django.http import HttpResponse
 import cloudstorage as gcs
-from libraries.utility.cursors import get_cursor, set_cursor
+from django.utils.encoding import force_bytes
 from lorepo.corporate.models import CompanyUser
 from lorepo.course.models import Course, ExportedCourse, ExportedCourseLesson
 import datetime
 from libraries.utility.decorators import backend, cron_method
-from lorepo.filestorage.utils import open_file
 import unicodedata
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.decorators import user_passes_test
@@ -26,6 +26,14 @@ from lorepo.public.util import send_message
 from settings import get_bucket_name
 
 
+def get_cursor(self):
+    """Returns the current cursor (page number)."""
+    return self._cursor
+
+
+def set_cursor(self, cursor):
+    """Sets the cursor (page number)."""
+    self._cursor = int(cursor)
 def keepalive(request):
     return HttpResponse("ok")
 
@@ -50,13 +58,15 @@ def delete_old_courses(request):
 
 @backend
 def delete_old_courses_async(_):
+    """
+    Deletes old exported courses and their associated lessons.
+    Logs the deletion process and sends a report via email.
+    """
     now = datetime.datetime.now()
-
     delete_date = now - datetime.timedelta(weeks=8)
 
-    all_exported_courses = ExportedCourse.objects.filter(
-        created_date__lte=delete_date
-    )
+    # Fetch old exported courses
+    all_exported_courses = ExportedCourse.objects.filter(created_date__lte=delete_date)
 
     course_page_size = 30
     lesson_page_size = 30
@@ -64,74 +74,79 @@ def delete_old_courses_async(_):
     deleted_courses = 0
     deleted_lessons = 0
 
-    log_file_name = '%s/0000_deleted_courses_logs/%s_%s_%s.txt' % (get_bucket_name('export-packages'), now.year, now.month, now.day)
+    # Generate a log file name
+    log_file_name = f'export-packages/0000_deleted_courses_logs/{now.year}_{now.month}_{now.day}.txt'
 
-    with open_file(log_file_name, 'text/plain') as my_file:
-        
-        course_results = all_exported_courses[:course_page_size]
-        try:
-            
+    try:
+        # Open the log file for writing
+        with default_storage.open(log_file_name, 'wb') as my_file:
+            course_results = all_exported_courses[:course_page_size]
+
             while len(course_results) > 0:
-                course_db_cursor = get_cursor(course_results)
-    
                 for exported_course in course_results:
                     try:
-                        does_exist = exported_course.course
-                        normalized_log = unicodedata.normalize('NFKD', 'Course id: %s | Course name: %s | Exported course id: %s | Created date: %s\n' % (exported_course.course.id, exported_course.course.name, exported_course.id, exported_course.course.created_date)).encode('ascii','ignore')
+                        # Log course details
+                        course = exported_course.course
+                        log = f'Course id: {course.id} | Course name: {course.name} | Exported course id: {exported_course.id} | Created date: {exported_course.created_date}\n'
                     except Course.DoesNotExist:
-                        normalized_log = unicodedata.normalize('NFKD', 'Course id: %s | Course does not exist' % (exported_course.course_id)).encode('ascii','ignore')
+                        log = f'Course id: {exported_course.course_id} | Course does not exist\n'
 
-                    my_file.write(normalized_log)
+                    my_file.write(force_bytes(unicodedata.normalize('NFKD', log)))
 
-                    exported_course_lessons = ExportedCourseLesson.objects.filter(exported_course = exported_course)
+                    # Delete associated lessons
+                    exported_course_lessons = ExportedCourseLesson.objects.filter(exported_course=exported_course)
                     lesson_results = exported_course_lessons[:lesson_page_size]
+
                     if len(lesson_results) > 0:
-                        normalized_log = unicodedata.normalize('NFKD', '\tLessons:\tSize\t\tContent ID\t\tCreated date\n').encode('ascii','ignore')
-                        my_file.write(normalized_log)
+                        my_file.write(force_bytes(unicodedata.normalize('NFKD', '\tLessons:\tSize\t\tContent ID\t\tCreated date\n')))
 
                     while len(lesson_results) > 0:
-                        lesson_db_cursor = get_cursor(lesson_results)
                         for exported_lesson in lesson_results:
-                            blobstore_info = exported_lesson.zipped_content.file.file.blobstore_info
+                            # Get the size of the zipped content
+                            try:
+                                size = default_storage.size(exported_lesson.zipped_content.path)
+                            except FileNotFoundError:
+                                size = 0
 
-                            if blobstore_info is not None:
-                                size = blobstore_info.size
-                            else:
-                                try:
-                                    size = gcs.stat(exported_lesson.zipped_content.path).st_size
-                                except gcs.NotFoundError:
-                                    size = 0
+                            # Log lesson details
+                            log = f'\t\t\t{filesizeformat(size)}\t\t{exported_lesson.content.id}\t{exported_lesson.created_date}\n'
+                            my_file.write(force_bytes(unicodedata.normalize('NFKD', log)))
 
-                            log = filesizeformat(size)+ '\t\t' + str(exported_lesson.content.id) + '\t' + str(exported_lesson.created_date)
-
-                            normalized_log = unicodedata.normalize('NFKD', '\t\t\t%s\n' % (log)).encode('ascii','ignore')
-                            my_file.write(normalized_log)
-                            if exported_lesson.zipped_content is not None:
+                            # Delete the zipped content and the lesson
+                            if exported_lesson.zipped_content:
                                 exported_lesson.zipped_content.delete()
                             exported_lesson.delete()
-                            total_size = total_size + size
-                            deleted_lessons = deleted_lessons + 1
+                            total_size += size
+                            deleted_lessons += 1
 
-                        lesson_results = set_cursor(exported_course_lessons, lesson_db_cursor)
-                        lesson_results = lesson_results[:lesson_page_size]
+                        lesson_results = exported_course_lessons[:lesson_page_size]
 
-                    if exported_course.uploaded_file is not None:
+                    # Delete the exported course
+                    if exported_course.uploaded_file:
                         exported_course.uploaded_file.delete()
                     exported_course.delete()
-                    deleted_courses = deleted_courses + 1
-    
-                course_results = set_cursor(all_exported_courses, course_db_cursor)
-                course_results = course_results[:course_page_size]
-    
-            normalized_log = unicodedata.normalize('NFKD', 'Total size: %s\n ' % (filesizeformat(total_size))).encode('ascii','ignore')
-            my_file.write(normalized_log)
-            
-        except Exception as e:
-            logging.error(traceback.format_exc())
-            mail_admins('Delete old courses - exception occurred ', traceback.format_exc())
-            return HttpResponse('failure')
+                    deleted_courses += 1
 
-    mail_admins('Deleted old exported courses','Old exported courses have been deleted. Full raport is available in GCS bucket under:\nhttps://console.developers.google.com/project/lorepocorporate/storage/browser%s \nTotal deleted courses: %s \nTotal deleted lessons: %s \nTotal space recovered: %s' % (log_file_name, deleted_courses, deleted_lessons, filesizeformat(total_size)))
+                course_results = all_exported_courses[:course_page_size]
+
+            # Log total size of deleted files
+            log = f'Total size: {filesizeformat(total_size)}\n'
+            my_file.write(force_bytes(unicodedata.normalize('NFKD', log)))
+
+    except Exception as e:
+        # Log the error and notify admins
+        logging.error(traceback.format_exc())
+        mail_admins('Delete old courses - exception occurred', traceback.format_exc())
+        return HttpResponse('failure')
+
+    # Notify admins of successful deletion
+    mail_admins(
+        'Deleted old exported courses',
+        f'Old exported courses have been deleted. Full report is available in the storage bucket under:\n{log_file_name}\n'
+        f'Total deleted courses: {deleted_courses}\n'
+        f'Total deleted lessons: {deleted_lessons}\n'
+        f'Total space recovered: {filesizeformat(total_size)}'
+    )
     return HttpResponse('ok')
 
 

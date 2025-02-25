@@ -80,7 +80,7 @@ class Content(models.Model, ModelCacheMixin):
     associated_content = models.ForeignKey('self', null=True, blank=True, on_delete=models.DO_NOTHING)
     name = models.CharField(max_length=255, default=None, null=True)
     is_globally_public = models.BooleanField(default=False)
-    spaces_path = models.CommaSeparatedIntegerField(max_length=250, default='')
+    spaces_path = models.CharField(max_length=250, default='')
     spaces = ListField(models.CharField()) # this field is type string ! remember about it when filtering
     passing_score = models.IntegerField(default=0)
     original = models.ForeignKey('self', null=True, blank=True, related_name='original_for', on_delete=models.DO_NOTHING)

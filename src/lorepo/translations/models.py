@@ -102,7 +102,7 @@ class TranslatedLang(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
     modified_date = models.DateTimeField(auto_now=True)
 
-    lang = models.ForeignKey(SupportedLanguages)
+    lang = models.ForeignKey(SupportedLanguages, on_delete=models.CASCADE,)
     lang_key = models.CharField(max_length=7)
     _deflated_content = BinaryField()
 
@@ -242,7 +242,7 @@ class TranslatedImages(models.Model):
 
 class ImportTable(models.Model):
     lang = models.ForeignKey(SupportedLanguages, null=True, on_delete=models.DO_NOTHING)
-    user = models.ForeignKey(User, unique=True, null=True, on_delete=models.DO_NOTHING)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     pasted_json = models.TextField(max_length=(1024 * 1024))
     added = models.TextField(max_length=(1024 * 1024))
     omitted = models.TextField(max_length=(1024 * 1024))

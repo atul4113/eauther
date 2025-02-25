@@ -1,11 +1,11 @@
-from django.conf.urls import patterns
+from django.urls import path
 
+from . import views
 
-urlpatterns = patterns('lorepo.editor.views',
-    (r'^api/templates$', 'templates'),
-    (r'^myapi/(?P<content_id>\d+)/addons$', 'addons'),
-    (r'^api/feedback$', 'feedback'),
-    (r'^api/addNewPage$', 'addPage'),
-    (r'^api/blobUploadDir$', 'blob_upload_dir'),
-)
-
+urlpatterns = [
+    path('api/templates', views.templates, name='templates'),
+    path('myapi/<int:content_id>/addons', views.addons, name='addons'),
+    path('api/feedback', views.feedback, name='feedback'),
+    path('api/addNewPage', views.addPage, name='addPage'),
+    path('api/blobUploadDir', views.blob_upload_dir, name='blob_upload_dir'),
+]

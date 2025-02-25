@@ -1,10 +1,10 @@
-from django.conf.urls import url
+from django.urls import path
 from django.utils.decorators import method_decorator
 from lorepo.permission.decorators import has_space_access
 from lorepo.permission.models import Permission
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
-from rest_framework import views
+from drf_spectacular import views
 from django.template.defaultfilters import truncatewords
 import feedparser
 from django.utils import html
@@ -44,5 +44,5 @@ class NewsView(views.APIView):
 
 
 urlpatterns = [
-    url(r'^$', NewsView.as_view(), name='news'),
+    path('', NewsView.as_view(), name='news'),
     ]

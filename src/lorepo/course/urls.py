@@ -1,25 +1,34 @@
-from django.conf.urls import patterns
-
-urlpatterns = patterns('lorepo.course.views',
-    (r'^list/(?P<project_id>\d+)/{0,1}$', 'courses_list'),
-    (r'^get_publication_lessons/(?P<publication_id>\d+)/{0,1}', 'get_publication_lessons'),
-    (r'^get_kids/(?P<publication_id>\d+)$', 'get_kids'),
-    (r'^get_space/(?P<course_id>\d+)/(?P<space_id>\d+)$', 'get_space'),
-    (r'^edit_table_of_contents/(?P<course_id>\d+)/(?P<project_id>\d+)/{0,1}', 'edit_table_of_contents'),
-    (r'^save_table_of_contents/(?P<course_id>\d+)/{0,1}', 'save_table_of_contents'),
-    (r'^rename/(?P<course_id>\d+)', 'rename'),
-    (r'^remove/(?P<course_id>\d+)', 'remove'),
-    (r'^remove_chapter/(?P<chapter_id>\d+)/(?P<course_id>\d+)', 'remove_chapter'),
-    (r'^add_lesson/(?P<chapter_id>\d+)/(?P<course_id>\d+)', 'add_lesson'),
-    (r'^add_lesson/eBook/(?P<course_id>\d+)$', 'add_lesson_to_eBook'),
-    (r'^remove_lessons/(?P<course_id>\d+)$', 'remove_lessons'),
-    (r'^export/(?P<course_id>\d+)$', 'trigger_export'),
-    (r'^export/(?P<course_id>\d+)/async/(?P<user_id>\d+)/(?P<version>\d+)/(?P<include_player>\d+)$', 'export'),
-    (r'^export_structure/(?P<course_id>\d+)/(?P<exported_course_id>\d+)/(?P<user_id>\d+)/(?P<version>\d+)$', 'export_structure'),
-    (r'^export_lesson/(?P<content_id>\d+)/(?P<user_id>\d+)/(?P<exported_course_id>\d+)/(?P<version>\d+)/(?P<include_player>\d+)$', 'export_lesson'),
-    (r'^set_structure_state$', 'set_structure_state'),
-    (r'^save_resources', 'save_resources'),
-    (r'^edit_resources/(?P<course_id>\d+)/(?P<content_id>\d+)$', 'edit_resources'),
-    (r'^edit_resources_iframe/(?P<content_id>\d+)$', 'edit_resources_iframe'),
-    (r'^get_resources/(?P<course_id>\d+)/(?P<content_id>\d+)/(?P<page_index>\d+)$', 'get_resources'),
+from django.urls import path, re_path
+from .views import (
+    courses_list, get_publication_lessons, get_kids, get_space,
+    edit_table_of_contents, save_table_of_contents, rename, remove,
+    remove_chapter, add_lesson, add_lesson_to_eBook, remove_lessons,
+    trigger_export, export, export_structure, export_lesson,
+    set_structure_state, save_resources, edit_resources, edit_resources_iframe,
+    get_resources
 )
+
+urlpatterns = [
+    # Regular paths
+    re_path(r'^list/(?P<project_id>\d+)/{0,1}$', courses_list, name='courses_list'),
+    re_path(r'^get_publication_lessons/(?P<publication_id>\d+)/{0,1}', get_publication_lessons, name='get_publication_lessons'),
+    path('get_kids/<int:publication_id>/', get_kids, name='get_kids'),
+    path('get_space/<int:course_id>/<int:space_id>/', get_space, name='get_space'),
+    re_path(r'^edit_table_of_contents/(?P<course_id>\d+)/(?P<project_id>\d+)/{0,1}', edit_table_of_contents, name='edit_table_of_contents'),
+    re_path(r'^save_table_of_contents/(?P<course_id>\d+)/{0,1}', save_table_of_contents, name='save_table_of_contents'),
+    path('rename/<int:course_id>/', rename, name='rename'),
+    path('remove/<int:course_id>/', remove, name='remove'),
+    path('remove_chapter/<int:chapter_id>/<int:course_id>/', remove_chapter, name='remove_chapter'),
+    path('add_lesson/<int:chapter_id>/<int:course_id>/', add_lesson, name='add_lesson'),
+    path('add_lesson/eBook/<int:course_id>/', add_lesson_to_eBook, name='add_lesson_to_eBook'),
+    path('remove_lessons/<int:course_id>/', remove_lessons, name='remove_lessons'),
+    path('export/<int:course_id>/', trigger_export, name='trigger_export'),
+    re_path(r'^export/(?P<course_id>\d+)/async/(?P<user_id>\d+)/(?P<version>\d+)/(?P<include_player>\d+)$', export, name='export'),
+    re_path(r'^export_structure/(?P<course_id>\d+)/(?P<exported_course_id>\d+)/(?P<user_id>\d+)/(?P<version>\d+)$', export_structure, name='export_structure'),
+    re_path(r'^export_lesson/(?P<content_id>\d+)/(?P<user_id>\d+)/(?P<exported_course_id>\d+)/(?P<version>\d+)$', export_lesson, name='export_lesson'),
+    path('set_structure_state/', set_structure_state, name='set_structure_state'),
+    path('save_resources', save_resources, name='save_resources'),
+    path('edit_resources/<int:course_id>/<int:content_id>/', edit_resources, name='edit_resources'),
+    path('edit_resources_iframe/<int:content_id>/', edit_resources_iframe, name='edit_resources_iframe'),
+    path('get_resources/<int:course_id>/<int:content_id>/<int:page_index>/', get_resources, name='get_resources'),
+]

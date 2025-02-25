@@ -1,5 +1,5 @@
-from google.appengine.api.modules import get_current_module_name
-from google.appengine.runtime.apiproxy_errors import OverQuotaError, DeadlineExceededError
+import os
+from google.api_core.exceptions import TooManyRequests, DeadlineExceeded
 from django.shortcuts import render
 from lorepo.exchange.utils import RETRY_ERRORS
 from lorepo.spaces.models import Space
@@ -21,7 +21,6 @@ import logging
 from lorepo.mycontent.models import Content, ContentType
 import json
 from lorepo.exchange.views import _zip_content
-from google.appengine.ext import blobstore
 from libraries.utility.queues import delete_task, trigger_backend_task
 from libraries.utility.environment import get_versioned_module
 from zipfile import ZipFile, ZIP_DEFLATED
@@ -37,7 +36,6 @@ from lorepo.permission.models import Permission
 import libraries.utility.cacheproxy as cache
 from xml.dom import minidom
 from lorepo.course.scorm import store_scorm_manifest
-from lorepo.filestorage.utils import open_file
 from lorepo.spaces.util import load_kids, structure_as_dict
 from libraries.utility.decorators import backend
 from lorepo.token.decorators import form_token, set_form_token
@@ -331,12 +329,12 @@ def export(_, course_id, user_id, version, include_player):
         for content_id in lessons_ids:
             url = '/course/export_lesson/%s/%s/%s/%s/%s' % (content_id, user_id, exported_course.pk, version, include_player)
             name = url.replace('/', '_')
-            trigger_backend_task(url, name=name, target=get_versioned_module(get_current_module_name()), queue_name='backup')
+            trigger_backend_task(url, name=name, target=get_versioned_module(os.environ('module_name')), queue_name='backup')
 
         trigger_backend_task('/course/export_structure/%s/%s/%s/%s' %
                                  (course_id, exported_course.pk, user_id, version), name="structure_export_course_%s" % exported_course.pk, target=get_versioned_module(get_current_module_name()), queue_name='backup')
 
-    except DeadlineExceededError:
+    except DeadlineExceeded:
         report_error()
         try:
             course.is_being_exported = False
@@ -389,6 +387,16 @@ def export_structure(request, course_id, exported_course_id, user_id, version):
     return HttpResponse()
 
 
+from google.cloud import storage
+from django.core.files.storage import default_storage
+from django.core.files.base import ContentFile
+from django.http import HttpResponse, HttpResponseForbidden
+import logging
+from .models import ExportedCourse, Content, ExportedCourseLesson, UploadedFile, Course
+from .exceptions import RETRY_ERRORS, LessonAlreadyCreatedError
+from .utils import _zip_content, send_failure_notification, delete_task
+
+
 @backend
 def export_lesson(_, content_id, user_id, exported_course_id, version, include_player):
     try:
@@ -396,17 +404,35 @@ def export_lesson(_, content_id, user_id, exported_course_id, version, include_p
         exported_course = ExportedCourse.objects.get(pk=exported_course_id)
         content = Content.get_cached(id=content_id)
         exported_course.validate_lesson_created(content)
+
+        # Create the zipped content file
         file_name = _zip_content(content, user_id, version, include_player=include_player)
+
+        # Upload the file to Google Cloud Storage (GCS)
+        storage_client = storage.Client()
+        bucket = storage_client.get_bucket('your-bucket-name')  # Replace with your GCS bucket name
+        blob = bucket.blob(file_name)
+
+        # Open and upload the file (assuming it's a zip file)
+        with open(file_name, 'rb') as f:
+            blob.upload_from_file(f, content_type='application/zip')
+
+        # After uploading, create the UploadedFile object and save it
         upfile = UploadedFile()
-        upfile.file = str(blobstore.create_gs_key('/gs' + file_name))
+        upfile.file = file_name  # or store the GCS URL (blob.public_url)
         upfile.path = file_name
         upfile.content_type = 'application/zip'
         upfile.save()
+
+        # Validate and create the ExportedCourseLesson
         exported_course.validate_lesson_created(content)
-        exported_course_lesson = ExportedCourseLesson(exported_course=exported_course, zipped_content=upfile, content=content)
+        exported_course_lesson = ExportedCourseLesson(exported_course=exported_course, zipped_content=upfile,
+                                                      content=content)
         exported_course_lesson.save()
+
     except RETRY_ERRORS as e:
-        logging.exception('%s - retrying. If you see too much of these, you will need to investigate' % type(e).__name__)
+        logging.exception(
+            '%s - retrying. If you see too much of these, you will need to investigate' % type(e).__name__)
         return HttpResponseForbidden()
     except LessonAlreadyCreatedError as e:
         logging.error(e)
@@ -533,15 +559,15 @@ def generate_gcs_zip(course, exported_course_lessons, file_name, user_id, versio
     my_file = None
 
     try:
-        my_file = open_file(file_name, 'application/zip')
-        my_zip = ZipFile(my_file, 'w', ZIP_DEFLATED)
+        with open(file_name, 'rb') as my_file:
+            my_zip = ZipFile(my_file, 'w', ZIP_DEFLATED)
 
-        course.save_exported_lessons(exported_course_lessons)
-        course_xml = course.structure_xml.contents
-        course_xml = remove_unrelated_resources(course_xml)
-        my_zip.writestr('structure.xml'.encode('utf-8'), course_xml)
-        store_scorm_manifest(my_zip, course, version)
-        _store_lessons(my_zip, exported_course_lessons, user_id)
+            course.save_exported_lessons(exported_course_lessons)
+            course_xml = course.structure_xml.contents
+            course_xml = remove_unrelated_resources(course_xml)
+            my_zip.writestr('structure.xml'.encode('utf-8'), course_xml)
+            store_scorm_manifest(my_zip, course, version)
+            _store_lessons(my_zip, exported_course_lessons, user_id)
     except Exception as e:
         raise e
     finally:

@@ -1,4 +1,4 @@
-from django.utils.http import urlquote
+from urllib.parse import quote
 from django.http import HttpResponseRedirect
 from lorepo.mycontent.models import Content
 
@@ -34,7 +34,7 @@ def is_being_edited(function):
             confirmed = request.GET.get('confirmed', None)
             user = content.who_is_editing()
             full_url = request.get_full_path()
-            encoded_full_url = urlquote(full_url)
+            encoded_full_url = quote(full_url)
             if not user or confirmed:
                 content.set_user_is_editing(request.user)
                 return function(request, *args, **kwargs)
@@ -72,7 +72,7 @@ class IsBeingEdited(object):
             content_id = kwargs.get(self.content_id_name)
             content = Content.get_cached_or_404(id=content_id)
             user = content.who_is_editing()
-            encoded_full_url = urlquote(request.get_full_path())
+            encoded_full_url = quote(request.get_full_path())
             confirmed = request.GET.get(self.confirmed_name, None)
 
             if user is None or confirmed:

@@ -2,29 +2,26 @@ import gc
 import json
 import logging
 
-from django.contrib.auth.decorators import login_required
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.http import HttpResponse, HttpResponseRedirect, Http404, HttpResponseForbidden
 from django.shortcuts import get_object_or_404, render
-
-import settings
-from libraries.utility.BucketManager import FileStorageBucketManager
-from libraries.utility.decorators import backend
-from lorepo.filestorage.forms import UploadForm
-from lorepo.filestorage.models import FileStorage, UploadedFile, SecureFile
-from google.appengine.ext import blobstore
-from google.appengine.api import images
+from django.contrib.auth.decorators import login_required
+from django.core.exceptions import PermissionDenied
+from django.conf import settings
+from io import BytesIO
 import datetime
-import cloudstorage
-from lorepo.filestorage.utils import get_reader
-from google.appengine.ext.blobstore import InternalError
+from django.core.files.storage import default_storage
+from django.core.files.base import ContentFile
 
+from lorepo.filestorage.forms import UploadForm
+from lorepo.filestorage.models import FileStorage, UploadedFile
+from lorepo.filestorage.utils import get_reader
 from lorepo.util.requests import is_request_secure
 
-SIZE_32_MB = 32 * 1024 * 1024 # should be google.appengine.ext.blobstore.MAX_BLOB_FETCH_SIZE
+SIZE_32_MB = 32 * 1024 * 1024
 RETRY_COUNT = 5
 GAE_LIMIT = 1024 * 1024 * 5
-CACHE_MAXAGE = 60*60  # 3600*24*30 seems not working
+CACHE_MAXAGE = 60 * 60  # 3600 * 24 * 30 seems not working
 
 def get_file(request, file_id):
     file = get_object_or_404(FileStorage, pk=file_id)
@@ -33,7 +30,7 @@ def get_file(request, file_id):
         response['Cache-Control'] = 'no-cache'
         return response
     else:
-        if (not request.user.is_authenticated()) or (request.user!=file.owner):
+        if not request.user.is_authenticated or request.user != file.owner:
             logging.error('Unauthorized request to save content')
             return HttpResponseForbidden('Permission Denied')
 
@@ -44,7 +41,7 @@ def get_file(request, file_id):
         return response
 
 def blob_upload_dir(request):
-    return HttpResponse(blobstore.create_upload_url('/file/upload'))
+    return HttpResponse(reverse('file_upload'))  # URL for the file upload
 
 def upload(request):
     view_url = reverse('lorepo.filestorage.views.upload')
@@ -58,15 +55,20 @@ def upload(request):
                 model.content_type = 'video/mp4'
             model.filename = request.FILES['file'].name
             model.save()
+
+            # Save the file to default storage (e.g., S3, local, etc.)
+            default_storage.save(model.filename, ContentFile(request.FILES['file'].read()))
+
             return HttpResponseRedirect(view_url + "?key=" + str(model.id))
-        except:
+        except Exception as e:
+            logging.error(f"Error uploading file: {e}")
             return HttpResponse("ERROR")
 
     key = request.GET.get('key', '???')
     if key == '???':
         return HttpResponse('/file/serve/???')
     model = UploadedFile.objects.get(pk=key)
-    return render(request, 'editor/uploaded_file.json', {'file' : model})
+    return render(request, 'editor/uploaded_file.json', {'file': model})
 
 
 def serve_blob(request, file_id):
@@ -79,30 +81,29 @@ def _serve_blob(request, upload):
     response['Accept-Ranges'] = 'bytes'
     response['Content-Type'] = upload.content_type
     if upload.filename and upload.filename != '':
-        response['content-disposition'] = 'filename="%s"' % upload.filename
+        response['content-disposition'] = f'filename="{upload.filename}"'
+
+    # Handle caching for files
     if upload.content_type != 'video/mp4' and upload.content_type != 'application/mp4':
         response['Cache-Control'] = "public, max-age=" + str(CACHE_MAXAGE)
         response['Pragma'] = 'Public'
-    if upload.file.file.blobstore_info is not None:
-        blob_key = str(upload.file.file.blobstore_info.key())
-        size = upload.file.file.blobstore_info.size
-    else:
-        blob_key = str(upload.file)
-        stat = cloudstorage.stat(upload.path)
-        size = stat.st_size
+
+    # Retrieve the file from the default storage
+    file_content = default_storage.open(upload.filename, 'rb')
+    size = file_content.size
 
     if size >= SIZE_32_MB:
-        response['X-AppEngine-BlobKey'] = blob_key
+        response['X-AppEngine-BlobKey'] = upload.filename
         if 'HTTP_RANGE' in request.META:
             response['X-AppEngine-BlobRange'] = request.META['HTTP_RANGE']
         return response
 
     reader = get_reader(upload)
-    response = serve_file(request, response, blob_key, size, reader)
+    response = serve_file(request, response, upload.filename, size, reader)
     gc.collect()
     return response
 
-def serve_file(request, response, blob_key, size, reader):
+def serve_file(request, response, file_key, size, reader):
     retry = 0
     while retry < RETRY_COUNT:
         try:
@@ -117,26 +118,26 @@ def serve_file(request, response, blob_key, size, reader):
                     bytes_string = range_string.split(':')[1]
                 limits = bytes_string.split('-')
                 start = int(limits[0])
-                if limits[1] != '':
-                    end = int(limits[1])
-                else:
-                    end = size - 1
+                end = int(limits[1]) if limits[1] else size - 1
                 to_read = end - start + 1
                 reader.seek(start)
+
                 while to_read > GAE_LIMIT:
                     response.write(reader.read(GAE_LIMIT))
-                    to_read = to_read - GAE_LIMIT
+                    to_read -= GAE_LIMIT
+
                 if to_read > 0:
                     response.write(reader.read(to_read))
-                response['Content-Range'] = 'bytes %s-%s/%s' % (start, end, size)
+                response['Content-Range'] = f'bytes {start}-{end}/{size}'
             retry = RETRY_COUNT
-        except InternalError as e:
-            retry = retry + 1
+        except Exception as e:
+            retry += 1
             if retry == RETRY_COUNT:
                 reader.close()
                 raise e
     reader.close()
     return response
+
 
 def image_thumbnail(request, file_id, width=150, height=150):
     width = int(width)
@@ -147,12 +148,8 @@ def image_thumbnail(request, file_id, width=150, height=150):
     upload = get_object_or_404(UploadedFile, pk=file_id)
     if 'image' in upload.content_type:
         try:
-            if upload.file.file.blobstore_info is not None:
-                image = images.Image(blob_key=upload.file.file.blobstore_info)
-            elif upload.path is not None:
-                image = images.Image(filename='/gs' + upload.path)
-            else:
-                raise Http404
+            file_content = default_storage.open(upload.filename, 'rb')
+            image = images.Image(file_content.read())
             image.resize(width, height)
             response = HttpResponse(content=image.execute_transforms(output_encoding=images.PNG), content_type='image/png')
         except images.BadImageError:
@@ -161,25 +158,30 @@ def image_thumbnail(request, file_id, width=150, height=150):
             response = HttpResponseRedirect("/media/images/no_thumbnail.png")
     else:
         response = HttpResponseRedirect("/media/images/no_thumbnail.png")
-    response['Cache-Control'] = "public, max-age=" + str(3600*24*30)
+
+    response['Cache-Control'] = "public, max-age=" + str(3600 * 24 * 30)
     return response
 
 @login_required
 def serve_secure(request, file_id):
+    """
+    Serve a secure file if the request is authenticated and secure.
+    If not secure or the user doesn't have access, redirect or raise an error.
+    """
     if not is_request_secure(request):
-        return HttpResponseRedirect('%s%s' % (settings.MAUTHOR_BASIC_URL, request.get_full_path()))
+        return HttpResponseRedirect(f"{settings.MAUTHOR_BASIC_URL}{request.get_full_path()}")
 
     upload = get_object_or_404(SecureFile, pk=file_id)
 
     if not upload.has_access(request.user):
-        raise Http404()
+        raise PermissionDenied("You do not have permission to access this file.")
+
     return _serve_blob(request, upload)
 
-
-@backend
 def remove_old_gcs_async(request):
     payload = json.loads(request.body)
-    logging.info("[backend task][filestorage]Removing from gcs: {}".format(payload['path']))
-    FileStorageBucketManager().delete(payload['path'])
+    logging.info("[backend task][filestorage]Removing from storage: {}".format(payload['path']))
+    # Use the default storage to remove files from S3, local storage, etc.
+    default_storage.delete(payload['path'])
 
     return HttpResponse("ok")

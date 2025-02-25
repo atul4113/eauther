@@ -1,4 +1,4 @@
-from django.conf.urls import url
+from django.urls import path
 from django.utils.decorators import method_decorator
 from lorepo.corporate.middleware import CorporateMiddleware
 from lorepo.editor.views import _read_corporate_templates
@@ -15,7 +15,7 @@ from mauthor.states.models import ProjectStatesSet, ContentState
 from mauthor.states.util import get_states_sets
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
-from rest_framework import views
+from drf_spectacular import views
 from lorepo.api.v2.mixins import MiddlewareMixin
 from lorepo.mycontent.serializers import ContentSerializer, TemplateContentSerializer
 from django.template.loader import render_to_string
@@ -133,9 +133,8 @@ class CreateLessonView(MiddlewareMixin, views.APIView):
           'content_id': str(content.pk)
         }, status=status.HTTP_200_OK)
 
-
 urlpatterns = [
-    url(r'^templates$', TemplatesView.as_view(), name='templates'),
-    url(r'^simpletemplates$', SimpleTemplatesView.as_view(), name='templates'),
-    url(r'^create$', CreateLessonView.as_view(), name='create_lesson'),
-    ]
+    path('templates', TemplatesView.as_view(), name='templates'),
+    path('simpletemplates', SimpleTemplatesView.as_view(), name='simpletemplates'),
+    path('create', CreateLessonView.as_view(), name='create_lesson'),
+]

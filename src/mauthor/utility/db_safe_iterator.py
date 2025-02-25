@@ -1,4 +1,16 @@
-from libraries.utility.cursors import get_cursor, set_cursor
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')))
+
+
+def get_cursor(self):
+    """Returns the current cursor (page number)."""
+    return self._cursor
+
+
+def set_cursor(self, cursor):
+    """Sets the cursor (page number)."""
+    self._cursor = int(cursor)
 
 
 def safe_iterate(queryset, batch_size=200):

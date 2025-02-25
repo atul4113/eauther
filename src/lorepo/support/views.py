@@ -14,7 +14,6 @@ from lorepo.support.templatetags.support import print_status
 from libraries.utility.request import get_request_value
 from lorepo.spaces.models import SpaceType, Space
 from lorepo.filestorage.forms import UploadForm
-from google.appengine.api import blobstore
 from django.contrib import messages
 from mauthor.company.util import get_users_from_company
 from django.contrib.auth.models import User
@@ -221,39 +220,46 @@ def _handle_add_comment(request, ticket_id):
 @login_required
 def add_attachment(request, ticket_id, admin=None):
     ticket = get_object_or_404(Ticket, pk=ticket_id)
+
     if request.method == 'POST':
         form = UploadForm(request.POST, request.FILES)
         if form.is_valid():
-            uploaded_file = form.save(False)
+            uploaded_file = form.save(commit=False)
             uploaded_file.content_type = request.FILES['file'].content_type
-            import cgi
-            uploaded_file.filename = cgi.escape(request.FILES['file'].name, True)
+            uploaded_file.filename = request.FILES['file'].name  # Directly using the file name
             uploaded_file.owner = request.user
             uploaded_file.title = request.POST.get('title', '')
             uploaded_file.save()
+
+            # Save attachment to the ticket
             attachment = TicketAttachment(file=uploaded_file, ticket=ticket)
             attachment.save()
-            text = 'New attachment added: %s/file/serve/%s' % (settings.BASE_URL, uploaded_file.id)
+
+            # Create a comment for the attachment
+            text = f'New attachment added: {settings.BASE_URL}/file/serve/{uploaded_file.id}'
             comment = Comment(
-                    ticket=ticket, 
-                    created_date=datetime.datetime.now(), 
-                    text=text, 
-                    author=request.user)
+                ticket=ticket,
+                created_date=datetime.datetime.now(),
+                text=text,
+                author=request.user
+            )
             comment.save()
+
+            # Notify users about the new comment
             send_new_comment_notification(ticket, comment)
+
+            # Display success message
             messages.success(request, "Your attachment has been added.")
+
+            # Redirect based on whether the user is an admin
             if admin:
-                return HttpResponseRedirect('/support/admin/ticket/' + ticket_id)
+                return HttpResponseRedirect(f'/support/admin/ticket/{ticket_id}')
             else:
-                return HttpResponseRedirect('/support/ticket/' + ticket_id)
+                return HttpResponseRedirect(f'/support/ticket/{ticket_id}')
     else:
         form = UploadForm()
-    url = '/support/add_attachment/' + ticket_id
-    if admin:
-        url = url + '/1'
-    upload_url = blobstore.create_upload_url(url)
-    return render(request, 'support/attachment.html', {'form' : form, 'upload_url' : upload_url, 'ticket' : ticket_id})
 
+    return render(request, 'support/attachment.html', {'form': form, 'ticket': ticket})
 
 @login_required
 @user_passes_test(lambda u: u.company != None)

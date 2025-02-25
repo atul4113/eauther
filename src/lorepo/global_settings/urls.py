@@ -1,7 +1,7 @@
-from django.conf.urls import url
+from django.urls import path
 
 from lorepo.global_settings.views import GlobalSettingsView
 
 urlpatterns = [
-    url(r'^$', GlobalSettingsView.as_view()),
+    path('', GlobalSettingsView.as_view()),
 ]

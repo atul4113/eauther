@@ -1,9 +1,4 @@
 import warnings
-from django.utils.deprecation import RemovedInDjango19Warning, RemovedInDjango110Warning
-
-#turn off warnings in logs about future django compatibility errors
-warnings.filterwarnings('ignore', category=RemovedInDjango19Warning)
-warnings.filterwarnings('ignore', category=RemovedInDjango110Warning)
 
 def autodiscover(module_name):
     """
@@ -11,7 +6,7 @@ def autodiscover(module_name):
     installed apps.
     """
     from django.conf import settings
-    from django.utils.importlib import import_module
+    from importlib import import_module
     from django.utils.module_loading import module_has_submodule
 
     for app in settings.INSTALLED_APPS:

@@ -1,16 +1,17 @@
-from django.conf.urls import patterns, url
-from mauthor.states.views import ProjectStates
+from django.urls import path
+from mauthor.states.views import ProjectStates, change_state, change_to_ready, list_sets, update_rank, update_percentage, delete_state, delete_set, rename_state, show_kanban
 
-urlpatterns = patterns('mauthor.states.views',
-    (r'^change/(?P<content_id>\d+)/(?P<state_id>\d+)$', 'change_state'),
-    (r'^change_to_ready/(?P<content_id>\d+)/(?P<state_id>\d+)$', 'change_to_ready'),
-    (r'^project/(?P<project_id>\d+)$', ProjectStates.as_view()),
-    (r'^sets$', 'list_sets'),
-    (r'^sets/(?P<set_id>\d+)$', 'list_sets'),
-    (r'^update_rank/(?P<state_id>\d+)/(?P<new_rank>\d+)$', 'update_rank'),
-    (r'^update_percentage/(?P<state_id>\d+)/(?P<percentage>\d+)$', 'update_percentage'),
-    (r'^delete/(?P<state_id>\d+)$', 'delete_state'),
-    (r'^delete_set/(?P<set_id>\d+)$', 'delete_set'),
-    (r'^rename/(?P<state_id>\d+)$', 'rename_state'),
-    (r'^show_kanban/(?P<project_id>\d+)$', 'show_kanban')
-)
+urlpatterns = [
+    # View URLs
+    path('change/<int:content_id>/<int:state_id>/', change_state),
+    path('change_to_ready/<int:content_id>/<int:state_id>/', change_to_ready),
+    path('project/<int:project_id>/', ProjectStates.as_view()),
+    path('sets/', list_sets),
+    path('sets/<int:set_id>/', list_sets),
+    path('update_rank/<int:state_id>/<int:new_rank>/', update_rank),
+    path('update_percentage/<int:state_id>/<int:percentage>/', update_percentage),
+    path('delete/<int:state_id>/', delete_state),
+    path('delete_set/<int:set_id>/', delete_set),
+    path('rename/<int:state_id>/', rename_state),
+    path('show_kanban/<int:project_id>/', show_kanban),
+]

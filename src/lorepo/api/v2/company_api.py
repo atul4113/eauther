@@ -1,4 +1,5 @@
-from django.conf.urls import url
+import requests
+from django.urls import path
 from django.core.validators import URLValidator
 from django.utils.decorators import method_decorator
 from lorepo.corporate.models import CompanyProperties
@@ -8,8 +9,7 @@ from lorepo.permission.util import get_company_for_user
 from rest_framework.exceptions import ValidationError
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
-from rest_framework import views
-from google.appengine.api import urlfetch
+from drf_spectacular import views
 
 
 class CompanyView(views.APIView):
@@ -47,9 +47,13 @@ class CompanyView(views.APIView):
         except:
             raise ValidationError('Callback Url is not valid.')
 
-        response = urlfetch.fetch(url=callback_url, method=urlfetch.GET, deadline=10)
+        try:
+            response = requests.get(callback_url, timeout=10)
+        except requests.exceptions.RequestException as e:
+            raise ValidationError(f'Error while contacting callback URL: {str(e)}')
+
         if response.status_code != 200:
-            raise ValidationError('Callback_url not responding')
+            raise ValidationError('Callback URL is not responding.')
 
         company = get_company_for_user(self.request.user)
 
@@ -62,5 +66,5 @@ class CompanyView(views.APIView):
 
 
 urlpatterns = [
-    url(r'^$', CompanyView.as_view(), name='company_properties'),
+    path('', CompanyView.as_view(), name='company_properties'),
     ]

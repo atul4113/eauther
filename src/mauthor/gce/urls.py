@@ -1,6 +1,6 @@
-from django.conf.urls import patterns, url
+from django.urls import path
 from .views import BasedViewRedirect
 
-urlpatterns = patterns('mauthor.gce.views',
-    (r'/', BasedViewRedirect.as_view()),
-)
+urlpatterns = [
+    path('', BasedViewRedirect.as_view(), name='based_view_redirect'),
+]

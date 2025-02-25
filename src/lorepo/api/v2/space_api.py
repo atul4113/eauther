@@ -1,6 +1,6 @@
 import logging
 
-from django.conf.urls import url
+from django.urls import path
 from django.utils.decorators import method_decorator
 from lorepo.api.v2.mixins import MiddlewareMixin
 from lorepo.api.v2.util import get_data_with_cursor
@@ -16,7 +16,7 @@ from rest_framework.exceptions import ValidationError
 from rest_framework.generics import get_object_or_404
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
-from rest_framework import views
+from drf_spectacular import views
 
 
 class SpaceView(MiddlewareMixin, views.APIView):
@@ -462,12 +462,12 @@ class SpaceGetUsersPermissions(views.APIView):
 
 
 urlpatterns = [
-    url(r'^$', SpaceView.as_view(), name='space'),
-    url(r'^(?P<space_id>\d+)/structure$', SpaceStructure.as_view(), name='space'),
-    url(r'^(?P<project_id>\d+)/publications$', PublicationsView.as_view(archived=False), name='publications'),
-    url(r'^(?P<project_id>\d+)/publications/archived$', PublicationsView.as_view(archived=True), name='publications_archived'),
-    url(r'^(?P<space_id>\d+)/lessons$', SpaceLessons.as_view(), name='space_lessons'),
-    url(r'^(?P<space_id>\d+)/get_project$', ProjectForPublicationView.as_view(), name='publication_project'),
-    url(r'^(?P<space_id>\d+)/lessons/(?P<lesson_id>\d+)/tags$', SpaceLessonTag.as_view(), name='space_lesson_tag'),
-    url(r'^permissions/(?P<space_id>\d+)$', SpaceGetUsersPermissions.as_view(), name='space_permissions'),
-    ]
+    path('', SpaceView.as_view(), name='space'),
+    path('<int:space_id>/structure', SpaceStructure.as_view(), name='space'),
+    path('<int:project_id>/publications', PublicationsView.as_view(archived=False), name='publications'),
+    path('<int:project_id>/publications/archived', PublicationsView.as_view(archived=True), name='publications_archived'),
+    path('<int:space_id>/lessons', SpaceLessons.as_view(), name='space_lessons'),
+    path('<int:space_id>/get_project', ProjectForPublicationView.as_view(), name='publication_project'),
+    path('<int:space_id>/lessons/<int:lesson_id>/tags', SpaceLessonTag.as_view(), name='space_lesson_tag'),
+    path('permissions/<int:space_id>', SpaceGetUsersPermissions.as_view(), name='space_permissions'),
+]

@@ -1,72 +1,79 @@
-from django.conf.urls import patterns, url
+from django.urls import path
 from lorepo.corporate.views import SpaceArchiveJobView, SpaceRetrieveJobView, SpaceDeleteJobView, DeleteSpaceAsyncView, \
-    ArchiveSpaceAsyncView, RetrieveSpaceAsyncView
+    ArchiveSpaceAsyncView, RetrieveSpaceAsyncView, more_projects_dashboard, view, view_addon, upload, company_public_spaces, \
+    add_public_space, company_divisions, delete_division, remove_contents_from_division, rename_division, add_division, \
+    admin_panel, division_panel, public_space, list_presentations, trash, delete, metadata, publish, create_new_content_version, \
+    addon_metadata, create_company, create_trial_account, create_company_owner, make_public, fixdb_public_content, fixdb_projects, \
+    fixdb_public_content_metadata, fixdb_public_content_metadata_task, projectControl, ajax_subprojects, addSubproject, project_list, \
+    change_template, flush_user_cache, copy_to_account, toggle_include_contents_in_editor, bug_track_add_form, get_publications_for_project_json, \
+    select_unit, clear_news_cache, no_space_info, set_demo_sample_lessons
 from lorepo.mycontent.fix_ssl import SslReportView
 from lorepo.spaces.models import SpaceType
+from lorepo.spaces.views import addSpace, renameProject, rank
+from lorepo.corporate.api import get_news
 
-urlpatterns = patterns('lorepo.corporate.views',
-    (r'^$', 'more_projects_dashboard'),
-    (r'^(?P<space_id>\d+)$', 'more_projects_dashboard'),
-    (r'^view/(?P<content_id>\d+)$', 'view'),
-    (r'^view_addon/(?P<addon_id>\d+)$', 'view_addon'),
-    (r'^upload/{0,1}$', 'upload'),
-    url(r'^publicspaces$', 'company_public_spaces', name='public_space_control'),
-    (r'^add_public$', 'add_public_space'),
-    (r'^divisions$', 'company_divisions'),
-    (r'^(?P<space_id>\d+)/delete_space$', 'delete_division'),
-    (r'^remove_contents/(?P<space_id>\d+)', 'remove_contents_from_division'),
-    (r'^(?P<space_id>\d+)/rename_space$', 'rename_division'),
-    (r'^add/(?P<space_id>\d+)$', 'add_division'),
-    (r'^admin$', 'admin_panel'),
-    (r'^divisionadmin$', 'division_panel'),
-    (r'^public/(?P<space_id>\d+)$', 'public_space'),
-    (r'^list/(?P<space_id>\d+)$', 'list_presentations'),
-    (r'^list/(?P<space_id>\d+)/trash$', 'trash'),
-    (r'^(?P<content_id>\d+)/delete$', 'delete'),
-    (r'^(?P<content_id>\d+)/metadata$', 'metadata'),
-    (r'^(?P<content_id>\d+)/publish$', 'publish'),
-    (r'^(?P<content_id>\d+)/newVersion$', 'create_new_content_version'),
-    (r'^(?P<addon_id>\d+)/addon_metadata$', 'addon_metadata'),
-    (r'^create_company$', 'create_company'),
-    (r'^create_trial_account$', 'create_trial_account'),
-    (r'^create_company_owner$', 'create_company_owner'),
-    (r'^(?P<content_id>\d+)/makepublic$', 'make_public'),
-    (r'^fixdb_public_content$', 'fixdb_public_content'),
-    (r'^fixdb_projects$', 'fixdb_projects'),
-    (r'^fixdb_public_content_metadata$', 'fixdb_public_content_metadata'),
-    (r'^fixdb_public_content_metadata_task/(?P<portion>\d+)$', 'fixdb_public_content_metadata_task'),
-    url(r'^(?P<space_id>\d+)/subproject$', 'projectControl', name='project_control'),
-    url(r'^(?P<space_id>\d+)/ajax_subprojects$', 'ajax_subprojects'),
-    (r'^(?P<space_id>\d+)/add_subproject$', 'addSubproject'),
-    url(r'^projects/(?P<space_id>\d+)$', 'project_list', name='corporate_projects'),
-    (r'^change_template', 'change_template'),
-    (r'^drop_cache/(?P<company_id>\d+)$', 'flush_user_cache'),
-    (r'^copy_to_account/(?P<content_id>\d+)', 'copy_to_account'),
-    (r'^(?P<project_id>\d+)/toggle_include', 'toggle_include_contents_in_editor'),
-    (r'^bug_track_add_form$', 'bug_track_add_form'),
-    (r'^get_publications_for_project_json$', 'get_publications_for_project_json'),
-    (r'^select_unit/(?P<content_id>\d+)/(?P<publication_id>\d+)$', 'select_unit'),
-    (r'^clear_news_cache$', 'clear_news_cache'),
-    (r'^no_space_info$', 'no_space_info'),
-    (r'^set_demo_sample_lessons$', 'set_demo_sample_lessons'),
-    (r'^ssl_report/(?P<space_id>\d+)_(?P<file_id>\d+)$', SslReportView.as_view(space_type=SpaceType.CORPORATE)),
+urlpatterns = [
+    # Corporate views
+    path('', more_projects_dashboard),
+    path('<int:space_id>/', more_projects_dashboard),
+    path('view/<int:content_id>/', view),
+    path('view_addon/<int:addon_id>/', view_addon),
+    path('upload/', upload),
+    path('publicspaces', company_public_spaces, name='public_space_control'),
+    path('add_public', add_public_space),
+    path('divisions', company_divisions),
+    path('<int:space_id>/delete_space', delete_division),
+    path('remove_contents/<int:space_id>', remove_contents_from_division),
+    path('<int:space_id>/rename_space', rename_division),
+    path('add/<int:space_id>', add_division),
+    path('admin', admin_panel),
+    path('divisionadmin', division_panel),
+    path('public/<int:space_id>', public_space),
+    path('list/<int:space_id>', list_presentations),
+    path('list/<int:space_id>/trash', trash),
+    path('<int:content_id>/delete', delete),
+    path('<int:content_id>/metadata', metadata),
+    path('<int:content_id>/publish', publish),
+    path('<int:content_id>/newVersion', create_new_content_version),
+    path('<int:addon_id>/addon_metadata', addon_metadata),
+    path('create_company', create_company),
+    path('create_trial_account', create_trial_account),
+    path('create_company_owner', create_company_owner),
+    path('<int:content_id>/makepublic', make_public),
+    path('fixdb_public_content', fixdb_public_content),
+    path('fixdb_projects', fixdb_projects),
+    path('fixdb_public_content_metadata', fixdb_public_content_metadata),
+    path('fixdb_public_content_metadata_task/<int:portion>', fixdb_public_content_metadata_task),
+    path('<int:space_id>/subproject', projectControl, name='project_control'),
+    path('<int:space_id>/ajax_subprojects', ajax_subprojects),
+    path('<int:space_id>/add_subproject', addSubproject),
+    path('projects/<int:space_id>', project_list, name='corporate_projects'),
+    path('change_template', change_template),
+    path('drop_cache/<int:company_id>', flush_user_cache),
+    path('copy_to_account/<int:content_id>', copy_to_account),
+    path('<int:project_id>/toggle_include', toggle_include_contents_in_editor),
+    path('bug_track_add_form', bug_track_add_form),
+    path('get_publications_for_project_json', get_publications_for_project_json),
+    path('select_unit/<int:content_id>/<int:publication_id>', select_unit),
+    path('clear_news_cache', clear_news_cache),
+    path('no_space_info', no_space_info),
+    path('set_demo_sample_lessons', set_demo_sample_lessons),
+    path('ssl_report/<int:space_id>_<int:file_id>', SslReportView.as_view(space_type=SpaceType.CORPORATE)),
 
-    # publication
-    (r'^archive/(?P<space_id>\d+)$', SpaceArchiveJobView.as_view()),
-    (r'^retrieve/(?P<space_id>\d+)$', SpaceRetrieveJobView.as_view()),
-    (r'^delete/(?P<space_id>\d+)$', SpaceDeleteJobView.as_view()),
-    (r'^delete_project_async/(?P<job_id>\d+)$', DeleteSpaceAsyncView.as_view()),
-    (r'^archive_project_async/(?P<job_id>\d+)$', ArchiveSpaceAsyncView.as_view()),
-    (r'^retrieve_project_async/(?P<job_id>\d+)$', RetrieveSpaceAsyncView.as_view()),
-)
+    # Publication Views
+    path('archive/<int:space_id>', SpaceArchiveJobView.as_view()),
+    path('retrieve/<int:space_id>', SpaceRetrieveJobView.as_view()),
+    path('delete/<int:space_id>', SpaceDeleteJobView.as_view()),
+    path('delete_project_async/<int:job_id>', DeleteSpaceAsyncView.as_view()),
+    path('archive_project_async/<int:job_id>', ArchiveSpaceAsyncView.as_view()),
+    path('retrieve_project_async/<int:job_id>', RetrieveSpaceAsyncView.as_view()),
 
-urlpatterns += patterns('lorepo.spaces.views',
-    (r'^projects/add/(?P<space_id>\d+)$', 'addSpace'),
-    (r'^projects/(?P<space_id>\d+)/rename_project$', 'renameProject', {'template' : 'corporate/rename_project.html' }),
-    (r'^projects/(?P<space_id>\d+)/rename_section$', 'renameProject', {'template' : 'corporate/rename_section.html' }),
-    (r'^projects/(?P<space_id>\d+)/section_rank$', 'rank', {'template' : 'corporate/section_rank.html' }),
-)
+    # Spaces Views
+    path('projects/add/<int:space_id>', addSpace),
+    path('projects/<int:space_id>/rename_project', renameProject, {'template': 'corporate/rename_project.html'}),
+    path('projects/<int:space_id>/rename_section', renameProject, {'template': 'corporate/rename_section.html'}),
+    path('projects/<int:space_id>/section_rank', rank, {'template': 'corporate/section_rank.html'}),
 
-urlpatterns += patterns('lorepo.corporate.api',
-    (r'^api/news$', 'get_news'),
-)
+    # API Views
+    path('api/news', get_news),
+]

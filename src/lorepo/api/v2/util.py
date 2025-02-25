@@ -1,6 +1,15 @@
-from libraries.utility.cursors import set_cursor, get_cursor
 from rest_framework.generics import GenericAPIView, CreateAPIView, UpdateAPIView, DestroyAPIView
 from rest_framework.mixins import ListModelMixin, RetrieveModelMixin
+
+
+def get_cursor(self):
+    """Returns the current cursor (page number)."""
+    return self._cursor
+
+
+def set_cursor(self, cursor):
+    """Sets the cursor (page number)."""
+    self._cursor = int(cursor)
 
 
 class PageDataWithCursor:
