@@ -6,6 +6,44 @@ from django.core.management import execute_from_command_line
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
+import os
+from google.auth import load_credentials_from_file
+
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/home/delhivery/atul/OneDrive_1_2-21-2025/datastore-app/key.json"
+
+# Test loading credentials
+try:
+    credentials, project = load_credentials_from_file(os.getenv("GOOGLE_APPLICATION_CREDENTIALS"))
+    print(f"Credentials loaded successfully for project: {project}")
+except Exception as e:
+    print(f"Error loading credentials: {e}")
+
+# import psycopg2
+#
+# # Define connection parameters
+# conn_params = {
+#     'dbname': 'myproject',
+#     'user': 'test_user',
+#     'password': 'test#123',
+#     'host': 'localhost',
+#     'port': 5432
+# }
+#
+# try:
+#     # Establish connection
+#     conn = psycopg2.connect(**conn_params)
+#     print("✅ Database connection successful!")
+#
+#     # Create a cursor
+#     cur = conn.cursor()
+#     cur.execute("SELECT version();")
+#     print("PostgreSQL version:", cur.fetchone())
+#
+#     # Close the connection
+#     cur.close()
+#     conn.close()
+# except Exception as e:
+#     print(f"❌ Database connection failed: {e}")
 
 def main():
     try:

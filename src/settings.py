@@ -12,29 +12,7 @@ import pymysql
 pymysql.install_as_MySQLdb()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-# import environ
-#
-# env = environ.Env()
-# BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-# print("BASE_DIR", BASE_DIR)
-# environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
-# file_yaml = env("", default="")
-#
-# print("DJANGAE_APP_YAML_LOCATION")
-# print(os.environ.get("DJANGAE_APP_YAML_LOCATION"), "21212")
-APP_NAME = 'mauthorexample.com'
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'eauthor_db',
-        'USER': 'itilite',
-        'PASSWORD': 'marwa1234',
-        'HOST': 'localhost',
-        'PORT': '3306',
-    }
-}
-
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/home/delhivery/atul/eauther/src/key.json"
 
 APPLICATION_ID = mock_get_application_id()
 
@@ -43,29 +21,16 @@ SERVER_URL = SHARED_SETTINGS[APPLICATION_ID]['server_url']
 BASE_URL = SHARED_SETTINGS[APPLICATION_ID]['base_url']
 MAUTHOR_BASIC_URL = SHARED_SETTINGS[APPLICATION_ID]['base_secure_url']
 
-
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'djangae.db.backends.appengine'
-    # }
-    'default': {  
-        'ENGINE': 'django.db.backends.mysql',  
-        'NAME': 'itilite',  
-        'USER': 'itilite',  
-        'PASSWORD': 'itilite',  
-        'HOST': 'localhost',  
-        'PORT': '3306',  
-        'OPTIONS': {  
-            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"  
-        }  
-    }  
+    "default": {
+        "ENGINE": "gcloudc.db.backends.datastore",
+        "PROJECT": "ealpha-test-application",  # Set your Google Cloud project ID
+    }
 }
-
 
 HTTPS_REDIRECT = SHARED_SETTINGS[APPLICATION_ID]['https_redirect']
 SECRET_KEY = SHARED_SETTINGS[APPLICATION_ID]['secret_key']
 MAUTHOR_IMPORT_SECRET_KEY = ''
-
 
 RECAPTCHA_PUBLIC_KEY = ''
 RECAPTCHA_PRIVATE_KEY = ''
@@ -77,7 +42,7 @@ USE_TZ = False
 
 DJANGAE_DISABLE_CONSTRAINT_CHECKS = True
 
-INSTALLED_APPS = (
+INSTALLED_APPS = [
     'djangae', # Djangae needs to come before django apps in django 1.7 and above
     'markdown_deux',
     'drf_spectacular',
@@ -136,9 +101,9 @@ INSTALLED_APPS = (
     'libraries.wiki',
     'captcha',
     'rest_framework_docs',
-)
+]
 
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE_CLASSES = [
 #    'google.appengine.ext.appstats.recording.AppStatsDjangoMiddleware', # uncomment to enable http://localhost:8000/_ah/stats
 #     'autoload.middleware.AutoloadMiddleware',
     'corsheaders.middleware.CorsMiddleware',
@@ -150,14 +115,8 @@ MIDDLEWARE_CLASSES = (
     'lorepo.user.middleware.LoggingMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'lorepo.HTTPSRedirectMiddleware.HTTPSRedirect',
-)
-# settings.py
-CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
-        'LOCATION': 'unique-snowflake',
-    }
-}
+]
+
 PASSWORD_HASHERS = (
     'django.contrib.auth.hashers.SHA1PasswordHasher',
     'django.contrib.auth.hashers.PBKDF2PasswordHasher',
