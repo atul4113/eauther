@@ -12,11 +12,11 @@ from django.template import loader
 from django.core.mail import mail_admins
 from django.conf import settings
 from django.db.models import Q
-from libraries.utility.helpers import get_object_or_none, generate_unique_gcs_path
-from lorepo.assets.models import AssetsOrPagesReplacementConfig
-from lorepo.mycontent.models import Content
-from lorepo.filestorage.forms import UploadForm
-from lorepo.assets.util import (
+from src.libraries.utility.helpers import get_object_or_none, generate_unique_gcs_path
+from src.lorepo.assets.models import AssetsOrPagesReplacementConfig
+from src.lorepo.mycontent.models import Content
+from src.lorepo.filestorage.forms import UploadForm
+from src.lorepo.assets.util import (
     update_content_assets,
     update_asset_title,
     delete_asset,
@@ -25,16 +25,16 @@ from lorepo.assets.util import (
     _send_replacement_status_info,
     replace_content_page_names,
 )
-from lorepo.permission.decorators import has_space_access
-from lorepo.permission.models import Permission
-from lorepo.filestorage.models import UploadedFile
+from src.lorepo.permission.decorators import has_space_access
+from src.lorepo.permission.models import Permission
+from src.lorepo.filestorage.models import UploadedFile
 from django.contrib.auth.models import User
 from zipfile import ZipFile, BadZipfile
 import mimetypes
 import logging
-from lorepo.filestorage.utils import get_reader, store_file, create_new_version
-from lorepo.spaces.models import Space
-from settings import get_bucket_name
+from src.lorepo.filestorage.utils import get_reader, store_file, create_new_version
+from src.lorepo.spaces.models import Space
+from src.settings import get_bucket_name
 from celery import shared_task
 
 MAX_ASSETS_RETRIES = 10

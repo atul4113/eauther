@@ -3,18 +3,18 @@ import uuid
 import logging
 from xml.dom import minidom
 
-import cloudstorage as gcs
+import src.cloudstorage as gcs
 from django.conf import settings
 from django.contrib.auth.models import User
-from libraries.utility.helpers import get_object_or_none
-from lorepo.filestorage.models import UploadedFile
-from lorepo.filestorage.utils import create_new_version, build_retry_params
-from lorepo.mycontent.models import Content
-from lorepo.public.util import send_message
-from mauthor.lessons_parsers.property_changer.parsers.parsers import ModuleParserFactory, AddonParser
-from mauthor.utility.db_safe_iterator import safe_iterate
+from src.libraries.utility.helpers import get_object_or_none
+from src.lorepo.filestorage.models import UploadedFile
+from src.lorepo.filestorage.utils import create_new_version, build_retry_params
+from src.lorepo.mycontent.models import Content
+from src.lorepo.public.util import send_message
+from src.mauthor.lessons_parsers.property_changer.parsers.parsers import ModuleParserFactory, AddonParser
+from src.mauthor.utility.db_safe_iterator import safe_iterate
 from .models import PageModel, AddonModel
-from settings import get_bucket_name
+from src.settings import get_bucket_name
 from .util import Logger
 
 

@@ -1,5 +1,5 @@
-from mauthor.states.models import StatesSet, StateToSet, ContentState
-import libraries.utility.cacheproxy as cache
+from src.mauthor.states.models import StatesSet, StateToSet, ContentState
+import src.libraries.utility.cacheproxy as cache
 
 def get_states_sets(company):
     states_set = {}

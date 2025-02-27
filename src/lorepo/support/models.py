@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from django.db import models
-from lorepo.spaces.models import Space
-from lorepo.filestorage.models import UploadedFile
+from src.lorepo.spaces.models import Space
+from src.lorepo.filestorage.models import UploadedFile
 
 class TicketStatus():
     NEW = 1

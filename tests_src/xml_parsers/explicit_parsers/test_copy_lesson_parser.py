@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 
 from tests_src.TestCase import DBTestCase
-from lorepo.filestorage.models import FileStorage
+from src.lorepo.filestorage.models import FileStorage
 from pytest import fixture
 from xml_parsers.explicit_parsers.lesson_copy_parser import LessonCopyParser
 

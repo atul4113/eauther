@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-from lorepo.spaces.util import is_space_owner
+from src.lorepo.spaces.util import is_space_owner
 from django.core.exceptions import PermissionDenied
 
 def company_admin(view_func):

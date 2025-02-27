@@ -1,8 +1,8 @@
 from django import template
 from django.template import defaultfilters
-from lorepo.spaces.util import get_space_for_content
-from lorepo.spaces.models import Space
-from lorepo.mycontent.models import Content, ContentType
+from src.lorepo.spaces.util import get_space_for_content
+from src.lorepo.spaces.models import Space
+from src.lorepo.mycontent.models import Content, ContentType
 import re
 import hashlib
 import urllib.parse

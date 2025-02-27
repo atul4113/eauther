@@ -1,5 +1,5 @@
 from django.urls import path
-from mauthor.backup.views import (
+from src.mauthor.backup.views import (
     backup_project,
     select_publications_for_backup,
     backup_project_async,

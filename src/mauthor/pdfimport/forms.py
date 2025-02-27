@@ -1,5 +1,5 @@
 import functools
-from lorepo.filestorage.forms import UploadForm
+from src.lorepo.filestorage.forms import UploadForm
 from django.core.exceptions import ValidationError
 import re
 

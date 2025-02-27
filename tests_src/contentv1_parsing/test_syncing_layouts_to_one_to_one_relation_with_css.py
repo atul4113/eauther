@@ -1,7 +1,7 @@
 from deepdiff import DeepDiff
 from lxml import etree
 
-from libraries.utility.lxml_utilities.content.content_xml import CONTENT_MAIN_XML_PARSERS, StyleTuple, LayoutTuple
+from src.libraries.utility.lxml_utilities.content.content_xml import CONTENT_MAIN_XML_PARSERS, StyleTuple, LayoutTuple
 
 from tests_src.path_utils import GetPathMixin
 

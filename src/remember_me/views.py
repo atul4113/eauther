@@ -1,6 +1,6 @@
 from django.contrib.auth import REDIRECT_FIELD_NAME
 from django.views.decorators.cache import never_cache
-from lorepo.spaces.models import SpaceAccess
+from src.lorepo.spaces.models import SpaceAccess
 from django.contrib.auth.models import User
 
 
@@ -20,7 +20,7 @@ def remember_me_login (
     from django.conf import settings
     from django.http import HttpResponseRedirect
 
-    from remember_me.forms import AuthenticationRememberMeForm
+    from src.remember_me.forms import AuthenticationRememberMeForm
     
     redirect_to = request.REQUEST.get ( redirect_field_name, '' )
     

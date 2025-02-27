@@ -1,6 +1,6 @@
 from django.test.client import Client
-from lorepo.mycontent.models import Content
-from libraries.utility.noseplugins import FormattedOutputTestCase,\
+from src.lorepo.mycontent.models import Content
+from src.libraries.utility.noseplugins import FormattedOutputTestCase,\
     QueueTestCase
 
 class AddonsViewsTests(QueueTestCase):

@@ -1,14 +1,14 @@
-from lorepo.filestorage.models import UploadedFile
-from lorepo.public.util import send_message
-from libraries.utility.decorators import service_admin_user
+from src.lorepo.filestorage.models import UploadedFile
+from src.lorepo.public.util import send_message
+from src.libraries.utility.decorators import service_admin_user
 from django.template import loader
 from django.template.context import Context
 from django.contrib.auth.models import User
 from django.conf import settings
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
-from libraries.utility.environment import get_versioned_module
-from libraries.utility.queues import trigger_backend_task
+from src.libraries.utility.environment import get_versioned_module
+from src.libraries.utility.queues import trigger_backend_task
 import json
 import logging
 from settings import get_bucket_name

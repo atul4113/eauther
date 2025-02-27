@@ -8,7 +8,7 @@ https://docs.djangoproject.com/en/1.6/howto/deployment/wsgi/
 """
 
 
-from .lorepo.boot import fix_path
+from src.lorepo.boot import fix_path
 fix_path()
 
 from django.core.wsgi import get_wsgi_application

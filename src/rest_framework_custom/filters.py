@@ -196,7 +196,7 @@ class OrderingFilter(BaseFilterBackend):
     # The URL query parameter used for the ordering.
     ordering_param = api_settings.ORDERING_PARAM
     ordering_fields = None
-    template = 'rest_framework_custom/filters/ordering.html'
+    template = 'src/rest_framework_custom/filters/ordering.html'
 
     def get_ordering(self, request, queryset, view):
         """

@@ -1,7 +1,7 @@
 from django.urls import re_path
-from lorepo.exchange.async_views import ExportWOMIPagesAsyncView, ExportWOMIPageAsyncView
-from lorepo.exchange.models import ExportVersions
-from lorepo.exchange.views import ExportWOMIPagesView, export, export_with_callback, import_presentation, list_exports, \
+from src.lorepo.exchange.async_views import ExportWOMIPagesAsyncView, ExportWOMIPageAsyncView
+from src.lorepo.exchange.models import ExportVersions
+from src.lorepo.exchange.views import ExportWOMIPagesView, export, export_with_callback, import_presentation, list_exports, \
     create, import_presentation_async, export_async, trigger_export_async, is_lesson_created, show_exports_list
 
 urlpatterns = [

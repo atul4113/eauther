@@ -1,6 +1,6 @@
-from libraries.utility.noseplugins import QueueTestCase
+from src.libraries.utility.noseplugins import QueueTestCase
 from django.test.client import Client
-from lorepo.mycontent.models import Content, CurrentlyEditing
+from src.lorepo.mycontent.models import Content, CurrentlyEditing
 from xml.dom import minidom
 from django.contrib.auth.models import User
 

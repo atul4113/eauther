@@ -1,12 +1,12 @@
 from django.contrib.auth.models import User
 from django.db import models
 from django.template.loader import render_to_string
-from lorepo.filestorage.models import UploadedFile
-import libraries.utility.cacheproxy as cache
-from lorepo.mycontent.models import Content
-from lorepo.util.searchable_models import Indexable
-from markdown import markdown
-from settings import USER_LANGUAGES, LANGUAGES
+from src.lorepo.filestorage.models import UploadedFile
+import src.libraries.utility.cacheproxy as cache
+from src.lorepo.mycontent.models import Content
+from src.lorepo.util.searchable_models import Indexable
+from src.markdown import markdown
+from src.settings import USER_LANGUAGES, LANGUAGES
 
 class WikiPage(models.Model):
     title = models.CharField(max_length=200)

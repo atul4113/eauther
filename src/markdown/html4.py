@@ -37,7 +37,7 @@
 # --------------------------------------------------------------------
 
 
-import markdown
+import src.markdown as markdown
 ElementTree = markdown.etree.ElementTree
 QName = markdown.etree.QName
 Comment = markdown.etree.Comment

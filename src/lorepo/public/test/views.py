@@ -1,6 +1,6 @@
 from django.test.client import Client
-from libraries.utility.noseplugins import FormattedOutputTestCase
-from lorepo.mycontent.models import Content
+from src.libraries.utility.noseplugins import FormattedOutputTestCase
+from src.lorepo.mycontent.models import Content
 
 class ViewsTest(FormattedOutputTestCase):
     fixtures = ['public.json']

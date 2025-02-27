@@ -1,10 +1,10 @@
 from django.template.defaultfilters import register
-from lorepo.corporate.models import CompanyUser
-from lorepo.spaces.models import Space
-from lorepo.spaces.util import is_company_locked
-from lorepo.spaces.util import is_space_owner as is_space_owner_util
-from lorepo.corporate.utils import get_division_for_space
-from mauthor.company.util import get_company_properties
+from src.lorepo.corporate.models import CompanyUser
+from src.lorepo.spaces.models import Space
+from src.lorepo.spaces.util import is_company_locked
+from src.lorepo.spaces.util import is_space_owner as is_space_owner_util
+from src.lorepo.corporate.utils import get_division_for_space
+from src.mauthor.company.util import get_company_properties
 
 
 @register.filter

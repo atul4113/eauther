@@ -1,4 +1,4 @@
-from lorepo.spaces.models import Space
+from src.lorepo.spaces.models import Space
 
 
 # needed when tested function is decorated by @backend

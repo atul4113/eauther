@@ -1,15 +1,15 @@
 from abc import ABCMeta, abstractmethod
 import logging
 from django.contrib.auth.models import User
-from libraries.utility.helpers import get_object_or_none
-from lorepo.filestorage.models import FileStorage
-from lorepo.mycontent.models import Content, ContentType
-from lorepo.public.util import send_message
-from lorepo.user.models import UserProfile, UserLanguage
+from src.libraries.utility.helpers import get_object_or_none
+from src.lorepo.filestorage.models import FileStorage
+from src.lorepo.mycontent.models import Content, ContentType
+from src.lorepo.public.util import send_message
+from src.lorepo.user.models import UserProfile, UserLanguage
 import settings
 import xml.dom.minidom
 
-from libraries.wiki.models import WikiPageTranslated
+from src.libraries.wiki.models import WikiPageTranslated
 
 
 class BackendTaskConfig(object, metaclass=ABCMeta):
@@ -179,9 +179,9 @@ class CorruptedLessonFinder(BackendTaskConfig):
         if task_number is None:
             super(CorruptedLessonFinder, self).send_success(user, instance_name, subject, body)
         elif len(self.broken_list):
-            import cloudstorage as gcs
+            import src.cloudstorage as gcs
             import csv
-            from lorepo.filestorage.utils import build_retry_params
+            from src.lorepo.filestorage.utils import build_retry_params
             with gcs.open('%s/corrupted-lessons/success-%d.csv' % (settings.get_bucket_name('export-packages'), task_number), 'w', 'text/csv', retry_params=build_retry_params()) as f:
                 w = csv.DictWriter(f, list(self.broken_list[0].keys()))
                 w.writeheader()

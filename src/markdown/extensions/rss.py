@@ -1,5 +1,5 @@
-import markdown
-from markdown import etree
+import src.markdown as markdown
+from src.markdown import etree
 
 DEFAULT_URL = "http://www.freewisdom.org/projects/python-markdown/"
 DEFAULT_CREATOR = "Yuri Takhteyev"

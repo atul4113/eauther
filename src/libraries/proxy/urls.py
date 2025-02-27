@@ -1,5 +1,5 @@
 from django.urls import path
-from libraries.proxy.views import get
+from src.libraries.proxy.views import get
 
 urlpatterns = [
     path('get/', get),

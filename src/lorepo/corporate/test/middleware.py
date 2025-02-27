@@ -1,7 +1,7 @@
 from django.test.client import RequestFactory
 from django.contrib.auth.models import User, AnonymousUser
-from lorepo.corporate.middleware import CorporateMiddleware
-from libraries.utility.noseplugins import FormattedOutputTestCase
+from src.lorepo.corporate.middleware import CorporateMiddleware
+from src.libraries.utility.noseplugins import FormattedOutputTestCase
 import lorepo.corporate.middleware as middleware
 import re
 from nose.plugins.attrib import attr

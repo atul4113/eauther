@@ -1,6 +1,6 @@
-from libraries.utility.noseplugins import QueueTestCase
+from src.libraries.utility.noseplugins import QueueTestCase
 from django.test.client import Client
-from libraries.utility.test_assertions import status_code_for
+from src.libraries.utility.test_assertions import status_code_for
 
 class SpaceAccessTests(QueueTestCase):
     fixtures = ['permission_views.json']

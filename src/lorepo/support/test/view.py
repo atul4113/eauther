@@ -1,6 +1,6 @@
-from libraries.utility.noseplugins import FormattedOutputTestCase
+from src.libraries.utility.noseplugins import FormattedOutputTestCase
 from django.test.client import Client
-from libraries.utility.test_assertions import status_code_for, the
+from src.libraries.utility.test_assertions import status_code_for, the
 
 class AdminViewsTests(FormattedOutputTestCase):
     fixtures = ['support.json']

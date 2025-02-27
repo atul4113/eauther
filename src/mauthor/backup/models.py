@@ -1,6 +1,6 @@
 from django.db import models
-from lorepo.filestorage.models import UploadedFile
-from lorepo.mycontent.models import Content
+from src.lorepo.filestorage.models import UploadedFile
+from src.lorepo.mycontent.models import Content
 
 class ProjectBackup(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)

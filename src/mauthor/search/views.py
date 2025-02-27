@@ -1,16 +1,16 @@
 from django.shortcuts import render, redirect
 
 import settings
-from libraries.wiki.models import WikiPageTranslatedIndex
-from lorepo.mycontent.models import Content
-from mauthor.search.util import update_index, search_index, get_spaces_query, \
+from src.libraries.wiki.models import WikiPageTranslatedIndex
+from src.lorepo.mycontent.models import Content
+from src.mauthor.search.util import update_index, search_index, get_spaces_query, \
     parse_query, DEFAULT_SEARCH_LIMIT
 from django.http import HttpResponse
-from libraries.utility.decorators import backend
+from src.libraries.utility.decorators import backend
 import logging
 from django.core.mail import mail_admins
 from django.utils.html import strip_tags
-from mauthor.utility.db_safe_iterator import safe_iterate
+from src.mauthor.utility.db_safe_iterator import safe_iterate
 
 MAX_UPDATE_INDEX_RETRIES = 5
 

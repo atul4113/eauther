@@ -2,7 +2,7 @@ import json
 from django.http import HttpResponse, HttpResponseForbidden
 from django.views.generic import View
 import libraries.utility.cacheproxy as cache
-from lorepo.token.util import generate_token
+from src.lorepo.token.util import generate_token
 
 
 class ApiView(View):

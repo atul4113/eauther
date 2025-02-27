@@ -1,5 +1,5 @@
 from django.urls import path
-from mauthor.indesign.views import upload, editor, create_lesson
+from src.mauthor.indesign.views import upload, editor, create_lesson
 
 urlpatterns = [
     path('upload/', upload),

@@ -2,28 +2,26 @@ from django.core.files.storage import default_storage
 from django.core.mail import mail_admins, send_mail
 from django.template.defaultfilters import filesizeformat
 from django.http import HttpResponse
-import cloudstorage as gcs
 from django.utils.encoding import force_bytes
-from lorepo.corporate.models import CompanyUser
-from lorepo.course.models import Course, ExportedCourse, ExportedCourseLesson
+from src.lorepo.corporate.models import CompanyUser
+from src.lorepo.course.models import Course, ExportedCourse, ExportedCourseLesson
 import datetime
-from libraries.utility.decorators import backend, cron_method
+from src.libraries.utility.decorators import backend, cron_method
 import unicodedata
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.decorators import user_passes_test
-from libraries.utility.queues import trigger_backend_task
+from src.libraries.utility.queues import trigger_backend_task
 import logging
 import traceback
-from lorepo.spaces.util import  get_spaces_tree, is_space_owner
-from lorepo.spaces.models import Space, SpaceAccess, LockedSpaceAccess, SpaceType
-from lorepo.corporate.signals import company_structure_changed
-from mauthor.company.util import get_company_properties
+from src.lorepo.spaces.util import  get_spaces_tree, is_space_owner
+from src.lorepo.spaces.models import Space, SpaceAccess, LockedSpaceAccess, SpaceType
+from src.lorepo.corporate.signals import company_structure_changed
+from src.mauthor.company.util import get_company_properties
 from django.contrib.auth.models import User
 from datetime import date
 from django.template.loader import render_to_string
-from settings import SERVER_EMAIL
-from lorepo.public.util import send_message
-from settings import get_bucket_name
+from src.settings import SERVER_EMAIL
+from src.lorepo.public.util import send_message
 
 
 def get_cursor(self):

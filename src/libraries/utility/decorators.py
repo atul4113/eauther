@@ -5,8 +5,8 @@ from django.contrib.auth.decorators import user_passes_test
 from django.http import Http404
 from django.utils.decorators import method_decorator
 from django.conf import settings
-from libraries.utility import cacheproxy as cache
-from libraries.utility.environment import RequestCache, is_development_server
+from src.libraries.utility import cacheproxy as cache
+from src.libraries.utility.environment import RequestCache, is_development_server
 
 
 def log_time(fn):

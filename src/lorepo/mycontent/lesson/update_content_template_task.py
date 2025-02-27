@@ -1,9 +1,9 @@
 import itertools
 from collections import namedtuple
 
-from libraries.utility.lxml_utilities.content.content_xml import AddonDescriptor, STYLE_ITEM, LAYOUT_ITEM
-from libraries.utility.lxml_utilities.content.xml_model import ContentXML
-from libraries.utility.lxml_utilities.utilities import ensure_subelement_exists, parse_main_xml_layouts
+from src.libraries.utility.lxml_utilities.content.content_xml import AddonDescriptor, STYLE_ITEM, LAYOUT_ITEM
+from src.libraries.utility.lxml_utilities.content.xml_model import ContentXML
+from src.libraries.utility.lxml_utilities.utilities import ensure_subelement_exists, parse_main_xml_layouts
 from lxml import etree
 
 

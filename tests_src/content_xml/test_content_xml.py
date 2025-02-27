@@ -1,6 +1,6 @@
 from deepdiff import DeepDiff
-from libraries.utility.lxml_utilities.content.content_xml import StyleTuple, LayoutTuple, ParsedSemiResponsiveContent
-from libraries.utility.lxml_utilities.content.xml_model import ContentXML
+from src.libraries.utility.lxml_utilities.content.content_xml import StyleTuple, LayoutTuple, ParsedSemiResponsiveContent
+from src.libraries.utility.lxml_utilities.content.xml_model import ContentXML
 
 from tests_src.path_utils import GetPathMixin, LoadXMLsFromFiles
 from tests_src.xml_utils import etree_to_dict

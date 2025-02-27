@@ -2,10 +2,10 @@ import requests
 from django.urls import path
 from django.core.validators import URLValidator
 from django.utils.decorators import method_decorator
-from lorepo.corporate.models import CompanyProperties
-from lorepo.permission.decorators import has_space_access
-from lorepo.permission.models import Permission
-from lorepo.permission.util import get_company_for_user
+from src.lorepo.corporate.models import CompanyProperties
+from src.lorepo.permission.decorators import has_space_access
+from src.lorepo.permission.models import Permission
+from src.lorepo.permission.util import get_company_for_user
 from rest_framework.exceptions import ValidationError
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response

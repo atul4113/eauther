@@ -1,21 +1,21 @@
 from class_views.ApiView import ApiView
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
-from libraries.utility.cacheproxy import delete_template_fragment_cache
-from libraries.utility.helpers import get_object_or_none
-from lorepo.corporate.decorators import HasSpacePermissionMixin
-from lorepo.corporate.models import CompanyUser
-from lorepo.corporate.signals import access_rights_changed, company_structure_changed
-from lorepo.permission.api_utils import get_error_message
-from lorepo.permission.models import Role, Permission
-from lorepo.permission.api_utility import get_filtered_publication_data, get_project_data
-from lorepo.permission.util import translate_perm_to_tuple, group_permissions_tuples, \
+from src.libraries.utility.cacheproxy import delete_template_fragment_cache
+from src.libraries.utility.helpers import get_object_or_none
+from src.lorepo.corporate.decorators import HasSpacePermissionMixin
+from src.lorepo.corporate.models import CompanyUser
+from src.lorepo.corporate.signals import access_rights_changed, company_structure_changed
+from src.lorepo.permission.api_utils import get_error_message
+from src.lorepo.permission.models import Role, Permission
+from src.lorepo.permission.api_utility import get_filtered_publication_data, get_project_data
+from src.lorepo.permission.util import translate_perm_to_tuple, group_permissions_tuples, \
     translate_perm_to_integer, get_company_for_user, create_company_user, remove_company_user
-from lorepo.spaces.form import AccessForm
-from lorepo.spaces.model.companyspacemap.company_space_map import CompanySpaceMap
-from lorepo.spaces.model.companyspacemap.multitasks_locker import CompanySpaceMapTaskLocker
-from lorepo.spaces.models import SpaceAccess, Space
-from mauthor.utility.decorators import LoginRequiredMixin
+from src.lorepo.spaces.form import AccessForm
+from src.lorepo.spaces.model.companyspacemap.company_space_map import CompanySpaceMap
+from src.lorepo.spaces.model.companyspacemap.multitasks_locker import CompanySpaceMapTaskLocker
+from src.lorepo.spaces.models import SpaceAccess, Space
+from src.mauthor.utility.decorators import LoginRequiredMixin
 
 
 # noinspection PyMethodMayBeStatic

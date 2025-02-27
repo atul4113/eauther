@@ -1,6 +1,6 @@
-from lorepo.spaces.models import Space
-from libraries.utility.noseplugins import FormattedOutputTestCase
-from lorepo.spaces.service import insert_space
+from src.lorepo.spaces.models import Space
+from src.libraries.utility.noseplugins import FormattedOutputTestCase
+from src.lorepo.spaces.service import insert_space
 
 class ServiceTest(FormattedOutputTestCase):
     def test_insert_space(self):

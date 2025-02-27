@@ -1,5 +1,5 @@
-from lorepo.spaces.util import get_spaces_from_top_to_specific_space, get_users_from_space
-from mauthor.bug_track.models import Bug
+from src.lorepo.spaces.util import get_spaces_from_top_to_specific_space, get_users_from_space
+from src.mauthor.bug_track.models import Bug
 
 def get_users_for_email(space):
     spaces = get_spaces_from_top_to_specific_space(space)

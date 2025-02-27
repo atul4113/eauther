@@ -1,6 +1,6 @@
 from django.urls import path, re_path
-from mauthor.pdfimport.views import upload, check_pdf_async
-from mauthor.pdfimport.api import gce_callback, error_message_exception
+from src.mauthor.pdfimport.views import upload, check_pdf_async
+from src.mauthor.pdfimport.api import gce_callback, error_message_exception
 
 urlpatterns = [
     # View URLs

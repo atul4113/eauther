@@ -2,16 +2,16 @@ import logging
 
 from django.urls import path
 from django.utils.decorators import method_decorator
-from lorepo.api.v2.mixins import MiddlewareMixin
-from lorepo.api.v2.util import get_data_with_cursor
-from lorepo.corporate.middleware import CorporateMiddleware
-from lorepo.mycontent.models import Content
-from lorepo.mycontent.serializers import ContentTagSerializer, SimpleContentSerializer
-from lorepo.permission.decorators import has_space_access
-from lorepo.permission.models import Permission
-from lorepo.spaces.models import Space, UserSpacePermissions
-from lorepo.spaces.serializers import SpaceSerializer, PublicationsInSpaceSerializer
-from lorepo.spaces.util import structure_with_ids_as_dict
+from src.lorepo.api.v2.mixins import MiddlewareMixin
+from src.lorepo.api.v2.util import get_data_with_cursor
+from src.lorepo.corporate.middleware import CorporateMiddleware
+from src.lorepo.mycontent.models import Content
+from src.lorepo.mycontent.serializers import ContentTagSerializer, SimpleContentSerializer
+from src.lorepo.permission.decorators import has_space_access
+from src.lorepo.permission.models import Permission
+from src.lorepo.spaces.models import Space, UserSpacePermissions
+from src.lorepo.spaces.serializers import SpaceSerializer, PublicationsInSpaceSerializer
+from src.lorepo.spaces.util import structure_with_ids_as_dict
 from rest_framework.exceptions import ValidationError
 from rest_framework.generics import get_object_or_404
 from rest_framework.permissions import IsAuthenticated

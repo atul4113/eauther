@@ -1,10 +1,10 @@
 import zipfile
 from xml.dom import minidom
 
-from libraries.utility.urlfetch import fetch
-from mauthor.localization.utils import filter_localization_properties
+from src.libraries.utility.urlfetch import fetch
+from src.mauthor.localization.utils import filter_localization_properties
 from .modules_list import MODULES_LIST
-import settings
+import src.settings as settings
 import re
 
 class IcplayerZipped(object):

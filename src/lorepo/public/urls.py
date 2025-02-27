@@ -1,5 +1,5 @@
 from django.urls import path, re_path
-from lorepo.public.views import view, view_addon, get_addon, full, contact_us, order_account, learn_more, \
+from src.lorepo.public.views import view, view_addon, get_addon, full, contact_us, order_account, learn_more, \
     player, samples, content_mp, developers_mp
 
 urlpatterns = [

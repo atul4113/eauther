@@ -1,5 +1,5 @@
 from django.urls import re_path
-from mauthor.exchange_narration import views
+from src.mauthor.exchange_narration import views
 
 urlpatterns = [
     re_path(r'^export_to_csv/(?P<content_id>\d+)/{0,1}$', views.export, {'export_type': 'csv'}),

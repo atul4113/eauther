@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 from django.test.client import Client, RequestFactory
-from lorepo.spaces.models import Space
-from lorepo.mycontent.models import Content, ContentSpace, SpaceTemplate
-from libraries.utility.noseplugins import FormattedOutputTestCase
-from libraries.utility.test_assertions import status_code_for
+from src.lorepo.spaces.models import Space
+from src.lorepo.mycontent.models import Content, ContentSpace, SpaceTemplate
+from src.libraries.utility.noseplugins import FormattedOutputTestCase
+from src.libraries.utility.test_assertions import status_code_for
 from django.contrib.auth.models import User
-from lorepo.corporate.views import get_publications_for_project_json
+from src.lorepo.corporate.views import get_publications_for_project_json
 
 class CorporateLogoTest(FormattedOutputTestCase):
     fixtures = ['logo.json']

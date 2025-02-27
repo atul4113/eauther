@@ -1,7 +1,7 @@
 from django.test.client import Client
-from libraries.utility.noseplugins import FormattedOutputTestCase
-from libraries.utility.test_assertions import status_code_for
-from mauthor.bug_track.models import Bug
+from src.libraries.utility.noseplugins import FormattedOutputTestCase
+from src.libraries.utility.test_assertions import status_code_for
+from src.mauthor.bug_track.models import Bug
 
 class ViewsTests(FormattedOutputTestCase):
     fixtures = ['bug.json']

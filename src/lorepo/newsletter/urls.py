@@ -1,5 +1,5 @@
 from django.urls import path
-from lorepo.newsletter.views import index, get_emails_async
+from src.lorepo.newsletter.views import index, get_emails_async
 
 urlpatterns = [
     path('', index),

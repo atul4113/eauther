@@ -1,5 +1,5 @@
 from django.urls import path, re_path
-from lorepo.filestorage import views
+from src.lorepo.filestorage import views
 
 urlpatterns = [
     re_path(r'^(?P<file_id>\d+)$', views.get_file, name='get_file'),

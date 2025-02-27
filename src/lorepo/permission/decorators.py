@@ -1,13 +1,13 @@
 from django.shortcuts import get_object_or_404
-from lorepo.mycontent.models import Content
-from lorepo.spaces.models import Space, SpaceAccess
-from lorepo.spaces.util import get_space_for_content, is_space_owner, is_company_locked
+from src.lorepo.mycontent.models import Content
+from src.lorepo.spaces.models import Space, SpaceAccess
+from src.lorepo.spaces.util import get_space_for_content, is_space_owner, is_company_locked
 from django.contrib.auth.models import AnonymousUser
 from django.core.exceptions import PermissionDenied
-from lorepo.corporate.templatetags.corporate import is_any_division_admin
-from lorepo.permission.util import check_space_access
-from lorepo.course.models import Course
-from lorepo.token.util import generate_token
+from src.lorepo.corporate.templatetags.corporate import is_any_division_admin
+from src.lorepo.permission.util import check_space_access
+from src.lorepo.course.models import Course
+from src.lorepo.token.util import generate_token
 from django.http import HttpResponseRedirect
 
 def has_space_access(permission, is_company=False, token_key=None):

@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from lorepo.mycontent.models import Content
+from src.lorepo.mycontent.models import Content
 
 class Bug(models.Model):
     title = models.CharField(max_length=200)

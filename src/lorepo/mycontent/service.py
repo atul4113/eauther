@@ -1,7 +1,7 @@
-from lorepo.mycontent.models import Content, ContentSpace
-import libraries.utility.cacheproxy as cache
-from lorepo.spaces.service import update_space
-from lorepo.spaces.models import Space
+from src.lorepo.mycontent.models import Content, ContentSpace
+import src.libraries.utility.cacheproxy as cache
+from src.lorepo.spaces.service import update_space
+from src.lorepo.spaces.models import Space
 
 CONTENT_CACHE_TIMEOUT = 60 * 60 * 24
 

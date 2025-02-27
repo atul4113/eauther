@@ -3,8 +3,8 @@ import json
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
-from lorepo.mycontent.models import Content
-from mauthor.lessons_parsers.property_changer.parsers.parsers import ModuleParserFactory, AddonParser
+from src.lorepo.mycontent.models import Content
+from src.mauthor.lessons_parsers.property_changer.parsers.parsers import ModuleParserFactory, AddonParser
 
 
 @user_passes_test(lambda user: user.is_superuser)

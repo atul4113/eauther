@@ -1,9 +1,9 @@
-from libraries.utility.noseplugins import FormattedOutputTestCase
-from lorepo.course.models import Course
-from lorepo.course.scorm import create_manifest
-from lorepo.filestorage.models import FileStorage
-from lorepo.exchange.models import ExportVersions
-from nose.plugins.attrib import attr
+from src.libraries.utility.noseplugins import FormattedOutputTestCase
+from src.lorepo.course.models import Course
+from src.lorepo.course.scorm import create_manifest
+from src.lorepo.filestorage.models import FileStorage
+from src.lorepo.exchange.models import ExportVersions
+from src.nose.plugins.attrib import attr
 
 class ScormTests(FormattedOutputTestCase):
     def setUp(self):

@@ -1,8 +1,8 @@
 import random
 from functools import partial
 
-import libraries.utility.cacheproxy as cache
-from lorepo.token.models import TOKEN_KEYS
+import src.libraries.utility.cacheproxy as cache
+from src.lorepo.token.models import TOKEN_KEYS
 
 
 def generate_token(token_size=5):

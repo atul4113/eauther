@@ -1,6 +1,6 @@
-import settings
-from libraries.utility.noseplugins import FormattedOutputTestCase
-from lorepo.course.helpers import parse_serialized_toc, get_or_create_node,\
+import src.settings as settings
+from src.libraries.utility.noseplugins import FormattedOutputTestCase
+from src.lorepo.course.helpers import parse_serialized_toc, get_or_create_node,\
     create_chapter_node, get_element_by_id, get_structure_chapters,\
     get_child_element_by, remove_unrelated_resources
 from xml.dom import minidom

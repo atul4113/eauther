@@ -6,15 +6,15 @@ from django.template import loader
 from django.template.context import Context
 from django.views.generic.base import View
 import logging
-from libraries.utility.decorators import BackendMixin
-from libraries.utility.helpers import get_object_or_none
-from libraries.utility.queues import trigger_backend_task
-from lorepo.exchange.models import ExportWOMIPages, ExportWOMIPage
-from lorepo.exchange.views import exported_file
-from lorepo.merger.models import ContentMerger
-from lorepo.mycontent.util import clean_content_assets
-from lorepo.public.util import send_message
-from mauthor.metadata.util import copy_page_metadata
+from src.libraries.utility.decorators import BackendMixin
+from src.libraries.utility.helpers import get_object_or_none
+from src.libraries.utility.queues import trigger_backend_task
+from src.lorepo.exchange.models import ExportWOMIPages, ExportWOMIPage
+from src.lorepo.exchange.views import exported_file
+from src.lorepo.merger.models import ContentMerger
+from src.lorepo.mycontent.util import clean_content_assets
+from src.lorepo.public.util import send_message
+from src.mauthor.metadata.util import copy_page_metadata
 
 _no_value = object()
 

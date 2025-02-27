@@ -1,7 +1,7 @@
-from libraries.utility.noseplugins import FormattedOutputTestCase
+from src.libraries.utility.noseplugins import FormattedOutputTestCase
 from django.test.client import Client
-from lorepo.spaces.models import SpaceAccess, LockedSpaceAccess
-from lorepo.spaces.util import get_spaces_tree
+from src.lorepo.spaces.models import SpaceAccess, LockedSpaceAccess
+from src.lorepo.spaces.util import get_spaces_tree
 
 class LockingCompanyTests(FormattedOutputTestCase):
     fixtures = ['locking_company_fix.json']

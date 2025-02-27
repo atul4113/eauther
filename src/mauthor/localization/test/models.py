@@ -1,8 +1,8 @@
-from libraries.utility.noseplugins import FormattedOutputTestCase
-from mauthor.localization.models import XliffXMLNode, ContentXML
+from src.libraries.utility.noseplugins import FormattedOutputTestCase
+import src.mauthor.localization.models import XliffXMLNode, ContentXML
 from nose.plugins.attrib import attr
 from xml.dom import minidom
-from libraries.utility.test_assertions import the
+from src.libraries.utility.test_assertions import the
 
 class StubbedWriter():
     def write(self, data):

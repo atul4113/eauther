@@ -1,11 +1,11 @@
 from django.contrib.auth.models import User
-from lorepo.spaces.util import get_user_spaces, get_space_for_content,\
+from src.lorepo.spaces.util import get_user_spaces, get_space_for_content,\
     filter_deleted, get_corporate_spaces_for_user, get_private_space_for_user,\
     get_spaces_tree, get_top_level_public_spaces, get_spaces_path_for_content,\
     is_space_owner, get_users_from_space, get_spaces_from_top_to_specific_space
-from lorepo.mycontent.models import Content
-from lorepo.spaces.models import Space
-from libraries.utility.noseplugins import FormattedOutputTestCase
+from src.lorepo.mycontent.models import Content
+from src.lorepo.spaces.models import Space
+from src.libraries.utility.noseplugins import FormattedOutputTestCase
 
 class UtilTest(FormattedOutputTestCase):
     fixtures = ['lorepo.json']

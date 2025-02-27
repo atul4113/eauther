@@ -1,10 +1,9 @@
-import libraries.utility.cacheproxy as cache
+import src.libraries.utility.cacheproxy as cache
 
-from lorepo.corporate.models import CompanyProperties
-from lorepo.corporate.signals import company_structure_changed
-from lorepo.permission.util import get_company_users
-
-import settings
+from src.lorepo.corporate.models import CompanyProperties
+from src.lorepo.corporate.signals import company_structure_changed
+from src.lorepo.permission.util import get_company_users
+import src.settings as settings
 
 
 def get_company_properties(company):

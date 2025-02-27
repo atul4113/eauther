@@ -1,6 +1,6 @@
 from django import forms
-from lorepo.support.models import TicketType
-from lorepo.filestorage.forms import UploadForm
+from src.lorepo.support.models import TicketType
+from src.lorepo.filestorage.forms import UploadForm
 
 class TicketForm(forms.Form):
     title = forms.CharField(required=True)

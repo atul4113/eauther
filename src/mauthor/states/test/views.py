@@ -1,7 +1,7 @@
 from django.test.client import Client
-from mauthor.states.models import State, StatesSet, ContentState
-from lorepo.mycontent.models import Content
-from libraries.utility.noseplugins import FormattedOutputTestCase
+from src.mauthor.states.models import State, StatesSet, ContentState
+from src.lorepo.mycontent.models import Content
+from src.libraries.utility.noseplugins import FormattedOutputTestCase
 
 class ViewsTests(FormattedOutputTestCase):
     fixtures = ['states.json']

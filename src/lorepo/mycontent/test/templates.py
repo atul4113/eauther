@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 from django.test.client import Client
-from lorepo.mycontent.models import Content
-from lorepo.mycontent.templatetags.content import cut_after
-from libraries.utility.noseplugins import FormattedOutputTestCase
-from libraries.utility.test_assertions import status_code_for, the
+from src.lorepo.mycontent.models import Content
+from src.lorepo.mycontent.templatetags.content import cut_after
+from src.libraries.utility.noseplugins import FormattedOutputTestCase
+from src.libraries.utility.test_assertions import status_code_for, the
 import xml.etree.ElementTree as ET
 
 class TemplatesTests(FormattedOutputTestCase):

@@ -1,4 +1,4 @@
-import markdown
+import src.markdown as markdown
 import re
 
 def isString(s):

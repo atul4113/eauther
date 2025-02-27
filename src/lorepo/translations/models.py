@@ -8,13 +8,13 @@ from django.db.models import BinaryField
 from django.db.models.signals import post_save, pre_delete
 from django.dispatch import receiver
 
-import libraries.utility.cacheproxy as cache
-from libraries.utility.decorators import cached_in_request
-from lorepo.filestorage.models import UploadedFile
-from lorepo.translations.images import images_labels
-from lorepo.util.singleton_model import SingletonModel
+import src.libraries.utility.cacheproxy as cache
+from src.libraries.utility.decorators import cached_in_request
+from src.lorepo.filestorage.models import UploadedFile
+from src.lorepo.translations.images import images_labels
+from src.lorepo.util.singleton_model import SingletonModel
 from rest_framework.exceptions import ValidationError
-from settings import USER_DEFAULT_LANG
+from src.settings import USER_DEFAULT_LANG
 
 SUPPORTED_LANGUAGES_CACHE_KEY = 'supported_languages_v1'
 
@@ -300,5 +300,5 @@ class TranslationsNewsStatistics(SingletonModel, StatisticsBase):
 
 @receiver(post_save, sender=TranslatedImages)
 def flush_translated_images_cache(sender, instance, **kwargs):
-    from lorepo.translations.utils import get_translated_images
+    from src.lorepo.translations.utils import get_translated_images
     get_translated_images.delete_cached(instance.lang)

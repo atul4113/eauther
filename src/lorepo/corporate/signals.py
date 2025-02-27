@@ -1,10 +1,10 @@
 import django.dispatch
-import libraries.utility.cacheproxy as cache
+import src.libraries.utility.cacheproxy as cache
 from django.contrib.auth.models import User
 from hashlib import sha1 as sha_constructor
 from django.shortcuts import get_object_or_404
-from libraries.utility.queues import trigger_task
-from lorepo.spaces.models import Space
+from src.libraries.utility.queues import trigger_task
+from src.lorepo.spaces.models import Space
 
 
 company_structure_changed = django.dispatch.Signal()

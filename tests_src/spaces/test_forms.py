@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from lorepo.spaces.form import AccessForm
+from src.lorepo.spaces.form import AccessForm
 from django.core.exceptions import ValidationError
 
 

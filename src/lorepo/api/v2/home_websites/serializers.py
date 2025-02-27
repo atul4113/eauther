@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
-from lorepo.home.models import WebSite
-from lorepo.filestorage.models import UploadedFile
+from src.lorepo.home.models import WebSite
+from src.lorepo.filestorage.models import UploadedFile
 
 
 class WebsiteSerializer(serializers.ModelSerializer):

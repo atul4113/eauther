@@ -1,6 +1,6 @@
 from django.core.cache import cache
-from libraries.utility.queues import trigger_backend_task
-from libraries.utility.environment import get_versioned_module
+from src.libraries.utility.queues import trigger_backend_task
+from src.libraries.utility.environment import get_versioned_module
 
 
 class MultiTasksLocker:

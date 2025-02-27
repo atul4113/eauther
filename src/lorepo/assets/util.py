@@ -1,11 +1,11 @@
 import json
 import xml.dom.minidom
 import re
-from lorepo.filestorage.models import UploadedFile, FileStorage
-from lorepo.assets.models import LessonCleaner
+from src.lorepo.filestorage.models import UploadedFile, FileStorage
+from src.lorepo.assets.models import LessonCleaner
 from django.template import loader, Context
-from lorepo.public.util import send_message
-import settings
+from src.lorepo.public.util import send_message
+import src.settings as settings
 
 
 def update_content_assets(content, uploaded_files):

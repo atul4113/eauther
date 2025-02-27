@@ -8,7 +8,7 @@ This extension adds Meta Data handling to markdown.
 
 Basic Usage:
 
-    >>> import markdown
+    >>> import src.markdown as markdown
     >>> text = '''Title: A Test Doc.
     ... Author: Waylan Limberg
     ...         John Doe
@@ -40,7 +40,8 @@ License: BSD (see ../docs/LICENSE for details)
 
 """
 
-import markdown, re
+import src.markdown as markdown
+import re
 
 # Global Vars
 META_RE = re.compile(r'^[ ]{0,3}(?P<key>[A-Za-z0-9_-]+):\s*(?P<value>.*)')

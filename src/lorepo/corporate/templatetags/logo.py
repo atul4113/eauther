@@ -1,5 +1,5 @@
 from django.template.defaultfilters import register
-from lorepo.corporate.models import CorporateLogo
+from src.lorepo.corporate.models import CorporateLogo
 
 
 @register.inclusion_tag('corporate/logo.html')

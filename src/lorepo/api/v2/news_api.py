@@ -1,14 +1,14 @@
 from django.urls import path
 from django.utils.decorators import method_decorator
-from lorepo.permission.decorators import has_space_access
-from lorepo.permission.models import Permission
+from src.lorepo.permission.decorators import has_space_access
+from src.lorepo.permission.models import Permission
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from drf_spectacular import views
 from django.template.defaultfilters import truncatewords
 import feedparser
 from django.utils import html
-import libraries.utility.cacheproxy as cache
+import src.libraries.utility.cacheproxy as cache
 import datetime
 from django.template.defaultfilters import date as django_date
 

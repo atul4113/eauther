@@ -1,8 +1,8 @@
-from libraries.utility.noseplugins import FormattedOutputTestCase
-from lorepo.permission.models import Role, Permission
-from lorepo.spaces.models import Space, SpaceAccess
+from src.libraries.utility.noseplugins import FormattedOutputTestCase
+from src.lorepo.permission.models import Role, Permission
+from src.lorepo.spaces.models import Space, SpaceAccess
 from django.test.client import Client
-from libraries.utility.test_assertions import status_code_for
+from src.libraries.utility.test_assertions import status_code_for
 
 class BasicTests(FormattedOutputTestCase):
     fixtures = ['permission_basic.json']

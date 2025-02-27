@@ -1,5 +1,5 @@
 from django import template
-from lorepo.token.decorators import get_form_token
+from src.lorepo.token.decorators import get_form_token
 
 register = template.Library()
 

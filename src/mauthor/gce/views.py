@@ -1,7 +1,7 @@
 import requests
 from django.http import HttpResponse
 from django.views.generic import TemplateView
-from libraries.utility.decorators import localhost_required
+from src.libraries.utility.decorators import localhost_required
 from django.utils.decorators import method_decorator
 
 

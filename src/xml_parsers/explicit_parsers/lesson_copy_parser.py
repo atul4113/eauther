@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404
-from lorepo.filestorage.models import FileStorage
-from xml_parsers.EchoXMLGenerator import OutputEchoXMLGenerator
+from src.lorepo.filestorage.models import FileStorage
+from src.xml_parsers.EchoXMLGenerator import OutputEchoXMLGenerator
 
 
 class LessonCopyParser(OutputEchoXMLGenerator):

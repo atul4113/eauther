@@ -1,18 +1,18 @@
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.shortcuts import render, get_object_or_404
-from libraries.utility.helpers import get_object_or_none
-from lorepo.corporate.models import CompanyUser
-from lorepo.permission.models import Role
-from lorepo.spaces.util import  get_spaces_tree
-from lorepo.spaces.models import Space, SpaceAccess, LockedSpaceAccess, SpaceType
-from mauthor.utility.decorators import company_admin
-from mauthor.company.util import get_company_properties, get_users_from_company, invalidate_language_cache_for_company_users
-from mauthor.company.forms import EditCompanyForm
+from src.libraries.utility.helpers import get_object_or_none
+from src.lorepo.corporate.models import CompanyUser
+from src.lorepo.permission.models import Role
+from src.lorepo.spaces.util import  get_spaces_tree
+from src.lorepo.spaces.models import Space, SpaceAccess, LockedSpaceAccess, SpaceType
+from src.mauthor.utility.decorators import company_admin
+from src.mauthor.company.util import get_company_properties, get_users_from_company, invalidate_language_cache_for_company_users
+from src.mauthor.company.forms import EditCompanyForm
 from django.http import HttpResponseRedirect
 from django.contrib import messages
-from libraries.utility.cacheproxy import delete_template_fragment_cache
-from lorepo.corporate.signals import company_structure_changed
-from lorepo.mycontent.models import Content
+from src.libraries.utility.cacheproxy import delete_template_fragment_cache
+from src.lorepo.corporate.signals import company_structure_changed
+from src.lorepo.mycontent.models import Content
 from django.contrib.auth.models import User
 
 COMPANY_LANGUAGES = [('en', 'Left to Right'),

@@ -1,12 +1,12 @@
-from libraries.utility.noseplugins import FormattedOutputTestCase
+from src.libraries.utility.noseplugins import FormattedOutputTestCase
 from xmlbuilder import XMLBuilder
 from django.contrib.auth.models import User
 import datetime
-from lorepo.filestorage.models import FileStorage
-from lorepo.mycontent.models import Content
-from mauthor.metadata.util import update_page_metadata
-from mauthor.metadata.models import PageMetadata
-from libraries.utility.test_assertions import the
+from src.lorepo.filestorage.models import FileStorage
+from src.lorepo.mycontent.models import Content
+from src.mauthor.metadata.util import update_page_metadata
+from src.mauthor.metadata.models import PageMetadata
+from src.libraries.utility.test_assertions import the
 
 class UpdateMetadataTests(FormattedOutputTestCase):
     fixtures = ['libraries.testing.users.json', 'libraries.testing.mycontent.json']

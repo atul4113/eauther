@@ -2,7 +2,7 @@ import settings
 from django.template import loader
 from django.template.context import Context
 from xml.dom.minidom import parseString
-from lorepo.exchange.models import ExportVersions
+from src.lorepo.exchange.models import ExportVersions
 
 def store_scorm_manifest(my_zip, course, version):
     manifest = create_manifest(course, version)

@@ -1,9 +1,9 @@
 from collections import OrderedDict
 from django.urls import path
-import settings
-from libraries.utility.environment import get_app_version
-from lorepo.global_settings.models import GlobalSettings
-from lorepo.translations.models import SupportedLanguages
+import src.settings as settings
+from src.libraries.utility.environment import get_app_version
+from src.lorepo.global_settings.models import GlobalSettings
+from src.lorepo.translations.models import SupportedLanguages
 from drf_spectacular import views
 from rest_framework.response import Response
 

@@ -1,10 +1,10 @@
-from libraries.utility.decorators import cached
+from src.libraries.utility.decorators import cached
 
-from libraries.utility.helpers import get_object_or_none
-import libraries.utility.cacheproxy as cache
-from lorepo.translations.models import SupportedLanguages, TranslatedImages, TranslatedLang
-from lorepo.user.models import UserProfile
-from settings import USER_DEFAULT_LANG
+from src.libraries.utility.helpers import get_object_or_none
+import src.libraries.utility.cacheproxy as cache
+from src.lorepo.translations.models import SupportedLanguages, TranslatedImages, TranslatedLang
+from src.lorepo.user.models import UserProfile
+from src.settings import USER_DEFAULT_LANG
 from django.contrib import messages
 
 TRANSLATION_CACHE_TIMEOUT = 60 * 60 * 24 * 7

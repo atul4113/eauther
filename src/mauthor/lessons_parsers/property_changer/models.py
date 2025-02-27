@@ -1,8 +1,8 @@
 import xml.dom.minidom as minidom
 
 import re
-from libraries.utility.helpers import get_object_or_none
-from lorepo.filestorage.models import FileStorage
+from src.libraries.utility.helpers import get_object_or_none
+from src.lorepo.filestorage.models import FileStorage
 from .util import number_in_regex_range, get_property_by_name, get_element_by_tag_name, get_addon_model
 
 

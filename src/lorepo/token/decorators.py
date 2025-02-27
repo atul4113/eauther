@@ -1,7 +1,7 @@
 from django.http import HttpResponseForbidden
-from lorepo.token.util import generate_token, create_and_cache_token
+from src.lorepo.token.util import generate_token, create_and_cache_token
 from django.shortcuts import render
-import libraries.utility.cacheproxy as cache
+import src.libraries.utility.cacheproxy as cache
 
 
 def token(key, method=None):

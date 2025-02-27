@@ -1,8 +1,8 @@
 from rest_framework.generics import RetrieveUpdateAPIView
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 
-from lorepo.global_settings.models import GlobalSettings
-from lorepo.global_settings.serializers import GlobalSettingsSerializer
+from src.lorepo.global_settings.models import GlobalSettings
+from src.lorepo.global_settings.serializers import GlobalSettingsSerializer
 
 
 class GlobalSettingsView(RetrieveUpdateAPIView):

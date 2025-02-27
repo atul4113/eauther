@@ -1,5 +1,5 @@
-from libraries.utility.helpers import get_object_or_none
-from lorepo.spaces.models import Space
+from src.libraries.utility.helpers import get_object_or_none
+from src.lorepo.spaces.models import Space
 
 
 def get_filtered_publication_data(publication_tuple, space_access_dict):

@@ -1,5 +1,5 @@
-from libraries.utility.noseplugins import FormattedOutputTestCase
-from mauthor.localization.models import Page, Comparer, Module, Field,\
+from src.libraries.utility.noseplugins import FormattedOutputTestCase
+from src.mauthor.localization.models import Page, Comparer, Module, Field,\
     Difference, DifferenceType
 from nose.plugins.attrib import attr
 

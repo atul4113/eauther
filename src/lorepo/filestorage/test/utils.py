@@ -1,14 +1,14 @@
-from lorepo.filestorage.models import FileStorage
-from lorepo.filestorage.utils import create_new_version, create_new_subpages,\
+from src.lorepo.filestorage.models import FileStorage
+from src.lorepo.filestorage.utils import create_new_version, create_new_subpages,\
     update_main_page
 from django.contrib.auth.models import User
 import xml.dom.minidom as minidom
-from libraries.utility.noseplugins import FormattedOutputTestCase
+from src.libraries.utility.noseplugins import FormattedOutputTestCase
 from nose.plugins.attrib import attr
 from django.http import HttpRequest, HttpResponse
-from lorepo.filestorage.views import serve_file
-from libraries.utility.test_assertions import the
-from libraries.utility.test_stubs import StubReader
+from src.lorepo.filestorage.views import serve_file
+from src.libraries.utility.test_assertions import the
+from src.libraries.utility.test_stubs import StubReader
 
 class UtilsTests(FormattedOutputTestCase):
     fixtures = ['filestorage.json']

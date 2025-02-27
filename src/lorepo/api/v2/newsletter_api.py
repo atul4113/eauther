@@ -1,12 +1,12 @@
 import time
 from django.urls import path
 
-from lorepo.newsletter.serializers import NewsletterGETSerializer
-from lorepo.newsletter.utils import NewsletterEmailProcessor
+from src.lorepo.newsletter.serializers import NewsletterGETSerializer
+from src.lorepo.newsletter.utils import NewsletterEmailProcessor
 from drf_spectacular import views
 from rest_framework.permissions import IsAdminUser
 from rest_framework.response import Response
-import libraries.utility.cacheproxy as cache
+import src.libraries.utility.cacheproxy as cache
 
 
 class EmailsView(views.APIView):

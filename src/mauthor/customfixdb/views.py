@@ -2,14 +2,14 @@ from django.contrib import messages
 from django.shortcuts import render
 from django.contrib.auth.models import User
 from django.http import HttpResponse
-from libraries.utility.decorators import backend
-from libraries.utility.helpers import get_object_or_none
-from libraries.utility.queues import trigger_backend_task
-from libraries.utility.environment import get_versioned_module, get_app_version
+from src.libraries.utility.decorators import backend
+from src.libraries.utility.helpers import get_object_or_none
+from src.libraries.utility.queues import trigger_backend_task
+from src.libraries.utility.environment import get_versioned_module, get_app_version
 from django.contrib.auth.decorators import login_required, user_passes_test
-from lorepo.public.util import send_message
-from mauthor.customfixdb.models import FixLog
-from mauthor.customfixdb.util import object_builder
+from src.lorepo.public.util import send_message
+from src.mauthor.customfixdb.models import FixLog
+from src.mauthor.customfixdb.util import object_builder
 import settings
 
 FIXDB_QUEUE = 'search'

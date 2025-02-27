@@ -1,33 +1,33 @@
-from lorepo.mycontent.decorators import IsBeingEdited
-from mauthor.localization.models import Xliff, ContentXML, Field, Module,\
+from src.lorepo.mycontent.decorators import IsBeingEdited
+from src.mauthor.localization.models import Xliff, ContentXML, Field, Module,\
     Comparer
 from django.shortcuts import get_object_or_404, render
-from libraries.utility.queues import trigger_backend_task
+from src.libraries.utility.queues import trigger_backend_task
 from django.contrib import messages
 import logging
 from django.contrib.auth.models import User
 from django.core.mail import mail_admins
 from django.http import HttpResponse, HttpResponseRedirect
-from mauthor.localization.utils import create_upload_file, get_xliff, get_upload_form,\
+from src.mauthor.localization.utils import create_upload_file, get_xliff, get_upload_form,\
     get_upload_url, get_uploaded_file, make_copy_and_put_into_space,\
     get_uploaded_xliff, get_space, get_content, create_id_string
-from libraries.utility.redirect import get_redirect, get_redirect_url
-from mauthor.localization.exceptions import NoModulesFoundException, NodeNotFoundException, ContentException,\
+from src.libraries.utility.redirect import get_redirect, get_redirect_url
+from src.mauthor.localization.exceptions import NoModulesFoundException, NodeNotFoundException, ContentException,\
     ContentTooBigException
 import xml.parsers.expat
-from lorepo.mycontent.models import Content
-from lorepo.filestorage.utils import create_xliff_filestorage, create_new_version
+from src.lorepo.mycontent.models import Content
+from src.lorepo.filestorage.utils import create_xliff_filestorage, create_new_version
 from xml.dom import minidom
 import datetime
-from lorepo.filestorage.models import FileStorage
+from src.lorepo.filestorage.models import FileStorage
 from django.contrib.auth.decorators import login_required
 from django.conf.global_settings import LANGUAGES
-from libraries.utility.environment import get_versioned_module
-from mauthor.localization.notifications import send_export_success_notification,\
+from src.libraries.utility.environment import get_versioned_module
+from src.mauthor.localization.notifications import send_export_success_notification,\
     send_export_failure_notification, send_import_success_notification,\
     send_import_failure_notification, send_create_xliff_success_notification,\
     send_create_xliff_failure_notification, send_content_too_big_notification
-from libraries.utility.decorators import backend
+from src.libraries.utility.decorators import backend
 
 @login_required
 def create_export(request, content_id):

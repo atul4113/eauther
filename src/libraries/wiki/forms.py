@@ -1,7 +1,7 @@
 from django import forms
-from libraries.wiki.models import WikiPage, WikiPageTranslated
+from src.libraries.wiki.models import WikiPage, WikiPageTranslated
 from django.core.exceptions import ValidationError
-from libraries.wiki.util import make_url
+from src.libraries.wiki.util import make_url
 
 
 class WikiPageForm(forms.Form):

@@ -12,15 +12,12 @@ from django.core.files.storage import default_storage
 from django.utils.decorators import method_decorator
 from django.views.generic.base import View, TemplateView
 import requests
-
-import zipstream
 from django.shortcuts import get_object_or_404
-
-from libraries.utility.helpers import generate_unique_gcs_path
-from lorepo.corporate.decorators import HasSpacePermissionMixin
-from lorepo.filestorage.iterators import GcsIterator
-from lorepo.filestorage.models import UploadedFile, FileStorage
-from lorepo.mycontent.models import Content, ContentType, AddonToCategory
+from src.libraries.utility.helpers import generate_unique_gcs_path
+from src.lorepo.corporate.decorators import HasSpacePermissionMixin
+from src.lorepo.filestorage.iterators import GcsIterator
+from src.lorepo.filestorage.models import UploadedFile, FileStorage
+from src.lorepo.mycontent.models import Content, ContentType, AddonToCategory
 from zipfile import ZipFile, ZipInfo, ZIP_DEFLATED, BadZipfile
 from google.cloud import storage
 from google.auth.exceptions import DefaultCredentialsError
@@ -29,37 +26,37 @@ import os
 # from google.appengine.ext import blobstore
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
-from lorepo.filestorage.forms import UploadForm
+from src.lorepo.filestorage.forms import UploadForm
 from django.http import HttpResponseRedirect, HttpResponse,\
     HttpResponseForbidden, Http404
-from lorepo.spaces.util import get_private_space_for_user
-from lorepo.exchange.models import ExportedContent, ExportVersions, ExportFails, ExportWOMIPages
+from src.lorepo.spaces.util import get_private_space_for_user
+from src.lorepo.exchange.models import ExportedContent, ExportVersions, ExportFails, ExportWOMIPages
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib import messages
-from lorepo.spaces.models import Space
-from libraries.utility.urlfetch import fetch
-from libraries.utility.helpers import get_object_or_none
+from src.lorepo.spaces.models import Space
+from src.libraries.utility.urlfetch import fetch
+from src.libraries.utility.helpers import get_object_or_none
 from django.template import loader
 from django.template.context import Context
-from libraries.utility.redirect import get_redirect
-from lorepo.public.util import send_message
-from libraries.utility.queues import trigger_backend_task
+from src.libraries.utility.redirect import get_redirect
+from src.lorepo.public.util import send_message
+from src.libraries.utility.queues import trigger_backend_task
 from django.core.mail import mail_admins
-from lorepo.mycontent.service import add_content_to_space
-from lorepo.exchange.utils import render_manifest, make_secret, RETRY_ERRORS
-from lorepo.permission.decorators import has_space_access
-from lorepo.mycontent.models import ContentType
-from lorepo.permission.models import Permission
-from lorepo.filestorage.utils import get_reader, store_file_from_stream
-from libraries.utility.environment import get_app_version, get_versioned_module
-from mauthor.metadata.util import get_metadata_values, get_page_metadata
-from lorepo.permission.util import get_company_for_user
-from mauthor.metadata.models import MetadataValue, PageMetadata
-from libraries.utility.decorators import backend
-from mauthor.localization.IcplayerZipped import IcplayerZipped
-from mauthor.utility.decorators import LoginRequiredMixin
-from settings import get_bucket_name, MAUTHOR_BASIC_URL
+from src.lorepo.mycontent.service import add_content_to_space
+from src.lorepo.exchange.utils import render_manifest, make_secret, RETRY_ERRORS
+from src.lorepo.permission.decorators import has_space_access
+from src.lorepo.mycontent.models import ContentType
+from src.lorepo.permission.models import Permission
+from src.lorepo.filestorage.utils import get_reader, store_file_from_stream
+from src.libraries.utility.environment import get_app_version, get_versioned_module
+from src.mauthor.metadata.util import get_metadata_values, get_page_metadata
+from src.lorepo.permission.util import get_company_for_user
+from src.mauthor.metadata.models import MetadataValue, PageMetadata
+from src.libraries.utility.decorators import backend
+from src.mauthor.localization.IcplayerZipped import IcplayerZipped
+from src.mauthor.utility.decorators import LoginRequiredMixin
+from src.settings import get_bucket_name, MAUTHOR_BASIC_URL
 
 RETRY_COUNT = 20
 XAPI_LIBS_DESCRIPTOR_PATH = 'lorepo/templates/exchange/tincan/descriptor.json'

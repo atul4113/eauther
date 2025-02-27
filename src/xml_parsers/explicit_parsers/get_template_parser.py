@@ -1,4 +1,4 @@
-from xml_parsers.EchoXMLGenerator import EchoXMLGenerator
+from src.xml_parsers.EchoXMLGenerator import EchoXMLGenerator
 
 
 class GetTemplateParser(EchoXMLGenerator):

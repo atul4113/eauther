@@ -1,10 +1,10 @@
 from django.test.client import Client
-from lorepo.mycontent.models import Content, ContentType, CurrentlyEditing
-from libraries.utility.noseplugins import FormattedOutputTestCase,\
+from src.lorepo.mycontent.models import Content, ContentType, CurrentlyEditing
+from src.libraries.utility.noseplugins import FormattedOutputTestCase,\
     QueueTestCase
 from xml.dom import minidom
-from lorepo.mycontent.views import _get_title_for_editor
-from lorepo.spaces.models import Space
+from src.lorepo.mycontent.views import _get_title_for_editor
+from src.lorepo.spaces.models import Space
 
 class ViewsTests(QueueTestCase):
     fixtures = ['url.json']

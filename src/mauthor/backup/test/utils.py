@@ -1,5 +1,5 @@
-from libraries.utility.noseplugins import FormattedOutputTestCase
-from mauthor.backup.utils import make_path, get_path
+from src.libraries.utility.noseplugins import FormattedOutputTestCase
+from src.mauthor.backup.utils import make_path, get_path
 from nose.plugins.attrib import attr
 
 

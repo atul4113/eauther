@@ -1,4 +1,4 @@
-from libraries.utility.environment import get_versioned_module
+from src.libraries.utility.environment import get_versioned_module
 import libraries.utility.queues
 
 def update_index_async(*args, **kwargs):

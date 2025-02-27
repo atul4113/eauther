@@ -1,11 +1,10 @@
-import settings
+import src.settings as settings
 from django.template import loader
 from django.template.context import Context
-from lorepo.exchange.models import ExportVersions
-from mauthor.metadata.util import get_metadata_values
+from src.lorepo.exchange.models import ExportVersions
+from src.mauthor.metadata.util import get_metadata_values
 import hashlib
-from settings import MAUTHOR_IMPORT_SECRET_KEY
-from google.cloud import storage  # For cloud storage operations
+from src.settings import MAUTHOR_IMPORT_SECRET_KEY
 from requests.exceptions import RequestException  # Replace urlfetch errors with requests exceptions
 class ForbiddenError(Exception):
     """Custom exception to handle forbidden errors."""

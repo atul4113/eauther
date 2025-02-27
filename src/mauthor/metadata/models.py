@@ -1,6 +1,6 @@
 from django.db import models
-from lorepo.spaces.models import Space
-from lorepo.mycontent.models import Content
+from src.lorepo.spaces.models import Space
+from src.lorepo.mycontent.models import Content
 
 
 class DefinitionType(object):

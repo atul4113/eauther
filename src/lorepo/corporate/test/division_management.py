@@ -1,6 +1,6 @@
 from django.test.client import Client
-from libraries.utility.noseplugins import FormattedOutputTestCase
-from lorepo.spaces.models import Space
+from src.libraries.utility.noseplugins import FormattedOutputTestCase
+from src.lorepo.spaces.models import Space
 
 class AccessRightsTest(FormattedOutputTestCase):
     fixtures = ['corporate_spaces.json']

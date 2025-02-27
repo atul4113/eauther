@@ -1,8 +1,8 @@
 from django.test.client import Client
-from libraries.utility.noseplugins import FormattedOutputTestCase,\
+from src.libraries.utility.noseplugins import FormattedOutputTestCase,\
     QueueTestCase
-from lorepo.mycontent.models import Content, SpaceTemplate
-from libraries.utility.test_assertions import the
+from src.lorepo.mycontent.models import Content, SpaceTemplate
+from src.libraries.utility.test_assertions import the
 from xml.dom import minidom
 
 class DefaultTemplateTests(QueueTestCase):

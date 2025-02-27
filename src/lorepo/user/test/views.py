@@ -1,6 +1,6 @@
 from django.test.client import Client
 from django.contrib.auth.models import User
-from libraries.utility.noseplugins import FormattedOutputTestCase
+from src.libraries.utility.noseplugins import FormattedOutputTestCase
 
 class ViewsTest(FormattedOutputTestCase):
     fixtures = ['user.json']

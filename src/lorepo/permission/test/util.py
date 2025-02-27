@@ -1,11 +1,11 @@
-from libraries.utility.noseplugins import FormattedOutputTestCase
+from src.libraries.utility.noseplugins import FormattedOutputTestCase
 from django.contrib.auth.models import User
-from lorepo.spaces.models import Space
-from lorepo.permission.util import verify_space_access, check_space_access,\
+from src.lorepo.spaces.models import Space
+from src.lorepo.permission.util import verify_space_access, check_space_access,\
     verify_content_access
-from lorepo.permission.models import Permission
+from src.lorepo.permission.models import Permission
 from django.core.exceptions import PermissionDenied
-from lorepo.mycontent.models import Content
+from src.lorepo.mycontent.models import Content
 
 class UtilityTests(FormattedOutputTestCase):
     fixtures = ['permission_views.json']

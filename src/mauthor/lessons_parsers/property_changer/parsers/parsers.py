@@ -1,12 +1,12 @@
 from abc import abstractmethod
 
 from django.http import Http404
-from mauthor.lessons_parsers.property_changer.parsers.properties_parsers import PropertyParserFactory
-from mauthor.lessons_parsers.property_changer.util import number_in_regex_range, get_addon_model
-from mauthor.lessons_parsers.property_changer.models import AddonModel, AddonPropertyModel, DefaultFrontEndPropertyModel, ListFrontEndPropertyModel, ModuleModel,StaticListFrontEndPropertyModel
-from mauthor.lessons_parsers.property_changer.parsers.parser import Parser
+from src.mauthor.lessons_parsers.property_changer.parsers.properties_parsers import PropertyParserFactory
+from src.mauthor.lessons_parsers.property_changer.util import number_in_regex_range, get_addon_model
+from src.mauthor.lessons_parsers.property_changer.models import AddonModel, AddonPropertyModel, DefaultFrontEndPropertyModel, ListFrontEndPropertyModel, ModuleModel,StaticListFrontEndPropertyModel
+from src.mauthor.lessons_parsers.property_changer.parsers.parser import Parser
 from xml.dom.minidom import Document
-from mauthor.lessons_parsers.property_changer.parsers.properties_parsers import AddonModelParser
+from src.mauthor.lessons_parsers.property_changer.parsers.properties_parsers import AddonModelParser
 
 
 # noinspection PyMethodMayBeStatic

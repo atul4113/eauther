@@ -1,5 +1,5 @@
-from lorepo.user.serializers import RegistrationSerializer
-from registration.models import RegistrationProfile
+from src.lorepo.user.serializers import RegistrationSerializer
+from src.registration.models import RegistrationProfile
 from rest_framework import status, generics
 from rest_framework.exceptions import ValidationError
 from rest_framework.response import Response

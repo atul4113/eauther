@@ -1,7 +1,7 @@
 # Adjusted code for Django 2.0+ without patterns()
 
 from django.urls import re_path
-from lorepo.translations import views
+from src.lorepo.translations import views
 
 urlpatterns = [
     re_path(r'^delete_lang_async/(?P<lang_id>\d+)/(?P<user_id>\d+)$', views.delete_lang_async),

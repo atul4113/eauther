@@ -1,19 +1,19 @@
 from django.db import models
-import settings
-from lorepo.filestorage.models import FileStorage, UploadedFile
-from lorepo.spaces.models import Space
+import src.settings as settings
+from src.lorepo.filestorage.models import FileStorage, UploadedFile
+from src.lorepo.spaces.models import Space
 from xml.dom import minidom
-from lorepo.course.helpers import create_chapter_node, get_structure_chapters,\
+from src.lorepo.course.helpers import create_chapter_node, get_structure_chapters,\
     get_element_by_id, get_lessons_container, get_chapter_lessons,\
     get_or_create_node, get_or_create_child_node, get_child_nodes,\
     get_child_element_by
-from lorepo.course.helpers import get_elements_by_id
+from src.lorepo.course.helpers import get_elements_by_id
 import re
 from django.template import loader
 from django.template.context import Context
 import logging
-from lorepo.mycontent.models import Content
-import libraries.utility.cacheproxy as cache
+from src.lorepo.mycontent.models import Content
+import src.libraries.utility.cacheproxy as cache
 
 
 class Course(models.Model):

@@ -1,5 +1,5 @@
 
-from markdown import message, CRITICAL
+from src.markdown import message, CRITICAL
 import sys
 
 ## Import

@@ -3,7 +3,7 @@ import re
 from django.contrib.auth.models import User
 
 from django.db import models
-from lorepo.spaces.models import Space
+from src.lorepo.spaces.models import Space
 from functools import partial
 
 file_serve_search = partial(re.findall, '/file/serve/[\d]+')

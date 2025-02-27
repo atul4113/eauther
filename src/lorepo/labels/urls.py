@@ -1,5 +1,5 @@
 from django.urls import re_path
-from lorepo.labels import views
+from src.lorepo.labels import views
 
 urlpatterns = [
     re_path(r'^$', views.index),

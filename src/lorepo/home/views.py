@@ -2,9 +2,9 @@ import logging
 
 from django.http import HttpResponse
 
-from libraries.utility.decorators import backend
-from lorepo.global_settings.models import GlobalSettings
-from lorepo.home.models import WebSite
+from src.libraries.utility.decorators import backend
+from src.lorepo.global_settings.models import GlobalSettings
+from src.lorepo.home.models import WebSite
 
 
 @backend

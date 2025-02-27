@@ -1,12 +1,12 @@
 from django.http import Http404
-from libraries.utility.helpers import get_object_or_none
-from lorepo.permission.models import PermissionTuples, Role, Permission
+from src.libraries.utility.helpers import get_object_or_none
+from src.lorepo.permission.models import PermissionTuples, Role, Permission
 import logging
-from lorepo.corporate.models import CompanyUser
-from lorepo.spaces.models import UserSpacePermissions, SpaceType, SpaceAccess
-from lorepo.spaces.util import get_space_for_content, has_space_permission
+from src.lorepo.corporate.models import CompanyUser
+from src.lorepo.spaces.models import UserSpacePermissions, SpaceType, SpaceAccess
+from src.lorepo.spaces.util import get_space_for_content, has_space_permission
 from django.core.exceptions import PermissionDenied
-import libraries.utility.cacheproxy as cache
+import src.libraries.utility.cacheproxy as cache
 
 
 def translate_perm_to_tuple(integer_perm):

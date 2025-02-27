@@ -1,7 +1,7 @@
-from libraries.utility.noseplugins import FormattedOutputTestCase
+from src.libraries.utility.noseplugins import FormattedOutputTestCase
 from django.http import QueryDict
-from libraries.utility.helpers import parse_query_dict
-from libraries.utility.test_assertions import the
+from src.libraries.utility.helpers import parse_query_dict
+from src.libraries.utility.test_assertions import the
 from nose.plugins.attrib import attr
 
 class HelpersTests(FormattedOutputTestCase):

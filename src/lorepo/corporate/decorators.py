@@ -1,4 +1,4 @@
-from lorepo.permission.decorators import has_space_access
+from src.lorepo.permission.decorators import has_space_access
 
 
 class HasSpacePermissionMixin(object):

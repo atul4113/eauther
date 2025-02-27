@@ -1,5 +1,5 @@
 from django.urls import path, re_path
-from lorepo.user import views
+from src.lorepo.user import views
 
 urlpatterns = [
     path('logout', views.logout_view, name='logout_view'),

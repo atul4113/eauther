@@ -1,6 +1,6 @@
 import uuid
 
-from libraries.utility.lxml_utilities.content.content_xml import StyleTuple, LayoutTuple
+from src.libraries.utility.lxml_utilities.content.content_xml import StyleTuple, LayoutTuple
 from lxml import etree
 
 

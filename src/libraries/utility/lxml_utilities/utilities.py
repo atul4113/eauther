@@ -1,4 +1,4 @@
-from libraries.utility.lxml_utilities.content.content_xml import CONTENT_MAIN_XML_PARSERS, OLD_CONTENT_XML_VERSION
+from src.libraries.utility.lxml_utilities.content.content_xml import CONTENT_MAIN_XML_PARSERS, OLD_CONTENT_XML_VERSION
 from lxml import etree
 
 

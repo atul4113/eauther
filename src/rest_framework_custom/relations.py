@@ -15,7 +15,7 @@ from django.utils.encoding import smart_str
 import urllib.parse as urlparse
 from django.utils.translation import gettext_lazy as _
 
-from rest_framework_custom.fields import (
+from src.rest_framework_custom.fields import (
     Field, empty, get_attribute, is_simple_callable, iter_options
 )
 from rest_framework.reverse import reverse

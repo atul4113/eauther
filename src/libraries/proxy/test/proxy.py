@@ -1,9 +1,9 @@
 from django.test.client import Client
 import google.appengine.api.urlfetch
 from minimock import mock, restore
-from libraries.utility.noseplugins import FormattedOutputTestCase
-from libraries.utility.test_assertions import status_code_for, the
-from libraries.utility.trackers import FunctionCallsTracker, verify
+from src.libraries.utility.noseplugins import FormattedOutputTestCase
+from src.libraries.utility.test_assertions import status_code_for, the
+from src.libraries.utility.trackers import FunctionCallsTracker, verify
 
 class StubbedResponse(object):
     status_code = 200

@@ -6,7 +6,7 @@ This extension adds abbreviation handling to Python-Markdown.
 
 Simple Usage:
 
-    >>> import markdown
+    >>> import src.markdown as markdown
     >>> text = """
     ... Some text with an ABBR and a REF. Ignore REFERENCE and ref.
     ...
@@ -22,9 +22,9 @@ Copyright 2007-2008
 	
 
 '''
-
-import markdown, re
-from markdown import etree
+import src.markdown as markdown
+import re
+from src.markdown import etree
 
 # Global Vars
 ABBR_REF_RE = re.compile(r'[*]\[(?P<abbr>[^\]]*)\][ ]?:\s*(?P<title>.*)')

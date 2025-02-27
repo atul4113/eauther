@@ -1,5 +1,5 @@
 from django.test.client import Client
-from libraries.utility.noseplugins import QueueTestCase
+from src.libraries.utility.noseplugins import QueueTestCase
 
 class ContentTests(QueueTestCase):
     fixtures = ['models.json']

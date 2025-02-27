@@ -1,11 +1,11 @@
 from django.shortcuts import render, get_object_or_404
-import settings
-from libraries.mobile.mobile_utils import is_mobile_user_agent, is_ios_user_agent
-from lorepo.mycontent.models import Content
-from lorepo.embed.decorators import check_is_public
-from lorepo.filestorage.models import FileStorage
-from lorepo.public.metaseo import MetaSEO
-from lorepo.spaces.util import is_company_locked
+import src.settings as settings
+from src.libraries.mobile.mobile_utils import is_mobile_user_agent, is_ios_user_agent
+from src.lorepo.mycontent.models import Content
+from src.lorepo.embed.decorators import check_is_public
+from src.lorepo.filestorage.models import FileStorage
+from src.lorepo.public.metaseo import MetaSEO
+from src.lorepo.spaces.util import is_company_locked
 from django.core.exceptions import PermissionDenied
 
 

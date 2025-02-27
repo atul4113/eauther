@@ -2,7 +2,7 @@ from django.test.client import Client
 import json
 from minimock import Mock
 import urllib.request, urllib.error, urllib.parse
-from libraries.utility.noseplugins import FormattedOutputTestCase
+from src.libraries.utility.noseplugins import FormattedOutputTestCase
 
 EXPECTED = '''{
 	"version": "1",
@@ -48,7 +48,7 @@ class AddonsTemplateTests(FormattedOutputTestCase):
 
     def _addons(self):
         '''Checks if output JSON structure is OK.
-        Test disabled as for now we only read addons from lorepo.com
+        Test disabled as for now we only read addons from src.lorepo.com
     	'''
         self.client.login(username='ala', password='ala')
         response = self.client.get('/editor/api/addons')

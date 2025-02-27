@@ -104,7 +104,7 @@ if 'patch' not in View.http_method_names:
 
 # Markdown is optional
 try:
-    import markdown
+    import src.markdown as markdown
 
     if markdown.version <= '2.2':
         HEADERID_EXT_PATH = 'headerid'

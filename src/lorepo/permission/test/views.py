@@ -1,6 +1,6 @@
-from libraries.utility.noseplugins import FormattedOutputTestCase
+from src.libraries.utility.noseplugins import FormattedOutputTestCase
 from django.contrib.auth.models import User
-from libraries.utility.test_assertions import status_code_for
+from src.libraries.utility.test_assertions import status_code_for
 
 class ReadAccessUserTests(FormattedOutputTestCase):
     fixtures = ['permission_views.json']

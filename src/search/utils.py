@@ -1,7 +1,7 @@
 
 import logging
 from django.conf import settings
-from search.core import search, default_splitter, get_stop_words
+from src.search.core import search, default_splitter, get_stop_words
 
 
 def partial_match_search(model, query, query_filter_args=None, primary_rank_by_number_of_matches=True, ranking_field=None,

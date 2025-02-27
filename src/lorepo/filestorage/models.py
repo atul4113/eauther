@@ -5,19 +5,14 @@ import logging
 import time
 import datetime
 import io
-
 from django.db import models
 from django.contrib.auth.models import User
-from django.db.models.signals import pre_delete
-from django.dispatch import receiver
 from google.cloud import storage
-
-from libraries.utility.BucketManager import FileStorageBucketManager
-from libraries.utility.environment import get_versioned_module
-from libraries.utility.helpers import get_object_or_none, generate_unique_gcs_path
-from libraries.utility.queues import trigger_backend_task
-from mauthor.utility.db_safe_iterator import safe_iterate
-from settings import get_bucket_name
+from src.libraries.utility.BucketManager import FileStorageBucketManager
+from src.libraries.utility.environment import get_versioned_module
+from src.libraries.utility.helpers import get_object_or_none, generate_unique_gcs_path
+from src.libraries.utility.queues import trigger_backend_task
+from src.settings import get_bucket_name
 
 DEFAULT_HEIGHT_FACEBOOK = 200
 DEFAULT_WIDTH_FACEBOOK = 200

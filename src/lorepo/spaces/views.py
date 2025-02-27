@@ -1,28 +1,28 @@
 # -*- coding: utf-8 -*-
 from django.contrib import messages
 from django.shortcuts import render, get_object_or_404
-from libraries.utility.decorators import backend
-from libraries.utility.environment import get_versioned_module
-from libraries.utility.queues import trigger_backend_task
-from lorepo.permission.util import get_company_for_user
-from lorepo.spaces.models import Space, SpaceType, UserSpacePermissions
+from src.libraries.utility.decorators import backend
+from src.libraries.utility.environment import get_versioned_module
+from src.libraries.utility.queues import trigger_backend_task
+from src.lorepo.permission.util import get_company_for_user
+from src.lorepo.spaces.models import Space, SpaceType, UserSpacePermissions
 from django.contrib.auth.decorators import login_required, user_passes_test
-from lorepo.spaces.form import SpaceForm, RankForm
+from src.lorepo.spaces.form import SpaceForm, RankForm
 from django.http import HttpResponseRedirect, HttpResponse
-from lorepo.spaces.signals import space_access_changed
-from lorepo.spaces.util import get_user_spaces, get_top_level_public_spaces, \
+from src.lorepo.spaces.signals import space_access_changed
+from src.lorepo.spaces.util import get_user_spaces, get_top_level_public_spaces, \
     get_spaces_subtree, SpacePermissionGenerator
-from lorepo.spaces.model.companyspacemap.company_space_map import CompanySpaceMap
+from src.lorepo.spaces.model.companyspacemap.company_space_map import CompanySpaceMap
 from django.contrib.auth.models import User
-import libraries.utility.cacheproxy as cache
-from lorepo.spaces.service import update_space, insert_space
-from libraries.utility.redirect import get_redirect, get_redirect_url
-from lorepo.mycontent.service import add_content_to_space, remove_content_space
-from lorepo.corporate.signals import kids_for_space_changed
-from lorepo.permission.decorators import has_space_access
-from lorepo.permission.models import Permission
-from mauthor.company.util import get_users_from_company
-from lorepo.spaces.model.companyspacemap.multitasks_locker import CompanySpaceMapTaskLocker
+import src.libraries.utility.cacheproxy as cache
+from src.lorepo.spaces.service import update_space, insert_space
+from src.libraries.utility.redirect import get_redirect, get_redirect_url
+from src.lorepo.mycontent.service import add_content_to_space, remove_content_space
+from src.lorepo.corporate.signals import kids_for_space_changed
+from src.lorepo.permission.decorators import has_space_access
+from src.lorepo.permission.models import Permission
+from src.mauthor.company.util import get_users_from_company
+from src.lorepo.spaces.model.companyspacemap.multitasks_locker import CompanySpaceMapTaskLocker
 
 @login_required
 def index(request, space_id = None):

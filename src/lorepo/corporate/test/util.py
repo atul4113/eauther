@@ -1,9 +1,9 @@
-from lorepo.spaces.models import Space
-from lorepo.spaces.util import get_spaces_subtree
-from lorepo.corporate.utils import get_division_for_space,\
+from src.lorepo.spaces.models import Space
+from src.lorepo.spaces.util import get_spaces_subtree
+from src.lorepo.corporate.utils import get_division_for_space,\
     get_contents_from_company, get_publication_for_space
-from libraries.utility.noseplugins import FormattedOutputTestCase
-from lorepo.mycontent.models import ContentType
+from src.libraries.utility.noseplugins import FormattedOutputTestCase
+from src.lorepo.mycontent.models import ContentType
 
 class CorporateUtilTest(FormattedOutputTestCase):
     fixtures = ['util.json']

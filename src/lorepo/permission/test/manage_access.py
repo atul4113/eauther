@@ -1,8 +1,8 @@
-from libraries.utility.noseplugins import FormattedOutputTestCase
+from src.libraries.utility.noseplugins import FormattedOutputTestCase
 from django.test.client import Client
-from lorepo.spaces.models import SpaceAccess, Space
+from src.lorepo.spaces.models import SpaceAccess, Space
 from django.contrib.auth.models import User
-from lorepo.permission.models import Role
+from src.lorepo.permission.models import Role
 import logging
 
 class ManageAccessTests(FormattedOutputTestCase):

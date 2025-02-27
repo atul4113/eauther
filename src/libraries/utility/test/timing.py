@@ -1,6 +1,6 @@
 import libraries.utility.timing as Timing
 import logging
-from libraries.utility.noseplugins import FormattedOutputTestCase
+from src.libraries.utility.noseplugins import FormattedOutputTestCase
 from nose.plugins.attrib import attr
 
 class TimingTests(FormattedOutputTestCase):

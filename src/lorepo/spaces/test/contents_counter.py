@@ -1,7 +1,7 @@
-from libraries.utility.noseplugins import FormattedOutputTestCase
-from lorepo.mycontent.models import Content, ContentSpace
-from lorepo.spaces.models import Space
-from lorepo.mycontent.service import add_content_to_space, remove_content_space,\
+from src.libraries.utility.noseplugins import FormattedOutputTestCase
+from src.lorepo.mycontent.models import Content, ContentSpace
+from src.lorepo.spaces.models import Space
+from src.lorepo.mycontent.service import add_content_to_space, remove_content_space,\
     _update_contents_count
 from django.contrib.auth.models import User
 

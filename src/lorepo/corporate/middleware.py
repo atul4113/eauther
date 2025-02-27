@@ -1,6 +1,6 @@
-from lorepo.permission.util import get_company_for_user
-from lorepo.corporate.models import CorporatePublicSpace, CompanyProperties
-import libraries.utility.cacheproxy as cache
+from src.lorepo.permission.util import get_company_for_user
+from src.lorepo.corporate.models import CorporatePublicSpace, CompanyProperties
+import src.libraries.utility.cacheproxy as cache
 import re
 
 USER_SPACES_CACHE_TIME = 60 * 60 * 24

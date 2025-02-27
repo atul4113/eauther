@@ -1,7 +1,7 @@
 from django.test.client import Client
-from libraries.utility.noseplugins import FormattedOutputTestCase
-from lorepo.mycontent.models import Content
-from libraries.utility.test_assertions import the, status_code_for
+from src.libraries.utility.noseplugins import FormattedOutputTestCase
+from src.lorepo.mycontent.models import Content
+from src.libraries.utility.test_assertions import the, status_code_for
 
 class ExtractPagesTests(FormattedOutputTestCase):
     fixtures = ['extract_pages.json']

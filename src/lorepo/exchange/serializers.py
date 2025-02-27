@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from lorepo.exchange.models import ExportVersions
+from src.lorepo.exchange.models import ExportVersions
 
 
 class PayloadExportSerializer(serializers.Serializer):

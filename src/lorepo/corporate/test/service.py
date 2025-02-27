@@ -1,7 +1,7 @@
-from libraries.utility.noseplugins import FormattedOutputTestCase
+from src.libraries.utility.noseplugins import FormattedOutputTestCase
 from django.test.client import Client
-from lorepo.spaces.models import Space
-from lorepo.spaces.service import insert_space, update_space
+from src.lorepo.spaces.models import Space
+from src.lorepo.spaces.service import insert_space, update_space
 
 class SpaceAccessTests(FormattedOutputTestCase):
     fixtures = ['space_service.json']

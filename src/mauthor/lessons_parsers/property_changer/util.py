@@ -1,10 +1,10 @@
 import csv
 import re
 from xml.dom import Node
-from lorepo.mycontent.models import Content, FileStorage
-from libraries.utility.helpers import get_object_or_none
+from src.lorepo.mycontent.models import Content, FileStorage
+from src.libraries.utility.helpers import get_object_or_none
 from django.shortcuts import get_object_or_404
-from mauthor.localization.IcplayerZipped import IcplayerZipped
+from src.mauthor.localization.IcplayerZipped import IcplayerZipped
 from xml.dom import minidom
 
 

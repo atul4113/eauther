@@ -2,15 +2,15 @@ import logging
 import mimetypes
 import zipfile
 
-import cloudstorage as gcs
+import src.cloudstorage as gcs
 from django.db import models
 
-from libraries.utility.BucketManager import BucketManager
-from libraries.utility.environment import is_development_server
-from lorepo.filestorage.models import UploadedFile
-from lorepo.filestorage.utils import get_reader
-from lorepo.translations.models import SupportedLanguages
-from settings import get_bucket_name
+from src.libraries.utility.BucketManager import BucketManager
+from src.libraries.utility.environment import is_development_server
+from src.lorepo.filestorage.models import UploadedFile
+from src.lorepo.filestorage.utils import get_reader
+from src.lorepo.translations.models import SupportedLanguages
+from src.settings import get_bucket_name
 
 
 class WebSite(models.Model):

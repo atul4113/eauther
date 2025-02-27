@@ -1,6 +1,6 @@
 import json
 from django.db import models
-from libraries.utility.decorators import cached_property
+from src.libraries.utility.decorators import cached_property
 
 
 class FixStatus(object):

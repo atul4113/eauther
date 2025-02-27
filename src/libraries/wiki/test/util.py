@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-from libraries.wiki.util import make_url, has_access_to_wiki
+from src.libraries.wiki.util import make_url, has_access_to_wiki
 from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
-from libraries.utility.noseplugins import FormattedOutputTestCase
+from src.libraries.utility.noseplugins import FormattedOutputTestCase
 from nose.plugins.attrib import attr
 
 class UtilTest(FormattedOutputTestCase):

@@ -2,14 +2,14 @@ from django.core.exceptions import PermissionDenied
 from django.utils.translation import get_language_info
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import View, TemplateView
-from lorepo.corporate.decorators import HasSpacePermissionMixin
-from lorepo.filestorage.models import FileStorage
-from lorepo.spaces.models import Space, SpaceAccess, SpaceType, UserSpacePermissions
-from lorepo.mycontent.util import get_content_details,\
+from src.lorepo.corporate.decorators import HasSpacePermissionMixin
+from src.lorepo.filestorage.models import FileStorage
+from src.lorepo.spaces.models import Space, SpaceAccess, SpaceType, UserSpacePermissions
+from src.lorepo.mycontent.util import get_content_details,\
     get_addon_source_code, get_recently_opened
-from lorepo.mycontent.models import ContentType, Content,\
+from src.lorepo.mycontent.models import ContentType, Content,\
     SpaceTemplate
-from lorepo.spaces.util import get_spaces_for_copy, \
+from src.lorepo.spaces.util import get_spaces_for_copy, \
     get_space_for_content, get_contents_and_total, \
     get_spaces_subtree, change_contentspace, \
     get_corporate_spaces_for_user, get_private_space_for_user, \
@@ -17,60 +17,60 @@ from lorepo.spaces.util import get_spaces_for_copy, \
     get_locked_companies, get_projects_with_publications, is_company_locked
 from django.http import Http404, HttpResponseRedirect, HttpResponse
 from django.contrib.auth.decorators import login_required, user_passes_test
-from lorepo.filestorage.forms import UploadForm
-from lorepo.corporate.models import CorporateLogo, CorporatePublicSpace,\
+from src.lorepo.filestorage.forms import UploadForm
+from src.lorepo.corporate.models import CorporateLogo, CorporatePublicSpace,\
     CompanyProperties, PROJECT_ADMIN_PERMISSIONS, SpaceJob, JOB_TYPE, DemoAccountLessons
-from lorepo.corporate.utils import set_uploaded_file, is_in_public_category,\
+from src.lorepo.corporate.utils import set_uploaded_file, is_in_public_category,\
     get_spaces_path_for_corporate_content, get_contents,\
     get_publication_for_space, get_division_for_space,\
     check_manage_access_rights, get_space_accesses_to_projects
-from lorepo.spaces.form import SpaceForm
+from src.lorepo.spaces.form import SpaceForm
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator
 import datetime
-from lorepo.mycontent.forms import ContentMetadataForm, AddonMetadataForm
-from lorepo.corporate.forms import CreateCompanyForm, CopyToAccount, CreateOwnerCompanyForm
+from src.lorepo.mycontent.forms import ContentMetadataForm, AddonMetadataForm
+from src.lorepo.corporate.forms import CreateCompanyForm, CopyToAccount, CreateOwnerCompanyForm
 import re
-from lorepo.token.decorators import token, TokenMixin
-from lorepo.spaces.service import update_space, insert_space
-from lorepo.mycontent.service import add_content_to_space,\
+from src.lorepo.token.decorators import token, TokenMixin
+from src.lorepo.spaces.service import update_space, insert_space
+from src.lorepo.mycontent.service import add_content_to_space,\
     remove_content_space, update_content_space
-from libraries.utility.redirect import get_redirect, get_redirect_url
-from lorepo.corporate.signals import company_structure_changed,\
+from src.libraries.utility.redirect import get_redirect, get_redirect_url
+from src.lorepo.corporate.signals import company_structure_changed,\
      kids_for_space_changed, access_rights_changed, user_spaces_flush
 from django.contrib import messages
-from mauthor.bug_track.forms import AddBugForm
-from mauthor.bug_track.models import Bug
-from mauthor.bug_track.util import get_users_for_email, get_last_bug_for_content
-from mauthor.bug_track.views import add_bug
-import libraries.utility.cacheproxy as cache
-from mauthor.company.util import remove_spaceaccesses
-from mauthor.states.util import get_current_state_for_content
+from src.mauthor.bug_track.forms import AddBugForm
+from src.mauthor.bug_track.models import Bug
+from src.mauthor.bug_track.util import get_users_for_email, get_last_bug_for_content
+from src.mauthor.bug_track.views import add_bug
+import src.libraries.utility.cacheproxy as cache
+from src.mauthor.company.util import remove_spaceaccesses
+from src.mauthor.states.util import get_current_state_for_content
 import logging
-from libraries.utility.cacheproxy import delete_template_fragment_cache
-from lorepo.permission.decorators import has_space_access
-from lorepo.permission.models import Permission, Role
-from lorepo.permission.util import create_company_user, check_space_access
-from libraries.utility.helpers import get_values_per_page, get_object_or_none
-from libraries.utility.environment import get_versioned_module
-from libraries.utility.queues import trigger_backend_task
+from src.libraries.utility.cacheproxy import delete_template_fragment_cache
+from src.lorepo.permission.decorators import has_space_access
+from src.lorepo.permission.models import Permission, Role
+from src.lorepo.permission.util import create_company_user, check_space_access
+from src.libraries.utility.helpers import get_values_per_page, get_object_or_none
+from src.libraries.utility.environment import get_versioned_module
+from src.libraries.utility.queues import trigger_backend_task
 from django.core.mail import mail_admins
 from logging import info
-from lorepo.mycontent.signals import addon_deleted, addon_published,\
+from src.lorepo.mycontent.signals import addon_deleted, addon_published,\
     metadata_updated
 from django.template.context import Context
 from django.template.loader import get_template, render_to_string
-from mauthor.metadata.util import save_metadata_from_request, update_page_metadata, toggle_page_metadata,\
+from src.mauthor.metadata.util import save_metadata_from_request, update_page_metadata, toggle_page_metadata,\
     get_metadata_values_and_definitions, copy_metadata
-from libraries.core.paginator import CustomPaginator
-from lorepo.mycontent.decorators import is_being_edited
-from libraries.utility.decorators import backend, BackendMixin
-from lorepo.filestorage.utils import create_new_version
+from src.libraries.core.paginator import CustomPaginator
+from src.lorepo.mycontent.decorators import is_being_edited
+from src.libraries.utility.decorators import backend, BackendMixin
+from src.lorepo.filestorage.utils import create_new_version
 from django.views.decorators.http import require_POST
-from lorepo.public.util import send_message
-from mauthor.utility.decorators import LoginRequiredMixin
-from lorepo.token.models import TOKEN_KEYS
-from lorepo.token.util import create_publication_action_token, create_mycontent_editor_token, create_mycontent_edit_addon_token
+from src.lorepo.public.util import send_message
+from src.mauthor.utility.decorators import LoginRequiredMixin
+from src.lorepo.token.models import TOKEN_KEYS
+from src.lorepo.token.util import create_publication_action_token, create_mycontent_editor_token, create_mycontent_edit_addon_token
 import settings
 from django.core.mail import send_mail
 import libraries.utility.queues

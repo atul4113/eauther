@@ -1,18 +1,18 @@
 from django.http import HttpResponse, HttpResponseForbidden
 from django.shortcuts import render, get_object_or_404
 from django.template.loader import render_to_string
-from lorepo.editor.forms import FeedbackForm
-from lorepo.editor.models import UserFeedback
-from lorepo.filestorage.models import FileStorage
-from lorepo.mycontent.models import Content, ContentType, AddonToCategory, DefaultTemplate
-from lorepo.public.util import filter_public_contents
-from lorepo.spaces.util import get_all_user_spaces, get_space_for_content, get_private_space_for_user
+from src.lorepo.editor.forms import FeedbackForm
+from src.lorepo.editor.models import UserFeedback
+from src.lorepo.filestorage.models import FileStorage
+from src.lorepo.mycontent.models import Content, ContentType, AddonToCategory, DefaultTemplate
+from src.lorepo.public.util import filter_public_contents
+from src.lorepo.spaces.util import get_all_user_spaces, get_space_for_content, get_private_space_for_user
 import datetime
 import json
-import libraries.utility.cacheproxy as cache
-from lorepo.mycontent.util import get_contents_from_specific_space
-from lorepo.spaces.models import Space, SpaceType
-from lorepo.editor.decorators import is_logged
+import src.libraries.utility.cacheproxy as cache
+from src.lorepo.mycontent.util import get_contents_from_specific_space
+from src.lorepo.spaces.models import Space, SpaceType
+from src.lorepo.editor.decorators import is_logged
 
 
 @is_logged

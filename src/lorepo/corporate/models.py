@@ -1,10 +1,10 @@
 from djangae.fields import ListField
 from django.db import models
-from lorepo.filestorage.models import UploadedFile
-from lorepo.permission.models import Permission
-from lorepo.spaces.models import Space
+from src.lorepo.filestorage.models import UploadedFile
+from src.lorepo.permission.models import Permission
+from src.lorepo.spaces.models import Space
 from django.contrib.auth.models import User
-import settings
+import src.settings as settings
 
 PROJECT_ADMIN_PERMISSIONS = [Permission.SPACE_ACCESS_MANAGE,
                            Permission.SPACE_EDIT,

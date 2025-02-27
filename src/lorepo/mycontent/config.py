@@ -1,5 +1,5 @@
 from django.apps import AppConfig
-from lorepo.mycontent.signals import content_updated, flush_content_cache
+from src.lorepo.mycontent.signals import content_updated, flush_content_cache
 
 
 class MyContentConfig(AppConfig):

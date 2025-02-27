@@ -5,8 +5,8 @@ try:
 except ImportError:
     from django.utils.encoding import force_unicode as force_str
 
-import markdown_deux
-from markdown_deux.conf import settings
+import src.markdown_deux
+from src.markdown_deux.conf import settings
 
 
 
@@ -64,7 +64,7 @@ class MarkdownNode(template.Node):
             return force_str(value)
 
 
-@register.inclusion_tag("markdown_deux/markdown_cheatsheet.html")
+@register.inclusion_tag("src/markdown_deux/markdown_cheatsheet.html")
 def markdown_cheatsheet():
     return {"help_url": settings.MARKDOWN_DEUX_HELP_URL}
 

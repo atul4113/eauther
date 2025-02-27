@@ -1,5 +1,5 @@
 from django import template
-from lorepo.spaces.util import load_kids
+from src.lorepo.spaces.util import load_kids
 
 register = template.Library()
 

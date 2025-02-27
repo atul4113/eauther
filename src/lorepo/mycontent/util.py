@@ -5,14 +5,14 @@ from xml.dom import minidom, NotFoundErr
 import xml.etree.ElementTree as ET
 import re
 import datetime
-from lorepo.spaces.util import get_spaces_tree, get_spaces_path_for_content, get_space_for_content, get_spaces_subtree
-from lorepo.mycontent.models import Content, ContentType, ContentSpace, UpdateTemplateStatus, RecentlyOpened
-from lorepo.filestorage.models import FileStorage, UploadedFile
-from lorepo.filestorage.utils import create_new_version
-from lorepo.assets.util import create_asset_element, clean_assets
-from lorepo.public.util import filter_public_contents
-from search.utils import partial_match_search
-from lorepo.mycontent.service import get_list_by_ids
+from src.lorepo.spaces.util import get_spaces_tree, get_spaces_path_for_content, get_space_for_content, get_spaces_subtree
+from src.lorepo.mycontent.models import Content, ContentType, ContentSpace, UpdateTemplateStatus, RecentlyOpened
+from src.lorepo.filestorage.models import FileStorage, UploadedFile
+from src.lorepo.filestorage.utils import create_new_version
+from src.lorepo.assets.util import create_asset_element, clean_assets
+from src.lorepo.public.util import filter_public_contents
+from src.search.utils import partial_match_search
+from src.lorepo.mycontent.service import get_list_by_ids
 
 @transaction.atomic
 def get_content_with_changed_content_file(content_id, file):

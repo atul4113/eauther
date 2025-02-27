@@ -1,5 +1,5 @@
-from lorepo.mycontent.models import Content
-from lorepo.public.util import send_message
+from src.lorepo.mycontent.models import Content
+from src.lorepo.public.util import send_message
 from django.template.context import Context
 from django.template import loader
 from django.conf import settings

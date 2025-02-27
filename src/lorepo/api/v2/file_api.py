@@ -1,8 +1,8 @@
 from django.urls import path
 from django.http import Http404
-from libraries.utility.helpers import blobstore_upload_url
-from lorepo.filestorage.forms import UploadForm
-from lorepo.filestorage.views import serve_blob
+from src.libraries.utility.helpers import blobstore_upload_url
+from src.lorepo.filestorage.forms import UploadForm
+from src.lorepo.filestorage.views import serve_blob
 from rest_framework import views, generics
 from rest_framework.exceptions import ValidationError
 from rest_framework.permissions import IsAuthenticated

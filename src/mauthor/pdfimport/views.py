@@ -3,13 +3,13 @@ from django.contrib.auth.decorators import login_required
 from django.core.files.storage import default_storage
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
-from libraries.utility.decorators import backend
-from libraries.utility.queues import trigger_backend_task
+from src.libraries.utility.decorators import backend
+from src.libraries.utility.queues import trigger_backend_task
 from .forms import PDFUploadForm
-from lorepo.filestorage.models import UploadedFile
-from libraries.utility.environment import get_versioned_module
+from src.lorepo.filestorage.models import UploadedFile
+from src.libraries.utility.environment import get_versioned_module
 from pdfminer.pdfpage import PDFPage
-from lorepo.filestorage.utils import get_reader
+from src.lorepo.filestorage.utils import get_reader
 from django.contrib.auth.models import User
 from .api import send_import_failure_notification
 import logging

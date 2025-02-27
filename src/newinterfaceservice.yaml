@@ -70,7 +70,7 @@ handlers:
 
 - url: /media/icplayer/icplayer.nocache.js
   static_files: lorepo/templates/static_files/icplayer/icplayer.nocache.js
-  upload: lorepo/templates/static_files/icplayer/icplayer.nocache.js
+  upload: src/lorepo/templates/static_files/icplayer/icplayer.nocache.js
   expiration: '0'
 
 - url: /media/iceditor/iceditor.nocache.js

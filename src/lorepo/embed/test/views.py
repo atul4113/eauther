@@ -1,5 +1,5 @@
 from django.test.client import Client
-from libraries.utility.noseplugins import FormattedOutputTestCase
+from src.libraries.utility.noseplugins import FormattedOutputTestCase
 
 class EmbedViewsTests(FormattedOutputTestCase):
     fixtures = ['embed.json']

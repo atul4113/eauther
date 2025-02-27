@@ -1,20 +1,19 @@
 from xml.dom import minidom
 from django.template.loader import render_to_string
-from lorepo.mycontent.models import Content
-from lorepo.filestorage.models import FileStorage, UploadedFile
+from src.lorepo.mycontent.models import Content
+from src.lorepo.filestorage.models import FileStorage, UploadedFile
 from django.conf import settings
 from google.cloud import storage  # Use google-cloud-storage instead of App Engine's blobstore
-from lorepo.filestorage.forms import UploadForm
+from src.lorepo.filestorage.forms import UploadForm
 import io
 import logging
-from lorepo.spaces.models import Space
+from src.lorepo.spaces.models import Space
 import datetime
-from mauthor.localization.exceptions import ContentException
+from src.mauthor.localization.exceptions import ContentException
 from django.shortcuts import get_object_or_404
-from lorepo.mycontent.service import add_content_to_space
-from lorepo.filestorage.utils import store_file_from_stream
-from libraries.utility.helpers import generate_unique_gcs_path  # If needed for cloud storage, otherwise use defaults
-from settings import get_bucket_name
+from src.lorepo.mycontent.service import add_content_to_space
+from src.libraries.utility.helpers import generate_unique_gcs_path  # If needed for cloud storage, otherwise use defaults
+from src.settings import get_bucket_name
 
 # Initialize Google Cloud Storage client
 storage_client = storage.Client()

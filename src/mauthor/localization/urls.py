@@ -1,5 +1,5 @@
 from django.urls import re_path
-from mauthor.localization import views
+from src.mauthor.localization import views
 
 urlpatterns = [
     re_path(r'^create_export/(?P<content_id>\d+)/{0,1}$', views.create_export),

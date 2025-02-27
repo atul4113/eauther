@@ -6,17 +6,16 @@ from django.shortcuts import get_object_or_404
 from django.template import loader, Context
 from django.utils.encoding import force_str
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-import settings
-from libraries.utility.helpers import get_object_or_none
-from lorepo.api.v2.mixins import MiddlewareMixin
-from lorepo.corporate.middleware import CorporateMiddleware
-from lorepo.corporate.models import CorporateLogo
-from lorepo.corporate.templatetags.corporate import is_any_division_admin
-from lorepo.permission.models import Role
-from lorepo.public.util import send_message
-from lorepo.spaces.serializers import SpaceSerializer, PermissionRoleSerializer
-from lorepo.spaces.util import get_private_space_for_user
-from lorepo.user.serializers import PasswordFormSerializer, ProfileChangeFormSerializer
+import src.settings as settings
+from src.lorepo.api.v2.mixins import MiddlewareMixin
+from src.lorepo.corporate.middleware import CorporateMiddleware
+from src.lorepo.corporate.models import CorporateLogo
+from src.lorepo.corporate.templatetags.corporate import is_any_division_admin
+from src.lorepo.permission.models import Role
+from src.lorepo.public.util import send_message
+from src.lorepo.spaces.serializers import SpaceSerializer, PermissionRoleSerializer
+from src.lorepo.spaces.util import get_private_space_for_user
+from src.lorepo.user.serializers import PasswordFormSerializer, ProfileChangeFormSerializer
 from rest_framework import views, generics, status
 from rest_framework.exceptions import ValidationError
 from rest_framework.fields import EmailField
@@ -103,7 +102,7 @@ class RemindLogin(generics.GenericAPIView):
                 'email': email,
                 'request': request
             }
-            email_template_name = 'registration/remind_login_email.html'
+            email_template_name = 'src/registration/remind_login_email.html'
             t = loader.get_template(email_template_name)
             from_email = settings.SERVER_EMAIL
 
@@ -171,7 +170,7 @@ class ResetPassword(generics.GenericAPIView):
         token = default_token_generator.make_token(user)
 
         from_email = settings.SERVER_EMAIL
-        email_template_name = 'registration/password_reset_email.html'
+        email_template_name = 'src/registration/password_reset_email.html'
         current_site = get_current_site(request)
         site_name = current_site.name
         domain = current_site.domain
@@ -189,7 +188,7 @@ class ResetPassword(generics.GenericAPIView):
             'request': request
         }
         send_message(from_email, [user.email],
-                     'lorepo.user.reset_password.Password_reset_on_',
+                     'src.lorepo.user.reset_password.Password_reset_on_',
                      t.render(Context(c)))
 
         return Response('ok')

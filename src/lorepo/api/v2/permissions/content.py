@@ -1,5 +1,5 @@
-from lorepo.permission.decorators import has_space_access
-from lorepo.permission.models import Permission
+from src.lorepo.permission.decorators import has_space_access
+from src.lorepo.permission.models import Permission
 from rest_framework.permissions import BasePermission
 
 

@@ -1,4 +1,4 @@
-from libraries.utility.environment import is_development_server
+from src.libraries.utility.environment import is_development_server
 
 
 def is_request_secure(request):

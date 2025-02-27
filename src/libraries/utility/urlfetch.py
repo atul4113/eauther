@@ -1,5 +1,5 @@
 import requests
-import libraries.utility.cacheproxy as cache
+import src.libraries.utility.cacheproxy as cache
 
 
 def fetch(url, timeout=30, cache_time=None, max_retries=3):

@@ -3,11 +3,11 @@ from rest_framework.permissions import IsAdminUser, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST
 
-from libraries.utility.queues import trigger_backend_task
-from lorepo.api.v2.home_websites.serializers import WebsiteSerializer, WebsiteUpdateDataSerializer
-from lorepo.home.models import WebSite
-from lorepo.translations.models import SupportedLanguages
-from lorepo.translations.serializers import LanguagesSerializer
+from src.libraries.utility.queues import trigger_backend_task
+from src.lorepo.api.v2.home_websites.serializers import WebsiteSerializer, WebsiteUpdateDataSerializer
+from src.lorepo.home.models import WebSite
+from src.lorepo.translations.models import SupportedLanguages
+from src.lorepo.translations.serializers import LanguagesSerializer
 
 NUMBER_OF_VERSIONS = 2
 

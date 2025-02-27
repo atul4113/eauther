@@ -1,6 +1,6 @@
-from lorepo.spaces.models import Space
-import libraries.utility.cacheproxy as cache
-from lorepo.spaces.signals import company_structure_has_changed
+from src.lorepo.spaces.models import Space
+import src.libraries.utility.cacheproxy as cache
+from src.lorepo.spaces.signals import company_structure_has_changed
 
 SPACE_CACHE_TIMEOUT = 60 * 60 * 24
 

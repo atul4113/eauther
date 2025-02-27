@@ -5,14 +5,14 @@ from django.core.mail import mail_admins
 from django.http import HttpResponseRedirect, Http404, HttpResponse, HttpResponsePermanentRedirect
 from django.shortcuts import render, get_object_or_404
 from django.contrib import messages
-from libraries.utility.decorators import backend
-from libraries.wiki.forms import WikiPageForm, WikiPageTranslatedForm
-from libraries.wiki.models import WikiPage, WikiFile, WikiPageTranslated
-from libraries.wiki.util import make_url, has_access_to_wiki
-from lorepo.filestorage.forms import UploadForm
+from src.libraries.utility.decorators import backend
+from src.libraries.wiki.forms import WikiPageForm, WikiPageTranslatedForm
+from src.libraries.wiki.models import WikiPage, WikiFile, WikiPageTranslated
+from src.libraries.wiki.util import make_url, has_access_to_wiki
+from src.lorepo.filestorage.forms import UploadForm
 from django.core.files.storage import default_storage
 from django.core.files.base import ContentFile
-from mauthor.utility.db_safe_iterator import safe_iterate
+from src.mauthor.utility.db_safe_iterator import safe_iterate
 import datetime
 
 

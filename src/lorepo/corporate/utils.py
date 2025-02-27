@@ -1,8 +1,8 @@
-from lorepo.corporate.models import CorporateLogo
-from lorepo.mycontent.models import ContentSpace, Content
-from lorepo.spaces.util import get_spaces_subtree
+from src.lorepo.corporate.models import CorporateLogo
+from src.lorepo.mycontent.models import ContentSpace, Content
+from src.lorepo.spaces.util import get_spaces_subtree
 from django.conf import settings
-from lorepo.filestorage.utils import resize_image
+from src.lorepo.filestorage.utils import resize_image
 from google.cloud import storage
 
 

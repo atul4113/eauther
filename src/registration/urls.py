@@ -4,7 +4,7 @@ from django.urls import re_path, path
 from django.contrib.auth import views as auth_views
 from django.views.generic import TemplateView
 from registration.views import activate, register
-from remember_me.views import remember_me_login  # Import the actual function
+from src.remember_me.views import remember_me_login  # Import the actual function
 
 urlpatterns = [
     # Activation keys get matched by \w+ instead of the more specific

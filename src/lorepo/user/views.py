@@ -9,26 +9,24 @@ from django.contrib import messages
 from django.core.mail import mail_admins
 from django.views.decorators.csrf import csrf_protect
 from celery import shared_task
-from registration.views import register as original_register
-from remember_me.views import remember_me_login
-from lorepo.spaces.models import Space, SpaceAccess, AccessRightType
+from src.registration.views import register as original_register
+from src.remember_me.views import remember_me_login
+from src.lorepo.spaces.models import Space, SpaceAccess, AccessRightType
 from django.contrib.auth.models import User
-from lorepo.spaces.util import get_spaces_subtree
-from lorepo.mycontent.util import get_contents_from_specific_space
+from src.lorepo.spaces.util import get_spaces_subtree
+from src.lorepo.mycontent.util import get_contents_from_specific_space
 from django.contrib.auth.forms import PasswordChangeForm
-from lorepo.filestorage.models import FileStorage
-from lorepo.user.forms import (
+from src.lorepo.filestorage.models import FileStorage
+from src.lorepo.user.forms import (
     CustomRegistrationForm,
     EmailChangeForm,
     CustomPasswordResetForm,
     LanguageChoiceForm,
 )
-from lorepo.mycontent.models import Content, DefaultTemplate, ContentType, CurrentlyEditing
-from lorepo.permission.models import Permission, Role
-from lorepo.course.models import Course
-from lorepo.user.models import UserProfile
-from lorepo.mycontent.service import add_content_to_space
-from xml.dom import minidom
+from src.lorepo.mycontent.models import Content, DefaultTemplate, ContentType, CurrentlyEditing
+from src.lorepo.permission.models import Permission, Role
+from src.lorepo.user.models import UserProfile
+from src.lorepo.mycontent.service import add_content_to_space
 import logging
 import datetime
 @shared_task
@@ -296,7 +294,7 @@ def register(
     request,
     success_url=None,
     form_class=CustomRegistrationForm,
-    template_name="registration/registration_form.html",
+    template_name="src/registration/registration_form.html",
     extra_context=None,
 ):
     """

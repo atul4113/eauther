@@ -1,10 +1,10 @@
-from libraries.utility.noseplugins import FormattedOutputTestCase
-from lorepo.mycontent.models import Content
-from lorepo.exchange.utils import render_manifest
-from libraries.utility.test_assertions import the
+from src.libraries.utility.noseplugins import FormattedOutputTestCase
+from src.lorepo.mycontent.models import Content
+from src.lorepo.exchange.utils import render_manifest
+from src.libraries.utility.test_assertions import the
 from xml.dom.minidom import parseString
 import re
-from lorepo.exchange.views import _update_resource_urls_to_locals
+from src.lorepo.exchange.views import _update_resource_urls_to_locals
 from nose.plugins.attrib import attr
 
 class ManifestTests(FormattedOutputTestCase):

@@ -1,5 +1,5 @@
 from django.template.defaultfilters import register
-from mauthor.metadata.models import DefinitionType
+from src.mauthor.metadata.models import DefinitionType
 
 @register.inclusion_tag('metadata/render_definition_form.html')
 def render_definition_form(definition, language_bidi , suffix=''):

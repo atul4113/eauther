@@ -1,6 +1,6 @@
 from django.test.client import Client
 import json
-from libraries.utility.noseplugins import FormattedOutputTestCase
+from src.libraries.utility.noseplugins import FormattedOutputTestCase
 
 class TemplatesTests(FormattedOutputTestCase):
     fixtures = ['templates.json']

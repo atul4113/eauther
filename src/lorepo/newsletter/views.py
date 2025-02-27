@@ -10,12 +10,11 @@ from django.http import HttpResponse
 from django.conf import settings
 from django.core.files.storage import default_storage
 
-from libraries.utility.decorators import backend
-from libraries.utility.environment import is_development_server
-from lorepo.newsletter.models import NewsletterEmails
-from lorepo.newsletter.utils import CsvFileBufferPresenter
-from lorepo.public.util import send_message
-from mauthor.utility.db_safe_iterator import safe_iterate
+from src.libraries.utility.decorators import backend
+from src.libraries.utility.environment import is_development_server
+from src.lorepo.newsletter.models import NewsletterEmails
+from src.lorepo.public.util import send_message
+from src.mauthor.utility.db_safe_iterator import safe_iterate
 
 PAGE_SIZE_ITERATE = 100
 

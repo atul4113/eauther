@@ -1,5 +1,5 @@
 from django.template.defaultfilters import register
-from mauthor.search.util import DEFAULT_SEARCH_LIMIT
+from src.mauthor.search.util import DEFAULT_SEARCH_LIMIT
 
 @register.filter
 def get_field(result, name):

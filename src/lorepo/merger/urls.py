@@ -1,5 +1,5 @@
 from django.urls import re_path
-from lorepo.merger.views import extract_pages, list_merge_pages, merge_undo, merge
+from src.lorepo.merger.views import extract_pages, list_merge_pages, merge_undo, merge
 
 urlpatterns = [
     re_path(r'^extract/(?P<content_id>\d+)/(?P<space_id>\d+)$', extract_pages),

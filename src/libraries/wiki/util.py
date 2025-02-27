@@ -1,4 +1,4 @@
-from unidecode import unidecode
+from src.unidecode import unidecode
 import re
 from django.core.exceptions import ValidationError
 import string

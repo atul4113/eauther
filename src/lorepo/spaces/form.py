@@ -1,9 +1,9 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
-from lorepo.spaces.models import Space, SpaceAccess
-from lorepo.spaces.model.companyspacemap.company_space_map import CompanySpaceMap
-from mauthor.utility.utils import sanitize_title
+from src.lorepo.spaces.models import Space, SpaceAccess
+from src.lorepo.spaces.model.companyspacemap.company_space_map import CompanySpaceMap
+from src.mauthor.utility.utils import sanitize_title
 
 
 def chunks(sequence, n):

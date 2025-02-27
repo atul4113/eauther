@@ -1,9 +1,9 @@
-from libraries.utility.noseplugins import FormattedOutputTestCase
+from src.libraries.utility.noseplugins import FormattedOutputTestCase
 from django.test.client import Client
-from lorepo.mycontent.models import Content
-from mauthor.exchange_narration.model import ExportNarration
-from libraries.utility.helpers import get_object_or_none
-from lorepo.filestorage.models import FileStorage
+from src.lorepo.mycontent.models import Content
+from src.mauthor.exchange_narration.model import ExportNarration
+from src.libraries.utility.helpers import get_object_or_none
+from src.lorepo.filestorage.models import FileStorage
 from xml.dom import minidom
 from django.contrib.auth.models import User
 

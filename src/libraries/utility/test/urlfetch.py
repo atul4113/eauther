@@ -1,9 +1,9 @@
-from libraries.utility.noseplugins import FormattedOutputTestCase
+from src.libraries.utility.noseplugins import FormattedOutputTestCase
 from minimock import restore, mock
-from libraries.utility.urlfetch import fetch
+from src.libraries.utility.urlfetch import fetch
 from google.appengine.api import urlfetch
-from libraries.utility.test_assertions import the
-from libraries.utility.trackers import FunctionCallsTracker, verify
+from src.libraries.utility.test_assertions import the
+from src.libraries.utility.trackers import FunctionCallsTracker, verify
 from nose.plugins.attrib import attr
 
 class StubbedResponse():

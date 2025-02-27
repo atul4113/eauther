@@ -1,5 +1,5 @@
 from django.urls import path, re_path
-from mauthor.search import views  # Import the views module
+from src.mauthor.search import views  # Import the views module
 
 urlpatterns = [
     # Use re_path for regex-based URL patterns

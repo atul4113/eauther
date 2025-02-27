@@ -97,8 +97,8 @@ handlers:
   url: /media
 - login: admin
   secure: optional
-  static_dir: mauthor/templates/static_files
-  url: /mauthor_media
+  static_dir: src/muthor/templates/static_files
+  url: /src/muthor_media
 - expiration: 7d
   login: admin
   secure: optional

@@ -1,5 +1,5 @@
-from lorepo.permission.models import Role
-from lorepo.spaces.models import Space, UserSpacePermissions
+from src.lorepo.permission.models import Role
+from src.lorepo.spaces.models import Space, UserSpacePermissions
 from rest_framework.fields import SerializerMethodField
 from rest_framework.serializers import ModelSerializer
 

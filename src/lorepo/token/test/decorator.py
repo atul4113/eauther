@@ -1,9 +1,9 @@
 import django.shortcuts
-from minimock import mock, restore
-from lorepo.token.decorators import token
-from libraries.utility.trackers import FunctionCallsTracker
-from libraries.utility.noseplugins import FormattedOutputTestCase
-from nose.plugins.attrib import attr
+from src.minimock import mock, restore
+from src.lorepo.token.decorators import token
+from src.libraries.utility.trackers import FunctionCallsTracker
+from src.libraries.utility.noseplugins import FormattedOutputTestCase
+from src.nose.plugins.attrib import attr
 
 class StubbedRequest(object):
     def __init__(self):

@@ -1,5 +1,5 @@
-from libraries.utility.trackers import FunctionCallsTracker
-from libraries.utility.noseplugins import FormattedOutputTestCase
+from src.libraries.utility.trackers import FunctionCallsTracker
+from src.libraries.utility.noseplugins import FormattedOutputTestCase
 from nose.plugins.attrib import attr
 
 class TrackersTests(FormattedOutputTestCase):

@@ -1,7 +1,7 @@
-from libraries.utility.noseplugins import FormattedOutputTestCase
-from nose.plugins.attrib import attr
-from lorepo.support.util import parse_lesson_id
-from libraries.utility.test_assertions import the
+from src.libraries.utility.noseplugins import FormattedOutputTestCase
+from src.nose.plugins.attrib import attr
+from src.lorepo.support.util import parse_lesson_id
+from src.libraries.utility.test_assertions import the
 
 class SupportUtilTests(FormattedOutputTestCase):
     @attr('unit')

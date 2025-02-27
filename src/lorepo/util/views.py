@@ -2,7 +2,7 @@ import logging
 
 from django.http.response import HttpResponse
 
-from libraries.utility.decorators import backend
+from src.libraries.utility.decorators import backend
 
 
 @backend

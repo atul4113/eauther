@@ -3,16 +3,16 @@ import zlib
 
 from django.urls import path, re_path
 
-import settings
-from libraries.utility.environment import get_versioned_module
-from libraries.utility.helpers import get_object_or_none
-from libraries.utility.queues import trigger_backend_task
-from lorepo.api.v2.util import RetrieveOrListAPIView, CreateUpdateDestroyAPIView
-from lorepo.translations.images import images_labels
-from lorepo.translations.models import SupportedLanguages, TranslatedLang, ImportTable, TranslatedImages
-from lorepo.translations.serializers import LanguagesSerializer, ImportSerializer, AddLabelSerializer, \
+import src.settings as settings
+from src.libraries.utility.environment import get_versioned_module
+from src.libraries.utility.helpers import get_object_or_none
+from src.libraries.utility.queues import trigger_backend_task
+from src.lorepo.api.v2.util import RetrieveOrListAPIView, CreateUpdateDestroyAPIView
+from src.lorepo.translations.images import images_labels
+from src.lorepo.translations.models import SupportedLanguages, TranslatedLang, ImportTable, TranslatedImages
+from src.lorepo.translations.serializers import LanguagesSerializer, ImportSerializer, AddLabelSerializer, \
     EditLabelSerializer, ImageSerializer
-from lorepo.translations.utils import get_translated_images
+from src.lorepo.translations.utils import get_translated_images
 from rest_framework import views, status
 from rest_framework.exceptions import ValidationError
 from rest_framework.generics import CreateAPIView, UpdateAPIView, get_object_or_404, DestroyAPIView

@@ -1,5 +1,5 @@
 import calendar
-from lorepo.mycontent.models import Asset
+from src.lorepo.mycontent.models import Asset
 from rest_framework.fields import SerializerMethodField
 from rest_framework.serializers import ModelSerializer
 

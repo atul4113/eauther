@@ -1,5 +1,4 @@
-from lorepo.user.models import UserLanguage
-from registration.forms import RegistrationFormTermsOfService
+from src.registration.forms import RegistrationFormTermsOfService
 from django import forms
 from django.utils.translation import gettext_lazy as _
 from django.utils.safestring import mark_safe
@@ -9,7 +8,7 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.template import loader
 from django.utils.http import urlsafe_base64_encode
 from django.template.context import Context
-from settings import USER_LANGUAGES
+from src.settings import USER_LANGUAGES
 
 attrs_dict = { 'class': 'required' }
 

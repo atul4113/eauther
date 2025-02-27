@@ -1,6 +1,6 @@
 from django.urls import re_path
 import logging
-from libraries.logger import views
+from src.libraries.logger import views
 
 urlpatterns = [
     re_path(r'^fatal(/(?P<app_id>[A-Za-z0-9]{1,20})){0,1}$', views.log, {'level': logging.FATAL}),

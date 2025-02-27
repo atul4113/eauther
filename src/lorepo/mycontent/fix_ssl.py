@@ -7,11 +7,10 @@ import datetime
 from django.shortcuts import get_object_or_404
 from django.utils.safestring import mark_safe
 from django.views.generic import TemplateView
-from libraries.utility.decorators import cached_property
-from lorepo.filestorage.models import FileStorage, UploadedFile
-from lorepo.filestorage.utils import create_new_version
-from lorepo.spaces.models import SpaceType, Space
-from mauthor.utility.decorators import LoginRequiredMixin
+from src.libraries.utility.decorators import cached_property
+from src.lorepo.filestorage.models import FileStorage, UploadedFile
+from src.lorepo.spaces.models import SpaceType, Space
+from src.mauthor.utility.decorators import LoginRequiredMixin
 
 try:
     from lxml import etree

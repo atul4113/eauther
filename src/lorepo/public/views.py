@@ -1,14 +1,14 @@
-from lorepo.public.forms import ContactForm, OrderForm
-from lorepo.filestorage.views import get_file
+from src.lorepo.public.forms import ContactForm, OrderForm
+from src.lorepo.filestorage.views import get_file
 from django.template import loader
 
 from django.shortcuts import render, get_object_or_404
-from lorepo.mycontent.util import get_content_details
-from lorepo.mycontent.models import ContentType, Content
-from lorepo.spaces.util import get_spaces_for_copy, get_private_space_for_user
+from src.lorepo.mycontent.util import get_content_details
+from src.lorepo.mycontent.models import ContentType, Content
+from src.lorepo.spaces.util import get_spaces_for_copy, get_private_space_for_user
 from django.http import Http404, HttpResponseRedirect
 from django.template.context import Context
-from lorepo.public.util import send_message
+from src.lorepo.public.util import send_message
 import settings
 
 def view(request, content_id):

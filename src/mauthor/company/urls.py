@@ -1,5 +1,5 @@
 from django.urls import path
-from mauthor.company import views
+from src.mauthor.company import views
 
 urlpatterns = [
     path('list_companies/', views.companies_report),

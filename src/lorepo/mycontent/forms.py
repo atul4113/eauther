@@ -2,7 +2,7 @@ from django import forms
 import re
 import unidecode
 from django.core.exceptions import ValidationError
-from lorepo.mycontent.models import Content, ContentType
+from src.lorepo.mycontent.models import Content, ContentType
 
 class ContentMetadataForm(forms.Form):
     title = forms.CharField()

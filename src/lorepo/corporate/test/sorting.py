@@ -1,7 +1,7 @@
-from libraries.utility.noseplugins import FormattedOutputTestCase
-from libraries.utility.test_assertions import the
-from lorepo.corporate.utils import get_contents
-from lorepo.spaces.models import Space
+from src.libraries.utility.noseplugins import FormattedOutputTestCase
+from src.libraries.utility.test_assertions import the
+from src.lorepo.corporate.utils import get_contents
+from src.lorepo.spaces.models import Space
 
 class SortingTests(FormattedOutputTestCase):
     fixtures = ['libraries.testing.spaces.json', 'libraries.testing.users.json', 'libraries.testing.mycontent.json']

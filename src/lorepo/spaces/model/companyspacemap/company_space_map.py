@@ -1,6 +1,6 @@
-from libraries.utility import cacheproxy as cache
-from lorepo.spaces.model.companyspacemap.multitasks_locker import CompanySpaceMapTaskLocker
-from lorepo.spaces.util import get_cached_kids
+from src.libraries.utility import cacheproxy as cache
+from src.lorepo.spaces.model.companyspacemap.multitasks_locker import CompanySpaceMapTaskLocker
+from src.lorepo.spaces.util import get_cached_kids
 
 
 # a whole cached map of company spaces represented as a list of tuples

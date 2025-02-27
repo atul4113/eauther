@@ -1,11 +1,10 @@
 import re
-
-import libraries.utility.cacheproxy as cache
+import src.libraries.utility.cacheproxy as cache
 from django import template
-from lorepo.corporate.models import PROJECT_ADMIN_PERMISSIONS
-from lorepo.mycontent.models import ContentType
-from lorepo.spaces.models import UserSpacePermissions
-from lorepo.spaces.util import  load_kids
+from src.lorepo.corporate.models import PROJECT_ADMIN_PERMISSIONS
+from src.lorepo.mycontent.models import ContentType
+from src.lorepo.spaces.models import UserSpacePermissions
+from src.lorepo.spaces.util import  load_kids
 
 register = template.Library()
 

@@ -1,5 +1,5 @@
 from django.apps import AppConfig
-from lorepo.mycontent.signals import metadata_updated, metadata_updated_async
+from src.lorepo.mycontent.signals import metadata_updated, metadata_updated_async
 from .signals import update_index_async, update_index_async_from_backend
 
 

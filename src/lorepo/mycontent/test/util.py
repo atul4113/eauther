@@ -1,10 +1,10 @@
-from lorepo.mycontent.util import get_contents_from_space,\
+from src.lorepo.mycontent.util import get_contents_from_space,\
     get_contents_from_public_space, get_contents_from_specific_space
-from lorepo.spaces.models import Space
-from libraries.utility.noseplugins import FormattedOutputTestCase
+from src.lorepo.spaces.models import Space
+from src.libraries.utility.noseplugins import FormattedOutputTestCase
 from django.test.client import Client
-from libraries.utility.test_assertions import the
-from lorepo.mycontent.models import Content
+from src.libraries.utility.test_assertions import the
+from src.lorepo.mycontent.models import Content
 
 
 class UtilTests(FormattedOutputTestCase):

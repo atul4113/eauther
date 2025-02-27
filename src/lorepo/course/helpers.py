@@ -1,7 +1,6 @@
 import re
 from xml.dom import minidom
-from libraries.utility.helpers import get_object_or_none
-from lorepo.mycontent.models import Content
+from src.lorepo.mycontent.models import Content
 
 
 def parse_serialized_toc(toc_string):

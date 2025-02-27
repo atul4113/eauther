@@ -4,7 +4,7 @@ from datetime import datetime, timedelta
 from tests_src.cron.cron_mocks import create_space_mock, RequestMock
 from tests_src.TestCase import TestCase
 from mock import patch
-from lorepo.cron.views import lock_companies_async
+from src.lorepo.cron.views import lock_companies_async
 
 USER_EMAILS = ['user1@u.com', 'user2@u.com', 'user3@u.com']
 SUPERUSERS_EMAILS = ['suser1@u.com', 'suser2@u.com', 'suser3@u.com']

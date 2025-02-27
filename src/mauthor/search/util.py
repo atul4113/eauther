@@ -1,8 +1,8 @@
 import re
 from django.db.models import Q
-from mauthor.metadata.util import get_metadata_values, get_page_metadata
-from lorepo.spaces.models import SpaceAccess
-from lorepo.spaces.util import get_space_for_content
+from src.mauthor.metadata.util import get_metadata_values, get_page_metadata
+from src.lorepo.spaces.models import SpaceAccess
+from src.lorepo.spaces.util import get_space_for_content
 
 DEFAULT_SEARCH_LIMIT = 10
 

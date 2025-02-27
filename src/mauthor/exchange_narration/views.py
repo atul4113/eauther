@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404, render
-from lorepo.mycontent.models import Content
-from mauthor.exchange_narration.model import ExportNarration, ExportedNarration
+from src.lorepo.mycontent.models import Content
+from src.mauthor.exchange_narration.model import ExportNarration, ExportedNarration
 from django.contrib.auth.decorators import login_required
 
 def _find_version(previous_exports, content):

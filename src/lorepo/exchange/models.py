@@ -4,8 +4,8 @@ from djangae.fields import ListField
 from django.contrib.auth.models import User
 from django.db import models
 
-from lorepo.filestorage.models import UploadedFile
-from lorepo.mycontent.models import Content
+from src.lorepo.filestorage.models import UploadedFile
+from src.lorepo.mycontent.models import Content
 
 
 class ExportedContent(models.Model):

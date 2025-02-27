@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from lorepo.global_settings.models import GlobalSettings
+from src.lorepo.global_settings.models import GlobalSettings
 
 
 class GlobalSettingsSerializer(serializers.ModelSerializer):

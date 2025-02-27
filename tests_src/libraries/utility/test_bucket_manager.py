@@ -1,6 +1,6 @@
 # coding=utf-8
 import pytest
-from libraries.utility.BucketManager import BucketManager
+from src.libraries.utility.BucketManager import BucketManager
 from mock import patch, MagicMock
 
 

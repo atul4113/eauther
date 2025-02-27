@@ -1,8 +1,8 @@
-from libraries.utility import cacheproxy as cache
-from lorepo.filestorage.models import FileStorage
-from lorepo.filestorage.utils import create_new_version
-from lorepo.mycontent.lesson.update_content_template_task import UpdateContentBasingOnTemplate
-from lorepo.mycontent.models import UpdateTemplateStatus
+from src.libraries.utility import cacheproxy as cache
+from src.lorepo.filestorage.models import FileStorage
+from src.lorepo.filestorage.utils import create_new_version
+from src.lorepo.mycontent.lesson.update_content_template_task import UpdateContentBasingOnTemplate
+from src.lorepo.mycontent.models import UpdateTemplateStatus
 from lxml import etree
 
 

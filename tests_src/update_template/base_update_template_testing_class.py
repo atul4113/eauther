@@ -1,6 +1,6 @@
 from os.path import dirname, abspath, join
 
-from lorepo.mycontent.lesson.update_content_template_task import UpdateContentBasingOnTemplate
+from src.lorepo.mycontent.lesson.update_content_template_task import UpdateContentBasingOnTemplate
 from lxml import etree
 
 from tests_src.xml_utils import etree_to_dict

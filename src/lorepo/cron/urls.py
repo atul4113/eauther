@@ -1,5 +1,5 @@
 from django.urls import path
-from lorepo.cron import views  # Import views module
+from src.lorepo.cron import views  # Import views module
 
 urlpatterns = [
     path('keepalive', views.keepalive),

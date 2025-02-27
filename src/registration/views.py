@@ -2,8 +2,8 @@ from django.conf import settings
 from django.urls import reverse  # ✅ Updated import
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
-from registration.models import RegistrationProfile
-from lorepo.user.forms import CustomRegistrationForm
+from src.registration.models import RegistrationProfile
+from src.lorepo.user.forms import CustomRegistrationForm
 import collections.abc  # ✅ Updated for Callable
 
 def activate(request, activation_key, template_name='registration/activate.html', extra_context=None):

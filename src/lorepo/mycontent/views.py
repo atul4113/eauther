@@ -8,68 +8,68 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.http import HttpResponseRedirect, HttpResponse, Http404
 from django.shortcuts import get_object_or_404, render
 from django.views.generic.base import TemplateView
-from lorepo.api.v2.jwt_api import jwt_payload_handler, jwt_encode_handler
-from lorepo.corporate.decorators import HasSpacePermissionMixin
-from lorepo.embed.decorators import check_is_public
-from lorepo.filestorage.forms import UploadForm
-from lorepo.filestorage.models import FileStorage, UploadedFile
-from lorepo.mycontent.fix_ssl import ContentFixer
-from lorepo.mycontent.forms import ContentMetadataForm, AddonMetadataForm,\
+from src.lorepo.api.v2.jwt_api import jwt_payload_handler, jwt_encode_handler
+from src.lorepo.corporate.decorators import HasSpacePermissionMixin
+from src.lorepo.embed.decorators import check_is_public
+from src.lorepo.filestorage.forms import UploadForm
+from src.lorepo.filestorage.models import FileStorage, UploadedFile
+from src.lorepo.mycontent.fix_ssl import ContentFixer
+from src.lorepo.mycontent.forms import ContentMetadataForm, AddonMetadataForm,\
     AddAddonForm
-from lorepo.mycontent.lesson.update_content_template import update_content_template
-from lorepo.mycontent.models import Content, ContentType,\
+from src.lorepo.mycontent.lesson.update_content_template import update_content_template
+from src.lorepo.mycontent.models import Content, ContentType,\
     SpaceTemplate, DefaultTemplate, UpdateTemplateStatus, CurrentlyEditing,\
     ContentSpace
 import datetime
-from lorepo.spaces.models import Space, SpaceType, SpaceAccess
-from lorepo.spaces.util import get_user_spaces, \
+from src.lorepo.spaces.models import Space, SpaceType, SpaceAccess
+from src.lorepo.spaces.util import get_user_spaces, \
       get_spaces_for_copy,  get_private_space_for_user, get_spaces_tree,\
       change_contentspace, _get_subspaces, is_company_locked
-from lorepo.spaces.util import get_space_for_content
-from lorepo.spaces.util import get_spaces_path_for_content
-from lorepo.mycontent.util import get_addon_source_code, create_template_node,\
+from src.lorepo.spaces.util import get_space_for_content
+from src.lorepo.spaces.util import get_spaces_path_for_content
+from src.lorepo.mycontent.util import get_addon_source_code, create_template_node,\
     clean_content_assets, save_recently_opened, get_content_with_changed_content_file
-from lorepo.filestorage.utils import create_new_version, resize_image
-from lorepo.filestorage.views import get_file
-from libraries.utility.redirect import get_redirect_url, get_redirect
+from src.lorepo.filestorage.utils import create_new_version, resize_image
+from src.lorepo.filestorage.views import get_file
+from src.libraries.utility.redirect import get_redirect_url, get_redirect
 import re
-from lorepo.token.decorators import cached_token
-from lorepo.mycontent.service import add_content_to_space,\
+from src.lorepo.token.decorators import cached_token
+from src.lorepo.mycontent.service import add_content_to_space,\
     update_content_space, remove_content_space
-from lorepo.token.models import TOKEN_KEYS
-from lorepo.token.util import create_mycontent_editor_token, create_mycontent_edit_addon_token
-from mauthor.customfixdb.models import FixLog
-from mauthor.states.models import ProjectStatesSet, ContentState
-from mauthor.states.util import get_states_sets
+from src.lorepo.token.models import TOKEN_KEYS
+from src.lorepo.token.util import create_mycontent_editor_token, create_mycontent_edit_addon_token
+from src.mauthor.customfixdb.models import FixLog
+from src.mauthor.states.models import ProjectStatesSet, ContentState
+from src.mauthor.states.util import get_states_sets
 from django.contrib import messages
-import libraries.utility.cacheproxy as cache
-from lorepo.permission.decorators import has_space_access, company_locked
-from lorepo.corporate.utils import get_publication_for_space, get_contents,\
+import src.libraries.utility.cacheproxy as cache
+from src.lorepo.permission.decorators import has_space_access, company_locked
+from src.lorepo.corporate.utils import get_publication_for_space, get_contents,\
     get_division_for_space
-from mauthor.utility.decorators import LoginRequiredMixin
+from src.mauthor.utility.decorators import LoginRequiredMixin
 from querystring_parser import parser
-from lorepo.permission.models import Permission
-from lorepo.mycontent.signals import addon_published, addon_deleted,\
+from src.lorepo.permission.models import Permission
+from src.lorepo.mycontent.signals import addon_published, addon_deleted,\
     metadata_updated
 import urllib.request, urllib.parse, urllib.error
 import logging
-from libraries.utility.helpers import parse_query_dict
+from src.libraries.utility.helpers import parse_query_dict
 from django.contrib.auth.models import User
-from lorepo.permission.util import verify_content_access, verify_space_access
-from lorepo.permission.notifications import send_no_access_notification
-from lorepo.public.util import send_message
+from src.lorepo.permission.util import verify_content_access, verify_space_access
+from src.lorepo.permission.notifications import send_no_access_notification
+from src.lorepo.public.util import send_message
 import settings
 from django.core.mail import mail_admins
-from libraries.utility.queues import trigger_backend_task, trigger_backend_tasks
-from mauthor.metadata.util import save_metadata_from_request, toggle_page_metadata, update_page_metadata,\
+from src.libraries.utility.queues import trigger_backend_task, trigger_backend_tasks
+from src.mauthor.metadata.util import save_metadata_from_request, toggle_page_metadata, update_page_metadata,\
     get_page_metadata, get_metadata_values_and_definitions, copy_metadata
-from mauthor.metadata.models import MetadataValue, PageMetadata
-from libraries.core.paginator import CustomPaginator
-from lorepo.mycontent.decorators import is_being_edited
-from lorepo.mycontent.util import set_new_token_and_return_path
-from libraries.utility.decorators import backend
-from libraries.utility.environment import get_versioned_module
-from mauthor.utility.db_safe_iterator import safe_iterate
+from src.mauthor.metadata.models import MetadataValue, PageMetadata
+from src.libraries.core.paginator import CustomPaginator
+from src.lorepo.mycontent.decorators import is_being_edited
+from src.lorepo.mycontent.util import set_new_token_and_return_path
+from src.libraries.utility.decorators import backend
+from src.libraries.utility.environment import get_versioned_module
+from src.mauthor.utility.db_safe_iterator import safe_iterate
 
 
 def trash(request, space_id=None):

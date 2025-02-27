@@ -1,6 +1,6 @@
 import libraries.utility.timing as timing
 from django.template.defaultfilters import register
-from libraries.utility.environment import get_app_version
+from src.libraries.utility.environment import get_app_version
 from django.urls import resolve, Resolver404
 import re
 

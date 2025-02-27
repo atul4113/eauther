@@ -4,21 +4,21 @@ from django.contrib import messages
 from django.shortcuts import get_object_or_404, render
 from django.contrib.auth.decorators import login_required
 
-from libraries.utility.helpers import get_object_or_none
-from lorepo.token.models import TOKEN_KEYS
-from lorepo.token.util import create_project_states_token, create_kanban_token
-from lorepo.token.decorators import TokenMixin, cached_token
-from mauthor.utility.decorators import company_admin, LoginRequiredMixin
-from mauthor.states.models import StatesSet, State, StateToSet, ProjectStatesSet,\
+from src.libraries.utility.helpers import get_object_or_none
+from src.lorepo.token.models import TOKEN_KEYS
+from src.lorepo.token.util import create_project_states_token, create_kanban_token
+from src.lorepo.token.decorators import TokenMixin, cached_token
+from src.mauthor.utility.decorators import company_admin, LoginRequiredMixin
+from src.mauthor.states.models import StatesSet, State, StateToSet, ProjectStatesSet,\
     ContentState
-from mauthor.states.forms import AddSetForm, AddStateForm, RenameStateForm
-from lorepo.spaces.models import Space
-from lorepo.mycontent.models import Content
-from libraries.utility.redirect import get_redirect
-from mauthor.states.util import get_states_sets
-from lorepo.mycontent.util import get_contents_from_subspaces
-from lorepo.spaces.util import filter_deleted, get_spaces_subtree
-import libraries.utility.cacheproxy as cache
+from src.mauthor.states.forms import AddSetForm, AddStateForm, RenameStateForm
+from src.lorepo.spaces.models import Space
+from src.lorepo.mycontent.models import Content
+from src.libraries.utility.redirect import get_redirect
+from src.mauthor.states.util import get_states_sets
+from src.lorepo.mycontent.util import get_contents_from_subspaces
+from src.lorepo.spaces.util import filter_deleted, get_spaces_subtree
+import src.libraries.utility.cacheproxy as cache
 
 @login_required
 @company_admin

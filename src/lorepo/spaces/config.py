@@ -1,5 +1,5 @@
 from django.apps import AppConfig
-from lorepo.spaces.signals import space_access_changed, company_structure_has_changed, \
+from src.lorepo.spaces.signals import space_access_changed, company_structure_has_changed, \
     update_company_users_space_permissions, update_user_space_permissions
 
 

@@ -1,23 +1,16 @@
 import calendar
-
-from libraries.utility.helpers import get_object_or_none
-from lorepo.filestorage.models import UploadedFile
-from lorepo.corporate.utils import get_division_for_space
+from src.lorepo.corporate.utils import get_division_for_space
 import calendar
-
-from libraries.utility.helpers import get_object_or_none
-from lorepo.corporate.utils import get_division_for_space
-from lorepo.filestorage.models import UploadedFile
-from lorepo.mycontent.models import Content, ContentType
-from lorepo.spaces.util import get_space_for_content
-from mauthor.bug_track.models import Bug
-from mauthor.bug_track.util import get_users_for_email
-from mauthor.metadata.models import MetadataValue, DefinitionType, PageMetadata
-from mauthor.metadata.util import get_metadata_values
-from rest_framework.exceptions import ValidationError
-from lorepo.spaces.util import get_space_for_content, get_space_for_content_cached
-from mauthor.metadata.models import MetadataValue, DefinitionType
-from mauthor.metadata.util import get_metadata_values
+from src.libraries.utility.helpers import get_object_or_none
+from src.lorepo.corporate.utils import get_division_for_space
+from src.lorepo.filestorage.models import UploadedFile
+from src.lorepo.mycontent.models import Content, ContentType
+from src.mauthor.bug_track.models import Bug
+from src.mauthor.bug_track.util import get_users_for_email
+from src.mauthor.metadata.models import MetadataValue, DefinitionType, PageMetadata
+from src.lorepo.spaces.util import get_space_for_content, get_space_for_content_cached
+from src.mauthor.metadata.models import MetadataValue, DefinitionType
+from src.mauthor.metadata.util import get_metadata_values
 from rest_framework.fields import SerializerMethodField
 from rest_framework.serializers import ModelSerializer, CharField, Serializer, IntegerField
 from rest_framework.serializers import ModelSerializer, ValidationError

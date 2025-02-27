@@ -1,10 +1,10 @@
 from django.contrib.auth.models import User
-import libraries.utility.cacheproxy as cache
-from lorepo.permission.models import Role, Permission
-from lorepo.spaces.models import Space, SpaceAccess
-from lorepo.spaces.service import insert_space
-from lorepo.user.models import UserProfile
-from registration.models import RegistrationProfile
+import src.libraries.utility.cacheproxy as cache
+from src.lorepo.permission.models import Role, Permission
+from src.lorepo.spaces.models import Space, SpaceAccess
+from src.lorepo.spaces.service import insert_space
+from src.lorepo.user.models import UserProfile
+from src.registration.models import RegistrationProfile
 from rest_framework import serializers as s
 from rest_framework.exceptions import ValidationError
 from rest_framework.fields import RegexField, EmailField

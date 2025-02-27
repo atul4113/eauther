@@ -1,12 +1,12 @@
-import libraries.utility.cacheproxy as cache
+import src.libraries.utility.cacheproxy as cache
 from django.core.mail import mail_admins
-from lorepo.mycontent.models import ContentLike, Content
-from lorepo.mycontent.service import get_list_by_ids, add_content_to_space,\
+from src.lorepo.mycontent.models import ContentLike, Content
+from src.lorepo.mycontent.service import get_list_by_ids, add_content_to_space,\
     remove_content_space
-from lorepo.permission.models import PermissionTuples, Role
-from lorepo.spaces.models import Space, SpaceAccess, SpaceType,\
+from src.lorepo.permission.models import PermissionTuples, Role
+from src.lorepo.spaces.models import Space, SpaceAccess, SpaceType,\
     LockedSpaceAccess, AccessRightType, UserSpacePermissions
-from lorepo.spaces.service import get_space_list_by_ids
+from src.lorepo.spaces.service import get_space_list_by_ids
 
 
 def filter_deleted(spaces, subspaces=None, is_trash=False):

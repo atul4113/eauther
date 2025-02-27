@@ -1,5 +1,5 @@
 from django.urls import path, re_path
-from mauthor.metadata.views import define, store, batch_update
+from src.mauthor.metadata.views import define, store, batch_update
 
 urlpatterns = [
     # View URLs

@@ -1,6 +1,6 @@
 from django.http import Http404
 
-import libraries.utility.cacheproxy as cache
+import src.libraries.utility.cacheproxy as cache
 
 
 class ModelCacheMixin(object):

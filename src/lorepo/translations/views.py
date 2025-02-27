@@ -13,20 +13,20 @@ from django.template.loader import render_to_string
 from itertools import islice
 
 import settings
-from libraries.utility.decorators import backend
-from lorepo.public.util import send_message
-from lorepo.translations.utils import save_translated_image_to_cache, change_session_lang, \
+from src.libraries.utility.decorators import backend
+from src.lorepo.public.util import send_message
+from src.lorepo.translations.utils import save_translated_image_to_cache, change_session_lang, \
     get_sys_label, get_user_lang, delete_cache_translated_image, get_static_language, get_safely_translation, \
     delete_cached_language
-from lorepo.translations.models import SupportedLanguages, \
+from src.lorepo.translations.models import SupportedLanguages, \
     TranslatedImages, TranslationsNewsStatistics, TranslatedLang, ImportTable, TranslationsNews, TranslationsSettings
-from lorepo.util.singleton_model import SingletonModel
+from src.lorepo.util.singleton_model import SingletonModel
 from settings import USER_DEFAULT_LANG, SERVER_EMAIL, APP_NAME
 from django.contrib.auth.models import User
 from django.core.mail import mail_admins
 from django.template import loader, Context, RequestContext
 from django.contrib import messages
-from libraries.utility.environment import get_versioned_module, get_app_version
+from src.libraries.utility.environment import get_versioned_module, get_app_version
 from django.utils.html import escape
 
 def send_confirmation(user, lang_key):

@@ -1,8 +1,8 @@
 from django.http import Http404, HttpResponse
 from django.shortcuts import redirect
 from urllib.parse import urlparse
-from libraries.utility.request import get_protocol
-from libraries.utility.urlfetch import fetch
+from src.libraries.utility.request import get_protocol
+from src.libraries.utility.urlfetch import fetch
 import re
 
 

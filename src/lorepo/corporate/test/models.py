@@ -1,7 +1,7 @@
-from libraries.utility.noseplugins import FormattedOutputTestCase
+from src.libraries.utility.noseplugins import FormattedOutputTestCase
 from django.test.client import RequestFactory, Client
-from lorepo.mycontent.models import Content
-from lorepo.spaces.models import Space
+from src.lorepo.mycontent.models import Content
+from src.lorepo.spaces.models import Space
 
 
 class PublicContentCheckTest(FormattedOutputTestCase):

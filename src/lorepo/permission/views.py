@@ -4,12 +4,12 @@ from django.utils.safestring import mark_safe
 from django.views.generic.base import TemplateView
 
 
-from lorepo.corporate.decorators import HasSpacePermissionMixin
-from lorepo.spaces.util import has_space_permission
-from lorepo.permission.models import Role, Permission
-from lorepo.permission.util import translate_perm_to_tuple,\
+from src.lorepo.corporate.decorators import HasSpacePermissionMixin
+from src.lorepo.spaces.util import has_space_permission
+from src.lorepo.permission.models import Role, Permission
+from src.lorepo.permission.util import translate_perm_to_tuple,\
     group_permissions_tuples, get_company_users, get_projects_users, get_projects_and_publications
-from lorepo.permission.decorators import has_space_access
+from src.lorepo.permission.decorators import has_space_access
 
 permissions_levels = {'project_level_only' : ['Manage Courses'],
     'company_level_only' : ['Upload Company Logo', 'View Company Details', 'Edit Company Details', 'View Company Administration Panel']

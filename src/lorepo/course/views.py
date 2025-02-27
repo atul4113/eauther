@@ -1,44 +1,44 @@
 import os
 from google.api_core.exceptions import TooManyRequests, DeadlineExceeded
 from django.shortcuts import render
-from lorepo.exchange.utils import RETRY_ERRORS
-from lorepo.spaces.models import Space
-from lorepo.mycontent.util import get_contents_from_specific_space
-from libraries.utility.helpers import get_object_or_none, generate_unique_gcs_path
+from src.lorepo.exchange.utils import RETRY_ERRORS
+from src.lorepo.spaces.models import Space
+from src.lorepo.mycontent.util import get_contents_from_specific_space
+from src.libraries.utility.helpers import get_object_or_none, generate_unique_gcs_path
 from django.http import HttpResponse, HttpResponseRedirect,\
     HttpResponseForbidden
 from django.template import loader
 from django.template.context import Context
-from lorepo.course.models import Course, ExportedCourse, ExportedCourseLesson, LessonAlreadyCreatedError
+from src.lorepo.course.models import Course, ExportedCourse, ExportedCourseLesson, LessonAlreadyCreatedError
 from django.contrib import messages
-from lorepo.filestorage.models import FileStorage, UploadedFile
+from src.lorepo.filestorage.models import FileStorage, UploadedFile
 import datetime
-from libraries.utility.redirect import get_redirect, get_redirect_url,\
+from src.libraries.utility.redirect import get_redirect, get_redirect_url,\
     join_redirect_urls, get_redirect_urls
-from lorepo.course.helpers import parse_serialized_toc, \
+from src.lorepo.course.helpers import parse_serialized_toc, \
     get_ebook_resources_node, remove_unrelated_resources, check_deleted_lessons
 import logging
-from lorepo.mycontent.models import Content, ContentType
+from src.lorepo.mycontent.models import Content, ContentType
 import json
-from lorepo.exchange.views import _zip_content
-from libraries.utility.queues import delete_task, trigger_backend_task
-from libraries.utility.environment import get_versioned_module
+from src.lorepo.exchange.views import _zip_content
+from src.libraries.utility.queues import delete_task, trigger_backend_task
+from src.libraries.utility.environment import get_versioned_module
 from zipfile import ZipFile, ZIP_DEFLATED
 from django.contrib.auth.models import User
-from lorepo.public.util import send_message
-from mauthor.utility.utils import sanitize_title
-import settings
-from mauthor.backup.views import _store_backup
+from src.lorepo.public.util import send_message
+from src.mauthor.utility.utils import sanitize_title
+import src.settings as settings
+from src.mauthor.backup.views import _store_backup
 from django.core.mail import mail_admins
 from django.contrib.auth.decorators import login_required
-from lorepo.permission.decorators import has_space_access
-from lorepo.permission.models import Permission
-import libraries.utility.cacheproxy as cache
+from src.lorepo.permission.decorators import has_space_access
+from src.lorepo.permission.models import Permission
+import src.libraries.utility.cacheproxy as cache
 from xml.dom import minidom
-from lorepo.course.scorm import store_scorm_manifest
-from lorepo.spaces.util import load_kids, structure_as_dict
-from libraries.utility.decorators import backend
-from lorepo.token.decorators import form_token, set_form_token
+from src.lorepo.course.scorm import store_scorm_manifest
+from src.lorepo.spaces.util import load_kids, structure_as_dict
+from src.libraries.utility.decorators import backend
+from src.lorepo.token.decorators import form_token, set_form_token
 
 
 @login_required

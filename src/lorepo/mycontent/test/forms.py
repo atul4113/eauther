@@ -1,5 +1,5 @@
-from lorepo.mycontent.forms import AddAddonForm
-from libraries.utility.noseplugins import FormattedOutputTestCase
+from src.lorepo.mycontent.forms import AddAddonForm
+from src.libraries.utility.noseplugins import FormattedOutputTestCase
 from nose.plugins.attrib import attr
 
 class FormsTests(FormattedOutputTestCase):

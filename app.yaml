@@ -35,74 +35,74 @@ handlers:
   expiration: '0'
 
 - url: /media/images/(.*)
-  static_files: lorepo/templates/static_files/images/\1
-  upload: lorepo/templates/static_files/images/(.*)
+  static_files: src/lorepo/templates/static_files/images/\1
+  upload: src/lorepo/templates/static_files/images/(.*)
   expiration: "7d"
 
 - url: /media/content/(.*)
-  static_files: lorepo/templates/static_files/content/\1
-  upload: lorepo/templates/static_files/content/(.*)
+  static_files: src/lorepo/templates/static_files/content/\1
+  upload: src/lorepo/templates/static_files/content/(.*)
   expiration: "7d"
 
 - url: /media/style/fonts/(.*\.eot)
-  static_files: lorepo/templates/static_files/style/fonts/\1
-  upload: lorepo/templates/static_files/style/fonts/(.*\.eot)
+  static_files: src/lorepo/templates/static_files/style/fonts/\1
+  upload: src/lorepo/templates/static_files/style/fonts/(.*\.eot)
   expiration: "30d"
   mime_type: font/eot
 
 - url: /media/style/fonts/(.*\.woff)
-  static_files: lorepo/templates/static_files/style/fonts/\1
-  upload: lorepo/templates/static_files/style/fonts/(.*\.woff)
+  static_files: src/lorepo/templates/static_files/style/fonts/\1
+  upload: src/lorepo/templates/static_files/style/fonts/(.*\.woff)
   expiration: "30d"
   mime_type: font/woff
 
 - url: /media/style/fonts/(.*\.ttf)
-  static_files: lorepo/templates/static_files/style/fonts/\1
-  upload: lorepo/templates/static_files/style/fonts/(.*\.ttf)
+  static_files: src/lorepo/templates/static_files/style/fonts/\1
+  upload: src/lorepo/templates/static_files/style/fonts/(.*\.ttf)
   expiration: "30d"
   mime_type: font/ttf
 
 - url: /media/style/fonts/(.*)
-  static_files: lorepo/templates/static_files/style/fonts/\1
-  upload: lorepo/templates/static_files/style/fonts/(.*)
+  static_files: src/lorepo/templates/static_files/style/fonts/\1
+  upload: src/lorepo/templates/static_files/style/fonts/(.*)
   expiration: "30d"
 
 - url: /media/icplayer/icplayer.nocache.js
-  static_files: lorepo/templates/static_files/icplayer/icplayer.nocache.js
-  upload: lorepo/templates/static_files/icplayer/icplayer.nocache.js
+  static_files: src/lorepo/templates/static_files/icplayer/icplayer.nocache.js
+  upload: src/lorepo/templates/static_files/icplayer/icplayer.nocache.js
   expiration: '0'
 
 - url: /media/iceditor/iceditor.nocache.js
-  static_files: lorepo/templates/static_files/iceditor/iceditor.nocache.js
-  upload: lorepo/templates/static_files/iceditor/iceditor.nocache.js
+  static_files: src/lorepo/templates/static_files/iceditor/iceditor.nocache.js
+  upload: src/lorepo/templates/static_files/iceditor/iceditor.nocache.js
   expiration: '0'
 
 - url: /media/addoneditor/addoneditor.nocache.js
-  static_files: lorepo/templates/static_files/addoneditor/addoneditor.nocache.js
-  upload: lorepo/templates/static_files/addoneditor/addoneditor.nocache.js
+  static_files: src/lorepo/templates/static_files/addoneditor/addoneditor.nocache.js
+  upload: src/lorepo/templates/static_files/addoneditor/addoneditor.nocache.js
   expiration: '0'
 
 - url: /media/styles.css
-  static_files: lorepo/templates/static_files/styles.css
-  upload: lorepo/templates/static_files/styles.css
+  static_files: src/lorepo/templates/static_files/styles.css
+  upload: src/lorepo/templates/static_files/styles.css
   expiration: '0'
 
 - url: /media/frontend/build/1120
-  static_dir: mauthor/templates/static_files/frontend
+  static_dir: src/muthor/templates/static_files/frontend
   expiration: "7d"
   secure: always
 
 - url: /media/apidoc/$
-  static_files: lorepo/templates/static_files/apidoc/index.html
-  upload: lorepo/templates/static_files/apidoc/index.html
+  static_files: src/lorepo/templates/static_files/apidoc/index.html
+  upload: src/lorepo/templates/static_files/apidoc/index.html
   login: admin
 
 - url: /media/apidoc
-  static_dir: lorepo/templates/static_files/apidoc/
+  static_dir: src/lorepo/templates/static_files/apidoc/
   login: admin
 
 - url: /media
-  static_dir: lorepo/templates/static_files
+  static_dir: src/lorepo/templates/static_files
 
 - url: (^/mycontent/copy_public_lesson/(\d+)$)
   script: wsgi.application
@@ -120,13 +120,13 @@ handlers:
   secure: always
 
 - url: (^/?$)|(^/home(/(.*))?$)|(^/accounts/login/?$)|(^/corporate/?$)|(^/mycontent/view/(\d+)$)|(^/corporate/view/(\d+)$)|(^/dashboard/?$)|(^/accounts/register/?$)|(^/accounts/register/finish$)|(^/mycontent/?$)|(^/mycontent(/(.*))?$)|(^/panel(/(.*))?$)|(^/corporate/list/(\d+)$)|(^/corporate/interactive-tutorials$)|(^/mycontent/addcontent/(\d+)$)|(^/corporate/list/(\d+)/trash$)
-  static_files: mauthor/templates/static_files/frontend/dist/index.html
-  upload: mauthor/templates/static_files/frontend/dist/index.html
+  static_files: src/muthor/templates/static_files/frontend/dist/index.html
+  upload: src/muthor/templates/static_files/frontend/dist/index.html
   expiration: "0"
   secure: always
 
-- url: /mauthor_media
-  static_dir: mauthor/templates/static_files
+- url: /src/muthor_media
+  static_dir: src/muthor/templates/static_files
 
 - url: /favicon\.ico
   static_files: lorepo/templates/static_files/favicon.ico

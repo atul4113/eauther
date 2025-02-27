@@ -2,9 +2,9 @@ import copy
 import re
 from abc import abstractmethod
 from xml.dom.minidom import Document, Node
-from mauthor.lessons_parsers.property_changer.parsers.parser import Parser
-from mauthor.lessons_parsers.property_changer.util import get_property_by_name, get_items_tag
-from mauthor.lessons_parsers.property_changer.models import AddonPropertyModel, DefaultFrontEndPropertyModel, ListFrontEndPropertyModel, StaticListFrontEndPropertyModel, StaticRowFrontEndPropertyModel
+from src.mauthor.lessons_parsers.property_changer.parsers.parser import Parser
+from src.mauthor.lessons_parsers.property_changer.util import get_property_by_name, get_items_tag
+from src.mauthor.lessons_parsers.property_changer.models import AddonPropertyModel, DefaultFrontEndPropertyModel, ListFrontEndPropertyModel, StaticListFrontEndPropertyModel, StaticRowFrontEndPropertyModel
 
 
 # noinspection PyClassHasNoInit

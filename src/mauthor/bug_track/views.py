@@ -1,19 +1,19 @@
 from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import get_object_or_404
-from lorepo.mycontent.models import Content
-from mauthor.bug_track.models import Bug
-from mauthor.bug_track.forms import AddBugForm
-from mauthor.bug_track.util import get_users_for_email
-from libraries.utility.redirect import get_redirect_url
-from lorepo.spaces.util import get_space_for_content, is_space_owner
+from src.lorepo.mycontent.models import Content
+from src.mauthor.bug_track.models import Bug
+from src.mauthor.bug_track.forms import AddBugForm
+from src.mauthor.bug_track.util import get_users_for_email
+from src.libraries.utility.redirect import get_redirect_url
+from src.lorepo.spaces.util import get_space_for_content, is_space_owner
 from django.contrib import messages
-from lorepo.public.util import send_message
+from src.lorepo.public.util import send_message
 from django.template import loader
 from django.template.context import Context
 from django.conf import settings
-from lorepo.permission.decorators import has_space_access
-from lorepo.permission.models import Permission
-from lorepo.permission.util import verify_space_access
+from src.lorepo.permission.decorators import has_space_access
+from src.lorepo.permission.models import Permission
+from src.lorepo.permission.util import verify_space_access
 
 
 @has_space_access(Permission.BUGTRACK_ADD)

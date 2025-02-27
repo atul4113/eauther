@@ -11,37 +11,37 @@ from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponseRedirect, HttpResponse,\
     HttpResponseForbidden
 from django.contrib import messages
-from lorepo.spaces.models import Space, SpaceType
-from lorepo.filestorage.models import UploadedFile, FileStorage
-from lorepo.mycontent.util import get_contents_from_specific_space
-from lorepo.filestorage.forms import UploadForm
-from mauthor.backup.models import ProjectBackup, ExportedPackage
+from src.lorepo.spaces.models import Space, SpaceType
+from src.lorepo.filestorage.models import UploadedFile, FileStorage
+from src.lorepo.mycontent.util import get_contents_from_specific_space
+from src.lorepo.filestorage.forms import UploadForm
+from src.mauthor.backup.models import ProjectBackup, ExportedPackage
 from xml.etree import ElementTree
 from zipfile import ZipFile
-from lorepo.corporate.signals import company_structure_changed
-from lorepo.mycontent.models import Content
+from src.lorepo.corporate.signals import company_structure_changed
+from src.lorepo.mycontent.models import Content
 import datetime
 from django.conf import settings
 from django.template.context import Context
 from django.template import loader
-from lorepo.public.util import send_message
+from src.lorepo.public.util import send_message
 from django.contrib.auth.models import User
-from lorepo.mycontent.service import add_content_to_space
-from libraries.utility.queues import trigger_backend_task, delete_task
+from src.lorepo.mycontent.service import add_content_to_space
+from src.libraries.utility.queues import trigger_backend_task, delete_task
 import logging
 from django.core.mail import mail_admins
-from lorepo.spaces.util import get_space_for_content
-from lorepo.exchange.views import _zip_content
-from lorepo.corporate.utils import get_division_for_space
-from libraries.utility.helpers import get_object_or_none
-from lorepo.spaces.service import update_space
-from lorepo.permission.models import Permission
-from lorepo.permission.decorators import has_space_access
-from lorepo.filestorage.utils import get_reader, store_file_from_stream
-from libraries.utility.environment import get_app_version, get_versioned_module
-from mauthor.backup.utils import make_path, get_path
-from mauthor.bulk.util import build_project_tree
-from libraries.utility.decorators import backend
+from src.lorepo.spaces.util import get_space_for_content
+from src.lorepo.exchange.views import _zip_content
+from src.lorepo.corporate.utils import get_division_for_space
+from src.libraries.utility.helpers import get_object_or_none
+from src.lorepo.spaces.service import update_space
+from src.lorepo.permission.models import Permission
+from src.lorepo.permission.decorators import has_space_access
+from src.lorepo.filestorage.utils import get_reader, store_file_from_stream
+from src.libraries.utility.environment import get_app_version, get_versioned_module
+from src.mauthor.backup.utils import make_path, get_path
+from src.mauthor.bulk.util import build_project_tree
+from src.libraries.utility.decorators import backend
 from settings import get_bucket_name
 
 

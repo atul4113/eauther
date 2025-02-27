@@ -1,4 +1,4 @@
-from xml_parsers.EchoXMLGenerator import OutputEchoXMLGenerator
+from src.xml_parsers.EchoXMLGenerator import OutputEchoXMLGenerator
 
 
 class AddTitleToXMLParser(OutputEchoXMLGenerator):

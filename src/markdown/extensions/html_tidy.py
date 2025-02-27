@@ -28,7 +28,7 @@ Dependencies:
 
 """
 
-import markdown
+import src.markdown as markdown
 import tidy
 
 class TidyExtension(markdown.Extension):

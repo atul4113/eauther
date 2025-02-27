@@ -1,6 +1,6 @@
 from django.urls import path, re_path
-from lorepo.mycontent.fix_ssl import SslReportView
-from lorepo.spaces.models import SpaceType
+from src.lorepo.mycontent.fix_ssl import SslReportView
+from src.lorepo.spaces.models import SpaceType
 from .views import ConfirmSelfEditing, ConfirmEditing, ConfirmSelfEditingAddon
 from .views import index, trash, add_content, editor, preview, metadata, pagemetadata, copy, copy_public_lesson, \
     changeIcon, make_public, make_globally_public, update_public, make_template, delete, show_history, \

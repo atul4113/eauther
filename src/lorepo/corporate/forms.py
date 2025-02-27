@@ -1,8 +1,8 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
-from lorepo.spaces.models import Space, SpaceType
-from lorepo.spaces.util import get_top_level_owned_corporate_spaces, get_corporate_spaces_for_user
+from src.lorepo.spaces.models import Space, SpaceType
+from src.lorepo.spaces.util import get_top_level_owned_corporate_spaces, get_corporate_spaces_for_user
 
 
 class CreateOwnerCompanyForm(forms.Form):

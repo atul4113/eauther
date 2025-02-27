@@ -4,13 +4,13 @@ import mimetypes
 
 PREPARE_UPLOAD_BACKEND = getattr(settings,
     'PREPARE_UPLOAD_BACKEND',
-    'filetransfers.backends.default.prepare_upload')
+    'src.filetransfers.backends.default.prepare_upload')
 SERVE_FILE_BACKEND = getattr(settings,
     'SERVE_FILE_BACKEND',
-    'filetransfers.backends.default.serve_file')
+    'src.filetransfers.backends.default.serve_file')
 PUBLIC_DOWNLOAD_URL_BACKEND = getattr(settings,
     'PUBLIC_DOWNLOAD_URL_BACKEND',
-    'filetransfers.backends.default.public_download_url')
+    'src.filetransfers.backends.default.public_download_url')
 
 _backends_cache = {}
 

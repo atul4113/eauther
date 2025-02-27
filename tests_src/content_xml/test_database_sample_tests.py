@@ -1,6 +1,6 @@
 import pytest
 from django.contrib.auth.models import User
-from libraries.utility.queues import trigger_backend_task
+from src.libraries.utility.queues import trigger_backend_task
 
 from tests_src.TestCase import DBTestCase, TestCase
 """

@@ -5,11 +5,11 @@ import xml.dom
 import xml.dom.minidom
 
 from django.shortcuts import get_object_or_404
-from libraries.utility.lxml_utilities.content.xml_model import ContentXML
-from libraries.utility.lxml_utilities.utilities import parse_main_xml_layouts
-from lorepo.filestorage.models import FileStorage
-from lorepo.merger.utils import ensure_unique_layouts_and_css_ids, create_replace_map, replace_in_page_ids
-from lorepo.mycontent.models import Content
+from src.libraries.utility.lxml_utilities.content.xml_model import ContentXML
+from src.libraries.utility.lxml_utilities.utilities import parse_main_xml_layouts
+from src.lorepo.filestorage.models import FileStorage
+from src.lorepo.merger.utils import ensure_unique_layouts_and_css_ids, create_replace_map, replace_in_page_ids
+from src.lorepo.mycontent.models import Content
 from lxml import etree
 
 

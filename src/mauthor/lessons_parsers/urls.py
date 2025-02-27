@@ -1,11 +1,11 @@
 from django.urls import path
-from mauthor.lessons_parsers.views import (
+from src.mauthor.lessons_parsers.views import (
     ChangePropertiesView,
     RemoveDescriptorsView,
     fix_properties_async,  # Import the view function
     remove_descriptors_async,  # Import the view function
 )
-from mauthor.lessons_parsers.api import get_properties, addon_exist
+from src.mauthor.lessons_parsers.api import get_properties, addon_exist
 
 urlpatterns = [
     # View URLs

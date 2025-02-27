@@ -1,8 +1,8 @@
 from djangae.fields import ListField
 from django.db import models
-from lorepo.spaces.models import Space
-import libraries.utility.cacheproxy as cache
-from lorepo.spaces.signals import company_structure_has_changed
+from src.lorepo.spaces.models import Space
+import src.libraries.utility.cacheproxy as cache
+from src.lorepo.spaces.signals import company_structure_has_changed
 
 '''
     IMPORTANT NOTE:
@@ -118,7 +118,7 @@ class Role(models.Model):
         return '%s' % self.name
 
     def get_permissions(self):
-        from lorepo.permission.util import translate_perm_to_tuple
+        from src.lorepo.permission.util import translate_perm_to_tuple
         return [translate_perm_to_tuple(perm) for perm in self.permissions]
 
     def save(self, *args, **kwargs):

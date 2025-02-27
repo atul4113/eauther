@@ -1,4 +1,4 @@
-import libraries.utility.cacheproxy as cache
+import src.libraries.utility.cacheproxy as cache
 
 def flush_addons_cache(sender, **kwargs):
     company_id = kwargs['company_id']

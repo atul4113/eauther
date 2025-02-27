@@ -1,10 +1,10 @@
-from lorepo.mycontent.models import Content
-from lorepo.filestorage.models import UploadedFile
-from lorepo.assets.util import update_content_assets, update_asset_title,\
+from src.lorepo.mycontent.models import Content
+from src.lorepo.filestorage.models import UploadedFile
+from src.lorepo.assets.util import update_content_assets, update_asset_title,\
     delete_asset
 import xml.dom.minidom
-from lorepo.assets.templatetags.assets import thumbnail_url
-from libraries.utility.noseplugins import FormattedOutputTestCase
+from src.lorepo.assets.templatetags.assets import thumbnail_url
+from src.libraries.utility.noseplugins import FormattedOutputTestCase
 
 class AssetsTests(FormattedOutputTestCase):
     fixtures = ['assets.json']

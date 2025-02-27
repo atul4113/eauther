@@ -1,12 +1,12 @@
 import json
 from django.http import Http404, HttpResponse
 from django.shortcuts import get_object_or_404
-from libraries.utility.helpers import get_object_or_none
-from libraries.wiki.models import WikiPageTranslated, PrivateAddonWikiPage
-from lorepo.mycontent.models import Content, ContentType
-from lorepo.permission.decorators import has_space_access
-from lorepo.permission.models import Permission
-from markdown import markdown
+from src.libraries.utility.helpers import get_object_or_none
+from src.libraries.wiki.models import WikiPageTranslated, PrivateAddonWikiPage
+from src.lorepo.mycontent.models import Content, ContentType
+from src.lorepo.permission.decorators import has_space_access
+from src.lorepo.permission.models import Permission
+from src.markdown import markdown
 
 
 def page(request, lang_code, url):

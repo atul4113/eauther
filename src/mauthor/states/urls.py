@@ -1,5 +1,5 @@
 from django.urls import path
-from mauthor.states.views import ProjectStates, change_state, change_to_ready, list_sets, update_rank, update_percentage, delete_state, delete_set, rename_state, show_kanban
+from src.mauthor.states.views import ProjectStates, change_state, change_to_ready, list_sets, update_rank, update_percentage, delete_state, delete_set, rename_state, show_kanban
 
 urlpatterns = [
     # View URLs

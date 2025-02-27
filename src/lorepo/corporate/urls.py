@@ -1,5 +1,5 @@
 from django.urls import path
-from lorepo.corporate.views import SpaceArchiveJobView, SpaceRetrieveJobView, SpaceDeleteJobView, DeleteSpaceAsyncView, \
+from src.lorepo.corporate.views import SpaceArchiveJobView, SpaceRetrieveJobView, SpaceDeleteJobView, DeleteSpaceAsyncView, \
     ArchiveSpaceAsyncView, RetrieveSpaceAsyncView, more_projects_dashboard, view, view_addon, upload, company_public_spaces, \
     add_public_space, company_divisions, delete_division, remove_contents_from_division, rename_division, add_division, \
     admin_panel, division_panel, public_space, list_presentations, trash, delete, metadata, publish, create_new_content_version, \
@@ -7,10 +7,10 @@ from lorepo.corporate.views import SpaceArchiveJobView, SpaceRetrieveJobView, Sp
     fixdb_public_content_metadata, fixdb_public_content_metadata_task, projectControl, ajax_subprojects, addSubproject, project_list, \
     change_template, flush_user_cache, copy_to_account, toggle_include_contents_in_editor, bug_track_add_form, get_publications_for_project_json, \
     select_unit, clear_news_cache, no_space_info, set_demo_sample_lessons
-from lorepo.mycontent.fix_ssl import SslReportView
-from lorepo.spaces.models import SpaceType
-from lorepo.spaces.views import addSpace, renameProject, rank
-from lorepo.corporate.api import get_news
+from src.lorepo.mycontent.fix_ssl import SslReportView
+from src.lorepo.spaces.models import SpaceType
+from src.lorepo.spaces.views import addSpace, renameProject, rank
+from src.lorepo.corporate.api import get_news
 
 urlpatterns = [
     # Corporate views

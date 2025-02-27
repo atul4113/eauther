@@ -4,13 +4,13 @@ import io
 
 from django.contrib.auth.models import User
 
-from libraries.utility.environment import get_versioned_module
-from libraries.utility.helpers import get_object_or_none
-from libraries.utility.queues import trigger_backend_task
-from lorepo.corporate.models import CompanyUser
-from lorepo.newsletter.models import NewsletterEmails
-import libraries.utility.cacheproxy as cache
-from lorepo.spaces.models import Space
+from src.libraries.utility.environment import get_versioned_module
+from src.libraries.utility.helpers import get_object_or_none
+from src.libraries.utility.queues import trigger_backend_task
+from src.lorepo.corporate.models import CompanyUser
+from src.lorepo.newsletter.models import NewsletterEmails
+import src.libraries.utility.cacheproxy as cache
+from src.lorepo.spaces.models import Space
 
 
 class CsvFileBufferPresenter(object):

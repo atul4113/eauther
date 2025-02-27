@@ -1,5 +1,5 @@
-from libraries.utility.lxml_utilities.content.content_xml import NEWEST_CONTENT_XML_VERSION, StyleTuple
-from libraries.utility.lxml_utilities.utilities import remove_all_elements_from_xml, ensure_subelement_exists
+from src.libraries.utility.lxml_utilities.content.content_xml import NEWEST_CONTENT_XML_VERSION, StyleTuple
+from src.libraries.utility.lxml_utilities.utilities import remove_all_elements_from_xml, ensure_subelement_exists
 from lxml import etree
 
 

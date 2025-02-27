@@ -3,12 +3,12 @@ import os
 
 from django.contrib.auth.models import User
 from django.views.generic import TemplateView
-from libraries.utility.environment import get_versioned_module
-from libraries.utility.queues import trigger_backend_task
-from lorepo.spaces.models import Space, UserSpacePermissions
+from src.libraries.utility.environment import get_versioned_module
+from src.libraries.utility.queues import trigger_backend_task
+from src.lorepo.spaces.models import Space, UserSpacePermissions
 from django.shortcuts import get_object_or_404, render
-from lorepo.spaces.util import get_space_access, load_kids, get_cached_kids
-from libraries.utility.redirect import get_redirect_url
+from src.lorepo.spaces.util import get_space_access, load_kids, get_cached_kids
+from src.libraries.utility.redirect import get_redirect_url
 from django.core.mail import mail_admins
 from django.core.exceptions import PermissionDenied
 from django.http import HttpResponse, HttpResponseNotFound

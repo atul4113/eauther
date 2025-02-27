@@ -1,5 +1,5 @@
 
-import markdown
+import src.markdown as markdown
 
 class State(list):
     """ Track the current and nested state of the parser. 

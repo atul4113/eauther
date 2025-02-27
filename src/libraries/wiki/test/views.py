@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 from django.test.client import Client
-from libraries.wiki.models import WikiPage, WikiFile
-from libraries.wiki.forms import WikiPageForm
+from src.libraries.wiki.models import WikiPage, WikiFile
+from src.libraries.wiki.forms import WikiPageForm
 from django.contrib.auth.models import User
-from libraries.utility.noseplugins import FormattedOutputTestCase
-from libraries.utility.test_assertions import status_code_for, the
+from src.libraries.utility.noseplugins import FormattedOutputTestCase
+from src.libraries.utility.test_assertions import status_code_for, the
 
 class ViewsTest(FormattedOutputTestCase):
     fixtures = ['wiki.json']

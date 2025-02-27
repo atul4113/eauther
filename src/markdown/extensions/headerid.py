@@ -8,7 +8,7 @@ Adds ability to set HTML IDs for headers.
 
 Basic usage:
 
-    >>> import markdown
+    >>> import src.markdown as markdown
     >>> text = "# Some Header # {#some_id}"
     >>> md = markdown.markdown(text, ['headerid'])
     >>> md
@@ -65,7 +65,7 @@ Dependencies:
 
 """
 
-import markdown
+import src.markdown as markdown
 from markdown import etree
 import re
 from string import ascii_lowercase, digits, punctuation

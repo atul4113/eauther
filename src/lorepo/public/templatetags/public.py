@@ -1,5 +1,5 @@
 from django.template.defaultfilters import register
-from lorepo.spaces.util import get_space_for_content, get_space_type
+from src.lorepo.spaces.util import get_space_for_content, get_space_type
 
 @register.inclusion_tag('public/tags/contents_thumbnail.html')
 def content_thumbnails(request, contents, ul_class=None):

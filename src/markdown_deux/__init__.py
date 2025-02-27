@@ -16,11 +16,11 @@ __author__ = "Trent Mick"
 def markdown(text, style="default"):
     if not text:
         return ""
-    import markdown2
+    import src.markdown as markdown2
     return markdown2.markdown(text, **get_style(style))
 
 def get_style(style):
-    from markdown_deux.conf import settings
+    from src.markdown_deux.conf import settings
     try:
         return settings.MARKDOWN_DEUX_STYLES[style]
     except KeyError:

@@ -364,7 +364,7 @@
   },
   {
     "pk": 11,
-    "model": "registration.registrationprofile",
+    "model": "src.registration.registrationprofile",
     "fields": {
       "activation_key": "ALREADY_ACTIVATED",
       "user": 10

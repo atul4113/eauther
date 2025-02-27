@@ -1,19 +1,19 @@
 # -*- coding: utf-8 -*-
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, render
-from lorepo.mycontent.models import Content
-from lorepo.mycontent.signals import metadata_updated
-from lorepo.spaces.models import Space, SpaceType
-from lorepo.spaces.util import get_private_space_for_user
-from lorepo.merger.models import ContentMerger
-from libraries.utility.redirect import get_redirect
-from lorepo.mycontent.service import add_content_to_space
+from src.lorepo.mycontent.models import Content
+from src.lorepo.mycontent.signals import metadata_updated
+from src.lorepo.spaces.models import Space, SpaceType
+from src.lorepo.spaces.util import get_private_space_for_user
+from src.lorepo.merger.models import ContentMerger
+from src.libraries.utility.redirect import get_redirect
+from src.lorepo.mycontent.service import add_content_to_space
 from django.contrib import messages
-from lorepo.permission.decorators import has_space_access
-from querystring_parser import parser
-from lorepo.permission.models import Permission
-from libraries.utility.helpers import get_object_or_none
-from mauthor.metadata.util import copy_page_metadata
+from src.lorepo.permission.decorators import has_space_access
+from src.querystring_parser import parser
+from src.lorepo.permission.models import Permission
+from src.libraries.utility.helpers import get_object_or_none
+from src.mauthor.metadata.util import copy_page_metadata
 
 @login_required
 @has_space_access(Permission.CONTENT_EDIT)

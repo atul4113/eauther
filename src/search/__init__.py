@@ -1,6 +1,6 @@
-from search.core import default_splitter, site_language, SearchManager, \
+from src.search.core import default_splitter, site_language, SearchManager, \
     install_index_model
-from autoload import autodiscover as auto_discover
+from src.autoload import autodiscover as auto_discover
 
 def autodiscover():
     auto_discover('search_indexes')

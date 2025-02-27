@@ -1,11 +1,11 @@
 import datetime
 from django.template import loader
 from django.template.loader import render_to_string
-from lorepo.filestorage.models import FileStorage
+from src.lorepo.filestorage.models import FileStorage
 from django.template.context import Context
-from lorepo.mycontent.models import Content
-from lorepo.spaces.util import get_private_space_for_user
-from lorepo.mycontent.service import add_content_to_space
+from src.lorepo.mycontent.models import Content
+from src.lorepo.spaces.util import get_private_space_for_user
+from src.lorepo.mycontent.service import add_content_to_space
 
 def render_lesson(user, name, pages, server_name):
     now = datetime.datetime.now()

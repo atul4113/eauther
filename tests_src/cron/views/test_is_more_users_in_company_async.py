@@ -2,12 +2,12 @@
 from tests_src.cron.cron_mocks import RequestMock
 from tests_src.TestCase import DBTestCase
 from mock import patch
-from lorepo.cron.views import is_more_users_in_company_async
+from src.lorepo.cron.views import is_more_users_in_company_async
 import pytest
 from django.contrib.auth.models import User
 
-from lorepo.corporate.models import CompanyProperties, CompanyUser
-from lorepo.spaces.models import Space, SpaceType
+from src.lorepo.corporate.models import CompanyProperties, CompanyUser
+from src.lorepo.spaces.models import Space, SpaceType
 
 OWNER_EMAILS = ['user@user.com', 'user1@user.com']
 

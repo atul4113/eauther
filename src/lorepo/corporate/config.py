@@ -1,7 +1,7 @@
 from django.apps import AppConfig
-from lorepo.corporate.signals import access_rights_changed, kids_for_space_changed, flush_kids_for_space, \
+from src.lorepo.corporate.signals import access_rights_changed, kids_for_space_changed, flush_kids_for_space, \
     flush_spaces_for_user, flush_company_structure_cache
-from lorepo.corporate.signals import company_structure_changed
+from src.lorepo.corporate.signals import company_structure_changed
 
 
 class CorporateConfig(AppConfig):

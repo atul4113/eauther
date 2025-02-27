@@ -1,7 +1,7 @@
 from djangae.fields import JSONField
 
-import libraries.utility.cacheproxy as cache
-from lorepo.util.singleton_model import SingletonModel
+import src.libraries.utility.cacheproxy as cache
+from src.lorepo.util.singleton_model import SingletonModel
 
 
 class GlobalSettings(SingletonModel):

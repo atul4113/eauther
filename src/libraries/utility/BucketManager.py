@@ -1,5 +1,5 @@
-import cloudstorage as gcs
-from settings import get_bucket_name
+import src.cloudstorage as gcs
+from src.settings import get_bucket_name
 
 
 class BucketManager(object):

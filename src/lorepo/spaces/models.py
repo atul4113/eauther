@@ -5,8 +5,8 @@ import json
 from djangae.fields import ListField
 from django.contrib.auth.models import User
 from django.db import models
-import libraries.utility.cacheproxy as cache
-from lorepo.spaces.signals import space_access_changed, company_structure_has_changed
+import src.libraries.utility.cacheproxy as cache
+from src.lorepo.spaces.signals import space_access_changed, company_structure_has_changed
 
 
 class SpaceType():
@@ -160,7 +160,7 @@ class UserSpacePermissions(models.Model):
             perms = set(self.get_permissions_for_space(space_id))
         except TypeError: #if get_permissions_for_space returns None
             return False
-        from lorepo.permission.models import Permission
+        from src.lorepo.permission.models import Permission
         all_perms = set(Permission().get_all())
         return perms == all_perms
 
@@ -204,7 +204,7 @@ class SpaceAccess(models.Model):
         super(SpaceAccess, self).__init__(*args, **kwargs)
 
     def __str__(self):
-        from lorepo.permission.models import Role
+        from src.lorepo.permission.models import Role
         return '%(username)s:%(title)s <%(roles)s>' % {
                  'title' : self.space.title,
                  'username' : self.user.username,
@@ -218,13 +218,13 @@ class SpaceAccess(models.Model):
         return self.access_right == 2
 
     def isOwner(self):
-        from lorepo.permission.models import Role
+        from src.lorepo.permission.models import Role
         if not hasattr(self, 'roles'):
             return False
         return 'owner' in [Role.get_cached_role(role_id).name for role_id in self.roles] or self.user.is_superuser
     
     def hasAccess(self, perm):
-        from lorepo.permission.models import Role
+        from src.lorepo.permission.models import Role
         if not hasattr(self, 'roles'):
             return False        
         return True in [perm in Role.get_cached_role(role_id).permissions for role_id in self.roles] or self.user.is_superuser
@@ -242,7 +242,7 @@ class SpaceAccess(models.Model):
         return the_copy
 
     def cache_permissions(self):
-        from lorepo.permission.models import Role
+        from src.lorepo.permission.models import Role
         for role_id in self.roles:
             role = Role.get_cached_role(role_id)
             self.permissions.extend(role.permissions)
@@ -252,7 +252,7 @@ class SpaceAccess(models.Model):
         if len(self.permissions) == 0:
             self.cache_permissions()
         if isinstance(permission, str) or isinstance(permission, str):
-            from lorepo.permission.models import Permission
+            from src.lorepo.permission.models import Permission
             permission = getattr(Permission, permission)
         if permission in self.permissions:
             return True
@@ -282,7 +282,7 @@ class LockedSpaceAccess(models.Model):
     roles = ListField(models.CharField())
 
     def __str__(self):
-        from lorepo.permission.models import Role
+        from src.lorepo.permission.models import Role
         return '%(username)s:%(title)s <%(roles)s>' % {
                  'title' : self.space.title,
                  'username' : self.user.username,

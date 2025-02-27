@@ -1,5 +1,5 @@
 from django.urls import path, re_path
-from lorepo.support.views import index, add_attachment, add_ticket, show_ticket, admin, admin_show_ticket, change_status, admin_change_status
+from src.lorepo.support.views import index, add_attachment, add_ticket, show_ticket, admin, admin_show_ticket, change_status, admin_change_status
 
 urlpatterns = [
     path('', index, name='index'),

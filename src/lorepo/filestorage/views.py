@@ -13,10 +13,10 @@ import datetime
 from django.core.files.storage import default_storage
 from django.core.files.base import ContentFile
 
-from lorepo.filestorage.forms import UploadForm
-from lorepo.filestorage.models import FileStorage, UploadedFile
-from lorepo.filestorage.utils import get_reader
-from lorepo.util.requests import is_request_secure
+from src.lorepo.filestorage.forms import UploadForm
+from src.lorepo.filestorage.models import FileStorage, UploadedFile
+from src.lorepo.filestorage.utils import get_reader
+from src.lorepo.util.requests import is_request_secure
 
 SIZE_32_MB = 32 * 1024 * 1024
 RETRY_COUNT = 5

@@ -1,5 +1,5 @@
 import django.dispatch
-import libraries.utility.cacheproxy as cache
+import src.libraries.utility.cacheproxy as cache
 
 
 content_updated = django.dispatch.Signal()

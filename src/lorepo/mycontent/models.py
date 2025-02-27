@@ -9,21 +9,21 @@ from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.shortcuts import get_object_or_404
-from lorepo.filestorage.models import FileStorage
-from lorepo.labels.models import Label
-from lorepo.mycontent.signals import content_updated, template_updated
-from lorepo.spaces.models import Space
+from src.lorepo.filestorage.models import FileStorage
+from src.lorepo.labels.models import Label
+from src.lorepo.mycontent.signals import content_updated, template_updated
+from src.lorepo.spaces.models import Space
 import datetime
 import xml.dom.minidom
 import re
-import libraries.utility.cacheproxy as cache
+import src.libraries.utility.cacheproxy as cache
 import xml.etree.ElementTree as ET
 
-from lorepo.util.Mixins.ModelCacheMixin import ModelCacheMixin
-from mauthor.utility.utils import sanitize_title
-from xml_parsers.explicit_parsers.add_titile_to_lesson_parser import AddTitleToXMLParser
-from xml_parsers.explicit_parsers.lesson_copy_parser import LessonCopyParser
-from xml_parsers.explicit_parsers.get_template_parser import GetTemplateParser
+from src.lorepo.util.Mixins.ModelCacheMixin import ModelCacheMixin
+from src.mauthor.utility.utils import sanitize_title
+from src.xml_parsers.explicit_parsers.add_titile_to_lesson_parser import AddTitleToXMLParser
+from src.xml_parsers.explicit_parsers.lesson_copy_parser import LessonCopyParser
+from src.xml_parsers.explicit_parsers.get_template_parser import GetTemplateParser
 
 
 class ContentType():
@@ -76,7 +76,7 @@ class Content(models.Model, ModelCacheMixin):
     tags = models.TextField(max_length=2048, null=True, blank=True)
     description = models.TextField(max_length=2048, null=True, blank=True)
     short_description = models.TextField(null=True, blank=True)
-    view_count = models.IntegerField(default=0)  # Not used at the moment, legacy flag from lorepo.com
+    view_count = models.IntegerField(default=0)  # Not used at the moment, legacy flag from src.lorepo.com
     associated_content = models.ForeignKey('self', null=True, blank=True, on_delete=models.DO_NOTHING)
     name = models.CharField(max_length=255, default=None, null=True)
     is_globally_public = models.BooleanField(default=False)

@@ -1,15 +1,15 @@
 import json
 import logging
-import cloudstorage as gcs
+import src.cloudstorage as gcs
 import uuid
 
 from django.contrib.auth.models import User
-from libraries.utility.helpers import get_object_or_none
-from lorepo.mycontent.models import Content
-from mauthor.lessons_parsers.property_changer.util import Logger
-from mauthor.utility.db_safe_iterator import safe_iterate
-from lorepo.filestorage.utils import create_new_version, build_retry_params
-from settings import get_bucket_name
+from src.libraries.utility.helpers import get_object_or_none
+from src.lorepo.mycontent.models import Content
+from src.mauthor.lessons_parsers.property_changer.util import Logger
+from src.mauthor.utility.db_safe_iterator import safe_iterate
+from src.lorepo.filestorage.utils import create_new_version, build_retry_params
+from src.settings import get_bucket_name
 from lxml import etree
 
 

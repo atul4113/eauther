@@ -1,15 +1,15 @@
 from xml.dom import minidom
-from mauthor.localization.utils import get_parent
-from libraries.utility.helpers import get_object_or_none
-from lorepo.filestorage.models import FileStorage
+from src.mauthor.localization.utils import get_parent
+from src.libraries.utility.helpers import get_object_or_none
+from src.lorepo.filestorage.models import FileStorage
 import datetime
-from lorepo.spaces.util import get_space_for_content
-from lorepo.corporate.utils import get_publication_for_space
+from src.lorepo.spaces.util import get_space_for_content
+from src.lorepo.corporate.utils import get_publication_for_space
 import io
 import csv
-import settings
+import src.settings as settings
 from django.db import models
-from lorepo.mycontent.models import Content
+from src.lorepo.mycontent.models import Content
 from django.template.loader import render_to_string
 from bs4 import BeautifulSoup, Tag
 import re

@@ -3,7 +3,7 @@ from xml.dom import minidom
 from xml.dom.minidom import Childless, Node
 from xml.sax.saxutils import escape
 
-from mauthor.localization.utils import create_id_string,\
+from src.mauthor.localization.utils import create_id_string,\
     get_xml_base_for_content, get_file, is_empty, get_properties_for_translation,\
     get_content_from_property, parent_is_list, get_parent, calculate_counter,\
     resolve_id_string,\
@@ -11,9 +11,9 @@ from mauthor.localization.utils import create_id_string,\
     is_list_type, get_list_properties, get_list_properties_by_name,\
     get_property_by_name, make_page_copy, get_content, set_or_create_text_node,\
     generate_id
-from mauthor.localization.exceptions import NodeNotFoundException, ContentException,\
+from src.mauthor.localization.exceptions import NodeNotFoundException, ContentException,\
     NoModulesFoundException, ContentTooBigException
-from mauthor.localization.utils import get_xliff
+from src.mauthor.localization.utils import get_xliff
 
 from .IcplayerZipped import IcplayerZipped
 

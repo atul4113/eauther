@@ -1,5 +1,5 @@
 from django import forms
-from lorepo.filestorage.models import UploadedFile
+from src.lorepo.filestorage.models import UploadedFile
 
 class UploadForm(forms.ModelForm):
     class Meta:

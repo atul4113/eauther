@@ -1,7 +1,7 @@
-from libraries.utility.noseplugins import FormattedOutputTestCase
-from mauthor.localization.models import Xliff, ContentXML, Page, Field
-from mauthor.localization.utils import get_xliff, get_xml_base_for_content, get_content
-from mauthor.localization.exceptions import ContentException
+from src.libraries.utility.noseplugins import FormattedOutputTestCase
+import src.mauthor.localization.models import Xliff, ContentXML, Page, Field
+import src.mauthor.localization.utils import get_xliff, get_xml_base_for_content, get_content
+import src.mauthor.localization.exceptions import ContentException
 
 class fakeContent(object):
     def __init__(self):

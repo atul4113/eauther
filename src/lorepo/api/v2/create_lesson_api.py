@@ -1,23 +1,23 @@
 from django.urls import path
 from django.utils.decorators import method_decorator
-from lorepo.corporate.middleware import CorporateMiddleware
-from lorepo.editor.views import _read_corporate_templates
-from lorepo.filestorage.models import FileStorage
-from lorepo.mycontent.models import SpaceTemplate, DefaultTemplate, Content
-from lorepo.mycontent.service import add_content_to_space
-from lorepo.mycontent.util import create_template_node
-from lorepo.permission.decorators import has_space_access
-from lorepo.permission.models import Permission
-from lorepo.spaces.models import Space
-from lorepo.spaces.util import get_private_space_for_user
-from lorepo.token.util import create_mycontent_editor_token
-from mauthor.states.models import ProjectStatesSet, ContentState
-from mauthor.states.util import get_states_sets
+from src.lorepo.corporate.middleware import CorporateMiddleware
+from src.lorepo.editor.views import _read_corporate_templates
+from src.lorepo.filestorage.models import FileStorage
+from src.lorepo.mycontent.models import SpaceTemplate, DefaultTemplate, Content
+from src.lorepo.mycontent.service import add_content_to_space
+from src.lorepo.mycontent.util import create_template_node
+from src.lorepo.permission.decorators import has_space_access
+from src.lorepo.permission.models import Permission
+from src.lorepo.spaces.models import Space
+from src.lorepo.spaces.util import get_private_space_for_user
+from src.lorepo.token.util import create_mycontent_editor_token
+from src.mauthor.states.models import ProjectStatesSet, ContentState
+from src.mauthor.states.util import get_states_sets
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from drf_spectacular import views
-from lorepo.api.v2.mixins import MiddlewareMixin
-from lorepo.mycontent.serializers import ContentSerializer, TemplateContentSerializer
+from src.lorepo.api.v2.mixins import MiddlewareMixin
+from src.lorepo.mycontent.serializers import ContentSerializer, TemplateContentSerializer
 from django.template.loader import render_to_string
 from rest_framework import status
 import datetime

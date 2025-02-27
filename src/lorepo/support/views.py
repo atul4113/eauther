@@ -1,24 +1,24 @@
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import render, get_object_or_404
-from lorepo.support.forms import CommentForm, TicketForm
-from lorepo.support.models import Ticket, Comment, TicketStatus, TicketType,\
+from src.lorepo.support.forms import CommentForm, TicketForm
+from src.lorepo.support.models import Ticket, Comment, TicketStatus, TicketType,\
     TicketAttachment
 import datetime
 from django.core.paginator import Paginator
 from django.template.context import Context
 from django.template import loader
-from lorepo.public.util import send_message
+from src.lorepo.public.util import send_message
 from django.conf import settings
-from lorepo.support.templatetags.support import print_status
-from libraries.utility.request import get_request_value
-from lorepo.spaces.models import SpaceType, Space
-from lorepo.filestorage.forms import UploadForm
+from src.lorepo.support.templatetags.support import print_status
+from src.libraries.utility.request import get_request_value
+from src.lorepo.spaces.models import SpaceType, Space
+from src.lorepo.filestorage.forms import UploadForm
 from django.contrib import messages
-from mauthor.company.util import get_users_from_company
+from src.mauthor.company.util import get_users_from_company
 from django.contrib.auth.models import User
-from lorepo.support.util import parse_lesson_id
-from lorepo.permission.decorators import security_token
+from src.lorepo.support.util import parse_lesson_id
+from src.lorepo.permission.decorators import security_token
 
 @login_required
 @user_passes_test(lambda u: u.company != None)

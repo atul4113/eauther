@@ -1,8 +1,8 @@
 from django.contrib.auth.models import User
 from django.db import models
 
-from lorepo.translations.models import SupportedLanguages
-from settings import LANGUAGE_CODE
+from src.lorepo.translations.models import SupportedLanguages
+from src.settings import LANGUAGE_CODE
 
 # depreciated
 class UserLanguage(models.Model):

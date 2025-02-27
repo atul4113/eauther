@@ -8,15 +8,15 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, get_object_or_404
 from django.template.context import Context
 from django.template import loader
-from libraries.utility.decorators import backend
-from libraries.utility.environment import get_versioned_module
-from libraries.utility.queues import trigger_backend_task
-from lorepo.public.util import send_message
-from lorepo.spaces.models import Space
-from mauthor.utility.decorators import company_admin
-from mauthor.metadata.models import Definition, MetadataValue
+from src.libraries.utility.decorators import backend
+from src.libraries.utility.environment import get_versioned_module
+from src.libraries.utility.queues import trigger_backend_task
+from src.lorepo.public.util import send_message
+from src.lorepo.spaces.models import Space
+from src.mauthor.utility.decorators import company_admin
+from src.mauthor.metadata.models import Definition, MetadataValue
 import logging
-from mauthor.metadata.util import get_metadata_definitions
+from src.mauthor.metadata.util import get_metadata_definitions
 from django.views.decorators.http import require_POST
 
 @login_required

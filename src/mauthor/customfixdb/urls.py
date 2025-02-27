@@ -1,5 +1,5 @@
 from django.urls import path, re_path
-from mauthor.customfixdb.views import manage, generic_async, report
+from src.mauthor.customfixdb.views import manage, generic_async, report
 
 urlpatterns = [
     path('manage', manage),

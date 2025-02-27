@@ -1,8 +1,8 @@
-from lorepo.mycontent.models import Content
+from src.lorepo.mycontent.models import Content
 from django.shortcuts import get_object_or_404
-from lorepo.spaces.util import get_space_for_content, get_space_access
+from src.lorepo.spaces.util import get_space_for_content, get_space_access
 from django.contrib.auth.models import User
-from lorepo.permission.models import Permission
+from src.lorepo.permission.models import Permission
 
 def check_is_public(fn):
     def _wrapper(request, *args, **kwargs):

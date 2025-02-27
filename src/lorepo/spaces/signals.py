@@ -1,7 +1,7 @@
 import django.dispatch
-from libraries.utility.cacheproxy import own_cache_mutex_try
-from libraries.utility.environment import get_versioned_module
-from libraries.utility.queues import trigger_backend_task
+from src.libraries.utility.cacheproxy import own_cache_mutex_try
+from src.libraries.utility.environment import get_versioned_module
+from src.libraries.utility.queues import trigger_backend_task
 
 space_access_changed = django.dispatch.Signal()
 company_structure_has_changed = django.dispatch.Signal()

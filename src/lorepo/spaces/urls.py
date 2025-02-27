@@ -1,8 +1,8 @@
 # libraries/wiki/urls.py
 
 from django.urls import re_path
-from libraries.wiki import views  # Regular views
-from libraries.wiki.api import page, section, private_addon  # API views
+from src.libraries.wiki import views  # Regular views
+from src.libraries.wiki.api import page, section, private_addon  # API views
 
 urlpatterns = [
     # Regular views

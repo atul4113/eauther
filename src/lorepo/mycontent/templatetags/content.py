@@ -1,5 +1,5 @@
 from django.template.defaultfilters import register
-from lorepo.spaces.util import get_space_type
+from src.lorepo.spaces.util import get_space_type
 
 @register.inclusion_tag('mycontent/icon.html')
 def get_icon(request, content, space_type=None):

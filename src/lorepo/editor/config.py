@@ -1,7 +1,7 @@
 from django.apps import AppConfig
-from lorepo.editor.signals import flush_addons_cache, flush_templates_cache
-from lorepo.mycontent.signals import addon_deleted
-from lorepo.mycontent.signals import addon_published, template_updated
+from src.lorepo.editor.signals import flush_addons_cache, flush_templates_cache
+from src.lorepo.mycontent.signals import addon_deleted
+from src.lorepo.mycontent.signals import addon_published, template_updated
 
 
 class EditorConfig(AppConfig):

@@ -1,11 +1,11 @@
 from django.template.defaultfilters import register
 from django.utils.html import escapejs
-from lorepo.translations.models import TranslatedLang
-from lorepo.translations.utils import get_translated_image, get_safely_translation
+from src.lorepo.translations.models import TranslatedLang
+from src.lorepo.translations.utils import get_translated_image, get_safely_translation
 from settings import USER_DEFAULT_LANG
-from libraries.utility.helpers import get_object_or_none
-from lorepo.user.models import UserProfile
-from lorepo.translations.images import images_labels
+from src.libraries.utility.helpers import get_object_or_none
+from src.lorepo.user.models import UserProfile
+from src.lorepo.translations.images import images_labels
 
 
 @register.simple_tag(takes_context=True)

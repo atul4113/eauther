@@ -1,4 +1,4 @@
-from mauthor.metadata.models import Definition, MetadataValue, PageMetadata
+from src.mauthor.metadata.models import Definition, MetadataValue, PageMetadata
 import copy
 
 def get_metadata_definitions(company):

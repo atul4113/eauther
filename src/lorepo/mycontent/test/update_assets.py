@@ -1,9 +1,9 @@
 from django.test.client import Client
-from libraries.utility.noseplugins import FormattedOutputTestCase
+from src.libraries.utility.noseplugins import FormattedOutputTestCase
 from xml.dom import minidom
-from lorepo.filestorage.models import FileStorage
-from libraries.utility.test_assertions import status_code_for, the
-from lorepo.mycontent.models import Content
+from src.lorepo.filestorage.models import FileStorage
+from src.libraries.utility.test_assertions import status_code_for, the
+from src.lorepo.mycontent.models import Content
 
 class ViewsTests(FormattedOutputTestCase):
     fixtures = ['update_assets.json']

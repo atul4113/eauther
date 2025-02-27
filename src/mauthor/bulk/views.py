@@ -1,21 +1,21 @@
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponseBadRequest
-from lorepo.mycontent.lesson.update_content_template import update_content_template
-from lorepo.mycontent.models import UpdateTemplateStatus, ContentType, Content
-from mauthor.bulk.util import BulkUpdate
+from src.lorepo.mycontent.lesson.update_content_template import update_content_template
+from src.lorepo.mycontent.models import UpdateTemplateStatus, ContentType, Content
+from src.mauthor.bulk.util import BulkUpdate
 from django.contrib import messages
 from django.core.mail import mail_admins
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
-from mauthor.backup.views import get_contents
-from lorepo.spaces.models import Space
-from lorepo.mycontent.util import clean_content_assets,\
+from src.mauthor.backup.views import get_contents
+from src.lorepo.spaces.models import Space
+from src.lorepo.mycontent.util import clean_content_assets,\
      get_contents_from_specific_space
 from django.template.context import Context
 from django.template import loader
-from lorepo.public.util import send_message
+from src.lorepo.public.util import send_message
 from django.conf import settings
 
-from lorepo.permission.models import Permission
+from src.lorepo.permission.models import Permission
 
 
 def send_notification(user, project, skipped_contents, template, subject):

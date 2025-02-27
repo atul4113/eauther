@@ -3,8 +3,8 @@ import sys
 import datetime
 import mimetypes
 from djangae.settings_base import *  # Set up some AppEngine specific stuff
-from lorepo.app_identity import mock_get_application_id
-from shared_settings import SHARED_SETTINGS
+from src.lorepo.app_identity import mock_get_application_id
+from src.shared_settings import SHARED_SETTINGS
 import logging
 from lxml import etree
 from pathlib import Path
@@ -79,7 +79,8 @@ DJANGAE_DISABLE_CONSTRAINT_CHECKS = True
 
 INSTALLED_APPS = (
     'djangae', # Djangae needs to come before django apps in django 1.7 and above
-    'markdown_deux',
+    'src.markdown_deux',
+    'src.mauthor',
     'drf_spectacular',
     'django.contrib.sites',
     'django.contrib.contenttypes',
@@ -88,53 +89,53 @@ INSTALLED_APPS = (
     # 'django.contrib.markup',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'autoload',
+    'src.autoload',
     # 'search',
-    'filetransfers',
-    'registration',
-    'remember_me',
-    'country_utils',
+    'src.filetransfers',
+    'src.registration',
+    'src.remember_me',
+    'src.country_utils',
     # Cross-origin resource sharing library: https://github.com/ottoyiu/django-cors-headers
-    'corsheaders',
-    'lorepo.assets',
-    'lorepo.editor',
-    'lorepo.embed',
-    'lorepo.home',
-    'lorepo.labels',
-    'lorepo.mycontent',
-    'lorepo.public',
-    'lorepo.spaces',
-    'lorepo.support',
-    'lorepo.newsletter',
-    'lorepo.user',
-    'lorepo.filestorage',
-    'lorepo.cron',
-    'lorepo.corporate',
-    'lorepo.permission',
-    'lorepo.exchange',
-    'lorepo.course',
-    'lorepo.token',
-    'lorepo.translations',
-    'lorepo.global_settings',
-    'lorepo.util',
-    'mauthor.customfixdb',
-    'mauthor.backup',
-    'mauthor.bug_track',
-    'mauthor.bulk',
-    'mauthor.company',
-    'mauthor.exchange_narration',
-    'mauthor.indesign',
-    'mauthor.localization',
-    'mauthor.metadata',
-    'mauthor.pdfimport',
-    'mauthor.search',
-    'mauthor.states',
-    'mauthor.lessons_parsers',
-    'libraries.logger',
-    'libraries.testing',
-    'libraries.utility',
-    'libraries.wiki',
-    'captcha',
+    'src.corsheaders',
+    'src.lorepo.assets',
+    'src.lorepo.editor',
+    'src.lorepo.embed',
+    'src.lorepo.home',
+    'src.lorepo.labels',
+    'src.lorepo.mycontent',
+    'src.lorepo.public',
+    'src.lorepo.spaces',
+    'src.lorepo.support',
+    'src.lorepo.newsletter',
+    'src.lorepo.user',
+    'src.lorepo.filestorage',
+    'src.lorepo.cron',
+    'src.lorepo.corporate',
+    'src.lorepo.permission',
+    'src.lorepo.exchange',
+    'src.lorepo.course',
+    'src.lorepo.token',
+    'src.lorepo.translations',
+    'src.lorepo.global_settings',
+    'src.lorepo.util',
+    'src.mauthor.customfixdb',
+    'src.mauthor.backup',
+    'src.mauthor.bug_track',
+    'src.mauthor.bulk',
+    'src.mauthor.company',
+    'src.mauthor.exchange_narration',
+    'src.mauthor.indesign',
+    'src.mauthor.localization',
+    'src.mauthor.metadata',
+    'src.mauthor.pdfimport',
+    'src.mauthor.search',
+    'src.mauthor.states',
+    'src.mauthor.lessons_parsers',
+    'src.libraries.logger',
+    'src.libraries.testing',
+    'src.libraries.utility',
+    'src.libraries.wiki',
+    'src.captcha',
     'rest_framework_docs',
 )
 
@@ -169,6 +170,14 @@ PASSWORD_HASHERS = (
     'django.contrib.auth.hashers.UnsaltedMD5PasswordHasher',
     'django.contrib.auth.hashers.CryptPasswordHasher',
 )
+# Celery settings
+CELERY_BROKER_URL = 'redis://localhost:6379/0'  # Redis as the message broker
+CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'  # Store task results in Redis
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'UTC'  # Set the timezone for Celery tasks
+CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True  # Add this line
 
 ALLOWED_HOSTS = ['*']
 SITE_ID = 1
@@ -199,9 +208,9 @@ TEMPLATES = [
 REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
-    'DEFAULT_VERSIONING_CLASS': 'rest_framework_custom.versioning.NamespaceVersioning',
+    'DEFAULT_VERSIONING_CLASS': 'src.rest_framework_custom.versioning.NamespaceVersioning',
     'DEFAULT_RENDERER_CLASSES': (
         'rest_framework.renderers.JSONRenderer',
     ),
@@ -241,7 +250,7 @@ ADMIN_MEDIA_PREFIX = '/media/admin/'
 
 STATIC_URL = '/media/'
 
-ROOT_URLCONF = 'urls'
+ROOT_URLCONF = 'src.urls'
 
 ACCOUNT_ACTIVATION_DAYS = 2
 LOGIN_REDIRECT_URL = '/corporate'
@@ -365,7 +374,7 @@ LOGGING = {
         'log_error_message': {
             'level': 'ERROR',
             'filters': ['require_debug_false'],
-            'class': 'mauthor.admin.log.LogAdminEmailHandler'
+            'class': 'src.mauthor.admin.log.LogAdminEmailHandler'
         },
         'mail_admins': {
             'level': 'ERROR',

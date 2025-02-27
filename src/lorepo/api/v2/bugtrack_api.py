@@ -1,17 +1,17 @@
 from django.urls import path
 from django.utils.decorators import method_decorator
 
-from mauthor.bug_track.models import Bug
-from mauthor.bug_track.views import _send_emails
+from src.mauthor.bug_track.models import Bug
+from src.mauthor.bug_track.views import _send_emails
 from rest_framework import views, status
 from rest_framework.generics import get_object_or_404
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
-from lorepo.mycontent.models import Content
-from lorepo.mycontent.serializers import LessonBugSerializer
-from lorepo.permission.decorators import has_space_access
-from lorepo.permission.models import Permission
+from src.lorepo.mycontent.models import Content
+from src.lorepo.mycontent.serializers import LessonBugSerializer
+from src.lorepo.permission.decorators import has_space_access
+from src.lorepo.permission.models import Permission
 
 
 class BugsView(views.APIView):

@@ -1,9 +1,9 @@
-from libraries.utility.noseplugins import FormattedOutputTestCase
+from src.libraries.utility.noseplugins import FormattedOutputTestCase
 from django.test.client import Client
-from mauthor.localization.utils import create_id_string,\
+import src.mauthor.localization.utils import create_id_string,\
     get_xliff
-from mauthor.localization.models import Page, Xliff, ContentXML, Field, Module
-from lorepo.mycontent.models import Content
+import src.mauthor.localization.models import Page, Xliff, ContentXML, Field, Module
+from src.lorepo.mycontent.models import Content
 
 class BuildXliffDocumentTests(FormattedOutputTestCase):
     fixtures = ['get_data_for_translation.json']

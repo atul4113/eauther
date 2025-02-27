@@ -1,9 +1,9 @@
-from libraries.utility.noseplugins import FormattedOutputTestCase,\
+from src.libraries.utility.noseplugins import FormattedOutputTestCase,\
     QueueTestCase
-from lorepo.mycontent.models import Content
+from src.lorepo.mycontent.models import Content
 from django.test.client import Client
-from lorepo.filestorage.models import FileStorage
-from mauthor.localization.models import Xliff
+from src.lorepo.filestorage.models import FileStorage
+import src.mauthor.localization.models import Xliff
 from xml.dom import minidom
 
 class VersionControlTests(FormattedOutputTestCase):

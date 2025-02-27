@@ -3,36 +3,36 @@ from django.urls import path, re_path, include  # ✅ Use path() or re_path()
 from django.utils.decorators import method_decorator
 from django.db.models import Q
 from django.contrib.auth.models import User
-from libraries.utility.environment import get_versioned_module
-from libraries.utility.helpers import get_object_or_none, filter_in_chunks
-from libraries.utility.queues import trigger_backend_task
-from lorepo.api.v2.mixins import MiddlewareMixin
-from lorepo.api.v2.permissions.content import HasEditAssetPermission
-from lorepo.api.v2.util import get_data_with_cursor
-from lorepo.assets.serializers import AssetsSerializer
-from lorepo.assets.util import update_content_assets
-from lorepo.corporate.middleware import CorporateMiddleware
-from lorepo.exchange.views import _trigger_creation_new
-from lorepo.filestorage.models import FileStorage, UploadedFile
-from lorepo.filestorage.serializers import FileStorageSerializer
-from lorepo.merger.models import ContentMerger
-from lorepo.mycontent.service import update_content_space, add_content_to_space
-from lorepo.mycontent.signals import metadata_updated, addon_deleted, addon_published
-from lorepo.mycontent.util import get_recently_opened
-from lorepo.mycontent.lesson.update_content_template import update_content_template
-from lorepo.mycontent.models import Content, ContentType, UpdateTemplateStatus
-from lorepo.mycontent.serializers import ContentSerializer, SimpleContentSerializer, ContentPageMetadataSerializer, \
+from src.libraries.utility.environment import get_versioned_module
+from src.libraries.utility.helpers import get_object_or_none, filter_in_chunks
+from src.libraries.utility.queues import trigger_backend_task
+from src.lorepo.api.v2.mixins import MiddlewareMixin
+from src.lorepo.api.v2.permissions.content import HasEditAssetPermission
+from src.lorepo.api.v2.util import get_data_with_cursor
+from src.lorepo.assets.serializers import AssetsSerializer
+from src.lorepo.assets.util import update_content_assets
+from src.lorepo.corporate.middleware import CorporateMiddleware
+from src.lorepo.exchange.views import _trigger_creation_new
+from src.lorepo.filestorage.models import FileStorage, UploadedFile
+from src.lorepo.filestorage.serializers import FileStorageSerializer
+from src.lorepo.merger.models import ContentMerger
+from src.lorepo.mycontent.service import update_content_space, add_content_to_space
+from src.lorepo.mycontent.signals import metadata_updated, addon_deleted, addon_published
+from src.lorepo.mycontent.util import get_recently_opened
+from src.lorepo.mycontent.lesson.update_content_template import update_content_template
+from src.lorepo.mycontent.models import Content, ContentType, UpdateTemplateStatus
+from src.lorepo.mycontent.serializers import ContentSerializer, SimpleContentSerializer, ContentPageMetadataSerializer, \
     ContentMetadataSerializer, ContentPageMetadataSimpleSerializer, UploadAssetsPackageSerializer
-from lorepo.permission.decorators import has_space_access
-from lorepo.permission.models import Permission
-from lorepo.spaces.models import Space, SpaceType
-from lorepo.spaces.serializers import SpaceSerializer
-from lorepo.spaces.util import get_private_space_for_user, get_user_spaces, get_private_space_for_user_cached, \
+from src.lorepo.permission.decorators import has_space_access
+from src.lorepo.permission.models import Permission
+from src.lorepo.spaces.models import Space, SpaceType
+from src.lorepo.spaces.serializers import SpaceSerializer
+from src.lorepo.spaces.util import get_private_space_for_user, get_user_spaces, get_private_space_for_user_cached, \
     change_contentspace
-from lorepo.token.util import create_mycontent_editor_token
-from lorepo.token.util import create_mycontent_edit_addon_token
-from mauthor.metadata.models import PageMetadata
-from mauthor.metadata.util import copy_metadata, copy_page_metadata, get_metadata_definitions
+from src.lorepo.token.util import create_mycontent_editor_token
+from src.lorepo.token.util import create_mycontent_edit_addon_token
+from src.mauthor.metadata.models import PageMetadata
+from src.mauthor.metadata.util import copy_metadata, copy_page_metadata, get_metadata_definitions
 from rest_framework.exceptions import ValidationError
 from rest_framework.generics import RetrieveAPIView, get_object_or_404, GenericAPIView, CreateAPIView
 from rest_framework.permissions import IsAuthenticated
@@ -1135,7 +1135,7 @@ class ContentView(views.APIView):
 
         page = int(request.GET.get('page', 1)) #starts from 1 not 0
         order_by = direction + order_by
-        
+
         # trash = str2bool(request.GET.get('trash', 'False'))
 
         if space_id is None:
@@ -1848,6 +1848,6 @@ urlpatterns = [
     re_path(r'^(?P<content_id>\d+)/upload_asset$', MyContentUploadAsset.as_view(), name='upload_asset'),
     re_path(r'^(?P<content_id>\d+)/upload_asset_package$', MyContentUploadAssetPackage.as_view(), name='upload_asset_package'),
     re_path(r'^set_version/(?P<content_id>\d+)/(?P<version_id>\d+)$', MyContentSetCurrentVersion.as_view(), name='set_current_version'),
-    re_path(r'^(?P<content_id>\d+)/bugs', include('lorepo.api.v2.bugtrack_api')),
+    re_path(r'^(?P<content_id>\d+)/bugs', include('src.lorepo.api.v2.bugtrack_api')),
     re_path(r'^refresh_content_index/(?P<content_id>\d+)$', MyContentFixdb.as_view(), name='content_fixdb'),
 ]

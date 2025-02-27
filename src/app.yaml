@@ -126,7 +126,7 @@ handlers:
   secure: always
 
 - url: /mauthor_media
-  static_dir: mauthor/templates/static_files
+  static_dir: src/muthor/templates/static_files
 
 - url: /favicon\.ico
   static_files: lorepo/templates/static_files/favicon.ico

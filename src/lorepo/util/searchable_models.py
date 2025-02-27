@@ -3,9 +3,8 @@ import re
 import traceback
 from django.db import models
 from django.contrib.postgres.search import SearchVector, SearchQuery, SearchRank
-from django.db.models import Q
-from libraries.utility.environment import get_versioned_module
-from libraries.utility.queues import trigger_backend_task, TaskQueue
+from src.libraries.utility.environment import get_versioned_module
+from src.libraries.utility.queues import trigger_backend_task, TaskQueue
 
 
 class EnableBackendObjectMethod(models.Model):

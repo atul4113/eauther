@@ -8,7 +8,7 @@ Converts [[WikiLinks]] to relative links.  Requires Python-Markdown 2.0+
 
 Basic usage:
 
-    >>> import markdown
+    >>> import src.markdown as markdown
     >>> text = "Some text with a [[WikiLink]]."
     >>> html = markdown.markdown(text, ['wikilinks'])
     >>> html
@@ -78,7 +78,7 @@ Dependencies:
 * [Markdown 2.0+](http://www.freewisdom.org/projects/python-markdown/)
 '''
 
-import markdown
+import src.markdown as markdown
 import re
 
 def build_url(label, base, end):

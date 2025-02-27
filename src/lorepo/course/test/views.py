@@ -1,4 +1,4 @@
-from libraries.utility.noseplugins import FormattedOutputTestCase
+from src.libraries.utility.noseplugins import FormattedOutputTestCase
 from django.test.client import Client
 
 class UserWithoutPermissionCourseTests(FormattedOutputTestCase):

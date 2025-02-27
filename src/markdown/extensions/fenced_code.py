@@ -6,7 +6,7 @@ Fenced Code Extension for Python Markdown
 
 This extension adds Fenced Code Blocks to Python-Markdown.
 
-    >>> import markdown
+    >>> import src.markdown as markdown
     >>> text = '''
     ... A paragraph before a fenced code block:
     ... 
@@ -60,7 +60,8 @@ Dependencies:
 
 """
 
-import markdown, re
+import src.markdown as markdown
+import re
 
 # Global vars
 FENCED_BLOCK_RE = re.compile( \

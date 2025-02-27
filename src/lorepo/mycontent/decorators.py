@@ -1,6 +1,6 @@
 from urllib.parse import quote
 from django.http import HttpResponseRedirect
-from lorepo.mycontent.models import Content
+from src.lorepo.mycontent.models import Content
 
 def is_being_edited(function):
     '''

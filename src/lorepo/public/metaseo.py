@@ -2,8 +2,8 @@ import json
 from django.http import HttpRequest
 from django.template.defaultfilters import striptags
 from django.utils.safestring import mark_safe
-import settings
-from lorepo.filestorage.models import UploadedFile
+import src.settings as settings
+from src.lorepo.filestorage.models import UploadedFile
 
 
 BASE_URL = settings.BASE_URL

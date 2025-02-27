@@ -1,5 +1,5 @@
 from django.urls import re_path
-from lorepo.assets import views
+from src.lorepo.assets import views
 
 urlpatterns = [
     re_path(r'^(?P<content_id>\d+)$', views.browse_assets),

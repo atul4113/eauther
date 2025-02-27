@@ -1,9 +1,7 @@
 from django.core.mail.message import EmailMultiAlternatives
-from lorepo.mycontent.models import Content, ContentSpace
-from lorepo.mycontent.service import get_list_by_ids
 from django.utils.html import strip_tags
-from lorepo.spaces.util import get_all_user_spaces, get_space_for_content
-from lorepo.corporate.utils import is_in_public_category
+from src.lorepo.spaces.util import get_all_user_spaces, get_space_for_content
+from src.lorepo.corporate.utils import is_in_public_category
 
 
 # that function will send mail to all receivers in BCC field, with TO field set to undisclosed-recipients

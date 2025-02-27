@@ -1,21 +1,21 @@
 from django.shortcuts import render, get_object_or_404
-from lorepo.filestorage.forms import UploadForm
+from src.lorepo.filestorage.forms import UploadForm
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
-from lorepo.filestorage.models import UploadedFile, FileStorage
+from src.lorepo.filestorage.models import UploadedFile, FileStorage
 import xml.etree.ElementTree as ET
 import datetime
 from django.template import loader
 from django.template.context import Context
-from lorepo.mycontent.models import Content
-from lorepo.spaces.util import get_private_space_for_user
-from lorepo.spaces.models import Space
-from lorepo.mycontent.service import add_content_to_space
-from querystring_parser import parser
-from libraries.utility.redirect import get_redirect_url
+from src.lorepo.mycontent.models import Content
+from src.lorepo.spaces.util import get_private_space_for_user
+from src.lorepo.spaces.models import Space
+from src.lorepo.mycontent.service import add_content_to_space
+from src.querystring_parser import parser
+from src.libraries.utility.redirect import get_redirect_url
 
-from lorepo.token.util import create_mycontent_editor_token
-from mauthor.indesign.utils import convert_post_data
+from src.lorepo.token.util import create_mycontent_editor_token
+from src.mauthor.indesign.utils import convert_post_data
 
 
 @login_required

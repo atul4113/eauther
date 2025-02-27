@@ -3,15 +3,15 @@ import json
 from django.contrib import messages
 from django.http import  HttpResponse, HttpResponseRedirect
 from django.views.generic.base import TemplateView
-from libraries.utility.decorators import backend, SuperUserRequiredMixin
-from libraries.utility.environment import get_versioned_module
-from libraries.utility.queues import trigger_backend_task
-from mauthor.lessons_parsers.form import ChangePropertiesForm
-from mauthor.lessons_parsers.remove_descriptor.form import RemoveAddonDescriptorsForm
-from mauthor.lessons_parsers.property_changer.properties_changer import PropertiesChanger
-from mauthor.lessons_parsers.remove_descriptor.descriptors_cleaner import DescriptorsCleaner
-from mauthor.localization.IcplayerZipped import IcplayerZipped
-from mauthor.utility.decorators import LoginRequiredMixin
+from src.libraries.utility.decorators import backend, SuperUserRequiredMixin
+from src.libraries.utility.environment import get_versioned_module
+from src.libraries.utility.queues import trigger_backend_task
+from src.mauthor.lessons_parsers.form import ChangePropertiesForm
+from src.mauthor.lessons_parsers.remove_descriptor.form import RemoveAddonDescriptorsForm
+from src.mauthor.lessons_parsers.property_changer.properties_changer import PropertiesChanger
+from src.mauthor.lessons_parsers.remove_descriptor.descriptors_cleaner import DescriptorsCleaner
+from src.mauthor.localization.IcplayerZipped import IcplayerZipped
+from src.mauthor.utility.decorators import LoginRequiredMixin
 
 
 # noinspection PyMethodMayBeStatic
