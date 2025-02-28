@@ -1,4 +1,4 @@
-import settings
+from src import settings
 from django.template import loader
 from django.template.context import Context
 from xml.dom.minidom import parseString

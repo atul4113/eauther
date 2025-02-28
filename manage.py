@@ -10,7 +10,7 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 def main():
     try:
         # Set the default Django settings module
-        os.environ.setdefault("DJANGO_SETTINGS_MODULE", "settings")
+        os.environ.setdefault("DJANGO_SETTINGS_MODULE", "src.settings")
 
         # Log the environment settings
         logging.info(f"DJANGO_SETTINGS_MODULE set to: {os.environ['DJANGO_SETTINGS_MODULE']}")

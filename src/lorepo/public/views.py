@@ -9,7 +9,7 @@ from src.lorepo.spaces.util import get_spaces_for_copy, get_private_space_for_us
 from django.http import Http404, HttpResponseRedirect
 from django.template.context import Context
 from src.lorepo.public.util import send_message
-import settings
+from src import settings
 
 def view(request, content_id):
     return HttpResponseRedirect('/embed/%s' % content_id)

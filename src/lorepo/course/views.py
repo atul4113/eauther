@@ -27,7 +27,7 @@ from zipfile import ZipFile, ZIP_DEFLATED
 from django.contrib.auth.models import User
 from src.lorepo.public.util import send_message
 from src.mauthor.utility.utils import sanitize_title
-import src.settings as settings
+from src import settings
 from src.mauthor.backup.views import _store_backup
 from django.core.mail import mail_admins
 from django.contrib.auth.decorators import login_required

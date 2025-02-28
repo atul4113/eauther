@@ -202,7 +202,7 @@ class SslReportView(LoginRequiredMixin, TemplateView):
             if '--Summary--' == line:
                 flag = 'S'
                 continue
-            if flag is 'S':
+            if flag == 'S':
                 summary.append(line)
                 continue
             row = line.split('\t')
@@ -213,9 +213,9 @@ class SslReportView(LoginRequiredMixin, TemplateView):
                 'fix_pages': row[3],
                 'title': row[4],
             }
-            if flag is 'T':
+            if flag == 'T':
                 templates.append(entry)
-            elif flag is 'L':
+            elif flag == 'L':
                 lessons.append(entry)
 
         return {

@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-import src.settings as settings
+from src import settings
 from src.libraries.mobile.mobile_utils import is_mobile_user_agent, is_ios_user_agent
 from src.lorepo.mycontent.models import Content
 from src.lorepo.embed.decorators import check_is_public

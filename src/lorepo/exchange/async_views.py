@@ -1,6 +1,6 @@
 import traceback
 
-import settings
+from src import settings
 from django.http.response import HttpResponse, HttpResponseForbidden
 from django.template import loader
 from django.template.context import Context

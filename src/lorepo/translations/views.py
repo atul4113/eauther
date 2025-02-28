@@ -12,7 +12,7 @@ from django.http import HttpResponse, \
 from django.template.loader import render_to_string
 from itertools import islice
 
-import settings
+from src import settings
 from src.libraries.utility.decorators import backend
 from src.lorepo.public.util import send_message
 from src.lorepo.translations.utils import save_translated_image_to_cache, change_session_lang, \

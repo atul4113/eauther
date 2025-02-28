@@ -2,7 +2,7 @@ import json
 from django.http import HttpRequest
 from django.template.defaultfilters import striptags
 from django.utils.safestring import mark_safe
-import src.settings as settings
+from src import settings
 from src.lorepo.filestorage.models import UploadedFile
 
 

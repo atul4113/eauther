@@ -4,7 +4,7 @@ from src.lorepo.filestorage.models import UploadedFile
 from src.lorepo.permission.models import Permission
 from src.lorepo.spaces.models import Space
 from django.contrib.auth.models import User
-import src.settings as settings
+from src import settings
 
 PROJECT_ADMIN_PERMISSIONS = [Permission.SPACE_ACCESS_MANAGE,
                            Permission.SPACE_EDIT,

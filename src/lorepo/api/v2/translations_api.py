@@ -3,7 +3,7 @@ import zlib
 
 from django.urls import path, re_path
 
-import src.settings as settings
+from src import settings
 from src.libraries.utility.environment import get_versioned_module
 from src.libraries.utility.helpers import get_object_or_none
 from src.libraries.utility.queues import trigger_backend_task

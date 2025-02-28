@@ -1,5 +1,5 @@
 from django.db import models
-import src.settings as settings
+from src import settings
 from src.lorepo.filestorage.models import FileStorage, UploadedFile
 from src.lorepo.spaces.models import Space
 from xml.dom import minidom

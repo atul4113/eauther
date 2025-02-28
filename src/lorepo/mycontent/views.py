@@ -58,7 +58,7 @@ from django.contrib.auth.models import User
 from src.lorepo.permission.util import verify_content_access, verify_space_access
 from src.lorepo.permission.notifications import send_no_access_notification
 from src.lorepo.public.util import send_message
-import settings
+from src import settings
 from django.core.mail import mail_admins
 from src.libraries.utility.queues import trigger_backend_task, trigger_backend_tasks
 from src.mauthor.metadata.util import save_metadata_from_request, toggle_page_metadata, update_page_metadata,\

@@ -141,7 +141,7 @@ if __name__ == '__main__':
     # Add project dir so Djnago project settings is in the scope
     LIB_PATH = os.path.abspath('..')
     sys.path.append(LIB_PATH)
-    import settings
+    from src import settings
     setup_environ(settings)
 
     i = 0

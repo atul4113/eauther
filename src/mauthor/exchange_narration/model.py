@@ -7,7 +7,7 @@ from src.lorepo.spaces.util import get_space_for_content
 from src.lorepo.corporate.utils import get_publication_for_space
 import io
 import csv
-import src.settings as settings
+from src import settings
 from django.db import models
 from src.lorepo.mycontent.models import Content
 from django.template.loader import render_to_string

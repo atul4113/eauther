@@ -10,7 +10,7 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from src.lorepo.public.util import send_message
 from src.mauthor.customfixdb.models import FixLog
 from src.mauthor.customfixdb.util import object_builder
-import settings
+from src import settings
 
 FIXDB_QUEUE = 'search'
 FIXDB_MODULE = 'backup'

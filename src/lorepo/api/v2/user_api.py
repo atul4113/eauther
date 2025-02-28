@@ -6,7 +6,7 @@ from django.shortcuts import get_object_or_404
 from django.template import loader, Context
 from django.utils.encoding import force_str
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-import src.settings as settings
+from src import settings
 from src.lorepo.api.v2.mixins import MiddlewareMixin
 from src.lorepo.corporate.middleware import CorporateMiddleware
 from src.lorepo.corporate.models import CorporateLogo

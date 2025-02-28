@@ -5,7 +5,7 @@ from src.lorepo.filestorage.models import UploadedFile, FileStorage
 from src.lorepo.assets.models import LessonCleaner
 from django.template import loader, Context
 from src.lorepo.public.util import send_message
-import src.settings as settings
+from src import settings
 
 
 def update_content_assets(content, uploaded_files):

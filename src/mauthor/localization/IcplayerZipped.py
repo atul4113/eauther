@@ -4,7 +4,7 @@ from xml.dom import minidom
 from src.libraries.utility.urlfetch import fetch
 from src.mauthor.localization.utils import filter_localization_properties
 from .modules_list import MODULES_LIST
-import src.settings as settings
+from src import settings
 import re
 
 class IcplayerZipped(object):

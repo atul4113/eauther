@@ -1,4 +1,4 @@
-import src.settings as settings
+from src import settings
 from django.template import loader
 from django.template.context import Context
 from src.lorepo.exchange.models import ExportVersions

@@ -6,7 +6,7 @@ from src.lorepo.filestorage.models import FileStorage
 from src.lorepo.mycontent.models import Content, ContentType
 from src.lorepo.public.util import send_message
 from src.lorepo.user.models import UserProfile, UserLanguage
-import settings
+from src import settings
 import xml.dom.minidom
 
 from src.libraries.wiki.models import WikiPageTranslated

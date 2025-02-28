@@ -71,9 +71,9 @@ from src.lorepo.public.util import send_message
 from src.mauthor.utility.decorators import LoginRequiredMixin
 from src.lorepo.token.models import TOKEN_KEYS
 from src.lorepo.token.util import create_publication_action_token, create_mycontent_editor_token, create_mycontent_edit_addon_token
-import settings
+from src import settings
 from django.core.mail import send_mail
-import libraries.utility.queues
+import src.libraries.utility.queues
 
 
 @login_required

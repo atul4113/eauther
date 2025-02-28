@@ -3,7 +3,7 @@ import src.libraries.utility.cacheproxy as cache
 from src.lorepo.corporate.models import CompanyProperties
 from src.lorepo.corporate.signals import company_structure_changed
 from src.lorepo.permission.util import get_company_users
-import src.settings as settings
+from src import settings
 
 
 def get_company_properties(company):

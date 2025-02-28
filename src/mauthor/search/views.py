@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 
-import settings
+from src import settings
 from src.libraries.wiki.models import WikiPageTranslatedIndex
 from src.lorepo.mycontent.models import Content
 from src.mauthor.search.util import update_index, search_index, get_spaces_query, \

@@ -1,6 +1,6 @@
 from collections import OrderedDict
 from django.urls import path
-import src.settings as settings
+from src import settings
 from src.libraries.utility.environment import get_app_version
 from src.lorepo.global_settings.models import GlobalSettings
 from src.lorepo.translations.models import SupportedLanguages
