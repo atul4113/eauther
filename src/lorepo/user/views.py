@@ -125,6 +125,7 @@ def custom_login(request):
     """
     Custom login view that redirects authenticated users to the home page.
     """
+    print("hey! you are logged in!")
     if request.user.is_authenticated:
         return HttpResponseRedirect("/")
     return remember_me_login(request)
@@ -294,7 +295,7 @@ def register(
     request,
     success_url=None,
     form_class=CustomRegistrationForm,
-    template_name="src/registration/registration_form.html",
+    template_name="registration/registration_form.html",
     extra_context=None,
 ):
     """

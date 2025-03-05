@@ -1,24 +1,34 @@
+from django.contrib import admin
 from django.urls import path, re_path, include
 from django.views.generic import TemplateView
 from src.lorepo.embed.views import present  # Import the function explicitly
 from src.lorepo.user.views import register, custom_login  # Explicit function imports
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
-
 urlpatterns = [
+    path('admin/', admin.site.urls),
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
     path('api/docs/', SpectacularSwaggerView.as_view(url_name='schema')),
     path('_ah/', include('djangae.urls')),
     path('api/docs/', include('rest_framework_docs.urls')),
     path('api/v2/', include(('src.lorepo.api.v2.urls', 'v2'), namespace='v2')),
     # path('api/v3/', include(('mcurriculum.api.v2.urls', 'v3'), namespace='v3')),  # For Future Use
+    # cron => few of them are working, few needs authentication,
     path('cron/', include('src.lorepo.cron.urls')),
+    # required database for website ids
     path('backendhome/', include('src.lorepo.home.urls')),
+    # few urls are working and few needs payload
     path('file/', include('src.lorepo.filestorage.urls')),
+    # few urls are working in user section
     path('user/', include('src.lorepo.user.urls')),
+
     path('assets/', include('src.lorepo.assets.urls')),
+
     path('labels/', include('src.lorepo.labels.urls')),
+
     path('doc/', include('src.libraries.wiki.urls')),
+
     path('spaces/', include('src.lorepo.spaces.urls')),
+
     path('translations/', include('src.lorepo.translations.urls')),
     path('accounts/register/', register),
     path('accounts/login/session/', custom_login),

@@ -22,7 +22,7 @@ def remember_me_login (
 
     from src.remember_me.forms import AuthenticationRememberMeForm
     
-    redirect_to = request.REQUEST.get ( redirect_field_name, '' )
+    redirect_to = request.POST.get ( redirect_field_name, '' )
     
     if request.method == "POST":
     

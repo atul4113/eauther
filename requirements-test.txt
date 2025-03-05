@@ -1,5 +1,0 @@
-deepdiff==3.3.0
-pytest==3.2.3
-WebOb==1.7.1
-pytest-django==3.1.2
-Pillow==5.2.0

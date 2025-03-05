@@ -12,7 +12,7 @@ import pymysql
 pymysql.install_as_MySQLdb()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/src/key.json"
+# os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/home/delhivery/atul/fixed_eauthor/eauther/src/key.json"
 
 APPLICATION_ID = mock_get_application_id()
 
@@ -25,6 +25,7 @@ DATABASES = {
     "default": {
         "ENGINE": "gcloudc.db.backends.datastore",
         "PROJECT": "ealpha-test-application",  # Set your Google Cloud project ID
+        'INDEXES_FILE': 'indexes.json',
     }
 }
 
@@ -38,8 +39,11 @@ NOCAPTCHA = True
 
 USE_I18N = False
 USE_L10N = True
-USE_TZ = False
+USE_TZ = True
+TIME_ZONE = 'UTC'
+SITE_ID = 1
 
+DEBUG = True
 DJANGAE_DISABLE_CONSTRAINT_CHECKS = True
 
 INSTALLED_APPS = [
@@ -47,7 +51,8 @@ INSTALLED_APPS = [
     'src.markdown_deux',
     'src.mauthor',
     'drf_spectacular',
-    'django.contrib.sites',
+    'django.contrib.admin',
+    # 'django.contrib.sites',
     'django.contrib.contenttypes',
     'django.contrib.auth',
     'django.contrib.sessions',
@@ -159,10 +164,10 @@ TEMPLATES = [
                 # 'lorepo.context_processor.settings',
                 'django.contrib.auth.context_processors.auth',
                 'django.template.context_processors.debug',
-                'django.core.context_processors.i18n',
-                'django.core.context_processors.request',
+                # 'django.core.context_processors.i18n',
+                # 'django.core.context_processors.request',
                 'django.template.context_processors.request',
-                'django.core.context_processors.media',
+                # 'django.core.context_processors.media',
                 'django.contrib.messages.context_processors.messages',
                 'lorepo.context_processors.settings',
                 'lorepo.context_processors.urls',
@@ -331,44 +336,44 @@ lxml_parser_options = {
 }
 etree.set_default_parser(parser=etree.XMLParser(**lxml_parser_options))
 
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'filters': {
-        'require_debug_false': {
-            '()': 'django.utils.log.RequireDebugFalse'
-        }
-    },
-    'handlers': {
-        'log_error_message': {
-            'level': 'ERROR',
-            'filters': ['require_debug_false'],
-            'class': 'src.mauthor.admin.log.LogAdminEmailHandler'
-        },
-        'mail_admins': {
-            'level': 'ERROR',
-            'filters': ['require_debug_false'],
-            'class': 'django.utils.log.AdminEmailHandler'
-        },
-        'empty-handler': {
-            'class': 'logging.NullHandler',
-        },
-    },
-    'loggers': {
-        # Silence SuspiciousOperation.DisallowedHost exception ('Invalid
-        # HTTP_HOST' header messages). Set the handler to 'null' so we don't
-        # get those annoying emails.
-        'django.security.DisallowedHost': {
-            'handlers': ['empty-handler'],
-            'propagate': False,
-        },
-        'django.request': {
-            'handlers': ['log_error_message', 'mail_admins'],
-            'level': 'ERROR',
-            'propagate': True,
-        },
-    }
-}
+# LOGGING = {
+#     'version': 1,
+#     'disable_existing_loggers': False,
+#     'filters': {
+#         'require_debug_false': {
+#             '()': 'django.utils.log.RequireDebugFalse'
+#         }
+#     },
+#     'handlers': {
+#         'log_error_message': {
+#             'level': 'ERROR',
+#             'filters': ['require_debug_false'],
+#             'class': 'src.mauthor.admin.log.LogAdminEmailHandler'
+#         },
+#         'mail_admins': {
+#             'level': 'ERROR',
+#             'filters': ['require_debug_false'],
+#             'class': 'django.utils.log.AdminEmailHandler'
+#         },
+#         'empty-handler': {
+#             'class': 'logging.NullHandler',
+#         },
+#     },
+#     'loggers': {
+#         # Silence SuspiciousOperation.DisallowedHost exception ('Invalid
+#         # HTTP_HOST' header messages). Set the handler to 'null' so we don't
+#         # get those annoying emails.
+#         'django.security.DisallowedHost': {
+#             'handlers': ['empty-handler'],
+#             'propagate': False,
+#         },
+#         'django.request': {
+#             'handlers': ['log_error_message', 'mail_admins'],
+#             'level': 'ERROR',
+#             'propagate': True,
+#         },
+#     }
+# }
 
 EMAIL_BACKEND = 'lorepo.util.email_backend.RecipientsCheckEmailBackend'
 
