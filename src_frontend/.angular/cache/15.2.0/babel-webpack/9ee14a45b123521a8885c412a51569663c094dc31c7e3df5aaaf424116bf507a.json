@@ -1,0 +1,1 @@
+{"ast":null,"code":"var RadioOption = /** @class */function () {\n  function RadioOption(content, value) {\n    this.content = content;\n    this.value = value;\n  }\n  return RadioOption;\n}();\nexport { RadioOption };","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

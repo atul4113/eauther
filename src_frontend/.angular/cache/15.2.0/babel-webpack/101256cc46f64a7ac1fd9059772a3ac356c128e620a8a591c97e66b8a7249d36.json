@@ -1,0 +1,1 @@
+{"ast":null,"code":"import { HomeMainComponent } from './component/home-main/home-main.component';\nexport var HomeRoutes = [{\n  path: '',\n  component: HomeMainComponent\n}, {\n  path: 'home',\n  component: HomeMainComponent\n}, {\n  path: 'home/from/:referrerKey',\n  component: HomeMainComponent\n}];","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

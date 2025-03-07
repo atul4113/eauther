@@ -1,11 +1,14 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { AppComponent } from './app.component';
+import { NgModule } from "@angular/core";
+import { BrowserModule } from "@angular/platform-browser";
+import { AppComponent } from "./app.component";
 import { FormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
-import { HttpModule } from "@angular/http";
+import { HttpClientModule } from "@angular/common/http";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { PERFECT_SCROLLBAR_CONFIG, PerfectScrollbarConfigInterface } from "ngx-perfect-scrollbar";
+import {
+    PERFECT_SCROLLBAR_CONFIG,
+    PerfectScrollbarConfigInterface,
+} from "ngx-perfect-scrollbar";
 
 import { AppCommonModule } from "./common/app.common.module";
 import { APP_ROUTER_PROVIDERS, AUTH_PROVIDERS } from "./app.routes";
@@ -27,27 +30,25 @@ import { SettingsService } from "./common/service/settings.service";
 import { UtilsService } from "./common/service/utils.service";
 import { ReferrerService } from "./common/service/referrer.service";
 
-
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     suppressScrollX: true,
     wheelPropagation: true,
 };
 
-
 @NgModule({
     imports: [
-        BrowserModule, FormsModule, RouterModule, HttpModule, BrowserAnimationsModule,
-        AppCommonModule, APP_ROUTER_PROVIDERS,
+        BrowserModule,
+        FormsModule,
+        RouterModule,
+        HttpClientModule,
+        BrowserAnimationsModule,
+        AppCommonModule,
+        APP_ROUTER_PROVIDERS,
 
         HomeModule,
     ],
-    declarations: [
-        AppComponent,
-
-        BaseComponent,
-        AccountsLoginComponent,
-    ],
-    bootstrap: [ AppComponent ],
+    declarations: [AppComponent, BaseComponent, AccountsLoginComponent],
+    bootstrap: [AppComponent],
     providers: [
         AUTH_PROVIDERS,
 
@@ -64,8 +65,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         ReferrerService,
         {
             provide: PERFECT_SCROLLBAR_CONFIG,
-            useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
-        }
-    ]
+            useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG,
+        },
+    ],
 })
-export class AppModule { }
+export class AppModule {}

@@ -1,7 +1,7 @@
-import { NgModule } from '@angular/core';
+import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
-import { HttpModule } from "@angular/http";
+import { HttpClientModule } from "@angular/common/http";
 import { CommonModule } from "@angular/common";
 
 import { AppCommonModule } from "../common/app.common.module";
@@ -17,17 +17,26 @@ import { ResolveConflictsPanelComponent } from "./component/resolve-conflicts-pa
 import { HomeWebsitesComponent } from "./component/home-websites.component";
 import { GlobalSettingsComponent } from "./component/global-settings.component";
 
-
 @NgModule({
     imports: [
-        CommonModule, FormsModule, RouterModule, HttpModule,
-        AppCommonModule, RouterModule.forChild(AdminRoutes)
+        CommonModule,
+        FormsModule,
+        RouterModule,
+        HttpClientModule,
+        AppCommonModule,
+        RouterModule.forChild(AdminRoutes),
     ],
     declarations: [
-        AdminPanelComponent, TranslationsPanelComponent, BrowseLabelsPanelComponent, LanguagesPanelComponent,
-        ImagesPanelComponent, ResolveConflictsPanelComponent, HomeWebsitesComponent, GlobalSettingsComponent
+        AdminPanelComponent,
+        TranslationsPanelComponent,
+        BrowseLabelsPanelComponent,
+        LanguagesPanelComponent,
+        ImagesPanelComponent,
+        ResolveConflictsPanelComponent,
+        HomeWebsitesComponent,
+        GlobalSettingsComponent,
     ],
-    providers: [ TranslationsAdminService ],
-    exports: []
+    providers: [TranslationsAdminService],
+    exports: [],
 })
 export class AdminModule {}
