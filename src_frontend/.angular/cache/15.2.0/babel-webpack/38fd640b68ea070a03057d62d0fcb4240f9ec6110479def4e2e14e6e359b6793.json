@@ -1,0 +1,1 @@
+{"ast":null,"code":"var News = /** @class */function () {\n  function News(news) {\n    if (news) {\n      this.published = news.published;\n      this.link = news.link;\n      this.summary = news.summary;\n      this.title = news.title;\n    }\n  }\n  return News;\n}();\nexport { News };","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

@@ -1,0 +1,1 @@
+{"ast":null,"code":"var CheckboxOption = /** @class */function () {\n  function CheckboxOption(content, value) {\n    this.content = content;\n    this.value = value;\n  }\n  return CheckboxOption;\n}();\nexport { CheckboxOption };","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}
