@@ -1,7 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
-import { map, share } from "rxjs/operators";
-import "rxjs/add/observable/of";
+import { Observable, of, map, share } from "rxjs";
 
 import { ISettingsRaw, Settings } from "../model";
 import { RestClientService } from "./rest-client.service";
@@ -32,7 +30,7 @@ export class SettingsService {
 
     public get(): Observable<Settings> {
         if (this.settings) {
-            return Observable.of(this.settings);
+            return of(this.settings);
         } else if (this.settingsObservable) {
             return this.settingsObservable;
         } else {

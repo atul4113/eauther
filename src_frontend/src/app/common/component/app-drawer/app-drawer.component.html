@@ -1,7 +1,14 @@
-<div class="drawer" [ngClass]="{'is-open': isOpen}" (window:resize)="onResize($event)">
+<div
+    class="drawer"
+    [ngClass]="{ 'is-open': isOpen }"
+    (window:resize)="onResize($event)"
+>
     <span class="mdl-layout-title drawer__logo">
         <a href="/">
-             <img class="header-top-bar__logo" [src]="assetsUrl + '/images/ealpha4.svg'"/>
+            <img
+                class="header-top-bar__logo"
+                [src]="assetsUrl + '/images/ealpha4.svg'"
+            />
         </a>
     </span>
 
@@ -10,13 +17,19 @@
             <mat-nav-list>
                 <a mat-list-item [disableRipple]="true" class="drawer__search">
                     <i mat-list-icon class="material-icons">&#xE8B6;</i>
-                    <mat-input-container mat-line>
-                        <input matInput
-                               [(ngModel)]="text"
-                               [placeholder]= " translations | getLabel: 'plain.browse_labels.panel.search'"
-                               name="search"
-                               id="search">
-                    </mat-input-container>
+                    <mat-form-field appearance="fill">
+                        <input
+                            matInput
+                            [(ngModel)]="text"
+                            [placeholder]="
+                                translations
+                                    | getLabel
+                                        : 'plain.browse_labels.panel.search'
+                            "
+                            name="search"
+                            id="search"
+                        />
+                    </mat-form-field>
                 </a>
             </mat-nav-list>
         </form>
@@ -24,99 +37,137 @@
 
     <nav class="small-screen-only">
         <mat-nav-list>
-            <a mat-list-item
-               href="/">
-                {{  translations | getLabel:"plain.home.panel.home" }}
+            <a mat-list-item href="/">
+                {{ translations | getLabel : "plain.home.panel.home" }}
             </a>
-            <a *ngIf="user.isAuthenticated"
-               mat-list-item
-               href="/corporate">
-                {{  translations | getLabel:"plain.corporate.panel.corporate.dashboard" }}
+            <a *ngIf="user.isAuthenticated" mat-list-item href="/corporate">
+                {{
+                    translations
+                        | getLabel : "plain.corporate.panel.corporate.dashboard"
+                }}
             </a>
-            <a *ngIf="user.isAuthenticated"
-               mat-list-item
-               href="/mycontent">
-                {{  translations | getLabel:"plain.my_lessons.panel.my_lessons.my_lessons" }}
+            <a *ngIf="user.isAuthenticated" mat-list-item href="/mycontent">
+                {{
+                    translations
+                        | getLabel
+                            : "plain.my_lessons.panel.my_lessons.my_lessons"
+                }}
             </a>
-            <a *ngIf="user.isAuthenticated && !user.company?.isLocked"
-               mat-list-item
-               href="/support">
-                {{  translations | getLabel:"plain.common.add_drawer.support" }}
+            <a
+                *ngIf="user.isAuthenticated && !user.company?.isLocked"
+                mat-list-item
+                href="/support"
+            >
+                {{
+                    translations | getLabel : "plain.common.add_drawer.support"
+                }}
             </a>
-            <a *ngIf="user.isAuthenticated && !user.company?.isLocked && user.company?.isOwner"
-               mat-list-item
-               href='/corporate/admin'>
-                {{  translations | getLabel:"plain.common.add_drawer.company_admin" }}
+            <a
+                *ngIf="
+                    user.isAuthenticated &&
+                    !user.company?.isLocked &&
+                    user.company?.isOwner
+                "
+                mat-list-item
+                href="/corporate/admin"
+            >
+                {{
+                    translations
+                        | getLabel : "plain.common.add_drawer.company_admin"
+                }}
             </a>
-            <a *ngIf="user.isAuthenticated && !user.company?.isLocked && user.permissions.isAnyDivisionAdmin"
-               mat-list-item
-               href='/corporate/divisionadmin'>
-                {{  translations | getLabel:"plain.common.add_drawer.project_admin" }}
+            <a
+                *ngIf="
+                    user.isAuthenticated &&
+                    !user.company?.isLocked &&
+                    user.permissions.isAnyDivisionAdmin
+                "
+                mat-list-item
+                href="/corporate/divisionadmin"
+            >
+                {{
+                    translations
+                        | getLabel : "plain.common.add_drawer.project_admin"
+                }}
             </a>
         </mat-nav-list>
     </nav>
 
     <nav *ngIf="projects.length > 0">
-        <h6> {{ translations | getLabel:"plain.common.add_drawer.projects" }}</h6>
+        <h6>
+            {{ translations | getLabel : "plain.common.add_drawer.projects" }}
+        </h6>
 
         <mat-nav-list>
-            <a *ngFor="let project of projects"
-               [routerLink]="'/corporate/list/' + project.id"
-               mat-list-item
-               (click)="close()">
+            <a
+                *ngFor="let project of projects"
+                [routerLink]="'/corporate/list/' + project.id"
+                mat-list-item
+                (click)="close()"
+            >
                 {{ project.title }}
             </a>
         </mat-nav-list>
     </nav>
 
     <nav>
-        <h6>{{ translations | getLabel:"plain.common.add_drawer.help" }}</h6>
+        <h6>{{ translations | getLabel : "plain.common.add_drawer.help" }}</h6>
 
         <mat-nav-list>
-            <a mat-list-item
-               href="#">
-                {{ translations | getLabel:"plain.common.add_drawer.documentation" }}
+            <a mat-list-item href="#">
+                {{
+                    translations
+                        | getLabel : "plain.common.add_drawer.documentation"
+                }}
             </a>
-            <a mat-list-item
-               href="#">
-                {{ translations | getLabel:"plain.corporate.panel.tiles.video_tutorials" }}
+            <a mat-list-item href="#">
+                {{
+                    translations
+                        | getLabel
+                            : "plain.corporate.panel.tiles.video_tutorials"
+                }}
             </a>
-            <a mat-list-item
-               href="#">
-                {{ translations | getLabel:"plain.common.add_drawer.modules_examples" }}
+            <a mat-list-item href="#">
+                {{
+                    translations
+                        | getLabel : "plain.common.add_drawer.modules_examples"
+                }}
             </a>
         </mat-nav-list>
     </nav>
 
     <nav>
-        <h6>
-            Alpha Publishing
-        </h6>
+        <h6>Alpha Publishing</h6>
 
         <mat-nav-list>
-            <a mat-list-item
-               href="#">
-                {{ translations | getLabel:"plain.common.add_drawer.about_learnetic" }}
-
+            <a mat-list-item href="#">
+                {{
+                    translations
+                        | getLabel : "plain.common.add_drawer.about_learnetic"
+                }}
             </a>
-            <a mat-list-item
-               href="#">
-                {{ translations | getLabel:"plain.common.add_drawer.contact_learnetic" }}
-
+            <a mat-list-item href="#">
+                {{
+                    translations
+                        | getLabel : "plain.common.add_drawer.contact_learnetic"
+                }}
             </a>
         </mat-nav-list>
     </nav>
-
 </div>
 
-<div (click)="close()"
-     class="drawer-mask"
-     [ngClass]="{'is-open': isOpen}"></div>
+<div
+    (click)="close()"
+    class="drawer-mask"
+    [ngClass]="{ 'is-open': isOpen }"
+></div>
 
-<button *ngIf="!isFullSize"
-        mat-icon-button
-        (click)="open()"
-        [ngClass]="{'is-header-compact': isHeaderCompact}"
-        class="drawer-button">
+<button
+    *ngIf="!isFullSize"
+    mat-icon-button
+    (click)="open()"
+    [ngClass]="{ 'is-header-compact': isHeaderCompact }"
+    class="drawer-button"
+>
     <i class="material-icons">menu</i>
 </button>

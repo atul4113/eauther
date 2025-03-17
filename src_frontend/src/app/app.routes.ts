@@ -1,75 +1,71 @@
 import { ModuleWithProviders } from "@angular/core";
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule } from "@angular/router";
 
 import { AppComponent } from "./app.component";
 import { BaseComponent } from "./base.component";
-import { HomeRoutes } from './home/home.routes';
+import { HomeRoutes } from "./home/home.routes";
 
-import {
-    AuthGuard, OnlyNoAuthGuard,
-    CanDeactivateGuard
-} from "./common/guard";
+import { AuthGuard, OnlyNoAuthGuard, CanDeactivateGuard } from "./common/guard";
 import { AccountsLoginComponent } from "./accounts/component/accounts-login/accounts-login.component";
 
+// Importing modules statically
+import { CorporateModule } from "./corporate/corporate.module";
+import { AccountsModule } from "./accounts/accounts.module";
+import { MyLessonsModule } from "./my-lessons/my-lessons.module";
+import { AdminModule } from "./admin/admin.module";
 
-export const AUTH_PROVIDERS = [
-    AuthGuard, OnlyNoAuthGuard,
-    CanDeactivateGuard
-];
+export const AUTH_PROVIDERS = [AuthGuard, OnlyNoAuthGuard, CanDeactivateGuard];
 
 const appRoutes: Routes = [
     {
-        path: 'accounts/login',
+        path: "accounts/login",
         component: AccountsLoginComponent,
-        canActivate: [OnlyNoAuthGuard]
+        canActivate: [OnlyNoAuthGuard],
     },
     {
-        path: 'accounts/login\/',
+        path: "accounts/login/",
         component: AccountsLoginComponent,
-        canActivate: [OnlyNoAuthGuard]
+        canActivate: [OnlyNoAuthGuard],
     },
     {
-        path: 'corporate',
-        loadChildren: 'app/corporate/corporate.module#CorporateModule'
+        path: "corporate",
+        loadChildren: () => CorporateModule, // Statically imported
     },
     {
-        path: 'accounts',
-        loadChildren: 'app/accounts/accounts.module#AccountsModule'
+        path: "accounts",
+        loadChildren: () => AccountsModule, // Statically imported
     },
     {
-        path: 'mycontent',
-        loadChildren: 'app/my-lessons/my-lessons.module#MyLessonsModule',
-        data: { isProject: false }
+        path: "mycontent",
+        loadChildren: () => MyLessonsModule, // Statically imported
+        data: { isProject: false },
     },
     {
-        path: 'corporate',
-        loadChildren: 'app/my-lessons/my-lessons.module#MyLessonsModule',
-        data: { isProject: true }
+        path: "corporate",
+        loadChildren: () => MyLessonsModule, // Statically imported
+        data: { isProject: true },
     },
     {
-        path: 'panel',
-        loadChildren: 'app/admin/admin.module#AdminModule'
+        path: "panel",
+        loadChildren: () => AdminModule, // Statically imported
     },
 
     ...HomeRoutes,
 ];
 
-
 export const routes: Routes = [
     {
-        path: '',
+        path: "",
         component: AppComponent,
         children: [
             {
-                path: '',
+                path: "",
                 component: BaseComponent,
-                children: [
-                    ...appRoutes
-                ]
+                children: [...appRoutes],
             },
-        ]
+        ],
     },
 ];
 
-
-export const APP_ROUTER_PROVIDERS: ModuleWithProviders = RouterModule.forRoot(routes);
+export const APP_ROUTER_PROVIDERS: ModuleWithProviders<RouterModule> =
+    RouterModule.forRoot(routes);

@@ -1,14 +1,13 @@
 import { Injectable } from "@angular/core";
-import { Observable, Observer } from "rxjs";
+import { Observable, Observer, of } from "rxjs";
 import { RestClientService } from "./rest-client.service";
-import { map , tap, catchError, share } from 'rxjs/operators';
-import "rxjs/add/observable/of";
+import { map, tap, catchError, share } from "rxjs";
 
 import { ISpaceRaw, Space } from "../model/space";
 import { Subspace } from "../model/subspace";
 import { RolePermissions } from "../model/auth-user";
 
-const PROJECTS_URL: string = '/projects/';
+const PROJECTS_URL: string = "/projects/";
 
 @Injectable()
 export class ProjectsService {
@@ -18,84 +17,83 @@ export class ProjectsService {
     private changeObserve: Observable<Space[]>;
     private changeObserver: Observer<Space[]>;
 
-    constructor (private _restClient: RestClientService) {
+    constructor(private _restClient: RestClientService) {
         this.load();
     }
 
-    private mapProjects (response: any) {
-        let spaces = <ISpaceRaw[]> response;
-        return spaces.map(space => new Space(space));
+    private mapProjects(response: any) {
+        let spaces = <ISpaceRaw[]>response;
+        return spaces.map((space) => new Space(space));
     }
 
-    private handleError (error: string): Observable<Space[]> {
-        return Observable.of([]);
+    private handleError(error: string): Observable<Space[]> {
+        return of([]);
     }
 
-    public get (): Observable<Space[]> {
+    public get(): Observable<Space[]> {
         if (this.projects) {
-            return Observable.of(this.projects);
-        } else if (this.observe){
+            return of(this.projects);
+        } else if (this.observe) {
             return this.observe;
         } else {
             return null;
         }
     }
 
-    public onChange (): Observable<Space[]> {
+    public onChange(): Observable<Space[]> {
         return this.changeObserve;
     }
 
-    public getPublications (projectId): Observable<Space[]> {
-        return this._restClient.get(PROJECTS_URL + projectId + '/publications').pipe(
-            map(response => {
-                return response.map(publication => new Space(publication));
-            })
-        );
+    public getPublications(projectId): Observable<Space[]> {
+        return this._restClient
+            .get(PROJECTS_URL + projectId + "/publications")
+            .pipe(
+                map((response) => {
+                    return response.map(
+                        (publication) => new Space(publication)
+                    );
+                })
+            );
     }
 
-    public getStructure (spaceId, recursive: boolean = false): Observable<Subspace> {
-        if(recursive) {
-            return this._restClient.get(PROJECTS_URL + spaceId + '/structure?recursive=true').pipe(
-                map(response => new Subspace(response))
-            );
-        }else{
-            return this._restClient.get(PROJECTS_URL + spaceId + '/structure').pipe(
-                map(response => new Subspace(response))
-            );
+    public getStructure(
+        spaceId,
+        recursive: boolean = false
+    ): Observable<Subspace> {
+        if (recursive) {
+            return this._restClient
+                .get(PROJECTS_URL + spaceId + "/structure?recursive=true")
+                .pipe(map((response) => new Subspace(response)));
+        } else {
+            return this._restClient
+                .get(PROJECTS_URL + spaceId + "/structure")
+                .pipe(map((response) => new Subspace(response)));
         }
     }
 
-    private load () {
-        this.observe =
-            this._restClient
-                .get(PROJECTS_URL)
-                .pipe(
-                    map(this.mapProjects),
-                    catchError(this.handleError),
-                    share()
-                );
+    private load() {
+        this.observe = this._restClient
+            .get(PROJECTS_URL)
+            .pipe(map(this.mapProjects), catchError(this.handleError), share());
 
-        this.observe
-            .subscribe(projects => this.projects = projects);
+        this.observe.subscribe((projects) => (this.projects = projects));
 
-        this.changeObserve =
-            Observable.create( (observer: Observer<Space[]>) => {
+        this.changeObserve = Observable.create(
+            (observer: Observer<Space[]>) => {
                 this.changeObserver = observer;
-            }).pipe(
-                share()
-            );
+            }
+        ).pipe(share());
     }
 
-
     public projectForPublication(spaceId: any) {
-        return this._restClient.get(PROJECTS_URL + spaceId + '/get_project').pipe(
-            map(response => new Space(response))
-        );
+        return this._restClient
+            .get(PROJECTS_URL + spaceId + "/get_project")
+            .pipe(map((response) => new Space(response)));
     }
 
     public getSpacePermissions(spaceId: any) {
-        return this._restClient.get(PROJECTS_URL + "permissions/" + spaceId).pipe(
-            map(permissions => new RolePermissions(permissions))
-        );
+        return this._restClient
+            .get(PROJECTS_URL + "permissions/" + spaceId)
+            .pipe(map((permissions) => new RolePermissions(permissions)));
     }
 }

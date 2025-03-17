@@ -20,6 +20,7 @@ import { MatMenuModule } from "@angular/material/menu";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { MatSelectModule } from "@angular/material/select";
 import { MatSlideToggleModule } from "@angular/material/slide-toggle";
+import { MatFormFieldModule } from "@angular/material/form-field";
 
 // ✅ Import Guards
 import { AuthGuard, OnlyNoAuthGuard, CanDeactivateGuard } from "./guard";
@@ -65,6 +66,7 @@ const MATERIAL_MODULES = [
     MatCheckboxModule,
     MatRadioModule,
     MatInputModule,
+    MatFormFieldModule,
     MatCardModule,
     MatButtonModule,
     MatToolbarModule,
