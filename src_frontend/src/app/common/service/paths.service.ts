@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
-import { Observable } from "rxjs/Observable";
+import { Observable } from "rxjs";
 import { Observer } from "rxjs";
 import { share, map } from "rxjs/operators";
 

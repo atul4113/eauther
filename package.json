@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "ngx-moment": "^6.0.2"
+  }
+}

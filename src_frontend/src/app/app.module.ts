@@ -51,7 +51,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     bootstrap: [AppComponent],
     providers: [
         AUTH_PROVIDERS,
-
         RestClientService,
         AuthUserService,
         InfoMessageService,

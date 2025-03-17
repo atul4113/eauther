@@ -1,11 +1,10 @@
 import { Injectable } from "@angular/core";
-import { Observable, Observer } from "rxjs";
+import { Observable, Observer, of } from "rxjs";
 import { AuthUser, IAuthUserRaw } from "../model/auth-user";
 import { RestClientService } from "./rest-client.service";
-import { map, share, catchError } from 'rxjs/operators';
-import "rxjs/add/observable/of";
+import { map, share, catchError } from "rxjs/operators";
 
-const USER_URL: string = '/user/';
+const USER_URL: string = "/user/";
 
 @Injectable()
 export class AuthUserService {
@@ -14,51 +13,43 @@ export class AuthUserService {
     private changeObserve: Observable<AuthUser>;
     private changeObserver: Observer<AuthUser>;
 
-    constructor (private _restClient: RestClientService) {
+    constructor(private _restClient: RestClientService) {
         this.load();
     }
 
-    private mapAuthUser (response: any) {
-        return new AuthUser(<IAuthUserRaw> response);
+    private mapAuthUser(response: any) {
+        return new AuthUser(<IAuthUserRaw>response);
     }
 
-    private handleError (error: string): Observable<AuthUser> {
-        return Observable.of(new AuthUser());
+    private handleError(error: string): Observable<AuthUser> {
+        return of(new AuthUser());
     }
 
-
-    public get (): Observable<AuthUser> {
+    public get(): Observable<AuthUser> {
         if (this.user) {
-            return Observable.of(this.user);
-        } else if (this.observe){
+            return of(this.user);
+        } else if (this.observe) {
             return this.observe;
         } else {
             return null;
         }
     }
 
-    public onChange (): Observable<AuthUser> {
+    public onChange(): Observable<AuthUser> {
         return this.changeObserve;
     }
 
-    private load () {
-        this.observe =
-            this._restClient
-                .get(USER_URL)
-                .pipe(
-                    map(this.mapAuthUser),
-                    catchError(this.handleError),
-                    share()
-                );
+    private load() {
+        this.observe = this._restClient
+            .get(USER_URL)
+            .pipe(map(this.mapAuthUser), catchError(this.handleError), share());
 
-        this.observe
-            .subscribe(user => this.user = user);
+        this.observe.subscribe((user) => (this.user = user));
 
-        this.changeObserve =
-            Observable.create( (observer: Observer<AuthUser>) => {
+        this.changeObserve = Observable.create(
+            (observer: Observer<AuthUser>) => {
                 this.changeObserver = observer;
-            }).pipe(
-                share()
-            );
+            }
+        ).pipe(share());
     }
 }

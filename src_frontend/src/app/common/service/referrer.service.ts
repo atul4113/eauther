@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
+import { Observable, of } from "rxjs";
 import { map, share } from "rxjs/operators";
 
 import { Settings } from "../model";
@@ -79,7 +79,7 @@ export class ReferrerService {
         currentLanguage: SupportedLanguage = null
     ): Observable<string> {
         if (this.referrerUrl) {
-            return Observable.of(this.referrerUrl);
+            return of(this.referrerUrl);
         } else if (this.observe) {
             return this.observe;
         } else {
