@@ -7,7 +7,7 @@ import { MatMenuItem } from "@angular/material/menu";
 export class MatMenuItemDisableHoverDirective implements OnInit {
     constructor(private _element: MatMenuItem) {}
 
-    @HostListener("click", ["$event"]) onClick($event) {
+    @HostListener("click", ["$event"]) onClick($event:any) {
         if (!this._element.disabled) {
             this._element._highlighted = false;
             this._element._hovered.next(this._element);

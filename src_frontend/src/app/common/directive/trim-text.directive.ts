@@ -7,7 +7,7 @@ declare let window: any;
     selector: '[trim-text]'
 })
 export class TrimText implements AfterViewInit, OnDestroy, OnChanges {
-    @Input('trim-text') params: {text: string, height: number};
+    @Input('trim-text') params: any;
 
     @Input('trim-separator') separator: string = ' ';
 

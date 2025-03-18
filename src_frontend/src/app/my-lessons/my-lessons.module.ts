@@ -56,7 +56,7 @@ import { PlayerComponent } from "./component/lesson-player/lesson-player.compone
         MatCardModule,
         MatDividerModule,
         MatButtonModule,
-        AppCommonModule,
+        // AppCommonModule,
         RouterModule.forChild(MyLessonsRoutes),
     ],
     declarations: [
@@ -91,12 +91,15 @@ import { PlayerComponent } from "./component/lesson-player/lesson-player.compone
     schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
 })
 export class MyLessonsModule {
-    public assetsUrl = window["mAuthorAssetsUrl"];
+    public assetsUrl: string;
 
     constructor(
         private _matIconRegistry: MatIconRegistry,
         private _domSanitizer: DomSanitizer
     ) {
+
+        this.assetsUrl = (window as any)["mAuthorAssetsUrl"] || '';
+
         this._matIconRegistry.addSvgIcon(
             "manage_courses",
             this._domSanitizer.bypassSecurityTrustResourceUrl(
@@ -129,3 +132,4 @@ export class MyLessonsModule {
         );
     }
 }
+

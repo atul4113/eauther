@@ -20,7 +20,7 @@ export class PutFooterBottom implements AfterViewInit, OnDestroy {
     private footer: any;
     private windowListenResizeFunc: any;
 
-    constructor(el: ElementRef, private _renderer: Renderer2) {
+    constructor(el: ElementRef, private _renderer: Renderer2) {   
         this.native = el.nativeElement;
     }
 

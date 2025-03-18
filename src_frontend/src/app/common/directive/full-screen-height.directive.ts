@@ -10,7 +10,7 @@ export class FullScreenHeightDirective implements AfterViewInit, OnDestroy {
 
     private native: any;
     private interval: any;
-    private resizeCallback: () => void;
+    private resizeCallback: any;
 
     constructor (
         el: ElementRef,
