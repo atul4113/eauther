@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslationsService } from '../../../common/service';
-import { ITranslations } from '../../../common/model';
 
 @Component({
     selector: 'app-quick-tour',
     templateUrl: './quick-tour.component.html'
 })
 export class QuickTourComponent implements OnInit {
-    public translations: ITranslations;
+    public translations: any;
 
     constructor(
         private _translations: TranslationsService

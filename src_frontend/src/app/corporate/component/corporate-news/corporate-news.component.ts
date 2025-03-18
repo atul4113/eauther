@@ -1,6 +1,4 @@
 import { Component, Input } from '@angular/core';
-
-import { News, ITranslations } from "../../../common/model";
 import { TranslationsService} from "../../../common/service";
 
 
@@ -9,10 +7,10 @@ import { TranslationsService} from "../../../common/service";
     templateUrl: './corporate-news.component.html'
 })
 export class CorporateNewsComponent {
-    @Input() assetsUrl: string;
-    @Input() news: News[];
+    @Input() assetsUrl: any;
+    @Input() news: any;
 
-    public translations: ITranslations;
+    public translations: any;
 
      constructor (
          private _translations: TranslationsService

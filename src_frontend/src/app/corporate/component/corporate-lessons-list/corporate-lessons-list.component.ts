@@ -11,10 +11,10 @@ import { TranslationsService} from "../../../common/service";
     templateUrl: './corporate-lessons-list.component.html'
 })
 export class CorporateLessonsListComponent {
-    @Input() lessons: Lesson[];
-    @Input() editLessonToken: EditToken;
+    @Input() lessons: any;
+    @Input() editLessonToken: any;
 
-    public translations: ITranslations;
+    public translations: any;
 
      constructor (
         private _translations: TranslationsService

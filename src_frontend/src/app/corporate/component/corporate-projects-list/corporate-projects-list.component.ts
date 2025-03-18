@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { Space, ITranslations } from "../../../common/model";
+import { Space } from "../../../common/model";
 import {ProjectsService, TranslationsService} from "../../../common/service";
 
 
@@ -9,9 +9,9 @@ import {ProjectsService, TranslationsService} from "../../../common/service";
     templateUrl: './corporate-projects-list.component.html'
 })
 export class CorporateProjectsListComponent {
-    @Input() projects: Space[];
+    @Input() projects: any;
 
-    public translations: ITranslations;
+    public translations: any;
 
     constructor (
         private _translations: TranslationsService,

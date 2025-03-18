@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
-import { Observable } from "rxjs";
-import "rxjs/add/observable/forkJoin";
 
+import "rxjs/add/observable/forkJoin";
+import { forkJoin } from "rxjs";
 import { News, AuthUser, Space, ITranslations } from "../../../common/model";
 import { Lesson } from "../../../my-lessons/model/lesson";
 import { EditToken } from "../../../my-lessons/model/edit-token";
@@ -22,17 +22,17 @@ declare var window: any;
 })
 export class CorporateComponent implements OnInit {
     public error: boolean = false;
-    public projects: Space[];
-    public editLessonToken: EditToken;
+    public projects: any;
+    public editLessonToken: any;
     public areTilesHidden: boolean = false;
     public structure: any;
-    public user: AuthUser;
+    public user: any;
     public isInitialized = false;
-    public privateSpace: Space;
-    public editedLessons: Lesson[];
-    public allNews: News[];
+    public privateSpace: any;
+    public editedLessons: any;
+    public allNews: any;
     public assetsUrl: string = window.mAuthorAssetsUrl;
-    public translations: ITranslations;
+    public translations: any;
 
     constructor(
         private _user: AuthUserService,
@@ -54,7 +54,7 @@ export class CorporateComponent implements OnInit {
             this.isInitialized = true;
         });
 
-        Observable.forkJoin(
+       forkJoin(
             this._myContent.getRecentlyEditedLessons(),
             this._myContent.getEditLessonToken()
         ).subscribe(([editedLessons, editLessonToken]) => {
@@ -68,7 +68,7 @@ export class CorporateComponent implements OnInit {
 
         this._projects.get().subscribe((projects) => {
             this.projects = projects;
-            this.projects.forEach((project) => {
+            this.projects.forEach((project:any) => {
                 project.publications = undefined;
             });
             this.projects.sort((a: Space, b: Space) =>
@@ -96,7 +96,7 @@ export class CorporateComponent implements OnInit {
         }
     }
 
-    public setTilesVisibility(value) {
+    public setTilesVisibility(value:any) {
         let dateYearPlus = new Date();
         dateYearPlus.setTime(dateYearPlus.getTime() + 365 * 24 * 3600 * 1000);
         this._cookie.put("shouldShowTiles" + this.user.id, value, {
