@@ -1,9 +1,5 @@
 import { Component, Input } from '@angular/core';
-
-import { Space, ITranslations } from "../../../common/model";
-import { EditToken } from "../../../my-lessons/model/edit-token";
 import { TranslationsService} from "../../../common/service";
-import { Lesson } from "../../../my-lessons/model/lesson";
 
 
 @Component({
@@ -11,11 +7,11 @@ import { Lesson } from "../../../my-lessons/model/lesson";
     templateUrl: './corporate-tiles.component.html'
 })
 export class CorporateTilesComponent {
-    @Input() privateSpace: Space;
-    @Input() lastEditedLesson: Lesson;
-    @Input() editLessonToken: EditToken;
+    @Input() privateSpace: any;
+    @Input() lastEditedLesson: any;
+    @Input() editLessonToken: any;
 
-    public translations: ITranslations;
+    public translations: any;
 
     constructor (
         private _translations: TranslationsService
