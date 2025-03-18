@@ -1,7 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { Observable } from "rxjs";
-import "rxjs/add/observable/forkJoin";
-
+import { forkJoin } from "rxjs";
 import { ITranslations } from "./common/model/translations";
 import {
     InfoMessageService,
@@ -15,7 +13,7 @@ import {
     templateUrl: "./app.component.html",
 })
 export class AppComponent implements OnInit {
-    public translations: ITranslations;
+    public translations: ITranslations = {} as ITranslations;
     private translationsReady = false;
 
     constructor(
@@ -31,12 +29,13 @@ export class AppComponent implements OnInit {
             .subscribe((t) => (this.translations = t));
         this._infoMessage.init();
 
-        Observable.forkJoin(
+        forkJoin([
             this._settings.get(),
             this._authUser.get()
-        ).subscribe(([settings, user]) => {
+        ]).subscribe(([settings, user]) => {
             this._translations.load(settings /*, user, this._profile*/);
         });
+        
 
         this._translations
             .getTranslations()
