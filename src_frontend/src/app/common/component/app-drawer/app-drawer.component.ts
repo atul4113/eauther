@@ -1,52 +1,51 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from "@angular/core";
 
 import { AuthUser, Space, ITranslations } from "../../model";
 import { TranslationsService } from "../../../common/service";
 
-declare var window: any;
+interface WindowWithMAuthor extends Window {
+    mAuthorAssetsUrl: string;
+}
+
+declare let window: WindowWithMAuthor;
 
 @Component({
-    selector: 'app-drawer',
-    templateUrl: './app-drawer.component.html',
+    selector: "app-drawer",
+    templateUrl: "./app-drawer.component.html",
 })
 export class AppDrawerComponent implements OnInit {
     @Input() isHeaderCompact: boolean = false;
-
-    @Input() user: AuthUser;
-    @Input() projects: Space[];
+    @Input() user!: AuthUser;
+    @Input() projects: Space[] = [];
 
     public isOpen: boolean = false;
     public assetsUrl: string = window.mAuthorAssetsUrl;
 
-    public text: string;
-    public translations: ITranslations;
-    public isFullSize = true;
+    public text: string = "";
+    public translations!: ITranslations;
+    public isFullSize: boolean = true;
 
-    constructor (
-        private _translations: TranslationsService
-    ) {}
+    constructor(private _translations: TranslationsService) {}
 
-    ngOnInit () {
-        this._translations.getTranslations().subscribe(t => this.translations = t);
+    ngOnInit(): void {
+        this._translations
+            .getTranslations()
+            .subscribe((t) => (this.translations = t));
     }
 
-    public close () {
+    public close(): void {
         this.isOpen = false;
     }
 
-    public open () {
+    public open(): void {
         this.isOpen = true;
     }
 
-    public onSearchSubmit() {
-        window.location.href = '/search/search?q=' + this.text;
+    public onSearchSubmit(): void {
+        window.location.href = "/search/search?q=" + this.text;
     }
 
-    public onResize($event) {
-        if(window.screen.width !== window.innerWidth){
-            this.isFullSize = false;
-        } else {
-           this.isFullSize = true;
-        }
+    public onResize(event: Event): void {
+        this.isFullSize = window.screen.width === window.innerWidth;
     }
 }

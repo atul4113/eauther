@@ -1,21 +1,31 @@
-import { Directive, AfterContentInit, ElementRef, Input, AfterViewChecked } from '@angular/core';
+import {
+    Directive,
+    AfterContentInit,
+    ElementRef,
+    Input,
+    AfterViewChecked,
+} from "@angular/core";
 
-declare var componentHandler: any;
+interface ComponentHandler {
+    upgradeAllRegistered(): void;
+}
+
+declare const componentHandler: ComponentHandler;
 
 @Directive({
-    selector: '[mdlup]'
+    selector: "[mdlup]",
 })
 export class MDLUP implements AfterViewChecked {
-    constructor (private _element: ElementRef) { }
+    constructor(private readonly _element: ElementRef<HTMLElement>) {}
 
-    @Input('mdlup') last: any;
-    @Input('mdlup-always') always = false;
+    @Input("mdlup") last: boolean = false;
+    @Input("mdlup-always") always: boolean = false;
 
     /* FIXME
      * hard work-around, checks if it is last element
      */
 
-    ngAfterViewChecked() {
+    ngAfterViewChecked(): void {
         if (this.last) {
             componentHandler.upgradeAllRegistered();
             if (!this.always) {

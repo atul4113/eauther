@@ -1,4 +1,3 @@
-
 export interface ILanguageRaw {
     id: number;
     lang_key: string;
@@ -8,10 +7,10 @@ export interface ILanguageRaw {
 }
 
 export class Language {
-    id: number;
-    key: string;          // en_EN, pl_PL
-    description: string;  // english, polish
-    isDefault: boolean;
+    public id: number = 0;
+    public key: string = ""; // en_EN, pl_PL
+    public description: string = ""; // english, polish
+    public isDefault: boolean = false;
 
     constructor(lang: ILanguageRaw) {
         if (lang) {
@@ -22,18 +21,18 @@ export class Language {
         }
     }
 
-    get isReal() { return this.id !== Language.FAKE_ID; }
+    public get isReal(): boolean {
+        return this.id !== Language.FAKE_ID;
+    }
 
-    static readonly FAKE_ID: number = -1;
+    public static readonly FAKE_ID: number = -1;
 }
 
 // used in browse labels view, to allow filtering by all languages
-export const ALL_LANGUAGE : Language = new Language(
-    {
-        id: Language.FAKE_ID,
-        lang_key: "all",
-        lang_description: "all languages",
-        created_date: "",
-        modified_date: ""
-    }
-);
+export const ALL_LANGUAGE: Language = new Language({
+    id: Language.FAKE_ID,
+    lang_key: "all",
+    lang_description: "all languages",
+    created_date: "",
+    modified_date: "",
+});

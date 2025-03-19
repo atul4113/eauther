@@ -10,9 +10,9 @@
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
         "importHelpers": true,
-        "target": "es2020",
+        "target": "es2022", // Updated to latest ECMAScript version
         "typeRoots": ["node_modules/@types"],
-        "lib": ["es2020", "dom"],
+        "lib": ["es2022", "dom"], // Updated to latest ECMAScript version
         "strict": true,
         "noImplicitReturns": true,
         "noFallthroughCasesInSwitch": true,
@@ -20,7 +20,7 @@
         "esModuleInterop": true,
         "allowSyntheticDefaultImports": true,
         "forceConsistentCasingInFileNames": true,
-        "useDefineForClassFields": false
+        "useDefineForClassFields": true // Set to true for better compatibility
     },
     "angularCompilerOptions": {
         "enableI18nLegacyMessageIdFormat": false,

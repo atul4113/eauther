@@ -1,27 +1,42 @@
 export const INFO_MESSAGE_TYPE = {
-    ERROR: 'error',
-    INFO: 'info',
-    WARNING: 'warning',
-    SUCCESS: 'success'
-};
+    ERROR: "error",
+    INFO: "info",
+    WARNING: "warning",
+    SUCCESS: "success",
+} as const;
+
+type InfoMessageType =
+    (typeof INFO_MESSAGE_TYPE)[keyof typeof INFO_MESSAGE_TYPE];
 
 export class InfoMessage {
-    constructor (
-        private type: string,
-        public content: string,
-        private closeable = true,
-        private autoClose = true
+    constructor(
+        private readonly type: InfoMessageType,
+        public readonly content: string,
+        private readonly closeable: boolean = true,
+        private readonly autoClose: boolean = true
     ) {}
 
-    public isError = () => this.type === INFO_MESSAGE_TYPE.ERROR;
+    public isError(): boolean {
+        return this.type === INFO_MESSAGE_TYPE.ERROR;
+    }
 
-    public isInfo = () => this.type === INFO_MESSAGE_TYPE.INFO;
+    public isInfo(): boolean {
+        return this.type === INFO_MESSAGE_TYPE.INFO;
+    }
 
-    public isWarning = () => this.type === INFO_MESSAGE_TYPE.WARNING;
+    public isWarning(): boolean {
+        return this.type === INFO_MESSAGE_TYPE.WARNING;
+    }
 
-    public isSuccess = () => this.type === INFO_MESSAGE_TYPE.SUCCESS;
+    public isSuccess(): boolean {
+        return this.type === INFO_MESSAGE_TYPE.SUCCESS;
+    }
 
-    public isCloseable = () => this.closeable;
+    public isCloseable(): boolean {
+        return this.closeable;
+    }
 
-    public isAutoClose = () => this.autoClose;
+    public isAutoClose(): boolean {
+        return this.autoClose;
+    }
 }

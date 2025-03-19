@@ -22,7 +22,7 @@ const PERMISSIONS = {
     spaceCreateRestoreProjectsBackup: 18,
     companyUploadCompanyLogo: 19,
     companyViewCompanyDetails: 20,
-    companyEditCOmpanyDetails: 21,
+    companyEditCompanyDetails: 21,
     companyViewCompanyAdministrationPanel: 22,
     bugtruckReportNewBugsInBugtruck: 23,
     narrationExportAudioVideoNarrations: 24,
@@ -36,8 +36,11 @@ const PERMISSIONS = {
     courseManageCourses: 32,
     spaceBulkTemplateUpdate: 33,
     spaceBulkAssetsUpdate: 34,
-    bugtruckViewBugs: 35
-};
+    bugtruckViewBugs: 35,
+} as const;
+
+type PermissionKey = keyof typeof PERMISSIONS;
+type PermissionValue = (typeof PERMISSIONS)[PermissionKey];
 
 export class RolePermissions {
     public assetsBrowseAssets: boolean = false;
@@ -66,7 +69,8 @@ export class RolePermissions {
     public narrationExportAudioVideoNarrations: boolean = false;
     public localizationCreateLessonsForLocalization: boolean = false;
     public localizationLocalizeLessonsPreparedForLocalization: boolean = false;
-    public localizationResetLocalizationLessonsToOriginalCurrentLesson: boolean = false;
+    public localizationResetLocalizationLessonsToOriginalCurrentLesson: boolean =
+        false;
     public localizationExportXLIFF: boolean = false;
     public localizationImportXLIFF: boolean = false;
     public statesManageAvailableStateSets: boolean = false;
@@ -76,44 +80,116 @@ export class RolePermissions {
     public spaceBulkAssetsUpdate: boolean = false;
     public bugtruckViewBugs: boolean = false;
 
-
-    constructor (permissions?: number[]) {
+    constructor(permissions?: PermissionValue[]) {
         if (permissions) {
-            this.assetsBrowseAssets = permissions.includes(PERMISSIONS.assetsBrowseAssets);
-            this.assetsUploadEditAssets = permissions.includes(PERMISSIONS.assetsUploadEditAssets);
-            this.assetsRemoveAssets = permissions.includes(PERMISSIONS.assetsRemoveAssets);
-            this.contentViewLessonsAddons = permissions.includes(PERMISSIONS.contentViewLessonsAddons);
-            this.contentRemoveLessonsAddons = permissions.includes(PERMISSIONS.contentRemoveLessonsAddons);
-            this.contentEditMetadataOfLessonsAddons = permissions.includes(PERMISSIONS.contentEditMetadataOfLessonsAddons);
-            this.contentPublishLessons = permissions.includes(PERMISSIONS.contentPublishLessons);
-            this.contentCopyLessons = permissions.includes(PERMISSIONS.contentCopyLessons);
-            this.contentCreateEditLessonsAddons = permissions.includes(PERMISSIONS.contentCreateEditLessonsAddons);
-            this.contentUploadLessonsAddonsIcon = permissions.includes(PERMISSIONS.contentUploadLessonsAddonsIcon);
-            this.contentShowLessonsHistory = permissions.includes(PERMISSIONS.contentShowLessonsHistory);
-            this.contentSetLessonsCurrentVersion = permissions.includes(PERMISSIONS.contentSetLessonsCurrentVersion);
-            this.contentExportLessons = permissions.includes(PERMISSIONS.contentExportLessons);
-            this.contentImportLessons = permissions.includes(PERMISSIONS.contentImportLessons);
-            this.spaceManageAccessToProjectsPublications = permissions.includes(PERMISSIONS.spaceManageAccessToProjectsPublications);
-            this.spaceCreateEditProjectsPublications = permissions.includes(PERMISSIONS.spaceCreateEditProjectsPublications);
-            this.spaceRemoveProjectsPublications = permissions.includes(PERMISSIONS.spaceRemoveProjectsPublications);
-            this.spaceCreateRestoreProjectsBackup = permissions.includes(PERMISSIONS.spaceCreateRestoreProjectsBackup);
-            this.companyUploadCompanyLogo = permissions.includes(PERMISSIONS.companyUploadCompanyLogo);
-            this.companyViewCompanyDetails = permissions.includes(PERMISSIONS.companyViewCompanyDetails);
-            this.companyEditCompanyDetails = permissions.includes(PERMISSIONS.companyViewCompanyDetails);
-            this.companyViewCompanyAdministrationPanel = permissions.includes(PERMISSIONS.companyViewCompanyAdministrationPanel);
-            this.bugtruckReportNewBugsInBugtruck = permissions.includes(PERMISSIONS.bugtruckReportNewBugsInBugtruck);
-            this.narrationExportAudioVideoNarrations = permissions.includes(PERMISSIONS.narrationExportAudioVideoNarrations);
-            this.localizationCreateLessonsForLocalization = permissions.includes(PERMISSIONS.localizationCreateLessonsForLocalization);
-            this.localizationLocalizeLessonsPreparedForLocalization = permissions.includes(PERMISSIONS.localizationLocalizeLessonsPreparedForLocalization);
-            this.localizationResetLocalizationLessonsToOriginalCurrentLesson = permissions.includes(PERMISSIONS.localizationResetLocalizationLessonsToOriginalCurrentLesson);
-            this.localizationExportXLIFF = permissions.includes(PERMISSIONS.localizationExportXLIFF);
-            this.localizationImportXLIFF = permissions.includes(PERMISSIONS.localizationImportXLIFF);
-            this.statesManageAvailableStateSets = permissions.includes(PERMISSIONS.statesManageAvailableStateSets);
-            this.statesSelectStateSetForPublication = permissions.includes(PERMISSIONS.statesSelectStateSetForPublication);
-            this.courseManageCourses = permissions.includes(PERMISSIONS.courseManageCourses);
-            this.spaceBulkTemplateUpdate = permissions.includes(PERMISSIONS.spaceBulkTemplateUpdate);
-            this.spaceBulkAssetsUpdate = permissions.includes(PERMISSIONS.spaceBulkAssetsUpdate);
-            this.bugtruckViewBugs = permissions.includes(PERMISSIONS.bugtruckViewBugs);
+            this.assetsBrowseAssets = permissions.includes(
+                PERMISSIONS.assetsBrowseAssets
+            );
+            this.assetsUploadEditAssets = permissions.includes(
+                PERMISSIONS.assetsUploadEditAssets
+            );
+            this.assetsRemoveAssets = permissions.includes(
+                PERMISSIONS.assetsRemoveAssets
+            );
+            this.contentViewLessonsAddons = permissions.includes(
+                PERMISSIONS.contentViewLessonsAddons
+            );
+            this.contentRemoveLessonsAddons = permissions.includes(
+                PERMISSIONS.contentRemoveLessonsAddons
+            );
+            this.contentEditMetadataOfLessonsAddons = permissions.includes(
+                PERMISSIONS.contentEditMetadataOfLessonsAddons
+            );
+            this.contentPublishLessons = permissions.includes(
+                PERMISSIONS.contentPublishLessons
+            );
+            this.contentCopyLessons = permissions.includes(
+                PERMISSIONS.contentCopyLessons
+            );
+            this.contentCreateEditLessonsAddons = permissions.includes(
+                PERMISSIONS.contentCreateEditLessonsAddons
+            );
+            this.contentUploadLessonsAddonsIcon = permissions.includes(
+                PERMISSIONS.contentUploadLessonsAddonsIcon
+            );
+            this.contentShowLessonsHistory = permissions.includes(
+                PERMISSIONS.contentShowLessonsHistory
+            );
+            this.contentSetLessonsCurrentVersion = permissions.includes(
+                PERMISSIONS.contentSetLessonsCurrentVersion
+            );
+            this.contentExportLessons = permissions.includes(
+                PERMISSIONS.contentExportLessons
+            );
+            this.contentImportLessons = permissions.includes(
+                PERMISSIONS.contentImportLessons
+            );
+            this.spaceManageAccessToProjectsPublications = permissions.includes(
+                PERMISSIONS.spaceManageAccessToProjectsPublications
+            );
+            this.spaceCreateEditProjectsPublications = permissions.includes(
+                PERMISSIONS.spaceCreateEditProjectsPublications
+            );
+            this.spaceRemoveProjectsPublications = permissions.includes(
+                PERMISSIONS.spaceRemoveProjectsPublications
+            );
+            this.spaceCreateRestoreProjectsBackup = permissions.includes(
+                PERMISSIONS.spaceCreateRestoreProjectsBackup
+            );
+            this.companyUploadCompanyLogo = permissions.includes(
+                PERMISSIONS.companyUploadCompanyLogo
+            );
+            this.companyViewCompanyDetails = permissions.includes(
+                PERMISSIONS.companyViewCompanyDetails
+            );
+            this.companyEditCompanyDetails = permissions.includes(
+                PERMISSIONS.companyEditCompanyDetails
+            );
+            this.companyViewCompanyAdministrationPanel = permissions.includes(
+                PERMISSIONS.companyViewCompanyAdministrationPanel
+            );
+            this.bugtruckReportNewBugsInBugtruck = permissions.includes(
+                PERMISSIONS.bugtruckReportNewBugsInBugtruck
+            );
+            this.narrationExportAudioVideoNarrations = permissions.includes(
+                PERMISSIONS.narrationExportAudioVideoNarrations
+            );
+            this.localizationCreateLessonsForLocalization =
+                permissions.includes(
+                    PERMISSIONS.localizationCreateLessonsForLocalization
+                );
+            this.localizationLocalizeLessonsPreparedForLocalization =
+                permissions.includes(
+                    PERMISSIONS.localizationLocalizeLessonsPreparedForLocalization
+                );
+            this.localizationResetLocalizationLessonsToOriginalCurrentLesson =
+                permissions.includes(
+                    PERMISSIONS.localizationResetLocalizationLessonsToOriginalCurrentLesson
+                );
+            this.localizationExportXLIFF = permissions.includes(
+                PERMISSIONS.localizationExportXLIFF
+            );
+            this.localizationImportXLIFF = permissions.includes(
+                PERMISSIONS.localizationImportXLIFF
+            );
+            this.statesManageAvailableStateSets = permissions.includes(
+                PERMISSIONS.statesManageAvailableStateSets
+            );
+            this.statesSelectStateSetForPublication = permissions.includes(
+                PERMISSIONS.statesSelectStateSetForPublication
+            );
+            this.courseManageCourses = permissions.includes(
+                PERMISSIONS.courseManageCourses
+            );
+            this.spaceBulkTemplateUpdate = permissions.includes(
+                PERMISSIONS.spaceBulkTemplateUpdate
+            );
+            this.spaceBulkAssetsUpdate = permissions.includes(
+                PERMISSIONS.spaceBulkAssetsUpdate
+            );
+            this.bugtruckViewBugs = permissions.includes(
+                PERMISSIONS.bugtruckViewBugs
+            );
         }
     }
 }
@@ -134,7 +210,7 @@ export class UserPermissions {
     public isStaff: boolean = false;
     public isAnyDivisionAdmin: boolean = false;
 
-    constructor (user?: IAuthUserRaw) {
+    constructor(user?: IAuthUserRaw) {
         if (user) {
             this.isSuperUser = user.is_superuser;
             this.isStaff = user.is_staff;
@@ -146,13 +222,13 @@ export class UserPermissions {
 export class AuthUser extends User {
     public isAuthenticated: boolean = false;
     public permissions: UserPermissions;
-    public languageCode: string;
-    public company: Space;
-    public privateSpace: Space;
+    public languageCode: string = "";
+    public company: Space | null = null;
+    public privateSpace: Space | null = null;
     // public publicCategory: Space;
     // public divisions: Space[];
 
-    constructor (user?: IAuthUserRaw) {
+    constructor(user?: IAuthUserRaw) {
         super(user);
         this.permissions = new UserPermissions(user);
 
@@ -172,9 +248,8 @@ export class AuthUser extends User {
             //     this.publicCategory = new Space(user.public_category);
             // }
             // if (user.divisions) {
-            //     this.divisions = user.divisions.map( (division: ISpaceRaw) => new Space(division));
+            //     this.divisions = user.divisions.map((division: ISpaceRaw) => new Space(division));
             // }
         }
     }
-
 }
