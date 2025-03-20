@@ -4,15 +4,13 @@ import { map } from "rxjs/operators";
 
 import { RestClientService } from "./rest-client.service";
 
-const LOGO_URL: string = "/user/logo";
+const LOGO_URL = "/user/logo";
 
 @Injectable()
 export class LogoService {
-    constructor(private _restClient: RestClientService) {}
+    constructor(private readonly _restClient: RestClientService) {}
 
     public get(): Observable<number> {
-        return this._restClient.get(LOGO_URL).pipe((logo) => {
-            return logo;
-        });
+        return this._restClient.get<number>(LOGO_URL).pipe(map((logo) => logo));
     }
 }

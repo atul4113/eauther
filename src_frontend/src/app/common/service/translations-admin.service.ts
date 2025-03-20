@@ -8,22 +8,44 @@ import { ITranslations } from "../model/translations";
 import { Conflict, IConflict } from "../../admin/model/conflict";
 import { RestClientService } from "./rest-client.service";
 
-const LANGUAGES_URL: string = "/translations/languages";
-const LABELS_LIST_URL: string = "/translations";
-const LABELS_IMPORT_URL: string = "/translations/import";
-const LABELS_URL: string = "/translations/label";
-const CONFLICTS_URL: string = "/translations/import/resolve_conflicts";
+const LANGUAGES_URL = "/translations/languages";
+const LABELS_LIST_URL = "/translations";
+const LABELS_IMPORT_URL = "/translations/import";
+const LABELS_URL = "/translations/label";
+const CONFLICTS_URL = "/translations/import/resolve_conflicts";
+
+interface ILabelParams {
+    create_notification: boolean;
+    name: string;
+    value: string;
+}
+
+interface IImportLabelsParams {
+    lang: number;
+    create_notification: boolean;
+    pasted_json: unknown;
+}
+
+interface IModifyLabelParams {
+    lang_key: string;
+    name: string;
+    value: string;
+}
+
+interface IResolveConflictsParams {
+    replace_conflict: unknown;
+}
 
 @Injectable()
 export class TranslationsAdminService {
-    constructor(private _restClient: RestClientService) {}
+    constructor(private readonly _restClient: RestClientService) {}
 
     public getLanguagesList(): Observable<Language[]> {
-        return this._restClient.get(LANGUAGES_URL).pipe(
-            map((response) => {
-                return response.map((lang) => new Language(lang));
-            })
-        );
+        return this._restClient
+            .get<ILanguageRaw[]>(LANGUAGES_URL)
+            .pipe(
+                map((response) => response.map((lang) => new Language(lang)))
+            );
     }
 
     /*
@@ -37,38 +59,39 @@ export class TranslationsAdminService {
      }
     */
     public addLanguage(lang: Language): Observable<ILanguageRaw> {
-        let params = {
+        const params = {
             lang_key: lang.key,
             lang_description: lang.description,
         };
-        return this._restClient.post(LANGUAGES_URL, params);
+        return this._restClient.post<ILanguageRaw>(LANGUAGES_URL, params);
     }
 
-    public deleteLanguage(lang: Language): Observable<any> {
-        return this._restClient.delete(LANGUAGES_URL + "/" + lang.id);
+    public deleteLanguage(lang: Language): Observable<void> {
+        return this._restClient.delete<void>(`${LANGUAGES_URL}/${lang.id}`);
     }
 
     public getLabels(lang: Language): Observable<ITranslations> {
-        return this._restClient.get(LABELS_LIST_URL + "/" + lang.id);
+        return this._restClient.get<ITranslations>(
+            `${LABELS_LIST_URL}/${lang.id}`
+        );
     }
 
     // returns empty object
     public addLabel(
         createNotification: boolean,
         label: Label
-    ): Observable<any> {
-        let params = {
+    ): Observable<void> {
+        const params: ILabelParams = {
             create_notification: createNotification,
             name: label.key,
             value: label.value,
         };
-        return this._restClient.post(LABELS_URL, params);
+        return this._restClient.post<void>(LABELS_URL, params);
     }
 
     public isLabelKeyValid(key: string): boolean {
-        let reg = RegExp(/^[\d\w.]+$/);
-        let res = reg.exec(key);
-        return res !== null;
+        const reg = /^[\d\w.]+$/;
+        return reg.test(key);
     }
 
     // for mass importing labels
@@ -76,44 +99,45 @@ export class TranslationsAdminService {
         lang: Language,
         createNotification: boolean,
         labels: string
-    ): Observable<any> {
-        let params = {
+    ): Observable<void> {
+        const params: IImportLabelsParams = {
             lang: lang.id,
             create_notification: createNotification,
             pasted_json: JSON.parse(labels),
         };
-        return this._restClient.post(LABELS_IMPORT_URL, params);
+        return this._restClient.post<void>(LABELS_IMPORT_URL, params);
     }
 
-    public removeLabel(label: Label): Observable<any> {
-        return this._restClient.delete(LABELS_URL + "/" + label.key);
+    public removeLabel(label: Label): Observable<void> {
+        return this._restClient.delete<void>(`${LABELS_URL}/${label.key}`);
     }
 
     public modifyLabel(
         lang: Language,
         label: Label,
         newValue: string
-    ): Observable<any> {
-        let params = {
+    ): Observable<void> {
+        const params: IModifyLabelParams = {
             lang_key: lang.key,
             name: label.key,
             value: newValue,
         };
 
-        return this._restClient.put(LABELS_URL, params);
+        return this._restClient.put<void>(LABELS_URL, params);
     }
 
-    public getConflicts(id: number): Observable<any> {
-        return this._restClient.get(CONFLICTS_URL + "/" + id);
+    public getConflicts(id: number): Observable<IConflict[]> {
+        return this._restClient.get<IConflict[]>(`${CONFLICTS_URL}/${id}`);
     }
 
-    public resolveConflicts(id: number, conflicts: any): Observable<any> {
-        let params = {
+    public resolveConflicts(id: number, conflicts: unknown): Observable<void> {
+        const params: IResolveConflictsParams = {
             replace_conflict: conflicts,
         };
 
-        return this._restClient.post(CONFLICTS_URL + "/" + id, params);
+        return this._restClient.post<void>(`${CONFLICTS_URL}/${id}`, params);
     }
 
-    public mapConflicts = (response: any) => new Conflict(<IConflict>response);
+    public mapConflicts = (response: IConflict): Conflict =>
+        new Conflict(response);
 }

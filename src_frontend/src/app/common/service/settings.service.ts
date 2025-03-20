@@ -4,37 +4,50 @@ import { Observable, of, map, share } from "rxjs";
 import { ISettingsRaw, Settings } from "../model";
 import { RestClientService } from "./rest-client.service";
 
-const SETTINGS_URL: string = "/settings";
+const SETTINGS_URL = "/settings";
+
+const DEFAULT_SETTINGS: ISettingsRaw = {
+    application_id: "",
+    email: "",
+    lang: "",
+    select_user_language: false,
+    referrers: {},
+    supported_languages: [],
+    version: "",
+};
 
 @Injectable()
 export class SettingsService {
-    private settings: Settings;
-    private settingsObservable: Observable<any>;
+    private settings: Settings | null = null;
+    private settingsObservable: Observable<Settings> | null = null;
 
-    constructor(private _restClient: RestClientService) {
+    constructor(private readonly _restClient: RestClientService) {
         this.load();
     }
 
-    private mapSettings = (response: any) =>
-        new Settings(<ISettingsRaw>response);
+    private mapSettings = (response: ISettingsRaw): Settings =>
+        new Settings(response);
 
-    private load() {
+    private load(): void {
         this.settingsObservable = this._restClient
-            .getPublic(SETTINGS_URL)
+            .getPublic<ISettingsRaw>(SETTINGS_URL)
             .pipe(map(this.mapSettings), share());
 
-        this.settingsObservable.subscribe(
-            (settings) => (this.settings = settings)
-        );
+        this.settingsObservable.subscribe({
+            next: (settings) => (this.settings = settings),
+        });
     }
 
     public get(): Observable<Settings> {
-        if (this.settings) {
+        if (this.settings !== null) {
             return of(this.settings);
-        } else if (this.settingsObservable) {
+        } else if (this.settingsObservable !== null) {
             return this.settingsObservable;
         } else {
-            return null;
+            this.load();
+            return (
+                this.settingsObservable || of(new Settings(DEFAULT_SETTINGS))
+            );
         }
     }
 }
