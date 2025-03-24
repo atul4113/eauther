@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 
 /*
  * Popup component
@@ -16,52 +16,52 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
  *
  */
 @Component({
-    selector: 'popup',
-    template:
-        `
-         <popup-base
-             [acceptLabel]="acceptLabel"
-             [rejectLabel]="rejectLabel"
-             [(isVisible)]="isVisible"
-             (accept)="onAccept($event)"
-             (reject)="onReject($event)">
-                 <span class="popup__title">{{ title }}</span>
-                 <span class="popup__content" [innerHTML]="content"></span>
-         </popup-base>
-        `
+    selector: "popup",
+    template: `
+        <popup-base
+            [acceptLabel]="acceptLabel"
+            [rejectLabel]="rejectLabel"
+            [(isVisible)]="isVisible"
+            (accept)="onAccept($event)"
+            (reject)="onReject($event)"
+        >
+            <span class="popup__title">{{ title }}</span>
+            <span class="popup__content" [innerHTML]="content"></span>
+        </popup-base>
+    `,
 })
 export class PopupComponent implements OnInit {
     @Input() isVisible: boolean = false;
-    @Input() title: string;
-    @Input() content: string;
-    @Input() acceptLabel: string;
-    @Input() rejectLabel: string;
+    @Input() title: string = "";
+    @Input() content: string = "";
+    @Input() acceptLabel: string = "";
+    @Input() rejectLabel: string = "";
 
-    @Output() accept = new EventEmitter<any>();
-    @Output() reject = new EventEmitter<any>();
+    @Output() accept = new EventEmitter<unknown>();
+    @Output() reject = new EventEmitter<unknown>();
     @Output() isVisibleChange = new EventEmitter<boolean>();
 
-    ngOnInit () {
+    ngOnInit(): void {
         if (!this.acceptLabel) {
-            this.acceptLabel = 'Ok';
+            this.acceptLabel = "Ok";
         }
 
         if (!this.rejectLabel) {
-            this.rejectLabel = 'Cancel';
+            this.rejectLabel = "Cancel";
         }
     }
 
-    public onAccept (event: any) {
+    public onAccept(event: unknown): void {
         this.accept.emit(event);
         this.hidePopup();
     }
 
-    public onReject (event: any) {
+    public onReject(event: unknown): void {
         this.reject.emit(event);
         this.hidePopup();
     }
 
-    private hidePopup () {
+    private hidePopup(): void {
         this.isVisible = false;
         this.isVisibleChange.emit(this.isVisible);
     }

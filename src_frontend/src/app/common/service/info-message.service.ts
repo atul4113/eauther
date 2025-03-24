@@ -1,80 +1,109 @@
-import { Injectable } from '@angular/core';
-import { Observable, Observer } from 'rxjs';
-import { share } from 'rxjs/operators';
+import { Injectable } from "@angular/core";
+import { Observable, Subject } from "rxjs";
+import { share, filter } from "rxjs/operators";
 
-import { InfoMessage, INFO_MESSAGE_TYPE } from '../model/info-message';
-
+import { InfoMessage, INFO_MESSAGE_TYPE } from "../model/info-message";
 
 @Injectable()
 export class InfoMessageService {
     private messages: InfoMessage[] = [];
-    private observer: Observer<InfoMessage>;
-    private observable: Observable<InfoMessage>;
-    private errorObserver: Observer<number>;
-    private errorObservable: Observable<number>;
+    private readonly messageSubject = new Subject<InfoMessage | null>();
+    private readonly errorSubject = new Subject<number>();
+    private readonly message$: Observable<InfoMessage>;
+    private readonly error$: Observable<number>;
 
-    constructor () {
-        this.observable = Observable.create((observer: Observer<InfoMessage>) => {
-            this.observer = observer;
-        }).pipe(
+    constructor() {
+        this.message$ = this.messageSubject.asObservable().pipe(
+            filter((message): message is InfoMessage => message !== null),
             share()
         );
+        this.error$ = this.errorSubject.asObservable().pipe(share());
 
-        this.errorObservable = Observable.create((observer: Observer<number>) => {
-            this.errorObserver = observer;
-        }).pipe(
-            share()
+        // Subscribe to keep the observables hot
+        this.message$.subscribe();
+        this.error$.subscribe();
+    }
+
+    public init(): void {} // method for forcing service initialization
+
+    public addSuccess(
+        message: string,
+        closeable = true,
+        autoClose = true
+    ): void {
+        this.addMessage(
+            new InfoMessage(
+                INFO_MESSAGE_TYPE.SUCCESS,
+                message,
+                closeable,
+                autoClose
+            )
         );
-
-        this.observable.subscribe();
-        this.errorObservable.subscribe();
     }
 
-    public init () {} // method for forcing service initialization
-
-    public addSuccess (message: string, closeable = true, autoClose = true) {
-        this.addMessage(new InfoMessage(INFO_MESSAGE_TYPE.SUCCESS, message, closeable, autoClose));
+    public addError(message: string, closeable = true, autoClose = true): void {
+        this.addMessage(
+            new InfoMessage(
+                INFO_MESSAGE_TYPE.ERROR,
+                message,
+                closeable,
+                autoClose
+            )
+        );
     }
 
-    public addError (message: string, closeable = true, autoClose = true) {
-        this.addMessage(new InfoMessage(INFO_MESSAGE_TYPE.ERROR, message, closeable, autoClose));
+    public addWarning(
+        message: string,
+        closeable = true,
+        autoClose = true
+    ): void {
+        this.addMessage(
+            new InfoMessage(
+                INFO_MESSAGE_TYPE.WARNING,
+                message,
+                closeable,
+                autoClose
+            )
+        );
     }
 
-    public addWarning (message: string, closeable = true, autoClose = true) {
-        this.addMessage(new InfoMessage(INFO_MESSAGE_TYPE.WARNING, message, closeable, autoClose));
+    public addInfo(message: string, closeable = true, autoClose = true): void {
+        this.addMessage(
+            new InfoMessage(
+                INFO_MESSAGE_TYPE.INFO,
+                message,
+                closeable,
+                autoClose
+            )
+        );
     }
 
-    public addInfo (message: string, closeable = true, autoClose = true) {
-        this.addMessage(new InfoMessage(INFO_MESSAGE_TYPE.INFO, message, closeable, autoClose));
+    public clear(): void {
+        this.messageSubject.next(null);
     }
 
-    public clear () {
-        this.observer.next(null);
+    public error500(): void {
+        this.errorSubject.next(500);
     }
 
-    public error500 () {
-        this.errorObserver.next(500);
+    public error404(): void {
+        this.errorSubject.next(404);
     }
 
-    public error404 () {
-        this.errorObserver.next(404);
+    public errors(): Observable<number> {
+        return this.error$;
     }
 
-    public errors (): Observable<number> {
-        return this.errorObservable;
+    public get(): Observable<InfoMessage> {
+        return this.message$;
     }
 
-    public get (): Observable<InfoMessage> {
-        return this.observable;
-    }
-
-    public getAll (): InfoMessage[] {
+    public getAll(): InfoMessage[] {
         return this.messages;
     }
 
-    private addMessage (message: InfoMessage) {
+    private addMessage(message: InfoMessage): void {
         this.messages.push(message);
-
-        this.observer.next(message);
+        this.messageSubject.next(message);
     }
 }

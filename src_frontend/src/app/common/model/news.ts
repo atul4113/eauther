@@ -6,12 +6,12 @@ export interface INewsRaw {
 }
 
 export class News {
-    published: string;
-    link: string;
-    summary: string;
-    title: string;
+    public published: string = "";
+    public link: string = "";
+    public summary: string = "";
+    public title: string = "";
 
-    constructor (news?: INewsRaw) {
+    constructor(news?: INewsRaw) {
         if (news) {
             this.published = news.published;
             this.link = news.link;

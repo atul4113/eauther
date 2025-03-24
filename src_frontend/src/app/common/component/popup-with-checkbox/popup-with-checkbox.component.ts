@@ -2,65 +2,70 @@ import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { RadioOption } from "../../model/radio-option";
 import { CheckboxOption } from "../../model/checkbox-option";
 
+type Direction = "horizontal" | "vertical";
 
 @Component({
-    selector: 'popup-with-checkbox',
-    template:
-        `
-         <popup-base
-             [acceptLabel]="acceptLabel"
-             [rejectLabel]="rejectLabel"
-             [(isVisible)]="isVisible"
-             (accept)="onAccept($event)"
-             (reject)="onReject($event)">
-                 <span class="popup__title">{{ title }}</span>
-                 <span class="popup__content">
-                    <p class="check-container">
-                        <mat-checkbox *ngFor="let check of checkOptions" [(ngModel)]="check.value">{{ check.displayName }}</mat-checkbox>
-                    </p>
-                 </span>
-         </popup-base>
-        `
+    selector: "popup-with-checkbox",
+    template: `
+        <popup-base
+            [acceptLabel]="acceptLabel"
+            [rejectLabel]="rejectLabel"
+            [(isVisible)]="isVisible"
+            (accept)="onAccept($event)"
+            (reject)="onReject($event)"
+        >
+            <span class="popup__title">{{ title }}</span>
+            <span class="popup__content">
+                <p class="check-container">
+                    <mat-checkbox
+                        *ngFor="let check of checkOptions"
+                        [(ngModel)]="check.value"
+                        >{{ check.displayName }}</mat-checkbox
+                    >
+                </p>
+            </span>
+        </popup-base>
+    `,
 })
 export class PopupWithCheckboxComponent implements OnInit {
     @Input() isVisible: boolean = false;
-    @Input() title: string;
-    @Input() content: string;
-    @Input() checkOptions: CheckboxOption[];
-    @Input() defaultRadioValue: any;
-    @Input() acceptLabel: string;
-    @Input() rejectLabel: string;
-    @Input() direction: string = "horizontal"; // horizontal || vertical
+    @Input() title: string = "";
+    @Input() content: string = "";
+    @Input() checkOptions: CheckboxOption[] = [];
+    @Input() defaultRadioValue: unknown;
+    @Input() acceptLabel: string = "";
+    @Input() rejectLabel: string = "";
+    @Input() direction: Direction = "horizontal";
 
     @Output() accept = new EventEmitter<CheckboxOption[]>();
-    @Output() reject = new EventEmitter<any>();
+    @Output() reject = new EventEmitter<unknown>();
     @Output() isVisibleChange = new EventEmitter<boolean>();
 
-    public radioValue: any;
+    public radioValue: unknown;
 
-    ngOnInit () {
+    ngOnInit(): void {
         if (!this.acceptLabel) {
-            this.acceptLabel = 'Ok';
+            this.acceptLabel = "Ok";
         }
 
         if (!this.rejectLabel) {
-            this.rejectLabel = 'Cancel';
+            this.rejectLabel = "Cancel";
         }
 
         this.radioValue = this.defaultRadioValue;
     }
 
-    public onAccept (event: any) {
+    public onAccept(event: unknown): void {
         this.accept.emit(this.checkOptions);
         this.hidePopup();
     }
 
-    public onReject (event: any) {
+    public onReject(event: unknown): void {
         this.reject.emit(event);
         this.hidePopup();
     }
 
-    private hidePopup () {
+    private hidePopup(): void {
         this.isVisible = false;
         this.isVisibleChange.emit(this.isVisible);
     }

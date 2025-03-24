@@ -7,23 +7,25 @@ import { SettingsService } from "./settings.service";
 import { CookieService } from "./cookie/cookies.service";
 import { SupportedLanguage } from "../model/settings";
 
-declare var document: any;
-
 const HOME_REFERRER_COOKIE = "home_referer";
 const HOME_DEFAULT = "default";
 
+interface Referrers {
+    [key: string]: string;
+}
+
 @Injectable()
 export class ReferrerService {
-    private referrerUrl: string;
-    private observe: Observable<string>;
+    private referrerUrl: string | null = null;
+    private observe: Observable<string | null> | null = null;
 
     constructor(
-        private _cookie: CookieService,
-        private _settings: SettingsService
+        private readonly _cookie: CookieService,
+        private readonly _settings: SettingsService
     ) {}
 
-    private setHomeReferrerCookie(referrer: string = "") {
-        let dateYearPlus = new Date();
+    private setHomeReferrerCookie(referrer: string = ""): void {
+        const dateYearPlus = new Date();
         dateYearPlus.setTime(dateYearPlus.getTime() + 365 * 24 * 3600 * 1000);
 
         this._cookie.put(HOME_REFERRER_COOKIE, referrer, {
@@ -33,13 +35,13 @@ export class ReferrerService {
 
     private mapReferrer(
         settings: Settings,
-        referrerKey: string = null,
-        currentLanguage: SupportedLanguage = null
-    ): string {
+        referrerKey: string | null = null,
+        currentLanguage: SupportedLanguage | null = null
+    ): string | null {
         if (settings.referrers) {
-            let referrers = settings.referrers;
-            let referrer: string = null;
-            let httpReferrer = document.referrer;
+            const referrers = settings.referrers as Referrers;
+            let referrer: string | null = null;
+            const httpReferrer = document.referrer;
 
             if (referrerKey && referrers[referrerKey]) {
                 referrer = referrerKey;
@@ -48,7 +50,7 @@ export class ReferrerService {
             } else if (httpReferrer === "") {
                 referrer = "";
             } else {
-                let referrerCookie = this._cookie.get(HOME_REFERRER_COOKIE);
+                const referrerCookie = this._cookie.get(HOME_REFERRER_COOKIE);
                 if (referrerCookie) {
                     referrer = referrerCookie;
                 } else {
@@ -57,8 +59,10 @@ export class ReferrerService {
             }
 
             if (referrer === "") {
-                let languageKeyReferrer =
-                    HOME_DEFAULT + "_" + currentLanguage.key;
+                const languageKeyReferrer = currentLanguage
+                    ? `${HOME_DEFAULT}_${currentLanguage.key}`
+                    : HOME_DEFAULT;
+
                 if (currentLanguage && referrers[languageKeyReferrer]) {
                     referrer = languageKeyReferrer;
                 } else if (referrers[HOME_DEFAULT]) {
@@ -68,17 +72,16 @@ export class ReferrerService {
             } else {
                 this.setHomeReferrerCookie(referrer);
             }
-            return referrers[referrer];
-        } else {
-            return null;
+            return referrers[referrer] || null;
         }
+        return null;
     }
 
     public getReferrerUrl(
-        referrerKey: string = null,
-        currentLanguage: SupportedLanguage = null
-    ): Observable<string> {
-        if (this.referrerUrl) {
+        referrerKey: string | null = null,
+        currentLanguage: SupportedLanguage | null = null
+    ): Observable<string | null> {
+        if (this.referrerUrl !== null) {
             return of(this.referrerUrl);
         } else if (this.observe) {
             return this.observe;
@@ -90,9 +93,9 @@ export class ReferrerService {
                 share()
             );
 
-            this.observe.subscribe(
-                (referrerUrl: string) => (this.referrerUrl = referrerUrl)
-            );
+            this.observe.subscribe({
+                next: (referrerUrl) => (this.referrerUrl = referrerUrl),
+            });
 
             return this.observe;
         }

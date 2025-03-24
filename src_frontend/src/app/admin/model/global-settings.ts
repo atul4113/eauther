@@ -5,9 +5,12 @@ export interface IGlobalSettingsRaw {
 }
 
 export class GlobalSettings {
-    referrers: Referrers;
+    readonly referrers: Referrers;
 
-    constructor (globalSettingsRaw: IGlobalSettingsRaw) {
+    constructor(globalSettingsRaw: IGlobalSettingsRaw) {
+        if (!globalSettingsRaw) {
+            throw new Error("Global settings data is required");
+        }
         this.referrers = globalSettingsRaw.referrers;
     }
 }

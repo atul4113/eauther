@@ -1,28 +1,30 @@
-import { Component, Input } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 
 import { AuthUser, ITranslations } from "../../model";
 import { TranslationsService } from "../../../common/service";
 
-declare var window: any;
+interface WindowWithMAuthor extends Window {
+    mAuthorAssetsUrl: string;
+}
 
+declare let window: WindowWithMAuthor;
 
 @Component({
-    selector: 'app-footer',
-    templateUrl: './app-footer.component.html'
+    selector: "app-footer",
+    templateUrl: "./app-footer.component.html",
 })
-export class AppFooterComponent {
-    @Input() user: AuthUser;
+export class AppFooterComponent implements OnInit {
+    @Input() user!: AuthUser;
 
     public assetsUrl: string = window.mAuthorAssetsUrl;
-    public currentYear = (new Date()).getUTCFullYear();
-    public translations: ITranslations;
+    public currentYear: number = new Date().getUTCFullYear();
+    public translations!: ITranslations;
 
+    constructor(private _translations: TranslationsService) {}
 
-    constructor (
-        private _translations: TranslationsService
-    ) {}
-
-    ngOnInit () {
-        this._translations.getTranslations().subscribe(t => this.translations = t);
+    ngOnInit(): void {
+        this._translations
+            .getTranslations()
+            .subscribe((t) => (this.translations = t));
     }
 }

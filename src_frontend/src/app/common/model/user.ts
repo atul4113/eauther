@@ -1,5 +1,3 @@
-
-
 export interface IUserRaw {
     id: number;
     username: string;
@@ -7,11 +5,11 @@ export interface IUserRaw {
 }
 
 export class User {
-    public id: number;
-    public username: string = '';
-    public email: string;
+    public id: number = 0;
+    public username: string = "";
+    public email: string = "";
 
-    constructor (user?: IUserRaw) {
+    constructor(user?: IUserRaw) {
         if (user) {
             this.id = user.id;
             this.username = user.username;

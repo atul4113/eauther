@@ -1,54 +1,52 @@
 import { Injectable } from "@angular/core";
-import { Router } from "@angular/router";
-import { Observable } from "rxjs";
-import { Observer } from "rxjs";
+import { Router, NavigationEnd } from "@angular/router";
+import { Observable, Subject } from "rxjs";
 import { share, map } from "rxjs/operators";
 
-let URLS = {
+interface Urls {
+    [key: string]: string[];
+}
+
+const URLS: Urls = {
     HOME: ["/home"],
     PROJECT: ["/corporate/list"],
     DASHBOARD: ["/corporate"],
     MY_LESSONS: ["/mycontent"],
-};
+} as const;
 
-declare let window: any;
+type Section = keyof typeof URLS;
 
 @Injectable()
 export class PathsService {
-    private previousPath: string;
-    private currentPath: string;
-    private pathsObservable: Observable<string>;
-    private pathsObserver: Observer<string>;
+    private previousPath: string | null = null;
+    private currentPath: string | null = null;
+    private readonly pathsSubject = new Subject<string>();
 
-    constructor(private _router: Router) {
-        this.pathsObservable = Observable.create(
-            (observer: Observer<string>) => {
-                this.pathsObserver = observer;
-                this._router.events.subscribe((event: any) => {
-                    if (event.url && event.url !== this.currentPath) {
-                        this.previousPath = this.currentPath;
-                        this.currentPath = event.url;
-                        observer.next(this.currentPath);
-                    }
-                });
+    constructor(private readonly _router: Router) {
+        this._router.events.subscribe((event) => {
+            if (
+                event instanceof NavigationEnd &&
+                event.url !== this.currentPath
+            ) {
+                this.previousPath = this.currentPath;
+                this.currentPath = event.url;
+                this.pathsSubject.next(this.currentPath);
             }
-        ).pipe(share());
+        });
     }
 
-    public getActiveSection(path: string): string {
-        for (let section in URLS) {
-            let sectionUrls = URLS[section];
-            for (let url in sectionUrls) {
-                let sectionUrl = sectionUrls[url];
-                if (path.indexOf(sectionUrl) === 0) {
-                    return section;
+    public getActiveSection(path: string): Section | null {
+        for (const [section, sectionUrls] of Object.entries(URLS)) {
+            for (const sectionUrl of sectionUrls) {
+                if (path.startsWith(sectionUrl)) {
+                    return section as Section;
                 }
             }
         }
         return path === "/" ? "HOME" : null;
     }
 
-    public getPreviousPath(): string {
+    public getPreviousPath(): string | null {
         return this.previousPath;
     }
 
@@ -57,64 +55,54 @@ export class PathsService {
     }
 
     public onChange(): Observable<string> {
-        return this.pathsObservable;
+        return this.pathsSubject.asObservable().pipe(share());
     }
 
-    public onActiveSectionChange(): Observable<string> {
-        return this.pathsObservable.pipe(
-            map((path) => this.getActiveSection(path))
+    public onActiveSectionChange(): Observable<Section | null> {
+        return this.pathsSubject.asObservable().pipe(
+            map((path) => this.getActiveSection(path)),
+            share()
         );
     }
 
-    public getParameterByName(name: string, url?: string): string {
+    public getParameterByName(name: string, url?: string): string | null {
         if (!url) url = window.location.href;
         name = name.replace(/[\[\]]/g, "\\$&");
-        let regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-            results = regex.exec(url);
+        const regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)");
+        const results = regex.exec(url);
         if (!results) return null;
         if (!results[2]) return "";
         return decodeURIComponent(results[2].replace(/\+/g, " "));
     }
 
     public encodeNextUrl(url: string): string {
-        let slashesRegExp = new RegExp("/", "g");
-        let semicolonRegExp = new RegExp(";", "g");
-        let slashCoded = "~";
-        let semicolonCoded = "|";
-
-        return url
-            .replace(slashesRegExp, slashCoded)
-            .replace(semicolonRegExp, semicolonCoded);
+        const slashCoded = "~";
+        const semicolonCoded = "|";
+        return url.replace(/\//g, slashCoded).replace(/;/g, semicolonCoded);
     }
 
-    public decodeNextUrl(url: string): string {
-        if (url) {
-            let slashCodedRegExp = new RegExp("~", "g");
-            let semicolonCodedRegExp = /\|/g;
-            let slash = "/";
-            let semicolon = ";";
-            let nextSeparator = "~next~";
+    public decodeNextUrl(url: string | null): string | null {
+        if (!url) return null;
 
-            let firstIndex = url.indexOf(nextSeparator);
+        const slash = "/";
+        const semicolon = ";";
+        const nextSeparator = "~next~";
 
-            if (firstIndex > -1) {
-                let decodedUrl = url.substring(
-                    0,
-                    firstIndex + nextSeparator.length
-                );
-                decodedUrl = decodedUrl
-                    .replace(slashCodedRegExp, slash)
-                    .replace(semicolonCodedRegExp, semicolon);
-                let nextUrl = url.substring(firstIndex + nextSeparator.length);
+        const firstIndex = url.indexOf(nextSeparator);
 
-                return decodedUrl + nextUrl;
-            } else {
-                return url
-                    .replace(slashCodedRegExp, slash)
-                    .replace(semicolonCodedRegExp, semicolon);
-            }
-        } else {
-            return null;
+        if (firstIndex > -1) {
+            let decodedUrl = url.substring(
+                0,
+                firstIndex + nextSeparator.length
+            );
+            decodedUrl = decodedUrl
+                .replace(/~/g, slash)
+                .replace(/\|/g, semicolon);
+            const nextUrl = url.substring(firstIndex + nextSeparator.length);
+
+            return decodedUrl + nextUrl;
         }
+
+        return url.replace(/~/g, slash).replace(/\|/g, semicolon);
     }
 }

@@ -5,7 +5,6 @@ import {
     OnInit,
     ViewChild,
     ElementRef,
-    Input,
 } from "@angular/core";
 import { FileUploader, FileItem, ParsedResponseHeaders } from "ng2-file-upload";
 import { Observable, Observer, forkJoin } from "rxjs";
@@ -30,13 +29,13 @@ import { UploadFileService, TokenService } from "../../service";
 export class BaseUploadFileComponent implements OnInit {
     @Output() selected: EventEmitter<FileData> = new EventEmitter<FileData>();
 
-    public uploader: FileUploader;
-    public file: FileItem;
+    public uploader!: FileUploader;
+    public file!: FileItem;
 
     @ViewChild("fileInput")
-    private fileInput: ElementRef;
+    private fileInput!: ElementRef;
 
-    private observer: Observer<FileData>;
+    private observer!: Observer<FileData> | null;
 
     constructor(
         private _uploadFile: UploadFileService,
@@ -48,7 +47,7 @@ export class BaseUploadFileComponent implements OnInit {
     }
 
     public upload(): Observable<FileData> {
-        return Observable.create((observer: Observer<FileData>) => {
+        return new Observable((observer: Observer<FileData>) => {
             if (this.observer) {
                 observer.error(
                     new UploadFileError("File is already uploading.", 400)
@@ -70,10 +69,10 @@ export class BaseUploadFileComponent implements OnInit {
                             this.file.upload();
                         },
                         error: (error: any) => {
-                            this.observer.error(
+                            this.observer!.error(
                                 new UploadFileError("Could not get token", 401)
                             );
-                            this.observer.complete();
+                            this.observer!.complete();
                         },
                     });
                 } else {
@@ -99,7 +98,7 @@ export class BaseUploadFileComponent implements OnInit {
 
     private init() {
         this.observer = null;
-        this.file = null;
+        this.file = null!;
         this.initUploader();
     }
 
@@ -113,7 +112,11 @@ export class BaseUploadFileComponent implements OnInit {
             this.file = item;
             this.observer = null;
             this.selected.emit(
-                new FileData(item.file.name, item.file.type, item.file.size)
+                new FileData(
+                    item.file.name || "",
+                    item.file.type || "",
+                    item.file.size
+                )
             );
         };
 
@@ -125,16 +128,16 @@ export class BaseUploadFileComponent implements OnInit {
         ) => {
             let data: { uploaded_file_id: number } = JSON.parse(response);
             this.uploader.clearQueue();
-            this.observer.next(
+            this.observer!.next(
                 new FileData(
-                    item.file.name,
-                    item.file.type,
+                    item.file.name || "",
+                    item.file.type || "",
                     item.file.size,
                     data.uploaded_file_id,
                     true
                 )
             );
-            this.observer.complete();
+            this.observer!.complete();
             this.init();
         };
 
@@ -145,8 +148,8 @@ export class BaseUploadFileComponent implements OnInit {
             headers: ParsedResponseHeaders
         ) => {
             this.uploader.clearQueue();
-            this.observer.error(new UploadFileError(response, status));
-            this.observer.complete();
+            this.observer!.error(new UploadFileError(response, status));
+            this.observer!.complete();
             this.init();
         };
     }
