@@ -4,26 +4,23 @@ import { map } from "rxjs/operators";
 
 import { RestClientService } from "./rest-client.service";
 
+interface IUploadUrlResponse {
+    upload_url: string;
+}
 
-const FILE_UPLOAD_URL = '/file/upload';
+const FILE_UPLOAD_URL = "/file/upload";
 
 @Injectable()
 export class UploadFileService {
+    constructor(private readonly _restClient: RestClientService) {}
 
-    constructor(
-        private _restClient: RestClientService
-    ) {}
-
-    public getUploadUrl (): Observable<string> {
-        return this._restClient.get(FILE_UPLOAD_URL).pipe(
-            map(this.mapUploadUrl)
-        );
+    public getUploadUrl(): Observable<string> {
+        return this._restClient
+            .get<IUploadUrlResponse>(FILE_UPLOAD_URL)
+            .pipe(map(this.mapUploadUrl));
     }
 
-    private mapUploadUrl (response: any): string {
-        let data: {upload_url: string} = <{upload_url: string}> response;
-
-        return data.upload_url;
+    private mapUploadUrl(response: IUploadUrlResponse): string {
+        return response.upload_url;
     }
-
 }

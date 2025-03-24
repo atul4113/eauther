@@ -1,6 +1,6 @@
 export class RadioOption {
-    constructor (
-        public content: string,
-        public value: any
+    constructor(
+        public readonly content: string,
+        public readonly value: string | number | boolean
     ) {}
 }

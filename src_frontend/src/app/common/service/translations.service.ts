@@ -10,15 +10,15 @@ const TRANSLATIONS_URL: string = "/translations/";
 
 @Injectable()
 export class TranslationsService {
-    private translations: ITranslations;
-    private translationsObservable: Observable<any>;
-    private translationsObserver: Observer<any>;
+    private translations: ITranslations | null = null;
+    private translationsObservable: Observable<ITranslations>;
+    private translationsObserver!: Observer<ITranslations>;
 
     private isReady: boolean = false;
 
-    constructor(private _restClient: RestClientService) {
-        this.translationsObservable = Observable.create(
-            (observer: Observer<any>) => {
+    constructor(private readonly _restClient: RestClientService) {
+        this.translationsObservable = new Observable<ITranslations>(
+            (observer: Observer<ITranslations>) => {
                 this.translationsObserver = observer;
             }
         ).pipe(share());
@@ -28,52 +28,56 @@ export class TranslationsService {
         );
     }
 
-    public getTranslations(): Observable<ITranslations> {
+    public getTranslations(): Observable<ITranslations | null> {
         if (this.translations) {
             return of(this.translations);
         } else if (this.translationsObservable) {
             return this.translationsObservable;
         } else {
-            return null;
+            return of(null);
         }
     }
 
-    public load(
-        settings: Settings,
-        user?: AuthUser /*, profileService: ProfileService*/
-    ) {
+    public load(settings: Settings, user?: AuthUser): void {
         if (!this.isReady) {
             this.isReady = true;
 
-            let language: SupportedLanguage = this.getCurrentLanguage(
-                settings,
-                user
-            );
+            const language = this.getCurrentLanguage(settings, user);
 
             this._restClient
                 .getPublic(TRANSLATIONS_URL + (language ? language.id : ""))
                 .pipe(map(this.mapTranslations))
-                .subscribe((translations: ITranslations) => {
-                    this.translationsObserver.next(translations);
-                    this.translationsObserver.complete();
+                .subscribe({
+                    next: (translations: ITranslations | null) => {
+                        if (translations) {
+                            this.translationsObserver.next(translations);
+                            this.translationsObserver.complete();
+                        } else {
+                            this.translationsObserver.error(
+                                new Error("Failed to load translations")
+                            );
+                        }
+                    },
+                    error: (err) => {
+                        console.error("Error loading translations:", err);
+                        this.translationsObserver.error(err);
+                    },
                 });
         }
     }
 
-    public getCurrentLanguage(settings: Settings, user?: AuthUser) {
-        let currentLanguage = null;
-        let defaultLanguage = settings.getDefaultLanguage();
-
-        currentLanguage = currentLanguage || defaultLanguage;
-
-        return currentLanguage;
+    public getCurrentLanguage(
+        settings: Settings,
+        user?: AuthUser
+    ): SupportedLanguage | undefined {
+        const defaultLanguage = settings.getDefaultLanguage();
+        return defaultLanguage;
     }
 
-    private mapTranslations(response: any): ITranslations {
+    private mapTranslations(response: unknown): ITranslations | null {
         if (!response) {
             return null;
-        } else {
-            return <ITranslations>response;
         }
+        return response as ITranslations;
     }
 }

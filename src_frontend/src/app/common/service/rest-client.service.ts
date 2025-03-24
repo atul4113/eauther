@@ -3,6 +3,7 @@ import {
     HttpClient,
     HttpHeaders,
     HttpErrorResponse,
+    HttpResponse,
 } from "@angular/common/http";
 import { Observable, throwError } from "rxjs";
 import { catchError, map, switchMap } from "rxjs/operators";
@@ -17,52 +18,54 @@ const SERVER_RESPONSE_STATUS = {
     UNAUTHORIZED: 401,
     FORBIDDEN: 403,
     INTERNAL_SERVER_ERROR: 500,
-};
+} as const;
+
+type HttpMethod = "GET" | "POST" | "PUT" | "DELETE";
 
 @Injectable({ providedIn: "root" })
 export class RestClientService {
     constructor(
-        private _http: HttpClient,
-        private _token: TokenService,
-        private _infoMessage: InfoMessageService
+        private readonly _http: HttpClient,
+        private readonly _token: TokenService,
+        private readonly _infoMessage: InfoMessageService
     ) {}
 
-    public get(url: string): Observable<any> {
-        return this.requestWithToken("GET", url);
+    public get<T>(url: string): Observable<T> {
+        return this.requestWithToken<T>("GET", url);
     }
 
-    public getPublic(url: string): Observable<any> {
+    public getPublic<T>(url: string): Observable<T> {
         return this._http
-            .get(API_URL + url, { headers: this.getHeaders() })
+            .get<T>(API_URL + url, { headers: this.getHeaders() })
             .pipe(map(this.extractData), catchError(this.handleError));
     }
 
-    public post(url: string, params: any = {}): Observable<any> {
-        return this.requestWithToken("POST", url, params);
+    public post<T>(url: string, params: unknown = {}): Observable<T> {
+        return this.requestWithToken<T>("POST", url, params);
     }
 
-    public postPublic(url: string, params: any): Observable<any> {
+    public postPublic<T>(url: string, params: unknown): Observable<T> {
         return this._http
-            .post(API_URL + url, params, { headers: this.getHeaders() })
+            .post<T>(API_URL + url, params, { headers: this.getHeaders() })
             .pipe(map(this.extractData), catchError(this.handleError));
     }
 
-    public put(url: string, params: any): Observable<any> {
-        return this.requestWithToken("PUT", url, params);
+    public put<T>(url: string, params: unknown): Observable<T> {
+        return this.requestWithToken<T>("PUT", url, params);
     }
 
-    public putPublic(url: string, params: any = {}): Observable<any> {
+    public putPublic<T>(url: string, params: unknown = {}): Observable<T> {
         return this._http
-            .put(API_URL + url, params, { headers: this.getHeaders() })
+            .put<T>(API_URL + url, params, { headers: this.getHeaders() })
             .pipe(map(this.extractData), catchError(this.handleError));
     }
 
-    public delete(url: string): Observable<any> {
-        return this.requestWithToken("DELETE", url);
+    public delete<T>(url: string): Observable<T> {
+        return this.requestWithToken<T>("DELETE", url);
     }
 
-    private extractData(response: any): any {
-        return response || {};
+    private extractData<T>(response: T): T {
+        return response || ({} as T);
     }
 
     private handleError(error: HttpErrorResponse): Observable<never> {
@@ -80,13 +83,13 @@ export class RestClientService {
         });
     }
 
-    private requestWithToken(
-        method: string,
+    private requestWithToken<T>(
+        method: HttpMethod,
         url: string,
-        params?: any
-    ): Observable<any> {
+        params?: unknown
+    ): Observable<T> {
         return this._token.get().pipe(
-            switchMap((token: string) => {
+            switchMap((token: string | null) => {
                 if (!token) {
                     return throwError(() => new Error(UNAUTHORIZED_ERROR));
                 }
@@ -97,27 +100,27 @@ export class RestClientService {
                 );
                 const options = { headers };
 
-                let request$: Observable<any>;
+                let request$: Observable<T>;
                 switch (method) {
                     case "GET":
-                        request$ = this._http.get(API_URL + url, options);
+                        request$ = this._http.get<T>(API_URL + url, options);
                         break;
                     case "POST":
-                        request$ = this._http.post(
+                        request$ = this._http.post<T>(
                             API_URL + url,
                             params,
                             options
                         );
                         break;
                     case "PUT":
-                        request$ = this._http.put(
+                        request$ = this._http.put<T>(
                             API_URL + url,
                             params,
                             options
                         );
                         break;
                     case "DELETE":
-                        request$ = this._http.delete(API_URL + url, options);
+                        request$ = this._http.delete<T>(API_URL + url, options);
                         break;
                     default:
                         return throwError(
