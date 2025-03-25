@@ -17,11 +17,13 @@ export class HomeWebsitesWithLanguage {
         }
         this.language = new Language(homeWebsitesWithLanguageRaw.language);
 
+        // Create websites with the correct language
         this.websites = homeWebsitesWithLanguageRaw.websites.map((website) => {
-            const wb = new HomeWebsite(website);
-            // @ts-ignore - We know this is safe because we're setting the language from the parent
-            wb.language = this.language;
-            return wb;
+            const websiteWithLanguage: IHomeWebsiteRaw = {
+                ...website,
+                language: this.language.id
+            };
+            return new HomeWebsite(websiteWithLanguage);
         });
         this.websites.sort((a, b) => a.version.localeCompare(b.version));
     }
