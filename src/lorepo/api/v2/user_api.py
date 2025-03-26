@@ -47,11 +47,14 @@ class UserData(MiddlewareMixin, views.APIView):
           is_superuser: true
       }
     """
-    permission_classes = (IsAuthenticated, )
-    MIDDLEWARE_CLASSES = (CorporateMiddleware, )
+    # permission_classes = (IsAuthenticated, )
+    # MIDDLEWARE_CLASSES = (CorporateMiddleware, )
 
     def get(self, request):
-        profile = request.user.profile
+        user = User.objects.All()
+        print(user)
+        profile = user.profile
+        # profile = request.user.profile
         # company = Space.objects.get(id=request.user.company)
 
         context = {'request': request}

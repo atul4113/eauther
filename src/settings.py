@@ -21,11 +21,17 @@ SERVER_URL = SHARED_SETTINGS[APPLICATION_ID]['server_url']
 BASE_URL = SHARED_SETTINGS[APPLICATION_ID]['base_url']
 MAUTHOR_BASIC_URL = SHARED_SETTINGS[APPLICATION_ID]['base_secure_url']
 
+os.environ["DATASTORE_EMULATOR_HOST"] = "localhost:8081"
+os.environ["DATASTORE_PROJECT_ID"] = "ealpha-test-application"
+os.environ["CLOUDSDK_CORE_PROJECT"] = "ealpha-test-application"
+os.environ["CLOUDSDK_API_ENDPOINT_OVERRIDES_DATASTORE"] = "http://localhost:8081/"
+
 DATABASES = {
     "default": {
         "ENGINE": "gcloudc.db.backends.datastore",
-        "PROJECT": "ealpha-test-application",  # Set your Google Cloud project ID
+        "PROJECT": os.getenv("DATASTORE_PROJECT_ID", "ealpha-test-application"),
         'INDEXES_FILE': 'indexes.json',
+        "NAMESPACE": "local",  # Optional namespace
     }
 }
 
@@ -108,13 +114,8 @@ INSTALLED_APPS = [
     'rest_framework_docs',
 ]
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.security.SecurityMiddleware',
 ]
 MIDDLEWARE_CLASSES = [
 #    'google.appengine.ext.appstats.recording.AppStatsDjangoMiddleware', # uncomment to enable http://localhost:8000/_ah/stats
