@@ -36,7 +36,7 @@ class LoadXMLsFromFiles(object):
             el = self.__get_etree_element(*paths)
             result_args_xmls.append(el)
 
-        for key, value in kwargs.items():
+        for key, value in list(kwargs.items()):
             results_kwargs_xmls[key] = self.__get_etree_element(value)
 
         return result_args_xmls, results_kwargs_xmls

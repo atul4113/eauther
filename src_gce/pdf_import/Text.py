@@ -1,6 +1,6 @@
 import operator
 
-from addons import *
+from .addons import *
 from alphabet_detector import AlphabetDetector
 
 from pdf_import.models import TSpanModel
@@ -231,14 +231,14 @@ class Line:
             else:
                 if start:
                     start = False
-                    keys.append(u"".join(key))
+                    keys.append("".join(key))
                     key = []
 
                 new_text.append(char)
         if start:
-            keys.append(u"".join(key))
+            keys.append("".join(key))
 
-        return u"".join(new_text), keys
+        return "".join(new_text), keys
 
     def __recover_map(self, text_map, keys):
         def replace_marker(match):

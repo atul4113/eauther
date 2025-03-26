@@ -1,6 +1,6 @@
 from deepdiff import DeepDiff
 
-from base_update_template_testing_class import BaseUpdateTemplateMixin
+from .base_update_template_testing_class import BaseUpdateTemplateMixin
 
 
 class TestThemeV0(BaseUpdateTemplateMixin):

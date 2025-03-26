@@ -1,5 +1,5 @@
-import ConfigParser
-import StringIO
+import configparser
+import io
 import os
 import subprocess
 import sys
@@ -19,7 +19,7 @@ SYS_PATHS_TO_REMOVE = [
 
 
 def log(priority, message):
-    print("[{}] {}".format(priority, message))
+    print(("[{}] {}".format(priority, message)))
 
 
 def log_info_message(message):
@@ -85,9 +85,9 @@ def get_build_properties():
 {}
         """.format(properties_data)
 
-    config_file = StringIO.StringIO(config)
+    config_file = io.StringIO(config)
 
-    config = ConfigParser.RawConfigParser()
+    config = configparser.RawConfigParser()
     config.readfp(config_file)
 
     return config

@@ -3,3 +3,5 @@ indexes:
   properties:
     - name: username
       direction: asc
+  auth_user:
+      username: [iexact]

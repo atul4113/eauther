@@ -1,14 +1,14 @@
 from deepdiff import DeepDiff
 
-from base_update_template_testing_class import BaseUpdateTemplateMixin
+from .base_update_template_testing_class import BaseUpdateTemplateMixin
 
 
 class TestPropagatePreferences(BaseUpdateTemplateMixin):
     folder = "preferences"
-    preferences = [u'useGrid',
-                   u'gridSize',
-                   u'staticHeader',
-                   u'staticFooter']
+    preferences = ['useGrid',
+                   'gridSize',
+                   'staticHeader',
+                   'staticFooter']
 
     def test_propagading_all_preferences(self):
         content_name = "contentV2.xml"

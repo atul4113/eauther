@@ -307,6 +307,7 @@ def register(
     if request.method == "POST" and result.status_code == 302:
         form = form_class(data=request.POST, files=request.FILES)
         username = form.data["username"]
+        print(username, "username")
         user = User.objects.get(username__iexact=username)
         space = Space(title=username)
         space.save()

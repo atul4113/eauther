@@ -1,14 +1,16 @@
+from djangae.settings_base import *  # Set up some AppEngine specific stuff
 import os
 import sys
 import datetime
 import mimetypes
-from djangae.settings_base import *  # Set up some AppEngine specific stuff
 from src.lorepo.app_identity import mock_get_application_id
 from src.shared_settings import SHARED_SETTINGS
 import logging
 from lxml import etree
 from pathlib import Path
 import pymysql
+from djangae.environment import is_development_environment
+
 pymysql.install_as_MySQLdb()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -22,12 +24,83 @@ BASE_URL = SHARED_SETTINGS[APPLICATION_ID]['base_url']
 MAUTHOR_BASIC_URL = SHARED_SETTINGS[APPLICATION_ID]['base_secure_url']
 
 DATABASES = {
-    "default": {
-        "ENGINE": "gcloudc.db.backends.datastore",
-        "PROJECT": "ealpha-test-application",  # Set your Google Cloud project ID
-        'INDEXES_FILE': 'indexes.json',
+    'default': {
+        'ENGINE': 'gcloudc.db.backends.datastore',
+        # 'PROJECT': "ealpha-test-application",
+        "PROJECT": os.getenv("GOOGLE_CLOUD_PROJECT", "ealpha-test-application"),
+        'INDEXES_FILE': "index.yaml",
+        'OPTIONS': {
+            'count_mode': 'emulated' if is_development_environment else 'native',
+        }
     }
 }
+
+# os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "D:\\Smart Education\\Projects\\eauther\\src\\key.json"
+os.environ["DATASTORE_EMULATOR_HOST"] = "localhost:8081"
+os.environ["DATASTORE_PROJECT_ID"] = "ealpha-test-application"
+os.environ["CLOUDSDK_CORE_PROJECT"] = "ealpha-test-application"
+os.environ["CLOUDSDK_API_ENDPOINT_OVERRIDES_DATASTORE"] = "http://localhost:8081/"
+# print(os.environ["DATASTORE_DATASET"])
+# print(os.environ["DATASTORE_EMULATOR_HOST"])
+# print(DATABASES["default"]["NAMESPACE"])
+# print(os.environ["DATASTORE_PROJECT_ID"])
+# print(os.environ["DATASTORE_EMULATOR_HOST"])
+# print(os.getenv("DATASTORE_EMULATOR_HOST"))
+
+# print(os.environ)
+# print(os.environ["GOOGLE_APPLICATION_CREDENTIALS"])
+
+# print(os.getenv("DJANGAE_APP_YAML_LOCATION"))
+# print(os.getenv("DATASTORE_EMULATOR_HOST"))
+# print(os.getenv("GOOGLE_CLOUD_PROJECT"))
+# Point to the local Datastore emulator instead of Google Cloud
+# if os.getenv("DATASTORE_EMULATOR_HOST"):
+
+# DATABASES["default"]["NAMESPACE"] = "local"  # Optional: use a namespace
+# os.environ["DATASTORE_DATASET"] = "ealpha-test-application"
+# os.environ["DATASTORE_EMULATOR_HOST"] = "localhost:9090"
+# os.environ["DATASTORE_PROJECT_ID"] = "ealpha-test-application"
+
+# print(os.environ["DATASTORE_DATASET"])
+# print(os.environ["DATASTORE_EMULATOR_HOST"])
+# print(DATABASES["default"]["NAMESPACE"])
+# print(os.environ["DATASTORE_PROJECT_ID"])
+# print(os.environ["DATASTORE_EMULATOR_HOST"])
+# print(os.getenv("DATASTORE_EMULATOR_HOST"))
+#
+# DATASTORE_EMULATOR_HOST="localhost:9090"
+# # Ensure environment variables are set
+# # if "DATASTORE_EMULATOR_HOST" in os.environ:
+# #     print(os.environ["DATASTORE_DATASET"])
+# #     print(os.environ["DATASTORE_EMULATOR_HOST"])
+# os.environ["DATASTORE_DATASET"] = "ealpha-test-application"
+# os.environ["DATASTORE_EMULATOR_HOST"] = "http://" + DATASTORE_EMULATOR_HOST
+# print(os.environ["DATASTORE_EMULATOR_HOST"])
+# Ensure environment variables are correctly formatted
+
+# if "DATASTORE_EMULATOR_HOST" in os.environ:
+#     print(os.environ["DATASTORE_DATASET"])
+#     print(os.environ["DATASTORE_EMULATOR_HOST"])
+#     os.environ["DATASTORE_DATASET"] = os.getenv("DATASTORE_PROJECT_ID")
+#     os.environ["DATASTORE_EMULATOR_HOST"] = os.getenv("DATASTORE_EMULATOR_HOST").strip()
+
+# # Ensure environment variables are set
+# if "DATASTORE_EMULATOR_HOST" in os.environ:
+#     print(os.environ["DATASTORE_DATASET"])
+#     print(os.environ["DATASTORE_EMULATOR_HOST"])
+#     os.environ["DATASTORE_DATASET"] = os.environ["DATASTORE_PROJECT_ID"]
+#     os.environ["DATASTORE_EMULATOR_HOST"] = "http://" + os.environ["DATASTORE_EMULATOR_HOST"]
+
+# # Point to the local Datastore emulator instead of Google Cloud
+# if os.getenv("DATASTORE_EMULATOR_HOST"):
+#     DATABASES["default"]["NAMESPACE"] = "local"  # Optional: use a namespace
+#     os.environ["DATASTORE_DATASET"] = os.getenv("GOOGLE_CLOUD_PROJECT")
+#     os.environ["DATASTORE_EMULATOR_HOST"] = os.getenv("DATASTORE_EMULATOR_HOST")
+#     os.environ["DATASTORE_PROJECT_ID"] = os.getenv("GOOGLE_CLOUD_PROJECT")
+#     print(os.environ["DATASTORE_DATASET"])
+#     print(os.environ["DATASTORE_EMULATOR_HOST"])
+#     print(DATABASES["default"]["NAMESPACE"])
+#     print(os.environ["DATASTORE_PROJECT_ID"])
 
 HTTPS_REDIRECT = SHARED_SETTINGS[APPLICATION_ID]['https_redirect']
 SECRET_KEY = SHARED_SETTINGS[APPLICATION_ID]['secret_key']
@@ -47,6 +120,8 @@ DJANGAE_DISABLE_CONSTRAINT_CHECKS = True
 
 INSTALLED_APPS = [
     'djangae', # Djangae needs to come before django apps in django 1.7 and above
+    # 'djangae.tasks',
+    # 'djangae.contrib.security',
     'src.markdown_deux',
     'src.mauthor',
     'drf_spectacular',
@@ -108,6 +183,7 @@ INSTALLED_APPS = [
     'rest_framework_docs',
 ]
 MIDDLEWARE = [
+    'djangae.contrib.security.middleware.AppEngineSecurityMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',

@@ -5,12 +5,12 @@ from timeit import default_timer as timer
 from subprocess import Popen, check_output
 import subprocess
 from lxml import etree as ET
-from addons import ErrorText
-from files import PageFile, MetadataFile
-from files import MainFile
-from files import ImageRepo
-from Text import LineList
-from addons import Image as Imgs
+from .addons import ErrorText
+from .files import PageFile, MetadataFile
+from .files import MainFile
+from .files import ImageRepo
+from .Text import LineList
+from .addons import Image as Imgs
 from pdf_import.models import Paragraph
 
 PDF_PAGE_NAME_PATTERN = "%d_page_"
@@ -97,7 +97,7 @@ def parse_pdf(temp_path, presentation_name):
     meta_file = MetadataFile(presentation_name.encode('utf-8'))
     first = True
 
-    for page_number, svg_page_path in svg_pages.iteritems():
+    for page_number, svg_page_path in svg_pages.items():
 
         logging.info("%s: working on: %s" % (presentation_name, str(page_number)))
         temp_file = image_repo.parse_file(svg_page_path, temp_path)

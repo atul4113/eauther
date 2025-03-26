@@ -11,8 +11,8 @@ from django.utils.html import escape, format_html, smart_urlquote
 from django.utils.safestring import SafeData, mark_safe
 
 from django.shortcuts import render as template_render
-from rest_framework.renderers import HTMLFormRenderer
-from rest_framework.utils.urls import replace_query_param
+from .rest_framework.renderers import HTMLFormRenderer
+from .rest_framework.utils.urls import replace_query_param
 
 register = template.Library()
 

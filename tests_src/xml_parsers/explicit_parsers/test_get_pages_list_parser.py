@@ -14,4 +14,4 @@ class TestGetPagesList(LoadFileMixin, GetPathMixin):
 
         parser.parse(input_file)
 
-        assert parser.get_pages_list() == [u'5364925476896768', u'4243434342342342', u'6176640607191040', u'6035369737584640', u'6494737159421952']
+        assert parser.get_pages_list() == ['5364925476896768', '4243434342342342', '6176640607191040', '6035369737584640', '6494737159421952']

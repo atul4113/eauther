@@ -1,5 +1,5 @@
 import os
-import StringIO
+import io
 from lxml import etree
 from xml_parsers.EchoXMLGenerator import EchoXMLGenerator
 
@@ -11,7 +11,7 @@ class TestSaxParsing(object):
     SIMPLE_XML_PATH = os.path.join(current_dir, "testdata/simple.xml")
 
     def test_sox_parser_returns_the_same_xml(self):
-        received_data = StringIO.StringIO('')
+        received_data = io.StringIO('')
         with open(self.SIMPLE_XML_PATH, 'r') as source:
             sax_handler = EchoXMLGenerator(out=received_data, encoding='utf-8')
             sax_handler.parse(source)

@@ -9,10 +9,10 @@ TEST_DIR = (dirname(abspath(__file__)))
 
 
 class PREFERENCES:
-    USE_GRID = u'useGrid'
-    GRID_SIZE = u'gridSize'
-    STATIC_HEADER = u'staticHeader'
-    STATIC_FOOTER = u'staticFooter'
+    USE_GRID = 'useGrid'
+    GRID_SIZE = 'gridSize'
+    STATIC_HEADER = 'staticHeader'
+    STATIC_FOOTER = 'staticFooter'
 
 
 class BaseUpdateTemplateMixin(object):

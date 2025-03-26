@@ -17,11 +17,11 @@ def etree_to_dict(t, ignore=None):
     if children:
         dd = defaultdict(list)
         for dc in map(etree_to_dict, children, [ignore]*len(children)):
-            for k, v in dc.iteritems():
+            for k, v in dc.items():
                 dd[k].append(v)
-        d = {t.tag: {k:v[0] if len(v) == 1 else v for k, v in dd.iteritems()}}
+        d = {t.tag: {k:v[0] if len(v) == 1 else v for k, v in dd.items()}}
     if t.attrib:
-        d[t.tag].update(('@' + k, v) for k, v in t.attrib.iteritems() if not ignore or not(t.tag == ignore[0] and k == ignore[1]))
+        d[t.tag].update(('@' + k, v) for k, v in t.attrib.items() if not ignore or not(t.tag == ignore[0] and k == ignore[1]))
     if t.text:
         text = t.text.strip()
         if children or t.attrib:

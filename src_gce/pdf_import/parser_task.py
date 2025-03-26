@@ -1,10 +1,10 @@
 from settings import get_bucket_name
-from utils import zip, messages
+from .utils import zip, messages
 from subprocess import CalledProcessError
 from libraries import storage
 import logging
 import tempfile
-import urllib2
+import urllib.request, urllib.error, urllib.parse
 import uuid
 
 from pdf_import import parser
@@ -43,7 +43,7 @@ def _import_pdf(tempdirname, request, space_id, user_id, file_id):
 
     logging.info("%s: Working on pdf, HOST: %s" % (pdf_name, HOST))
 
-    pdf_file_fetch = urllib2.urlopen("%s/file/serve/%s" % (HOST, file_id), timeout=30)
+    pdf_file_fetch = urllib.request.urlopen("%s/file/serve/%s" % (HOST, file_id), timeout=30)
     logging.info("%s: Temp dir name: %s" % (pdf_name, tempdirname))
     with open("%s/%s" % (tempdirname, pdf_name), 'wb') as output:
         output.write(pdf_file_fetch.read())

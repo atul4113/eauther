@@ -53,10 +53,21 @@ class RegistrationForm(forms.Form):
         """
         Validate that the username is alphanumeric and is not already
         in use.
-        
+
         """
+        print((self.cleaned_data['username']))
+        print((User.objects.values_list('username', flat=True)))
         try:
-            user = User.objects.get(username__iexact=self.cleaned_data['username'])
+            username = self.cleaned_data['username']
+            print((username, "username"))
+            users = User.objects.all()  # Regular lookup
+            for user in users:
+                print(user, "user")
+                if user.username.lower() == username.lower():  # Manual case-insensitive check
+                    # return user
+            # return None  # No match found
+            # user = User.objects.get(username__iexact=self.cleaned_data['username'])
+                    print((user, "user"))
         except User.DoesNotExist:
             return self.cleaned_data['username']
         raise forms.ValidationError(_('This username is already taken. Please choose another.'))

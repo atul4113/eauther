@@ -6,7 +6,7 @@ logging.basicConfig(level=logging.INFO)
 
 @app.route('/gce/import_pdf/<space_id>/<user_id>/<file_id>', methods=['POST'])
 def import_pdf(space_id, user_id, file_id):
-    from pdf_import import parser_task
+    from .pdf_import import parser_task
 
     try:
         parser_task.import_pdf(request, space_id, user_id, file_id)
@@ -14,7 +14,7 @@ def import_pdf(space_id, user_id, file_id):
         import traceback
         logging.exception("Parsing Error: %s" % str(err))
         logging.exception(traceback.format_exc())
-        from pdf_import.utils import messages
+        from .pdf_import.utils import messages
         messages.send_error_message(user_id, pdf_name=request.form["file_name"], traceback=traceback.format_exc())
     return "OK"
 

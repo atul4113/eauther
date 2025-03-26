@@ -26,6 +26,7 @@ def register(request, success_url=None, form_class=CustomRegistrationForm, profi
              template_name='registration/registration_form.html', extra_context=None):
 
     if request.method == 'POST':
+        print("hey you are in register page 29")
         form = form_class(data=request.POST, files=request.FILES)
         if form.is_valid():
             new_user = form.save(profile_callback=profile_callback)
