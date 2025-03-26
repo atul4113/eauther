@@ -29,6 +29,10 @@ from src.lorepo.user.models import UserProfile
 from src.lorepo.mycontent.service import add_content_to_space
 import logging
 import datetime
+# from django.db import transaction
+
+
+
 @shared_task
 def update_owners_permissions_task():
     """
@@ -290,7 +294,7 @@ def profile_callback(user):
     up.save()
     return up
 
-
+# @transaction.non_atomic_requests  
 def register(
     request,
     success_url=None,
@@ -307,7 +311,8 @@ def register(
     if request.method == "POST" and result.status_code == 302:
         form = form_class(data=request.POST, files=request.FILES)
         username = form.data["username"]
-        user = User.objects.get(username__iexact=username)
+        user = next((u for u in User.objects.all() if u.username.lower() == username.lower()), None)
+
         space = Space(title=username)
         space.save()
         role = Role(name="owner", permissions=Permission().get_all())

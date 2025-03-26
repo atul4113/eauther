@@ -5,14 +5,26 @@ import mimetypes
 from djangae.settings_base import *  # Set up some AppEngine specific stuff
 from src.lorepo.app_identity import mock_get_application_id
 from src.shared_settings import SHARED_SETTINGS
-import logging
 from lxml import etree
 from pathlib import Path
 import pymysql
+
+
 pymysql.install_as_MySQLdb()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+
+
 BASE_DIR = Path(__file__).resolve().parent.parent
-# os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/home/delhivery/atul/fixed_eauthor/eauther/src/key.json"
+
+
+
+os.environ["DATASTORE_EMULATOR_HOST"] = "localhost:8081"
+os.environ["DATASTORE_PROJECT_ID"] = "ealpha-test-application"
+os.environ["CLOUDSDK_CORE_PROJECT"] = "ealpha-test-application"
+os.environ["CLOUDSDK_API_ENDPOINT_OVERRIDES_DATASTORE"] = "http://localhost:8081/"
+
+# os.environ["GOOGLE_CLOUD_DISABLE_GRPC"] = "True"
+
 
 APPLICATION_ID = mock_get_application_id()
 
@@ -24,10 +36,16 @@ MAUTHOR_BASIC_URL = SHARED_SETTINGS[APPLICATION_ID]['base_secure_url']
 DATABASES = {
     "default": {
         "ENGINE": "gcloudc.db.backends.datastore",
-        "PROJECT": "ealpha-test-application",  # Set your Google Cloud project ID
+        "PROJECT": os.getenv("DATASTORE_PROJECT_ID", "ealpha-test-application"),
         'INDEXES_FILE': 'indexes.json',
+        "NAMESPACE": "local",  # Optional namespace
     }
 }
+ 
+if "DATASTORE_EMULATOR_HOST" in os.environ:
+    os.environ["DATASTORE_EMULATOR_HOST"] = os.getenv("DATASTORE_EMULATOR_HOST").strip()
+ 
+
 
 HTTPS_REDIRECT = SHARED_SETTINGS[APPLICATION_ID]['https_redirect']
 SECRET_KEY = SHARED_SETTINGS[APPLICATION_ID]['secret_key']
@@ -265,6 +283,15 @@ CACHES = {
         'LOCATION': 'unique-snowflake',
     }
 }
+
+
+# GCLOUD = {
+#     'UNIQUE_CONSTRAINT_CHECKS': 'transactionless',
+#     'TRANSACTION_MODE': 'none',  # Explicitly disable transactions
+# }
+
+
+# DEBUG_PROPAGATE_EXCEPTIONS = True
 
 
 LANGUAGE_CODE = 'en'

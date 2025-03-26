@@ -58,6 +58,7 @@ class Asset(models.Model):
     "modified_date",
     "title"
 ])
+
 class Content(models.Model, ModelCacheMixin):
     version = models.IntegerField(default=0) #version attribute for big fixdb purposes
     title = models.CharField(max_length=200, default='Content')
@@ -396,33 +397,35 @@ class Content(models.Model, ModelCacheMixin):
     def content_changed(sender, instance, **kwargs):
         Content.cache_delete(instance.history_for_id)
 
-class ContentAccess(models.Model):
-    """
-    Prawa dostępu do contentu
-    1 - read
-    2 - write
-    3 - owner
-    """
-    user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
-    content = models.ForeignKey(Content, on_delete=models.DO_NOTHING)
-    access_right = models.IntegerField(choices=[(1, 'read'), (2, 'write'), (2, 'owner')],default=3)
-    is_deleted = models.BooleanField(default=False)
-    modified_date = models.DateTimeField(null=True)
 
-    class Meta:
-        ordering = ('-modified_date',)
+#Not used anywhere
+# class ContentAccess(models.Model):
+#     """
+#     Prawa dostępu do contentu
+#     1 - read
+#     2 - write
+#     3 - owner
+#     """
+#     user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+#     content = models.ForeignKey(Content, on_delete=models.DO_NOTHING)
+#     access_right = models.IntegerField(choices=[(1, 'read'), (2, 'write'), (2, 'owner')],default=3)
+#     is_deleted = models.BooleanField(default=False)
+#     modified_date = models.DateTimeField(null=True)
+
+#     class Meta:
+#         ordering = ('-modified_date',)
     
-    def __str__(self):
-        return self.content.title
+#     def __str__(self):
+#         return self.content.title
 
-
-class ContentLabels(models.Model):
-    """
-    Zawiera połączenie contentu z etykietami
-    """
-    content = models.ForeignKey(Content, on_delete=models.DO_NOTHING)
-    content_access = models.ForeignKey(ContentAccess, null=True, on_delete=models.DO_NOTHING)
-    label = models.ForeignKey(Label, on_delete=models.DO_NOTHING)
+#Not used anywhere
+# class ContentLabels(models.Model):
+#     """
+#     Zawiera połączenie contentu z etykietami
+#     """
+#     content = models.ForeignKey(Content, on_delete=models.DO_NOTHING)
+#     content_access = models.ForeignKey(ContentAccess, null=True, on_delete=models.DO_NOTHING)
+#     label = models.ForeignKey(Label, on_delete=models.DO_NOTHING)
 
 
 class ContentSpace(models.Model):

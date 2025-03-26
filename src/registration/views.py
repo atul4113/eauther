@@ -5,6 +5,7 @@ from django.shortcuts import render
 from src.registration.models import RegistrationProfile
 from src.lorepo.user.forms import CustomRegistrationForm
 import collections.abc  # ✅ Updated for Callable
+# from django.db import transaction
 
 def activate(request, activation_key, template_name='registration/activate.html', extra_context=None):
     activation_key = activation_key.lower()  # Normalize before using it.
@@ -22,6 +23,7 @@ def activate(request, activation_key, template_name='registration/activate.html'
 
     return render(request, template_name, context)  # ✅ Used render instead of render_to_response
 
+# @transaction.non_atomic_requests
 def register(request, success_url=None, form_class=CustomRegistrationForm, profile_callback=None,
              template_name='registration/registration_form.html', extra_context=None):
 

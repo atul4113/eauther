@@ -62,6 +62,7 @@ class RegistrationManager(models.Manager):
     
     def create_inactive_user(self, username, password, email,
                              send_email=True, profile_callback=None):
+        print('77'*100)
         """
         Create a new, inactive ``User``, generates a
         ``RegistrationProfile`` and email its activation key to the
@@ -102,9 +103,12 @@ class RegistrationManager(models.Manager):
             The ``User`` to relate the profile to.
         
         """
+        print('88'*100)
         new_user = User.objects.create_user(username, email, password)
+        print('99'*100)
         new_user.is_active = False
         new_user.save()
+        print("New user created!!")
         
         registration_profile = self.create_profile(new_user)
         
