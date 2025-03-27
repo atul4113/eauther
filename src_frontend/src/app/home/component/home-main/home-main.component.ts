@@ -36,16 +36,17 @@ export class HomeMainComponent implements OnInit {
             this._authUser.get(),
             this._settings.get()
         ]).pipe(
-            mergeMap(([translations, user, settings]: [ITranslations, any, any]) => {
-                this.translations = translations;
+            mergeMap(([translations, user, settings]: [ITranslations | null, any, any]) => {
+                this.translations = translations ?? {} as ITranslations;
                 let currentLanguage = this._translations.getCurrentLanguage(settings, user);
                 return this._referrer.getReferrerUrl(referrerKey, currentLanguage);
             })
-        ).subscribe((referrerUrl: string) => {
+        ).subscribe((referrerUrl: any) => {
             if (referrerUrl) {
                 this.homeIframeSrc = this._domSanitization.bypassSecurityTrustResourceUrl(referrerUrl);
             }
         });
+        
 
         this._translations.getTranslations().subscribe(t => this.translations = t);
     }

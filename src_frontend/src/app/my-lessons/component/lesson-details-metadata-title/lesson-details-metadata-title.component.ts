@@ -45,12 +45,12 @@ import { RolePermissions } from "../../../common/model/auth-user";
     `
 })
 export class LessonDetailsMetadataTitleComponent implements OnInit {
-    @Input() translations: ITranslations;
+    @Input() translations!: ITranslations;
     @Input() isEditMode: boolean = false;
     @Input() isLoading: boolean = false;
     @Input() isToggleMode: boolean = false;
     @Input() canSave: boolean = true;
-    @Input() userPermissions: RolePermissions;
+    @Input() userPermissions!: RolePermissions;
 
     @Output() editModeChange: EventEmitter<boolean> = new EventEmitter<boolean>();
     @Output() toggleModeChange: EventEmitter<boolean> = new EventEmitter<boolean>();
