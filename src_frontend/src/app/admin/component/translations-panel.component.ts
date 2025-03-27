@@ -8,7 +8,7 @@ import { TranslationsService, InfoMessageService } from "../../common/service";
     templateUrl: '../templates/translations-panel.component.html'
 })
 export class TranslationsPanelComponent implements OnInit {
-    public translations: ITranslations;
+    public translations: any;
     public isInitialized = true;
     public settings = null;
 

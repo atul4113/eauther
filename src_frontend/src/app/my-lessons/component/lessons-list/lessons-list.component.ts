@@ -10,21 +10,22 @@ import { TranslationsService } from "../../../common/service";
 })
 export class LessonsListComponent implements OnInit {
 
-    @Input() lessons: Lesson[];
+    @Input() lessons!: Lesson[];
 
     @Output() cancel = new EventEmitter<any>();
     @Output() select = new EventEmitter<any>();
 
-    public translations: ITranslations;
+    public translations!: ITranslations;
 
     constructor(
         private _translations: TranslationsService
     ) {}
 
     ngOnInit() {
-        this._translations.getTranslations().subscribe(t => this.translations = t);
+        this._translations.getTranslations().subscribe(t => {
+            this.translations = t ?? {} as ITranslations;
+        });
     }
-
     public cancelMerge() {
         this.cancel.emit();
     }

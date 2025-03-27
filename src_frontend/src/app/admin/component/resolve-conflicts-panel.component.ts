@@ -15,12 +15,12 @@ import { ActivatedRoute } from "@angular/router";
 })
 export class ResolveConflictsPanelComponent implements OnInit {
 
-    public translations: ITranslations;
-    public authUser: AuthUser = null;
+    public translations: any;
+    public authUser: any;
     public isInitialized = false;
     public isResolved = false;
 
-    public conflictId: number;
+    public conflictId: any;
     public conflicts: Conflict[] = [];
     public paginatedConflictsPage = 1;
     public pageSize = 15;
@@ -50,9 +50,9 @@ export class ResolveConflictsPanelComponent implements OnInit {
                 this.conflicts = conflicts.conflict.map(this._translationsAdmin.mapConflicts);
                 this.isInitialized = true;
 
-                this.omitted = conflicts.omitted.map( o => o );
-                this.added = conflicts.added.map( a => a );
-                this.notValid = conflicts.not_valid.map( nv => nv );
+                this.omitted = conflicts.omitted.map( (o:any) => o );
+                this.added = conflicts.added.map( (a:any) => a );
+                this.notValid = conflicts.not_valid.map( (nv:any) => nv );
             } );
         });
     }

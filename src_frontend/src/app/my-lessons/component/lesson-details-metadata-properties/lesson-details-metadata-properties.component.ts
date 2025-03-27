@@ -17,20 +17,20 @@ import { Category } from "../../../common/model/category";
 })
 export class LessonDetailsMetadataPropertiesComponent implements OnChanges, OnInit {
 
-    @Input() lesson: Lesson;
-    @Input() translations: ITranslations;
-    @Input() isProject: boolean;
+    @Input() lesson!: Lesson;
+    @Input() translations!: ITranslations;
+    @Input() isProject!: boolean;
 
     public isEditMode: boolean = false;
 
-    public properties: LessonProperties;
-    public projects: Space[];
-    public selectedProject: Space;
-    public projectStructure: Subspace;
-    public publicationId: number;
-    public categories: Category[];
-    public selectedCategory: Category;
-    private selectedProjectId: number;
+    public properties!: LessonProperties;
+    public projects!: Space[];
+    public selectedProject!: Space;
+    public projectStructure!: Subspace;
+    public publicationId!: number;
+    public categories!: Category[];
+    public selectedCategory!: Category;
+    private selectedProjectId!: number;
 
     constructor (
         private _myContent: MyContentService,
@@ -80,7 +80,7 @@ export class LessonDetailsMetadataPropertiesComponent implements OnChanges, OnIn
     }
 
     public getProjectStructure() {
-        this._projects.getStructure(this.selectedProjectId, false).subscribe(structure => {
+        this._projects.getStructure(this.selectedProjectId.toString(), false).subscribe(structure => {
             this.projectStructure = structure;
             if (this.projectStructure.subspaces) {
                 this.projectStructure.subspaces.sort(function (a: Subspace, b: Subspace) {
@@ -90,12 +90,12 @@ export class LessonDetailsMetadataPropertiesComponent implements OnChanges, OnIn
         });
     }
 
-    public changeProject(project) {
+    public changeProject(project:any) {
         this.selectedProjectId = project.value.id;
         this.getProjectStructure();
     }
 
-    public publicatonChange(space) {
+    public publicatonChange(space:any) {
         if(this.isProject) {
             this.publicationId = space.value;
             this.properties.spaceId = space.value;

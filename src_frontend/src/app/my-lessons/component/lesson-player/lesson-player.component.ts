@@ -3,26 +3,26 @@ import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser'
 
 const CORPORATE_EMBED = '/embed/corporate_embed/'
 
-declare const window;
+declare const window:any;
 
 @Component({
     selector: 'app-lesson-player',
     templateUrl: './lesson-player.component.html',
 })
 export class PlayerComponent implements OnInit {
-    @Input() lessonId: number;
+    @Input() lessonId!: number;
     @Output() close = new EventEmitter<any>();
-    @ViewChild('contentIframe') contentIframe: ElementRef;
-    @Input() main: HTMLElement;
+    @ViewChild('contentIframe') contentIframe!: ElementRef;
+    @Input() main!: HTMLElement;
 
-    public iframeUrl: SafeResourceUrl;
+    public iframeUrl!: SafeResourceUrl;
 
     private MAX_WIDTH: number = 1100;
     private DELTA_WIDTH: number = 800;
-    private iframe;
-    private userAgent;
-    private iframeWindow;
-    private viewPort;
+    private iframe:any;
+    private userAgent:any;
+    private iframeWindow:any;
+    private viewPort:any;
 
     constructor(private _sanitizer: DomSanitizer) {
     }
@@ -31,7 +31,7 @@ export class PlayerComponent implements OnInit {
         this.close.emit();
     }
 
-    handleResize(data) {
+    handleResize(data:any) {
         let dimensions = data.split(';');
         let width = dimensions[0];
         let height = dimensions[1];
@@ -51,7 +51,7 @@ export class PlayerComponent implements OnInit {
         }
     }
 
-    getOffsetTopSum(elem) {
+    getOffsetTopSum(elem:any) {
         let top = 0;
         while (elem) {
             top = top + parseFloat(elem.offsetTop);
@@ -60,7 +60,7 @@ export class PlayerComponent implements OnInit {
         return top;
     }
 
-    onMessageReceived(event) {
+    onMessageReceived(event:any) {
         if (event.data.indexOf('RESIZE:') === 0 && !window.isStretchOrFullScreenMode) {
             this.handleResize(event.data.substring('RESIZE:'.length));
             this.postIFrameMessage(this.iframe.style.height);
@@ -74,7 +74,7 @@ export class PlayerComponent implements OnInit {
         }
     }
 
-    postIFrameMessage(height) {
+    postIFrameMessage(height:any) {
         let offset, scroll, windowInnerHeight, frameOffsetTop;
         offset = (window.pageYOffset || document.documentElement.scrollTop);
         frameOffsetTop = this.getOffsetTopSum(this.iframe);
@@ -92,7 +92,7 @@ export class PlayerComponent implements OnInit {
         this.iframeWindow.postMessage('I_FRAME_SIZES:' + JSON.stringify(postObject), '*');
     }
 
-    postWindowWidth(data) {
+    postWindowWidth(data:any) {
         this.iframeWindow.postMessage("WINDOW_WIDTH:" + JSON.stringify(data), '*');
     }
 
@@ -109,7 +109,7 @@ export class PlayerComponent implements OnInit {
         this.iframe.style.height = screenSizes.height;
 
         window.addEventListener('message',
-            (event) => {
+            (event:any) => {
                 this.onMessageReceived(event)
             },
             false);

@@ -11,9 +11,9 @@ import {Lesson} from "../../model/lesson";
 })
 export class ProjectStructureComponent implements OnInit {
 
-    private _projectId: number;
+    private _projectId!: number;
 
-    @Input() hasLeftPadding: boolean;
+    @Input() hasLeftPadding!: boolean;
     @Input()
     set projectId(value: number){
         this._projectId = value;
@@ -23,16 +23,16 @@ export class ProjectStructureComponent implements OnInit {
         return this._projectId;
     }
     @Input() currentSpaceId: any;
-    @Input() shouldShowAddons: boolean;
-    @Input() lesson: Lesson;
+    @Input() shouldShowAddons!: boolean;
+    @Input() lesson!: Lesson;
     @Input() selectable: boolean = false;
     @Output() publicationChanged = new EventEmitter<any>();
     @Output() displayLessons = new EventEmitter<any>();
     @Output() afterSubmodulesDownload = new EventEmitter<any>();
     @Output() onSelect = new EventEmitter<any>();
 
-    public structure: Subspace;
-    public translations: ITranslations;
+    public structure!: Subspace;
+    public translations!: ITranslations;
 
     constructor(
         private _translations: TranslationsService,
@@ -41,11 +41,13 @@ export class ProjectStructureComponent implements OnInit {
     }
 
     ngOnInit() {
-        this._translations.getTranslations().subscribe(t => this.translations = t);
+        this._translations.getTranslations().subscribe(t => {
+            this.translations = t ?? {} as ITranslations;
+        });
     }
 
     reload(){
-        this._projects.getStructure(this.projectId).subscribe((structure) => {
+        this._projects.getStructure(this.projectId.toString()).subscribe((structure) => {
             if (structure) {
                 this.structure = structure;
                 if(this.structure.subspaces) {

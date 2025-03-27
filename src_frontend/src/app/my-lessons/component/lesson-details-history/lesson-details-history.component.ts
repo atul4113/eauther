@@ -14,21 +14,24 @@ import { RolePermissions } from "../../../common/model/auth-user";
 })
 export class LessonDetailsHistoryComponent implements OnInit {
 
-    @Input() lesson: Lesson;
-    @Input() versions: FileStorage[];
-    @Input() userPermissions: RolePermissions;
+    @Input() lesson!: Lesson;
+    @Input() versions!: FileStorage[];
+    @Input() userPermissions!: RolePermissions;
 
     public paginatedHistory: number = 1;
     public historyPageSize: number = 14;
-    public translations: ITranslations;
+    public translations!: ITranslations;
 
     constructor (
         private _myContent: MyContentService,
         private _translations: TranslationsService
     ) {}
 
-    ngOnInit () {
-        this._translations.getTranslations().subscribe(t => this.translations = t);
+ 
+    ngOnInit() {
+        this._translations.getTranslations().subscribe(t => {
+            this.translations = t ?? {} as ITranslations;
+        });
     }
 
     public setCurrentVersion(contentId: any, versionId: any) {

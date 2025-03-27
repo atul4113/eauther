@@ -16,13 +16,13 @@ import { RolePermissions } from "../../../common/model/auth-user";
     templateUrl: './lesson-details-metadata.component.html'
 })
 export class LessonDetailsMetadataComponent implements OnChanges {
-    @Input() translations: ITranslations;
-    @Input() lesson: Lesson;
-    @Input() pages: LessonPage[];
-    @Input() versions: FileStorage[];
-    @Input() metadata: Metadata;
+    @Input() translations!: ITranslations;
+    @Input() lesson!: Lesson;
+    @Input() pages!: LessonPage[];
+    @Input() versions!: FileStorage[];
+    @Input() metadata!: Metadata;
     @Input() isProject: boolean = true;
-    @Input() userPermissions: RolePermissions;
+    @Input() userPermissions!: RolePermissions;
 
     @Output() pagesChange: EventEmitter<LessonPage[]> = new EventEmitter<LessonPage[]>();
     @Output() iconChange: EventEmitter<FileData> = new EventEmitter<FileData>();
@@ -30,9 +30,9 @@ export class LessonDetailsMetadataComponent implements OnChanges {
     @Output() LoadPages: EventEmitter<any> = new EventEmitter<any>();
     @Output() reloadLessons = new EventEmitter<any>();
 
-    @ViewChild(LessonDetailsMetadataPropertiesComponent) propertiesComponent: LessonDetailsMetadataPropertiesComponent;
-    @ViewChild(LessonDetailsMetadataFormComponent) formComponent: LessonDetailsMetadataFormComponent;
-    @ViewChild(LessonDetailsMetadataPagesFormComponent) pagesFormComponent: LessonDetailsMetadataPagesFormComponent;
+    @ViewChild(LessonDetailsMetadataPropertiesComponent) propertiesComponent!: LessonDetailsMetadataPropertiesComponent;
+    @ViewChild(LessonDetailsMetadataFormComponent) formComponent!: LessonDetailsMetadataFormComponent;
+    @ViewChild(LessonDetailsMetadataPagesFormComponent) pagesFormComponent!: LessonDetailsMetadataPagesFormComponent;
 
     public isEditMode: boolean = false;
     public isEditPropertiesMode: boolean = false;

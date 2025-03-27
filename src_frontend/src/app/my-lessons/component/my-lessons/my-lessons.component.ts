@@ -26,27 +26,27 @@ declare let window: any;
     providers: [MyContentService, CategoriesService]
 })
 export class MyLessonsComponent implements OnInit {
-    @ViewChild(LessonDetailsComponent) lessonDetailsComponent: LessonDetailsComponent;
-    @ViewChildren(LessonCardComponent) lessonCardComponent: QueryList<LessonCardComponent>;
-    @ViewChild('contentmain') contentmain: ElementRef;
+    @ViewChild(LessonDetailsComponent) lessonDetailsComponent!: LessonDetailsComponent;
+    @ViewChildren(LessonCardComponent) lessonCardComponent!: QueryList<LessonCardComponent>;
+    @ViewChild('contentmain') contentmain!: ElementRef;
 
 
     public projects: any;
-    public lessons: Lesson[];
-    public categories: Category[];
-    public user: AuthUser;
+    public lessons!: Lesson[];
+    public categories!: Category[];
+    public user!: AuthUser;
     public selectedLessons: Lesson[] = [];
-    public originalSpaceId: number;
+    public originalSpaceId!: number;
     public lessonsPageSize = 16;
     public lessonsPagesCount: number = 1;
     public trashPagesCount: number = 1;
     public lessonsPageIndex: number = 1;
     public trashPageIndex: number = 1;
     public lessonsOrder: LessonsOrder = new LessonsOrder();
-    public userPermissions: RolePermissions;
+    public userPermissions!: RolePermissions;
 
     public isListLessonsShow = true;
-    public selectedLessonId: number;
+    public selectedLessonId!: number;
 
     public isCtrlPressed = false;
 
@@ -70,26 +70,26 @@ export class MyLessonsComponent implements OnInit {
     public isView: boolean = false;
     public projectStructure: Subspace = null;
     public publicationName: string = "";
-    public currentProject: Space;
+    public currentProject!: Space;
     public detailsVisible = false;
 
-    public editLessonToken: EditToken;
-    public editAddonToken: EditToken;
+    public editLessonToken!: EditToken;
+    public editAddonToken!: EditToken;
     public isDeleteLessonPopupVisible: boolean = false;
     public isCopyToAnotherUserPopupVisible: boolean = false;
-    public lessonsToDelete: Lesson[];
-    public translations: ITranslations;
+    public lessonsToDelete!: Lesson[];
+    public translations!: ITranslations;
     public lessonsToShow: Lesson[] = [];
-    public addonsToShow: Lesson[];
-    public trashToShow: Lesson[];
+    public addonsToShow!: Lesson[];
+    public trashToShow!: Lesson[];
     public allLessons: Lesson[] = [];
     public shouldShowAddons = false;
     public shouldShowTrash = false;
-    public mainCategory: Category = null;
+    public mainCategory!: Category = null;
 
     public assetsUrl = window['mAuthorAssetsUrl'];
 
-    public selectedLesson: Lesson;
+    public selectedLesson!: Lesson;
 
     constructor(private _infoMessage: InfoMessageService,
                 private _user: AuthUserService,
@@ -117,7 +117,9 @@ export class MyLessonsComponent implements OnInit {
     }
 
     ngOnInit() {
-        this._translations.getTranslations().subscribe(t => this.translations = t);
+        this._translations.getTranslations().subscribe(t => {
+            this.translations = t ?? {} as ITranslations;
+        });
 
         this._route.data.subscribe(data => {
             this.isProject = data.isProject || false;
@@ -246,13 +248,13 @@ export class MyLessonsComponent implements OnInit {
                 }
             });
 
-            this._projects.projectForPublication(this.originalSpaceId).subscribe(project => {
+            this._projects.projectForPublication(this.originalSpaceId.toString()).subscribe(project => {
                 const fetch = !this.currentProject || this.currentProject.id !== project.id;
                 this.currentProject = project;
                 this.projectName = project.title;
                 if (fetch) {
                     this.projectStructure = null;
-                    this._projects.getStructure(this.currentProject.id, false).subscribe(structure => {
+                    this._projects.getStructure(this.currentProject.id.toString(), false).subscribe(structure => {
                         this.projectStructure = structure;
                         this.projectStructure.subspaces.sort(function (a: Subspace, b: Subspace) {
                             return (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0);
@@ -260,7 +262,7 @@ export class MyLessonsComponent implements OnInit {
                     });
                 }
 
-                this._projects.getStructure(this.originalSpaceId, false).subscribe(structure => {
+                this._projects.getStructure(this.originalSpaceId.toString(), false).subscribe(structure => {
                     this.publicationName = structure.name;
                 });
 

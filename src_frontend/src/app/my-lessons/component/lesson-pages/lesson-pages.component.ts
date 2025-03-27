@@ -11,18 +11,21 @@ import { TranslationsService } from "../../../common/service";
 })
 export class LessonPagesComponent implements OnInit {
 
-    @Input() pages: MergeLesson[];
+    @Input() pages!: MergeLesson[];
     @Input() commons: MergeLesson[] = [];
-    @Input() lesson: Lesson;
-    public translations: ITranslations;
+    @Input() lesson!: Lesson;
+    public translations!: ITranslations;
 
     constructor(
         private _translations: TranslationsService
     ) {}
 
     ngOnInit() {
-        this._translations.getTranslations().subscribe(t => this.translations = t);
+        this._translations.getTranslations().subscribe(t => {
+            this.translations = t ?? {} as ITranslations;
+        });
     }
+    
 
     public selectAll() {
         this.pages.forEach(page => {
