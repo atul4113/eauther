@@ -26,7 +26,7 @@ export class AppComponent implements OnInit {
     ngOnInit() {
         this._translations
             .getTranslations()
-            .subscribe((t) => (this.translations = t));
+            .subscribe((t) => (this.translations = t ?? {} as ITranslations))
         this._infoMessage.init();
 
         forkJoin([
@@ -39,7 +39,7 @@ export class AppComponent implements OnInit {
 
         this._translations
             .getTranslations()
-            .subscribe((translations: ITranslations) => {
+            .subscribe((translations: any) => {
                 this.translations = translations;
                 this.translationsReady = true;
             });

@@ -42,7 +42,7 @@ export class MyContentService {
     public getLessonDetails(id: number): Observable<Lesson> {
         return this._restClient
             .get(`${MY_CONTENT_URL}${id}`)
-            .pipe(map((lesson) => new Lesson(lesson)));
+            .pipe(map((lesson:any) => new Lesson(lesson)));
     }
 
     public updateLessonIcon(lesson: Lesson, icon: FileData): Observable<any> {
@@ -59,7 +59,7 @@ export class MyContentService {
         return this._restClient
             .get(url)
             .pipe(
-                map((response: ILessonRaw) =>
+                map((response: any) =>
                     Metadata.fromLesson(new Lesson(response))
                 )
             );
@@ -100,7 +100,7 @@ export class MyContentService {
 
     public getLessonAssets(lessonId: number): Observable<Asset[]> {
         return this._restClient.get(MY_CONTENT_URL + lessonId + "/assets").pipe(
-            map((response) => {
+            map((response:any) => {
                 return response.assets.map((asset:any) => new Asset(asset));
             })
         );
@@ -110,7 +110,7 @@ export class MyContentService {
         return this._restClient
             .get(MY_CONTENT_URL + lessonId + "/history")
             .pipe(
-                map((response) => {
+                map((response:any) => {
                     return response.map(
                         (fileStorage:any) => new FileStorage(fileStorage)
                     );
@@ -124,7 +124,7 @@ export class MyContentService {
         return this._restClient
             .get(url)
             .pipe(
-                map((response) => response.map((page:any) => new LessonPage(page)))
+                map((response:any) => response.map((page:any) => new LessonPage(page)))
             );
     }
 
@@ -138,7 +138,7 @@ export class MyContentService {
         return this._restClient
             .put(url, data)
             .pipe(
-                map((response) => response.map((page:any) => new LessonPage(page)))
+                map((response:any) => response.map((page:any) => new LessonPage(page)))
             );
     }
 
@@ -146,7 +146,7 @@ export class MyContentService {
         const url = `${MY_CONTENT_URL}${lessonId}${LESSON_BUGS_SUFFIX}`;
         return this._restClient
             .get(url)
-            .pipe(map((response) => response.map((bugRaw:any) => new Bug(bugRaw))));
+            .pipe(map((response:any) => response.map((bugRaw:any) => new Bug(bugRaw))));
     }
 
     public reportLessonBug(lesson: Lesson, bug: Bug): Observable<Bug> {
@@ -161,7 +161,7 @@ export class MyContentService {
 
     public getRecentlyEditedLessons(): Observable<Lesson[]> {
         return this._restClient.get(EDITED_LESSONS_URL).pipe(
-            map((response) => {
+            map((response:any) => {
                 return response.content.map((lesson:any) => new Lesson(lesson));
             })
         );
@@ -260,9 +260,9 @@ export class MyContentService {
         }
 
         return this._restClient.get(url).pipe(
-            map((response: { lessons: ILessonRaw[]; more_count: number }) => {
+            map((response: any) => {
                 const lessons = response.lessons.map(
-                    (lesson) => new Lesson(lesson)
+                    (lesson:any) => new Lesson(lesson)
                 );
                 return { lessons: lessons, moreCount: response.more_count };
             })
@@ -326,9 +326,9 @@ export class MyContentService {
         }
 
         return this._restClient.get(url).pipe(
-            map((response: { lessons: ILessonRaw[]; more_count: number }) => {
+            map((response: any) => {
                 const lessons = response.lessons.map(
-                    (lesson) => new Lesson(lesson)
+                    (lesson:any) => new Lesson(lesson)
                 );
                 return { lessons: lessons, moreCount: response.more_count };
             })
@@ -420,7 +420,7 @@ export class MyContentService {
         return this._restClient
             .get(MY_CONTENT_URL + contentId + "/" + spaceId + "/page_list")
             .pipe(
-                map((response) => {
+                map((response:any) => {
                     return {
                         pages: response.pages_chapters.map(
                             (page:any) => new MergeLesson(page)
@@ -443,13 +443,13 @@ export class MyContentService {
     public getEditLessonToken(): Observable<EditToken> {
         return this._restClient
             .get(EDIT_LESSON_TOKEN_URL)
-            .pipe(map((response) => new EditToken(response)));
+            .pipe(map((response:any) => new EditToken(response)));
     }
 
     public getEditAddonToken(): Observable<EditToken> {
         return this._restClient
             .get(EDIT_ADDON_TOKEN_URL)
-            .pipe(map((response) => new EditToken(response)));
+            .pipe(map((response:any) => new EditToken(response)));
     }
 
     private mapLessonsOrder(order: LessonsOrder): string {
