@@ -90,7 +90,7 @@ export class Lesson {
     public title: string;
     public author: string;
     public state: string;
-    public modifiedDate: Date;
+    public modifiedDate: any;
     public version: string;
     public iconHref: string;
     public isPublic: boolean;
@@ -107,15 +107,12 @@ export class Lesson {
     public enablePageMetadata: boolean;
     public scoreType: string;
     public contentType: LessonContentType;
-    public customValues: CustomMetadata[];
+    public customValues: any;
     public followers: string[] = [];
     public isDeleted: boolean;
 
     public _ui: UserInterface = new UserInterface();
-    public content: {
-        pages: MergeLesson[],
-        commons: MergeLesson[]
-    };
+    public content: any;
 
     constructor (lesson: ILessonRaw) {
         this.id = lesson.id;
@@ -214,7 +211,7 @@ export class LessonPage {
     public tags: string;
     public shortDescription: string;
     public description: string;
-    public customValues: CustomMetadata[];
+    public customValues: any;
 
     constructor (page: ILessonPageRaw) {
         this.id = page.page_id;
@@ -238,7 +235,7 @@ export class LessonPage {
             tags: this.tags,
             short_description: this.shortDescription,
             description: this.description,
-            custom_values: this.customValues ? this.customValues.map(cv => cv.raw()) : null
+            custom_values: this.customValues ? this.customValues.map((cv:any) => cv.raw()) : null
         };
     }
 
@@ -320,7 +317,7 @@ export class Metadata {
     public description: string;
     public customValues: CustomMetadata[];
 
-    constructor (title: string, tags: string, shortDescription: string, description: string, customValues: CustomMetadata[], id: number | string = null) {
+    constructor (title: string, tags: string, shortDescription: string, description: string, customValues: CustomMetadata[], id: any | string = null) {
         this.title = title;
         this.tags = tags;
         this.shortDescription = shortDescription;
@@ -357,7 +354,7 @@ export class Metadata {
             this.tags,
             this.shortDescription,
             this.description,
-            this.customValues ? this.customValues.map(cv => cv.copy()) : null,
+            this.customValues ? this.customValues.map(cv => cv.copy()) : null as any,
             this.id
         );
     }
@@ -427,7 +424,7 @@ export class CustomMetadata {
 
     public raw (withoutId: boolean = false): ICustomMetadataRaw {
         return {
-            id: withoutId ? undefined : this.id,
+            id: withoutId ? undefined as any : this.id, 
             name: this.name,
             description: this.description,
             value: this.definedValue,

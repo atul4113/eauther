@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, Output, ViewChild } from '@angular/core';
-import { Observable } from "rxjs/Observable";
+import { Observable } from "rxjs";
 import { mergeMap, map } from "rxjs/operators";
 
 import { LessonDetailsMetadataBaseFormComponent } from "../lesson-details-metadata-base-form/lesson-details-metadata-base-form.component";
@@ -21,15 +21,15 @@ import { MyContentService } from "../../service/my-content.service";
 })
 export class LessonDetailsMetadataFormComponent implements OnChanges {
 
-    @ViewChild(LessonDetailsMetadataBaseFormComponent) baseFormComponent: LessonDetailsMetadataBaseFormComponent;
+    @ViewChild(LessonDetailsMetadataBaseFormComponent) baseFormComponent!: LessonDetailsMetadataBaseFormComponent;
 
-    @Input() translations: ITranslations;
-    @Input() lesson: Lesson;
-    @Input() metadata: Metadata;
+    @Input() translations!: ITranslations;
+    @Input() lesson!: Lesson;
+    @Input() metadata!: Metadata;
     @Input() isProject: boolean = true;
     @Output() isValidChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-    public data: Metadata;
+    public data!: Metadata;
 
     constructor (
         private _myContent: MyContentService

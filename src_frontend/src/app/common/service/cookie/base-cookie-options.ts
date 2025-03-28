@@ -16,13 +16,21 @@ export class CookieOptions {
   secure: boolean;
 
   constructor({path, domain, expires, secure}: CookieOptionsArgs = {}) {
-    this.path = this.isPresent(path) ? path : null;
-    this.domain = this.isPresent(domain) ? domain : null;
-    this.expires = this.isPresent(expires) ? expires : null;
-    this.secure = this.isPresent(secure) ? secure : false;
+    this.path = path ?? "";
+    this.domain = domain ?? "";
+    this.expires = expires ?? "";
+    this.secure = secure ?? false;
   }
 
   merge(options?: CookieOptionsArgs): CookieOptions {
+    if (!options) {
+      return new CookieOptions({
+        path: this.path,
+        domain: this.domain,
+        expires: this.expires,
+        secure: this.secure
+      });
+    }
     return new CookieOptions(<CookieOptionsArgs>{
       path: this.isPresent(options) && this.isPresent(options.path) ? options.path : this.path,
       domain: this.isPresent(options) && this.isPresent(options.domain) ? options.domain :

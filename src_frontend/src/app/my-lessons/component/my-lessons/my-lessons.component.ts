@@ -13,9 +13,6 @@ import {
 import {LessonDetailsComponent} from "../lesson-details/lesson-details.component";
 import {RolePermissions} from "../../../common/model/auth-user";
 import {LessonCardComponent} from "../lesson-card/lesson-card.component";
-import {Observer} from "rxjs/Observer";
-import {NOT_FOUND_CHECK_ONLY_ELEMENT_INJECTOR} from "@angular/core/src/view/provider";
-import {MatMenu} from "@angular/material";
 
 
 declare let document: any;
@@ -26,27 +23,27 @@ declare let window: any;
     providers: [MyContentService, CategoriesService]
 })
 export class MyLessonsComponent implements OnInit {
-    @ViewChild(LessonDetailsComponent) lessonDetailsComponent: LessonDetailsComponent;
-    @ViewChildren(LessonCardComponent) lessonCardComponent: QueryList<LessonCardComponent>;
-    @ViewChild('contentmain') contentmain: ElementRef;
+    @ViewChild(LessonDetailsComponent) lessonDetailsComponent!: LessonDetailsComponent;
+    @ViewChildren(LessonCardComponent) lessonCardComponent!: QueryList<LessonCardComponent>;
+    @ViewChild('contentmain') contentmain!: ElementRef;
 
 
     public projects: any;
-    public lessons: Lesson[];
-    public categories: Category[];
-    public user: AuthUser;
+    public lessons!: Lesson[];
+    public categories!: Category[];
+    public user!: AuthUser;
     public selectedLessons: Lesson[] = [];
-    public originalSpaceId: number;
+    public originalSpaceId!: number;
     public lessonsPageSize = 16;
     public lessonsPagesCount: number = 1;
     public trashPagesCount: number = 1;
     public lessonsPageIndex: number = 1;
     public trashPageIndex: number = 1;
     public lessonsOrder: LessonsOrder = new LessonsOrder();
-    public userPermissions: RolePermissions;
+    public userPermissions!: RolePermissions;
 
     public isListLessonsShow = true;
-    public selectedLessonId: number;
+    public selectedLessonId!: number;
 
     public isCtrlPressed = false;
 
@@ -62,34 +59,34 @@ export class MyLessonsComponent implements OnInit {
     public copyToAnotherUserPopupTitle = 'Copy content to account';
     public isUpdateTemplatePopupVisible = false;
 
-    public lessonsToMerge = [];
-    public pagesToMerge = [];
+    public lessonsToMerge: Lesson[] = [];
+    public pagesToMerge: LessonToMerge[] = [];
 
     public projectName: string = "";
     public isProject: boolean = false;
     public isView: boolean = false;
-    public projectStructure: Subspace = null;
+    public projectStructure: any;
     public publicationName: string = "";
-    public currentProject: Space;
+    public currentProject!: Space;
     public detailsVisible = false;
 
-    public editLessonToken: EditToken;
-    public editAddonToken: EditToken;
+    public editLessonToken!: EditToken;
+    public editAddonToken!: EditToken;
     public isDeleteLessonPopupVisible: boolean = false;
     public isCopyToAnotherUserPopupVisible: boolean = false;
-    public lessonsToDelete: Lesson[];
-    public translations: ITranslations;
+    public lessonsToDelete!: Lesson[];
+    public translations!: ITranslations;
     public lessonsToShow: Lesson[] = [];
-    public addonsToShow: Lesson[];
-    public trashToShow: Lesson[];
+    public addonsToShow!: Lesson[];
+    public trashToShow!: Lesson[];
     public allLessons: Lesson[] = [];
     public shouldShowAddons = false;
     public shouldShowTrash = false;
-    public mainCategory: Category = null;
+    public mainCategory: any;
 
     public assetsUrl = window['mAuthorAssetsUrl'];
 
-    public selectedLesson: Lesson;
+    public selectedLesson!: Lesson;
 
     constructor(private _infoMessage: InfoMessageService,
                 private _user: AuthUserService,
@@ -103,12 +100,12 @@ export class MyLessonsComponent implements OnInit {
     ) {
     }
 
-    public get spaceId(): number {
-        return this.originalSpaceId || (this.user ? this.user.privateSpace.id : null);
+    public get spaceId(): any {
+        return this.originalSpaceId || (this.user ? this.user.privateSpace : null);
     }
 
-    public get privateSpaceId(): number {
-        return this.user.privateSpace.id;
+    public get privateSpaceId(): any {
+        return this.user.privateSpace;
     }
 
 
@@ -117,7 +114,9 @@ export class MyLessonsComponent implements OnInit {
     }
 
     ngOnInit() {
-        this._translations.getTranslations().subscribe(t => this.translations = t);
+        this._translations.getTranslations().subscribe(t => {
+            this.translations = t ?? {} as ITranslations;
+        });
 
         this._route.data.subscribe(data => {
             this.isProject = data.isProject || false;
@@ -157,7 +156,7 @@ export class MyLessonsComponent implements OnInit {
 
         this._projects.get().subscribe(projects => {
             this.projects = projects;
-            this.projects.forEach((project) => {
+            this.projects.forEach((project:any) => {
                 project.publications = undefined;
             });
             this.projects.sort(function (a: Space, b: Space) {
@@ -219,7 +218,7 @@ export class MyLessonsComponent implements OnInit {
     get currentProjectPublications(): Array<Space> {
         let publications: Array<Space> = [];
         if (this.currentProject && this.projects) {
-            this.projects.forEach(project => {
+            this.projects.forEach((project:any) => {
                 if (this.currentProject.id === project.id) {
                     this.downloadPublications(project);
                     publications = project.publications;
@@ -229,7 +228,7 @@ export class MyLessonsComponent implements OnInit {
         return publications;
     }
 
-    private init(params) {
+    private init(params:any) {
         if (!this.isView) {
             this.originalSpaceId = params['id'] || null;
         } else {
@@ -239,20 +238,20 @@ export class MyLessonsComponent implements OnInit {
         this.hideDetails();
 
         if (this.isProject) {
-            this._projects.getSpacePermissions(this.originalSpaceId).subscribe(permissions => {
+            this._projects.getSpacePermissions(this.originalSpaceId.toString()).subscribe(permissions => {
                 this.userPermissions = permissions;
                 if (this.userPermissions.contentViewLessonsAddons) {
                     this.detectSort();
                 }
             });
 
-            this._projects.projectForPublication(this.originalSpaceId).subscribe(project => {
+            this._projects.projectForPublication(this.originalSpaceId.toString()).subscribe(project => {
                 const fetch = !this.currentProject || this.currentProject.id !== project.id;
                 this.currentProject = project;
                 this.projectName = project.title;
                 if (fetch) {
                     this.projectStructure = null;
-                    this._projects.getStructure(this.currentProject.id, false).subscribe(structure => {
+                    this._projects.getStructure(this.currentProject.id.toString(), false).subscribe(structure => {
                         this.projectStructure = structure;
                         this.projectStructure.subspaces.sort(function (a: Subspace, b: Subspace) {
                             return (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0);
@@ -260,7 +259,7 @@ export class MyLessonsComponent implements OnInit {
                     });
                 }
 
-                this._projects.getStructure(this.originalSpaceId, false).subscribe(structure => {
+                this._projects.getStructure(this.originalSpaceId.toString(), false).subscribe(structure => {
                     this.publicationName = structure.name;
                 });
 
@@ -276,8 +275,8 @@ export class MyLessonsComponent implements OnInit {
         }
     }
 
-    public getAddons(spaceId) {
-        this.addonsToShow = undefined;
+    public getAddons(spaceId:any) {
+        this.addonsToShow = [];
         this._myContent.getAllAddons(spaceId).subscribe(lessons => {
 
             this.addonsToShow = lessons;
@@ -291,8 +290,8 @@ export class MyLessonsComponent implements OnInit {
         }
     }
 
-    public getTrash(pageIndex, spaceId) {
-        this.trashToShow = undefined;
+    public getTrash(pageIndex:number, spaceId:number) {
+        this.trashToShow = [];
         this.trashPageIndex = pageIndex;
         this._myContent.getTrashPage(pageIndex, spaceId).subscribe(trashPage => {
                 this.trashPagesCount = pageIndex;
@@ -323,9 +322,9 @@ export class MyLessonsComponent implements OnInit {
         }
     }
 
-    private _loadLessonsPage(pageIndex: number, spaceId: number = null, order: LessonsOrder = new LessonsOrder()) {
+    private _loadLessonsPage(pageIndex: number, spaceId: any = null, order: LessonsOrder = new LessonsOrder()) {
         if (!this.isView) {
-            this.lessons = undefined;
+            this.lessons = [];
             this.lessonsPageIndex = pageIndex;
             this._myContent.getLessonsPage(pageIndex, spaceId, order).subscribe(lessonsPage => {
                     this.lessonsPagesCount = pageIndex;
@@ -481,7 +480,7 @@ export class MyLessonsComponent implements OnInit {
         }
     }
 
-    public onLessonEdit(lessonId) {
+    public onLessonEdit(lessonId:any) {
         let cardComponent = this.lessonCardComponent.filter(lessonCard => lessonCard.lesson.id == lessonId);
         if (cardComponent[0].lesson.contentType.isLesson()) {
             this._myContent.getEditLessonToken().subscribe(editToken => {
@@ -496,7 +495,7 @@ export class MyLessonsComponent implements OnInit {
         }
     }
 
-    public onLessonPreview(lesson) {
+    public onLessonPreview(lesson:any) {
         let redirectUrl;
         if (this.isProject) {
             redirectUrl = '/corporate/view/' + lesson.id;
@@ -663,7 +662,7 @@ export class MyLessonsComponent implements OnInit {
     public listPage() {
         this.clearMergedPages();
         this.lessonsToMerge = [];
-        this.selectedLessons.forEach(lesson => {
+        this.selectedLessons.forEach((lesson:Lesson) => {
             if (lesson.content) {
                 this.lessonsToMerge.push(lesson);
             } else {
@@ -685,10 +684,10 @@ export class MyLessonsComponent implements OnInit {
     public onMergeSelect() {
         this.lessonsToMerge.forEach((lesson: Lesson, index) => {
             let lessonObj = new LessonToMerge({
-                'common_pages': [],
-                'content_id': lesson.id,
-                'title': lesson.title,
-                'pages': []
+                common_pages: [],
+                content_id: lesson.id,
+                title: lesson.title,
+                pages: []
             });
 
             lesson.content.pages.forEach((page: MergeLesson) => {
@@ -758,12 +757,12 @@ export class MyLessonsComponent implements OnInit {
     public onDeleteLessonAccept() {
         this._deleteLessons();
         this.isDeleteLessonPopupVisible = false;
-        this.lessonsToDelete = null;
+        this.lessonsToDelete = [];
     }
 
     public onDeleteLessonReject() {
         this.isDeleteLessonPopupVisible = false;
-        this.lessonsToDelete = null;
+        this.lessonsToDelete = [];
     }
 
     public scrollToTop() {
@@ -848,10 +847,10 @@ export class MyLessonsComponent implements OnInit {
 
     public downloadPublications(project: Space) {
         if (!project.publications) {
-            this._projects.getPublications(project.id).subscribe((publications) => {
+            this._projects.getPublications(project.id.toString()).subscribe((publications) => {
                 this.projects.forEach((p: Space) => {
                     if (p.id === project.id) {
-                        p.publications = publications;
+                        p.publications && p.publications == publications;
                     }
                 });
             });
@@ -876,7 +875,7 @@ export class MyLessonsComponent implements OnInit {
         }
     }
 
-    public undelete(event) {
+    public undelete(event:Event) {
         event.stopPropagation();
         if (this.userPermissions && this.userPermissions.contentRemoveLessonsAddons) {
             if (!this.isProject) {

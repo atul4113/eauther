@@ -10,7 +10,7 @@ export class Bug {
     public id: number;
     public title: string = '';
     public description: string = '';
-    public username: string;
+    public username: any;
     public createdDate: Date;
 
     constructor (bug?: IBugRaw) {

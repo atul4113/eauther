@@ -14,10 +14,10 @@ import { RolePermissions } from "../../../common/model/auth-user";
 })
 export class LessonDetailsMetadataBaseInfoComponent implements OnChanges {
 
-    @Input() translations: ITranslations;
-    @Input() lesson: Lesson;
-    @Input() versions: FileStorage[];
-    @Input() userPermissions: RolePermissions;
+    @Input() translations!: ITranslations;
+    @Input() lesson!: Lesson;
+    @Input() versions!: FileStorage[];
+    @Input() userPermissions!: RolePermissions;
 
     public lastModifiedBy: string = '';
 
@@ -32,7 +32,7 @@ export class LessonDetailsMetadataBaseInfoComponent implements OnChanges {
         }
     }
 
-    public publishLesson(contentId: any, event) {
+    public publishLesson(contentId: any, event:any) {
         if(this.userPermissions && this.userPermissions.contentPublishLessons) {
             event.stopPropagation();
             this._myContent.publishLesson(contentId).subscribe();
@@ -41,7 +41,7 @@ export class LessonDetailsMetadataBaseInfoComponent implements OnChanges {
         }
     }
 
-    public unpublishLesson(contentId: any, event) {
+    public unpublishLesson(contentId: any, event:any) {
         if(this.userPermissions && this.userPermissions.contentPublishLessons) {
             event.stopPropagation();
             this._myContent.unpublicLesson(contentId).subscribe();

@@ -1,5 +1,6 @@
 import { Component, Input, OnChanges, QueryList, ViewChildren } from '@angular/core';
-import { Observable } from "rxjs/Observable";
+import { forkJoin, Observable } from "rxjs";
+
 import "rxjs/add/observable/forkJoin";
 
 import { LessonDetailsMetadataBaseFormComponent } from "../lesson-details-metadata-base-form/lesson-details-metadata-base-form.component";
@@ -25,14 +26,14 @@ import { ITranslations } from "../../../common/model/translations";
 })
 export class LessonDetailsMetadataPagesFormComponent implements OnChanges {
 
-    @ViewChildren(LessonDetailsMetadataBaseFormComponent) metadataComponents: QueryList<LessonDetailsMetadataBaseFormComponent>;
+    @ViewChildren(LessonDetailsMetadataBaseFormComponent) metadataComponents: any;
 
-    @Input() translations: ITranslations;
-    @Input() lesson: Lesson;
-    @Input() pages: LessonPage[];
+    @Input() translations: any;
+    @Input() lesson: any;
+    @Input() pages: any;
     @Input() isProject: boolean = true;
 
-    public data: Metadata[];
+    public data: any;
 
     constructor () {}
 
@@ -43,21 +44,20 @@ export class LessonDetailsMetadataPagesFormComponent implements OnChanges {
     }
 
     public edit () {
-        this.metadataComponents.forEach( item => {
+        this.metadataComponents.forEach( (item:any) => {
             item.edit();
         });
     }
 
     public save (): Observable<Metadata[]> {
-        return Observable.forkJoin(
-            this.metadataComponents.map(item => item.save())
-        );
+        return forkJoin(this.metadataComponents.map((item: any) => item.save())) as Observable<Metadata[]>;
     }
+    
 
     public reset () {
-        this.data = this.pages.map(page => Metadata.fromLessonPage(page));
+        this.data = this.pages.map((page:any) => Metadata.fromLessonPage(page));
         if (this.metadataComponents && this.metadataComponents.forEach) {
-            this.metadataComponents.forEach( item => {
+            this.metadataComponents.forEach( (item:any) => {
                 item.reset();
             });
         }

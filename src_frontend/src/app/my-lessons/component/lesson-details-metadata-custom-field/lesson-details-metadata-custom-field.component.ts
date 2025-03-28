@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges } from '@angular/core';
-import { Observable } from "rxjs/Observable";
+import { Observable, forkJoin, of } from "rxjs";
 import "rxjs/add/observable/of";
 
 import { CustomMetadata } from "../../model/lesson";
@@ -10,11 +10,11 @@ import { CustomMetadata } from "../../model/lesson";
     templateUrl: './lesson-details-metadata-custom-field.component.html'
 })
 export class LessonDetailsMetadataCustomFieldComponent implements OnChanges {
-    @Input() value: CustomMetadata;
+    @Input() value!: CustomMetadata;
 
-    public values: string[];
+    public values!: string[];
 
-    public editValue: CustomMetadata;
+    public editValue!: CustomMetadata;
 
     constructor () {}
 
@@ -37,7 +37,7 @@ export class LessonDetailsMetadataCustomFieldComponent implements OnChanges {
             this.editValue.value = "";
         }
 
-        return Observable.of(this.editValue);
+        return of(this.editValue);
     }
 
 }

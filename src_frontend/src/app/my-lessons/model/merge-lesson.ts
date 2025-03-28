@@ -9,7 +9,7 @@ export interface IMergeLessonRaw {
 
 export class MergeLesson {
   public index: string;
-  public isPage: boolean;
+  public isPage: any;
   public title: string;
   public indent: string = "";
   public _ui: UserInterface = new UserInterface();

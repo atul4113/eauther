@@ -11,22 +11,24 @@ import { Lesson } from "../../model/lesson";
 })
 export class ProjectStructureSelectComponent implements OnInit {
 
-    @Input() structure: Subspace;
-    @Input() hasLeftPadding: boolean;
-    @Input() projectId: any;
+    @Input() structure!: Subspace;
+    @Input() hasLeftPadding!: boolean;
+    @Input() projectId!: any;
     @Input() currentSpaceId: any;
-    @Input() lesson: Lesson;
-    @Input() shouldShowAddons: boolean;
+    @Input() lesson!: Lesson;
+    @Input() shouldShowAddons!: boolean;
     @Output() publicationChanged = new EventEmitter<any>();
     @Output() displayLessons = new EventEmitter<any>();
 
-    public translations: ITranslations;
+    public translations!: ITranslations;
 
     constructor(private _translations: TranslationsService) {
     }
 
     ngOnInit() {
-        this._translations.getTranslations().subscribe(t => this.translations = t);
+        this._translations.getTranslations().subscribe(t => {
+            this.translations = t ?? {} as ITranslations;
+        });
     }
 
     public showSubspaces(publication: Subspace) {

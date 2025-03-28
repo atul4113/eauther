@@ -10,7 +10,6 @@ import { InfoMessageService } from "../../../common/service/info-message.service
 import { MyContentService } from "../../service/my-content.service";
 import { RolePermissions } from "../../../common/model/auth-user";
 
-
 @Component({
     selector: 'app-lesson-details-metadata-icon',
     template: `
@@ -24,7 +23,7 @@ import { RolePermissions } from "../../../common/model/auth-user";
                     class="white">
                 <i class="material-icons">close</i>
             </button>
-            <button *ngIf="!isEditMode && (userPermissions && userPermissions.contentUploadLessonsAddonsIcon)"
+            <button *ngIf="!isEditMode && (userPermissions?.contentUploadLessonsAddonsIcon)"
                      mat-mini-fab color="primary"
                     (click)="toggleEditMode()"
                     class="white">
@@ -36,18 +35,17 @@ import { RolePermissions } from "../../../common/model/auth-user";
                          (selected)="onFileSelected($event)"
                          [ngClass]="{'hidden': isUploadingIcon}">
             </upload-file>
-            <app-loading *ngIf="isUploadingIcon"
-            ></app-loading>
+            <app-loading *ngIf="isUploadingIcon"></app-loading>
         </div>
     `
 })
 export class LessonDetailsMetadataIconComponent implements OnInit {
 
-    @Input() lesson: Lesson;
-    @Input() userPermissions: RolePermissions;
+    @Input() lesson!: Lesson;
+    @Input() userPermissions!: RolePermissions;
     @Output() iconChange: EventEmitter<FileData> = new EventEmitter<FileData>();
 
-    @ViewChild(UploadFileComponent) uploadFileComponent: UploadFileComponent;
+    @ViewChild(UploadFileComponent) uploadFileComponent?: UploadFileComponent;
 
     public isEditMode: boolean = false;
     public isUploadingIcon: boolean = false;
@@ -63,13 +61,15 @@ export class LessonDetailsMetadataIconComponent implements OnInit {
         this.isEditMode = !this.isEditMode;
     }
 
-    public onFileSelected (file: FileData) {
+    public onFileSelected (event: any) {
+        const file: FileData = event as FileData;
+        
         if (!file.isUploaded) {
             this.isUploadingIcon = true;
-            this.uploadFileComponent.upload().pipe(
+            this.uploadFileComponent?.upload().pipe(
                 mergeMap(
                 (uploadedFile: FileData) => {
-                    file = uploadedFile;
+                    file.fileId = Number(uploadedFile.fileId); // Ensure fileId is a number
                     return this._myContent.updateLessonIcon(this.lesson, uploadedFile);
                 })
             ).subscribe(
@@ -84,10 +84,9 @@ export class LessonDetailsMetadataIconComponent implements OnInit {
                     console.error(error);
                     this.isUploadingIcon = false;
                     this.isEditMode = false;
-                    this._infoMessage.addError('An error occured during saving Preview Icon.');
+                    this._infoMessage.addError('An error occurred during saving Preview Icon.');
                 }
-            )
+            );
         }
     }
-
 }

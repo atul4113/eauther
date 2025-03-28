@@ -18,17 +18,15 @@ export class CreateLessonService {
 
     public getTemplates(): Observable<Lesson[]> {
         return this._restClient.get(CREATE_LESSON_URL + "templates").pipe(
-            map(response => {
-                return response.content.map((lesson:any) => new Lesson(lesson));
-            })
+            map((response: any) => response.content.map((lesson: any) => new Lesson(lesson)))
+
         );
     }
 
     public getSimpleTemplates(): Observable<SimpleLesson[]> {
         return this._restClient.get(CREATE_LESSON_URL + "simpletemplates").pipe(
-            map(response => {
-                return response.content.map((simpleTemplate:any) => new SimpleLesson(simpleTemplate))
-            })
+            map((response:any) => response.content.map((simpleTemplate:any) => new SimpleLesson(simpleTemplate))
+            )
         );
     }
 

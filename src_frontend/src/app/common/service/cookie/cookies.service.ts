@@ -90,7 +90,7 @@ export class CookieService {
    * @param {CookieOptionsArgs} options (Optional) Options object.
    */
   remove(key: string, options?: CookieOptionsArgs): void {
-    this._cookieWriter()(key, undefined, options);
+    this._cookieWriter()(key, "", options);
   }
 
   /**

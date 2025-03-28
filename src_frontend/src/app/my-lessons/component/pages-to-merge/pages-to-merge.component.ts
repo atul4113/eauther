@@ -14,10 +14,10 @@ import { InfoMessageService, TranslationsService } from "../../../common/service
 })
 export class PagesToMergeComponent implements OnInit {
 
-    @Input() lessonsToMerge: LessonToMerge[];
+    @Input() lessonsToMerge: any;
     @Input() spaceId: any;
     @Output() mergeAction = new EventEmitter<Lesson>();
-    public translations: ITranslations;
+    public translations: any;
     public mergeInProgress: boolean = false;
 
     constructor(
@@ -34,7 +34,7 @@ export class PagesToMergeComponent implements OnInit {
         this.mergeInProgress = true;
 
         this._myContent.merge(this.spaceId, this.lessonsToMerge).subscribe(
-            (success) => {
+            (success:any) => {
                 let lesson = new Lesson(success.content);
                 this.mergeAction.emit(lesson);
                 this._infoMessage.addSuccess("Success");
