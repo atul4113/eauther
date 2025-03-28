@@ -24,7 +24,7 @@ export class InfoMessagesComponent implements OnInit, OnDestroy {
     public errorMessageType: number = 0;
     public message: InfoMessage | null = null;
     public serverEmail: string = "admin@mauthor.com";
-    public translations!: ITranslations;
+    public translations: ITranslations | null = null;
 
     private removeMessageTimeout: number | null = null;
 
@@ -34,12 +34,16 @@ export class InfoMessagesComponent implements OnInit, OnDestroy {
         private _translations: TranslationsService
     ) {}
 
-    ngOnInit() {
+    ngOnInit(): void {
         this._translations
             .getTranslations()
-            .subscribe((t) => (this.translations = t));
+            .subscribe((t: ITranslations | null) => {
+                if (t) {
+                    this.translations = t;
+                }
+            });
 
-        this._infoMessage.get().subscribe((message) => {
+        this._infoMessage.get().subscribe((message: InfoMessage | null) => {
             this.message = null;
             this.clearRemoveMessageTimeout();
             this.message = message;
@@ -56,7 +60,7 @@ export class InfoMessagesComponent implements OnInit, OnDestroy {
             }
         });
 
-        this._infoMessage.errors().subscribe((error) => {
+        this._infoMessage.errors().subscribe((error: number) => {
             if (error === 500 || error === 404) {
                 this.errorMessageType = error;
                 this.showErrorMessage = true;
@@ -72,20 +76,20 @@ export class InfoMessagesComponent implements OnInit, OnDestroy {
         });
     }
 
-    ngOnDestroy() {
+    ngOnDestroy(): void {
         this.clearRemoveMessageTimeout();
     }
 
-    public closeInfoMessage() {
+    public closeInfoMessage(): void {
         this.clearRemoveMessageTimeout();
         this.removeInfoMessage();
     }
 
-    private removeInfoMessage() {
+    private removeInfoMessage(): void {
         this.message = null;
     }
 
-    private clearRemoveMessageTimeout() {
+    private clearRemoveMessageTimeout(): void {
         if (this.removeMessageTimeout) {
             clearTimeout(this.removeMessageTimeout);
             this.removeMessageTimeout = null;

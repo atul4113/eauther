@@ -52,8 +52,8 @@ export class PopupBaseComponent implements OnInit {
     @Input() rejectLabel: string = "";
     @Input() autoClose: boolean = true;
 
-    @Output() accept = new EventEmitter<unknown>();
-    @Output() reject = new EventEmitter<unknown>();
+    @Output() accept = new EventEmitter<MouseEvent>();
+    @Output() reject = new EventEmitter<MouseEvent>();
     @Output() isVisibleChange = new EventEmitter<boolean>();
 
     ngOnInit(): void {
@@ -66,12 +66,12 @@ export class PopupBaseComponent implements OnInit {
         }
     }
 
-    public onAccept(event: unknown): void {
+    public onAccept(event: MouseEvent): void {
         this.accept.emit(event);
         this.hidePopup();
     }
 
-    public onReject(event: unknown): void {
+    public onReject(event: MouseEvent): void {
         this.reject.emit(event);
         this.hidePopup();
     }

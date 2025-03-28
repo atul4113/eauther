@@ -13,6 +13,7 @@ import { PopupBaseComponent } from "../popup-base/popup-base.component";
     selector: "popup-with-input",
     template: `
         <popup-base
+            #popupBase
             [acceptLabel]="acceptLabel"
             [rejectLabel]="rejectLabel"
             [(isVisible)]="isVisible"
@@ -38,7 +39,7 @@ import { PopupBaseComponent } from "../popup-base/popup-base.component";
     `,
 })
 export class PopupWithInputComponent implements OnInit {
-    @ViewChild(PopupBaseComponent) popupBase!: PopupBaseComponent;
+    @ViewChild('popupBase') popupBase!: PopupBaseComponent;
 
     @Input() isVisible: boolean = false;
     @Input() placeholder: string = "";
@@ -49,7 +50,7 @@ export class PopupWithInputComponent implements OnInit {
     @Input() rejectLabel: string = "";
     @Input() emptyWarningLabel: string = "";
     @Output() accept = new EventEmitter<string>();
-    @Output() reject = new EventEmitter<unknown>();
+    @Output() reject = new EventEmitter<MouseEvent>();
     @Output() isVisibleChange = new EventEmitter<boolean>();
 
     valueControl = new FormControl(this.defaultValue, [Validators.required]);
@@ -63,11 +64,10 @@ export class PopupWithInputComponent implements OnInit {
             this.rejectLabel = "Cancel";
         }
 
-        this.popupBase.onAccept = this.onAccept.bind(this);
         this.valueControl.markAsUntouched();
     }
 
-    public onAccept(event: unknown): void {
+    public onAccept(event: MouseEvent): void {
         this.valueControl.markAsTouched();
         if (this.valueControl.value && this.valueControl.value.length > 0) {
             this.accept.emit(this.valueControl.value);
@@ -75,7 +75,7 @@ export class PopupWithInputComponent implements OnInit {
         }
     }
 
-    public onReject(event: unknown): void {
+    public onReject(event: MouseEvent): void {
         this.reject.emit(event);
         this.hidePopup();
     }

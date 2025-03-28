@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 
 import { Language } from "../../../admin/model/language";
-import { Label } from "../../../admin/model/label";
+import { Label, ILabelRaw } from "../../../admin/model/label";
 import { ITranslations } from "../../../common/model/translations";
 import {
     TranslationsService,
@@ -24,8 +24,8 @@ export class AddLabelComponent implements OnInit {
 
     public newLabelKey: string = "";
     public newLabelValue: string = "";
-    public translations!: ITranslations;
-    public selectedLanguage!: Language;
+    public translations: ITranslations | null = null;
+    public selectedLanguage: Language | null = null;
 
     constructor(
         private _infoMessage: InfoMessageService,
@@ -36,7 +36,11 @@ export class AddLabelComponent implements OnInit {
     ngOnInit(): void {
         this._translations
             .getTranslations()
-            .subscribe((t) => (this.translations = t));
+            .subscribe((t: ITranslations | null) => {
+                if (t) {
+                    this.translations = t;
+                }
+            });
     }
 
     public addNewLabel(): void {
@@ -54,10 +58,12 @@ export class AddLabelComponent implements OnInit {
         let wasError: boolean = false;
 
         for (const lang of this.languages) {
-            const label = new Label();
-            label.language = lang.key;
-            label.key = this.newLabelKey;
-            label.value = this.newLabelValue;
+            const labelRaw: ILabelRaw = {
+                language: lang.key,
+                key: this.newLabelKey,
+                value: this.newLabelValue
+            };
+            const label = new Label(labelRaw);
             newLabels.push(label);
         }
 

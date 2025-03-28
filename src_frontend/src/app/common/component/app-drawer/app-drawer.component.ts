@@ -20,9 +20,8 @@ export class AppDrawerComponent implements OnInit {
 
     public isOpen: boolean = false;
     public assetsUrl: string = window.mAuthorAssetsUrl;
-
     public text: string = "";
-    public translations!: ITranslations;
+    public translations: ITranslations | null = null;
     public isFullSize: boolean = true;
 
     constructor(private _translations: TranslationsService) {}
@@ -30,7 +29,11 @@ export class AppDrawerComponent implements OnInit {
     ngOnInit(): void {
         this._translations
             .getTranslations()
-            .subscribe((t) => (this.translations = t));
+            .subscribe((t: ITranslations | null) => {
+                if (t) {
+                    this.translations = t;
+                }
+            });
     }
 
     public close(): void {
