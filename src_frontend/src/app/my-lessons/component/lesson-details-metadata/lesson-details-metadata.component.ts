@@ -10,7 +10,6 @@ import { InfoMessageService } from "../../../common/service";
 import { MyContentService } from "../../service/my-content.service";
 import { RolePermissions } from "../../../common/model/auth-user";
 
-
 @Component({
     selector: 'app-lesson-details-metadata',
     templateUrl: './lesson-details-metadata.component.html'
@@ -18,8 +17,8 @@ import { RolePermissions } from "../../../common/model/auth-user";
 export class LessonDetailsMetadataComponent implements OnChanges {
     @Input() translations!: ITranslations;
     @Input() lesson!: Lesson;
-    @Input() pages!: LessonPage[];
-    @Input() versions!: FileStorage[];
+    @Input() pages: LessonPage[] = [];
+    @Input() versions: FileStorage[] = [];
     @Input() metadata!: Metadata;
     @Input() isProject: boolean = true;
     @Input() userPermissions!: RolePermissions;
@@ -27,8 +26,8 @@ export class LessonDetailsMetadataComponent implements OnChanges {
     @Output() pagesChange: EventEmitter<LessonPage[]> = new EventEmitter<LessonPage[]>();
     @Output() iconChange: EventEmitter<FileData> = new EventEmitter<FileData>();
     @Output() metadataChange: EventEmitter<Metadata> = new EventEmitter<Metadata>();
-    @Output() LoadPages: EventEmitter<any> = new EventEmitter<any>();
-    @Output() reloadLessons = new EventEmitter<any>();
+    @Output() LoadPages: EventEmitter<void> = new EventEmitter<void>();
+    @Output() reloadLessons: EventEmitter<void> = new EventEmitter<void>();
 
     @ViewChild(LessonDetailsMetadataPropertiesComponent) propertiesComponent!: LessonDetailsMetadataPropertiesComponent;
     @ViewChild(LessonDetailsMetadataFormComponent) formComponent!: LessonDetailsMetadataFormComponent;
@@ -44,15 +43,14 @@ export class LessonDetailsMetadataComponent implements OnChanges {
     public isSavingPagesMetadata: boolean = false;
     public isPagesMetadataFormValid: boolean = true;
 
-    constructor (
+    constructor(
         private _infoMessage: InfoMessageService,
         private _myContent: MyContentService
     ) {}
 
-    ngOnChanges () {
-    }
+    ngOnChanges(): void {}
 
-    public onEditModeChange () {
+    public onEditModeChange(): void {
         this.isEditMode = !this.isEditMode;
 
         if (this.isEditMode) {
@@ -62,26 +60,30 @@ export class LessonDetailsMetadataComponent implements OnChanges {
         }
     }
 
-    public saveMetadata () {
+    public saveMetadata(): void {
         this.isSavingMetadata = true;
-        this.formComponent.save().subscribe((data: Metadata) => {
+        this.formComponent.save().subscribe(
+            (data: Metadata) => {
                 this.lesson.updateMetadata(data);
                 this.metadata = data;
                 this.metadataChange.emit(this.metadata);
-                this._infoMessage.addSuccess('Lesson metadata saved successfully.');
+                const successMessage = this.translations.labels['lesson.metadata.save.success'] ?? 'Lesson metadata saved successfully.';
+                this._infoMessage.addSuccess(successMessage);
                 this.isSavingMetadata = false;
                 this.isEditMode = false;
             },
-            (error) => {
+            (error: unknown) => {
                 console.error(error);
-                this._infoMessage.addError('An error occured during saving lesson metadata.');
+                const errorMessage = this.translations.labels['lesson.metadata.save.error'] ?? 'An error occurred during saving lesson metadata.';
+                this._infoMessage.addError(errorMessage);
                 this.lesson = this.lesson.copy();
                 this.isSavingMetadata = false;
                 this.isEditMode = false;
-            });
+            }
+        );
     }
 
-    public editPropertiesModeChange () {
+    public editPropertiesModeChange(): void {
         this.isEditPropertiesMode = !this.isEditPropertiesMode;
 
         if (this.isEditPropertiesMode) {
@@ -91,41 +93,45 @@ export class LessonDetailsMetadataComponent implements OnChanges {
         }
     }
 
-    public saveProperties () {
+    public saveProperties(): void {
         this.isSavingProperties = true;
-        this.propertiesComponent.save().subscribe((properties: LessonProperties) => {
+        this.propertiesComponent.save().subscribe(
+            (properties: LessonProperties) => {
                 this.lesson.updateProperties(properties);
-                this._infoMessage.addSuccess('Lesson properties saved successfully.');
+                const successMessage = this.translations.labels['lesson.properties.save.success'] ?? 'Lesson properties saved successfully.';
+                this._infoMessage.addSuccess(successMessage);
                 this.isSavingProperties = false;
                 this.isEditPropertiesMode = false;
                 this.reloadLessons.emit();
             },
-            (error) => {
+            (error: unknown) => {
                 console.error(error);
-                this._infoMessage.addError('An error occured during saving lesson properties.');
+                const errorMessage = this.translations.labels['lesson.properties.save.error'] ?? 'An error occurred during saving lesson properties.';
+                this._infoMessage.addError(errorMessage);
                 this.lesson = this.lesson.copy();
                 this.isSavingProperties = false;
                 this.isEditPropertiesMode = false;
-            });
+            }
+        );
     }
 
-    public onIconChange (icon: FileData) {
+    public onIconChange(icon: FileData): void {
         this.iconChange.emit(icon);
     }
 
-    public isMetadataFormValidChanged (isValid: boolean) {
+    public isMetadataFormValidChanged(isValid: boolean): void {
         this.isMetadataFormValid = isValid;
     }
 
-    public onTogglePagesModeChange (isOpen: boolean) {
+    public onTogglePagesModeChange(isOpen: boolean): void {
         this.isPagesMetadataOpen = isOpen;
 
         if (this.isPagesMetadataOpen) {
-            this.LoadPages.emit(null);
+            this.LoadPages.emit();
         }
     }
 
-    public onEditPagesModeChange () {
+    public onEditPagesModeChange(): void {
         this.isEditPagesMode = !this.isEditPagesMode;
 
         if (this.isEditPagesMode) {
@@ -135,30 +141,36 @@ export class LessonDetailsMetadataComponent implements OnChanges {
         }
     }
 
-    public savePagesMetadata () {
+    public savePagesMetadata(): void {
         this.isSavingPagesMetadata = true;
-        this.pagesFormComponent.save().subscribe((data) => {
-            let pages = this.pages.map(page => page.copy());
-            data.forEach(metadata => {
-                const page = pages.find(p => p.id === metadata.id);
-                if (page) {
-                    page.updateMetadata(metadata);
-                }
-            });
+        this.pagesFormComponent.save().subscribe(
+            (data: Metadata[]) => {
+                const pages = this.pages.map(page => page.copy());
+                data.forEach((metadata: Metadata) => {
+                    const page = pages.find(p => p.id === metadata.id);
+                    if (page) {
+                        page.updateMetadata(metadata);
+                    }
+                });
 
-            this._myContent.updateLessonPagesMetadata(this.lesson, pages).subscribe(() => {
-                this._infoMessage.addSuccess('Lesson pages metadata saved successfully.');
-                this.pages = pages;
-                this.isSavingPagesMetadata = false;
-                this.isEditPagesMode = false;
-            },
-            (error) => {
-                console.error(error);
-                this._infoMessage.addError('An error occured during saving lesson pages metadata.');
-                this.pages = this.pages.map(page => page.copy());
-                this.isSavingPagesMetadata = false;
-                this.isEditPagesMode = false;
-            });
-        });
+                this._myContent.updateLessonPagesMetadata(this.lesson, pages).subscribe(
+                    () => {
+                        const successMessage = this.translations.labels['lesson.pages.metadata.save.success'] ?? 'Lesson pages metadata saved successfully.';
+                        this._infoMessage.addSuccess(successMessage);
+                        this.pages = pages;
+                        this.isSavingPagesMetadata = false;
+                        this.isEditPagesMode = false;
+                    },
+                    (error: unknown) => {
+                        console.error(error);
+                        const errorMessage = this.translations.labels['lesson.pages.metadata.save.error'] ?? 'An error occurred during saving lesson pages metadata.';
+                        this._infoMessage.addError(errorMessage);
+                        this.pages = this.pages.map(page => page.copy());
+                        this.isSavingPagesMetadata = false;
+                        this.isEditPagesMode = false;
+                    }
+                );
+            }
+        );
     }
 }

@@ -23,7 +23,7 @@ export class AppHeaderComponent implements OnInit {
     public activeSection: string = "";
     public assetsUrl: string = window.mAuthorAssetsUrl;
     public text: string = "";
-    public translations!: ITranslations;
+    public translations: ITranslations | null = null;
     public logoId: number = 0;
     public isFullSize: boolean = true;
 
@@ -36,19 +36,29 @@ export class AppHeaderComponent implements OnInit {
     ngOnInit(): void {
         this._translations
             .getTranslations()
-            .subscribe((t) => (this.translations = t));
+            .subscribe((t: ITranslations | null) => {
+                if (t) {
+                    this.translations = t;
+                }
+            });
 
-        this._paths.onActiveSectionChange().subscribe((activeSection) => {
-            this.activeSection = activeSection;
+        this._paths.onActiveSectionChange().subscribe((activeSection: string | number | null) => {
+            if (typeof activeSection === 'string') {
+                this.activeSection = activeSection;
+            }
         });
 
-        this._logo.get().subscribe((logo) => {
+        this._logo.get().subscribe((logo: number) => {
             this.logoId = logo;
         });
 
-        this.activeSection = this._paths.getActiveSection(
-            this._paths.getCurrentPath()
-        );
+        const currentPath = this._paths.getCurrentPath();
+        if (currentPath) {
+            const section = this._paths.getActiveSection(currentPath);
+            if (typeof section === 'string') {
+                this.activeSection = section;
+            }
+        }
     }
 
     public onSearchSubmit(): void {

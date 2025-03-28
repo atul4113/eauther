@@ -17,6 +17,6 @@ export class LessonToMerge {
     this.common_pages = mergeLesson.common_pages;
     this.title = mergeLesson.title;
     this.content_id = mergeLesson.content_id;
-    this.common_pages = mergeLesson.common_pages;
+    // this.common_pages = mergeLesson.common_pages;
   }
 }

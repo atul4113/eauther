@@ -24,10 +24,10 @@ export class CorporateProjectsListComponent {
 
     getPublications(project: Space){
         if(!project.publications) {
-            this._projects.getPublications(project.id).subscribe((publications) => {
+            this._projects.getPublications(project.id.toString()).subscribe((publications) => {
                 this.projects.forEach((p: Space) => {
                     if (p.id === project.id) {
-                        p.publications = publications;
+                        p.publications && p.publications == publications;
                     }
                 });
             });

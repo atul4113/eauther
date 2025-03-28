@@ -1,26 +1,25 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Observable, forkJoin } from 'rxjs';
 
 import { ITranslations } from "../../common/model/translations";
 import { HomeWebsitesWithLanguage } from "../model/home-websites-with-language";
 import { TranslationsService } from "../../common/service";
 import { HomeWebsitesService } from 'app/admin/service/home-websites.service';
 import { FileData } from "../../common/model/upload-file";
-import { HomeWebsite } from 'app/admin/model/home-website';
+import { HomeWebsite, IHomeWebsiteRaw } from 'app/admin/model/home-website';
 import { InfoMessageService } from "../../common/service/info-message.service";
 import { HomeWebsiteStatus } from "../model/home-website-status";
-
 
 @Component({
     templateUrl: '../templates/home-websites.component.html',
     providers: [HomeWebsitesService]
 })
 export class HomeWebsitesComponent implements OnInit, OnDestroy {
-    public translations: ITranslations;
+    public translations: ITranslations | null = null;
     public isInitialized = false;
-    public homeWebsitesWithLanguages: HomeWebsitesWithLanguage[];
+    public homeWebsitesWithLanguages: HomeWebsitesWithLanguage[] = [];
 
-    private timeoutId: any;
+    private timeoutId: number | null = null;
 
     constructor(
         private _translations: TranslationsService,
@@ -29,41 +28,56 @@ export class HomeWebsitesComponent implements OnInit, OnDestroy {
     ) {}
 
     ngOnInit() {
-        Observable.forkJoin(
+        forkJoin(
             this._translations.getTranslations(),
             this._homeWebsitesService.getHomeWebsitesWithLanguages(),
-        ).subscribe(([translations, homeWebsitesWithLanguages]) => {
-            this.translations = translations;
+        ).subscribe(([translations, homeWebsitesWithLanguages]: [ITranslations | null, HomeWebsitesWithLanguage[]]) => {
+            if (translations) {
+                this.translations = translations;
+            }
             this.homeWebsitesWithLanguages = homeWebsitesWithLanguages;
             this.isInitialized = true;
         });
     }
 
-    ngOnDestroy (): void {
+    ngOnDestroy(): void {
         if (this.timeoutId) {
             clearTimeout(this.timeoutId);
         }
     }
 
-    public startingUpload (website: HomeWebsite) {
-        website.status = HomeWebsiteStatus.IN_PROGRESS;
+    public startingUpload(website: HomeWebsite): void {
+        const updatedWebsiteRaw: IHomeWebsiteRaw = {
+            id: website.id,
+            language: website.language.id,
+            modified_date: website.modifiedDate,
+            status: HomeWebsiteStatus.IN_PROGRESS,
+            url: website.url,
+            version: website.version
+        };
+        const updatedWebsite = new HomeWebsite(updatedWebsiteRaw);
+        
+        this.homeWebsitesWithLanguages = this.homeWebsitesWithLanguages.map(hwl => ({
+            ...hwl,
+            websites: hwl.websites.map(w => w.id === website.id ? updatedWebsite : w)
+        }));
     }
 
-    public onUploaded (file: FileData, website: HomeWebsite) {
+    public onUploaded(file: FileData, website: HomeWebsite): void {
         this._homeWebsitesService.updateHomeWebsite(website, file).subscribe(
             () => {
                 this.updateStatus(website);
-            }, (error) => {
+            }, (error: { body?: { msg?: string } }) => {
                 let msg: string;
-                if (error.body.msg) {
-                    msg = this.translations.labels['plain.admin.panel.home_websites.file_not_valid'];
-                    msg += this.translations.labels[error.body.msg];
+                if (error.body?.msg) {
+                    msg = this.translations?.labels['plain.admin.panel.home_websites.file_not_valid'] || '';
+                    msg += this.translations?.labels[error.body.msg] || '';
                 } else {
-                    msg = this.translations.labels['common.file_upload.error'];
+                    msg = this.translations?.labels['common.file_upload.error'] || '';
                 }
                 this._infoMessage.addError(msg);
                 this._homeWebsitesService.getHomeWebsitesWithLanguages().subscribe(
-                    (homeWebsitesWithLanguages) => {
+                    (homeWebsitesWithLanguages: HomeWebsitesWithLanguage[]) => {
                         this.homeWebsitesWithLanguages = homeWebsitesWithLanguages;
                     }
                 );
@@ -71,10 +85,10 @@ export class HomeWebsitesComponent implements OnInit, OnDestroy {
         );
     }
 
-    private updateStatus (website: HomeWebsite) {
-        this.timeoutId = setTimeout(() => {
+    private updateStatus(website: HomeWebsite): void {
+        this.timeoutId = window.setTimeout(() => {
             this._homeWebsitesService.getHomeWebsitesWithLanguages().subscribe(
-                (homeWebsitesWithLanguages) => {
+                (homeWebsitesWithLanguages: HomeWebsitesWithLanguage[]) => {
                     this.homeWebsitesWithLanguages = homeWebsitesWithLanguages;
                     homeWebsitesWithLanguages.forEach(
                         homeWebsitesWithLanguage => {
@@ -83,7 +97,7 @@ export class HomeWebsitesComponent implements OnInit, OnDestroy {
                                     if (ws.status === HomeWebsiteStatus.IN_PROGRESS) {
                                         this.updateStatus(website);
                                     } else {
-                                        this._infoMessage.addSuccess(this.translations.labels['common.file_upload.success'])
+                                        this._infoMessage.addSuccess(this.translations?.labels['common.file_upload.success'] || '');
                                     }
                                 }
                             });

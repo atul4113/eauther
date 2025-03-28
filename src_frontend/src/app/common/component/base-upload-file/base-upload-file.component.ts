@@ -29,20 +29,20 @@ import { UploadFileService, TokenService } from "../../service";
 export class BaseUploadFileComponent implements OnInit {
     @Output() selected: EventEmitter<FileData> = new EventEmitter<FileData>();
 
-    public uploader!: FileUploader;
-    public file!: FileItem;
+    public uploader: FileUploader | null = null;
+    public file: FileItem | null = null;
 
     @ViewChild("fileInput")
     private fileInput!: ElementRef;
 
-    private observer!: Observer<FileData> | null;
+    private observer: Observer<FileData> | null = null;
 
     constructor(
         private _uploadFile: UploadFileService,
         private _token: TokenService
     ) {}
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.init();
     }
 
@@ -62,13 +62,15 @@ export class BaseUploadFileComponent implements OnInit {
                         uploadUrl: this._uploadFile.getUploadUrl(),
                     }).subscribe({
                         next: ({ token, uploadUrl }) => {
-                            this.uploader.setOptions({
-                                url: uploadUrl,
-                                authToken: "JWT " + token,
-                            });
-                            this.file.upload();
+                            if (this.uploader) {
+                                this.uploader.setOptions({
+                                    url: uploadUrl,
+                                    authToken: "JWT " + token,
+                                });
+                                this.file!.upload();
+                            }
                         },
-                        error: (error: any) => {
+                        error: (error: unknown) => {
                             this.observer!.error(
                                 new UploadFileError("Could not get token", 401)
                             );
@@ -88,25 +90,25 @@ export class BaseUploadFileComponent implements OnInit {
         });
     }
 
-    public openFilePicker() {
+    public openFilePicker(): void {
         this.fileInput.nativeElement.click();
     }
 
-    public clear() {
+    public clear(): void {
         this.init();
     }
 
-    private init() {
+    private init(): void {
         this.observer = null;
-        this.file = null!;
+        this.file = null;
         this.initUploader();
     }
 
-    private initUploader() {
+    private initUploader(): void {
         this.uploader = new FileUploader({ url: "" });
 
         this.uploader.onAfterAddingFile = (item: FileItem) => {
-            if (this.file) {
+            if (this.file && this.uploader) {
                 this.uploader.removeFromQueue(this.file);
             }
             this.file = item;
@@ -127,7 +129,7 @@ export class BaseUploadFileComponent implements OnInit {
             headers: ParsedResponseHeaders
         ) => {
             let data: { uploaded_file_id: number } = JSON.parse(response);
-            this.uploader.clearQueue();
+            this.uploader!.clearQueue();
             this.observer!.next(
                 new FileData(
                     item.file.name || "",
@@ -147,7 +149,7 @@ export class BaseUploadFileComponent implements OnInit {
             status: number,
             headers: ParsedResponseHeaders
         ) => {
-            this.uploader.clearQueue();
+            this.uploader!.clearQueue();
             this.observer!.error(new UploadFileError(response, status));
             this.observer!.complete();
             this.init();
