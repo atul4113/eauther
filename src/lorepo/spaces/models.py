@@ -2,7 +2,7 @@
 import bz2
 import json
 
-from djangae.fields import ListField
+from django.db.models import JSONField
 from django.contrib.auth.models import User
 from django.db import models
 import src.libraries.utility.cacheproxy as cache
@@ -28,7 +28,7 @@ class Space(models.Model):
     is_deleted = models.BooleanField(default=False)
     contents_count = models.IntegerField(default=0)
     include_contents_in_editor = models.BooleanField(default=False)
-    path = ListField(models.IntegerField()) # this is list of integers, not strings like in Content.spaces
+    path = JSONField(default=list)# this is list of integers, not strings like in Content.spaces
     is_test = models.BooleanField(null=True, blank=True)
 
     def __str__(self):
@@ -193,7 +193,7 @@ class SpaceAccess(models.Model):
     created_date = models.DateTimeField(auto_now_add = True)
     modified_date = models.DateTimeField(auto_now = True)
 
-    roles = ListField(models.CharField())
+    roles = models.JSONField(default=list)
     permissions = []
 
     def __init__(self, *args, **kwargs):
@@ -279,7 +279,7 @@ class LockedSpaceAccess(models.Model):
     created_date = models.DateTimeField(auto_now_add = True)
     modified_date = models.DateTimeField(auto_now = True)
 
-    roles = ListField(models.CharField())
+    roles = models.JSONField(default=list)
 
     def __str__(self):
         from src.lorepo.permission.models import Role

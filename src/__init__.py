@@ -1,4 +1,10 @@
-# __init__.py
-from .celery import app as celery_app
+import os
+from django.db import connections
 
-__all__ = ('celery_app',)
+# Force non-transactional mode when app loads
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'settings')
+connections['default'].settings_dict['OPTIONS']['use_transactions'] = False
+
+# Monkey-patch to prevent transaction usage
+from django.db import transaction
+transaction.atomic = lambda using=None: (item for item in (None,))  # Disables all transactions

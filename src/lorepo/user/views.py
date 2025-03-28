@@ -302,7 +302,7 @@ def register(
     Custom registration view that creates a user and associated space.
     """
     result = original_register(
-        request, success_url, form_class, profile_callback, template_name, extra_context
+        request, success_url, form_class, template_name
     )
     if request.method == "POST" and result.status_code == 302:
         form = form_class(data=request.POST, files=request.FILES)

@@ -1,11 +1,12 @@
-from .urls import path
+from django.urls import path
 from django.contrib.auth.models import User
 from django.contrib.auth.tokens import default_token_generator
 from django.contrib.sites.shortcuts import get_current_site
 from django.shortcuts import get_object_or_404
-from django.template import loader, Context
+from django.template import loader
 from django.utils.encoding import force_str
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.encoding import force_bytes
 from src import settings
 from src.lorepo.api.v2.mixins import MiddlewareMixin
 from src.lorepo.corporate.middleware import CorporateMiddleware
@@ -18,7 +19,6 @@ from src.lorepo.spaces.util import get_private_space_for_user
 from src.lorepo.user.serializers import PasswordFormSerializer, ProfileChangeFormSerializer
 from rest_framework import views, generics, status
 from rest_framework.exceptions import ValidationError
-from rest_framework.fields import EmailField
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from drf_spectacular import serializers as s
@@ -47,33 +47,41 @@ class UserData(MiddlewareMixin, views.APIView):
           is_superuser: true
       }
     """
-    # permission_classes = (IsAuthenticated, )
-    # MIDDLEWARE_CLASSES = (CorporateMiddleware, )
+    permission_classes = (IsAuthenticated,)
 
     def get(self, request):
-        # user = User.objects.all()
-        user = User.objects.filter(username="test_user_1")
-        print((user.key.id))
-        print((user.email))
-        profile = user.profile
-        # profile = request.user.profile
-        # company = Space.objects.get(id=request.user.company)
+        try:
+            profile = request.user.profile
+            language_code = profile.language_code if hasattr(profile, 'language_code') else 'en'
+        except AttributeError:
+            language_code = 'en'  # Default value if profile doesn't exist
 
         context = {'request': request}
-
         private_space = get_private_space_for_user(request.user)
 
-        return Response({
+        response_data = {
             'id': request.user.id,
             'username': request.user.username,
             'email': request.user.email,
             'is_superuser': request.user.is_superuser,
-            'language_code': profile.language_code,
-            'company': None if request.user.company is None else SpaceSerializer(request.user.company, context=context).data,
-            'public_category': None if request.user.public_category is None else SpaceSerializer(request.user.public_category, context=context).data,
-            'private_space': None if private_space is None else SpaceSerializer(private_space, context=context).data,
+            'language_code': language_code,
+            'company': None,
+            'public_category': None,
+            'private_space': None,
             'is_any_division_admin': is_any_division_admin(request.user)
-        })
+        }
+
+        # Only try to serialize if the relationships exist
+        if hasattr(request.user, 'company') and request.user.company:
+            response_data['company'] = SpaceSerializer(request.user.company, context=context).data
+
+        if hasattr(request.user, 'public_category') and request.user.public_category:
+            response_data['public_category'] = SpaceSerializer(request.user.public_category, context=context).data
+
+        if private_space:
+            response_data['private_space'] = SpaceSerializer(private_space, context=context).data
+
+        return Response(response_data)
 
 
 class RemindLogin(generics.GenericAPIView):
@@ -96,26 +104,27 @@ class RemindLogin(generics.GenericAPIView):
     """
 
     def post(self, request, *args, **kwargs):
-        data = request.data.copy()
-        email = data['email']
+        email = request.data.get('email')
+        if not email:
+            raise ValidationError('Email is required.')
+
         logins = User.objects.filter(email=email)
-
-        if logins:
-            c = {
-                'logins': logins,
-                'email': email,
-                'request': request
-            }
-            email_template_name = 'src/registration/remind_login_email.html'
-            t = loader.get_template(email_template_name)
-            from_email = settings.SERVER_EMAIL
-
-            send_message(from_email, [email],
-                         'remind_login.email_subject',
-                         t.render(Context(c)))
-            return Response({'reminded': True})
-        else:
+        if not logins.exists():
             raise ValidationError('E-mail does not exist.')
+
+        c = {
+            'logins': logins,
+            'email': email,
+            'request': request
+        }
+        email_template_name = 'src/registration/remind_login_email.html'
+        t = loader.get_template(email_template_name)
+        from_email = settings.SERVER_EMAIL
+
+        send_message(from_email, [email],
+                     'remind_login.email_subject',
+                     t.render(c))
+        return Response({'reminded': True})
 
 
 class ResetPassword(generics.GenericAPIView):
@@ -134,43 +143,8 @@ class ResetPassword(generics.GenericAPIView):
       HTTP/1.1 404 Not Found
     """
 
-    """
-    @api {post} /api/v2/user/reset_password /user/reset_password
-    @apiDescription Check if provided token is valid
-    @apiName CheckToken
-    @apiGroup User
-
-    @apiParam {String} token (required) - token
-
-    @apiSuccessExample {json} Success-Response:
-      HTTP/1.1 200 OK
-
-    @apiErrorExample {json} Error-Response:
-      HTTP/1.1 400 Bad Request
-      ["token is invalid"]
-    """
-
-    """
-    @api {put} /api/v2/user/reset_password /user/reset_password
-    @apiDescription Reset password
-    @apiName ResetPassword
-    @apiGroup User
-
-    @apiParam {String} token (required) - token
-    @apiParam {String} password1 (required) - password1
-    @apiParam {String} password2 (required) - password2
-
-    @apiSuccessExample {json} Success-Response:
-      HTTP/1.1 200 OK
-
-    @apiErrorExample {json} Error-Response:
-      HTTP/1.1 400 Bad Request
-      ["password does not match"]
-    """
-
     def get(self, request, username, *args, **kwargs):
         user = get_object_or_404(User, username=username, is_active=True)
-
         token = default_token_generator.make_token(user)
 
         from_email = settings.SERVER_EMAIL
@@ -185,7 +159,7 @@ class ResetPassword(generics.GenericAPIView):
             'email': user.email,
             'domain': domain,
             'site_name': site_name,
-            'uid': urlsafe_base64_encode(str(user.id)),
+            'uid': urlsafe_base64_encode(force_bytes(str(user.id))),
             'user': user,
             'token': token,
             'protocol': use_https and 'https' or 'http',
@@ -193,37 +167,46 @@ class ResetPassword(generics.GenericAPIView):
         }
         send_message(from_email, [user.email],
                      'src.lorepo.user.reset_password.Password_reset_on_',
-                     t.render(Context(c)))
+                     t.render(c))
 
         return Response('ok')
 
     def post(self, request, *args, **kwargs):
-        data = request.data.copy()
-        token = data['token']
-        uid, pass_token = self._split_token(token)
-        user = self._get_user(uid)
+        token = request.data.get('token')
+        if not token:
+            raise ValidationError('Token is required')
 
-        if default_token_generator.check_token(user, pass_token):
-            return Response('ok')
-        raise ValidationError('token is invalid')
-
-    def put(self, request, *args, **kwargs):
-        data = request.data.copy()
-        token = data['token']
-        uid, pass_token = self._split_token(token)
-
-        password1 = data['password1']
-        password2 = data['password2']
-
-        if password1 != password2:
-            raise ValidationError('password does not match')
-
-        user = self._get_user(uid)
+        try:
+            uid, pass_token = self._split_token(token)
+            user = self._get_user(uid)
+        except (ValueError, User.DoesNotExist):
+            raise ValidationError('token is invalid')
 
         if not default_token_generator.check_token(user, pass_token):
             raise ValidationError('token is invalid')
 
-        # do reset
+        return Response('ok')
+
+    def put(self, request, *args, **kwargs):
+        token = request.data.get('token')
+        password1 = request.data.get('password1')
+        password2 = request.data.get('password2')
+
+        if not token or not password1 or not password2:
+            raise ValidationError('All fields are required')
+
+        if password1 != password2:
+            raise ValidationError('password does not match')
+
+        try:
+            uid, pass_token = self._split_token(token)
+            user = self._get_user(uid)
+        except (ValueError, User.DoesNotExist):
+            raise ValidationError('token is invalid')
+
+        if not default_token_generator.check_token(user, pass_token):
+            raise ValidationError('token is invalid')
+
         user.set_password(password1)
         user.save()
         return Response('ok')
@@ -235,7 +218,6 @@ class ResetPassword(generics.GenericAPIView):
 
     def _get_user(self, user_id):
         return get_object_or_404(User, pk=user_id)
-
 
 
 class EditUser(generics.GenericAPIView):
@@ -268,20 +250,11 @@ class EditUser(generics.GenericAPIView):
     serializer_class = ProfileChangeFormSerializer
 
     def post(self, request, *args, **kwargs):
-        data = request.data.copy()
-        data['user'] = request.user
-
-        serializer = self.get_serializer(data=data)
+        serializer = self.get_serializer(data=request.data)
         if serializer.is_valid():
-            response = serializer.save()
-            st = status.HTTP_200_OK
-        else:
-            response = serializer.errors
-            st = status.HTTP_400_BAD_REQUEST
-        return Response(response, status=st)
-
-
-
+            serializer.save()
+            return Response({'status': 'OK'}, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class UserPassword(generics.GenericAPIView):
@@ -321,12 +294,9 @@ class UserPassword(generics.GenericAPIView):
 
         serializer = self.get_serializer(data=data)
         if serializer.is_valid():
-            response = serializer.save()
-            st = status.HTTP_200_OK
-        else:
-            response = serializer.errors
-            st = status.HTTP_400_BAD_REQUEST
-        return Response(response, status=st)
+            serializer.save()
+            return Response({'status': 'OK'}, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class UserLogo(MiddlewareMixin, views.APIView):
@@ -348,16 +318,14 @@ class UserLogo(MiddlewareMixin, views.APIView):
           logo: 6077825400438784,
       }
     """
-    permission_classes = (IsAuthenticated, )
-    MIDDLEWARE_CLASSES = (CorporateMiddleware, )
+    permission_classes = (IsAuthenticated,)
 
     def get(self, request):
-        logo = None
-        corporate_logo_list = CorporateLogo.objects.filter(space=request.user.company)
-        if len(corporate_logo_list) > 0:
-            logo = corporate_logo_list[0].logo
+        if not hasattr(request.user, 'company'):
+            return Response(None)
 
-        return Response(logo.id if logo else None)
+        corporate_logo = CorporateLogo.objects.filter(space=request.user.company).first()
+        return Response(corporate_logo.logo.id if corporate_logo and corporate_logo.logo else None)
 
 
 urlpatterns = [
@@ -366,6 +334,6 @@ urlpatterns = [
     path('password/', UserPassword.as_view(), name='user_password'),
     path('remind_login/', RemindLogin.as_view(), name='remind_login'),
     path('reset_password/', ResetPassword.as_view(), name='reset_password'),
-    path('reset_password/<str:username>/', ResetPassword.as_view(), name='reset_password'),
+    path('reset_password/<str:username>/', ResetPassword.as_view(), name='reset_password_with_username'),
     path('logo/', UserLogo.as_view(), name='logo'),
 ]

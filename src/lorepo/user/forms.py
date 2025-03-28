@@ -1,4 +1,4 @@
-from src.registration.forms import RegistrationFormTermsOfService
+from django_registration.forms import RegistrationFormTermsOfService
 from django import forms
 from django.utils.translation import gettext_lazy as _
 from django.utils.safestring import mark_safe

@@ -1,4 +1,4 @@
-from djangae.fields import ListField
+from django.db.models import JSONField
 from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
@@ -148,39 +148,39 @@ class DictEmu(object):
         return getattr(self.data, key)
 
 # IndexField is a (String)ListField storing indexed fields of a model_instance
-class IndexField(ListField):
+class IndexField(models.JSONField):
     def __init__(self, search_manager, *args, **kwargs):
         self.search_manager = search_manager
-        kwargs['item_field'] = models.CharField(max_length=500)
-        kwargs['editable'] = False
-        super(IndexField, self).__init__(*args, **kwargs)
+        kwargs.setdefault("default", list)  # Default value should be a list
+        kwargs["editable"] = False
+        super().__init__(*args, **kwargs)
 
     def pre_save(self, model_instance, add):
-        if self.search_manager.filters and not \
-                self.search_manager.should_index(DictEmu(model_instance)):
+        if self.search_manager.filters and not self.search_manager.should_index(DictEmu(model_instance)):
             return []
 
         language = self.search_manager.language
-        if isinstance(language, collections.Callable):
+        if isinstance(language, collections.abc.Callable):  # Fixed deprecated usage
             language = language(model_instance, property=self)
 
         index = []
         for field_name in self.search_manager.fields_to_index:
             values = getattr_by_path(model_instance, field_name, None)
             if not values:
-                values = ()
+                values = []
             elif not isinstance(values, (list, tuple)):
-                values = (values,)
+                values = [values]
             for value in values:
-                index.extend(self.search_manager.splitter(value, indexing=True,
-                    language=language))
+                index.extend(self.search_manager.splitter(value, indexing=True, language=language))
+
         if self.search_manager.indexer:
-            index = self.search_manager.indexer(index, indexing=True,
-                language=language)
+            index = self.search_manager.indexer(index, indexing=True, language=language)
+
         # Sort index to make debugging easier
-        setattr(model_instance, self.search_manager.search_list_field_name,
-            sorted(set(index)))
-        return index
+        sorted_index = sorted(set(index))
+        setattr(model_instance, self.search_manager.search_list_field_name, sorted_index)
+
+        return sorted_index
 
 class SearchManager(models.Manager):
     """

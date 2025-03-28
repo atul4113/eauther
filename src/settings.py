@@ -10,6 +10,10 @@ from lxml import etree
 from pathlib import Path
 import pymysql
 from djangae.environment import is_development_environment
+try:
+    from .gcloudc_monkeypatch import *  # Apply the patch
+except ImportError:
+    pass
 
 pymysql.install_as_MySQLdb()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -26,15 +30,20 @@ MAUTHOR_BASIC_URL = SHARED_SETTINGS[APPLICATION_ID]['base_secure_url']
 DATABASES = {
     'default': {
         'ENGINE': 'gcloudc.db.backends.datastore',
-        # 'PROJECT': "ealpha-test-application",
-        "PROJECT": os.getenv("GOOGLE_CLOUD_PROJECT", "ealpha-test-application"),
+        'PROJECT': "ealpha-test-application",
         'INDEXES_FILE': "index.yaml",
+        'AUTOCOMMIT': True,
         'OPTIONS': {
-            'count_mode': 'emulated' if is_development_environment else 'native',
+            'use_transactions': False,  # Disable transactions completely
+            'count_mode': 'emulated',
+            'ATOMIC_REQUESTS': False,
+            'DATASET': "ealpha-test-application",
+            'MAX_ENTITY_GROUPS_PER_CALL': 1  # Important for registration
         }
     }
 }
-
+DATABASE_ROUTERS = ['routers.NonTransactionalRouter']
+DJANGAE_DISABLE_INDEX_CHECKING = True
 # os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "D:\\Smart Education\\Projects\\eauther\\src\\key.json"
 os.environ["DATASTORE_EMULATOR_HOST"] = "localhost:8081"
 os.environ["DATASTORE_PROJECT_ID"] = "ealpha-test-application"
@@ -360,7 +369,19 @@ USER_LANGUAGES = [    #available to users
 ]
 
 USER_DEFAULT_LANG = 'en_US'
-
+if DEBUG:
+    # Development-friendly settings
+    CSRF_COOKIE_SECURE = False  # Allows HTTP for local testing
+    SESSION_COOKIE_SECURE = False  # Allows HTTP for local testing
+    SECURE_SSL_REDIRECT = False
+else:
+    # Production security settings
+    CSRF_COOKIE_SECURE = True  # Only send CSRF cookie over HTTPS
+    SESSION_COOKIE_SECURE = True  # Only send session cookie over HTTPS
+    SECURE_SSL_REDIRECT = True  # Redirect all HTTP to HTTPS
+    SECURE_HSTS_SECONDS = 31536000  # 1 year HSTS
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
 # Cross-Origin Resource Sharing settings
 CORS_ORIGIN_ALLOW_ALL = False
 CORS_URLS_REGEX = r'(^/doc/api/.*$)|(^/file/serve/.*$)'

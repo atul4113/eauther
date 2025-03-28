@@ -1,4 +1,4 @@
-from djangae.fields import ListField
+from django.db.models import JSONField
 from django.db import models
 from src.lorepo.spaces.models import Space
 import src.libraries.utility.cacheproxy as cache
@@ -108,7 +108,7 @@ class Role(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
     modified_date = models.DateTimeField(auto_now=True)
 
-    permissions = ListField(models.IntegerField())
+    permissions = models.JSONField(default=list)  # Stores a list of integers
     company = models.ForeignKey(Space, null=True, blank=True, on_delete=models.DO_NOTHING)
 
     def __str__(self):

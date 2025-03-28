@@ -2,7 +2,7 @@ import logging
 import re
 import traceback
 from django.db import models
-from django.contrib.postgres.search import SearchVector, SearchQuery, SearchRank
+from djangae.contrib.search import document, index
 from src.libraries.utility.environment import get_versioned_module
 from src.libraries.utility.queues import trigger_backend_task, TaskQueue
 
@@ -40,7 +40,6 @@ class SearchableModel(EnableBackendObjectMethod):
     Abstract model that supports Database entities automatically saved to a search index.
     Fields that need to be indexed should be included in "_search_indexed_fields" property.
     """
-
     class Meta:
         abstract = True
 
@@ -48,39 +47,32 @@ class SearchableModel(EnableBackendObjectMethod):
     queue_name = TaskQueue.SEARCH
 
     def save(self, *args, **kwargs):
-        super(SearchableModel, self).save(*args, **kwargs)
+        super().save(*args, **kwargs)
         if hasattr(self, '_search_indexed_fields'):
             self.add_to_search_index()
 
     def add_to_search_index(self):
-        """
-        Adds the object to the search index.
-        """
+        """Adds the object to the search index."""
         try:
-            # Update the search index for the object
-            self.update_search_index()
+            # Create a document with the indexed fields
+            doc = {
+                field: getattr(self, field)
+                for field in self._search_indexed_fields
+                if hasattr(self, field)
+            }
+            document.create_document(self._meta.model_name, str(self.id), doc)
         except Exception as e:
             logging.error(f"Failed to add to search index: {e}")
             logging.error(traceback.format_exc())
             self.save_search_index_in_backend()
 
-    def save_search_index_in_backend(self):
-        """
-        Schedules the object to be added to the search index in the background.
-        """
-        self.object_method_in_backend('add_to_search_index')
-
-    def delete(self, *args, **kwargs):
-        if hasattr(self, '_search_indexed_fields'):
-            self.remove_from_search_index()
-        super(SearchableModel, self).delete(*args, **kwargs)
-
     def remove_from_search_index(self):
-        """
-        Removes the object from the search index.
-        """
-        # Implement search index removal logic here
-        pass
+        """Removes the object from the search index."""
+        try:
+            document.delete_document(self._meta.model_name, str(self.id))
+        except Exception as e:
+            logging.error(f"Failed to remove from search index: {e}")
+            self.save_search_index_in_backend()
 
     @classmethod
     def search(cls, term, cursor_string=None, limit=20, **kwargs):
@@ -90,25 +82,23 @@ class SearchableModel(EnableBackendObjectMethod):
         if not term:
             return {'number_found': 0, 'results': [], 'cursor': None}
 
-        # Use Django's built-in search functionality
-        search_vector = SearchVector(*cls._search_indexed_fields)
-        search_query = SearchQuery(term)
-        search_rank = SearchRank(search_vector, search_query)
-
-        queryset = cls.objects.annotate(
-            rank=search_rank
-        ).filter(rank__gte=0.1).order_by('-rank')[:limit]
-
-        return {
-            'number_found': queryset.count(),
-            'results': queryset,
-            'cursor': None  # Cursor functionality is not supported in Django's built-in search
-        }
+        try:
+            results = index.search(
+                term,
+                model_name=cls._meta.model_name,
+                limit=limit
+            )
+            return {
+                'number_found': len(results),
+                'results': [cls.objects.get(pk=result.doc_id.split('__')[-1]) for result in results],
+                'cursor': None
+            }
+        except Exception as e:
+            logging.error(f"Search failed: {e}")
+            return {'number_found': 0, 'results': [], 'cursor': None}
 
     def tokenize_phrase(self, phrase, start_word=2):
-        """
-        Tokenizes a phrase for search indexing.
-        """
+        """Tokenizes a phrase for search indexing."""
         tokens = set()
         for word in phrase.split():
             for i in range(1, len(word) + 1):
@@ -117,78 +107,42 @@ class SearchableModel(EnableBackendObjectMethod):
         return ' '.join(tokens)
 
     def tokenized_value(self, field):
-        """
-        Returns a tokenized value for a given field.
-        """
+        """Returns a tokenized value for a given field."""
         text = str(getattr(self, field, ""))
         text = re.sub(r"[\,;\/\-\(\)\!#$%\^\&\*=\|]", " ", text)
         text = re.sub(r"\s+", " ", text)
         return self.tokenize_phrase(text)
 
 
-class MultiKindSearchableModel(SearchableModel):
-    """
-    Abstract model that supports searching across multiple kinds (models).
-    """
-
-    class Meta:
-        abstract = True
-
-    @classmethod
-    def get_model(cls, kind):
-        """
-        Returns the model class for the given kind.
-        """
-        raise NotImplementedError('get_model() is not implemented in class %s' % cls.__name__)
-
-    @classmethod
-    def get_results(cls, search_results):
-        """
-        Returns the results of a search query.
-        """
-        results = []
-        for doc in search_results:
-            doc_id = doc.doc_id.split('__')
-            kind = doc_id[0]
-            key = doc_id[1]
-            model = cls.get_model(kind)
-            results.append(model.objects.get(pk=key))
-        return results
-
-
 class Indexable(SearchableModel):
     """
     Abstract model that supports indexing in a search engine.
     """
-
     def save(self, *args, **kwargs):
         # Save data only in the full-text search engine
         if hasattr(self, '_search_indexed_fields'):
             self.add_to_search_index()
 
-    def delete(self, *args, **kwargs):
-        if hasattr(self, '_search_indexed_fields'):
-            self.remove_from_search_index()
-
     @classmethod
-    def search(cls, query, page=1, limit=10, sort_by_field=None, direction=None, **kwargs):
+    def search(cls, query, page=1, limit=10, **kwargs):
         """
         Searches for objects matching the given query.
         """
         if not query:
             return {'number_found': 0, 'results': [], 'cursor': None}
 
-        # Use Django's built-in search functionality
-        search_vector = SearchVector(*cls._search_indexed_fields)
-        search_query = SearchQuery(query)
-        search_rank = SearchRank(search_vector, search_query)
-
-        queryset = cls.objects.annotate(
-            rank=search_rank
-        ).filter(rank__gte=0.1).order_by('-rank')[(page - 1) * limit:page * limit]
-
-        return {
-            'number_found': queryset.count(),
-            'results': queryset,
-            'cursor': None  # Cursor functionality is not supported in Django's built-in search
-        }
+        try:
+            results = index.search(
+                query,
+                model_name=cls._meta.model_name,
+                offset=(page - 1) * limit,
+                limit=limit
+            )
+            return {
+                'number_found': len(results),
+                'results': [cls.objects.get(pk=result.doc_id.split('__')[-1]) for result in results],
+                'cursor': None
+            }
+        except Exception as e:
+            logging.error(f"Search failed: {e}")
+            return {'number_found': 0, 'results': [], 'cursor': None}

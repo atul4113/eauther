@@ -1,4 +1,4 @@
-from djangae.fields import ListField
+from django.db.models import JSONField
 from django.db import models
 from src.lorepo.filestorage.models import UploadedFile
 from src.lorepo.permission.models import Permission
@@ -62,7 +62,7 @@ class ProjectUser(models.Model):
     modified_date = models.DateTimeField(auto_now=True)
 
     username = models.CharField(max_length = 200) # for better performance at sorting
-    space_access_list = ListField(models.IntegerField()) # list of space access ids
+    space_access_list = models.JSONField(default=list)  # Stores a list of integers
 
     def __str__(self):
         return '%(project_name)s:%(username)s' % { 'project_name' : self.project.title, 'username' : self.username }

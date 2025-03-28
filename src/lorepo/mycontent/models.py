@@ -2,7 +2,7 @@
 import logging
 
 from djangae.contrib.pagination import paginated_model
-from djangae.fields import ListField
+from django.db.models import JSONField
 from django.contrib.auth.models import User
 from django.core.exceptions import MultipleObjectsReturned
 from django.db import models
@@ -24,6 +24,7 @@ from src.mauthor.utility.utils import sanitize_title
 from src.xml_parsers.explicit_parsers.add_titile_to_lesson_parser import AddTitleToXMLParser
 from src.xml_parsers.explicit_parsers.lesson_copy_parser import LessonCopyParser
 from src.xml_parsers.explicit_parsers.get_template_parser import GetTemplateParser
+
 
 
 class ContentType():
@@ -81,7 +82,7 @@ class Content(models.Model, ModelCacheMixin):
     name = models.CharField(max_length=255, default=None, null=True)
     is_globally_public = models.BooleanField(default=False)
     spaces_path = models.CharField(max_length=250, default='')
-    spaces = ListField(models.CharField()) # this field is type string ! remember about it when filtering
+    spaces = JSONField(default=list)
     passing_score = models.IntegerField(default=0)
     original = models.ForeignKey('self', null=True, blank=True, related_name='original_for', on_delete=models.DO_NOTHING)
     xliff_file = models.OneToOneField(FileStorage, null=True, blank=True, related_name='xliff_for', on_delete=models.DO_NOTHING)

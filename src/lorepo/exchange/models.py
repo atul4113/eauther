@@ -1,6 +1,6 @@
 from collections import namedtuple
 
-from djangae.fields import ListField
+from django.db.models import JSONField
 from django.contrib.auth.models import User
 from django.db import models
 
@@ -63,7 +63,7 @@ class ExportWOMIPages(models.Model):
     is_success = models.BooleanField(default=False)
     content = models.ForeignKey(Content, on_delete=models.DO_NOTHING)
     hide_nav = models.BooleanField(default=False)
-    commons_indexes = ListField(models.IntegerField())
+    commons_indexes = models.JSONField(default=list)  # List of integers
     pages_count = models.IntegerField(default=-1)
     traceback = models.TextField(blank=True, null=True)
 
