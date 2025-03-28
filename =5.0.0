@@ -1,0 +1,13 @@
+Requirement already satisfied: django in c:\users\moro\work\atul_last_updated\eauther\venv\lib\site-packages (4.1.13)
+Collecting django
+  Using cached Django-5.1.7-py3-none-any.whl (8.3 MB)
+Requirement already satisfied: sqlparse>=0.3.1 in c:\users\moro\work\atul_last_updated\eauther\venv\lib\site-packages (from django) (0.5.3)
+Requirement already satisfied: asgiref<4,>=3.8.1 in c:\users\moro\work\atul_last_updated\eauther\venv\lib\site-packages (from django) (3.8.1)
+Requirement already satisfied: tzdata in c:\users\moro\work\atul_last_updated\eauther\venv\lib\site-packages (from django) (2025.1)
+Requirement already satisfied: typing-extensions>=4 in c:\users\moro\work\atul_last_updated\eauther\venv\lib\site-packages (from asgiref<4,>=3.8.1->django) (4.12.2)
+Installing collected packages: django
+  Attempting uninstall: django
+    Found existing installation: Django 4.1.13
+    Uninstalling Django-4.1.13:
+      Successfully uninstalled Django-4.1.13
+Successfully installed django-5.1.7

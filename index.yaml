@@ -1,0 +1,18 @@
+auth_user:
+  username:
+  - iexact
+indexes:
+- kind: auth_user
+  properties:
+  - direction: asc
+    name: username
+  - direction: asc
+    name: email
+special_indexes:
+  auth_user:
+    email:
+    - iexact
+    - exact
+    username:
+    - iexact
+    - exact
