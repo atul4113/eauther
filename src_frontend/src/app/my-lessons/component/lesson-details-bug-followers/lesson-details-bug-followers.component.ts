@@ -11,8 +11,8 @@ import {TranslationsService} from "../../../common/service";
 })
 export class LessonDetailsBugFollowersComponent implements OnInit {
 
-    @Input() lesson: Lesson;
-    public translations: ITranslations;
+    @Input() lesson!: Lesson;
+    public translations: ITranslations | null = null;
 
     constructor (
         private _translations: TranslationsService

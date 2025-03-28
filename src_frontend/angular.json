@@ -105,5 +105,8 @@
             }
         }
     },
-    "defaultProject": "mauthor-frontend"
+    "defaultProject": "mauthor-frontend",
+    "cli": {
+      "analytics": false
+    }
 }
