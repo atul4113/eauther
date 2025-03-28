@@ -11,7 +11,7 @@ export interface IAccountsSettingsRaw {
 export class SSOProviderSettings {
     constructor(
         public isActive: boolean = false,
-        public url: string = null
+        public url: string = ""
     ) {}
 }
 

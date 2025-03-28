@@ -69,7 +69,8 @@ export class AccountsRegisterComponent implements OnInit {
 
     public checkAccountFields () {
         for (let i = 0; i < ACCOUNT_REQUIRED_FIELDS.length; i++) {
-            this.formValid[ACCOUNT_REQUIRED_FIELDS[i]] = !!this.registerAccount[ACCOUNT_REQUIRED_FIELDS[i]];
+            this.formValid[ACCOUNT_REQUIRED_FIELDS[i]] = !!(this.registerAccount as any)[ACCOUNT_REQUIRED_FIELDS[i]];
+
         }
     }
 

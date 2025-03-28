@@ -25,7 +25,7 @@ export class TokenService {
         return res.token;
     }
 
-    private handleError(error: unknown): Observable<null> {
+    private handleError(error: any): Observable<null> {
         if (
             error &&
             typeof error === "object" &&

@@ -38,7 +38,6 @@ import { QuickTourComponent } from "./component/quick-tour/quick-tour.component"
         CorporateLessonsListComponent,
         CorporateProjectsListComponent,
         QuickTourComponent,
-        PutFooterBottom,
     ],
 })
 export class CorporateModule {}
