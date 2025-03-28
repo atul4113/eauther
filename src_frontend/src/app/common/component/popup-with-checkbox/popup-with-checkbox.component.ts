@@ -32,16 +32,13 @@ export class PopupWithCheckboxComponent implements OnInit {
     @Input() title: string = "";
     @Input() content: string = "";
     @Input() checkOptions: CheckboxOption[] = [];
-    @Input() defaultRadioValue: unknown;
     @Input() acceptLabel: string = "";
     @Input() rejectLabel: string = "";
     @Input() direction: Direction = "horizontal";
 
     @Output() accept = new EventEmitter<CheckboxOption[]>();
-    @Output() reject = new EventEmitter<unknown>();
+    @Output() reject = new EventEmitter<MouseEvent>();
     @Output() isVisibleChange = new EventEmitter<boolean>();
-
-    public radioValue: unknown;
 
     ngOnInit(): void {
         if (!this.acceptLabel) {
@@ -51,16 +48,14 @@ export class PopupWithCheckboxComponent implements OnInit {
         if (!this.rejectLabel) {
             this.rejectLabel = "Cancel";
         }
-
-        this.radioValue = this.defaultRadioValue;
     }
 
-    public onAccept(event: unknown): void {
+    public onAccept(event: MouseEvent): void {
         this.accept.emit(this.checkOptions);
         this.hidePopup();
     }
 
-    public onReject(event: unknown): void {
+    public onReject(event: MouseEvent): void {
         this.reject.emit(event);
         this.hidePopup();
     }

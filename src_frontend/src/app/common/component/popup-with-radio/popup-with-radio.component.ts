@@ -38,16 +38,16 @@ export class PopupWithRadioComponent implements OnInit {
     @Input() title: string = "";
     @Input() content: string = "";
     @Input() radioOptions: RadioOption[] = [];
-    @Input() defaultRadioValue: unknown;
+    @Input() defaultRadioValue: string | number = "";
     @Input() acceptLabel: string = "";
     @Input() rejectLabel: string = "";
     @Input() direction: Direction = "horizontal";
 
-    @Output() accept = new EventEmitter<unknown>();
-    @Output() reject = new EventEmitter<unknown>();
+    @Output() accept = new EventEmitter<string | number>();
+    @Output() reject = new EventEmitter<MouseEvent>();
     @Output() isVisibleChange = new EventEmitter<boolean>();
 
-    public radioValue: unknown;
+    public radioValue: string | number = "";
 
     ngOnInit(): void {
         if (!this.acceptLabel) {
@@ -61,12 +61,12 @@ export class PopupWithRadioComponent implements OnInit {
         this.radioValue = this.defaultRadioValue;
     }
 
-    public onAccept(event: unknown): void {
+    public onAccept(event: MouseEvent): void {
         this.accept.emit(this.radioValue);
         this.hidePopup();
     }
 
-    public onReject(event: unknown): void {
+    public onReject(event: MouseEvent): void {
         this.reject.emit(event);
         this.hidePopup();
     }

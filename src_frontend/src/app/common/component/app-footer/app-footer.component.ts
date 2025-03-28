@@ -18,13 +18,17 @@ export class AppFooterComponent implements OnInit {
 
     public assetsUrl: string = window.mAuthorAssetsUrl;
     public currentYear: number = new Date().getUTCFullYear();
-    public translations!: ITranslations;
+    public translations: ITranslations | null = null;
 
     constructor(private _translations: TranslationsService) {}
 
     ngOnInit(): void {
         this._translations
             .getTranslations()
-            .subscribe((t) => (this.translations = t));
+            .subscribe((t: ITranslations | null) => {
+                if (t) {
+                    this.translations = t;
+                }
+            });
     }
 }

@@ -40,7 +40,7 @@ export class SimpleUploadFileComponent implements OnInit {
     @ViewChild(BaseUploadFileComponent)
     public baseUploadFile!: BaseUploadFileComponent;
 
-    public translations!: ITranslations;
+    public translations: ITranslations | null = null;
 
     constructor(
         private readonly _translations: TranslationsService,
@@ -50,8 +50,10 @@ export class SimpleUploadFileComponent implements OnInit {
     ngOnInit(): void {
         this._translations
             .getTranslations()
-            .subscribe((translations: ITranslations) => {
-                this.translations = translations;
+            .subscribe((translations: ITranslations | null) => {
+                if (translations) {
+                    this.translations = translations;
+                }
             });
     }
 
@@ -62,9 +64,11 @@ export class SimpleUploadFileComponent implements OnInit {
                 this.uploaded.emit(uploadedFile);
             },
             error: (error: unknown) => {
-                this._infoMessage.addError(
-                    this.translations.labels["common.file_upload.error"]
-                );
+                if (this.translations) {
+                    this._infoMessage.addError(
+                        this.translations.labels["common.file_upload.error"]
+                    );
+                }
                 console.error("File upload error:", error);
             },
         });
