@@ -6,6 +6,7 @@ export interface IEditTokenRaw {
 export class EditToken {
   public token: string;
   public tokenKey: string;
+    key: any;
 
   constructor (editToken: IEditTokenRaw) {
     this.token = editToken.token;

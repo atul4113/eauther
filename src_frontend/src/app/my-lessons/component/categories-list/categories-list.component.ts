@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, OnChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, OnChanges, SimpleChanges } from '@angular/core';
 
 import { Category, ITranslations } from "../../../common/model";
 import { TranslationsService } from "../../../common/service";
@@ -7,39 +7,41 @@ import { TranslationsService } from "../../../common/service";
   selector: 'app-categories-list',
   templateUrl: './categories-list.component.html'
 })
-export class CategoriesListComponent implements OnInit {
+export class CategoriesListComponent implements OnInit, OnChanges {
+  @Input() categories: Category[] = [];
+  @Input() shouldShowAddons: boolean = false;
+  @Input() shouldShowTrash: boolean = false;
+  @Input() currentSpaceId: number = 0;
+  @Output() displayLessons = new EventEmitter<void>();
 
-  @Input() categories: Category[];
-  @Input() shouldShowAddons: boolean;
-  @Input() shouldShowTrash: boolean;
-  @Input() currentSpaceId: number;
-  @Output() displayLessons = new EventEmitter<any>();
-
-  public translations: ITranslations;
-  public mainCategory: Category = null;
-  public categoriesToDisplay: Category[];
+  public translations: ITranslations | null = null;
+  public mainCategory: Category | null = null;
+  public categoriesToDisplay: Category[] = [];
 
   constructor(
       private _translations: TranslationsService
   ) {}
 
-  ngOnInit() {
-      this._translations.getTranslations().subscribe(t => this.translations = t);
+  ngOnInit(): void {
+      this._translations.getTranslations().subscribe((translations: ITranslations | null) => {
+          if (translations) {
+              this.translations = translations;
+          }
+      });
   }
 
-  ngOnChanges() {
-      if(this.categories) {
-          this.mainCategory = this.categories.filter(cat => cat.isTopLevel)[0];
+  ngOnChanges(changes: SimpleChanges): void {
+      if (this.categories) {
+          this.mainCategory = this.categories.find(cat => cat.isTopLevel) || null;
           this.categoriesToDisplay = this.categories.filter(cat => !cat.isTopLevel);
       }
   }
 
-  get mainCategoryId() {
-      return this.mainCategory ? this.mainCategory.id : '';
+  get mainCategoryId(): string {
+      return this.mainCategory ? this.mainCategory.id.toString() : '';
   }
 
-  public showLessons() {
+  public showLessons(): void {
       this.displayLessons.emit();
   }
-
 }

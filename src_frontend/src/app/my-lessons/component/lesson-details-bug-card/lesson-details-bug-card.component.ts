@@ -17,18 +17,18 @@ export class LessonDetailsBugCardComponent implements OnInit {
         }, 0);
     }
 
-    @Input() user: AuthUser;
-    @Input() bug: Bug;
+    @Input() user!: AuthUser;
+    @Input() bug!: Bug;
     @Output() deleteBug: EventEmitter<Bug> = new EventEmitter<Bug>();
 
-    public translations: ITranslations;
+    public translations: ITranslations | null = null;
     public isVisible: boolean = false;
 
     constructor(
         private _translations: TranslationsService
     ) {}
 
-    ngOnInit() {
+    ngOnInit(): void {
         this._translations.getTranslations().subscribe(t => this.translations = t);
     }
 

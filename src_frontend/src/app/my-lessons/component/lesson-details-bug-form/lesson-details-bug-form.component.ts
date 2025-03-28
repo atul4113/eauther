@@ -12,8 +12,8 @@ import {TranslationsService} from "../../../common/service";
 export class LessonDetailsBugFormComponent implements OnInit {
     @Output() reportBug: EventEmitter<Bug> = new EventEmitter<Bug>();
 
-    public editBug: Bug;
-    public translations: ITranslations;
+    public editBug!: Bug;
+    public translations: ITranslations | null = null;
     public isTitleValid: boolean = true;
     public isDescValid: boolean = true;
 
@@ -21,7 +21,7 @@ export class LessonDetailsBugFormComponent implements OnInit {
         private _translations: TranslationsService
     ) {}
 
-    ngOnInit() {
+    ngOnInit(): void {
         this._translations.getTranslations().subscribe(t => this.translations = t);
         this.editBug = new Bug();
     }
@@ -32,7 +32,7 @@ export class LessonDetailsBugFormComponent implements OnInit {
 
     public set title(value: string) {
         this.editBug.title = value;
-        this.checkIfTitleValid()
+        this.checkIfTitleValid();
     }
 
     public get description(): string {
@@ -42,11 +42,11 @@ export class LessonDetailsBugFormComponent implements OnInit {
     public set description(value: string) {
         if (this.editBug.description.localeCompare(value) !== 0) {
             this.editBug.description = value;
-            this.checkIfDescValid()
+            this.checkIfDescValid();
         }
     }
 
-    public onSubmit() {
+    public onSubmit(): void {
         this.checkIfTitleValid();
         this.checkIfDescValid();
 
@@ -57,11 +57,11 @@ export class LessonDetailsBugFormComponent implements OnInit {
         }
     }
 
-    private checkIfTitleValid() {
+    private checkIfTitleValid(): void {
         this.isTitleValid = this.editBug.title.length > 0;
     }
 
-    private checkIfDescValid() {
+    private checkIfDescValid(): void {
         this.isDescValid = this.editBug.description.length > 0;
     }
 
