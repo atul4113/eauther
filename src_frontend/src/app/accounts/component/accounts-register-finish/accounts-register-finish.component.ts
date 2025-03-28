@@ -14,14 +14,16 @@ declare let document: any;
 })
 
 export class AccountsRegisterFinishComponent implements OnInit, OnDestroy {
-    public translations: ITranslations;
+    public translations!: ITranslations;
 
     constructor (
         private _translations: TranslationsService
     ) {}
 
     ngOnInit () {
-        this._translations.getTranslations().subscribe(t => this.translations = t);
+        this._translations.getTranslations().subscribe(t => {
+            this.translations = t ?? {} as ITranslations;
+        });
     }
 
     ngOnDestroy () {}

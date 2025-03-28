@@ -23,7 +23,7 @@ export class AccountsRegisterComponent implements OnInit {
     public isEmailConfirmedServerError = false;
     public isSSORegistration = false;
     public registerIsClicked = false;
-    public translations: ITranslations;
+    public translations!: ITranslations;
 
     public formValid = {
         username: true,
@@ -46,7 +46,9 @@ export class AccountsRegisterComponent implements OnInit {
     ) {}
 
     ngOnInit () {
-        this._translations.getTranslations().subscribe(t => this.translations = t);
+        this._translations.getTranslations().subscribe(t => {
+            this.translations = t ?? {} as ITranslations;
+        });
     }
 
     public checkPasswords () {

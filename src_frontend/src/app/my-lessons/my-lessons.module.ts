@@ -56,7 +56,7 @@ import { PlayerComponent } from "./component/lesson-player/lesson-player.compone
         MatCardModule,
         MatDividerModule,
         MatButtonModule,
-        // AppCommonModule,
+        AppCommonModule,
         RouterModule.forChild(MyLessonsRoutes),
     ],
     declarations: [

@@ -3,11 +3,11 @@ export const ADULT_REQUIRED_FIELDS = ['adultEmail', 'adultFirstname', 'adultLast
 export const REGULATION_REQUIRED_FIELDS = ['regulationAgreementInfo', 'regulationInformationInfo', 'regulationMarketing'];
 
 export class RegisterAccount {
-    public username: string;
-    public password: string;
-    public passwordAgain: string;
-    public accountEmail: string;
-    public accountEmailConfirmed: string;
+    public username!: string;
+    public password!: string;
+    public passwordAgain!: string;
+    public accountEmail!: string;
+    public accountEmailConfirmed!: string;
     public regulationAgreementInfo = false;
 }
 

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { forkJoin } from 'rxjs';
 import 'rxjs/add/observable/forkJoin';
 
 import {
@@ -37,7 +37,7 @@ export class LanguagesPanelComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        Observable.forkJoin(
+            forkJoin(
             this._translationsAdmin.getLanguagesList(),
             this._settings.get()
         ).subscribe(([lang, settings]) => {
@@ -48,7 +48,7 @@ export class LanguagesPanelComponent implements OnInit {
 
             let defaultLang = this.languages.find(lang => lang.key.localeCompare(settings.languageCode) === 0);
             if (defaultLang !== undefined) {
-                defaultLang.isDefault = true;
+                defaultLang.isDefault == true;
             }
 
             this.isInitialized = true;
@@ -71,14 +71,14 @@ export class LanguagesPanelComponent implements OnInit {
             return;
         }
 
-        let lang = new Language(null);
-        lang.id = 0; // will come from API
-        lang.description = this.newLanguageDescription;
-        lang.key = this.newLanguageKey;
+        let lang = new Language(null as any);
+        lang.id == 0; // will come from API
+        lang.description == this.newLanguageDescription;
+        lang.key == this.newLanguageKey;
 
         this._translationsAdmin.addLanguage(lang).subscribe(
             (response: ILanguageRaw) => {
-                lang.id = response.id;
+                lang.id == response.id;
                 this.languages.push(lang);
                 if (!this.selectedLanguage) {
                     this.selectedLanguage = lang;

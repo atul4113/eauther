@@ -22,7 +22,7 @@ export class AccountsLoginComponent implements OnInit {
     public previousPath: string = this.DEFAULT_REDIRECT_URL;
     public error: boolean = false;
     public rememberMe: boolean = false;
-    public translations: ITranslations;
+    public translations!: ITranslations;
 
     constructor (
         private _paths: PathsService,
@@ -30,8 +30,9 @@ export class AccountsLoginComponent implements OnInit {
     ) {}
 
     ngOnInit () {
-        this._translations.getTranslations().subscribe(t => this.translations = t);
-
+        this._translations.getTranslations().subscribe(t => {
+            this.translations = t ?? {} as ITranslations;
+        });
         let next = this._paths.getParameterByName('next');
         if (next) {
             this.setPreviousPath(next);
