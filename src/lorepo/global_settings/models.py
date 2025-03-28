@@ -1,4 +1,4 @@
-from djangae.fields import JSONField
+from gcloudc.db.models.fields.json import JSONField
 
 import src.libraries.utility.cacheproxy as cache
 from src.lorepo.util.singleton_model import SingletonModel

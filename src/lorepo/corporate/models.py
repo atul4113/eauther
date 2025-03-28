@@ -1,4 +1,4 @@
-from djangae.fields import ListField
+from gcloudc.db.models.fields.iterable import ListField
 from django.db import models
 from src.lorepo.filestorage.models import UploadedFile
 from src.lorepo.permission.models import Permission

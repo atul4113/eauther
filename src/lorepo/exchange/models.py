@@ -1,6 +1,6 @@
 from collections import namedtuple
 
-from djangae.fields import ListField
+from gcloudc.db.models.fields.iterable import ListField
 from django.contrib.auth.models import User
 from django.db import models
 

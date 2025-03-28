@@ -1,4 +1,4 @@
-from djangae.fields import ListField
+from gcloudc.db.models.fields.iterable import ListField
 from django.db import models
 from src.lorepo.spaces.models import Space
 import src.libraries.utility.cacheproxy as cache

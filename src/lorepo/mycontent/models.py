@@ -2,7 +2,7 @@
 import logging
 
 from djangae.contrib.pagination import paginated_model
-from djangae.fields import ListField
+from gcloudc.db.models.fields.iterable import ListField
 from django.contrib.auth.models import User
 from django.core.exceptions import MultipleObjectsReturned
 from django.db import models

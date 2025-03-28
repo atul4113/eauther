@@ -60,8 +60,8 @@ class RegistrationManager(models.Manager):
                 return user
         return False
     
-    def create_inactive_user(self, username, password, email,
-                             send_email=True, profile_callback=None):
+    def create_inactive_user(self, username, email, password, send_email=True, profile_callback=None):
+
         print('77'*100)
         """
         Create a new, inactive ``User``, generates a
@@ -109,12 +109,17 @@ class RegistrationManager(models.Manager):
         new_user.is_active = False
         new_user.save()
         print("New user created!!")
+
+        # Force a commit to datastore
+        from google.cloud import datastore
+        client = datastore.Client()
+        client.transaction()  # This forces a commit
         
         registration_profile = self.create_profile(new_user)
         
         if profile_callback is not None:
             profile_callback(user=new_user)
-        
+
         if send_email:
             from django.core.mail import send_mail
             

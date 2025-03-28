@@ -9,6 +9,11 @@ from lxml import etree
 from pathlib import Path
 import pymysql
 
+try:
+    from .datastore_settings import *
+except ImportError:
+    pass
+
 
 pymysql.install_as_MySQLdb()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -401,7 +406,15 @@ etree.set_default_parser(parser=etree.XMLParser(**lxml_parser_options))
 #     }
 # }
 
-EMAIL_BACKEND = 'lorepo.util.email_backend.RecipientsCheckEmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'  # Or your custom backend
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' # For development,
+
+EMAIL_HOST = 'smtp.example.com'  # Your SMTP server
+EMAIL_PORT = 587  # Your SMTP port
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'your-email@example.com'  # Your email address
+EMAIL_HOST_PASSWORD = 'your-password'  # Your email password
+DEFAULT_FROM_EMAIL = 'noreply@example.com'
 
 
 def get_bucket_name(name):
