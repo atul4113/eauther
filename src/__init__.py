@@ -8,3 +8,9 @@ try:
     from .patches import *  # Apply patches when app is loaded
 except ImportError:
     pass
+
+
+try:
+    from .datastore_patches import *
+except ImportError:
+    pass

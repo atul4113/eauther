@@ -10,6 +10,7 @@ from django.db import models
 from django.template.loader import render_to_string
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import User
+from google.cloud import datastore
 
 
 SHA1_RE = re.compile('^[a-f0-9]{40}$')
@@ -55,66 +56,63 @@ class RegistrationManager(models.Manager):
                 user = profile.user
                 user.is_active = True
                 user.save()
+
+                # Update user in Google Datastore
+                client = datastore.Client()
+                
+                # Update user entity
+                query = client.query(kind="auth_user")
+                query.add_filter("username", "=", user.username)
+                results = list(query.fetch())
+                
+                if results:
+                    user_entity = results[0]
+                    user_entity['is_active'] = True
+                    client.put(user_entity)
+
+                # Update profile in Datastore
+                profile_query = client.query(kind="profile")
+                profile_query.add_filter("user_username", "=", user.username)
+                profile_results = list(profile_query.fetch())
+                
+                if profile_results:
+                    profile_entity = profile_results[0]
+                    profile_entity['activation_key'] = self.model.ACTIVATED
+                    client.put(profile_entity)
+
                 profile.activation_key = self.model.ACTIVATED
                 profile.save()
                 return user
         return False
     
     def create_inactive_user(self, username, email, password, send_email=True, profile_callback=None):
-
-        print('77'*100)
         """
         Create a new, inactive ``User``, generates a
         ``RegistrationProfile`` and email its activation key to the
         ``User``, returning the new ``User``.
-        
-        To disable the email, call with ``send_email=False``.
-
-        The activation email will make use of two templates:
-
-        ``registration/activation_email_subject.txt``
-            This template will be used for the subject line of the
-            email. It receives one context variable, ``site``, which
-            is the currently-active
-            ``django.contrib.sites.models.Site`` instance. Because it
-            is used as the subject line of an email, this template's
-            output **must** be only a single line of text; output
-            longer than one line will be forcibly joined into only a
-            single line.
-
-        ``registration/activation_email.txt``
-            This template will be used for the body of the email. It
-            will receive three context variables: ``activation_key``
-            will be the user's activation key (for use in constructing
-            a URL to activate the account), ``expiration_days`` will
-            be the number of days for which the key will be valid and
-            ``site`` will be the currently-active
-            ``django.contrib.sites.models.Site`` instance.
-        
-        To enable creation of a custom user profile along with the
-        ``User`` (e.g., the model specified in the
-        ``AUTH_PROFILE_MODULE`` setting), define a function which
-        knows how to create and save an instance of that model with
-        appropriate default values, and pass it as the keyword
-        argument ``profile_callback``. This function should accept one
-        keyword argument:
-
-        ``user``
-            The ``User`` to relate the profile to.
-        
         """
-        print('88'*100)
+        # Create user in Google Datastore first to get the ID
+        client = datastore.Client()
+        user_key = client.key("auth_user")
+        user_entity = datastore.Entity(key=user_key)
+        user_entity.update({
+            'username': username,
+            'email': email,
+            'password': password,
+            'is_active': False,
+            'date_joined': datetime.datetime.now(),
+            'last_login': None
+        })
+        client.put(user_entity)
+        user_id = user_entity.key.id
+        print('Created Datastore user with ID:', user_id)
+
+        # Now create user in Django ORM with the same ID
         new_user = User.objects.create_user(username, email, password)
-        print('99'*100)
+        new_user.id = user_id  # Set the same ID as Datastore
         new_user.is_active = False
         new_user.save()
-        print("New user created!!")
-
-        # Force a commit to datastore
-        from google.cloud import datastore
-        client = datastore.Client()
-        client.transaction()  # This forces a commit
-        
+        print("New user created with ID:", user_id)
         registration_profile = self.create_profile(new_user)
         
         if profile_callback is not None:
@@ -146,12 +144,32 @@ class RegistrationManager(models.Manager):
         username and a random salt.
         
         """
-
+        print('Creating profile for user:', user.username)
         salt = hashlib.sha1(str(random.random()).encode()).hexdigest()[:5]
         activation_key = hashlib.sha1((salt + user.username).encode()).hexdigest()
 
-        return self.create(user=user,
-                           activation_key=activation_key)
+        # Create profile in Django ORM
+        profile = self.create(user=user, activation_key=activation_key)
+        print('Created Django profile:', profile)
+
+        # Create profile in Google Datastore
+        client = datastore.Client()
+        
+        # Create the profile entity with user's ID as the key
+        profile_key = client.key("profile", user.id)  # Use user.id as the key
+        profile_entity = datastore.Entity(key=profile_key)
+        profile_entity.update({
+            'user_id': user.id,
+            'activation_key': activation_key,
+            'user_username': user.username,
+            'is_active': False
+        })
+        
+        # Save to Datastore
+        client.put(profile_entity)
+        print('Created Datastore profile for user ID:', user.id)
+
+        return profile
         
     def delete_expired_users(self):
         """

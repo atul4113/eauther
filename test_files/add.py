@@ -10,6 +10,11 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "src.settings")
 django.setup()
 
 
+import os
+os.environ["DATASTORE_EMULATOR_HOST"] = "localhost:8081"  # Adjust port if needed
+os.environ["DATASTORE_PROJECT_ID"] = "your-project-id"
+
+
 client = datastore.Client()
 kind = "auth_user"
 user_key = client.key(kind)
