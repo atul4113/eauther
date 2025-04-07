@@ -92,9 +92,15 @@ class RegistrationManager(models.Manager):
         ``RegistrationProfile`` and email its activation key to the
         ``User``, returning the new ``User``.
         """
-        # Create user in Google Datastore first to get the ID
+        #Create user in Django ORM (USER)
+        new_user = User.objects.create_user(username, email, password)
+        new_user.is_active = False
+        new_user.save()
+        print("New Django user created with ID:", new_user.id)
+
+        #Create user in Google Datastore with the same ID
         client = datastore.Client()
-        user_key = client.key("auth_user")
+        user_key = client.key("auth_user", new_user.id)  # Use Django user ID
         user_entity = datastore.Entity(key=user_key)
         user_entity.update({
             'username': username,
@@ -113,6 +119,9 @@ class RegistrationManager(models.Manager):
         new_user.is_active = True
         new_user.password = make_password(password)
         new_user.save()
+        client.put(user_entity)
+        print('Created Datastore user with ID:', new_user.id)
+
         registration_profile = self.create_profile(new_user)
         
         if profile_callback is not None:

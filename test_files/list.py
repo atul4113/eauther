@@ -3,7 +3,6 @@ import django
 import sys
 from google.cloud import datastore
 import datetime
-from django.contrib.auth.models import User
 
 
 # Set up Django
@@ -11,15 +10,15 @@ sys.path.append("D:/Smart Education/Projects/eauther")
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "src.settings")  
 django.setup()
 
-os.environ["DATASTORE_EMULATOR_HOST"] = "localhost:8081"  # Adjust port if needed
-os.environ["DATASTORE_PROJECT_ID"] = "your-project-id"
+# os.environ["DATASTORE_EMULATOR_HOST"] = "localhost:8081"  # Adjust port if needed
+# os.environ["DATASTORE_PROJECT_ID"] = "your-project-id"
 
 client = datastore.Client()
 
 def list_users():
     query = client.query(kind="auth_user")
     users = list(query.fetch())
-
+    print('list_users function started ..')
     for user in users:
         print(f"ID: {user.key.id}, Username: {user['username']}, Email: {user['email']}")
 
@@ -53,7 +52,7 @@ def get_user_with_profile(user_id):
     else:
         print("User not found.")
 
-get_user_with_profile(9)
+# get_user_with_profile(9)
 
 
 def list_kinds():
@@ -68,6 +67,7 @@ def list_kinds():
 
 def list_django_users():
     print("\nQuerying users via Django ORM:")
+    from django.contrib.auth.models import User
     users = User.objects.all()
     
     print(f"Found {len(users)} users via Django ORM:")
@@ -76,7 +76,7 @@ def list_django_users():
         print(f"  Is active: {user.is_active}, Date joined: {user.date_joined}")
 
 
-# list_django_users()
+list_django_users()
 
 
 def list_users_2():
