@@ -1,7 +1,13 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import {
+    Component,
+    EventEmitter,
+    Input,
+    OnInit,
+    Output,
+    ViewChild,
+} from "@angular/core";
 import { mergeMap } from "rxjs/operators";
-import "rxjs/add/observable/forkJoin";
-import "rxjs/add/observable/of";
+import { forkJoin, of } from "rxjs";
 
 import { UploadFileComponent } from "../../../common/component/upload-file/upload-file.component";
 import { FileData } from "../../../common/model/upload-file";
@@ -11,36 +17,47 @@ import { MyContentService } from "../../service/my-content.service";
 import { RolePermissions } from "../../../common/model/auth-user";
 
 @Component({
-    selector: 'app-lesson-details-metadata-icon',
+    selector: "app-lesson-details-metadata-icon",
     template: `
         <div
-            [ngStyle]="{'background-image': 'url(' + lesson.iconHref + ')'}"
-            [ngClass]="{'edit': isEditMode}"
-            class="icon">
-            <button *ngIf="isEditMode"
-                    mat-icon-button color="primary"
-                    (click)="toggleEditMode()"
-                    class="white">
+            [ngStyle]="{ 'background-image': 'url(' + lesson.iconHref + ')' }"
+            [ngClass]="{ edit: isEditMode }"
+            class="icon"
+        >
+            <button
+                *ngIf="isEditMode"
+                mat-icon-button
+                color="primary"
+                (click)="toggleEditMode()"
+                class="white"
+            >
                 <i class="material-icons">close</i>
             </button>
-            <button *ngIf="!isEditMode && (userPermissions?.contentUploadLessonsAddonsIcon)"
-                     mat-mini-fab color="primary"
-                    (click)="toggleEditMode()"
-                    class="white">
+            <button
+                *ngIf="
+                    !isEditMode &&
+                    userPermissions?.contentUploadLessonsAddonsIcon
+                "
+                mat-mini-fab
+                color="primary"
+                (click)="toggleEditMode()"
+                class="white"
+            >
                 <i class="material-icons">edit</i>
             </button>
 
-            <upload-file *ngIf="isEditMode"
-                         [disabled]="isUploadingIcon"
-                         (selected)="onFileSelected($event)"
-                         [ngClass]="{'hidden': isUploadingIcon}">
+            <upload-file
+                *ngIf="isEditMode"
+                [disabled]="isUploadingIcon"
+                (selected)="onFileSelected($event)"
+                [ngClass]="{ hidden: isUploadingIcon }"
+            >
             </upload-file>
             <app-loading *ngIf="isUploadingIcon"></app-loading>
         </div>
-    `
+    `,
 })
 export class LessonDetailsMetadataIconComponent implements OnInit {
-
     @Input() lesson!: Lesson;
     @Input() userPermissions!: RolePermissions;
     @Output() iconChange: EventEmitter<FileData> = new EventEmitter<FileData>();
@@ -50,43 +67,52 @@ export class LessonDetailsMetadataIconComponent implements OnInit {
     public isEditMode: boolean = false;
     public isUploadingIcon: boolean = false;
 
-    constructor (
+    constructor(
         private _infoMessage: InfoMessageService,
-        private _myContent: MyContentService,
+        private _myContent: MyContentService
     ) {}
 
-    ngOnInit () {}
+    ngOnInit() {}
 
-    public toggleEditMode () {
+    public toggleEditMode() {
         this.isEditMode = !this.isEditMode;
     }
 
-    public onFileSelected (event: any) {
+    public onFileSelected(event: any) {
         const file: FileData = event as FileData;
-        
+
         if (!file.isUploaded) {
             this.isUploadingIcon = true;
-            this.uploadFileComponent?.upload().pipe(
-                mergeMap(
-                (uploadedFile: FileData) => {
-                    file.fileId = Number(uploadedFile.fileId); // Ensure fileId is a number
-                    return this._myContent.updateLessonIcon(this.lesson, uploadedFile);
-                })
-            ).subscribe(
-                () => {
-                    this.lesson.iconHref = file.link;
-                    this.isUploadingIcon = false;
-                    this.isEditMode = false;
-                    this._infoMessage.addSuccess('Preview Icon saved successfully.');
-                    this.iconChange.emit(file);
-                },
-                (error) => {
-                    console.error(error);
-                    this.isUploadingIcon = false;
-                    this.isEditMode = false;
-                    this._infoMessage.addError('An error occurred during saving Preview Icon.');
-                }
-            );
+            this.uploadFileComponent
+                ?.upload()
+                .pipe(
+                    mergeMap((uploadedFile: FileData) => {
+                        file.fileId = Number(uploadedFile.fileId); // Ensure fileId is a number
+                        return this._myContent.updateLessonIcon(
+                            this.lesson,
+                            uploadedFile
+                        );
+                    })
+                )
+                .subscribe(
+                    () => {
+                        this.lesson.iconHref = file.link;
+                        this.isUploadingIcon = false;
+                        this.isEditMode = false;
+                        this._infoMessage.addSuccess(
+                            "Preview Icon saved successfully."
+                        );
+                        this.iconChange.emit(file);
+                    },
+                    (error) => {
+                        console.error(error);
+                        this.isUploadingIcon = false;
+                        this.isEditMode = false;
+                        this._infoMessage.addError(
+                            "An error occurred during saving Preview Icon."
+                        );
+                    }
+                );
         }
     }
 }

@@ -1,16 +1,24 @@
-<div *ngIf="homeIframeSrc" class="page-content" (window:message)="onMessage($event)">
-    <iframe [src]="homeIframeSrc" [ngStyle]="{'height': HomeIframeHeight}"
-            allowfullscreen="allowfullscreen"
-            mozallowfullscreen="mozallowfullscreen"
-            msallowfullscreen="msallowfullscreen"
-            oallowfullscreen="oallowfullscreen"
-            webkitallowfullscreen="webkitallowfullscreen"></iframe>
+<div
+    *ngIf="homeIframeSrc"
+    class="page-content"
+    (window:message)="onMessage($event)"
+>
+    <iframe
+        [src]="homeIframeSrc"
+        [ngStyle]="{ height: HomeIframeHeight }"
+        allowfullscreen="allowfullscreen"
+        mozallowfullscreen="mozallowfullscreen"
+        msallowfullscreen="msallowfullscreen"
+        oallowfullscreen="oallowfullscreen"
+        webkitallowfullscreen="webkitallowfullscreen"
+    ></iframe>
 </div>
 
 <div *ngIf="!homeIframeSrc" class="app-content" id="home-main">
     <page-title-bar>
-        <h1 class="title">{{ translations | getLabel: "plain.home.panel.home"}}</h1>
+        <h1 class="title">
+            {{ translations | getLabel : "plain.home.panel.home" }}
+        </h1>
     </page-title-bar>
-    <div putFooterBottom class="app-content-page">
-    </div>
+    <div putFooterBottom class="app-content-page"></div>
 </div>

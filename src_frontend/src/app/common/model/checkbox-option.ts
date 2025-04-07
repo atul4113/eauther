@@ -1,6 +1,7 @@
 export class CheckboxOption {
     constructor(
         public readonly content: string,
-        public readonly value: string | number | boolean
+        public value: string | number | boolean,
+        public readonly displayName?: string
     ) {}
 }

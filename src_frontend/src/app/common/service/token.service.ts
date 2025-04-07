@@ -30,7 +30,8 @@ export class TokenService {
             error &&
             typeof error === "object" &&
             "status" in error &&
-            error.status === 400
+            typeof (error as { status: number }).status === "number" &&
+            (error as { status: number }).status === 400
         ) {
             return of(null);
         } else {

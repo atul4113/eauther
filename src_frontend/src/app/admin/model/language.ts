@@ -12,9 +12,13 @@ export class Language {
     readonly description: string; // english, polish
     readonly isDefault: boolean;
 
-    constructor(lang: ILanguageRaw) {
+    constructor(lang: ILanguageRaw | null) {
         if (!lang) {
-            throw new Error("Language data is required");
+            this.id = 0;
+            this.key = "";
+            this.description = "";
+            this.isDefault = false;
+            return;
         }
         this.id = lang.id;
         this.key = lang.lang_key;
@@ -27,6 +31,16 @@ export class Language {
     }
 
     static readonly FAKE_ID: number = -1;
+
+    static createNew(key: string, description: string): Language {
+        return new Language({
+            id: 0,
+            lang_key: key,
+            lang_description: description,
+            created_date: "",
+            modified_date: "",
+        });
+    }
 }
 
 // used in browse labels view, to allow filtering by all languages

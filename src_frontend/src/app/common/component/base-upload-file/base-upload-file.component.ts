@@ -5,31 +5,36 @@ import {
     OnInit,
     ViewChild,
     ElementRef,
+    Input,
 } from "@angular/core";
 import { FileUploader, FileItem, ParsedResponseHeaders } from "ng2-file-upload";
 import { Observable, Observer, forkJoin } from "rxjs";
+import { FileUploadModule } from "ng2-file-upload";
+import { CommonModule } from "@angular/common";
 
 import { FileData, UploadFileError } from "../../model/upload-file";
 import { UploadFileService, TokenService } from "../../service";
 
 @Component({
     selector: "base-upload-file",
+    standalone: true,
+    imports: [CommonModule, FileUploadModule],
     template: `
         <input
-            *ngIf="uploader"
             #fileInput
-            [uploader]="uploader"
             type="file"
-            ng2FileSelect
+            (change)="onFileChange($event)"
+            style="display: none"
         />
         <ng-content></ng-content>
     `,
+
     providers: [UploadFileService],
 })
 export class BaseUploadFileComponent implements OnInit {
+    @Input() uploader: FileUploader | null = null;
     @Output() selected: EventEmitter<FileData> = new EventEmitter<FileData>();
 
-    public uploader: FileUploader | null = null;
     public file: FileItem | null = null;
 
     @ViewChild("fileInput")
@@ -44,6 +49,27 @@ export class BaseUploadFileComponent implements OnInit {
 
     ngOnInit(): void {
         this.init();
+    }
+
+    onFileChange(event: Event): void {
+        const input = event.target as HTMLInputElement;
+        if (input.files && input.files.length > 0) {
+            const selectedFile = input.files[0];
+
+            if (this.uploader) {
+                this.uploader.clearQueue();
+                this.uploader.addToQueue([selectedFile]);
+                this.file = this.uploader.queue[0];
+
+                this.selected.emit(
+                    new FileData(
+                        selectedFile.name || "",
+                        selectedFile.type || "",
+                        selectedFile.size
+                    )
+                );
+            }
+        }
     }
 
     public upload(): Observable<FileData> {
@@ -91,10 +117,15 @@ export class BaseUploadFileComponent implements OnInit {
     }
 
     public openFilePicker(): void {
-        this.fileInput.nativeElement.click();
+        if (this.fileInput) {
+            this.fileInput.nativeElement.click();
+        }
     }
 
     public clear(): void {
+        if (this.uploader) {
+            this.uploader.clearQueue();
+        }
         this.init();
     }
 

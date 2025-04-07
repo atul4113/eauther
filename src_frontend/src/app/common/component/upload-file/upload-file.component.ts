@@ -2,13 +2,21 @@ import {
     Component,
     EventEmitter,
     Input,
+    OnInit,
     Output,
     ViewChild,
 } from "@angular/core";
 import { Observable } from "rxjs";
+import { CommonModule } from "@angular/common";
+import { MatButtonModule } from "@angular/material/button";
 
 import { FileData } from "../../model";
 import { BaseUploadFileComponent } from "../base-upload-file/base-upload-file.component";
+import { UploadFileService } from "../../service";
+import { TranslationsService } from "../../service/translations.service";
+import { InfoMessageService } from "../../service/info-message.service";
+import { ITranslations } from "../../model/translations";
+import { GetLabelPipe } from "../../pipe/get-label.pipe";
 
 /**
  * Upload file component based on ng2-file-upload module.
@@ -59,15 +67,18 @@ import { BaseUploadFileComponent } from "../base-upload-file/base-upload-file.co
  */
 @Component({
     selector: "upload-file",
+    standalone: true,
+    imports: [
+        CommonModule,
+        MatButtonModule,
+        BaseUploadFileComponent,
+        GetLabelPipe,
+    ],
     template: `
         <base-upload-file (selected)="onSelected($event)">
             <button
                 (click)="baseUploadFile.openFilePicker()"
-                [disabled]="
-                    !baseUploadFile.uploader ||
-                    (baseUploadFile.file && baseUploadFile.file.isUploading) ||
-                    disabled
-                "
+                [disabled]="disabled"
                 mat-mini-fab
                 color="accent"
             >
@@ -75,14 +86,31 @@ import { BaseUploadFileComponent } from "../base-upload-file/base-upload-file.co
             </button>
         </base-upload-file>
     `,
+    providers: [UploadFileService],
 })
-export class UploadFileComponent {
+export class UploadFileComponent implements OnInit {
     @Input() disabled: boolean = false;
-
     @Output() selected: EventEmitter<FileData> = new EventEmitter<FileData>();
 
     @ViewChild(BaseUploadFileComponent)
     public baseUploadFile!: BaseUploadFileComponent;
+
+    public translations: ITranslations | null = null;
+
+    constructor(
+        private readonly _translations: TranslationsService,
+        private readonly _infoMessage: InfoMessageService
+    ) {}
+
+    ngOnInit(): void {
+        this._translations
+            .getTranslations()
+            .subscribe((translations: ITranslations | null) => {
+                if (translations) {
+                    this.translations = translations;
+                }
+            });
+    }
 
     public upload(): Observable<FileData> {
         return this.baseUploadFile.upload();

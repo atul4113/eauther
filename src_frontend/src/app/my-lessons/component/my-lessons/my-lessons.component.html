@@ -1,201 +1,522 @@
 <section class="app-content" id="my-lessons">
-    <div class="page-content" [ngClass]="{'page-content-bigger': !detailsVisible}">
+    <div
+        class="page-content"
+        [ngClass]="{ 'page-content-bigger': !detailsVisible }"
+    >
         <div class="page-title-bar">
             <div class="page-title-bar__header">
                 <div class="project-title-container">
-                    <h1 *ngIf="!isProject" class="title"> {{ translations | getLabel:
-                        "plain.my_lessons.panel.my_lessons.my_lessons"}}</h1>
+                    <h1 *ngIf="!isProject" class="title">
+                        {{
+                            translations
+                                | getLabel
+                                    : "plain.my_lessons.panel.my_lessons.my_lessons"
+                        }}
+                    </h1>
                     <h1 *ngIf="isProject" class="title">
                         {{ projectName }}
                     </h1>
-                    <span *ngIf="publicationName && !shouldShowAddons && !shouldShowTrash">{{ publicationName }}</span>
                     <span
-                        *ngIf="publicationName && shouldShowAddons">{{ translations | getLabel:"plain.my_lessons.panel.my_lessons.addons" }}</span>
+                        *ngIf="
+                            publicationName &&
+                            !shouldShowAddons &&
+                            !shouldShowTrash
+                        "
+                        >{{ publicationName }}</span
+                    >
+                    <span *ngIf="publicationName && shouldShowAddons">{{
+                        translations
+                            | getLabel
+                                : "plain.my_lessons.panel.my_lessons.addons"
+                    }}</span>
                     <span
-                        *ngIf="publicationName && !shouldShowAddons && shouldShowTrash">{{ translations | getLabel:"plain.my_lessons.panel.my_lessons.trash" }}</span>
+                        *ngIf="
+                            publicationName &&
+                            !shouldShowAddons &&
+                            shouldShowTrash
+                        "
+                        >{{
+                            translations
+                                | getLabel
+                                    : "plain.my_lessons.panel.my_lessons.trash"
+                        }}</span
+                    >
                 </div>
                 <div class="header-functions">
                     <div *ngIf="!isView" class="sort-order">
                         <span
-                            *ngIf="lessonsOrder.isNameDown()|| lessonsOrder.isNameUp()"> {{ translations | getLabel: "plain.my_lessons.panel.my_lessons.name" }}</span>
-                        <i *ngIf="lessonsOrder.isNameDown()"
-                           class="material-icons">arrow_downward</i>
-                        <i *ngIf="lessonsOrder.isNameUp()"
-                           class="material-icons">arrow_upward</i>
+                            *ngIf="
+                                lessonsOrder.isNameDown() ||
+                                lessonsOrder.isNameUp()
+                            "
+                        >
+                            {{
+                                translations
+                                    | getLabel
+                                        : "plain.my_lessons.panel.my_lessons.name"
+                            }}</span
+                        >
+                        <i
+                            *ngIf="lessonsOrder.isNameDown()"
+                            class="material-icons"
+                            >arrow_downward</i
+                        >
+                        <i
+                            *ngIf="lessonsOrder.isNameUp()"
+                            class="material-icons"
+                            >arrow_upward</i
+                        >
 
                         <span
-                            *ngIf="lessonsOrder.isDateDown() || lessonsOrder.isDateUp()"> {{ translations | getLabel: "plain.my_lessons.panel.my_lessons.date" }}</span>
-                        <i *ngIf="lessonsOrder.isDateDown()"
-                           class="material-icons">arrow_downward</i>
-                        <i *ngIf="lessonsOrder.isDateUp()"
-                           class="material-icons">arrow_upward</i>
+                            *ngIf="
+                                lessonsOrder.isDateDown() ||
+                                lessonsOrder.isDateUp()
+                            "
+                        >
+                            {{
+                                translations
+                                    | getLabel
+                                        : "plain.my_lessons.panel.my_lessons.date"
+                            }}</span
+                        >
+                        <i
+                            *ngIf="lessonsOrder.isDateDown()"
+                            class="material-icons"
+                            >arrow_downward</i
+                        >
+                        <i
+                            *ngIf="lessonsOrder.isDateUp()"
+                            class="material-icons"
+                            >arrow_upward</i
+                        >
                     </div>
 
-                    <button *ngIf="!isView" [matMenuTriggerFor]="sortaction"
-                            id="sort-options"
-                            class="icon-link"
-                            [matTooltip]=" translations | getLabel:'plain.my_lessons.panel.my_lessons.sort'"
-                            [matTooltipPosition]="'below'"
-                            mat-icon-button>
+                    <button
+                        *ngIf="!isView"
+                        [matMenuTriggerFor]="sortaction"
+                        id="sort-options"
+                        class="icon-link"
+                        [matTooltip]="
+                            translations
+                                | getLabel
+                                    : 'plain.my_lessons.panel.my_lessons.sort'
+                        "
+                        [matTooltipPosition]="'below'"
+                        mat-icon-button
+                    >
                         <i class="material-icons">filter_list</i>
                     </button>
 
-                    <mat-menu #sortaction="matMenu"
-                              [overlapTrigger]="false">
-                        <a *ngIf="!lessonsOrder.isNameDown()"
-                           (click)="sortLessonsByNameDown()"
-                           mat-menu-item>
-                            {{ translations | getLabel: "plain.my_lessons.panel.my_lessons.name" }}
+                    <mat-menu #sortaction="matMenu" [overlapTrigger]="false">
+                        <a
+                            *ngIf="!lessonsOrder.isNameDown()"
+                            (click)="sortLessonsByNameDown()"
+                            mat-menu-item
+                        >
+                            {{
+                                translations
+                                    | getLabel
+                                        : "plain.my_lessons.panel.my_lessons.name"
+                            }}
                             <i class="material-icons">arrow_downward</i>
                         </a>
-                        <a *ngIf="lessonsOrder.isNameDown()"
-                           (click)="sortLessonsByNameUp()"
-                           mat-menu-item>
-                            {{ translations | getLabel: "plain.my_lessons.panel.my_lessons.name" }}
+                        <a
+                            *ngIf="lessonsOrder.isNameDown()"
+                            (click)="sortLessonsByNameUp()"
+                            mat-menu-item
+                        >
+                            {{
+                                translations
+                                    | getLabel
+                                        : "plain.my_lessons.panel.my_lessons.name"
+                            }}
                             <i class="material-icons">arrow_upward</i>
                         </a>
-                        <a *ngIf="!lessonsOrder.isDateDown()"
-                           (click)="sortLessonByDateDown()"
-                           mat-menu-item>
-                            {{ translations | getLabel: "plain.my_lessons.panel.my_lessons.date" }}
+                        <a
+                            *ngIf="!lessonsOrder.isDateDown()"
+                            (click)="sortLessonByDateDown()"
+                            mat-menu-item
+                        >
+                            {{
+                                translations
+                                    | getLabel
+                                        : "plain.my_lessons.panel.my_lessons.date"
+                            }}
                             <i class="material-icons">arrow_downward</i>
                         </a>
-                        <a *ngIf="lessonsOrder.isDateDown()"
-                           (click)="sortLessonByDateUp()"
-                           mat-menu-item>
-                            {{ translations | getLabel: "plain.my_lessons.panel.my_lessons.date" }}
+                        <a
+                            *ngIf="lessonsOrder.isDateDown()"
+                            (click)="sortLessonByDateUp()"
+                            mat-menu-item
+                        >
+                            {{
+                                translations
+                                    | getLabel
+                                        : "plain.my_lessons.panel.my_lessons.date"
+                            }}
                             <i class="material-icons">arrow_upward</i>
                         </a>
                     </mat-menu>
 
-                    <ng-container *ngIf="selectedLesson&&isView&&selectedLesson.contentType.isLesson()">
-                        <button *ngIf="userPermissions && userPermissions.contentViewLessonsAddons" mat-icon-button
+                    <ng-container
+                        *ngIf="
+                            selectedLesson &&
+                            isView &&
+                            selectedLesson.contentType.isLesson()
+                        "
+                    >
+                        <button
+                            *ngIf="
+                                userPermissions &&
+                                userPermissions.contentViewLessonsAddons
+                            "
+                            mat-icon-button
                             matTooltip="Contact support"
-                           (click)="$event.stopPropagation();onContactSupport()">
-                             <i class="material-icons">contacts</i></button>
+                            (click)="
+                                $event.stopPropagation(); onContactSupport()
+                            "
+                        >
+                            <i class="material-icons">contacts</i>
+                        </button>
                     </ng-container>
 
                     <div class="line"></div>
 
-                    <ng-container *ngIf="selectedLesson&&isView&&selectedLesson.contentType.isLesson()">
-                        <button *ngIf="userPermissions && userPermissions.contentViewLessonsAddons" mat-icon-button
-                           [matTooltip]="translations | getLabel:'plain.my_lessons.panel.lesson_details.preview'"
-                           (click)="$event.stopPropagation();"
-                           target="_blank"><i class="material-icons">launch</i></button>
+                    <ng-container
+                        *ngIf="
+                            selectedLesson &&
+                            isView &&
+                            selectedLesson.contentType.isLesson()
+                        "
+                    >
+                        <button
+                            *ngIf="
+                                userPermissions &&
+                                userPermissions.contentViewLessonsAddons
+                            "
+                            mat-icon-button
+                            [matTooltip]="
+                                translations
+                                    | getLabel
+                                        : 'plain.my_lessons.panel.lesson_details.preview'
+                            "
+                            (click)="$event.stopPropagation()"
+                            target="_blank"
+                        >
+                            <i class="material-icons">launch</i>
+                        </button>
 
-                        <button *ngIf="userPermissions && userPermissions.contentCreateEditLessonsAddons" mat-icon-button
-                           [matTooltip]="translations | getLabel:'plain.corporate.panel._lessons_list.edit'"
-                           (click)="$event.stopPropagation(); onSelectedLessonEdit($event)">
-                            <i class="material-icons">mode_edit</i></button>
+                        <button
+                            *ngIf="
+                                userPermissions &&
+                                userPermissions.contentCreateEditLessonsAddons
+                            "
+                            mat-icon-button
+                            [matTooltip]="
+                                translations
+                                    | getLabel
+                                        : 'plain.corporate.panel._lessons_list.edit'
+                            "
+                            (click)="
+                                $event.stopPropagation();
+                                onSelectedLessonEdit($event)
+                            "
+                        >
+                            <i class="material-icons">mode_edit</i>
+                        </button>
                     </ng-container>
 
-                    <ng-container *ngIf="selectedLesson&&isView&&selectedLesson.contentType.isAddon()">
-                        <button mat-icon-button
-                           [matTooltip]="translations | getLabel:'plain.my_lessons.panel.lesson_details.preview'"
-                           (click)="$event.stopPropagation();"
-                           target="_blank"><i class="material-icons">launch</i></button>
+                    <ng-container
+                        *ngIf="
+                            selectedLesson &&
+                            isView &&
+                            selectedLesson.contentType.isAddon()
+                        "
+                    >
+                        <button
+                            mat-icon-button
+                            [matTooltip]="
+                                translations
+                                    | getLabel
+                                        : 'plain.my_lessons.panel.lesson_details.preview'
+                            "
+                            (click)="$event.stopPropagation()"
+                            target="_blank"
+                        >
+                            <i class="material-icons">launch</i>
+                        </button>
 
-                        <button mat-icon-button
-                           [matTooltip]="translations | getLabel:'plain.corporate.panel._lessons_list.edit'"
-                           (click)="$event.stopPropagation(); onSelectedLessonEdit($event);"
-                           ><i class="material-icons">mode_edit</i></button>
+                        <button
+                            mat-icon-button
+                            [matTooltip]="
+                                translations
+                                    | getLabel
+                                        : 'plain.corporate.panel._lessons_list.edit'
+                            "
+                            (click)="
+                                $event.stopPropagation();
+                                onSelectedLessonEdit($event)
+                            "
+                        >
+                            <i class="material-icons">mode_edit</i>
+                        </button>
                     </ng-container>
 
-                    <ng-container *ngIf="selectedLesson&&isView&&selectedLesson.contentType.isLesson()">
-                         <button mat-icon-button
-                                [matTooltip]="translations | getLabel: 'plain.my_lessons.panel.lesson_card.more_options'"
-                                [matMenuTriggerFor]="menu"
-                                (click)="$event.stopPropagation()"
-                                class="more-actions"><i class="material-icons more-icon">more_vert</i></button>
+                    <ng-container
+                        *ngIf="
+                            selectedLesson &&
+                            isView &&
+                            selectedLesson.contentType.isLesson()
+                        "
+                    >
+                        <button
+                            mat-icon-button
+                            [matTooltip]="
+                                translations
+                                    | getLabel
+                                        : 'plain.my_lessons.panel.lesson_card.more_options'
+                            "
+                            [matMenuTriggerFor]="menu"
+                            (click)="$event.stopPropagation()"
+                            class="more-actions"
+                        >
+                            <i class="material-icons more-icon">more_vert</i>
+                        </button>
                         <mat-menu #menu="matMenu">
                             <a mat-menu-item>
-                                <b>{{ translations | getLabel:"plain.my_lessons.panel.lesson_card.view_as" }}</b>
+                                <b>{{
+                                    translations
+                                        | getLabel
+                                            : "plain.my_lessons.panel.lesson_card.view_as"
+                                }}</b>
                             </a>
-                            <a *ngIf="userPermissions && userPermissions.contentViewLessonsAddons" mat-menu-item
-                               [href]="'/embed/' + selectedLesson.id"
-                               class="lesson-menu-item"
-                               target="_blank">
-                                {{ translations | getLabel:"plain.my_lessons.panel.lesson_card.single_page" }}
+                            <a
+                                *ngIf="
+                                    userPermissions &&
+                                    userPermissions.contentViewLessonsAddons
+                                "
+                                mat-menu-item
+                                [href]="'/embed/' + selectedLesson.id"
+                                class="lesson-menu-item"
+                                target="_blank"
+                            >
+                                {{
+                                    translations
+                                        | getLabel
+                                            : "plain.my_lessons.panel.lesson_card.single_page"
+                                }}
                             </a>
-                            <a *ngIf="userPermissions && userPermissions.contentViewLessonsAddons" mat-menu-item
-                               [href]="'/embed/book/' + selectedLesson.id"
-                               class="lesson-menu-item"
-                               target="_blank">
-                                {{ translations | getLabel:"plain.my_lessons.panel.lesson_card.double_page" }}
+                            <a
+                                *ngIf="
+                                    userPermissions &&
+                                    userPermissions.contentViewLessonsAddons
+                                "
+                                mat-menu-item
+                                [href]="'/embed/book/' + selectedLesson.id"
+                                class="lesson-menu-item"
+                                target="_blank"
+                            >
+                                {{
+                                    translations
+                                        | getLabel
+                                            : "plain.my_lessons.panel.lesson_card.double_page"
+                                }}
                             </a>
-                            <a *ngIf="userPermissions && userPermissions.contentViewLessonsAddons" mat-menu-item
-                               [href]="'/embed/' + selectedLesson.id + '?cover=1'"
-                               class="lesson-menu-item"
-                               target="_blank">
-                                {{ translations | getLabel:"plain.my_lessons.panel.lesson_card.double_page_cover" }}
+                            <a
+                                *ngIf="
+                                    userPermissions &&
+                                    userPermissions.contentViewLessonsAddons
+                                "
+                                mat-menu-item
+                                [href]="
+                                    '/embed/' + selectedLesson.id + '?cover=1'
+                                "
+                                class="lesson-menu-item"
+                                target="_blank"
+                            >
+                                {{
+                                    translations
+                                        | getLabel
+                                            : "plain.my_lessons.panel.lesson_card.double_page_cover"
+                                }}
                             </a>
-                            <a *ngIf="userPermissions && userPermissions.contentViewLessonsAddons" mat-menu-item
-                               [href]="'/present/' + selectedLesson.id"
-                               class="lesson-menu-item"
-                               target="_blank">
-                                {{ translations | getLabel:"plain.my_lessons.panel.lesson_card.presentation" }}
+                            <a
+                                *ngIf="
+                                    userPermissions &&
+                                    userPermissions.contentViewLessonsAddons
+                                "
+                                mat-menu-item
+                                [href]="'/present/' + selectedLesson.id"
+                                class="lesson-menu-item"
+                                target="_blank"
+                            >
+                                {{
+                                    translations
+                                        | getLabel
+                                            : "plain.my_lessons.panel.lesson_card.presentation"
+                                }}
                             </a>
 
-                           <a mat-menu-item>
-                                <b>{{ translations | getLabel:"plain.my_lessons.panel.lesson_card.localization" }}</b>
+                            <a mat-menu-item>
+                                <b>{{
+                                    translations
+                                        | getLabel
+                                            : "plain.my_lessons.panel.lesson_card.localization"
+                                }}</b>
                             </a>
-                            <a *ngIf="userPermissions && userPermissions.localizationCreateLessonsForLocalization" mat-menu-item
-                               [href]="'/localization/start_localization/' + selectedLesson.id + '/' + spaceId + '?next=/mycontent'"
-                               class="lesson-menu-item"
-                               target="_blank">
-                                {{ translations | getLabel:"plain.my_lessons.panel.lesson_card.start_localization" }}
+                            <a
+                                *ngIf="
+                                    userPermissions &&
+                                    userPermissions.localizationCreateLessonsForLocalization
+                                "
+                                mat-menu-item
+                                [href]="
+                                    '/localization/start_localization/' +
+                                    selectedLesson.id +
+                                    '/' +
+                                    spaceId +
+                                    '?next=/mycontent'
+                                "
+                                class="lesson-menu-item"
+                                target="_blank"
+                            >
+                                {{
+                                    translations
+                                        | getLabel
+                                            : "plain.my_lessons.panel.lesson_card.start_localization"
+                                }}
                             </a>
-                            <a *ngIf="userPermissions && userPermissions.narrationExportAudioVideoNarrations" mat-menu-item
-                               [href]="'/exchange_narration/export_to_csv/' + selectedLesson.id + '?next=/mycontent'"
-                               class="lesson-menu-item"
-                               target="_blank">
-                                {{ translations | getLabel:"plain.my_lessons.panel.lesson_card.export_csv" }}
+                            <a
+                                *ngIf="
+                                    userPermissions &&
+                                    userPermissions.narrationExportAudioVideoNarrations
+                                "
+                                mat-menu-item
+                                [href]="
+                                    '/exchange_narration/export_to_csv/' +
+                                    selectedLesson.id +
+                                    '?next=/mycontent'
+                                "
+                                class="lesson-menu-item"
+                                target="_blank"
+                            >
+                                {{
+                                    translations
+                                        | getLabel
+                                            : "plain.my_lessons.panel.lesson_card.export_csv"
+                                }}
                             </a>
-                            <a *ngIf="userPermissions && userPermissions.narrationExportAudioVideoNarrations" mat-menu-item
-                               [href]="'/exchange_narration/export_to_html/' + selectedLesson.id + '?next=/mycontent'"
-                               class="lesson-menu-item"
-                               target="_blank">
-                                {{ translations | getLabel:"plain.my_lessons.panel.lesson_card.export_html" }}
+                            <a
+                                *ngIf="
+                                    userPermissions &&
+                                    userPermissions.narrationExportAudioVideoNarrations
+                                "
+                                mat-menu-item
+                                [href]="
+                                    '/exchange_narration/export_to_html/' +
+                                    selectedLesson.id +
+                                    '?next=/mycontent'
+                                "
+                                class="lesson-menu-item"
+                                target="_blank"
+                            >
+                                {{
+                                    translations
+                                        | getLabel
+                                            : "plain.my_lessons.panel.lesson_card.export_html"
+                                }}
                             </a>
-                            <a *ngIf="userPermissions && userPermissions.localizationExportXLIFF" mat-menu-item
-                               [href]="'/localization/create_export/' + selectedLesson.id + '?next=/mycontent'"
-                               class="lesson-menu-item"
-                               target="_blank">
-                                {{ translations | getLabel:"plain.my_lessons.panel.lesson_card.export_xliff" }}
+                            <a
+                                *ngIf="
+                                    userPermissions &&
+                                    userPermissions.localizationExportXLIFF
+                                "
+                                mat-menu-item
+                                [href]="
+                                    '/localization/create_export/' +
+                                    selectedLesson.id +
+                                    '?next=/mycontent'
+                                "
+                                class="lesson-menu-item"
+                                target="_blank"
+                            >
+                                {{
+                                    translations
+                                        | getLabel
+                                            : "plain.my_lessons.panel.lesson_card.export_xliff"
+                                }}
                             </a>
                         </mat-menu>
-                     </ng-container>
+                    </ng-container>
 
                     <button
-                        *ngIf="userPermissions && userPermissions.contentCopyLessons && !shouldShowAddons && !shouldShowTrash"
+                        *ngIf="
+                            userPermissions &&
+                            userPermissions.contentCopyLessons &&
+                            !shouldShowAddons &&
+                            !shouldShowTrash
+                        "
                         [disabled]="!areLessonsSelected || areAddonsSelected"
                         [matMenuTriggerFor]="copyaction"
                         id="copy-functions"
                         class="icon-link"
-                        [matTooltip]=" translations | getLabel:'plain.my_lessons.panel.my_lessons.copy_to' "
+                        [matTooltip]="
+                            translations
+                                | getLabel
+                                    : 'plain.my_lessons.panel.my_lessons.copy_to'
+                        "
                         [matTooltipPosition]="'below'"
-                        mat-icon-button>
+                        mat-icon-button
+                    >
                         <i class="material-icons">content_copy</i>
                     </button>
 
-                    <mat-menu #copyaction="matMenu" [overlapTrigger]="false" (mouseenter)="$event.stoppropagation()">
-                        <button mat-menu-item (click)="copyLesson(privateSpaceId)">
-                            {{ translations | getLabel:'plain.my_lessons.panel.my_lessons.my_lessons' }}
+                    <mat-menu
+                        #copyaction="matMenu"
+                        [overlapTrigger]="false"
+                        (mouseenter)="$event.stopPropagation()"
+                    >
+                        <button
+                            mat-menu-item
+                            (click)="copyLesson(privateSpaceId)"
+                        >
+                            {{
+                                translations
+                                    | getLabel
+                                        : "plain.my_lessons.panel.my_lessons.my_lessons"
+                            }}
                         </button>
-                        <button *ngIf="user.permissions.isSuperUser" (click)="copyLessonToAnotherAccount()"
-                                mat-menu-item>
-                            {{ translations | getLabel:'plain.my_lessons.panel.my_lessons.another_account' }}
+                        <button
+                            *ngIf="user.permissions.isSuperUser"
+                            (click)="copyLessonToAnotherAccount()"
+                            mat-menu-item
+                        >
+                            {{
+                                translations
+                                    | getLabel
+                                        : "plain.my_lessons.panel.my_lessons.another_account"
+                            }}
                         </button>
                         <ng-container *ngFor="let project of projects">
-                            <button mat-menu-item-disable-hover mat-menu-item #btn (menuOpened)="downloadPublications(project)" [matMenuTriggerFor]="copypublicationsaction">{{ project.title }}
+                            <button
+                                mat-menu-item-disable-hover
+                                mat-menu-item
+                                #btn
+                                (menuOpened)="downloadPublications(project)"
+                                [matMenuTriggerFor]="copypublicationsaction"
+                            >
+                                {{ project.title }}
                             </button>
                             <mat-menu #copypublicationsaction="matMenu">
                                 <a *ngIf="!project.publications">
                                     <app-loading></app-loading>
                                 </a>
                                 <ng-container *ngIf="project.publications">
-                                    <button mat-menu-item *ngFor="let p of project.publications"
-                                            (click)="copyLesson(p.id)">
+                                    <button
+                                        mat-menu-item
+                                        *ngFor="let p of project.publications"
+                                        (click)="copyLesson(p.id)"
+                                    >
                                         {{ p.title }}
                                     </button>
                                 </ng-container>
@@ -204,137 +525,275 @@
                     </mat-menu>
 
                     <button
-                        *ngIf="userPermissions && userPermissions.contentCopyLessons && !shouldShowTrash &&!isView"
+                        *ngIf="
+                            userPermissions &&
+                            userPermissions.contentCopyLessons &&
+                            !shouldShowTrash &&
+                            !isView
+                        "
                         [disabled]="!areLessonsSelected || areAddonsSelected"
                         (click)="listPage()"
                         id="merge-option"
                         class="icon-link"
-                        [matTooltip]=" translations | getLabel:'plain.my_lessons.panel.pages_to_merge.merge' "
+                        [matTooltip]="
+                            translations
+                                | getLabel
+                                    : 'plain.my_lessons.panel.pages_to_merge.merge'
+                        "
                         [matTooltipPosition]="'below'"
-                        mat-icon-button>
+                        mat-icon-button
+                    >
                         <i class="material-icons">insert_link</i>
                     </button>
 
-                      <button class="undelete-button"
-                            *ngIf="shouldShowTrash&&isView"
-                            (click)="undelete($event)"
-                            mat-button>{{ translations | getLabel: 'plain.my_lessons.panel.lesson_details.undelete' }}</button>
+                    <button
+                        class="undelete-button"
+                        *ngIf="shouldShowTrash && isView"
+                        (click)="undelete($event)"
+                        mat-button
+                    >
+                        {{
+                            translations
+                                | getLabel
+                                    : "plain.my_lessons.panel.lesson_details.undelete"
+                        }}
+                    </button>
 
                     <button
-                        *ngIf="userPermissions && userPermissions.contentRemoveLessonsAddons && !shouldShowTrash"
+                        *ngIf="
+                            userPermissions &&
+                            userPermissions.contentRemoveLessonsAddons &&
+                            !shouldShowTrash
+                        "
                         [disabled]="!areLessonsSelected"
                         (click)="deleteLessons()"
                         id="delete-lesson"
                         class="icon-link"
-                        [matTooltip]=" translations | getLabel:'plain.languages.panel.delete'"
+                        [matTooltip]="
+                            translations
+                                | getLabel : 'plain.languages.panel.delete'
+                        "
                         [matTooltipPosition]="'below'"
-                        mat-icon-button>
+                        mat-icon-button
+                    >
                         <i class="material-icons">delete</i>
                     </button>
 
-                    <button *ngIf="!shouldShowTrash && !isView"
-                            [matMenuTriggerFor]="importaction"
-                            id="import-options"
-                            class="icon-link"
-                            [matTooltip]="translations | getLabel:'plain.my_lessons.panel.my_lessons.import'"
-                            [matTooltipPosition]="'below'"
-                            mat-icon-button>
-                        <mat-icon class="material-icons" svgIcon="import"></mat-icon>
+                    <button
+                        *ngIf="!shouldShowTrash && !isView"
+                        [matMenuTriggerFor]="importaction"
+                        id="import-options"
+                        class="icon-link"
+                        [matTooltip]="
+                            translations
+                                | getLabel
+                                    : 'plain.my_lessons.panel.my_lessons.import'
+                        "
+                        [matTooltipPosition]="'below'"
+                        mat-icon-button
+                    >
+                        <mat-icon
+                            class="material-icons"
+                            svgIcon="import"
+                        ></mat-icon>
                     </button>
 
-                    <mat-menu #importaction="matMenu"
-                              [overlapTrigger]="false">
-                        <a *ngIf="userPermissions && userPermissions.contentImportLessons"
-                           [href]="'/exchange/import/' + spaceId + '?next=/mycontent/' + spaceId"
-                           mat-menu-item>
-                            {{ translations | getLabel: "plain.my_lessons.panel.my_lessons.import_lesson" }}
+                    <mat-menu #importaction="matMenu" [overlapTrigger]="false">
+                        <a
+                            *ngIf="
+                                userPermissions &&
+                                userPermissions.contentImportLessons
+                            "
+                            [href]="
+                                '/exchange/import/' +
+                                spaceId +
+                                '?next=/mycontent/' +
+                                spaceId
+                            "
+                            mat-menu-item
+                        >
+                            {{
+                                translations
+                                    | getLabel
+                                        : "plain.my_lessons.panel.my_lessons.import_lesson"
+                            }}
                         </a>
-                        <a *ngIf="userPermissions && userPermissions.localizationImportXLIFF"
-                           [href]="'/localization/create_import/' + spaceId + '?next=/mycontent/' + spaceId"
-                           mat-menu-item>
-                            {{ translations | getLabel: "plain.my_lessons.panel.my_lessons.import_xliff" }}
+                        <a
+                            *ngIf="
+                                userPermissions &&
+                                userPermissions.localizationImportXLIFF
+                            "
+                            [href]="
+                                '/localization/create_import/' +
+                                spaceId +
+                                '?next=/mycontent/' +
+                                spaceId
+                            "
+                            mat-menu-item
+                        >
+                            {{
+                                translations
+                                    | getLabel
+                                        : "plain.my_lessons.panel.my_lessons.import_xliff"
+                            }}
                         </a>
-                        <a [href]="'/indesign/upload/' + spaceId + '?next=/mycontent/' + spaceId"
-                           mat-menu-item>
-                            {{ translations | getLabel: "plain.my_lessons.panel.my_lessons.import_xml" }}
+                        <a
+                            [href]="
+                                '/indesign/upload/' +
+                                spaceId +
+                                '?next=/mycontent/' +
+                                spaceId
+                            "
+                            mat-menu-item
+                        >
+                            {{
+                                translations
+                                    | getLabel
+                                        : "plain.my_lessons.panel.my_lessons.import_xml"
+                            }}
                         </a>
-                        <a [href]="'/pdfimport/upload/' + spaceId + '?next=/mycontent/' + spaceId"
-                           mat-menu-item>
-                            {{ translations | getLabel: "plain.my_lessons.panel.my_lessons.import_pdf" }}
+                        <a
+                            [href]="
+                                '/pdfimport/upload/' +
+                                spaceId +
+                                '?next=/mycontent/' +
+                                spaceId
+                            "
+                            mat-menu-item
+                        >
+                            {{
+                                translations
+                                    | getLabel
+                                        : "plain.my_lessons.panel.my_lessons.import_pdf"
+                            }}
                         </a>
                     </mat-menu>
 
                     <button
-                        *ngIf="userPermissions && userPermissions.contentExportLessons && !shouldShowAddons && !shouldShowTrash"
+                        *ngIf="
+                            userPermissions &&
+                            userPermissions.contentExportLessons &&
+                            !shouldShowAddons &&
+                            !shouldShowTrash
+                        "
                         [disabled]="!areLessonsSelected || areAddonsSelected"
                         [matMenuTriggerFor]="exportaction"
                         id="export-options"
                         class="icon-link"
-                        [matTooltip]=" translations | getLabel:'plain.my_lessons.panel.my_lessons.export' "
+                        [matTooltip]="
+                            translations
+                                | getLabel
+                                    : 'plain.my_lessons.panel.my_lessons.export'
+                        "
                         [matTooltipPosition]="'below'"
-                        mat-icon-button>
-                        <mat-icon class="material-icons" svgIcon="export"></mat-icon>
+                        mat-icon-button
+                    >
+                        <mat-icon
+                            class="material-icons"
+                            svgIcon="export"
+                        ></mat-icon>
                     </button>
 
-                    <mat-menu #exportaction="matMenu"
-                              [overlapTrigger]="false">
-                        <button (click)="exportLesson(6)"
-                                mat-menu-item>
+                    <mat-menu #exportaction="matMenu" [overlapTrigger]="false">
+                        <button (click)="exportLesson(6)" mat-menu-item>
                             HTML5
                         </button>
-                        <button (click)="exportLesson(3)"
-                                mat-menu-item>
+                        <button (click)="exportLesson(3)" mat-menu-item>
                             xAPI
                         </button>
-                        <button (click)="exportLesson(2)"
-                                mat-menu-item>
+                        <button (click)="exportLesson(2)" mat-menu-item>
                             SCORM 2004
                         </button>
-                        <button (click)="exportLesson(1)"
-                                mat-menu-item>
+                        <button (click)="exportLesson(1)" mat-menu-item>
                             SCORM 1.2
                         </button>
-                        <a [href]="selectedLessons[0] ? ('/exchange/list/' +  selectedLessons[0].id) : ''"
-                           [disabled]="selectedLessons.length !== 1"
-                           mat-menu-item>
-                            {{ translations | getLabel: "plain.my_lessons.panel.my_lessons.see_existing_packages" }}
+                        <a
+                            [href]="
+                                selectedLessons[0]
+                                    ? '/exchange/list/' + selectedLessons[0].id
+                                    : ''
+                            "
+                            [disabled]="selectedLessons.length !== 1"
+                            mat-menu-item
+                        >
+                            {{
+                                translations
+                                    | getLabel
+                                        : "plain.my_lessons.panel.my_lessons.see_existing_packages"
+                            }}
                         </a>
                     </mat-menu>
 
                     <button
-                        *ngIf="userPermissions && (userPermissions.assetsUploadEditAssets || userPermissions.contentCreateEditLessonsAddons) && !shouldShowAddons && !shouldShowTrash"
+                        *ngIf="
+                            userPermissions &&
+                            (userPermissions.assetsUploadEditAssets ||
+                                userPermissions.contentCreateEditLessonsAddons) &&
+                            !shouldShowAddons &&
+                            !shouldShowTrash
+                        "
                         [disabled]="!areLessonsSelected || areAddonsSelected"
                         [matMenuTriggerFor]="updateaction"
                         id="update-functions"
                         class="icon-link"
-                        [matTooltip]="translations | getLabel:'plain.my_lessons.panel.my_lessons.update'"
+                        [matTooltip]="
+                            translations
+                                | getLabel
+                                    : 'plain.my_lessons.panel.my_lessons.update'
+                        "
                         [matTooltipPosition]="'below'"
-                        mat-icon-button>
-                        <mat-icon class="material-icons" svgIcon="update"></mat-icon>
+                        mat-icon-button
+                    >
+                        <mat-icon
+                            class="material-icons"
+                            svgIcon="update"
+                        ></mat-icon>
                     </button>
 
-                    <mat-menu #updateaction="matMenu"
-                              [overlapTrigger]="false">
-                        <button *ngIf="userPermissions && userPermissions.assetsUploadEditAssets"
-                                (click)="updateAssets()"
-                                mat-menu-item>
-                            {{ translations | getLabel: "plain.my_lessons.panel.my_lessons.update_assets" }}
+                    <mat-menu #updateaction="matMenu" [overlapTrigger]="false">
+                        <button
+                            *ngIf="
+                                userPermissions &&
+                                userPermissions.assetsUploadEditAssets
+                            "
+                            (click)="updateAssets()"
+                            mat-menu-item
+                        >
+                            {{
+                                translations
+                                    | getLabel
+                                        : "plain.my_lessons.panel.my_lessons.update_assets"
+                            }}
                         </button>
-                        <button *ngIf="userPermissions && userPermissions.contentCreateEditLessonsAddons"
-                                (click)="updateTemplate()"
-                                mat-menu-item>
-                            {{ translations | getLabel: "plain.my_lessons.panel.my_lessons.update_template" }}
+                        <button
+                            *ngIf="
+                                userPermissions &&
+                                userPermissions.contentCreateEditLessonsAddons
+                            "
+                            (click)="updateTemplate()"
+                            mat-menu-item
+                        >
+                            {{
+                                translations
+                                    | getLabel
+                                        : "plain.my_lessons.panel.my_lessons.update_template"
+                            }}
                         </button>
                     </mat-menu>
 
                     <button
-                        *ngIf="currentProject&&(!isView)"
+                        *ngIf="currentProject && !isView"
                         [matMenuTriggerFor]="kanbanaction"
                         id="kanban-functions"
                         class="icon-link"
-                        [matTooltip]=" translations | getLabel:'plain.my_lessons.panel.my_lessons.kanban' "
+                        [matTooltip]="
+                            translations
+                                | getLabel
+                                    : 'plain.my_lessons.panel.my_lessons.kanban'
+                        "
                         [matTooltipPosition]="'below'"
-                        mat-icon-button>
+                        mat-icon-button
+                    >
                         <i class="material-icons">view_column</i>
                     </button>
 
@@ -342,82 +801,199 @@
                         <a *ngIf="!currentProjectPublications">
                             <app-loading></app-loading>
                         </a>
-                        <ng-container *ngFor="let publication of currentProjectPublications">
-                            <a mat-menu-item [href]="'/states/show_kanban/' + publication.id">
+                        <ng-container
+                            *ngFor="
+                                let publication of currentProjectPublications
+                            "
+                        >
+                            <a
+                                mat-menu-item
+                                [href]="'/states/show_kanban/' + publication.id"
+                            >
                                 {{ publication.title }}
                             </a>
                         </ng-container>
                     </mat-menu>
 
                     <a
-                        *ngIf="isProject && currentProject && (userPermissions && userPermissions.courseManageCourses) && !shouldShowTrash&&(!isView)"
+                        *ngIf="
+                            isProject &&
+                            currentProject &&
+                            userPermissions &&
+                            userPermissions.courseManageCourses &&
+                            !shouldShowTrash &&
+                            !isView
+                        "
                         [href]="'/course/list/' + currentProject.id"
                         id="manage-courses"
                         class="icon-link manage-courser"
                         matTooltip="Manage courses"
                         [matTooltipPosition]="'below'"
-                        mat-icon-button>
+                        mat-icon-button
+                    >
                         <!-- <mat-icon class="material-icons" svgIcon="manage_courses"></mat-icon> -->
-                        <img class="material-icons" [src]="assetsUrl + '/images/icon_ManageCourses2.svg'">
+                        <img
+                            class="material-icons"
+                            [src]="
+                                assetsUrl + '/images/icon_ManageCourses2.svg'
+                            "
+                        />
                     </a>
 
                     <a
-                        *ngIf="user.permissions.isSuperUser && isProject && !shouldShowTrash&&(!isView)"
+                        *ngIf="
+                            user.permissions.isSuperUser &&
+                            isProject &&
+                            !shouldShowTrash &&
+                            !isView
+                        "
                         id="property-change"
                         class="icon-link property-change"
-                        [href]="'/lessons_parsers/change_properties/' + originalSpaceId"
-                        [matTooltip]=" translations | getLabel:'plain.my_lessons.panel.my_lessons.property_change'"
+                        [href]="
+                            '/lessons_parsers/change_properties/' +
+                            originalSpaceId
+                        "
+                        [matTooltip]="
+                            translations
+                                | getLabel
+                                    : 'plain.my_lessons.panel.my_lessons.property_change'
+                        "
                         [matTooltipPosition]="'below'"
-                        mat-icon-button>
-                        <img class="material-icons" [src]="assetsUrl + '/images/icon_PropertyChange.svg'">
+                        mat-icon-button
+                    >
+                        <img
+                            class="material-icons"
+                            [src]="
+                                assetsUrl + '/images/icon_PropertyChange.svg'
+                            "
+                        />
                     </a>
 
                     <a
-                        *ngIf="user.permissions.isSuperUser && isProject && !shouldShowTrash"
+                        *ngIf="
+                            user.permissions.isSuperUser &&
+                            isProject &&
+                            !shouldShowTrash
+                        "
                         id="remove-descriptor"
                         class="icon-link remove-descriptors"
-                        [href]="'/lessons_parsers/remove_descriptors/' + originalSpaceId"
-                        [matTooltip]=" translations | getLabel:'plain.my_lessons.panel.my_lessons.remove_descriptors'"
+                        [href]="
+                            '/lessons_parsers/remove_descriptors/' +
+                            originalSpaceId
+                        "
+                        [matTooltip]="
+                            translations
+                                | getLabel
+                                    : 'plain.my_lessons.panel.my_lessons.remove_descriptors'
+                        "
                         [matTooltipPosition]="'below'"
-                        mat-icon-button>
-                        <img class="material-icons" [src]="assetsUrl + '/images/icon_RemoveDescriptor.svg'">
+                        mat-icon-button
+                    >
+                        <img
+                            class="material-icons"
+                            [src]="
+                                assetsUrl + '/images/icon_RemoveDescriptor.svg'
+                            "
+                        />
                     </a>
 
-                    <a *ngIf="userPermissions && userPermissions.contentCreateEditLessonsAddons && isProject"
-                       [routerLink]="'/mycontent/addcontent/' + spaceId + '/next/corporate~list~' + spaceId"
-                       id="create-options"
-                       mat-fab
-                       [matTooltip]="translations | getLabel:'plain.my_lessons.panel.my_lessons.create_lesson'"
-                       [matTooltipPosition]="'below'"
-                       color="accent">
+                    <a
+                        *ngIf="
+                            userPermissions &&
+                            userPermissions.contentCreateEditLessonsAddons &&
+                            isProject
+                        "
+                        [routerLink]="
+                            '/mycontent/addcontent/' +
+                            spaceId +
+                            '/next/corporate~list~' +
+                            spaceId
+                        "
+                        id="create-options"
+                        mat-fab
+                        [matTooltip]="
+                            translations
+                                | getLabel
+                                    : 'plain.my_lessons.panel.my_lessons.create_lesson'
+                        "
+                        [matTooltipPosition]="'below'"
+                        color="accent"
+                    >
                         <i class="material-icons">add</i>
                     </a>
-                    <a *ngIf="userPermissions && userPermissions.contentCreateEditLessonsAddons && !isProject"
-                       [routerLink]="'/mycontent/addcontent/' + spaceId + '/next/mycontent~' + spaceId"
-                       id="create-options"
-                       mat-fab
-                       [matTooltip]="translations | getLabel:'plain.my_lessons.panel.my_lessons.create_lesson'"
-                       [matTooltipPosition]="'below'"
-                       color="accent">
+                    <a
+                        *ngIf="
+                            userPermissions &&
+                            userPermissions.contentCreateEditLessonsAddons &&
+                            !isProject
+                        "
+                        [routerLink]="
+                            '/mycontent/addcontent/' +
+                            spaceId +
+                            '/next/mycontent~' +
+                            spaceId
+                        "
+                        id="create-options"
+                        mat-fab
+                        [matTooltip]="
+                            translations
+                                | getLabel
+                                    : 'plain.my_lessons.panel.my_lessons.create_lesson'
+                        "
+                        [matTooltipPosition]="'below'"
+                        color="accent"
+                    >
                         <i class="material-icons">add</i>
                     </a>
 
-                    <a *ngIf="userPermissions && userPermissions.contentCreateEditLessonsAddons && isProject && shouldShowAddons"
-                       [href]="'/mycontent/addon/' + spaceId + '?next=/corporate/list/' + spaceId"
-                       id="create-options"
-                       mat-fab
-                       [matTooltip]="translations | getLabel:'plain.my_lessons.panel.my_lessons.create_addon'"
-                       [matTooltipPosition]="'below'"
-                       color="primary">
+                    <a
+                        *ngIf="
+                            userPermissions &&
+                            userPermissions.contentCreateEditLessonsAddons &&
+                            isProject &&
+                            shouldShowAddons
+                        "
+                        [href]="
+                            '/mycontent/addon/' +
+                            spaceId +
+                            '?next=/corporate/list/' +
+                            spaceId
+                        "
+                        id="create-options"
+                        mat-fab
+                        [matTooltip]="
+                            translations
+                                | getLabel
+                                    : 'plain.my_lessons.panel.my_lessons.create_addon'
+                        "
+                        [matTooltipPosition]="'below'"
+                        color="primary"
+                    >
                         <i class="material-icons">add</i>
                     </a>
-                    <a *ngIf="userPermissions && userPermissions.contentCreateEditLessonsAddons && !isProject && shouldShowAddons"
-                       [href]="'/mycontent/addon/' + spaceId + '?next=/mycontent/' + spaceId"
-                       id="create-options"
-                       mat-fab
-                       [matTooltip]="translations | getLabel:'plain.my_lessons.panel.my_lessons.create_addon'"
-                       [matTooltipPosition]="'below'"
-                       color="primary">
+                    <a
+                        *ngIf="
+                            userPermissions &&
+                            userPermissions.contentCreateEditLessonsAddons &&
+                            !isProject &&
+                            shouldShowAddons
+                        "
+                        [href]="
+                            '/mycontent/addon/' +
+                            spaceId +
+                            '?next=/mycontent/' +
+                            spaceId
+                        "
+                        id="create-options"
+                        mat-fab
+                        [matTooltip]="
+                            translations
+                                | getLabel
+                                    : 'plain.my_lessons.panel.my_lessons.create_addon'
+                        "
+                        [matTooltipPosition]="'below'"
+                        color="primary"
+                    >
                         <i class="material-icons">add</i>
                     </a>
 
@@ -455,258 +1031,532 @@
                         appFullScreenHeight
                     >
                         <div class="column-body">
-                            <app-pages-to-merge *ngIf="pagesToMerge.length > 0"
-                                                [lessonsToMerge]="pagesToMerge"
-                                                [spaceId]="spaceId"
-                                                (mergeAction)="onMergeAction($event)">
+                            <app-pages-to-merge
+                                *ngIf="pagesToMerge.length > 0"
+                                [lessonsToMerge]="pagesToMerge"
+                                [spaceId]="spaceId"
+                                (mergeAction)="onMergeAction($event)"
+                            >
                             </app-pages-to-merge>
 
                             <!--(displayLessons)="switchToLessons($event)"-->
-                            <app-categories-list *ngIf="!isProject"
-                                                 (displayLessons)="switchToLessons($event)"
-                                                 [currentSpaceId]="originalSpaceId"
-                                                 [shouldShowAddons]="shouldShowAddons"
-                                                 [shouldShowTrash]="shouldShowTrash"
-                                                 [categories]="categories">
+                            <app-categories-list
+                                *ngIf="!isProject"
+                                (displayLessons)="switchToLessons()"
+                                [currentSpaceId]="originalSpaceId"
+                                [shouldShowAddons]="shouldShowAddons"
+                                [shouldShowTrash]="shouldShowTrash"
+                                [categories]="categories"
+                            >
                             </app-categories-list>
 
-                            <div *ngIf="isProject && projectStructure" class="publications-header">
-                                <h4 *ngIf="isProject && projectStructure" class="categories-title"> {{ translations |
-                                    getLabel:
-                                    "plain.corporate.panel._lessons_list.publications"}}</h4>
+                            <div
+                                *ngIf="isProject && projectStructure"
+                                class="publications-header"
+                            >
+                                <h4
+                                    *ngIf="isProject && projectStructure"
+                                    class="categories-title"
+                                >
+                                    {{
+                                        translations
+                                            | getLabel
+                                                : "plain.corporate.panel._lessons_list.publications"
+                                    }}
+                                </h4>
                                 <a
-                                    *ngIf="isProject && projectStructure && (userPermissions && userPermissions.spaceCreateEditProjectsPublications)"
+                                    *ngIf="
+                                        isProject &&
+                                        projectStructure &&
+                                        userPermissions &&
+                                        userPermissions.spaceCreateEditProjectsPublications
+                                    "
                                     id="edit-publication-option"
                                     class="icon-link"
-                                    [matTooltip]=" translations | getLabel:'plain.corporate.panel._lessons_list.edit' "
+                                    [matTooltip]="
+                                        translations
+                                            | getLabel
+                                                : 'plain.corporate.panel._lessons_list.edit'
+                                    "
                                     [matTooltipPosition]="'below'"
-                                    [href]="'/corporate/projects/' + originalSpaceId"
-                                    mat-icon-button>
+                                    [href]="
+                                        '/corporate/projects/' + originalSpaceId
+                                    "
+                                    mat-icon-button
+                                >
                                     <i class="material-icons">mode_edit</i>
                                 </a>
                             </div>
 
-                            <div *ngIf="currentProject" class="publication-container lessons-section">
+                            <div
+                                *ngIf="currentProject"
+                                class="publication-container lessons-section"
+                            >
                                 <div class="publication-name">
-                                    <a (click)="hideDetails(); switchToLessons($event)"
-                                       [ngClass]="{'is-bold': currentProject.id == originalSpaceId && !shouldShowAddons && !shouldShowTrash}"
-                                       [routerLink]="'/corporate/list/' + currentProject.id">{{ translations |
-                                        getLabel:"plain.my_lessons.panel.my_lessons.lessons" }}</a>
+                                    <a
+                                        (click)="
+                                            hideDetails();
+                                            switchToLessons($event)
+                                        "
+                                        [ngClass]="{
+                                            'is-bold':
+                                                currentProject.id ==
+                                                    originalSpaceId &&
+                                                !shouldShowAddons &&
+                                                !shouldShowTrash
+                                        }"
+                                        [routerLink]="
+                                            '/corporate/list/' +
+                                            currentProject.id
+                                        "
+                                        >{{
+                                            translations
+                                                | getLabel
+                                                    : "plain.my_lessons.panel.my_lessons.lessons"
+                                        }}</a
+                                    >
                                 </div>
                             </div>
 
-                            <div *ngIf="isProject && !projectStructure" class="app-loading-wrapper-structure">
+                            <div
+                                *ngIf="isProject && !projectStructure"
+                                class="app-loading-wrapper-structure"
+                            >
                                 <app-loading class="page-loading"></app-loading>
                             </div>
 
-                            <app-project-structure *ngIf="isProject && projectStructure"
-                                                   [hasLeftPadding]="false"
-                                                   [shouldShowAddons]="shouldShowAddons"
-                                                   [projectId]="currentProject.id"
-                                                   [currentSpaceId]="originalSpaceId"
-                                                   (displayLessons)="switchToLessons($event)"
-                                                   (publicationChanged)="hideDetails($event)">
+                            <app-project-structure
+                                *ngIf="isProject && projectStructure"
+                                [hasLeftPadding]="false"
+                                [shouldShowAddons]="shouldShowAddons"
+                                [projectId]="currentProject.id"
+                                [currentSpaceId]="originalSpaceId"
+                                (displayLessons)="switchToLessons()"
+                                (publicationChanged)="hideDetails()"
+                            >
                             </app-project-structure>
                             <div class="publication-container">
                                 <div class="publication-name custom-addons">
-                                    <a *ngIf="!isProject && categories"
-                                       (click)="switchToAddons()"
-                                       [routerLink]="'/mycontent/' + categories[0].id + '/addons'"
-                                       [ngClass]="{'is-bold': shouldShowAddons}">{{translations | getLabel:"plain.my_lessons.panel.my_lessons.addons" }}</a>
-                                    <a *ngIf="isProject && currentProject"
-                                       (click)="switchToAddons()"
-                                       [routerLink]="'/corporate/list/' + currentProject.id + '/addons'"
-                                       [ngClass]="{'is-bold': shouldShowAddons}">{{translations | getLabel:"plain.my_lessons.panel.my_lessons.addons" }}</a>
+                                    <a
+                                        *ngIf="!isProject && categories"
+                                        (click)="switchToAddons()"
+                                        [routerLink]="
+                                            '/mycontent/' +
+                                            categories[0].id +
+                                            '/addons'
+                                        "
+                                        [ngClass]="{
+                                            'is-bold': shouldShowAddons
+                                        }"
+                                        >{{
+                                            translations
+                                                | getLabel
+                                                    : "plain.my_lessons.panel.my_lessons.addons"
+                                        }}</a
+                                    >
+                                    <a
+                                        *ngIf="isProject && currentProject"
+                                        (click)="switchToAddons()"
+                                        [routerLink]="
+                                            '/corporate/list/' +
+                                            currentProject.id +
+                                            '/addons'
+                                        "
+                                        [ngClass]="{
+                                            'is-bold': shouldShowAddons
+                                        }"
+                                        >{{
+                                            translations
+                                                | getLabel
+                                                    : "plain.my_lessons.panel.my_lessons.addons"
+                                        }}</a
+                                    >
                                 </div>
                                 <div class="trash">
-                                    <a *ngIf="!isProject && categories"
-                                       (click)="switchToTrash()"
-                                       [routerLink]="'/mycontent/' + categories[0].id + '/trash'"
-                                       [ngClass]="{'is-bold': shouldShowTrash && !shouldShowAddons}">{{ translations | getLabel:"plain.my_lessons.panel.my_lessons.trash" }}</a>
-                                    <a *ngIf="isProject && currentProject"
-                                       (click)="switchToTrash()"
-                                       [routerLink]="'/corporate/list/' + currentProject.id + '/trash'"
-                                       [ngClass]="{'is-bold': shouldShowTrash && !shouldShowAddons}">{{ translations | getLabel:"plain.my_lessons.panel.my_lessons.trash" }}</a>
+                                    <a
+                                        *ngIf="!isProject && categories"
+                                        (click)="switchToTrash()"
+                                        [routerLink]="
+                                            '/mycontent/' +
+                                            categories[0].id +
+                                            '/trash'
+                                        "
+                                        [ngClass]="{
+                                            'is-bold':
+                                                shouldShowTrash &&
+                                                !shouldShowAddons
+                                        }"
+                                        >{{
+                                            translations
+                                                | getLabel
+                                                    : "plain.my_lessons.panel.my_lessons.trash"
+                                        }}</a
+                                    >
+                                    <a
+                                        *ngIf="isProject && currentProject"
+                                        (click)="switchToTrash()"
+                                        [routerLink]="
+                                            '/corporate/list/' +
+                                            currentProject.id +
+                                            '/trash'
+                                        "
+                                        [ngClass]="{
+                                            'is-bold':
+                                                shouldShowTrash &&
+                                                !shouldShowAddons
+                                        }"
+                                        >{{
+                                            translations
+                                                | getLabel
+                                                    : "plain.my_lessons.panel.my_lessons.trash"
+                                        }}</a
+                                    >
                                 </div>
                             </div>
                         </div>
                     </perfect-scrollbar>
                 </div>
 
-                <div class="lessons" [ngClass]="{'text-center': !lessons}">
-                    <ng-container *ngIf="isListLessonsShow&&(!isView)">
-                    <perfect-scrollbar
-                        style="position: relative"
-                        [scrollIndicators]="true"
-                        appFullScreenHeight
-                    >
-                        <div class="column-body">
-                            <div *ngIf="lessonsPagesCount > 1 && !shouldShowAddons && !shouldShowTrash"
-                                 class="lessons-paginator">
-                                <paginator-base
-                                    [pagesCount]="lessonsPagesCount"
-                                    [pageIndex]="lessonsPageIndex"
-                                    [buttonsCount]="5"
-                                    (pageChange)="loadLessonsPage($event)">
-                                </paginator-base>
-                            </div>
-                            <div *ngIf="shouldShowTrash"
-                                 class="lessons-paginator">
-                                <paginator-base
-                                    [pagesCount]="trashPagesCount"
-                                    [pageIndex]="trashPageIndex"
-                                    [buttonsCount]="5"
-                                    (pageChange)="loadTrashPage($event)">
-                                </paginator-base>
-                            </div>
-
+                <div class="lessons" [ngClass]="{ 'text-center': !lessons }">
+                    <ng-container *ngIf="isListLessonsShow && !isView">
+                        <perfect-scrollbar
+                            style="position: relative"
+                            [scrollIndicators]="true"
+                            appFullScreenHeight
+                        >
+                            <div class="column-body">
                                 <div
-                                    *ngIf="userPermissions && userPermissions.contentViewLessonsAddons && (!lessons || !editLessonToken || (shouldShowAddons && !addonsToShow) || (shouldShowTrash && !trashToShow))"
-                                    class="app-loading-wrapper">
-                                    <app-loading class="page-loading"></app-loading>
-                                </div>
-
-                                <ng-container
-                                    *ngIf="userPermissions && userPermissions.contentViewLessonsAddons && (lessons || addonsToShow || trashToShow)">
-                                    <div class="no-lessons-info"
-                                         *ngIf="lessons && lessons.length === 0 && !shouldShowAddons && !shouldShowTrash">
-                                        {{ translations | getLabel:"plain.my_lessons.panel.my_lessons.no_lessons_info" }}
-                                    </div>
-                                    <div class="no-lessons-info"
-                                         *ngIf="addonsToShow && addonsToShow.length === 0 && shouldShowAddons">
-                                        {{ translations | getLabel:"plain.my_lessons.panel.my_lessons.no_addons_info" }}
-                                    </div>
-                                    <div class="no-lessons-info"
-                                         *ngIf="trashToShow && trashToShow.length === 0 && shouldShowTrash">
-                                        {{ translations | getLabel:"plain.my_lessons.panel.my_lessons.no_trash_info" }}
-                                    </div>
-                                    <div *ngIf="lessons && editLessonToken" class="lessons-container">
-                                        <ng-container *ngIf="!shouldShowAddons && !shouldShowTrash">
-                                            <app-lesson-card
-                                                *ngFor="let lesson of lessons"
-                                                [lesson]="lesson"
-                                                [isTrash]="shouldShowTrash"
-                                                [isSelected]="isLessonSelected(lesson)"
-                                                [spaceId]="spaceId"
-                                                [isProject]="isProject"
-                                                [editLessonToken]="editLessonToken"
-                                                [userPermissions]="userPermissions"
-                                                (undeleteLesson)="undeleteLesson($event)"
-                                                (preview)="onLessonPreview($event)"
-                                                (edit)="onLessonEdit($event)"
-                                                (select)="onLessonSelect($event)"
-                                                (publish)="onLessonPublish($event)">
-                                            </app-lesson-card>
-                                        </ng-container>
-                                        <ng-container *ngIf="shouldShowAddons">
-                                            <app-lesson-card
-                                                *ngFor="let lesson of addonsToShow"
-                                                [lesson]="lesson"
-                                                [isTrash]="shouldShowTrash"
-                                                [isSelected]="isLessonSelected(lesson)"
-                                                [spaceId]="spaceId"
-                                                [isProject]="isProject"
-                                                [editLessonToken]="editLessonToken"
-                                                [userPermissions]="userPermissions"
-                                                (undeleteLesson)="undeleteLesson($event)"
-                                                (preview)="onLessonPreview($event)"
-                                                (edit)="onLessonEdit($event)"
-                                                (select)="onLessonSelect($event)"
-                                                (publish)="onLessonPublish($event)">
-                                            </app-lesson-card>
-                                        </ng-container>
-                                        <ng-container *ngIf="shouldShowTrash && !shouldShowAddons">
-                                            <app-lesson-card
-                                                *ngFor="let lesson of trashToShow"
-                                                [lesson]="lesson"
-                                                [isTrash]="shouldShowTrash"
-                                                [isSelected]="isLessonSelected(lesson)"
-                                                [spaceId]="spaceId"
-                                                [isProject]="isProject"
-                                                [editLessonToken]="editLessonToken"
-                                                [userPermissions]="userPermissions"
-                                                (undeleteLesson)="undeleteLesson($event)"
-                                                (preview)="onLessonPreview($event)"
-                                                (edit)="onLessonEdit($event)"
-                                                (select)="onLessonSelect($event)"
-                                                (publish)="onLessonPublish($event)">
-                                            </app-lesson-card>
-
-                                        </ng-container>
-                                    </div>
-
-                                <div *ngIf="lessonsPagesCount > 1 && !shouldShowAddons && !shouldShowTrash"
-                                     class="lessons-paginator">
+                                    *ngIf="
+                                        lessonsPagesCount > 1 &&
+                                        !shouldShowAddons &&
+                                        !shouldShowTrash
+                                    "
+                                    class="lessons-paginator"
+                                >
                                     <paginator-base
                                         [pagesCount]="lessonsPagesCount"
                                         [pageIndex]="lessonsPageIndex"
                                         [buttonsCount]="5"
-                                        (pageChange)="loadLessonsPage($event); scrollToTop()">
+                                        (pageChange)="loadLessonsPage($event)"
+                                    >
                                     </paginator-base>
                                 </div>
-                                <div *ngIf="shouldShowTrash"
-                                 class="lessons-paginator">
+                                <div
+                                    *ngIf="shouldShowTrash"
+                                    class="lessons-paginator"
+                                >
                                     <paginator-base
                                         [pagesCount]="trashPagesCount"
                                         [pageIndex]="trashPageIndex"
                                         [buttonsCount]="5"
-                                        (pageChange)="loadTrashPage($event)">
+                                        (pageChange)="loadTrashPage($event)"
+                                    >
                                     </paginator-base>
                                 </div>
-                            </ng-container>
-                        </div>
-                    </perfect-scrollbar>
+
+                                <div
+                                    *ngIf="
+                                        userPermissions &&
+                                        userPermissions.contentViewLessonsAddons &&
+                                        (!lessons ||
+                                            !editLessonToken ||
+                                            (shouldShowAddons &&
+                                                !addonsToShow) ||
+                                            (shouldShowTrash && !trashToShow))
+                                    "
+                                    class="app-loading-wrapper"
+                                >
+                                    <app-loading
+                                        class="page-loading"
+                                    ></app-loading>
+                                </div>
+
+                                <ng-container
+                                    *ngIf="
+                                        userPermissions &&
+                                        userPermissions.contentViewLessonsAddons &&
+                                        (lessons || addonsToShow || trashToShow)
+                                    "
+                                >
+                                    <div
+                                        class="no-lessons-info"
+                                        *ngIf="
+                                            lessons &&
+                                            lessons.length === 0 &&
+                                            !shouldShowAddons &&
+                                            !shouldShowTrash
+                                        "
+                                    >
+                                        {{
+                                            translations
+                                                | getLabel
+                                                    : "plain.my_lessons.panel.my_lessons.no_lessons_info"
+                                        }}
+                                    </div>
+                                    <div
+                                        class="no-lessons-info"
+                                        *ngIf="
+                                            addonsToShow &&
+                                            addonsToShow.length === 0 &&
+                                            shouldShowAddons
+                                        "
+                                    >
+                                        {{
+                                            translations
+                                                | getLabel
+                                                    : "plain.my_lessons.panel.my_lessons.no_addons_info"
+                                        }}
+                                    </div>
+                                    <div
+                                        class="no-lessons-info"
+                                        *ngIf="
+                                            trashToShow &&
+                                            trashToShow.length === 0 &&
+                                            shouldShowTrash
+                                        "
+                                    >
+                                        {{
+                                            translations
+                                                | getLabel
+                                                    : "plain.my_lessons.panel.my_lessons.no_trash_info"
+                                        }}
+                                    </div>
+                                    <div
+                                        *ngIf="lessons && editLessonToken"
+                                        class="lessons-container"
+                                    >
+                                        <ng-container
+                                            *ngIf="
+                                                !shouldShowAddons &&
+                                                !shouldShowTrash
+                                            "
+                                        >
+                                            <app-lesson-card
+                                                *ngFor="let lesson of lessons"
+                                                [lesson]="lesson"
+                                                [isTrash]="shouldShowTrash"
+                                                [isSelected]="
+                                                    isLessonSelected(lesson)
+                                                "
+                                                [spaceId]="spaceId"
+                                                [isProject]="isProject"
+                                                [editLessonToken]="
+                                                    editLessonToken
+                                                "
+                                                [userPermissions]="
+                                                    userPermissions
+                                                "
+                                                (undeleteLesson)="
+                                                    undeleteLesson($event)
+                                                "
+                                                (preview)="
+                                                    onLessonPreview($event)
+                                                "
+                                                (edit)="onLessonEdit($event)"
+                                                (select)="
+                                                    onLessonSelect($event)
+                                                "
+                                                (publish)="
+                                                    onLessonPublish($event)
+                                                "
+                                            >
+                                            </app-lesson-card>
+                                        </ng-container>
+                                        <ng-container *ngIf="shouldShowAddons">
+                                            <app-lesson-card
+                                                *ngFor="
+                                                    let lesson of addonsToShow
+                                                "
+                                                [lesson]="lesson"
+                                                [isTrash]="shouldShowTrash"
+                                                [isSelected]="
+                                                    isLessonSelected(lesson)
+                                                "
+                                                [spaceId]="spaceId"
+                                                [isProject]="isProject"
+                                                [editLessonToken]="
+                                                    editLessonToken
+                                                "
+                                                [userPermissions]="
+                                                    userPermissions
+                                                "
+                                                (undeleteLesson)="
+                                                    undeleteLesson($event)
+                                                "
+                                                (preview)="
+                                                    onLessonPreview($event)
+                                                "
+                                                (edit)="onLessonEdit($event)"
+                                                (select)="
+                                                    onLessonSelect($event)
+                                                "
+                                                (publish)="
+                                                    onLessonPublish($event)
+                                                "
+                                            >
+                                            </app-lesson-card>
+                                        </ng-container>
+                                        <ng-container
+                                            *ngIf="
+                                                shouldShowTrash &&
+                                                !shouldShowAddons
+                                            "
+                                        >
+                                            <app-lesson-card
+                                                *ngFor="
+                                                    let lesson of trashToShow
+                                                "
+                                                [lesson]="lesson"
+                                                [isTrash]="shouldShowTrash"
+                                                [isSelected]="
+                                                    isLessonSelected(lesson)
+                                                "
+                                                [spaceId]="spaceId"
+                                                [isProject]="isProject"
+                                                [editLessonToken]="
+                                                    editLessonToken
+                                                "
+                                                [userPermissions]="
+                                                    userPermissions
+                                                "
+                                                (undeleteLesson)="
+                                                    undeleteLesson($event)
+                                                "
+                                                (preview)="
+                                                    onLessonPreview($event)
+                                                "
+                                                (edit)="onLessonEdit($event)"
+                                                (select)="
+                                                    onLessonSelect($event)
+                                                "
+                                                (publish)="
+                                                    onLessonPublish($event)
+                                                "
+                                            >
+                                            </app-lesson-card>
+                                        </ng-container>
+                                    </div>
+
+                                    <div
+                                        *ngIf="
+                                            lessonsPagesCount > 1 &&
+                                            !shouldShowAddons &&
+                                            !shouldShowTrash
+                                        "
+                                        class="lessons-paginator"
+                                    >
+                                        <paginator-base
+                                            [pagesCount]="lessonsPagesCount"
+                                            [pageIndex]="lessonsPageIndex"
+                                            [buttonsCount]="5"
+                                            (pageChange)="
+                                                loadLessonsPage($event);
+                                                scrollToTop()
+                                            "
+                                        >
+                                        </paginator-base>
+                                    </div>
+                                    <div
+                                        *ngIf="shouldShowTrash"
+                                        class="lessons-paginator"
+                                    >
+                                        <paginator-base
+                                            [pagesCount]="trashPagesCount"
+                                            [pageIndex]="trashPageIndex"
+                                            [buttonsCount]="5"
+                                            (pageChange)="loadTrashPage($event)"
+                                        >
+                                        </paginator-base>
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </perfect-scrollbar>
                     </ng-container>
-                    <app-lesson-player *ngIf="!isListLessonsShow||isView"
-                                       [lessonId]="selectedLessonId"
-                                       (close)="closeLessonPreview($event)"
-                                       [main]="getMainContent()"
+                    <app-lesson-player
+                        *ngIf="!isListLessonsShow || isView"
+                        [lessonId]="selectedLessonId"
+                        (close)="closeLessonPreview($event)"
+                        [main]="getMainContent()"
                     >
                     </app-lesson-player>
                 </div>
             </div>
 
             <div class="details-view">
-                <div *ngIf="!shouldShowDetails && !showMergeOptions && !shouldDisplayList" class="select-lesson-info">
-                    {{ translations | getLabel:"plain.my_lessons.panel.select_lesson_properties" }}
+                <div
+                    *ngIf="
+                        !shouldShowDetails &&
+                        !showMergeOptions &&
+                        !shouldDisplayList
+                    "
+                    class="select-lesson-info"
+                >
+                    {{
+                        translations
+                            | getLabel
+                                : "plain.my_lessons.panel.select_lesson_properties"
+                    }}
                 </div>
-                <app-lesson-details *ngIf="shouldShowDetails && !showMergeOptions"
-                                    [isView]="isView"
-                                    [translations]="translations"
-                                    [lesson]="lessonToShow"
-                                    [publicationName]="publicationName"
-                                    [isProject]="isProject"
-                                    [userPermissions]="userPermissions"
-                                    (reloadLessons)="reloadLessons($event)"
-                                    (hideDetailsEvent)="hideDetails($event)">
+                <app-lesson-details
+                    *ngIf="shouldShowDetails && !showMergeOptions"
+                    [isView]="isView"
+                    [translations]="translations"
+                    [lesson]="lessonToShow"
+                    [publicationName]="publicationName"
+                    [isProject]="isProject"
+                    [userPermissions]="userPermissions"
+                    (reloadLessons)="reloadLessons()"
+                    (hideDetailsEvent)="hideDetails()"
+                >
                 </app-lesson-details>
 
-                <perfect-scrollbar *ngIf="showMergeOptions"
-                                   style="position: relative"
-                                   [scrollIndicators]="true"
-                                   appFullScreenHeight>
+                <perfect-scrollbar
+                    *ngIf="showMergeOptions"
+                    style="position: relative"
+                    [scrollIndicators]="true"
+                    appFullScreenHeight
+                >
                     <app-lessons-list
                         [lessons]="lessonsToMerge"
                         (cancel)="onMergeCancel($event)"
-                        (select)="onMergeSelect($event)">
+                        (select)="onMergeSelect($event)"
+                    >
                     </app-lessons-list>
                 </perfect-scrollbar>
 
-                <div *ngIf="shouldDisplayList && !showMergeOptions && !shouldShowDetails" class="lessons-list">
-                    <div class="selected-lessons">{{ translations | getLabel:
-                        "plain.my_lessons.panel.selected_lessons"}}
+                <div
+                    *ngIf="
+                        shouldDisplayList &&
+                        !showMergeOptions &&
+                        !shouldShowDetails
+                    "
+                    class="lessons-list"
+                >
+                    <div class="selected-lessons">
+                        {{
+                            translations
+                                | getLabel
+                                    : "plain.my_lessons.panel.selected_lessons"
+                        }}
                     </div>
                     <perfect-scrollbar
                         style="position: relative"
                         [scrollIndicators]="true"
-                        appFullScreenHeight>
-                        <div class="lesson-list-element" *ngFor="let lesson of selectedLessons">
-                            <a [href]='"/present/" + lesson.id' target="_blank">{{ lesson.title }}</a>
+                        appFullScreenHeight
+                    >
+                        <div
+                            class="lesson-list-element"
+                            *ngFor="let lesson of selectedLessons"
+                        >
+                            <a
+                                [href]="'/present/' + lesson.id"
+                                target="_blank"
+                                >{{ lesson.title }}</a
+                            >
                         </div>
                     </perfect-scrollbar>
                 </div>
             </div>
-
         </div>
     </div>
 </section>
@@ -715,28 +1565,39 @@
     [(isVisible)]="isUpdateTemplatePopupVisible"
     [checkOptions]="checkOptions"
     [title]="templatePopupTitle"
-    (accept)="updateTemplateAccept($event)">
+    (accept)="updateTemplateAccept($event)"
+>
 </popup-with-checkbox>
 
 <popup-with-input
     [(isVisible)]="isCopyToAnotherUserPopupVisible"
     [placeholder]="'Username'"
     [title]="copyToAnotherUserPopupTitle"
-    (accept)="copyToAnotherUserAccept($event)">
+    (accept)="copyToAnotherUserAccept($event)"
+>
 </popup-with-input>
 
 <popup-base
     [(isVisible)]="isDeleteLessonPopupVisible"
-    [acceptLabel]="translations | getLabel:'plain.my_lessons.panel.my_lessons.yes_delete'"
+    [acceptLabel]="
+        translations | getLabel : 'plain.my_lessons.panel.my_lessons.yes_delete'
+    "
     (accept)="onDeleteLessonAccept()"
-    (reject)="onDeleteLessonReject()">
+    (reject)="onDeleteLessonReject()"
+>
     <span class="popup__title">
-        {{ translations | getLabel:"plain.my_lessons.panel.my_lessons.delete_lessons" }}
+        {{
+            translations
+                | getLabel : "plain.my_lessons.panel.my_lessons.delete_lessons"
+        }}
         <span *ngFor="let lesson of lessonsToDelete; let last = last">
             {{ lesson.title }}<span *ngIf="!last">, </span>
         </span>
     </span>
     <span class="popup__content">
-        {{ translations | getLabel:"plain.my_lessons.panel.my_lessons.confirm_delete" }}
+        {{
+            translations
+                | getLabel : "plain.my_lessons.panel.my_lessons.confirm_delete"
+        }}
     </span>
 </popup-base>

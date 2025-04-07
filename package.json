@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "ng2-file-upload": "^8.0.0",
     "ngx-moment": "^6.0.2"
   }
 }

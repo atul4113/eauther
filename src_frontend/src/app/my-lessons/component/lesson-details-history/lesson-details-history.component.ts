@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from "@angular/core";
 
 import { FileStorage } from "../../model/file-storage";
 import { Lesson } from "../../model/lesson";
@@ -8,8 +8,8 @@ import { MyContentService } from "../../service/my-content.service";
 import { RolePermissions } from "../../../common/model/auth-user";
 
 @Component({
-    selector: 'app-lesson-details-history',
-    templateUrl: './lesson-details-history.component.html'
+    selector: "app-lesson-details-history",
+    templateUrl: "./lesson-details-history.component.html",
 })
 export class LessonDetailsHistoryComponent implements OnInit {
     @Input() lesson!: Lesson;
@@ -26,14 +26,22 @@ export class LessonDetailsHistoryComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
-        this._translations.getTranslations().subscribe(t => this.translations = t);
+        this._translations.getTranslations().subscribe((t) => {
+            if (t) {
+                this.translations = t;
+            }
+        });
     }
 
     public setCurrentVersion(contentId: number, versionId: number): void {
-        this._myContent.setCurrentVersion(contentId, versionId).subscribe(
-            () => {
-                this.lesson.fileId = versionId;
-            }
-        );
+        if (!this.lesson) return;
+
+        this._myContent
+            .setCurrentVersion(contentId, versionId)
+            .subscribe(() => {
+                if (this.lesson) {
+                    this.lesson.fileId = versionId;
+                }
+            });
     }
 }

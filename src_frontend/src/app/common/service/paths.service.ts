@@ -12,7 +12,7 @@ const URLS: Urls = {
     PROJECT: ["/corporate/list"],
     DASHBOARD: ["/corporate"],
     MY_LESSONS: ["/mycontent"],
-} as const;
+};
 
 type Section = keyof typeof URLS;
 

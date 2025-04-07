@@ -1,8 +1,6 @@
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
-import { Observer } from "rxjs";
+import { Observable, Observer, of } from "rxjs";
 import { map } from "rxjs/operators";
-import "rxjs/add/observable/of";
 
 import { RestClientService } from "../../common/service/rest-client.service";
 import {
@@ -42,7 +40,7 @@ export class MyContentService {
     public getLessonDetails(id: number): Observable<Lesson> {
         return this._restClient
             .get(`${MY_CONTENT_URL}${id}`)
-            .pipe(map((lesson:any) => new Lesson(lesson)));
+            .pipe(map((lesson: any) => new Lesson(lesson)));
     }
 
     public updateLessonIcon(lesson: Lesson, icon: FileData): Observable<any> {
@@ -100,8 +98,8 @@ export class MyContentService {
 
     public getLessonAssets(lessonId: number): Observable<Asset[]> {
         return this._restClient.get(MY_CONTENT_URL + lessonId + "/assets").pipe(
-            map((response:any) => {
-                return response.assets.map((asset:any) => new Asset(asset));
+            map((response: any) => {
+                return response.assets.map((asset: any) => new Asset(asset));
             })
         );
     }
@@ -110,9 +108,9 @@ export class MyContentService {
         return this._restClient
             .get(MY_CONTENT_URL + lessonId + "/history")
             .pipe(
-                map((response:any) => {
+                map((response: any) => {
                     return response.map(
-                        (fileStorage:any) => new FileStorage(fileStorage)
+                        (fileStorage: any) => new FileStorage(fileStorage)
                     );
                 })
             );
@@ -124,7 +122,9 @@ export class MyContentService {
         return this._restClient
             .get(url)
             .pipe(
-                map((response:any) => response.map((page:any) => new LessonPage(page)))
+                map((response: any) =>
+                    response.map((page: any) => new LessonPage(page))
+                )
             );
     }
 
@@ -138,7 +138,9 @@ export class MyContentService {
         return this._restClient
             .put(url, data)
             .pipe(
-                map((response:any) => response.map((page:any) => new LessonPage(page)))
+                map((response: any) =>
+                    response.map((page: any) => new LessonPage(page))
+                )
             );
     }
 
@@ -146,7 +148,11 @@ export class MyContentService {
         const url = `${MY_CONTENT_URL}${lessonId}${LESSON_BUGS_SUFFIX}`;
         return this._restClient
             .get(url)
-            .pipe(map((response:any) => response.map((bugRaw:any) => new Bug(bugRaw))));
+            .pipe(
+                map((response: any) =>
+                    response.map((bugRaw: any) => new Bug(bugRaw))
+                )
+            );
     }
 
     public reportLessonBug(lesson: Lesson, bug: Bug): Observable<Bug> {
@@ -161,15 +167,17 @@ export class MyContentService {
 
     public getRecentlyEditedLessons(): Observable<Lesson[]> {
         return this._restClient.get(EDITED_LESSONS_URL).pipe(
-            map((response:any) => {
-                return response.content.map((lesson:any) => new Lesson(lesson));
+            map((response: any) => {
+                return response.content.map(
+                    (lesson: any) => new Lesson(lesson)
+                );
             })
         );
     }
 
     public getLessons(
         cursor: any,
-        spaceId:any
+        spaceId: any
     ): Observable<{ lessons: Lesson[]; cursor: string; moreCount: number }> {
         const requestUrl = spaceId
             ? MY_CONTENT_URL + spaceId + "/lessons"
@@ -195,7 +203,7 @@ export class MyContentService {
 
     public getTrash(
         cursor: any,
-        spaceId:any
+        spaceId: any
     ): Observable<{ lessons: Lesson[]; cursor: string; moreCount: number }> {
         const requestUrl = spaceId
             ? MY_CONTENT_URL + spaceId + "/trash"
@@ -221,7 +229,7 @@ export class MyContentService {
 
     public getAddons(
         cursor: any,
-        spaceId:any
+        spaceId: any
     ): Observable<{ addons: Lesson[]; cursor: string; moreCount: number }> {
         const requestUrl = spaceId
             ? MY_CONTENT_URL + spaceId + "/addons"
@@ -247,7 +255,7 @@ export class MyContentService {
 
     public getLessonsPage(
         pageNumber: number = 1,
-        spaceId:any,
+        spaceId: any,
         order: LessonsOrder
     ): Observable<TLessonsPage> {
         const orderString = this.mapLessonsOrder(order);
@@ -262,7 +270,7 @@ export class MyContentService {
         return this._restClient.get(url).pipe(
             map((response: any) => {
                 const lessons = response.lessons.map(
-                    (lesson:any) => new Lesson(lesson)
+                    (lesson: any) => new Lesson(lesson)
                 );
                 return { lessons: lessons, moreCount: response.more_count };
             })
@@ -284,9 +292,9 @@ export class MyContentService {
     public getLessonsInBatches(
         observer: Observer<Lesson[]>,
         cursor: any,
-        spaceId:any
+        spaceId: any
     ) {
-        this.getLessons(cursor, spaceId).subscribe((data:any) => {
+        this.getLessons(cursor, spaceId).subscribe((data: any) => {
             observer.next(data.lessons);
 
             if (data.moreCount > 0) {
@@ -300,9 +308,9 @@ export class MyContentService {
     public getAddonsInBatches(
         observer: Observer<Lesson[]>,
         cursor: any,
-        spaceId:any
+        spaceId: any
     ) {
-        this.getAddons(cursor, spaceId).subscribe((data:any) => {
+        this.getAddons(cursor, spaceId).subscribe((data: any) => {
             observer.next(data.addons);
 
             if (data.moreCount > 0) {
@@ -328,7 +336,7 @@ export class MyContentService {
         return this._restClient.get(url).pipe(
             map((response: any) => {
                 const lessons = response.lessons.map(
-                    (lesson:any) => new Lesson(lesson)
+                    (lesson: any) => new Lesson(lesson)
                 );
                 return { lessons: lessons, moreCount: response.more_count };
             })
@@ -344,9 +352,9 @@ export class MyContentService {
     public getTrashLessonsInBatches(
         observer: Observer<Lesson[]>,
         cursor: any,
-        spaceId:any
+        spaceId: any
     ) {
-        this.getTrash(cursor, spaceId).subscribe((data:any) => {
+        this.getTrash(cursor, spaceId).subscribe((data: any) => {
             observer.next(data.lessons);
 
             if (data.moreCount > 0) {
@@ -420,13 +428,13 @@ export class MyContentService {
         return this._restClient
             .get(MY_CONTENT_URL + contentId + "/" + spaceId + "/page_list")
             .pipe(
-                map((response:any) => {
+                map((response: any) => {
                     return {
                         pages: response.pages_chapters.map(
-                            (page:any) => new MergeLesson(page)
+                            (page: any) => new MergeLesson(page)
                         ),
                         commons: response.common_pages.map(
-                            (page:any) => new MergeLesson(page)
+                            (page: any) => new MergeLesson(page)
                         ),
                     };
                 })
@@ -443,13 +451,13 @@ export class MyContentService {
     public getEditLessonToken(): Observable<EditToken> {
         return this._restClient
             .get(EDIT_LESSON_TOKEN_URL)
-            .pipe(map((response:any) => new EditToken(response)));
+            .pipe(map((response: any) => new EditToken(response)));
     }
 
     public getEditAddonToken(): Observable<EditToken> {
         return this._restClient
             .get(EDIT_ADDON_TOKEN_URL)
-            .pipe(map((response:any) => new EditToken(response)));
+            .pipe(map((response: any) => new EditToken(response)));
     }
 
     private mapLessonsOrder(order: LessonsOrder): string {

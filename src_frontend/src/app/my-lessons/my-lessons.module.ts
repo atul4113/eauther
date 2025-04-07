@@ -6,8 +6,11 @@ import {
 import { FormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
 import { CommonModule } from "@angular/common";
+import { HttpClientModule } from "@angular/common/http";
+import { MomentModule } from "ngx-moment";
 
 import { AppCommonModule } from "../common/app.common.module";
+import { PaginatorBaseComponent } from "../common/component/paginator-base/paginator-base.component";
 import { MyLessonsRoutes } from "./my-lessons.routes";
 import { MyLessonsComponent } from "./component/my-lessons/my-lessons.component";
 import { CategoriesListComponent } from "./component/categories-list/categories-list.component";
@@ -39,25 +42,28 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatCardModule } from "@angular/material/card";
 import { MatDividerModule } from "@angular/material/divider";
 import { MatButtonModule } from "@angular/material/button";
-import { HttpClientModule } from "@angular/common/http";
 import { MatIconRegistry } from "@angular/material/icon";
 import { DomSanitizer } from "@angular/platform-browser";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { PlayerComponent } from "./component/lesson-player/lesson-player.component";
+import { MatMenuModule } from "@angular/material/menu";
 
 @NgModule({
     imports: [
         CommonModule,
         FormsModule,
         RouterModule,
-        MatIconModule,
         HttpClientModule,
-        MatProgressSpinnerModule,
+        AppCommonModule,
+        RouterModule.forChild(MyLessonsRoutes),
+        MatIconModule,
         MatCardModule,
         MatDividerModule,
         MatButtonModule,
-        // AppCommonModule,
-        RouterModule.forChild(MyLessonsRoutes),
+        MatProgressSpinnerModule,
+        MatMenuModule,
+        MomentModule,
+        PaginatorBaseComponent,
     ],
     declarations: [
         MyLessonsComponent,
@@ -88,6 +94,8 @@ import { PlayerComponent } from "./component/lesson-player/lesson-player.compone
         CreateLessonComponent,
         PlayerComponent,
     ],
+    providers: [],
+    exports: [],
     schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
 })
 export class MyLessonsModule {
@@ -97,8 +105,7 @@ export class MyLessonsModule {
         private _matIconRegistry: MatIconRegistry,
         private _domSanitizer: DomSanitizer
     ) {
-
-        this.assetsUrl = (window as any)["mAuthorAssetsUrl"] || '';
+        this.assetsUrl = (window as any)["mAuthorAssetsUrl"] || "";
 
         this._matIconRegistry.addSvgIcon(
             "manage_courses",
@@ -132,4 +139,3 @@ export class MyLessonsModule {
         );
     }
 }
-

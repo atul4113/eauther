@@ -7,6 +7,8 @@ import {
     ViewChild,
 } from "@angular/core";
 import { Observable } from "rxjs";
+import { CommonModule } from "@angular/common";
+import { MatButtonModule } from "@angular/material/button";
 
 import { FileData } from "../../model";
 import { BaseUploadFileComponent } from "../base-upload-file/base-upload-file.component";
@@ -14,9 +16,17 @@ import { UploadFileService } from "../../service";
 import { TranslationsService } from "../../service/translations.service";
 import { InfoMessageService } from "../../service/info-message.service";
 import { ITranslations } from "../../model/translations";
+import { GetLabelPipe } from "../../pipe/get-label.pipe";
 
 @Component({
     selector: "simple-upload-file",
+    standalone: true,
+    imports: [
+        CommonModule,
+        MatButtonModule,
+        BaseUploadFileComponent,
+        GetLabelPipe,
+    ],
     template: `
         <base-upload-file (selected)="onSelected($event)">
             <button
@@ -74,7 +84,8 @@ export class SimpleUploadFileComponent implements OnInit {
         });
     }
 
-    public onSelected(file: File): void {
-        this.upload();
+    public onSelected(file: FileData): void {
+        this.startingUpload.emit();
+        this.uploaded.emit(file);
     }
 }

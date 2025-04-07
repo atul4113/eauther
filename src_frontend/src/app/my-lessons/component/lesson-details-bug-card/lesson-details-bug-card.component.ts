@@ -1,18 +1,16 @@
-import {Component, OnInit, Input, EventEmitter, Output} from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from "@angular/core";
 
-import {AuthUser, ITranslations} from "../../../common/model";
-import {Bug} from "../../model/bug";
-import {TranslationsService} from "../../../common/service";
-
+import { AuthUser, ITranslations } from "../../../common/model";
+import { Bug } from "../../model/bug";
+import { TranslationsService } from "../../../common/service";
 
 @Component({
-    selector: 'app-lesson-details-bug-card',
-    templateUrl: './lesson-details-bug-card.component.html'
+    selector: "app-lesson-details-bug-card",
+    templateUrl: "./lesson-details-bug-card.component.html",
 })
 export class LessonDetailsBugCardComponent implements OnInit {
-
-    @Input() set isActive (value: boolean) {
-        setTimeout( () => {
+    @Input() set isActive(value: boolean) {
+        setTimeout(() => {
             this.isVisible = value;
         }, 0);
     }
@@ -24,19 +22,23 @@ export class LessonDetailsBugCardComponent implements OnInit {
     public translations: ITranslations | null = null;
     public isVisible: boolean = false;
 
-    constructor(
-        private _translations: TranslationsService
-    ) {}
+    constructor(private _translations: TranslationsService) {}
 
     ngOnInit(): void {
-        this._translations.getTranslations().subscribe(t => this.translations = t);
+        this._translations.getTranslations().subscribe((t) => {
+            if (t) {
+                this.translations = t;
+            }
+        });
     }
 
-    public onDelete () {
-        this.deleteBug.emit(this.bug);
+    public onDelete(): void {
+        if (this.bug) {
+            this.deleteBug.emit(this.bug);
+        }
     }
 
-    public get isOwner () {
+    public get isOwner() {
         if (this.bug && this.user) {
             return this.bug.username.localeCompare(this.user.username) === 0;
         } else {

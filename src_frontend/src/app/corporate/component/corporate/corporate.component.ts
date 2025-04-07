@@ -1,6 +1,4 @@
 import { Component, OnInit } from "@angular/core";
-
-import "rxjs/add/observable/forkJoin";
 import { forkJoin } from "rxjs";
 import { News, AuthUser, Space, ITranslations } from "../../../common/model";
 import { Lesson } from "../../../my-lessons/model/lesson";
@@ -22,17 +20,17 @@ declare var window: any;
 })
 export class CorporateComponent implements OnInit {
     public error: boolean = false;
-    public projects: any;
-    public editLessonToken: any;
+    public projects: Space[] = [];
+    public editLessonToken: EditToken | null = null;
     public areTilesHidden: boolean = false;
-    public structure: any;
-    public user: any;
+    public structure: unknown;
+    public user: AuthUser | null = null;
     public isInitialized = false;
-    public privateSpace: any;
-    public editedLessons: any;
-    public allNews: any;
+    public privateSpace: Space | null = null;
+    public editedLessons: Lesson[] = [];
+    public allNews: News[] = [];
     public assetsUrl: string = window.mAuthorAssetsUrl;
-    public translations: any;
+    public translations: ITranslations | null = null;
 
     constructor(
         private _user: AuthUserService,
@@ -46,7 +44,7 @@ export class CorporateComponent implements OnInit {
     ngOnInit() {
         this._translations
             .getTranslations()
-            .subscribe((t) => (this.translations = t));
+            .subscribe((t) => (this.translations = t ?? ({} as ITranslations)));
 
         this._user.get().subscribe((user) => {
             this.user = user;
@@ -54,7 +52,7 @@ export class CorporateComponent implements OnInit {
             this.isInitialized = true;
         });
 
-       forkJoin(
+        forkJoin(
             this._myContent.getRecentlyEditedLessons(),
             this._myContent.getEditLessonToken()
         ).subscribe(([editedLessons, editLessonToken]) => {
@@ -68,7 +66,7 @@ export class CorporateComponent implements OnInit {
 
         this._projects.get().subscribe((projects) => {
             this.projects = projects;
-            this.projects.forEach((project:any) => {
+            this.projects.forEach((project: any) => {
                 project.publications = undefined;
             });
             this.projects.sort((a: Space, b: Space) =>
@@ -88,7 +86,7 @@ export class CorporateComponent implements OnInit {
     }
 
     public detectTilesVisibility() {
-        const cookieTiles = this._cookie.get("shouldShowTiles" + this.user.id);
+        const cookieTiles = this._cookie.get("shouldShowTiles" + this.user?.id);
         if (cookieTiles !== undefined) {
             cookieTiles == "true" ? this.showTiles() : this.hideTiles();
         } else {
@@ -96,10 +94,10 @@ export class CorporateComponent implements OnInit {
         }
     }
 
-    public setTilesVisibility(value:any) {
+    public setTilesVisibility(value: boolean) {
         let dateYearPlus = new Date();
         dateYearPlus.setTime(dateYearPlus.getTime() + 365 * 24 * 3600 * 1000);
-        this._cookie.put("shouldShowTiles" + this.user.id, value, {
+        this._cookie.put("shouldShowTiles" + this.user?.id, String(value), {
             expires: dateYearPlus,
         });
     }

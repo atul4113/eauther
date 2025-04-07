@@ -1,13 +1,11 @@
-import { Component, Input, OnChanges } from '@angular/core';
-import { Observable, forkJoin, of } from "rxjs";
-import "rxjs/add/observable/of";
+import { Component, Input, OnChanges } from "@angular/core";
+import { Observable, of } from "rxjs";
 
 import { CustomMetadata } from "../../model/lesson";
 
-
 @Component({
-    selector: 'app-lesson-details-metadata-custom-field',
-    templateUrl: './lesson-details-metadata-custom-field.component.html'
+    selector: "app-lesson-details-metadata-custom-field",
+    templateUrl: "./lesson-details-metadata-custom-field.component.html",
 })
 export class LessonDetailsMetadataCustomFieldComponent implements OnChanges {
     @Input() value!: CustomMetadata;
@@ -16,28 +14,27 @@ export class LessonDetailsMetadataCustomFieldComponent implements OnChanges {
 
     public editValue!: CustomMetadata;
 
-    constructor () {}
+    constructor() {}
 
-    ngOnChanges () {
+    ngOnChanges() {
         this.reset();
 
         if (this.value.fieldType.isSelect()) {
-            this.values = this.value.definedValue.split(',');
+            this.values = this.value.definedValue.split(",");
         }
     }
 
-    public reset () {
+    public reset() {
         if (this.value) {
             this.editValue = this.value.copy();
         }
     }
 
-    public save (): Observable<CustomMetadata> {
+    public save(): Observable<CustomMetadata> {
         if (!this.editValue.isEnabled) {
             this.editValue.value = "";
         }
 
         return of(this.editValue);
     }
-
 }

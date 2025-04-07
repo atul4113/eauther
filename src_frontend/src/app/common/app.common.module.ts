@@ -7,7 +7,7 @@ import { MomentModule } from "ngx-moment";
 import { FileUploadModule } from "ng2-file-upload";
 import { PerfectScrollbarModule } from "ngx-perfect-scrollbar";
 
-// ✅ Correct Angular Material Imports
+// Angular Material Modules
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatRadioModule } from "@angular/material/radio";
 import { MatInputModule } from "@angular/material/input";
@@ -22,13 +22,13 @@ import { MatSelectModule } from "@angular/material/select";
 import { MatSlideToggleModule } from "@angular/material/slide-toggle";
 import { MatFormFieldModule } from "@angular/material/form-field";
 
-// ✅ Import Guards
+// Guards
 import { AuthGuard, OnlyNoAuthGuard, CanDeactivateGuard } from "./guard";
 
-// ✅ Import Pipes
+// Pipes
 import { GetLabelPipe, PaginatePipe, TruncatePipe, SafeHtmlPipe } from "./pipe";
 
-// ✅ Import Directives
+// Directives
 import {
     TrimText,
     MDL,
@@ -39,7 +39,7 @@ import {
     MatMenuItemDisableHoverDirective,
 } from "./directive";
 
-// ✅ Import Components
+// Components
 import {
     AppHeaderComponent,
     AppFooterComponent,
@@ -55,87 +55,137 @@ import {
     AddLabelComponent,
     UploadFileComponent,
     PopupWithCheckboxComponent,
-    BaseUploadFileComponent,
     SimpleUploadFileComponent,
     PopupWithInputComponent,
+    PaginatorBaseComponent,
+    BaseUploadFileComponent,
 } from "./component";
-
-// ✅ Material Modules
-const MATERIAL_MODULES = [
-    MatCheckboxModule,
-    MatRadioModule,
-    MatInputModule,
-    MatFormFieldModule,
-    MatCardModule,
-    MatButtonModule,
-    MatToolbarModule,
-    MatListModule,
-    MatTabsModule,
-    MatMenuModule,
-    MatTooltipModule,
-    MatSelectModule,
-    MatSlideToggleModule,
-];
-
-// ✅ Common Components
-const COMMON_COMPONENTS = [
-    AppHeaderComponent,
-    AppFooterComponent,
-    AppDrawerComponent,
-    TinyMCEComponent,
-    PageTitleBarComponent,
-    PopupBaseComponent,
-    PopupComponent,
-    PopupWithRadioComponent,
-    InfoMessagesComponent,
-    LoadingComponent,
-    PaginatorComponent,
-    AddLabelComponent,
-    PopupWithCheckboxComponent,
-    PopupWithInputComponent,
-    UploadFileComponent,
-    BaseUploadFileComponent,
-    SimpleUploadFileComponent,
-];
-
-// ✅ Common Directives
-const COMMON_DIRECTIVES = [
-    PutFooterBottom,
-    TrimText,
-    MDL,
-    AutoFocusAfterInit,
-    FullScreenHeightDirective,
-    MatMenuItemDisableHoverDirective,
-];
-
-// ✅ Common Pipes
-const COMMON_PIPES = [
-    GetLabelPipe,
-    MDLUP,
-    PaginatePipe,
-    TruncatePipe,
-    SafeHtmlPipe,
-];
 
 @NgModule({
     imports: [
         CommonModule,
-        HttpClientModule,
         FormsModule,
         ReactiveFormsModule,
+        HttpClientModule,
         RouterModule,
         MomentModule,
         FileUploadModule,
         PerfectScrollbarModule,
-        ...MATERIAL_MODULES, // ✅ Spread Operator for Material Modules
+
+        // Angular Material Modules
+        MatCheckboxModule,
+        MatRadioModule,
+        MatInputModule,
+        MatFormFieldModule,
+        MatCardModule,
+        MatButtonModule,
+        MatToolbarModule,
+        MatListModule,
+        MatTabsModule,
+        MatMenuModule,
+        MatTooltipModule,
+        MatSelectModule,
+        MatSlideToggleModule,
+
+        // Standalone Components & Pipes
+        BaseUploadFileComponent,
+        SimpleUploadFileComponent,
+        UploadFileComponent,
+        PaginatorBaseComponent,
+        GetLabelPipe, // ✅ moved from declarations
     ],
-    declarations: [...COMMON_COMPONENTS, ...COMMON_DIRECTIVES, ...COMMON_PIPES],
-    providers: [AuthGuard, OnlyNoAuthGuard, CanDeactivateGuard],
+    declarations: [
+        // ONLY non-standalone components/pipes/directives here
+        AppHeaderComponent,
+        AppFooterComponent,
+        AppDrawerComponent,
+        TinyMCEComponent,
+        PageTitleBarComponent,
+        PopupComponent,
+        PopupBaseComponent,
+        PopupWithRadioComponent,
+        InfoMessagesComponent,
+        LoadingComponent,
+        PaginatorComponent,
+        AddLabelComponent,
+        PopupWithCheckboxComponent,
+        PopupWithInputComponent,
+
+        PutFooterBottom,
+        TrimText,
+        MDL,
+        AutoFocusAfterInit,
+        FullScreenHeightDirective,
+        MatMenuItemDisableHoverDirective,
+
+        // These must be NON-standalone pipes
+        MDLUP,
+        PaginatePipe,
+        TruncatePipe,
+        SafeHtmlPipe,
+    ],
     exports: [
-        ...MATERIAL_MODULES,
-        ...COMMON_COMPONENTS,
-        ...COMMON_DIRECTIVES,
-        ...COMMON_PIPES,
+        CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        RouterModule,
+        MomentModule,
+        FileUploadModule,
+        PerfectScrollbarModule,
+
+        // Angular Material
+        MatCheckboxModule,
+        MatRadioModule,
+        MatInputModule,
+        MatFormFieldModule,
+        MatCardModule,
+        MatButtonModule,
+        MatToolbarModule,
+        MatListModule,
+        MatTabsModule,
+        MatMenuModule,
+        MatTooltipModule,
+        MatSelectModule,
+        MatSlideToggleModule,
+
+        // Standalone
+        BaseUploadFileComponent,
+        SimpleUploadFileComponent,
+        UploadFileComponent,
+        PaginatorBaseComponent,
+        GetLabelPipe,
+
+        // Shared components
+        AppHeaderComponent,
+        AppFooterComponent,
+        AppDrawerComponent,
+        TinyMCEComponent,
+        PageTitleBarComponent,
+        PopupComponent,
+        PopupBaseComponent,
+        PopupWithRadioComponent,
+        InfoMessagesComponent,
+        LoadingComponent,
+        PaginatorComponent,
+        AddLabelComponent,
+        PopupWithCheckboxComponent,
+        PopupWithInputComponent,
+
+        // Directives
+        PutFooterBottom,
+        TrimText,
+        MDL,
+        AutoFocusAfterInit,
+        FullScreenHeightDirective,
+        MatMenuItemDisableHoverDirective,
+
+        // Pipes (non-standalone only)
+        MDLUP,
+        PaginatePipe,
+        TruncatePipe,
+        SafeHtmlPipe,
     ],
+    providers: [AuthGuard, OnlyNoAuthGuard, CanDeactivateGuard],
 })
 export class AppCommonModule {}

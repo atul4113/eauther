@@ -7,8 +7,6 @@ import { MatCardModule } from "@angular/material/card";
 import { MatDividerModule } from "@angular/material/divider";
 import { MatButtonModule } from "@angular/material/button";
 
-import { PutFooterBottom } from "../common/directive/put-footer-bottom.directive";
-
 import { AppCommonModule } from "../common/app.common.module";
 import { CorporateRoutes } from "./corporate.routes";
 
@@ -38,7 +36,6 @@ import { QuickTourComponent } from "./component/quick-tour/quick-tour.component"
         CorporateLessonsListComponent,
         CorporateProjectsListComponent,
         QuickTourComponent,
-        PutFooterBottom,
     ],
 })
 export class CorporateModule {}

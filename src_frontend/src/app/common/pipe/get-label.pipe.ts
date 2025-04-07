@@ -1,5 +1,4 @@
-import { Pipe, PipeTransform } from '@angular/core';
-
+import { Pipe, PipeTransform } from "@angular/core";
 
 /*
  * Extracts label's value from translations
@@ -7,12 +6,13 @@ import { Pipe, PipeTransform } from '@angular/core';
  *    translations | getLabel:label
  * Example:
  *   {{  translations | getLabel:"menu.home" }}
-*/
+ */
 @Pipe({
-    name: 'getLabel'
+    name: "getLabel",
+    standalone: true,
 })
 export class GetLabelPipe implements PipeTransform {
-    transform (translations: any, name: string): string {
+    transform(translations: any, name: string): string {
         if (translations && translations.labels) {
             if (translations.labels[name]) {
                 return translations.labels[name];
@@ -21,6 +21,6 @@ export class GetLabelPipe implements PipeTransform {
             return 'Label "' + name + '" is undefined.';
         }
 
-        return '';
+        return "";
     }
 }

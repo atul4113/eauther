@@ -1,35 +1,33 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 
-import {ITranslations, Subspace} from "../../../common/model";
-import {ProjectsService, TranslationsService} from "../../../common/service";
-import {Lesson} from "../../model/lesson";
-
+import { ITranslations, Subspace } from "../../../common/model";
+import { ProjectsService, TranslationsService } from "../../../common/service";
+import { Lesson } from "../../model/lesson";
 
 @Component({
-    selector: 'app-project-structure',
-    templateUrl: './project-structure.component.html'
+    selector: "app-project-structure",
+    templateUrl: "./project-structure.component.html",
 })
 export class ProjectStructureComponent implements OnInit {
-
     private _projectId!: number;
 
     @Input() hasLeftPadding!: boolean;
     @Input()
-    set projectId(value: number){
+    set projectId(value: number) {
         this._projectId = value;
         this.reload();
     }
-    get projectId(){
+    get projectId() {
         return this._projectId;
     }
-    @Input() currentSpaceId: any;
+    @Input() currentSpaceId!: number;
     @Input() shouldShowAddons!: boolean;
     @Input() lesson!: Lesson;
     @Input() selectable: boolean = false;
-    @Output() publicationChanged = new EventEmitter<any>();
-    @Output() displayLessons = new EventEmitter<any>();
-    @Output() afterSubmodulesDownload = new EventEmitter<any>();
-    @Output() onSelect = new EventEmitter<any>();
+    @Output() publicationChanged = new EventEmitter<void>();
+    @Output() displayLessons = new EventEmitter<void>();
+    @Output() afterSubmodulesDownload = new EventEmitter<Subspace[]>();
+    @Output() onSelect = new EventEmitter<number>();
 
     public structure!: Subspace;
     public translations!: ITranslations;
@@ -37,48 +35,40 @@ export class ProjectStructureComponent implements OnInit {
     constructor(
         private _translations: TranslationsService,
         private _projects: ProjectsService
-    ) {
-    }
+    ) {}
 
     ngOnInit() {
-        this._translations.getTranslations().subscribe(t => {
-            this.translations = t ?? {} as ITranslations;
+        this._translations.getTranslations().subscribe((t) => {
+            this.translations = t ?? ({} as ITranslations);
         });
     }
 
-    reload(){
-        this._projects.getStructure(this.projectId.toString()).subscribe((structure) => {
-            if (structure) {
+    reload() {
+        this._projects
+            .getStructure(this.projectId.toString())
+            .subscribe((structure) => {
                 this.structure = structure;
-                if(this.structure.subspaces) {
-                    this.structure.subspaces.sort(function (a: Subspace, b: Subspace) {
-                        return (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0);
-                    });
-                    this.afterSubmodulesDownload.emit(structure.subspaces);
-                }else{
-                    this.afterSubmodulesDownload.emit([]);
-                }
-            }
-        });
+                this.afterSubmodulesDownload.emit(structure.subspaces);
+            });
     }
 
-    public showSubspaces(publication: Subspace) {
+    public showSubspaces(publication: Subspace): void {
         publication._ui.isExpanded = true;
     }
 
-    public hideSubspaces(publication: Subspace) {
+    public hideSubspaces(publication: Subspace): void {
         publication._ui.isExpanded = false;
     }
 
-    public changePublication() {
+    public changePublication(): void {
         this.publicationChanged.emit();
     }
 
-    public showLessons() {
+    public showLessons(): void {
         this.displayLessons.emit();
     }
 
-    public select(id: number){
+    public select(id: number): void {
         this.onSelect.emit(id);
     }
 }

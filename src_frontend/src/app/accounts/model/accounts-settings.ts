@@ -11,7 +11,7 @@ export interface IAccountsSettingsRaw {
 export class SSOProviderSettings {
     constructor(
         public isActive: boolean = false,
-        public url: string = null
+        public url: string | null = null
     ) {}
 }
 
@@ -20,24 +20,22 @@ export class AccountsSettings {
     public office: SSOProviderSettings;
     public librus: SSOProviderSettings;
     public registrationType: number;
+    public url: string | null = null;
 
-    constructor (accountsSettings?: IAccountsSettingsRaw) {
+    constructor(accountsSettings?: IAccountsSettingsRaw) {
         if (accountsSettings) {
-            this.google =
-                new SSOProviderSettings(
-                    accountsSettings.sign_in_with_google_active,
-                    accountsSettings.sign_in_with_google_url
-                );
-            this.office =
-                new SSOProviderSettings(
-                    accountsSettings.sign_in_with_office_active,
-                    accountsSettings.sign_in_with_office_url
-                );
-            this.librus =
-                new SSOProviderSettings(
-                    accountsSettings.sign_in_with_librus_active,
-                    accountsSettings.sign_in_with_librus_url
-                );
+            this.google = new SSOProviderSettings(
+                accountsSettings.sign_in_with_google_active,
+                accountsSettings.sign_in_with_google_url
+            );
+            this.office = new SSOProviderSettings(
+                accountsSettings.sign_in_with_office_active,
+                accountsSettings.sign_in_with_office_url
+            );
+            this.librus = new SSOProviderSettings(
+                accountsSettings.sign_in_with_librus_active,
+                accountsSettings.sign_in_with_librus_url
+            );
             this.registrationType = accountsSettings.registration_type;
         } else {
             this.google = new SSOProviderSettings();

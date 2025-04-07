@@ -7,9 +7,12 @@ import {
     OnInit,
     SimpleChanges,
 } from "@angular/core";
+import { CommonModule } from "@angular/common";
 
 @Component({
     selector: "paginator-base",
+    standalone: true,
+    imports: [CommonModule],
     template: `
         <div class="paginator">
             <button

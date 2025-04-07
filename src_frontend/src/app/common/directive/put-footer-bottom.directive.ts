@@ -14,7 +14,7 @@ declare var window: any;
     selector: "[putFooterBottom]",
 })
 export class PutFooterBottom implements AfterViewInit, OnDestroy {
-    @Input("putFooterBottom") paddingAndMargin: number = 0;
+    @Input("putFooterBottom") paddingAndMargin: string | number = 0;
 
     private native: HTMLElement;
     private footer: HTMLElement | null = null;
@@ -56,11 +56,12 @@ export class PutFooterBottom implements AfterViewInit, OnDestroy {
             if (headerHeight === 0 || footerHeight < 265) {
                 setTimeout(() => this.onResize(), 100);
             } else {
+                const paddingValue =
+                    typeof this.paddingAndMargin === "string"
+                        ? parseInt(this.paddingAndMargin)
+                        : this.paddingAndMargin;
                 const minHeight: number =
-                    windowHeight -
-                    headerHeight -
-                    footerHeight -
-                    this.paddingAndMargin;
+                    windowHeight - headerHeight - footerHeight - paddingValue;
 
                 const hasScrollBarBefore: boolean = this.hasScrollBar();
                 this.native.style.minHeight = `${minHeight}px`;
