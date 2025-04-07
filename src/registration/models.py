@@ -11,6 +11,7 @@ from django.template.loader import render_to_string
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import User
 from google.cloud import datastore
+from django.contrib.auth.hashers import make_password
 
 
 SHA1_RE = re.compile('^[a-f0-9]{40}$')
@@ -98,21 +99,21 @@ class RegistrationManager(models.Manager):
         user_entity.update({
             'username': username,
             'email': email,
-            'password': password,
-            'is_active': False,
+            # 'password': password,
+            'password': make_password(password),
+            'is_active': True,
             'date_joined': datetime.datetime.now(),
             'last_login': None
         })
         client.put(user_entity)
         user_id = user_entity.key.id
-        print('Created Datastore user with ID:', user_id)
 
         # Now create user in Django ORM with the same ID
         new_user = User.objects.create_user(username, email, password)
         new_user.id = user_id  # Set the same ID as Datastore
-        new_user.is_active = False
+        new_user.is_active = True
+        new_user.password = make_password(password)
         new_user.save()
-        print("New user created with ID:", user_id)
         registration_profile = self.create_profile(new_user)
         
         if profile_callback is not None:
@@ -144,13 +145,11 @@ class RegistrationManager(models.Manager):
         username and a random salt.
         
         """
-        print('Creating profile for user:', user.username)
         salt = hashlib.sha1(str(random.random()).encode()).hexdigest()[:5]
         activation_key = hashlib.sha1((salt + user.username).encode()).hexdigest()
 
         # Create profile in Django ORM
         profile = self.create(user=user, activation_key=activation_key)
-        print('Created Django profile:', profile)
 
         # Create profile in Google Datastore
         client = datastore.Client()
@@ -167,7 +166,6 @@ class RegistrationManager(models.Manager):
         
         # Save to Datastore
         client.put(profile_entity)
-        print('Created Datastore profile for user ID:', user.id)
 
         return profile
         

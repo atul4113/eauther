@@ -2,7 +2,7 @@ from django.template.defaultfilters import register
 from django.utils.html import escapejs
 from src.lorepo.translations.models import TranslatedLang
 from src.lorepo.translations.utils import get_translated_image, get_safely_translation
-from settings import USER_DEFAULT_LANG
+from src.settings import USER_DEFAULT_LANG
 from src.libraries.utility.helpers import get_object_or_none
 from src.lorepo.user.models import UserProfile
 from src.lorepo.translations.images import images_labels

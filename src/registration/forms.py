@@ -56,7 +56,6 @@ class RegistrationForm(forms.Form):
         
         """
         user = next((u for u in User.objects.all() if u.username.lower() == self.cleaned_data['username'].lower()), None)
-        print(f'User {user}')
 
         if user:  # If a user is found, raise an error
             raise forms.ValidationError(_('This username is already taken. Please choose another.'))

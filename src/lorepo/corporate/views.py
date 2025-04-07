@@ -1173,6 +1173,7 @@ def bug_track_add_form(request):
 @login_required
 def more_projects_dashboard(request):
     if request.user.company is None:
+    # if request.user is None:
         locked_companies = get_locked_companies(request.user)
         for locked_company in locked_companies:
             messages.warning(request, 'The company account "%(company)s" has been locked. Please contact administrator' % { 'company' : locked_company })
@@ -1296,7 +1297,8 @@ def add_demo_content(request, space):
 
 def create_trial_account(request):
     if request.user.is_authenticated():
-        if request.user.company is not None:
+        # if request.user.company is not None:
+        if request.user is not None:
             return HttpResponseRedirect('/mycontent')
         if request.method == 'POST':
             name = request.POST.get("space_name")

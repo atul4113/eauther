@@ -30,7 +30,7 @@ urlpatterns = [
     path('spaces/', include('src.lorepo.spaces.urls')),
 
     path('translations/', include('src.lorepo.translations.urls')),
-    path('accounts/register/', register),
+    # path('accounts/register/', register),
     path('accounts/login/session/', custom_login),
     path('accounts/login/', custom_login, name='auth_login'),
     path('accounts/', include('src.registration.urls')),

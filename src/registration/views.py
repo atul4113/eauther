@@ -29,8 +29,11 @@ def register(request, success_url=None, form_class=CustomRegistrationForm, profi
 
     if request.method == 'POST':
         form = form_class(data=request.POST, files=request.FILES)
+        print(form)
         if form.is_valid():
+            print(form.data)
             new_user = form.save(profile_callback=profile_callback)
+            print(new_user)
             return HttpResponseRedirect(success_url or reverse('registration_complete'))
     else:
         form = form_class()
