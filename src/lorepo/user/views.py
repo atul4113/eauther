@@ -135,7 +135,6 @@ def custom_login(request):
         matches = User.objects.filter(username=username)
 
         if matches.exists():
-            # user = matches.first()  # Pick the first one arbitrarily
             remember_me_login(request)
 
             if not request.user.is_authenticated:
