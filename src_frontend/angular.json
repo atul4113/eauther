@@ -16,7 +16,15 @@
                         "main": "src/main.ts",
                         "polyfills": ["zone.js"],
                         "tsConfig": "src/tsconfig.app.json",
-                        "assets": ["src/assets", "src/favicon.ico"],
+                        "assets": [
+                            "src/assets",
+                            "src/favicon.ico",
+                            {
+                                "glob": "**/*",
+                                "input": "src/libs",
+                                "output": "/libs"
+                            }
+                        ],
                         "styles": ["src/styles.css"],
                         "scripts": [],
                         "vendorChunk": true,
@@ -107,6 +115,6 @@
     },
     "defaultProject": "mauthor-frontend",
     "cli": {
-      "analytics": false
+        "analytics": false
     }
 }

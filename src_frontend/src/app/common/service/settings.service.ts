@@ -3,8 +3,10 @@ import { Observable, of, map, share } from "rxjs";
 
 import { ISettingsRaw, Settings } from "../model";
 import { RestClientService } from "./rest-client.service";
+import { environment } from "../../../environments/environment";
 
-const SETTINGS_URL = "/settings";
+// Use the complete URL from environment without adding /settings again
+const SETTINGS_URL = environment.apiUrl;
 
 const DEFAULT_SETTINGS: ISettingsRaw = {
     application_id: "",
