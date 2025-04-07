@@ -99,7 +99,6 @@ class RegistrationManager(models.Manager):
         user_entity.update({
             'username': username,
             'email': email,
-            # 'password': password,
             'password': make_password(password),
             'is_active': True,
             'date_joined': datetime.datetime.now(),

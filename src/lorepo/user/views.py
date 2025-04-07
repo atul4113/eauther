@@ -126,155 +126,22 @@ def update_owners_permissions(request):
     update_owners_permissions_task.delay()
     return HttpResponse("Update process started. Check logs for details.")
 
-# def custom_login(request):
-#     """
-#     Custom login view that redirects authenticated users to the home page.
-#     """
-#     print("hey! you are logged in!", request.user)
-#     if request.user.is_authenticated:
-#         return HttpResponseRedirect("/")
-#     print("new")
-#     return remember_me_login(request)
-# def custom_login(request):
-#     """
-#     Custom login view that redirects authenticated users to the home page.
-#     """
-#     print("hey! you are logged in!", request.user)
-#     if request.user.is_authenticated:
-#         return HttpResponseRedirect(settings.LOGIN_REDIRECT_URL)
-#
-#     return remember_me_login(request)
-
-# def custom_login(request):
-#     print("hey! you are logged in!")
-#
-#     if request.method == 'POST':
-#         print("Login POST data:", request.POST)
-#         username = request.POST.get('username')
-#         if username:
-#             User = get_user_model()
-#             from google.cloud import ndb
-#
-#             with ndb.Client().context():
-#                 user_keys = User.query().fetch(keys_only=True)
-#                 users = ndb.get_multi(user_keys)
-#                 print(len(users), "you are here")  # Check if it's still 5
-#
-#
-#             matches = User.objects.filter(username=username)
-#             print(f"Found {matches.count()} users with username={username}")
-#             all_users = User.objects.all()
-#             print(f"Found {all_users.count()} all users count")
-#             for user in matches:
-#                 print(f"User: {user.pk} {user.username}")
-#
-#     if request.user.is_authenticated:
-#         return HttpResponseRedirect("/")
-#
-#     return remember_me_login(request)
-
-# def custom_login(request):
-#     print("hey! you are logged in!")
-#
-#     if request.method == 'POST':
-#         print("Login POST data:", request.POST)
-#         username = request.POST.get('username')
-#         if username:
-#             User = get_user_model()
-#             matches = auth_user.objects.filter(username=username)
-#             print(f"Found {matches.count()} users with username={username}")
-#             for user in matches:
-#                 print(f"User: {user.pk} {user.username}")
-#
-#     if request.user.is_authenticated:
-#         return HttpResponseRedirect("/")
-#
-#     return remember_me_login(request)
 
 def custom_login(request):
-    print("hey! you are logged in!")
-    from google.cloud import datastore
 
     if request.method == 'POST':
-        print("Login POST data:", request.POST)
         username = request.POST.get('username')
-        # if username:
-        #     client = datastore.Client()
-        #
-        #     # Query all entities in auth_user kind
-        #     query = client.query(kind='auth_user')
-        #     users = list(query.fetch())
-        #
-        #     print(f"Found {len(users)} users")
-        #     for user in users:
-        #         if user['username'] == username:
-        #             print('found it!!!')
-        #             if request.user.is_authenticated:
-        #                 return HttpResponseRedirect("/")
         User = get_user_model()
         matches = User.objects.filter(username=username)
-        print(f"Found {matches.count()} users with username___________={username}")
-        # for user in matches:
-        #     print(f"User: {user.pk} {user.username}")
 
         if matches.exists():
             user = matches.first()  # Pick the first one arbitrarily
-            print(f"Logging in as: {user.pk} {user.username}")
-            print(request.user.is_authenticated)
             remember_me_login(request)
 
-            # Log in manually if not already authenticated
             if not request.user.is_authenticated:
-                # from django.contrib.auth import login
-                # l = login(request, user)
-                # print(l, "hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh")
-                # return HttpResponseRedirect("/")
                 return HttpResponseRedirect(settings.LOGIN_REDIRECT_URL)
 
-    # if request.user.is_authenticated:
-    #     return HttpResponseRedirect("/")
-
     return remember_me_login(request)
-
-# from django.contrib.auth import authenticate, login, get_user_model
-# from django.shortcuts import render, redirect
-# from django.http import HttpResponseRedirect
-# from django.contrib.auth.forms import AuthenticationForm
-# from django.views.decorators.csrf import csrf_protect
-#
-# @csrf_protect
-# def custom_login(request):
-#     if request.method == 'POST':
-#         print("Login POST data:", request.POST)
-#         username = request.POST.get('username')
-#         password = request.POST.get('password')
-#         remember_me = request.POST.get('remember_me') == 'on'
-#
-#         if username and password:
-#             user = authenticate(request, username=username, password=password)
-#             if user:
-#                 login(request, user)
-#
-#                 # Handle 'remember me'
-#                 if not remember_me:
-#                     request.session.set_expiry(0)  # Session expires on browser close
-#                 else:
-#                     request.session.set_expiry(60 * 60 * 24 * 30)  # 30 days
-#
-#                 return redirect('home')  # Replace with your actual redirect URL
-#             else:
-#                 form = AuthenticationForm(request, data=request.POST)
-#                 form.add_error(None, "Invalid username or password")
-#                 return render(request, 'login.html', {'form': form})
-#
-#         # fallback if something is wrong
-#         form = AuthenticationForm(request, data=request.POST)
-#         form.add_error(None, "Username and password required.")
-#         return render(request, 'login.html', {'form': form})
-#
-#     else:
-#         form = AuthenticationForm()
-#     return render(request, 'login.html', {'form': form})
 
 @login_required
 def logout_view(request):
