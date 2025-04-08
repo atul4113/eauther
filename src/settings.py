@@ -24,9 +24,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # use for local emulator
 # os.environ["DATASTORE_EMULATOR_HOST"] = "localhost:8081"
-# os.environ["DATASTORE_PROJECT_ID"] = "ealpha-test-application"
-# os.environ["CLOUDSDK_CORE_PROJECT"] = "ealpha-test-application"
 # os.environ["CLOUDSDK_API_ENDPOINT_OVERRIDES_DATASTORE"] = "http://localhost:8081/"
+
+os.environ["DATASTORE_PROJECT_ID"] = "eauthor-dev"
+os.environ["CLOUDSDK_CORE_PROJECT"] = "eauthor-dev"
 
 # os.environ["GOOGLE_CLOUD_DISABLE_GRPC"] = "True"
 

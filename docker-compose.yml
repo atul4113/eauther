@@ -1,0 +1,13 @@
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: src/Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/code
+      - ./key.json:/code/key.json
+    environment:
+      - GOOGLE_APPLICATION_CREDENTIALS=/code/key.json

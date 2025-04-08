@@ -15,4 +15,4 @@ test-reports/
 static_files
 *.bak
 key.json
-
+*key.json
