@@ -1,4 +1,4 @@
-from django.urls import include, path
+from django.urls import path
 from .views import documentation
 
 # Uncomment the next two lines to enable the admin:
@@ -6,5 +6,5 @@ from .views import documentation
 # admin.autodiscover()
 
 urlpatterns = [
-    path('', documentation, name='api-documentation'),
+    path("", documentation, name="api-documentation"),
 ]
