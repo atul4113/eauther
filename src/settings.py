@@ -21,8 +21,10 @@ pymysql.install_as_MySQLdb()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"]="E:\\Work\\Programming\\Projects\\SmartEdu\\mauthor\\src\\key.json"
+os.environ["DATASTORE_PROJECT_ID"]="eauthor-dev"
+os.environ["CLOUDSDK_CORE_PROJECT"]="eauthor-dev"
 
-# use for local emulator
 # os.environ["DATASTORE_EMULATOR_HOST"] = "localhost:8081"
 # os.environ["DATASTORE_PROJECT_ID"] = "ealpha-test-application"
 # os.environ["CLOUDSDK_CORE_PROJECT"] = "ealpha-test-application"
@@ -43,7 +45,7 @@ DATABASES = {
         "ENGINE": "gcloudc.db.backends.datastore",
         "PROJECT": os.getenv("DATASTORE_PROJECT_ID", "ealpha-test-application"),
         'INDEXES_FILE': 'indexes.json',
-        # "NAMESPACE": "",  # Optional namespace
+        "NAMESPACE": "local",  # Optional namespace
     }
 }
  

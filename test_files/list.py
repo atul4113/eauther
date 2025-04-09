@@ -6,7 +6,7 @@ import datetime
 
 
 # Set up Django
-sys.path.append("D:/Smart Education/Projects/eauther")
+sys.path.append("E:\\Work\\Programming\\Projects\\SmartEdu\\mauthor")
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "src.settings")  
 django.setup()
 
@@ -62,7 +62,7 @@ def list_kinds():
     for kind in kinds:
         print(kind.key.name)
 
-# list_kinds()
+list_kinds()
 
 
 def list_django_users():

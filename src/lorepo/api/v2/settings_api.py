@@ -54,5 +54,5 @@ class SettingsView(views.APIView):
         return Response(response_data)
 
 urlpatterns = [
-    path('settings', SettingsView.as_view(), name='settings'),
+    path('', SettingsView.as_view(), name='settings'),
 ]
