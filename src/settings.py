@@ -21,10 +21,10 @@ pymysql.install_as_MySQLdb()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"]="E:\\Work\\Programming\\Projects\\SmartEdu\\mauthor\\src\\key.json"
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"]="C:\\Users\\Moro\\Work\\atul_last_updated\\eauther\\src\\key.json"
 os.environ["DATASTORE_PROJECT_ID"]="eauthor-dev"
 os.environ["CLOUDSDK_CORE_PROJECT"]="eauthor-dev"
-
+DJANGAE_INDEX_YAML = 'djangaeidx.yaml'
 # os.environ["DATASTORE_EMULATOR_HOST"] = "localhost:8081"
 # os.environ["DATASTORE_PROJECT_ID"] = "ealpha-test-application"
 # os.environ["CLOUDSDK_CORE_PROJECT"] = "ealpha-test-application"
@@ -43,6 +43,9 @@ MAUTHOR_BASIC_URL = SHARED_SETTINGS[APPLICATION_ID]['base_secure_url']
 DATABASES = {
     "default": {
         "ENGINE": "gcloudc.db.backends.datastore",
+        'TEST': {
+            'GENERATE_SPECIAL_INDEXES': True
+        },
         "PROJECT": os.getenv("DATASTORE_PROJECT_ID", "ealpha-test-application"),
         'INDEXES_FILE': 'indexes.json',
         "NAMESPACE": "local",  # Optional namespace
@@ -133,6 +136,7 @@ INSTALLED_APPS = [
     'rest_framework_docs',
 ]
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -200,12 +204,15 @@ TEMPLATES = [
     },
 ]
 
-
+CSRF_COOKIE_HTTPONLY = False
 REST_FRAMEWORK = {
-    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
-    'DEFAULT_AUTHENTICATION_CLASSES': (
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+        # or JWT if you're using DRF JWT
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-    ),
+    ],
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
     'DEFAULT_VERSIONING_CLASS': 'src.rest_framework_custom.versioning.NamespaceVersioning',
     'DEFAULT_RENDERER_CLASSES': (
         'rest_framework.renderers.JSONRenderer',
@@ -214,7 +221,8 @@ REST_FRAMEWORK = {
 }
 
 JWT_AUTH = {
-    'JWT_EXPIRATION_DELTA': datetime.timedelta(seconds=3000)
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(hours=1),
+    'JWT_ALLOW_REFRESH': True,
 }
 
 REST_FRAMEWORK_DOCS = {
@@ -234,7 +242,6 @@ SPECTACULAR_SETTINGS = {
     },
 }
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
-
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
 ]
@@ -243,6 +250,7 @@ AUTHENTICATION_BACKENDS = [
 
 # NOSE_ARGS = ['--with-xunit', '--xunit-file=website-corporate/test-reports/xunit.xml', '-v']
 # NOSE_PLUGINS = ['libraries.utility.noseplugins.TestDiscoveryPlugin']
+APPEND_SLASH = False
 
 ADMIN_MEDIA_PREFIX = '/media/admin/'
 
@@ -323,9 +331,10 @@ USER_DEFAULT_LANG = 'en_US'
 
 # Cross-Origin Resource Sharing settings
 CORS_ORIGIN_ALLOW_ALL = False
-CORS_URLS_REGEX = r'(^/doc/api/.*$)|(^/file/serve/.*$)'
+CORS_URLS_REGEX = r'(^/doc/api/.*$)|(^/file/serve/.*$)|(^/api/.*$)'
 CORS_ORIGIN_REGEX_WHITELIST = (
     # mAuthor
+    r'^(https?://)?(localhost|127\.0\.0\.1):4200$',
     r'^(https?://)?(www\.)?mauthor\.com$',
     r'^(https?://)?([\w\-]+\.?)?mauthor-dev\.appspot\.com$',
     r'^(https?://)?([\w\-]+\.?)?lorepocorporate\.appspot\.com$',

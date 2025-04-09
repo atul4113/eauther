@@ -25,7 +25,7 @@ from rest_framework.response import Response
 from drf_spectacular import serializers as s
 
 
-class UserData(MiddlewareMixin, views.APIView):
+class UserData(views.APIView):
     """
     @api {get} /api/v2/user/ /user/
     @apiDescription Roles and basic information about user
@@ -48,44 +48,34 @@ class UserData(MiddlewareMixin, views.APIView):
           is_superuser: true
       }
     """
-    # permission_classes = (IsAuthenticated, )
-    # MIDDLEWARE_CLASSES = (CorporateMiddleware, )
+    permission_classes = [IsAuthenticated]  # Enforce authentication
 
-    def get(self, request):    
-        user = User.objects.all().order_by('date_joined')
-        print(f"USER: {user}")
+    def get(self, request):
+        # Debugging - remove in production
+        print(f"Authenticated user: {request.user.username}")
 
-        # user_instance = User.objects.get(username='john_doe')
-        # print(f"user_instance: {user_instance}")
-        # profile = RegistrationProfile.objects.get(user=user_instance)
-        # print(f"profile {profile}")
+        try:
+            context = {'request': request}
+            profile = request.user.profile  # Assuming you have a profile model
+            private_space = get_private_space_for_user(request.user)
 
-        
-        # profile = user.profile    
-        # profile = request.user.profile    
-        # company = Space.objects.get(id=request.user.company) 
+            return Response({
+                'id': request.user.id,
+                'username': request.user.username,
+                'email': request.user.email,
+                'is_superuser': request.user.is_superuser,
+                'language_code': profile.language_code if hasattr(profile, 'language_code') else 'en',
+                'company': None if not hasattr(request.user, 'company') or request.user.company is None
+                          else SpaceSerializer(request.user.company, context=context).data,
+                'public_category': None if not hasattr(request.user, 'public_category') or request.user.public_category is None
+                                 else SpaceSerializer(request.user.public_category, context=context).data,
+                'private_space': None if private_space is None
+                               else SpaceSerializer(private_space, context=context).data,
+                'is_any_division_admin': is_any_division_admin(request.user)
+            })
 
-    # def get(self, request):
-    #     profile = request.user.profile
-    #     # company = Space.objects.get(id=request.user.company)
-
-        context = {'request': request}
-
-        private_space = get_private_space_for_user(request.user)
-
-
-        return Response({
-            'id': request.user.id,
-            'username': request.user.username,
-            'email': request.user.email,
-            'is_superuser': request.user.is_superuser,
-            'language_code': profile.language_code,
-            'company': None if request.user.company is None else SpaceSerializer(request.user.company, context=context).data,
-            'public_category': None if request.user.public_category is None else SpaceSerializer(request.user.public_category, context=context).data,
-            'private_space': None if private_space is None else SpaceSerializer(private_space, context=context).data,
-            'is_any_division_admin': is_any_division_admin(request.user)
-        })
-
+        except Exception as e:
+            return Response({'error': str(e)}, status=400)
 
 class RemindLogin(generics.GenericAPIView):
     """

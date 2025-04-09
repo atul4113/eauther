@@ -4,23 +4,28 @@
     "secure": false
   },
   "/file/serve": {
-    "target": "http://localhost:8080",
+    "target": "http://localhost:8000",
     "secure": false
   },
   "/api": {
-    "target": "http://localhost:8080",
+    "target": "http://localhost:8000",
     "secure": false
   },
   "/accounts/login/session": {
-    "target": "http://localhost:8080",
+    "target": "http://localhost:8000",
     "secure": false
   },
+
+  "/api/v2": {
+    "target": "http://localhost:8000",
+    "secure": false
+},
   "/user/logout": {
-    "target": "http://localhost:8080",
+    "target": "http://localhost:8000",
     "secure": false
   },
   "/corporate/no_space_info": {
-    "target": "http://localhost:8080",
+    "target": "http://localhost:8000",
     "secure": false
   }
 }

@@ -70,9 +70,13 @@ def get_public_space_for_content(content):
 def get_private_space_for_user(user):
     '''Get top level private space for user
     '''
-    for sa in user.spaceaccess_set.all():
-        if sa.space.is_private() and sa.space.is_top_level():
-            return sa.space
+    try:
+        for sa in user.spaceaccess_set.all():
+            if sa.space.is_private() and sa.space.is_top_level():
+                return sa.space
+    except AttributeError:
+        # Handle case where user model doesn't have spaceaccess_set
+        return None
 
     raise Exception('No private space for user %(user)s' % {'user' : user.username})
 

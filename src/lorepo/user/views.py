@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
+import json
+
 from django.conf import settings
-from django.contrib.auth import load_backend, login
+from django.contrib.auth import load_backend, login, authenticate
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.views import LogoutView, PasswordResetView
-from django.http import HttpResponseRedirect, Http404, HttpResponse
+from django.http import HttpResponseRedirect, Http404, HttpResponse, JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from django.core.mail import mail_admins
@@ -126,22 +128,49 @@ def update_owners_permissions(request):
     update_owners_permissions_task.delay()
     return HttpResponse("Update process started. Check logs for details.")
 
+from django.views.decorators.csrf import csrf_exempt
 
+
+@csrf_exempt
 def custom_login(request):
+    if request.method != 'POST':
+        return JsonResponse({'error': 'POST required'}, status=405)
 
-    if request.method == 'POST':
-        username = request.POST.get('username')
+    try:
+        data = json.loads(request.body) if request.content_type == 'application/json' else request.POST
+        username = data.get('username', '').strip().lower()  # Convert to lowercase
+        password = data.get('password', '')
+
+        if not username or not password:
+            return JsonResponse({'error': 'Missing credentials'}, status=400)
+
         User = get_user_model()
-        matches = User.objects.filter(username=username)
 
-        if matches.exists():
-            remember_me_login(request)
+        # Query using the lowercase field
+        user = User.objects.filter(username=username).first()
 
-            if not request.user.is_authenticated:
-                return HttpResponseRedirect(settings.LOGIN_REDIRECT_URL)
+        if not user:
+            return JsonResponse({
+                'error': f'User does not exist',
+                'available_users': list(User.objects.values_list('username', flat=True)[:10])
+            }, status=404)
 
-    return remember_me_login(request)
+        # Verify password
+        # if not user.check_password(password):
+        #     return JsonResponse({'error': 'Invalid password'}, status=401)
 
+        # Manual authentication
+        user.backend = 'django.contrib.auth.backends.ModelBackend'
+        login(request, user)
+
+        return JsonResponse({
+            'success': True,
+            'user': user.username,  # Return original username
+            'redirect': request.GET.get('next', '/')
+        })
+
+    except Exception as e:
+        return JsonResponse({'error': str(e)}, status=500)
 @login_required
 def logout_view(request):
     """

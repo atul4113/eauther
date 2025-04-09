@@ -1,8 +1,8 @@
 from django.contrib import admin
 from django.urls import path, re_path, include
 from django.views.generic import TemplateView
-from src.lorepo.embed.views import present  # Import the function explicitly
-from src.lorepo.user.views import register, custom_login  # Explicit function imports
+from src.lorepo.embed.views import present
+from src.lorepo.user.views import register, custom_login
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -30,11 +30,9 @@ urlpatterns = [
     path('spaces/', include('src.lorepo.spaces.urls')),
 
     path('translations/', include('src.lorepo.translations.urls')),
-    # path('accounts/register/', register),
-    path('accounts/login/session/', custom_login),
-    path('accounts/login/', custom_login, name='auth_login'),
+    re_path(r'^accounts/login/session/?$', custom_login, name='custom_login'),
     path('accounts/', include('src.registration.urls')),
-    path('corporate/', include('src.lorepo.corporate.urls')),  # Should come as one of the last, overrides spaces
+    path('corporate/', include('src.lorepo.corporate.urls')),
     path('exchange/', include('src.lorepo.exchange.urls')),
     path('merger/', include('src.lorepo.merger.urls')),
     path('newsletter/', include('src.lorepo.newsletter.urls')),

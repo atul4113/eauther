@@ -35,7 +35,7 @@ class RegistrationSerializer(s.Serializer):
 
     def validate_username(self, value):
         try:
-            user = User.objects.get(username__iexact=value)
+            user = User.objects.get(username=value.lower())
         except User.DoesNotExist:
             return value
 

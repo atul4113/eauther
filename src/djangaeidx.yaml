@@ -1,5 +1,0 @@
-indexes:
-- kind: auth_user
-  properties:
-    - name: username
-      direction: asc
