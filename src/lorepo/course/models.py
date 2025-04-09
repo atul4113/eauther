@@ -305,14 +305,16 @@ class ExportedCourseLesson(models.Model):
     content = models.ForeignKey(Content, on_delete=models.DO_NOTHING)
 
 
-class UpdateCourseLesson(models.Model):
-    course = models.ForeignKey(Course, on_delete=models.DO_NOTHING)
-    created_date = models.DateTimeField(auto_now_add=True)
-    lesson = models.ForeignKey(Content, on_delete=models.DO_NOTHING)
+##This model is not used anywhere
+# class UpdateCourseLesson(models.Model):
+#     course = models.ForeignKey(Course, on_delete=models.DO_NOTHING)
+#     created_date = models.DateTimeField(auto_now_add=True)
+#     lesson = models.ForeignKey(Content, on_delete=models.DO_NOTHING)
 
 
-class UpdateCourseLessonsCount(models.Model):
-    course = models.ForeignKey(Course, on_delete=models.DO_NOTHING)
-    created_date = models.DateTimeField(auto_now_add=True)
+##This model is not used anywhere
+# class UpdateCourseLessonsCount(models.Model):
+#     course = models.ForeignKey(Course, on_delete=models.DO_NOTHING)
+#     created_date = models.DateTimeField(auto_now_add=True)
     
-    count = models.IntegerField(default=0)
+#     count = models.IntegerField(default=0)

@@ -21,7 +21,7 @@ from src.lorepo.translations.utils import save_translated_image_to_cache, change
 from src.lorepo.translations.models import SupportedLanguages, \
     TranslatedImages, TranslationsNewsStatistics, TranslatedLang, ImportTable, TranslationsNews, TranslationsSettings
 from src.lorepo.util.singleton_model import SingletonModel
-from settings import USER_DEFAULT_LANG, SERVER_EMAIL, APP_NAME
+from src.settings import USER_DEFAULT_LANG, SERVER_EMAIL, APP_NAME
 from django.contrib.auth.models import User
 from django.core.mail import mail_admins
 from django.template import loader, Context, RequestContext

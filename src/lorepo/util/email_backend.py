@@ -1,4 +1,4 @@
-from djangae.mail import AsyncEmailBackend
+from django.core.mail.backends.smtp import EmailBackend
 import logging
 
 
@@ -20,7 +20,7 @@ class ManyAddressesInToFieldError(MailError):
     pass
 
 
-class RecipientsCheckEmailBackend(AsyncEmailBackend):
+class RecipientsCheckEmailBackend(EmailBackend):
     def send_messages(self, email_messages):
 
         messages_with_many_addresses = [message for message in email_messages if len(message.to) > 1]

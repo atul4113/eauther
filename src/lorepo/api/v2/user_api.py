@@ -1,5 +1,6 @@
 from .urls import path
 from django.contrib.auth.models import User
+from src.registration.models import RegistrationProfile
 from django.contrib.auth.tokens import default_token_generator
 from django.contrib.sites.shortcuts import get_current_site
 from django.shortcuts import get_object_or_404
@@ -47,12 +48,26 @@ class UserData(MiddlewareMixin, views.APIView):
           is_superuser: true
       }
     """
-    permission_classes = (IsAuthenticated, )
-    MIDDLEWARE_CLASSES = (CorporateMiddleware, )
+    # permission_classes = (IsAuthenticated, )
+    # MIDDLEWARE_CLASSES = (CorporateMiddleware, )
 
-    def get(self, request):
-        profile = request.user.profile
-        # company = Space.objects.get(id=request.user.company)
+    def get(self, request):    
+        user = User.objects.all().order_by('date_joined')
+        print(f"USER: {user}")
+
+        # user_instance = User.objects.get(username='john_doe')
+        # print(f"user_instance: {user_instance}")
+        # profile = RegistrationProfile.objects.get(user=user_instance)
+        # print(f"profile {profile}")
+
+        
+        # profile = user.profile    
+        # profile = request.user.profile    
+        # company = Space.objects.get(id=request.user.company) 
+
+    # def get(self, request):
+    #     profile = request.user.profile
+    #     # company = Space.objects.get(id=request.user.company)
 
         context = {'request': request}
 

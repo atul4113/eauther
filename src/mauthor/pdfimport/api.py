@@ -11,7 +11,7 @@ from src.libraries.utility.environment import get_versioned_module
 from src.libraries.utility.queues import trigger_backend_task
 import json
 import logging
-from settings import get_bucket_name
+from src.settings import get_bucket_name
 
 
 @service_admin_user

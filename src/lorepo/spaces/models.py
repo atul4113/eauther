@@ -2,7 +2,7 @@
 import bz2
 import json
 
-from djangae.fields import ListField
+from gcloudc.db.models.fields.iterable import ListField
 from django.contrib.auth.models import User
 from django.db import models
 import src.libraries.utility.cacheproxy as cache

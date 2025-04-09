@@ -1,4 +1,4 @@
-import settings as global_settings
+import src.settings as global_settings
 
 
 def settings(_):

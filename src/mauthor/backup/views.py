@@ -42,7 +42,7 @@ from src.libraries.utility.environment import get_app_version, get_versioned_mod
 from src.mauthor.backup.utils import make_path, get_path
 from src.mauthor.bulk.util import build_project_tree
 from src.libraries.utility.decorators import backend
-from settings import get_bucket_name
+from src.settings import get_bucket_name
 
 
 @login_required

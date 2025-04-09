@@ -1,4 +1,4 @@
-from djangae.fields import ListField
+from gcloudc.db.models.fields.iterable import ListField
 from django.db import models
 from src.lorepo.filestorage.models import UploadedFile
 from src.lorepo.permission.models import Permission
@@ -53,19 +53,21 @@ class CompanyUser(models.Model):
     def __str__(self):
         return '%(company_name)s:%(username)s' % { 'company_name' : self.company.title, 'username' : self.username }
 
+
+##Not used anywhere
 # !!! dont use this, use CompanyUser instead !!!
-class ProjectUser(models.Model):
-    user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
-    project = models.ForeignKey(Space, on_delete=models.DO_NOTHING)
+# class ProjectUser(models.Model):
+#     user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+#     project = models.ForeignKey(Space, on_delete=models.DO_NOTHING)
 
-    created_date = models.DateTimeField(auto_now_add=True)
-    modified_date = models.DateTimeField(auto_now=True)
+#     created_date = models.DateTimeField(auto_now_add=True)
+#     modified_date = models.DateTimeField(auto_now=True)
 
-    username = models.CharField(max_length = 200) # for better performance at sorting
-    space_access_list = ListField(models.IntegerField()) # list of space access ids
+#     username = models.CharField(max_length = 200) # for better performance at sorting
+#     space_access_list = ListField(models.IntegerField()) # list of space access ids
 
-    def __str__(self):
-        return '%(project_name)s:%(username)s' % { 'project_name' : self.project.title, 'username' : self.username }
+#     def __str__(self):
+#         return '%(project_name)s:%(username)s' % { 'project_name' : self.project.title, 'username' : self.username }
 
 
 class JOB_TYPE(object):
