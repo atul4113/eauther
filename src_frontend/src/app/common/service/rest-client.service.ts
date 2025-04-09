@@ -10,8 +10,10 @@ import { catchError, map, switchMap } from "rxjs/operators";
 
 import { TokenService } from "./token.service";
 import { InfoMessageService } from "./info-message.service";
+import { environment } from "../../../environments/environment";
 
-const API_URL = "/api/v2";
+// Combine base URL with API path
+const API_URL = `${environment.apiUrl}/api/v2`;
 export const UNAUTHORIZED_ERROR = "Unauthorized";
 
 const SERVER_RESPONSE_STATUS = {

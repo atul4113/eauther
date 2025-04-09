@@ -5,7 +5,8 @@ import { ISettingsRaw, Settings } from "../model";
 import { RestClientService } from "./rest-client.service";
 import { environment } from "../../../environments/environment";
 
-const SETTINGS_URL = `${environment.apiUrl}/settings`;
+// Use the settings endpoint
+const SETTINGS_URL = "/settings";
 
 const DEFAULT_SETTINGS: ISettingsRaw = {
     application_id: "",
