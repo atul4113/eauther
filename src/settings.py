@@ -48,7 +48,7 @@ DATABASES = {
         },
         "PROJECT": os.getenv("DATASTORE_PROJECT_ID", "ealpha-test-application"),
         'INDEXES_FILE': 'indexes.json',
-        "NAMESPACE": "local",  # Optional namespace
+        "NAMESPACE": "",  # Optional namespace
     }
 }
  

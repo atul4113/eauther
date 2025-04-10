@@ -1,3 +1,5 @@
+from rest_framework.permissions import AllowAny
+
 from src.lorepo.user.serializers import RegistrationSerializer
 from src.registration.models import RegistrationProfile
 from rest_framework import status, generics
@@ -6,30 +8,8 @@ from rest_framework.response import Response
 
 
 class RegisterUser(generics.GenericAPIView):
-    """
-    @api {post} /api/v2/register /register
-    @apiDescription User and sso user register with provided data
-    @apiName RegisterUser
-    @apiGroup User
+    permission_classes = [AllowAny]  # Allow any user to access this endpoint
 
-    @apiParam {String} username (required) - username
-    @apiParam {Number} password1 (required) - password 1
-    @apiParam {String} password2 (required)- password 2
-    @apiParam {String} email (required) - user email
-    @apiParam {String} email_confirmed (required) - confirmed email
-    @apiParam {Boolean} regulation_agreement (required) - agree on term of use
-
-    @apiSuccessExample {json} Success-Response:
-      HTTP/1.1 201 CREATED
-      {
-
-      }
-    @apiErrorExample {json} Error-Response:
-      HTTP/1.1 400 Bad Request
-        {
-        "regulation_agreement":["This field is required."]
-        }
-    """
     serializer_class = RegistrationSerializer
 
     def post(self, request, *args, **kwargs):

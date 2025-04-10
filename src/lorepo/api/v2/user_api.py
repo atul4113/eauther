@@ -51,7 +51,7 @@ class UserData(views.APIView):
                 else SpaceSerializer(request.user.public_category, context=context).data,
                 'private_space': None if private_space is None
                 else SpaceSerializer(private_space, context=context).data,
-                'is_any_division_admin': is_any_division_admin(request.user)
+                'is_any_division_admin': is_any_division_admin(request.user, manual_flag=True)
             })
 
         except Exception as e:

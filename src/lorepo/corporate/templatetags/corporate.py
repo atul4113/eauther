@@ -47,35 +47,74 @@ def corporate_spaces_list(spaces, selected_space):
     spaces = sorted(spaces, key=lambda space: space.rank)
     return {'spaces': spaces, 'selected_space' : selected_space }
 
+#local
+
+register = template.Library()
+
+
 @register.filter
-def is_any_division_admin(user):
+def is_any_division_admin(user, manual_flag=None):
+    # If manual_flag is provided, return it directly
+    if manual_flag is not None:
+        return manual_flag
+
+    # Existing logic
     if user.is_superuser:
         return True
-    is_he = cache.get("is_any_division_admin_%s"%(user.id))
+
+    is_he = cache.get(f"is_any_division_admin_{user.id}")
     if is_he is None:
         usp = UserSpacePermissions.get_cached_usp_for_user(user)
         for division in list(user.divisions.values()):
             perms = usp.get_permissions_for_space(division.id)
-            if not perms:
-                pass
-            else:
+            if perms:
                 for permission in PROJECT_ADMIN_PERMISSIONS:
                     if permission in perms:
-                        cache.set("is_any_division_admin_%s"%(user.id), True)
+                        cache.set(f"is_any_division_admin_{user.id}", True)
                         return True
             for project in division.kids.all():
                 perms = usp.get_permissions_for_space(project.id)
-                if not perms:
-                    pass
-                else:
+                if perms:
                     for permission in PROJECT_ADMIN_PERMISSIONS:
                         if permission in perms:
-                            cache.set("is_any_division_admin_%s"%(user.id), True)
+                            cache.set(f"is_any_division_admin_{user.id}", True)
                             return True
     else:
         return is_he
-    cache.set("is_any_division_admin_%s"%(user.id), False)
+
+    cache.set(f"is_any_division_admin_{user.id}", False)
     return False
+
+#development
+# @register.filter
+# def is_any_division_admin(user):
+#     if user.is_superuser:
+#         return True
+#     is_he = cache.get("is_any_division_admin_%s"%(user.id))
+#     if is_he is None:
+#         usp = UserSpacePermissions.get_cached_usp_for_user(user)
+#         for division in list(user.divisions.values()):
+#             perms = usp.get_permissions_for_space(division.id)
+#             if not perms:
+#                 pass
+#             else:
+#                 for permission in PROJECT_ADMIN_PERMISSIONS:
+#                     if permission in perms:
+#                         cache.set("is_any_division_admin_%s"%(user.id), True)
+#                         return True
+#             for project in division.kids.all():
+#                 perms = usp.get_permissions_for_space(project.id)
+#                 if not perms:
+#                     pass
+#                 else:
+#                     for permission in PROJECT_ADMIN_PERMISSIONS:
+#                         if permission in perms:
+#                             cache.set("is_any_division_admin_%s"%(user.id), True)
+#                             return True
+#     else:
+#         return is_he
+#     cache.set("is_any_division_admin_%s"%(user.id), False)
+#     return False
 
 @register.inclusion_tag('corporate/projects_list.html')
 def children_tag_projects_list(spaces, selected_space, is_trash, root):
