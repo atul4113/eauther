@@ -132,7 +132,9 @@ INSTALLED_APPS = [
     'src.captcha',
     'rest_framework_docs',
 ]
+
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -323,8 +325,9 @@ USER_DEFAULT_LANG = 'en_US'
 
 # Cross-Origin Resource Sharing settings
 CORS_ORIGIN_ALLOW_ALL = False
-CORS_URLS_REGEX = r'(^/doc/api/.*$)|(^/file/serve/.*$)'
+CORS_URLS_REGEX = r'(^/doc/api/.*$)|(^/file/serve/.*$)|(^/api/.*$)'
 CORS_ORIGIN_REGEX_WHITELIST = (
+    r'^(https?://)?(localhost|127\.0\.0\.1):4200$',
     # mAuthor
     r'^(https?://)?(www\.)?mauthor\.com$',
     r'^(https?://)?([\w\-]+\.?)?mauthor-dev\.appspot\.com$',
