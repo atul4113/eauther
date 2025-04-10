@@ -26,37 +26,16 @@ from drf_spectacular import serializers as s
 
 
 class UserData(views.APIView):
-    """
-    @api {get} /api/v2/user/ /user/
-    @apiDescription Roles and basic information about user
-    @apiName UserData
-    @apiGroup User
-
-    @apiHeader {String} Authorization User Token.
-    @apiHeaderExample {json} Header-Example:
-      {
-        "Authorization": "JWT TOKEN"
-      }
-
-    @apiSuccessExample {json} Success-Response:
-      HTTP/1.1 200 OK
-      {
-          id: 6077825400438784,
-          email: "michal.zarzycki@solwit.com",
-          username: "g",
-          language_code: "en",
-          is_superuser: true
-      }
-    """
-    permission_classes = [IsAuthenticated]  # Enforce authentication
+    permission_classes = [IsAuthenticated]
 
     def get(self, request):
-        # Debugging - remove in production
-        print(f"Authenticated user: {request.user.username}")
+        print("\n=== UserData View Called ===")
+        print("User:", request.user)
+        print("Auth Header:", request.headers.get('Authorization'))
 
         try:
             context = {'request': request}
-            profile = request.user.profile  # Assuming you have a profile model
+            profile = request.user.profile
             private_space = get_private_space_for_user(request.user)
 
             return Response({
@@ -66,15 +45,17 @@ class UserData(views.APIView):
                 'is_superuser': request.user.is_superuser,
                 'language_code': profile.language_code if hasattr(profile, 'language_code') else 'en',
                 'company': None if not hasattr(request.user, 'company') or request.user.company is None
-                          else SpaceSerializer(request.user.company, context=context).data,
-                'public_category': None if not hasattr(request.user, 'public_category') or request.user.public_category is None
-                                 else SpaceSerializer(request.user.public_category, context=context).data,
+                else SpaceSerializer(request.user.company, context=context).data,
+                'public_category': None if not hasattr(request.user,
+                                                       'public_category') or request.user.public_category is None
+                else SpaceSerializer(request.user.public_category, context=context).data,
                 'private_space': None if private_space is None
-                               else SpaceSerializer(private_space, context=context).data,
+                else SpaceSerializer(private_space, context=context).data,
                 'is_any_division_admin': is_any_division_admin(request.user)
             })
 
         except Exception as e:
+            print("Error in UserData:", str(e))
             return Response({'error': str(e)}, status=400)
 
 class RemindLogin(generics.GenericAPIView):

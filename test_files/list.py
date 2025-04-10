@@ -219,3 +219,32 @@ def list_all_users_with_profiles():
             print("No profile found in Django ORM")
 
 # list_all_users_with_profiles()
+
+def supported_languages():
+    query = client.query(kind="translations_supportedlanguages")
+    languages = list(query.fetch())
+    print('translations_supportedlanguages function started ..')
+    for lang in languages:
+        print(dict(lang))
+        print(lang.id)
+
+
+supported_languages()
+
+
+def list_django_languages():
+    print("\nQuerying languages via Django ORM:")
+    from src.lorepo.translations.models import SupportedLanguages
+    languages = SupportedLanguages.objects.all()
+
+    print(f"Found {len(languages)} languages via Django ORM:")
+    for lang in languages:
+        print({
+            'lang_key': lang.lang_key,
+            'lang_description': lang.lang_description,
+            'created_date': lang.created_date,
+            'modified_date': lang.modified_date
+        })
+
+
+list_django_languages()

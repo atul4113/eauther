@@ -9,35 +9,32 @@ from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
 )
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from rest_framework.permissions import IsAuthenticated
 from django.urls import path, re_path
 
 jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
 jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER
 jwt_response_payload_handler = api_settings.JWT_RESPONSE_PAYLOAD_HANDLER
 
-
-class SessionToken(generics.GenericAPIView):
+class SessionToken(APIView):
     """
     API endpoint that returns a JWT token for users with active sessions.
     """
-    authentication_classes = [SessionAuthentication]
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
         """
         Generate a JWT token for an already authenticated session user.
         """
-        try:
-            payload = jwt_payload_handler(request.user)
-            token = jwt_encode_handler(payload)
-            response_data = jwt_response_payload_handler(token, request.user, request)
-            return Response(response_data)
-        except Exception as e:
-            return HttpResponseBadRequest(
-                '{"non_field_errors":["Unable to generate token for session."]}',
-                content_type='application/json'
-            )
+        from rest_framework_simplejwt.tokens import RefreshToken
 
+        refresh = RefreshToken.for_user(request.user)
+        return Response({
+            'refresh': str(refresh),
+            'access': str(refresh.access_token),
+        })
 
 # Single consolidated urlpatterns definition
 urlpatterns = [

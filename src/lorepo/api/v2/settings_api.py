@@ -1,5 +1,7 @@
 from collections import OrderedDict
 from django.urls import path
+from rest_framework.permissions import AllowAny
+
 from src import settings
 from src.libraries.utility.environment import get_app_version
 from src.lorepo.global_settings.models import GlobalSettings
@@ -36,6 +38,7 @@ class SettingsView(views.APIView):
         ]
     }
     """
+    permission_classes = [AllowAny]  # Add this line to allow public access
     def get(self, request):
         # Prepare the response data
         response_data = OrderedDict((
