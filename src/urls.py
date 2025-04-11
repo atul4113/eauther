@@ -32,6 +32,7 @@ urlpatterns = [
     path('translations/', include('src.lorepo.translations.urls')),
     re_path(r'^accounts/login/session/?$', custom_login, name='custom_login'),
     path('accounts/', include('src.registration.urls')),
+    path('accounts/', include(('rest_framework_custom.urls', 'rest_framework_custom'), namespace='rest_framework_custom')),
     path('corporate/', include('src.lorepo.corporate.urls')),
     path('exchange/', include('src.lorepo.exchange.urls')),
     path('merger/', include('src.lorepo.merger.urls')),
