@@ -56,30 +56,6 @@ class RegistrationManager(models.Manager):
                 user = profile.user
                 user.is_active = True
                 user.save()
-
-                # Update user in Google Datastore
-                client = datastore.Client()
-
-                # Update user entity
-                query = client.query(kind="auth_user")
-                query.add_filter("username", "=", user.username)
-                results = list(query.fetch())
-
-                if results:
-                    user_entity = results[0]
-                    user_entity['is_active'] = True
-                    client.put(user_entity)
-
-                # Update profile in Datastore
-                profile_query = client.query(kind="profile")
-                profile_query.add_filter("user_username", "=", user.username)
-                profile_results = list(profile_query.fetch())
-
-                if profile_results:
-                    profile_entity = profile_results[0]
-                    profile_entity['activation_key'] = self.model.ACTIVATED
-                    client.put(profile_entity)
-
                 profile.activation_key = self.model.ACTIVATED
                 profile.save()
                 return user
@@ -96,22 +72,6 @@ class RegistrationManager(models.Manager):
         new_user.is_active = True
         new_user.password = make_password(password)
         new_user.save()
-        print("New Django user created with ID:", new_user.id)
-
-        # Create user in Google Datastore with the same ID
-        client = datastore.Client()
-        user_key = client.key("auth_user", new_user.id)  # Use Django user ID
-        user_entity = datastore.Entity(key=user_key)
-        user_entity.update({
-            'username': username,
-            'email': email,
-            'password': make_password(password),
-            'is_active': True,
-            'date_joined': new_user.date_joined,
-            'last_login': None
-        })
-        client.put(user_entity)
-        print('Created Datastore user with ID:', new_user.id)
 
         registration_profile = self.create_profile(new_user)
 
@@ -150,24 +110,6 @@ class RegistrationManager(models.Manager):
 
         # Create profile in Django ORM
         profile = self.create(user=user, activation_key=activation_key)
-        print('Created Django profile:', profile)
-
-        # Create profile in Google Datastore
-        client = datastore.Client()
-
-        # Create the profile entity with user's ID as the key
-        profile_key = client.key("profile", user.id)  # Use user.id as the key
-        profile_entity = datastore.Entity(key=profile_key)
-        profile_entity.update({
-            'user_id': user.id,
-            'activation_key': activation_key,
-            'user_username': user.username,
-            'is_active': False
-        })
-
-        # Save to Datastore
-        client.put(profile_entity)
-        print('Created Datastore profile for user ID:', user.id)
 
         return profile
 
@@ -247,6 +189,7 @@ class RegistrationProfile(models.Model):
     class Meta:
         verbose_name = _('registration profile')
         verbose_name_plural = _('registration profiles')
+        db_table = 'registration_registrationprofile'  # Use default Django table naming
 
     def __unicode__(self):
         return "Registration information for %s" % self.user
