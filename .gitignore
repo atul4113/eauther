@@ -15,4 +15,7 @@ test-reports/
 static_files
 *.bak
 key.json
-
+test_files/list.py
+test_files/migrate_languages.py
+src_frontend/yarn.lock
+test_files/add.py

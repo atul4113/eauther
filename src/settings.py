@@ -23,7 +23,7 @@ pymysql.install_as_MySQLdb()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"]="C:\\Users\\Moro\\Work\\atul_last_updated\\eauther\\src\\key.json"
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"]="D:\\Smart Education\\Projects\\eauther\\src\\key.json"
 os.environ["DATASTORE_PROJECT_ID"]="eauthor-dev"
 os.environ["CLOUDSDK_CORE_PROJECT"]="eauthor-dev"
 DJANGAE_INDEX_YAML = 'djangaeidx.yaml'
@@ -48,9 +48,9 @@ DATABASES = {
         'TEST': {
             'GENERATE_SPECIAL_INDEXES': True
         },
-        "PROJECT": os.getenv("DATASTORE_PROJECT_ID", "ealpha-test-application"),
+        "PROJECT": "eauthor-dev",
+        "NAMESPACE": "",  # Using default namespace
         'INDEXES_FILE': 'indexes.json',
-        "NAMESPACE": "",  # Optional namespace
     }
 }
  
@@ -150,7 +150,6 @@ MIDDLEWARE = [
 MIDDLEWARE_CLASSES = [
 #    'google.appengine.ext.appstats.recording.AppStatsDjangoMiddleware', # uncomment to enable http://localhost:8000/_ah/stats
 #     'autoload.middleware.AutoloadMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

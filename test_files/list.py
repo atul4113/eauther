@@ -6,7 +6,7 @@ import datetime
 
 
 # Set up Django
-sys.path.append("E:\\Work\\Programming\\Projects\\SmartEdu\\mauthor")
+sys.path.append("D:\\Smart Education\\Projects\\eauther")
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "src.settings")  
 django.setup()
 
@@ -22,7 +22,7 @@ def list_users():
     for user in users:
         print(f"ID: {user.key.id}, Username: {user['username']}, Email: {user['email']}")
 
-list_users()
+# list_users()
 
 def list_profiles():
     query = client.query(kind="profile")
@@ -62,7 +62,7 @@ def list_kinds():
     for kind in kinds:
         print(kind.key.name)
 
-list_kinds()
+# list_kinds()
 
 
 def list_django_users():
@@ -76,7 +76,7 @@ def list_django_users():
         print(f"  Is active: {user.is_active}, Date joined: {user.date_joined}")
 
 
-list_django_users()
+# list_django_users()
 
 
 def list_users_2():
@@ -228,15 +228,15 @@ def supported_languages():
         print(dict(lang))
         print(lang.id)
 
-
 supported_languages()
+
 
 
 def list_django_languages():
     print("\nQuerying languages via Django ORM:")
     from src.lorepo.translations.models import SupportedLanguages
     languages = SupportedLanguages.objects.all()
-
+    
     print(f"Found {len(languages)} languages via Django ORM:")
     for lang in languages:
         print({
@@ -245,6 +245,5 @@ def list_django_languages():
             'created_date': lang.created_date,
             'modified_date': lang.modified_date
         })
-
 
 list_django_languages()
