@@ -37,18 +37,14 @@ export class AccountsLoginComponent implements OnInit {
         if (next) {
             this.setPreviousPath(next);
         } else {
-            this.setPreviousPath();
-            this._paths.onChange().subscribe(() => {
-                if (this._paths.getPreviousPath()) {
-                    this.error = false;
-                }
-                this.setPreviousPath();
-            });
+            this.setPreviousPath("/corporate/no_space_info");
         }
 
         if (document.referrer.indexOf(ACCOUNTS_LOGIN_PATH) !== -1) {
             this.error = true;
         }
+
+        console.log("Test log message");
     }
 
     private setPreviousPath(next?: string) {

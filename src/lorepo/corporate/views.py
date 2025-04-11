@@ -1348,7 +1348,8 @@ def create_trial_account(request):
 
 
 def no_space_info(request):
-    if request.user.company is not None and is_company_locked(request.user.company):
+    user_company = getattr(request.user, 'company', None)
+    if user_company is not None and is_company_locked(user_company):
         return HttpResponseRedirect('/mycontent')
 
     return render(request, 'corporate/no_space_info.html')
