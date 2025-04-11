@@ -28,13 +28,13 @@ def corporate_dashboard(request, name, path, classes):
             classes += ' selected'
     return {'name': name, 'path' : path, 'classes' : classes}
 
-@register.inclusion_tag("spaces_menu.html")
-def corporate_subspaces_menu(request):
+@register.inclusion_tag("spaces_menu.html", takes_context=True)
+def corporate_subspaces_menu(context):
+    request = context['request']
     s = list(request.user.divisions.values())
-    s = sorted(list(s), key=lambda space: space.title)
-    s = [s for s in s if not s.is_top_level()]
-    return {'spaces' : s}
-
+    s = sorted(s, key=lambda space: space.title)
+    s = [space for space in s if not space.is_top_level()]
+    return {'spaces': s}
 @register.inclusion_tag("spaces_menu_links.html")
 def corporate_subspaces_menu_links(request):
     s = list(request.user.divisions.values())
@@ -49,7 +49,7 @@ def corporate_spaces_list(spaces, selected_space):
 
 #local
 
-register = template.Library()
+# register = template.Library()
 
 
 @register.filter
