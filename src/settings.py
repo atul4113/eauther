@@ -2,6 +2,8 @@ import os
 import sys
 import datetime
 import mimetypes
+
+from corsheaders.defaults import default_headers
 from djangae.settings_base import *  # Set up some AppEngine specific stuff
 from src.lorepo.app_identity import mock_get_application_id
 from src.shared_settings import SHARED_SETTINGS
@@ -209,7 +211,11 @@ CORS_ALLOWED_ORIGINS = [
 ]
 CSRF_COOKIE_HTTPONLY = False
 CORS_ALLOW_CREDENTIALS = True
-
+CORS_ALLOW_HEADERS = list(default_headers) + [
+    'Authorization',
+    'X-Requested-With',
+    'Content-Type',
+]
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
