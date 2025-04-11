@@ -274,7 +274,7 @@ AUTHENTICATION_BACKENDS = [
 
 # NOSE_ARGS = ['--with-xunit', '--xunit-file=website-corporate/test-reports/xunit.xml', '-v']
 # NOSE_PLUGINS = ['libraries.utility.noseplugins.TestDiscoveryPlugin']
-APPEND_SLASH = False
+# APPEND_SLASH = False
 
 ADMIN_MEDIA_PREFIX = '/media/admin/'
 
