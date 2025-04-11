@@ -9,7 +9,9 @@
   },
   "/api": {
     "target": "http://localhost:8000",
-    "secure": false
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug"
   },
   "/accounts/login/session": {
     "target": "http://localhost:8000",

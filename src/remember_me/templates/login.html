@@ -16,7 +16,7 @@
             </div>
         {% endif %}
 
-        <form method="POST" action="{% url 'auth_login' %}">
+        <form method="POST" action="{% url 'rest_framework_custom:login' %}">
             {% csrf_token %}
 
             <div class="mb-3">
@@ -44,7 +44,7 @@
         </form>
 
         <div class="text-center mt-3">
-            <a href="{% url 'password_reset' %}">Forgot Password?</a>
+            <a href="{% url 'rest_framework_custom:password_reset' %}">Forgot Password?</a>
         </div>
     </div>
 

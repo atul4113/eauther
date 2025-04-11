@@ -1,26 +1,10 @@
-"""
-Login and logout views for the browsable API.
+from django.urls import re_path
 
-Add these to your root URLconf if you're using the browsable API and
-your API requires authentication:
+from django.contrib.auth import views as auth_views
 
-    urlpatterns = [
-        ...
-        url(r'^auth/', include('rest_framework_custom.urls', namespace='rest_framework_custom'))
-    ]
-
-In Django versions older than 1.9, the urls must be namespaced as 'rest_framework_custom',
-and you should make sure your authentication settings include `SessionAuthentication`.
-"""
-
-
-from django.conf.urls import url
-from django.contrib.auth import views
-
-template_name = {'template_name': 'rest_framework_custom/login.html'}
-
-app_name = 'rest_framework_custom'
+app_name = 'rest_framework_custom'  # ✅ this is the namespace
 urlpatterns = [
-    url(r'^login/$', views.login, template_name, name='login'),
-    url(r'^logout/$', views.logout, template_name, name='logout'),
+    re_path(r'^login/$', auth_views.LoginView.as_view(template_name='rest_framework_custom/login.html'), name='login'),
+    re_path(r'^logout/$', auth_views.LogoutView.as_view(), name='logout'),
+    re_path(r'^password_reset/$', auth_views.PasswordResetView.as_view(), name='password_reset'),
 ]
