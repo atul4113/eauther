@@ -1,0 +1,193 @@
+.users-management-tab-pane-inner-div-centered {
+    margin-top:20px;
+}
+
+.users-management-loading-gif-active {
+    display: block;
+}
+
+.users-management-loading-gif-hidden {
+    display: none;
+}
+
+.users-managment-select-container {
+    border-top-right-radius: 4px;
+    border-color: rgb(169, 169, 169);
+    border-top-left-radius: 4px;
+    padding-right: 5px;
+    width: 100px;
+    height: 34px;
+}
+
+.users-managment-select {
+    font-size: 15px;
+    margin-right: 5px;
+}
+
+#users-roles-save-changes-button {
+    margin-top: 10px;
+}
+
+.role-badge {
+    margin-right: 5px;
+}
+
+.group {
+    margin-top: 20px;
+}
+
+#project-publication-select-container {
+    margin-top: 5px;
+}
+
+.clickable-user-role-link {
+    cursor: pointer;
+}
+
+.clickable-user-publication {
+    cursor: pointer;
+}
+
+#users-tab-select-for-user {
+    margin-left: 5px;
+}
+
+.user-publications-table {
+    padding-left: 20px;
+    padding-right: 20px;
+    border-top: 0px;
+
+}
+
+#projects-tab-select-for-project {
+    margin-left: 5px;
+}
+
+input[type=checkbox].checkbox-label-center-margin {
+    margin-bottom: 0px;
+    margin-top: 3px;
+}
+
+.roles-navigation {
+    margin-top: 10px;
+}
+
+.roles-navigation button {
+    margin-right: 5px;
+}
+
+label.permission-label {
+    font-weight: 100;
+}
+
+#edit-role-form {
+    max-width: 500px;
+    width: 100%;
+    margin: 20px auto 0 auto;
+}
+
+#edit-role-form-content {
+    margin-top: 20px;
+}
+
+#edit-role-save-button {
+    margin-right: 10px;
+}
+
+#user-permission-table {
+    margin-top: 20px;
+}
+
+#projects-tab-select-for-project {
+    margin-top: 20px;
+}
+
+#project-permission-table {
+    margin-top: 20px
+}
+
+#users-tab-select-for-user {
+    margin-top: 20px;
+}
+
+.roles-edit-panel {
+    margin-right: 191px;
+}
+
+.roles-controls button{
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+#roles-container {
+    margin-top: 20px;
+}
+
+#add-role-roles-container {
+    margin-bottom: 20px;
+}
+
+.ajax-loader-img {
+    margin-top: 28px;
+    margin-left: 10px;
+}
+
+.not-active-link-button {
+   pointer-events: none;
+   cursor: default;
+}
+
+td.hiddenRow.hidden-row {
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+
+table.hidden-table {
+    padding: 0;
+    margin: 0;
+}
+
+td.hidden-row-td {
+    border-top: 1px solid rgb(221, 221, 221);
+}
+
+.hiddenRow.nopadding {
+    padding: 0px;
+}
+.hiddenRow.hidden-table {
+    padding: 0px;
+}
+
+#permission-index table tr.collapsable-clickable-element:hover {
+    background-color: #d9edf7;
+}
+
+#back-button-container-edit-role {
+    margin-top: 19px;
+    margin-right: 10px;
+}
+
+.mCurriculum-footer {
+    height: 49px;
+}
+
+.modal-button-footer-accept {
+    margin-right: 5px;
+}
+
+.users-panel-select-and-button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#users-tab-select-for-user-container {
+    margin-left: 385px;
+}
+
+#delete-user-button {
+    font-size: 11px;
+    margin-left: 230px;
+    margin-top: 18px;
+}
