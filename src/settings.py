@@ -283,8 +283,10 @@ AUTHENTICATION_BACKENDS = [
 
 ADMIN_MEDIA_PREFIX = '/media/admin/'
 
-STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATIC_URL = '/media/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'src/lorepo/templates/static_files'),
+]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 ROOT_URLCONF = 'src.urls'
