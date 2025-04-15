@@ -5,8 +5,11 @@ DATASTORE_SETTINGS.update({
     'NAMESPACE': '',  # Using default namespace
     'PROJECT': 'eauthor-dev',  # Correct project ID
     'DISABLE_CONSTRAINT_CHECKS': True,  # Match DJANGAE_DISABLE_CONSTRAINT_CHECKS
-    'DISABLE_TRANSACTION_ENFORCEMENT': False,
+    'DISABLE_TRANSACTION_ENFORCEMENT': True,  # Allow non-transactional operations
     'HIGH_REPLICATION': True,
     'EVENTUAL_CONSISTENCY_PROBABILITY': 1.0,  # Always use eventual consistency
     'CREATE_TRANSACTION_COMMIT_ON_COMPLETION': True,  # Force transactions to commit
+    'MAX_RETRIES': 3,  # Maximum number of retries for failed operations
+    'RETRY_DELAY': 0.1,  # Initial delay between retries in seconds
+    'MAX_RETRY_DELAY': 1.0,  # Maximum delay between retries
 })

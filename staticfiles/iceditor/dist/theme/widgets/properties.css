@@ -1,0 +1,267 @@
+/* PROPERTIES */
+#rightCol .ps-scrollbar-x-rail {
+  display: none;
+}
+#propertiesPage {
+  /* width: 100%; */
+  left: auto !important;
+  /* min-width: 500px; */
+  width: 500px;
+  max-width: 100%;
+}
+#propertiesPage #richTextEditor {
+  width: 100%;
+  height: auto;
+  background: #8e9598;
+}
+#propertiesPage .gwt-RichTextToolbar {
+  background: #8e9598;
+  /* margin: auto; */
+  padding: 6px;
+}
+#propertiesPage .gwt-PushButton,
+#propertiesPage .gwt-ToggleButton,
+#propertiesPage .gwt-ListBox {
+  cursor: pointer;
+  text-align: center;
+  background: #d4d6d9;
+  margin: 2px;
+  padding: 4px 2px 0px 2px;
+  outline: 0;
+}
+#propertiesPage .gwt-PushButton:hover,
+#propertiesPage .gwt-ToggleButton:hover {
+  background: rgba(255, 255, 255, 0.9);
+}
+#propertiesPage .gwt-ListBox {
+  padding: 2px;
+  border: 0;
+}
+#propertiesPage .propertiesItemsListWrapper {
+  position: absolute;
+  overflow: hidden;
+  left: 12px;
+  top: 155px;
+  /* WITH TEXT EDITOR ENABLED */
+  right: 12px;
+  bottom: 50px;
+}
+#propertiesPage .propertiesItemsListWrapper.no-toolbar {
+  top: 52px;
+}
+#propertiesPage .propertiesItemsList .ui-sortable-placeholder {
+  height: 100%;
+  visibility: visible !important;
+  border: 2px dashed rgba(255, 255, 255, 0.2);
+  background: rgba(34, 140, 237, 0.1);
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+#propertiesPage .propertiesItem {
+  background: #6a6e71;
+  margin-bottom: 12px;
+  margin-right: 12px;
+  border-bottom: 1px solid #5b5e61;
+  border-right: 1px solid #5b5e61;
+  min-width: 470px;
+}
+#propertiesPage .propertiesItem:last-child {
+  margin-bottom: 0px;
+}
+#propertiesPage .propertiesItem div {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+#propertiesPage .propertiesItem .propertiesItem-Title {
+  width: 100%;
+  float: left;
+  height: 30px;
+  background: rgba(255, 255, 255, 0.1);
+  margin-bottom: 10px;
+  padding: 6px;
+  font-size: 14px;
+  cursor: move;
+}
+#propertiesPage .propertiesItem .propertiesItemControlls {
+  float: right;
+}
+#propertiesPage .propertiesItem .propertiesItemControlls a {
+  display: block;
+  margin: 0 2px 0 2px;
+  float: left;
+  width: 18px;
+  height: 18px;
+  -o-background-size: 16px 16px;
+     background-size: 16px 16px;
+  background-position: center;
+  cursor: pointer;
+}
+#propertiesPage .propertiesItem .propertiesItemControlls a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+#propertiesPage .propertiesItem .propertiesItem-MoveUp {
+  background: url(../theme/images/arrow-up-white.png) no-repeat;
+}
+#propertiesPage .propertiesItem .propertiesItem-MoveDown {
+  background: url(../theme/images/arrow-down-white.png) no-repeat;
+}
+#propertiesPage .propertiesItem .propertiesItem-DeleteBtn {
+  background: url(../theme/images/trash.png) no-repeat;
+}
+#propertiesPage .propertiesItem .propertiesItem-Contents {
+  padding: 6px;
+}
+#propertiesPage .propertiesItem .propertiesItemFiled {
+  display: table;
+  width: 100%;
+  padding: 3px;
+  clear: both;
+}
+#propertiesPage .propertiesItem .propertiesItem-Label {
+  display: table-cell;
+  width: 20% !important;
+  text-align: right;
+  padding-right: 6px;
+  font-size: 12px;
+  min-width: 100px;
+  vertical-align: middle;
+}
+#propertiesPage .propertiesItem .propertiesItem-Value {
+  display: table-cell;
+  /* background: red; */
+  overflow: hidden;
+  min-width: 200px;
+  width: 80%;
+  max-width: 80%;
+}
+#propertiesPage .propertiesItem .propertiesItem-Value select {
+  display: block;
+  width: 100%;
+  border: 0;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 2px;
+  padding: 2px 4px 2px 4px;
+  height: 20px;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+#propertiesPage .propertiesItem .propertiesItem-Value input,
+#propertiesPage .propertiesItem .propertiesItem-Value iframe {
+  display: block;
+  width: 100%;
+  border: 0;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 2px;
+  padding: 2px 4px 2px 4px;
+  height: 20px;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+.propertiesItem-Value span {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}
+.propertyValue .listText {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}
+#propertiesPage .propertiesItem input.propertiesItemCheckbox {
+  min-width: 20px;
+  width: auto;
+  margin: 4px 0 4px 0;
+}
+#propertiesPage .propertiesItem .propertiesItem-Value iframe {
+  height: auto;
+  width: 100%;
+}
+#propertiesPage .propertiesItem .propertiesItemTextarea {
+  height: auto;
+  width: 100%;
+  max-width: 100% !important;
+  overflow: hidden;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+#propertiesPage .propertiesItem .propertiesItem-Value textarea {
+  display: inline-block;
+  min-height: 40px;
+  min-width: 40%;
+  max-width: 80% !important;
+  margin: 0 !important;
+  padding: 4px;
+  overflow: hidden;
+}
+#propertiesPage .propertiesItem a.fileSelectButton {
+  display: inline-block;
+  padding: 3px 8px 2px 8px;
+  height: 18px;
+  font-size: 12px;
+  margin: 4px 0 6px 0;
+  color: #fff;
+  background: #8e9598;
+  cursor: pointer;
+}
+#propertiesPage .propertiesItem select {
+  display: block;
+  width: auto;
+  border: 0;
+  background: #efefef;
+  border-radius: 3px;
+  padding: 2px 4px 2px 4px;
+  height: 20px;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+#propertiesPage .propertiesControls {
+  position: absolute;
+  left: 12px;
+  top: auto;
+  bottom: 20px;
+  right: 12px;
+  height: 20px;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+#propertiesPage .propertiesControls input.noOfItems {
+  width: 30px;
+}
+#propertiesPage .propertiesControls .saveButtons {
+  float: right;
+}
+#propertiesPage .propertiesControls a {
+  display: inline-block;
+  padding: 3px 8px 2px 8px;
+  height: 18px;
+  font-size: 12px;
+  margin: 4px 0 6px 0;
+  color: #fff;
+  background: #2dade3;
+}
+.propertiesItemsList {
+  margin-left: 9px;
+}
+.propertiesItem-Ghost {
+  border: 2px dashed rgba(255, 255, 255, 0.2) !important;
+  background: rgba(34, 140, 237, 0.1) !important;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  position: relative;
+}
+.propertiesItem-Ghost .propertiesItem-Title {
+  visibility: hidden !important;
+}
+.propertiesItem-Ghost .propertiesItem-Contents {
+  visibility: hidden !important;
+}

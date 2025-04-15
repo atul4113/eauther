@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><addon xmlns="http://icplayer.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Vimeo" xsi:schemaLocation="http://icplayer.com ../../tools/addon.xsd">
+	<model>
+		<property name="movie id" nameLabel="Vimeo_property_movie_id" type="string"/>
+	</model>
+<css/><view>&lt;iframe &#13;
+	src='http://player.vimeo.com/video/${movie id}?title=0&amp;byline=0&amp;portrait=0' &#13;
+	width='100%' &#13;
+	height='100%' &#13;
+	frameborder="0" &#13;
+	webkitAllowFullScreen &#13;
+	mozallowfullscreen &#13;
+	allowFullScreen&gt; &#13;
+&lt;/iframe&gt;&#13;
+</view><preview>&lt;img src="" style="width:100%;height:100%"/&gt;&#13;
+</preview><presenter>function AddonVimeo_create(){&#13;
+			&#13;
+	var presenter = function(){}&#13;
+&#13;
+	presenter.run = function(view, model){&#13;
+		var iframe = view.getElementsByTagName('iframe')[0];&#13;
+		var src = iframe.getAttribute('src');&#13;
+		src = src.replace('${movie id}', model['movie id'])&#13;
+        src = src.replace('http', 'https');&#13;
+		iframe.setAttribute('src', src);&#13;
+	}&#13;
+&#13;
+	presenter.createPreview = function(view, model){&#13;
+		$.ajax({&#13;
+	        type:'GET',&#13;
+	        url: 'https://vimeo.com/api/v2/video/' + model['movie id'] + '.json',&#13;
+	        jsonp: 'callback',&#13;
+	        dataType: 'jsonp',&#13;
+	        success: function(data){&#13;
+	        	$(view).children("img:first").attr("src", data[0].thumbnail_large);&#13;
+	        }&#13;
+	    });		&#13;
+	};&#13;
+	&#13;
+	return presenter;&#13;
+}&#13;
+</presenter></addon>

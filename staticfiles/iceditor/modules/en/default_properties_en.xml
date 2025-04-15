@@ -1,0 +1,2482 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<addons>
+	<addon id="Text">
+		<property name="Width" type="integer" value="425"/>
+		<property name="Height" type="integer" value="175"/>
+		<property name="Text" type="text">
+			<![CDATA[Text Module can be used for gap filling activities.<br><ol><li>A dropdown gap: {{1:option 1|option 2|option 3}}.</li><li>An editable or a draggable gap: \gap{answer}.</li><li>A gap with 2 correct options: \gap{blue|navy}.</li><li>This is a filled gap: \filledGap{initial text|answer}</li></ol>]]>
+		</property>
+		<property name="Gap width" type="string" value="80"/>
+	</addon>
+
+	<addon id="Basic_Math_Gaps">
+		<property name="Width" type="integer" value="150"/>
+		<property name="Height" type="integer" value="40"/>
+		<property name="gapsDefinition" type="text">
+			<![CDATA[[2] + 3 = 5]]>
+		</property>
+		<property name="isEquation" type="boolean" value="False"/>
+		<property name="gapType" type="{Editable, Draggable}" value="Editable"/>
+	</addon>
+
+	<addon id="Connection">
+		<property name="Width" type="integer" value="300"/>
+		<property name="Height" type="integer" value="150"/>
+		<property name="Single connection mode" type="boolean" value="True"/>
+		<property name="Left column" type="list">
+			<items>
+				<item>
+					<property name="id" type="string" value="1"/>
+					<property name="content" type="html">
+						<![CDATA[ Sky is ]]>
+					</property>
+					<property name="connects to" type="string" value="c"/>
+				</item>
+				<item>
+					<property name="id" type="string" value="2"/>
+					<property name="content" type="html">
+						<![CDATA[ Grass is ]]>
+					</property>
+					<property name="connects to" type="string" value="a"/>
+				</item>
+				<item>
+					<property name="id" type="string" value="3"/>
+					<property name="content" type="html">
+						<![CDATA[ Sun is ]]>
+					</property>
+					<property name="connects to" type="string" value="b"/>
+				</item>
+			</items>
+		</property>
+		<property name="Right column" type="list">
+			<items>
+				<item>
+					<property name="id" type="string" value="a"/>
+					<property name="content" type="html">
+						<![CDATA[ green. ]]>
+					</property>
+				</item>
+				<item>
+					<property name="id" type="string" value="b"/>
+					<property name="content" type="html">
+						<![CDATA[ yellow. ]]>
+					</property>
+				</item>
+				<item>
+					<property name="id" type="string" value="c"/>
+					<property name="content" type="html">
+						<![CDATA[ blue. ]]>
+					</property>
+				</item>
+			</items>
+		</property>
+		<property name="Columns width" type="list">
+			<items>
+				<item>
+					<property name="left" type="string" value="38%"/>
+					<property name="middle" type="string" value="24%"/>
+					<property name="right" type="string" value="38%"/>
+				</item>
+			</items>
+		</property>
+		<property name="Default connection color" type="string" value="#0097A7"/>
+		<property name="Correct connection color" type="string" value="#4CAF50"/>
+		<property name="Incorrect connection color" type="string" value="#F44336"/>
+		<property name="Connection thickness" type="string" value="2"/>
+	</addon>
+
+	<addon id="Clock">
+		<property name="Width" type="integer" value="200"/>
+		<property name="Height" type="integer" value="200"/>
+		<property name="InitialTime" type="string" value="9:03"/>
+		<property name="TimeStep" type="string" value="1"/>
+		<property name="ShowClockLabels" type="boolean" value="True"/>
+		<property name="SynchronizeHands" type="{None, Min with Hour, Both}" value="Both"/>
+		<property name="CorrectAnswer" type="string" value="9:00"/>
+		<property name="isActivity" type="boolean" value="True"/>
+	</addon>
+
+	<addon id="Text_Selection">
+		<property name="Width" type="integer" value="425"/>
+		<property name="Height" type="integer" value="50"/>
+		<property name="Selection type" type="{Single select, Multiselect}" value="Multiselect"/>
+		<property name="Text" type="html">
+			<![CDATA[The Text Selection addon allows marking / selecting parts of text as&nbsp;\correct{correct} and&nbsp;\wrong{wrong} phrases.]]>
+		</property>
+	</addon>
+
+	<addon id="crossword">
+		<property name="Width" type="integer" value="350"/>
+		<property name="Height" type="integer" value="250"/>
+		<property name="Crossword" type="text"><![CDATA[ENGLISH
+   O   
+ NEVER 
+ E E   
+ W     ]]>
+ 		</property>
+		<property name="Columns" type="string" value="7"/>
+		<property name="Rows" type="string" value="5"/>
+		<property name="Cell width" type="string" value="50"/>
+		<property name="Cell height" type="string" value="50"/>
+		<property name="Blank cells border color" type="string" value="#B0BEC5"/>
+		<property name="Blank cells border style" type="{solid, dotted, dashed}" value="solid"/>
+		<property name="Blank cells border width" type="string" value="1"/>
+		<property name="Letter cells border color" type="string" value="#bbb"/>
+		<property name="Letter cells border width" type="string" value="1"/>
+	</addon>
+
+	<addon id="TrueFalse">
+		<property name="Width" type="integer" value="400"/>
+		<property name="Height" type="integer" value="175"/>
+		<property name="Multi" type="boolean" value="True"/>
+		<property name="Questions" type="list">
+			<items>
+				<item>
+					<property name="Question" type="html">
+						<![CDATA[ True is on the left ]]>
+					</property>
+					<property name="Answer" type="string" value="1"/>
+				</item>
+				<item>
+					<property name="Question" type="html">
+						<![CDATA[ This sentence is false ]]>
+					</property>
+					<property name="Answer" type="string" value="1,2"/>
+				</item>
+			</items>
+		</property>
+		<property name="Choices" type="list">
+			<items>
+				<item>
+					<property name="Choice" type="html">
+						<![CDATA[ True ]]>
+					</property>
+				</item>
+				<item>
+					<property name="Choice" type="html">
+						<![CDATA[ False ]]>
+					</property>
+				</item>
+			</items>
+		</property>
+	</addon>
+
+	<addon id="Magic_Boxes">
+		<property name="Width" type="integer" value="250"/>
+		<property name="Height" type="integer" value="250"/>
+		<property name="Grid" type="text">
+			<![CDATA[ONETE
+THAHI
+TTORO
+SWVET
+FOUEM]]>
+		</property>
+		<property name="Answers" type="text">
+			<![CDATA[ONE
+TWO
+THREE]]>
+		</property>
+	</addon>
+
+	<addon id="PointsLines">
+		<property name="Width" type="integer" value="200"/>
+		<property name="Height" type="integer" value="200"/>
+		<property name="Points" type="text">
+		<![CDATA[[100,50]
+[50,100]
+[125,125]]]>
+		</property>
+	</addon>
+
+	<addon id="Hangman">
+		<property name="Width" type="integer" value="575"/>
+		<property name="Height" type="integer" value="150"/>
+		<property name="Phrases" type="list">
+			<items>
+				<item>
+					<property name="Letters" type="string" value=""/>
+					<property name="Phrase" type="string" value="APPLE"/>
+				</item>
+			</items>
+		</property>
+		<property name="Possible mistakes" type="string" value="3"/>
+	</addon>
+
+	<addon id="Source list">
+		<property name="Width" type="integer" value="350"/>
+		<property name="Height" type="integer" value="75"/>
+		<property name="Items" type="string">
+			<![CDATA[donkey
+pigeon
+zebra
+swan
+dolphin
+duck
+seagull
+tiger ]]>
+		</property>
+	</addon>
+
+	<addon id="Table">
+		<property name="Width" type="integer" value="325"/>
+		<property name="Height" type="integer" value="150"/>
+		<property name="Rows" type="string" value="3"/>
+		<property name="newWidthCalculate" type="boolean" value="true"/>
+		<property name="Columns" type="string" value="2"/>
+		<property name="Table cells" type="list">
+			<items>
+				<item>
+					<property name="Row" type="string" value="1"/>
+					<property name="Column" type="string" value="1"/>
+					<property name="Content" type="html">
+						<![CDATA[ Month ]]>
+					</property>
+				</item>
+				<item>
+					<property name="Row" type="string" value="1"/>
+					<property name="Column" type="string" value="2"/>
+					<property name="Content" type="html">
+						<![CDATA[ Number ]]>
+					</property>
+				</item>
+				<item>
+					<property name="Row" type="string" value="2"/>
+					<property name="Column" type="string" value="1"/>
+					<property name="Content" type="html">
+						<![CDATA[ January ]]>
+					</property>
+				</item>
+				<item>
+					<property name="Row" type="string" value="2"/>
+					<property name="Column" type="string" value="2"/>
+					<property name="Content" type="html">
+						<![CDATA[ 1 ]]>
+					</property>
+				</item>
+				<item>
+					<property name="Row" type="string" value="3"/>
+					<property name="Column" type="string" value="1"/>
+					<property name="Content" type="html">
+						<![CDATA[ February ]]>
+					</property>
+				</item>
+				<item>
+					<property name="Row" type="string" value="3"/>
+					<property name="Column" type="string" value="2"/>
+					<property name="Content" type="html">
+						<![CDATA[ 2 ]]>
+					</property>
+				</item>
+			</items>
+		</property>
+	</addon>
+
+	<addon id="gamememo">
+		<property name="Width" type="integer" value="335"/>
+		<property name="Height" type="integer" value="235"/>
+		<property name="Columns" type="string" value="4"/>
+		<property name="Rows" type="string" value="3"/>
+		<property name="Use two styles for cards" type="boolean" value="True"/>
+		<property name="Pairs" type="list">
+			<items>
+				<item>
+					<property name="A (text)" type="string" value="1"/>
+					<property name="B (text)" type="string" value="One"/>
+				</item>
+				<item>
+					<property name="A (text)" type="string" value="2"/>
+					<property name="B (text)" type="string" value="Two"/>
+				</item>
+				<item>
+					<property name="A (text)" type="string" value="3"/>
+					<property name="B (text)" type="string" value="Three"/>
+				</item>
+				<item>
+					<property name="A (text)" type="string" value="4"/>
+					<property name="B (text)" type="string" value="Four"/>
+				</item>
+				<item>
+					<property name="A (text)" type="string" value="5"/>
+					<property name="B (text)" type="string" value="Five"/>
+				</item>
+				<item>
+					<property name="A (text)" type="string" value="6"/>
+					<property name="B (text)" type="string" value="Six"/>
+				</item>
+			</items>
+		</property>
+	</addon>
+
+	<addon id="Audio">
+		<property name="Width" type="integer" value="400"/>
+		<property name="Height" type="integer" value="50"/>
+		<property name="mp3" type="audio" value="//www.mauthor.com/file/serve/5183398030606336"/>
+		<property name="ogg" type="audio" value="//www.mauthor.com/file/serve/5082862845427712"/>
+		<property name="defaultControls" type="boolean" value="True"/>
+		<property name="useBrowserControls" type="boolean" value="False"/>
+		<property name="displayTime" type="boolean" value="False"/>
+	</addon>
+
+	<addon id="Media_Recorder">
+		<property name="Width" type="integer" value="300"/>
+		<property name="Height" type="integer" value="40"/>
+		<property name="type" type="{audio, video}" value="audio"/>
+		<property name="maxTime" type="integer" value="10"/>
+		<property name="isResetRemovesRecording" type="boolean" value="True"/>
+		<property name="isShowedTimer" type="boolean" value="True"/>
+		<property name="isShowedDefaultRecordingButton" type="boolean" value="False"/>
+	</addon>
+
+	<addon id="Choice">
+		<property name="Width" type="integer" value="175"/>
+		<property name="Height" type="integer" value="175"/>
+		<property name="Item" type="list">
+			<items>
+				<item>
+					<property name="Value" type="string" value="1"/>
+					<property name="Text" type="string" value="Option 1"/>
+				</item>
+				<item>
+					<property name="Value" type="string" value="0"/>
+					<property name="Text" type="string" value="Option 2"/>
+				</item>
+				<item>
+					<property name="Value" type="string" value="0"/>
+					<property name="Text" type="string" value="Option 3"/>
+				</item>
+			</items>
+		</property>
+	</addon>
+
+	<addon id="Ordering">
+		<property name="Width" type="integer" value="260"/>
+		<property name="Height" type="integer" value="60"/>
+		<property name="Is Vertical" type="boolean" value="False"/>
+		<property name="Ordering item" type="list">
+			<items>
+				<item>
+					<property name="Text" type="string" value="1"/>
+				</item>
+				<item>
+					<property name="Text" type="string" value="2"/>
+				</item>
+				<item>
+					<property name="Text" type="string" value="3"/>
+				</item>
+			</items>
+		</property>
+	</addon>
+
+	<addon id="graph">
+		<property name="Width" type="integer" value="250"/>
+		<property name="Height" type="integer" value="250"/>
+		<property name="Show X axis bars descriptions" type="boolean" value="False"/>
+		<property name="Y axis maximum value" type="string" value="5"/>
+		<property name="Y axis minimum value" type="string" value="-5"/>
+		<property name="Y axis grid step" type="string" value="1"/>
+		<property name="Interactive" type="boolean" value="True"/>
+		<property name="Interactive step" type="string" value="1"/>
+		<property name="Data" type="text">
+		<![CDATA["3", "2", "5"
+"1", "-2", "-4"
+"-1", "1", "3"]]>
+		</property>
+		<property name="Answers" type="list">
+			<items>
+				<item>
+					<property name="Answer" type="string" value="-4"/>
+				</item>
+				<item>
+					<property name="Answer" type="string" value="-3"/>
+				</item>
+				<item>
+					<property name="Answer" type="string" value="-2"/>
+				</item>
+				<item>
+					<property name="Answer" type="string" value="-1"/>
+				</item>
+				<item>
+					<property name="Answer" type="string" value="0"/>
+				</item>
+				<item>
+					<property name="Answer" type="string" value="1"/>
+				</item>
+				<item>
+					<property name="Answer" type="string" value="2"/>
+				</item>
+				<item>
+					<property name="Answer" type="string" value="3"/>
+				</item>
+				<item>
+					<property name="Answer" type="string" value="4"/>
+				</item>
+			</items>
+		</property>
+		<property name="Series colors" type="list">
+			<items>
+				<item>
+					<property name="Color" type="string" value="#03A9F4"/>
+				</item>
+				<item>
+					<property name="Color" type="string" value="#00BCD4"/>
+				</item>
+				<item>
+					<property name="Color" type="string" value="#009688"/>
+				</item>
+			</items>
+		</property>
+	</addon>
+
+	<addon id="Fractions">
+		<property name="Width" type="integer" value="200"/>
+		<property name="Height" type="integer" value="200"/>
+		<property name="Figure" type="{---,Rectangular,Circle}" value="Circle"/>
+		<property name="RectHorizontal" type="string" value="5"/>
+		<property name="CircleParts" type="string" value="7"/>
+		<property name="Correct" type="string" value="4"/>
+		<property name="selectedParts" type="string" value="1"/>
+		<property name="selectionColor" type="string" value="#CDDC39"/>
+		<property name="emptyColor" type="string" value="#F0F4C3"/>
+		<property name="strokeColor" type="string" value="#AFB42B"/>
+		<property name="strokeWidth" type="string" value="2"/>
+	</addon>
+
+	<addon id="ConnectingDots">
+		<property name="Width" type="integer" value="250"/>
+		<property name="Height" type="integer" value="175"/>
+		<property name="Dots" type="text"><![CDATA[[25,50]
+[150,25]
+[200,100]
+[100,125]]]>
+		</property>
+		<property name="Is activity" type="boolean" value="True"/>
+	</addon>
+
+	<addon id="text_identification">
+		<property name="Width" type="integer" value="175"/>
+		<property name="Height" type="integer" value="75"/>
+		<property name="Text" type="html">
+			<![CDATA[ Lorem ipsum ]]>
+		</property>
+		<property name="SelectionCorrect" type="boolean" value="True"/>
+	</addon>
+
+	<addon id="Puzzle">
+		<property name="Width" type="integer" value="300"/>
+		<property name="Height" type="integer" value="200"/>
+		<property name="Columns" type="string" value="3"/>
+		<property name="Rows" type="string" value="2"/>
+		<property name="Image" type="image" value="//www.mauthor.com/file/serve/1826680"/>
+	</addon>
+
+	<addon id="WritingCalculations">
+		<property name="Width" type="integer" value="150"/>
+		<property name="Height" type="integer" value="125"/>
+		<property name="Value" displayName="Value" type="text"><![CDATA[_[2][1]
++11
+===
+_32]]>
+		</property>
+	</addon>
+
+	<addon id="Drawing">
+		<property name="Width" type="integer" value="350"/>
+		<property name="Height" type="integer" value="200"/>
+		<property name="Color" displayName="Color" type="string" value="#000000"/>
+		<property name="Thickness" displayName="Thickness" type="string" value="3"/>
+		<property name="Border" displayName="Border" type="string" value="0"/>
+		<property name="Opacity" displayName="Opacity" type="string" value="1"/>
+	</addon>
+
+	<addon id="TextAudio">
+		<property name="Width" type="integer" value="400"/>
+		<property name="Height" type="integer" value="195"/>
+		<property name="controls" displayName="Controls" type="{None, Browser, Custom}" value="Custom"/>
+		<property name="Slides" displayName="Slides" type="list">
+			<items>
+				<item>
+					<property name="Text" displayName="Text" type="html">
+						<![CDATA[Slide 1||<br><br>Seconds: 00:00-00:05||<br>Seconds:&nbsp;00:05-00:10||<br>Seconds:&nbsp;00:10-00:15]]>
+					</property>
+					<property name="Times" displayName="Times" type="text"><![CDATA[00:00-00:00
+00:00-00:05
+00:05-00:10
+00:10-00:15]]>
+					</property>
+					<property name="positionAndDimentions" displayName="Position and dimentions" type="text"/>
+				</item>
+				<item>
+					<property name="Text" displayName="Text" type="html">
+						<![CDATA[Slide 2||<br><br>Seconds:&nbsp;00:15-00:20||<br>The rest of the audio]]>
+					</property>
+					<property name="Times" displayName="Times" type="text"><![CDATA[00:15-00:15
+00:15-00:20
+00:20-00:24]]>
+					</property>
+					<property name="positionAndDimentions" displayName="Position and dimentions" type="text"/>
+				</item>
+			</items>
+		</property>
+		<property name="mp3" displayName="mp3" type="audio" value="//www.mauthor.com/file/serve/5183398030606336"/>
+		<property name="ogg" displayName="ogg" type="audio" value="//www.mauthor.com/file/serve/5082862845427712"/>
+	</addon>
+
+	<addon id="Slider">
+		<property name="Width" type="integer" value="250"/>
+		<property name="Height" type="integer" value="25"/>
+		<property name="ImageElement" type="image" value="//www.mauthor.com/file/serve/6146081882112000"/>
+		<property name="Stepwise" type="boolean" value="True"/>
+		<property name="StepsCount" type="string" value="5"/>
+		<property name="InitialStep" type="string" value="3"/>
+		<property name="Continuous events" type="boolean" value="True"/>
+		<property name="Continuous events steps" type="{Stick, Smooth}" value="Smooth"/>
+	</addon>
+	<addon id="ProgrammingCommandPrompt">
+		<property name="sceneID" type="string" value="Grid_Scene1"/>
+	</addon>
+	<addon id="BlocklyCodeEditor">
+		<property name="Width" type="integer" value="800"/>
+		<property name="Height" type="integer" value="500"/>
+		<property name="maxBlocksLimit" type="integer" value="0"/>
+		<property name="testSelect" type="editableselect" value="somethingElse">
+			<property name="something" type="text" value="firstValue"/>
+			<property name="something else" type="string" value="Second Value"/>
+		</property>
+		<property name="toolbox" type="list">
+			<items>
+				<item>
+					<property name="blockName" type="editableselect" value="custom">
+						<property name="colour_rgb" type="text" >
+<![CDATA[{
+"COLOUR_RGB_BLUE" : "blue",
+"COLOUR_RGB_GREEN" : "green",
+"COLOUR_RGB_RED" : "red",
+"COLOUR_RGB_TITLE" : "colour with",
+"COLOUR_RGB_TOOLTIP" : "Create a colour with the specified amount of red, green, and blue. All values must be between 0 and 100."
+}
+]]>
+						</property>
+<property name="text_append" type="text" >
+<![CDATA[{
+"TEXT_APPEND_APPENDTEXT" : "append text",
+"TEXT_APPEND_TO" : "to",
+"TEXT_APPEND_TOOLTIP" : "Append some text to variable %1.",
+"TEXT_APPEND_VARIABLE": "item"
+}
+]]>
+						</property>
+						<property name="math_arithmetic" type="text" >
+<![CDATA[{
+"MATH_ARITHMETIC_TOOLTIP_ADD" : "Return the sum of the two numbers.",
+"MATH_ARITHMETIC_TOOLTIP_DIVIDE" : "Return the quotient of the two numbers.",
+"MATH_ARITHMETIC_TOOLTIP_MINUS" : "Return the difference of the two numbers.",
+"MATH_ARITHMETIC_TOOLTIP_MULTIPLY" : "Return the product of the two numbers.",
+"MATH_ARITHMETIC_TOOLTIP_POWER" : "Return the first number raised to the power of the second number."
+}
+]]>
+						</property>
+						<property name="math_single" type="text" >
+<![CDATA[{
+"MATH_SINGLE_OP_ABSOLUTE" : "absolute",
+"MATH_SINGLE_OP_ROOT" : "square root",
+"MATH_SINGLE_TOOLTIP_ABS" : "Return the absolute value of a number.",
+"MATH_SINGLE_TOOLTIP_EXP" : "Return e to the power of a number.",
+"MATH_SINGLE_TOOLTIP_LN" : "Return the natural logarithm of a number.",
+"MATH_SINGLE_TOOLTIP_LOG10" : "Return the base 10 logarithm of a number.",
+"MATH_SINGLE_TOOLTIP_NEG" : "Return the negation of a number.",
+"MATH_SINGLE_TOOLTIP_POW10" : "Return 10 to the power of a number.",
+"MATH_SINGLE_TOOLTIP_ROOT" : "Return the square root of a number."
+}
+]]>
+						</property>
+						<property name="colour_blend" type="text" ><![CDATA[{
+"COLOUR_BLEND_COLOUR1" : "colour 1",
+"COLOUR_BLEND_COLOUR2" : "colour 2",
+"COLOUR_BLEND_RATIO" : "ratio",
+"COLOUR_BLEND_TITLE" : "blend",
+"COLOUR_BLEND_TOOLTIP" : "Blends two colours together with a given ratio (0.0 - 1.0)."
+}
+]]>
+						</property>
+						<property name="logic_boolean" type="text" ><![CDATA[{
+"LOGIC_BOOLEAN_FALSE" : "false",
+"LOGIC_BOOLEAN_TOOLTIP" : "Returns either true or false.",
+"LOGIC_BOOLEAN_TRUE" : "true"
+}
+]]>
+						</property>
+						<property name="controls_flow_statements" type="text" ><![CDATA[{
+"CONTROLS_FLOW_STATEMENTS_OPERATOR_BREAK" : "break out of loop",
+"CONTROLS_FLOW_STATEMENTS_OPERATOR_CONTINUE" : "continue with next iteration of loop",
+"CONTROLS_FLOW_STATEMENTS_TOOLTIP_BREAK" : "Break out of the containing loop.",
+"CONTROLS_FLOW_STATEMENTS_TOOLTIP_CONTINUE" : "Skip the rest of this loop, and continue with the next iteration.",
+"CONTROLS_FLOW_STATEMENTS_WARNING" : "Warning: This block may only be used within a loop."
+}
+]]>
+						</property>
+						<property name="text_charAt" type="text" ><![CDATA[{
+"TEXT_CHARAT_FIRST" : "get first letter",
+"TEXT_CHARAT_FROM_END" : "get letter # from end",
+"TEXT_CHARAT_FROM_START" : "get letter #",
+"TEXT_CHARAT_INPUT_INTEXT" : "in text",
+"TEXT_CHARAT_LAST" : "get last letter",
+"TEXT_CHARAT_RANDOM" : "get random letter",
+"TEXT_CHARAT_TAIL" : "",
+"TEXT_CHARAT_TOOLTIP" : "Returns the letter at the specified position."
+}
+]]>
+						</property>
+						<property name="colour_picker" type="text" >
+<![CDATA[{
+"COLOUR_PICKER_TOOLTIP" : "Choose a colour from the palette."
+}
+]]>
+						</property>
+						<property name="logic_compare" type="text" ><![CDATA[{
+"LOGIC_COMPARE_TOOLTIP_EQ" : "Return true if both inputs equal each other.",
+"LOGIC_COMPARE_TOOLTIP_GT" : "Return true if the first input is greater than the second input.",
+"LOGIC_COMPARE_TOOLTIP_GTE" : "Return true if the first input is greater than or equal to the second input.",
+"LOGIC_COMPARE_TOOLTIP_LT" : "Return true if the first input is smaller than the second input.",
+"LOGIC_COMPARE_TOOLTIP_LTE" : "Return true if the first input is smaller than or equal to the second input.",
+"LOGIC_COMPARE_TOOLTIP_NEQ" : "Return true if both inputs are not equal to each other."
+}
+]]>
+						</property>
+<property name="math_constant" type="text" >
+<![CDATA[{
+"MATH_CONSTANT_TOOLTIP" : "Return one of the common constants: π (3.141…), e (2.718…), φ (1.618…), sqrt(2) (1.414…), sqrt(½) (0.707…), or ∞ (infinity)."
+}
+]]>
+						</property>
+						<property name="math_constrain" type="text" ><![CDATA[{
+"MATH_CONSTRAIN_TITLE" : "constrain %1 low %2 high %3",
+"MATH_CONSTRAIN_TOOLTIP" : "Constrain a number to be between the specified limits (inclusive)."
+}
+]]>
+						</property>
+						<property name="lists_split" type="text" ><![CDATA[{
+"LISTS_SPLIT_LIST_FROM_TEXT" : "make list from text",
+"LISTS_SPLIT_TEXT_FROM_LIST" : "make text from list",
+"LISTS_SPLIT_TOOLTIP_JOIN" : "Join a list of texts into one text, separated by a delimiter.",
+"LISTS_SPLIT_TOOLTIP_SPLIT" : "Split text into a list of texts, breaking at each delimiter.",
+"LISTS_SPLIT_WITH_DELIMITER" : "with delimiter"
+}
+]]>
+						</property>
+						<property name="lists_repeat" type="text" ><![CDATA[{
+"LISTS_REPEAT_TITLE" : "create list with item %1 repeated %2 times",
+"LISTS_REPEAT_TOOLTIP" : "Creates a list consisting of the given value repeated the specified number of times."
+}
+]]>
+						</property>
+						<property name="lists_create_with" type="text" ><![CDATA[{
+"LISTS_CREATE_WITH_ITEM_TITLE" : "item",
+"LISTS_CREATE_WITH_CONTAINER_TITLE_ADD" : "list",
+"LISTS_CREATE_WITH_CONTAINER_TOOLTIP" : "Add, remove, or reorder sections to reconfigure this list block.",
+"LISTS_CREATE_WITH_INPUT_WITH" : "create list with",
+"LISTS_CREATE_WITH_ITEM_TOOLTIP" : "Add an item to the list.",
+"LISTS_CREATE_WITH_TOOLTIP" : "Create a list with any number of items."
+}
+]]>
+						</property>
+    					<property name="controls_forEach" type="text" ><![CDATA[{
+"CONTROLS_FOREACH_TITLE" : "for each item %1 in list %2",
+"CONTROLS_FOREACH_TOOLTIP" : "For each item in a list, set the variable %1 to the item, and then do some statements.",
+"CONTROLS_FOREACH_INPUT_DO" : "for"
+}
+]]>
+						</property>
+						<property name="controls_for" type="text" ><![CDATA[{
+"CONTROLS_FOR_INPUT_DO" : "do",
+"CONTROLS_FOR_TITLE" : "count with %1 from %2 to %3 by %4",
+"CONTROLS_FOR_TOOLTIP" : "Have the variable %1 take on the values from the start number to the end number, counting by the specified interval, and do the specified blocks.",
+"CONTROLS_FOR_INPUT_DO" : "do"
+}
+]]>
+						</property>
+						<property name="lists_getIndex" type="text" ><![CDATA[{
+"LISTS_GET_INDEX_TOOLTIP_GET_FIRST" : "Returns the first item in a list.",
+"LISTS_GET_INDEX_FIRST" : "first",
+"LISTS_GET_INDEX_FROM_END" : "# from end",
+"LISTS_GET_INDEX_FROM_START" : "#",
+"LISTS_GET_INDEX_GET" : "get",
+"LISTS_GET_INDEX_GET_REMOVE" : "get and remove",
+"LISTS_GET_INDEX_LAST" : "last",
+"LISTS_GET_INDEX_RANDOM" : "random",
+"LISTS_GET_INDEX_REMOVE" : "remove",
+"LISTS_GET_INDEX_TAIL" : "",
+"LISTS_GET_INDEX_TOOLTIP_GET_FROM_END" : "Returns the item at the specified position in a list. #1 is the last item.",
+"LISTS_GET_INDEX_TOOLTIP_GET_FROM_START" : "Returns the item at the specified position in a list. #1 is the first item.",
+"LISTS_GET_INDEX_TOOLTIP_GET_LAST" : "Returns the last item in a list.",
+"LISTS_GET_INDEX_TOOLTIP_GET_RANDOM" : "Returns a random item in a list.",
+"LISTS_GET_INDEX_TOOLTIP_GET_REMOVE_FIRST" : "Removes and returns the first item in a list.",
+"LISTS_GET_INDEX_TOOLTIP_GET_REMOVE_FROM_END" : "Removes and returns the item at the specified position in a list. #1 is the last item.",
+"LISTS_GET_INDEX_TOOLTIP_GET_REMOVE_FROM_START" : "Removes and returns the item at the specified position in a list. #1 is the first item.",
+"LISTS_GET_INDEX_TOOLTIP_GET_REMOVE_LAST" : "Removes and returns the last item in a list.",
+"LISTS_GET_INDEX_TOOLTIP_GET_REMOVE_RANDOM" : "Removes and returns a random item in a list.",
+"LISTS_GET_INDEX_TOOLTIP_REMOVE_FIRST" : "Removes the first item in a list.",
+"LISTS_GET_INDEX_TOOLTIP_REMOVE_FROM_END" : "Removes the item at the specified position in a list. #1 is the last item.",
+"LISTS_GET_INDEX_TOOLTIP_REMOVE_FROM_START" : "Removes the item at the specified position in a list. #1 is the first item.",
+"LISTS_GET_INDEX_TOOLTIP_REMOVE_LAST" : "Removes the last item in a list.",
+"LISTS_GET_INDEX_TOOLTIP_REMOVE_RANDOM" : "Removes a random item in a list.",
+"LISTS_GET_INDEX_INPUT_IN_LIST" : "in list"
+}
+]]>
+						</property>
+						<property name="lists_getSublist" type="text" ><![CDATA[{
+"LISTS_GET_SUBLIST_END_FROM_END" : "to # from end",
+"LISTS_GET_SUBLIST_END_FROM_START" : "to #",
+"LISTS_GET_SUBLIST_END_LAST" : "to last",
+"LISTS_GET_SUBLIST_START_FIRST" : "get sub-list from first",
+"LISTS_GET_SUBLIST_START_FROM_END" : "get sub-list from # from end",
+"LISTS_GET_SUBLIST_START_FROM_START" : "get sub-list from #",
+"LISTS_GET_SUBLIST_TAIL" : "",
+"LISTS_GET_SUBLIST_TOOLTIP" : "Creates a copy of the specified portion of a list.",
+"LISTS_GET_SUBLIST_INPUT_IN_LIST" : "in list"
+}
+]]>
+						</property>
+						<property name="variables_get" type="text" ><![CDATA[{
+"VARIABLES_DEFAULT_NAME" : "item",
+"VARIABLES_GET_CREATE_SET" : "Create set %1",
+"VARIABLES_GET_TOOLTIP" : "Returns the value of this variable."
+}
+]]>
+						</property>
+						<property name="controls_if" type="text" ><![CDATA[{
+"CONTROLS_IF_ELSEIF_TOOLTIP" : "Add a condition to the if block.",
+"CONTROLS_IF_ELSE_TOOLTIP" : "Add a final, catch-all condition to the if block.",
+"CONTROLS_IF_IF_TOOLTIP" : "Add, remove, or reorder sections to reconfigure this if block.",
+"CONTROLS_IF_MSG_ELSE" : "else",
+"CONTROLS_IF_MSG_ELSEIF" : "else if",
+"CONTROLS_IF_MSG_IF" : "if",
+"CONTROLS_IF_IF_TITLE_IF" : "if",
+"CONTROLS_IF_ELSE_TITLE_ELSE" : "else",
+"CONTROLS_IF_ELSEIF_TITLE_ELSEIF" : "else if",
+"CONTROLS_IF_IF_TITLE_IF" : "if",
+"CONTROLS_IF_MSG_THEN" : "then",
+"CONTROLS_IF_TOOLTIP_1" : "If a value is true, then do some statements.",
+"CONTROLS_IF_TOOLTIP_2" : "If a value is true, then do the first block of statements. Otherwise, do the second block of statements.",
+"CONTROLS_IF_TOOLTIP_3" : "If the first value is true, then do the first block of statements. Otherwise, if the second value is true, do the second block of statements.",
+"CONTROLS_IF_TOOLTIP_4" : "If the first value is true, then do the first block of statements. Otherwise, if the second value is true, do the second block of statements. If none of the values are true, do the last block of statements."
+}
+]]>
+						</property>
+						<property name="lists_isEmpty" type="text" ><![CDATA[{
+"LISTS_ISEMPTY_TITLE" : "%1 is empty",
+"LISTS_ISEMPTY_TOOLTIP" : "Returns true if the list is empty."
+}
+]]>
+						</property>
+						<property name="text_isEmpty" type="text" ><![CDATA[{
+"TEXT_ISEMPTY_TITLE" : "%1 is empty",
+"TEXT_ISEMPTY_TOOLTIP" : "Returns true if the provided text is empty."
+}
+]]>
+						</property>
+						<property name="text_join" type="text" ><![CDATA[{
+"TEXT_JOIN_TITLE_CREATEWITH" : "create text with",
+"TEXT_JOIN_TOOLTIP" : "Create a piece of text by joining together any number of items.",
+"TEXT_CREATE_JOIN_TITLE_JOIN" : "join",
+"TEXT_CREATE_JOIN_ITEM_TITLE_ITEM" : "item"
+}
+]]>
+						</property>
+						<property name="lists_indexOf" type="text" ><![CDATA[{
+"LISTS_INDEX_OF_FIRST" : "find first occurrence of item",
+"LISTS_INDEX_OF_LAST" : "find last occurrence of item",
+"LISTS_INDEX_OF_TOOLTIP" : "Returns the index of the first/last occurrence of the item in the list. Returns 0 if item is not found.",
+"LISTS_INDEX_OF_INPUT_IN_LIST" : "in list"
+}
+]]>
+						</property>
+						<property name="lists_length" type="text" ><![CDATA[{
+"LISTS_LENGTH_TITLE" : "length of %1",
+"LISTS_LENGTH_TOOLTIP" : "Returns the length of a list."
+}
+]]>
+						</property>
+						<property name="logic_operation" type="text" ><![CDATA[{
+"LOGIC_OPERATION_AND" : "and",
+"LOGIC_OPERATION_OR" : "or",
+"LOGIC_OPERATION_TOOLTIP_AND" : "Return true if both inputs are true.",
+"LOGIC_OPERATION_TOOLTIP_OR" : "Return true if at least one of the inputs is true."
+}
+]]>
+						</property>
+    					<property name="logic_ternary" type="text" ><![CDATA[{
+"LOGIC_TERNARY_CONDITION" : "test",
+"LOGIC_TERNARY_IF_FALSE" : "if false",
+"LOGIC_TERNARY_IF_TRUE" : "if true",
+"LOGIC_TERNARY_TOOLTIP" : "Check the condition in test. If the condition is true, returns the if true value; otherwise returns the if false value."
+}
+]]>
+						</property>
+						<property name="math_on_list" type="text" ><![CDATA[{
+"MATH_ONLIST_OPERATOR_AVERAGE" : "average of list",
+"MATH_ONLIST_OPERATOR_MAX" : "max of list",
+"MATH_ONLIST_OPERATOR_MEDIAN" : "median of list",
+"MATH_ONLIST_OPERATOR_MIN" : "min of list",
+"MATH_ONLIST_OPERATOR_MODE" : "modes of list",
+"MATH_ONLIST_OPERATOR_RANDOM" : "random item of list",
+"MATH_ONLIST_OPERATOR_STD_DEV" : "standard deviation of list",
+"MATH_ONLIST_OPERATOR_SUM" : "sum of list",
+"MATH_ONLIST_TOOLTIP_AVERAGE" : "Return the average (arithmetic mean) of the numeric values in the list.",
+"MATH_ONLIST_TOOLTIP_MAX" : "Return the largest number in the list.",
+"MATH_ONLIST_TOOLTIP_MEDIAN" : "Return the median number in the list.",
+"MATH_ONLIST_TOOLTIP_MIN" : "Return the smallest number in the list.",
+"MATH_ONLIST_TOOLTIP_MODE" : "Return a list of the most common item(s) in the list.",
+"MATH_ONLIST_TOOLTIP_RANDOM" : "Return a random element from the list.",
+"MATH_ONLIST_TOOLTIP_STD_DEV" : "Return the standard deviation of the list.",
+"MATH_ONLIST_TOOLTIP_SUM" : "Return the sum of all the numbers in the list."
+}
+]]>
+						</property>
+						<property name="math_modulo" type="text" ><![CDATA[{
+"MATH_MODULO_TITLE" : "remainder of %1 ÷ %2",
+"MATH_MODULO_TOOLTIP" : "Return the remainder from dividing the two numbers."
+}
+]]>
+						</property>
+						<property name="logic_negate" type="text" ><![CDATA[{
+"LOGIC_NEGATE_TITLE" : "not %1",
+"LOGIC_NEGATE_TOOLTIP" : "Returns true if the input is false. Returns false if the input is true."
+}
+]]>
+						</property>
+						<property name="logic_null" type="text" ><![CDATA[{
+"LOGIC_NULL" : "null",
+"LOGIC_NULL_TOOLTIP" : "Returns null."
+}
+]]>
+						</property>
+						<property name="math_number_property" type="text" ><![CDATA[{
+"MATH_IS_DIVISIBLE_BY" : "is divisible by",
+"MATH_IS_EVEN" : "is even",
+"MATH_IS_NEGATIVE" : "is negative",
+"MATH_IS_ODD" : "is odd",
+"MATH_IS_POSITIVE" : "is positive",
+"MATH_IS_PRIME" : "is prime",
+"MATH_IS_TOOLTIP" : "Check if a number is an even, odd, prime, whole, positive, negative, or if it is divisible by certain number. Returns true or false.",
+"MATH_IS_WHOLE" : "is whole"
+}
+]]>
+						</property>
+						<property name="math_number" type="text" ><![CDATA[{
+"MATH_NUMBER_TOOLTIP" : "A number."
+}
+]]>
+						</property>
+						<property name="text_print" type="text" ><![CDATA[{
+"TEXT_PRINT_TITLE" : "print %1",
+"TEXT_PRINT_TOOLTIP" : "Print the specified text, number or other value."
+}
+]]>
+						</property>
+						<property name="text_prompt_ext" type="text" ><![CDATA[{
+"TEXT_PROMPT_TOOLTIP_NUMBER" : "Prompt for user for a number.",
+"TEXT_PROMPT_TOOLTIP_TEXT" : "Prompt for user for some text.",
+"TEXT_PROMPT_TYPE_NUMBER" : "prompt for number with message",
+"TEXT_PROMPT_TYPE_TEXT" : "prompt for text with message"
+}
+]]>
+						</property>
+						<property name="colour_random" type="text" ><![CDATA[{
+"COLOUR_RANDOM_TITLE" : "random colour",
+"COLOUR_RANDOM_TOOLTIP" : "Choose a colour at random."
+}
+]]>
+						</property>
+						<property name="math_random_float" type="text" ><![CDATA[{
+"MATH_RANDOM_FLOAT_TITLE_RANDOM" : "random fraction",
+"MATH_RANDOM_FLOAT_TOOLTIP" : "Return a random fraction between 0.0 (inclusive) and 1.0 (exclusive)."
+}
+]]>
+						</property>
+						<property name="math_random_int" type="text" ><![CDATA[{
+"MATH_RANDOM_INT_TITLE" : "random integer from %1 to %2",
+"MATH_RANDOM_INT_TOOLTIP" : "Return a random integer between the two specified limits, inclusive."
+}
+]]>
+						</property>
+						<property name="controls_whileUntil" type="text" ><![CDATA[{
+"CONTROLS_WHILEUNTIL_INPUT_DO" : "do",
+"CONTROLS_WHILEUNTIL_OPERATOR_UNTIL" : "repeat until",
+"CONTROLS_WHILEUNTIL_OPERATOR_WHILE" : "repeat while",
+"CONTROLS_WHILEUNTIL_TOOLTIP_UNTIL" : "While a value is false, then do some statements.",
+"CONTROLS_WHILEUNTIL_TOOLTIP_WHILE" : "While a value is true, then do some statements."
+}
+]]>
+						</property>
+						<property name="controls_repeat_ext" type="text" ><![CDATA[{
+"CONTROLS_REPEAT_INPUT_DO" : "do",
+"CONTROLS_REPEAT_TITLE" : "repeat %1 times",
+"CONTROLS_REPEAT_TOOLTIP" : "Do some statements several times."}
+]]>
+						</property>
+						<property name="math_round" type="text" ><![CDATA[{
+"MATH_ROUND_OPERATOR_ROUND" : "round",
+"MATH_ROUND_OPERATOR_ROUNDDOWN" : "round down",
+"MATH_ROUND_OPERATOR_ROUNDUP" : "round up",
+"MATH_ROUND_TOOLTIP" : "Round a number up or down."
+}
+]]>
+						</property>
+						<property name="lists_setIndex" type="text" ><![CDATA[{
+"LISTS_SET_INDEX_TOOLTIP_INSERT_FIRST" : "Inserts the item at the start of a list.",
+"LISTS_SET_INDEX_TOOLTIP_INSERT_FROM_END" : "Inserts the item at the specified position in a list. #1 is the last item.",
+"LISTS_SET_INDEX_TOOLTIP_INSERT_FROM_START" : "Inserts the item at the specified position in a list. #1 is the first item.",
+"LISTS_SET_INDEX_TOOLTIP_INSERT_LAST" : "Append the item to the end of a list.",
+"LISTS_SET_INDEX_TOOLTIP_INSERT_RANDOM" : "Inserts the item randomly in a list.",
+"LISTS_SET_INDEX_TOOLTIP_SET_FIRST" : "Sets the first item in a list.",
+"LISTS_SET_INDEX_TOOLTIP_SET_FROM_END" : "Sets the item at the specified position in a list. #1 is the last item.",
+"LISTS_SET_INDEX_TOOLTIP_SET_FROM_START" : "Sets the item at the specified position in a list. #1 is the first item.",
+"LISTS_SET_INDEX_TOOLTIP_SET_LAST" : "Sets the last item in a list.",
+"LISTS_SET_INDEX_TOOLTIP_SET_RANDOM" : "Sets a random item in a list.",
+"LISTS_SET_INDEX_INSERT" : "insert at",
+"LISTS_SET_INDEX_SET" : "set",
+"LISTS_SET_INDEX_INPUT_IN_LIST" : "in list",
+"LISTS_SET_INDEX_INPUT_TO" : "as",
+"LISTS_GET_INDEX_FIRST" : "first",
+"LISTS_GET_INDEX_FROM_END" : "# from end",
+"LISTS_GET_INDEX_FROM_START" : "#",
+"LISTS_GET_INDEX_LAST" : "last",
+"LISTS_GET_INDEX_RANDOM" : "random"
+}
+]]>
+						</property>
+						<property name="variables_set" type="text" ><![CDATA[{
+"VARIABLES_SET" : "set %1 to %2",
+"VARIABLES_SET_CREATE_GET" : "Create get %1",
+"VARIABLES_SET_TOOLTIP" : "Sets this variable to be equal to the input."
+}
+]]>
+						</property>
+						<property name="lists_sort" type="text" ><![CDATA[{
+"LISTS_SORT_ORDER_ASCENDING" : "ascending",
+"LISTS_SORT_ORDER_DESCENDING" : "descending",
+"LISTS_SORT_TITLE" : "sort %1 %2 %3",
+"LISTS_SORT_TOOLTIP" : "Sort a copy of a list.",
+"LISTS_SORT_TYPE_IGNORECASE" : "alphabetic, ignore case",
+"LISTS_SORT_TYPE_NUMERIC" : "numeric",
+"LISTS_SORT_TYPE_TEXT" : "alphabetic"
+}
+]]>
+						</property>
+						<property name="text_getSubstring" type="text" ><![CDATA[{
+"TEXT_GET_SUBSTRING_END_FROM_END" : "to letter # from end",
+"TEXT_GET_SUBSTRING_END_FROM_START" : "to letter #",
+"TEXT_GET_SUBSTRING_END_LAST" : "to last letter",
+"TEXT_GET_SUBSTRING_INPUT_IN_TEXT" : "in text",
+"TEXT_GET_SUBSTRING_START_FIRST" : "get substring from first letter",
+"TEXT_GET_SUBSTRING_START_FROM_END" : "get substring from letter # from end",
+"TEXT_GET_SUBSTRING_START_FROM_START" : "get substring from letter #",
+"TEXT_GET_SUBSTRING_TAIL" : "",
+"TEXT_GET_SUBSTRING_TOOLTIP" : "Returns a specified portion of the text."
+}
+]]>
+						</property>
+						<property name="text_indexOf" type="text" ><![CDATA[{
+"TEXT_INDEXOF_INPUT_INTEXT" : "in text",
+"TEXT_INDEXOF_OPERATOR_FIRST" : "find first occurrence of text",
+"TEXT_INDEXOF_OPERATOR_LAST" : "find last occurrence of text",
+"TEXT_INDEXOF_TAIL" : "",
+"TEXT_INDEXOF_TOOLTIP" : "Returns the index of the first/last occurrence of the first text in the second text. Returns 0 if text is not found."
+}
+]]>
+						</property>
+						<property name="text_length" type="text" ><![CDATA[{
+"TEXT_LENGTH_TITLE" : "length of %1",
+"TEXT_LENGTH_TOOLTIP" : "Returns the number of letters (including spaces) in the provided text."
+}
+]]>
+						</property>
+						<property name="text" type="text" ><![CDATA[{
+"TEXT_TEXT_TOOLTIP" : "A letter, word, or line of text."
+}
+]]>
+						</property>
+						<property name="text_changeCase" type="text"><![CDATA[{
+"TEXT_CHANGECASE_OPERATOR_LOWERCASE" : "to lower case",
+"TEXT_CHANGECASE_OPERATOR_TITLECASE" : "to Title Case",
+"TEXT_CHANGECASE_OPERATOR_UPPERCASE" : "to UPPER/CASE",
+"TEXT_CHANGECASE_TOOLTIP" : "Return a copy of the text in a different case."
+}
+]]>
+						</property>
+						<property name="math_trig" type="text"><![CDATA[{
+"MATH_TRIG_ACOS" : "acos",
+"MATH_TRIG_ASIN" : "asin",
+"MATH_TRIG_ATAN" : "atan",
+"MATH_TRIG_COS" : "cos",
+"MATH_TRIG_SIN" : "sin",
+"MATH_TRIG_TAN" : "tan",
+"MATH_TRIG_TOOLTIP_ACOS" : "Return the arccosine of a number.",
+"MATH_TRIG_TOOLTIP_ASIN" : "Return the arcsine of a number.",
+"MATH_TRIG_TOOLTIP_ATAN" : "Return the arctangent of a number.",
+"MATH_TRIG_TOOLTIP_COS" : "Return the cosine of a degree (not radian).",
+"MATH_TRIG_TOOLTIP_SIN" : "Return the sine of a degree (not radian).",
+"MATH_TRIG_TOOLTIP_TAN" : "Return the tangent of a degree (not radian)."
+}
+]]>
+						</property>
+						<property name="text_trim" type="text" ><![CDATA[{
+"TEXT_TRIM_OPERATOR_BOTH" : "trim spaces from both sides of",
+"TEXT_TRIM_OPERATOR_LEFT" : "trim spaces from left side of",
+"TEXT_TRIM_OPERATOR_RIGHT" : "trim spaces from right side of",
+"TEXT_TRIM_TOOLTIP" : "Return a copy of the text with spaces removed from one or both ends."
+}
+]]>
+						</property>
+						<property name="math_change" type="text" ><![CDATA[{
+"MATH_CHANGE_TITLE" : "change %1 by %2",
+"MATH_CHANGE_TOOLTIP" : "Add a number to variable %1.",
+"MATH_CHANGE_TITLE_ITEM" : "Item"
+}
+]]>
+						</property>
+						<property name="grid_scene_commands" type="text"><![CDATA[{
+"block_mark": "mark",
+"block_x": "x",
+"block_y": "y",
+"block_clear": "clear",
+"block_steps": "steps",
+"block_drawLeft": "drawLeft",
+"block_drawRight": "drawRight",
+"block_drawUp": "drawUp",
+"block_drawDown": "drawDown",
+"block_drawLeftFrom": "drawLeftFrom",
+"block_drawRightFrom": "drawRightFrom",
+"block_drawUpFrom": "drawUpFrom",
+"block_drawDownFrom": "drawDownFrom",
+"block_setColor": "setColor",
+"block_setCursor": "setCursor",
+"block_clearMark": "clearMark"
+}
+]]>
+						</property>
+						<property name="variables_editor" type="text"><![CDATA[{
+"NEW_VARIABLE": "Create variable..."
+}
+]]>
+						</property>
+						<property name="custom" type="string" value=""/>
+					</property>
+					<property name="blockCategory" type="string" value=""/>
+					<property name="blockAliases" type="string" value=""/>
+					<property name="blockIsDisabled" type="boolean" value="false"/>
+				</item>
+			</items>
+		</property>
+	</addon>
+	<addon id="PseudoCode_Console">
+		<property name="Width" type="integer" value="400"/>
+		<property name="Height" type="integer" value="250"/>
+		<property name="functionsList" type="list">
+			<items>
+				<item>
+					<property name="name" type="string" value="print"/>
+					<property name="body" type="html">
+						<![CDATA[ builtIn.console.Write(arguments[0].value); ]]>
+					</property>
+				</item>
+				<item>
+					<property name="name" type="string" value="read"/>
+					<property name="body" type="html">
+						<![CDATA[var receivedValue = arguments[0];
+builtIn.console.ReadLine(function (value) {
+    builtIn.retVal.value = builtIn.objects.String.__constructor__(value);
+});]]>
+					</property>
+				</item>
+				<item>
+					<property name="name" type="string" value="read_char"/>
+					<property name="body" type="html">
+						<![CDATA[var receivedValue = arguments[0];
+builtIn.console.ReadChar(function (value) {
+    builtIn.retVal.value = builtIn.objects.String.__constructor__(value);
+});]]>
+					</property>
+				</item>
+			</items>
+		</property>
+	</addon>
+	<addon id="feedback">
+		<property name="Width" type="integer" value="425"/>
+		<property name="Height" type="integer" value="100"/>
+		<property name="Responses" type="list">
+			<items>
+				<item>
+					<property name="Unique response ID" type="string" value="1"/>
+					<property name="Status" type="string" value="N"/>
+					<property name="Text" type="html">
+						<![CDATA[ Lorem ipsum dolor sit amet ]]>
+					</property>
+				</item>
+				<item>
+					<property name="Unique response ID" type="string" value="2"/>
+					<property name="Status" type="string" value="T"/>
+					<property name="Text" type="html">
+						<![CDATA[ True Lorem ipsum dolor sit amet ]]>
+					</property>
+				</item>
+				<item>
+					<property name="Unique response ID" type="string" value="3"/>
+					<property name="Status" type="string" value="F"/>
+					<property name="Text" type="html">
+						<![CDATA[ False&nbsp;Lorem ipsum dolor sit amet ]]>
+					</property>
+				</item>
+			</items>
+		</property>
+		<property name="Default response" type="html">
+			<![CDATA[ Feedback ]]>
+		</property>
+		<property name="Fade transitions" type="boolean" value="False"/>
+		<property name="Center horizontally" type="boolean" value="True"/>
+		<property name="Center vertically" type="boolean" value="True"/>
+	</addon>
+
+	<addon id="Single_State_Button">
+		<property name="Width" type="integer" value="100"/>
+		<property name="Height" type="integer" value="50"/>
+		<property name="Title" type="string" value="Click"/>
+	</addon>
+
+	<addon id="Double_State_Button">
+		<property name="Width" type="integer" value="100"/>
+		<property name="Height" type="integer" value="50"/>
+		<property name="Text" type="string" value="Select"/>
+		<property name="Text selected" type="string" value="Deselect"/>
+	</addon>
+
+	<addon id="Maze">
+		<property name="Width" type="integer" value="400"/>
+		<property name="Height" type="integer" value="300"/>
+		<property name="mazeWidth" type="integer" value="10"/>
+		<property name="mazeHeight" type="integer" value="10"/>
+		<property name="numberOfMazes" type="string" value="1"/>
+	</addon>
+
+	<addon id="Board_Game">
+		<property name="Width" type="integer" value="600"/>
+		<property name="Height" type="integer" value="450"/>
+		<property name="Background" type="image" value="//www.mauthor.com/file/serve/5408753169465344"/>
+		<property name="hasFields" type="boolean" value="False"/>
+		<property name="Images" type="list">
+			<items>
+				<item>
+					<property name="PawnImage" type="image" value="//www.mauthor.com/file/serve/6186720996884480"/>
+					<property name="Top" type="string" value="100"/>
+					<property name="Left" type="string" value="70"/>
+					<property name="Width" type="string" value="30"/>
+					<property name="Height" type="string" value="50"/>
+				</item>
+				<item>
+					<property name="PawnImage" type="image" value="//www.mauthor.com/file/serve/6343297250885632"/>
+					<property name="Top" type="string" value="155"/>
+					<property name="Left" type="string" value="75"/>
+					<property name="Width" type="string" value="30"/>
+					<property name="Height" type="string" value="50"/>
+				</item>
+				<item>
+					<property name="PawnImage" type="image" value="//www.mauthor.com/file/serve/6059422192762880"/>
+					<property name="Top" type="string" value="160"/>
+					<property name="Left" type="string" value="110"/>
+					<property name="Width" type="string" value="30"/>
+					<property name="Height" type="string" value="50"/>
+				</item>
+				<item>
+					<property name="PawnImage" type="image" value="//www.mauthor.com/file/serve/6484034739240960"/>
+					<property name="Top" type="string" value="120"/>
+					<property name="Left" type="string" value="40"/>
+					<property name="Width" type="string" value="30"/>
+					<property name="Height" type="string" value="50"/>
+				</item>
+			</items>
+		</property>
+	</addon>
+
+	<addon id="Dice">
+		<property name="Width" type="string" value="100"/>
+		<property name="Height" type="string" value="100"/>
+		<property name="animationLength" type="string" value="2000"/>
+		<property name="elementsList" type="list">
+			<items>
+				<item>
+					<property name="number"  type="string" value="1"/>
+            		<property name="image"  type="image" value="//www.mauthor.com/file/serve/5801437142188032"/>
+				</item>
+				<item>
+					<property name="number"  type="string" value="2"/>
+            		<property name="image"  type="image" value="//www.mauthor.com/file/serve/5045397471625216"/>
+				</item>
+				<item>
+					<property name="number"  type="string" value="3"/>
+            		<property name="image"  type="image" value="//www.mauthor.com/file/serve/5635496181760000"/>
+				</item>
+				<item>
+					<property name="number"  type="string" value="4"/>
+            		<property name="image"  type="image" value="//www.mauthor.com/file/serve/6111558644793344"/>
+				</item>
+				<item>
+					<property name="number"  type="string" value="5"/>
+            		<property name="image"  type="image" value="//www.mauthor.com/file/serve/5322036449378304"/>
+				</item>
+				<item>
+					<property name="number"  type="string" value="6"/>
+            		<property name="image"  type="image" value="//www.mauthor.com/file/serve/6279791540699136"/>
+				</item>
+			</items>
+		</property>
+	</addon>
+
+	<addon id="Count_and_Graph">
+		<property name="Width" type="integer" value="300"/>
+		<property name="Height" type="integer" value="200"/>
+		<property name="X axis description" type="string" value="Lorem"/>
+		<property name="X axis data" type="list">
+			<items>
+				<item>
+					<property name="Answer" type="string" value="1"/>
+					<property name="Color" type="string" value="#9C27B0"/>
+					<property name="Description" type="string" value="One"/>
+					<property name="Description image" type="image" value=""/>
+				</item>
+				<item>
+					<property name="Answer" type="string" value="2"/>
+					<property name="Color" type="string" value="#3F51B5"/>
+					<property name="Description" type="string" value="Two"/>
+					<property name="Description image" type="image" value=""/>
+				</item>
+				<item>
+					<property name="Answer" type="string" value="3"/>
+					<property name="Color" type="string" value="#009688"/>
+					<property name="Description" type="string" value="Three"/>
+					<property name="Description image" type="image" value=""/>
+				</item>
+			</items>
+		</property>
+		<property name="Y axis description" type="string" value="Ipsum"/>
+		<property name="Y axis maximum value" type="string" value="4"/>
+		<property name="Bars width" type="string" value="35"/>
+		<property name="Background color" type="string" value="#E0F7FA"/>
+		<property name="Grid line color" type="string" value="#00BCD4"/>
+	</addon>
+
+	<addon id="FigureDrawing">
+		<property name="Width" type="integer" value="300"/>
+		<property name="Height" type="integer" value="200"/>
+		<property name="3DGrid" type="boolean" value="False"/>
+		<property name="ShowGrid" type="boolean" value="True"/>
+		<property name="Grid" type="string" value="50"/>
+		<property name="StartingLines" type="text"><![CDATA[2;2-3;1
+3;1-4;1
+4;1-5;2
+5;2-5;3
+5;3-4;4
+4;4-3;4
+3;4-2;3
+2;3-2;2]]></property>
+		<property name="Answer" type="text"><![CDATA[]]></property>
+		<property name="IsActivity" type="boolean" value="True"/>
+		<property name="ShowAns" type="boolean" value="False"/>
+	</addon>
+
+	<addon id="Image">
+		<property name="Width" type="integer" value="300"/>
+		<property name="Height" type="integer" value="200"/>
+		<property name="Image" type="image" value="//www.mauthor.com/file/serve/1815989"/>
+	</addon>
+
+	<addon id="YouTube_Addon">
+		<property name="Width" type="integer" value="400"/>
+		<property name="Height" type="integer" value="225"/>
+		<property name="ID" type="string" value="4PN5JJDh78I"/>
+	</addon>
+
+	<addon id="Line_Selection">
+		<property name="Width" type="integer" value="400"/>
+		<property name="Height" type="integer" value="250"/>
+		<property name="Lines" displayName="Lines" type="text"><![CDATA[20;200-250;230-1
+100;100-150;150-1
+160;70-280;10-0
+370;90-250;150-1]]></property>
+		<property name="IsActivity" type="boolean" value="True"/>
+		<property name="SingleMode" type="boolean" value="False"/>
+	</addon>
+
+	<addon id="PieChart">
+		<property name="Width" type="integer" value="400"/>
+		<property name="Height" type="integer" value="250"/>
+		<property name="Items" displayName="" type="list">
+			<items>
+				<item>
+					<property name="Name" type="string" value="Item 1"/>
+					<property name="Color" type="string" value="#FFCA28"/>
+					<property name="Starting percent" type="string" value="10"/>
+					<property name="Answer" type="string" value="20"/>
+				</item>
+				<item>
+					<property name="Name" type="string" value="Item 2"/>
+					<property name="Color" type="string" value="#EC407A"/>
+					<property name="Starting percent" type="string" value="20"/>
+					<property name="Answer" type="string" value="10"/>
+				</item>
+				<item>
+					<property name="Name" type="string" value="Item 3"/>
+					<property name="Color" type="string" value="#42A5F5"/>
+					<property name="Starting percent" type="string" value="70"/>
+					<property name="Answer" type="string" value="70"/>
+				</item>
+			</items>
+		</property>
+		<property name="Step" type="string" value="10"/>
+		<property name="Show values" type="boolean" value="True"/>
+		<property name="Show names" type="boolean" value="True"/>
+		<property name="Is Activity" type="boolean" value="False"/>
+	</addon>
+
+	<addon id="Line_Number">
+		<property name="Width" type="integer" value="400"/>
+		<property name="Height" type="integer" value="100"/>
+		<property name="Min" type="string" value="-2"/>
+		<property name="Max" type="string" value="2"/>
+		<property name="Show Axis X Values" type="boolean" value="True"/>
+	</addon>
+
+	<addon id="Sudoku">
+		<property name="Width" type="integer" value="400"/>
+		<property name="Height" type="integer" value="400"/>
+		<property name="Values" displayName="Row Values" type="text"><![CDATA[7 5 3 ____4
+
+___57__28
+
+_71_5__3
+546
+61_834_52
+2___6
+_84_1___7]]></property>
+		<property name="isActivity" type="boolean" value="True"/>
+	</addon>
+
+	<addon id="Plot">
+		<property name="Width" type="integer" value="400"/>
+		<property name="Height" type="integer" value="400"/>
+		<property name="Expressions" displayName="" type="list">
+			<items>
+				<item>
+					<property name="id" displayName="" type="string" value=""/>
+					<property name="expression" displayName="" type="string" value="2*x-2"/>
+					<property name="xMin" displayName="" type="int" value=""/>
+					<property name="xMax" displayName="" type="int" value=""/>
+					<property name="yMin" displayName="" type="int" value=""/>
+					<property name="yMax" displayName="" type="int" value=""/>
+					<property name="selectable" displayName="" type="boolean" value="False"/>
+					<property name="correct" displayName="" type="boolean" value="False"/>
+					<property name="y to x" displayName="" type="boolean" value="False"/>
+					<property name="hidden" displayName="" type="boolean" value="False"/>
+					<property name="color" displayName="" type="string" value="#00BCD4"/>
+				</item>
+				<item>
+					<property name="id" displayName="" type="string" value=""/>
+					<property name="expression" displayName="" type="string" value="x^2-4*x+4"/>
+					<property name="xMin" displayName="" type="int" value=""/>
+					<property name="xMax" displayName="" type="int" value=""/>
+					<property name="yMin" displayName="" type="int" value=""/>
+					<property name="yMax" displayName="" type="int" value=""/>
+					<property name="selectable" displayName="" type="boolean" value="False"/>
+					<property name="correct" displayName="" type="boolean" value="False"/>
+					<property name="y to x" displayName="" type="boolean" value="False"/>
+					<property name="hidden" displayName="" type="boolean" value="False"/>
+					<property name="color" displayName="" type="string" value="#E91E63"/>
+				</item>
+			</items>
+		</property>
+		<property name="xMin" displayName="" type="int" value="-6.5"/>
+		<property name="xMax" displayName="" type="int" value="6.5"/>
+		<property name="yMin" displayName="" type="int" value="-6.5"/>
+		<property name="yMax" displayName="" type="int" value="6.5"/>
+		<property name="Grid" displayName="" type="boolean" value="False"/>
+		<property name="Axis values" displayName="" type="boolean" value="True"/>
+		<property name="Axis x values" displayName="" type="string" value="1,2,3,4,5,-1,-2,-3,-4,-5,-6"/>
+		<property name="Axis y values" displayName="" type="string" value="1,2,3,4,5,-1,-2,-3,-4,-5,-6"/>
+	</addon>
+
+	<addon id="Image_Identification">
+		<property name="Width" type="integer" value="175"/>
+		<property name="Height" type="integer" value="125"/>
+		<property name="Image" displayName="Image" type="image" value="//www.mauthor.com/file/serve/1826681"/>
+	</addon>
+
+	<addon id="Paragraph_Keyboard">
+		<property name="Width" type="integer" value="350"/>
+		<property name="Height" type="integer" value="250"/>
+	</addon>
+
+	<addon id="Paragraph">
+		<property name="Width" type="integer" value="350"/>
+		<property name="Height" type="integer" value="250"/>
+	</addon>
+
+	<addon id="Viewer_3D">
+		<property name="Width" type="integer" value="300"/>
+		<property name="Height" type="integer" value="300"/>
+		<property name="OBJ File" type="file" value="//www.mauthor.com/file/serve/6599454729175040"/>
+		<property name="MTL File" type="file" value="//www.mauthor.com/file/serve/6037189823037440"/>
+		<property name="Initial Rotation X" type="string" value="50"/>
+		<property name="Initial Rotation Y" type="string" value="40"/>
+		<property name="Initial Rotation Z"  type="string" value="30"/>
+		<property name="Background Color 1" type="string" value="#90A4AE"/>
+		<property name="Background Color 2" type="string" value="#263238"/>
+	</addon>
+
+	<addon id="Animation">
+		<property name="Width" type="integer" value="300"/>
+		<property name="Height" type="integer" value="200"/>
+		<property name="Preview image" type="image" value="//www.mauthor.com/file/serve/5539291175845888"/>
+		<property name="Animation" type="image" value="//www.mauthor.com/file/serve/4730032229974016"/>
+		<property name="Frames count" type="string" value="20"/>
+		<property name="Frame duration" type="string" value="50"/>
+		<property name="Frame size" type="{Original, Keep aspect ratio, Stretch}" value="Stretch"/>
+		<property name="Show watermark" type="boolean" value="True"/>
+		<property name="Watermark color" type="string" value="#00BCD4"/>
+		<property name="Watermark opacity" type="string" value="0.9"/>
+		<property name="Don't reset on end" type="boolean" value="True"/>
+	</addon>
+
+	<addon id="Coloring">
+		<property name="Width" type="integer" value="350"/>
+		<property name="Height" type="integer" value="250"/>
+		<property name="Image" type="image" value="//www.mauthor.com/file/serve/4834816278659072"/>
+		<property name="Areas" type="text"><![CDATA[75;75;38 166 154 255
+125;150;38 166 154 255
+255;100;38 166 154 255]]>
+		</property>
+		<property name="DefaultFillingColor" type="string" value="38 166 154 255"/>
+	</addon>
+
+	<addon id="EdgeAnimation">
+		<property name="Width" type="integer" value="300"/>
+		<property name="Height" type="integer" value="200"/>
+		<property name="Animations" type="list">
+			<items>
+				<item>
+					<property name="compositionClass" type="string" value="EDGE-159746961"/>
+					<property name="edgeFile" type="file" value="//www.mauthor.com/file/serve/4586981163532288"/>
+					<property name="edgeActionsFile" type="file" value="//www.mauthor.com/file/serve/5903829746319360"/>
+				</item>
+			</items>
+		</property>
+	</addon>
+
+	<addon id="Glossary">
+		<property name="Width" type="integer" value="450"/>
+		<property name="Height" type="integer" value="150"/>
+		<property name="List of words" type="list">
+			<items>
+				<item>
+					<property name="ID" type="string" value="1"/>
+					<property name="Text" type="string" value="Lorem"/>
+					<property name="Description" type="html">
+					<![CDATA[Lorem ipsum dolor sit amet.&nbsp;Lorem ipsum dolor sit amet.&nbsp;Lorem ipsum dolor sit amet.&nbsp;Lorem ipsum dolor sit amet.&nbsp;Lorem ipsum dolor sit amet.&nbsp;Lorem ipsum dolor sit amet.&nbsp;Lorem ipsum dolor sit amet.&nbsp;Lorem ipsum dolor sit amet.&nbsp;Lorem ipsum dolor sit amet.&nbsp;Lorem ipsum dolor sit amet.&nbsp;]]>
+					</property>
+				</item>
+			</items>
+		</property>
+		<property name="Visible" type="boolean" value="True"/>
+	</addon>
+
+	<addon id="Image_Viewer_Public">
+		<property name="Width" type="integer" value="350"/>
+		<property name="Height" type="integer" value="250"/>
+		<property name="Image" type="image" value="//www.mauthor.com/file/serve/5032602609647616"/>
+		<property name="Frames" type="string" value="3"/>
+		<property name="Frame size" type="{Original, Keep aspect ratio, Stretch}" value="Stretch"/>
+		<property name="isClickDisabled" type="boolean" value="False"/>
+		<property name="Show watermark" type="boolean" value="True"/>
+		<property name="Watermark color" type="string" value="#3F51B5"/>
+		<property name="Watermark opacity" type="string" value="0.9"/>
+		<property name="Animation" type="{None, Linear, Fading}" value="Linear"/>
+		<property name="Show frame counter" type="boolean" value="True"/>
+	</addon>
+
+	<addon id="IWB_Toolbar">
+		<property name="Width" type="integer" value="75"/>
+		<property name="Height" type="integer" value="50"/>
+		<property name="Fixed Position" displayName="Fixed Position" type="boolean" value="True"/>
+		<property name="forPen" displayName="Show for pen" type="{---, Color panel, Thickness panel}" value="Color panel"/>
+		<property name="forMarker" displayName="Show for marker" type="{---, Color panel, Thickness panel}" value="Color panel"/>
+		<property name="keepStateAndPosition" displayName="Keep state and position" type="boolean" value="True"/>
+	</addon>
+
+	<addon id="Layered_Image">
+		<property name="Width" type="integer" value="300"/>
+		<property name="Height" type="integer" value="200"/>
+		<property name="Base image" type="image" value="//www.mauthor.com/file/serve/5032602609647616"/>
+		<property name="Layers" type="list">
+			<items>
+				<item>
+					<property name="Image" type="image" value="//www.mauthor.com/file/serve/5019588254760960"/>
+					<property name="Show at start" type="boolean" value="True"/>
+				</item>
+				<item>
+					<property name="Image" type="image" value="//www.mauthor.com/file/serve/6140348964798464"/>
+					<property name="Show at start" type="boolean" value="False"/>
+				</item>
+				<item>
+					<property name="Image" type="image" value="//www.mauthor.com/file/serve/4684480679247872"/>
+					<property name="Show at start" type="boolean" value="False"/>
+				</item>
+			</items>
+		</property>
+	</addon>
+
+	<addon id="Shape_Tracing">
+		<property name="Width" type="integer" value="200"/>
+		<property name="Height" type="integer" value="250"/>
+		<property name="Shape image" type="image" value="//www.mauthor.com/file/serve/5041473461944320"/>
+		<property name="Show Shape image" type="boolean" value="False"/>
+		<property name="Show Boundaries (editor)" type="boolean" value="False"/>
+		<property name="Background image" type="image" value="//www.mauthor.com/file/serve/6167373368786944"/>
+		<property name="Points' coordinates" type="text"><![CDATA[70;90;10
+100;60;10
+100;180;10]]></property>
+	</addon>
+
+	<addon id="Slideshow">
+		<property name="Width" type="integer" value="400"/>
+		<property name="Height" type="integer" value="300"/>
+		<property name="Audio" type="list">
+			<items>
+				<item>
+					<property name="MP3" type="file" value="//www.mauthor.com/file/serve/4230002"/>
+					<property name="OGG" type="file" value="//www.mauthor.com/file/serve/4231002"/>
+					<property name="AAC" type="file" value="//www.mauthor.com/file/serve/4209043"/>
+				</item>
+			</items>
+		</property>
+		<property name="Slides" displayName="" type="list">
+			<items>
+				<item>
+					<property name="Image" type="file" value="//www.mauthor.com/file/serve/4196016"/>
+					<property name="Start" type="string" value="00:00"/>
+				</item>
+				<item>
+					<property name="Image" type="file" value="//www.mauthor.com/file/serve/4229006"/>
+					<property name="Start" type="string" value="00:03"/>
+				</item>
+				<item>
+					<property name="Image" type="file" value="//www.mauthor.com/file/serve/4316002"/>
+					<property name="Start" type="string" value="00:06"/>
+				</item>
+			</items>
+		</property>
+		<property name="Texts" displayName="" type="list">
+			<items>
+				<item>
+					<property name="Text" type="string" value="Slide 1"/>
+					<property name="Top" type="string" value="50"/>
+					<property name="Left" type="string" value="50"/>
+					<property name="Start" type="string" value="00:00"/>
+					<property name="End" type="string" value="00:03"/>
+				</item>
+				<item>
+					<property name="Text" type="string" value="Slide 2"/>
+					<property name="Top" type="string" value="50"/>
+					<property name="Left" type="string" value="200"/>
+					<property name="Start" type="string" value="00:03"/>
+					<property name="End" type="string" value="00:06"/>
+				</item>
+				<item>
+					<property name="Text" type="string" value="Slide 3"/>
+					<property name="Top" type="string" value="50"/>
+					<property name="Left" type="string" value="300"/>
+					<property name="Start" type="string" value="00:06"/>
+					<property name="End" type="string" value="00:09"/>
+				</item>
+				<item>
+					<property name="Text" type="string" value="Slide 1 and 2"/>
+					<property name="Top" type="string" value="220"/>
+					<property name="Left" type="string" value="160"/>
+					<property name="Start" type="string" value="00:00"/>
+					<property name="End" type="string" value="00:04"/>
+				</item>
+				<item>
+					<property name="Text" type="string" value="Slide no 2 and 3"/>
+					<property name="Top" type="string" value="250"/>
+					<property name="Left" type="string" value="500"/>
+					<property name="Start" type="string" value="00:05"/>
+					<property name="End" type="string" value="00:08"/>
+				</item>
+			</items>
+		</property>
+		<property name="Slide animation" type="boolean" value="True"/>
+		<property name="Text animation" type="boolean" value="True"/>
+		<property name="Hide progressbar" type="boolean" value="False"/>
+		<property name="Show slide" type="string" value="1"/>
+		<property name="Group next and previous buttons" type="boolean" value="True"/>
+	</addon>
+
+	<addon id="Standard_Shapes">
+		<property name="Width" type="integer" value="300"/>
+		<property name="Height" type="integer" value="25"/>
+		<property name="Shape" type="{Line, Square, Rectangle, Circle, Ellipse}" value="Line"/>
+		<property name="Stroke width" type="string" value="2"/>
+		<property name="Stroke color" type="string" value="#607D8B"/>
+		<property name="Corners rounding" type="boolean" value="False"/>
+		<property name="Line ending" type="{None, Circles, Arrows, None - Arrow, None - Circle, Circle - Arrow}" value="None - Arrow"/>
+	</addon>
+
+	<addon id="SVG2">
+		<property name="Width" type="integer" value="250"/>
+		<property name="Height" type="integer" value="200"/>
+		<property name="SVG file" type="image" value="//www.mauthor.com/file/serve/5607207829241856"/>
+		<property name="Skip aspect ratio" type="boolean" value="False"/>
+	</addon>
+
+	<addon id="SwiffyAnimation">
+		<property name="Width" type="integer" value="300"/>
+		<property name="Height" type="integer" value="200"/>
+		<property name="Animations" type="list">
+			<items>
+				<item>
+					<property name="swiffyobject" type="file" value="//www.mauthor.com/file/serve/5098737052942336"/>
+					<property name="autoPlay" type="boolean" value="True"/>
+					<property name="disableTransparentBackground" type="boolean" value="False"/>
+					<property name="doNotPreload" type="boolean" value="False"/>
+				</item>
+			</items>
+		</property>
+	</addon>
+
+	<addon id="video">
+		<property name="Width" type="integer" value="400"/>
+		<property name="Height" type="integer" value="225"/>
+		<property name="Files" type="list">
+			<items>
+				<item>
+					<property name="Ogg video" type="video" value="//www.mauthor.com/file/serve/4963160974426112"/>
+					<property name="MP4 video" type="video" value="//www.mauthor.com/file/serve/4893696589299712"/>
+					<property name="WebM video" type="video" value="//www.mauthor.com/file/serve/6094735673917440"/>
+					<property name="Subtitles" type="text"/>
+					<property name="Poster" type="image" value="//www.mauthor.com/file/serve/6019596496142336"/>
+					<property name="ID" type="string" value=""/>
+				</item>
+			</items>
+		</property>
+	</addon>
+
+	<addon id="Vimeo">
+		<property name="Width" type="integer" value="400"/>
+		<property name="Height" type="integer" value="225"/>
+		<property name="movie id" type="string" value="26946849"/>
+	</addon>
+
+	<addon id="YouTube_Addon">
+		<property name="Width" type="integer" value="400"/>
+		<property name="Height" type="integer" value="225"/>
+		<property name="ID" type="string" value="4PN5JJDh78I"/>
+	</addon>
+
+	<addon id="Zoom_Image">
+		<property name="Width" type="integer" value="125"/>
+		<property name="Height" type="integer" value="100"/>
+		<property name="Full Screen image" type="image" value="//www.mauthor.com/file/serve/4196016"/>
+		<property name="Page image" type="image" value="//www.mauthor.com/file/serve/5573527903666176"/>
+	</addon>
+
+	<addon id="Animated_Lesson_Progress">
+		<property name="Width" type="integer" value="275"/>
+		<property name="Height" type="integer" value="50"/>
+		<property name="Ranges" displayName="Ranges" type="list">
+			<items>
+				<item>
+					<property name="Score" type="string" value="0"/>
+					<property name="Image" type="image" value="//www.mauthor.com/file/serve/5680776659599360"/>
+				</item>
+				<item>
+					<property name="Score" type="string" value="20"/>
+					<property name="Image" type="image" value="//www.mauthor.com/file/serve/5107009428389888"/>
+				</item>
+				<item>
+					<property name="Score" type="string" value="40"/>
+					<property name="Image" type="image" value="//www.mauthor.com/file/serve/6308643164651520"/>
+				</item>
+				<item>
+					<property name="Score" type="string" value="60"/>
+					<property name="Image" type="image" value="//www.mauthor.com/file/serve/5486796877594624"/>
+				</item>
+				<item>
+					<property name="Score" type="string" value="80"/>
+					<property name="Image" type="image" value="//www.mauthor.com/file/serve/5187731593887744"/>
+				</item>
+				<item>
+					<property name="Score" type="string" value="100"/>
+					<property name="Image" type="image" value="//www.mauthor.com/file/serve/4870739250905088"/>
+				</item>
+			</items>
+		</property>
+	</addon>
+
+	<addon id="Animated_Page_Progress">
+		<property name="Width" type="integer" value="275"/>
+		<property name="Height" type="integer" value="50"/>
+		<property name="Ranges" displayName="Ranges" type="list">
+			<items>
+				<item>
+					<property name="Score" type="string" value="0"/>
+					<property name="Image" type="image" value="//www.mauthor.com/file/serve/5107009428389888"/>
+				</item>
+				<item>
+					<property name="Score" type="string" value="25"/>
+					<property name="Image" type="image" value="//www.mauthor.com/file/serve/6308643164651520"/>
+				</item>
+				<item>
+					<property name="Score" type="string" value="50"/>
+					<property name="Image" type="image" value="//www.mauthor.com/file/serve/5486796877594624"/>
+				</item>
+				<item>
+					<property name="Score" type="string" value="75"/>
+					<property name="Image" type="image" value="//www.mauthor.com/file/serve/5187731593887744"/>
+				</item>
+				<item>
+					<property name="Score" type="string" value="100"/>
+					<property name="Image" type="image" value="//www.mauthor.com/file/serve/4870739250905088"/>
+				</item>
+			</items>
+		</property>
+		<property name="Initial image" type="image" value="//www.mauthor.com/file/serve/5680776659599360"/>
+	</addon>
+
+	<addon id="Page_Rating">
+		<property name="Width" type="integer" value="350"/>
+		<property name="Height" type="integer" value="215"/>
+		<property name="Title Text" type="string" value="Title Text"/>
+		<property name="Comment Text" type="string" value="Comment Text"/>
+		<property name="Rates" type="list">
+			<items>
+				<item>
+					<property name="Deselected" type="image" value="//www.mauthor.com/file/serve/6412411050917888"/>
+					<property name="Selected" type="image" value="//www.mauthor.com/file/serve/5361812121321472"/>
+				</item>
+				<item>
+					<property name="Deselected" type="image" value="//www.mauthor.com/file/serve/6361690842595328"/>
+					<property name="Selected" type="image" value="//www.mauthor.com/file/serve/6727865795608576"/>
+				</item>
+				<item>
+					<property name="Deselected" type="image" value="//www.mauthor.com/file/serve/5137987416883200"/>
+					<property name="Selected" type="image" value="//www.mauthor.com/file/serve/6390876755984384"/>
+				</item>
+				<item>
+					<property name="Deselected" type="image" value="//www.mauthor.com/file/serve/6615232023101440"/>
+					<property name="Selected" type="image" value="//www.mauthor.com/file/serve/5854393330565120"/>
+				</item>
+				<item>
+					<property name="Deselected" type="image" value="//www.mauthor.com/file/serve/6718328418074624"/>
+					<property name="Selected" type="image" value="//www.mauthor.com/file/serve/5278924621217792"/>
+				</item>
+			</items>
+		</property>
+		<property name="Close button visible" type="boolean" value="True"/>
+	</addon>
+
+	<addon id="Lesson_Error_Counter">
+		<property name="Width" type="integer" value="30"/>
+		<property name="Height" type="integer" value="20"/>
+	</addon>
+
+	<addon id="Lesson_Score_Counter">
+		<property name="Width" type="integer" value="50"/>
+		<property name="Height" type="integer" value="20"/>
+	</addon>
+
+	<addon id="Page_Score_Counter">
+		<property name="Width" type="integer" value="50"/>
+		<property name="Height" type="integer" value="20"/>
+	</addon>
+
+	<addon id="Completion_Progress">
+		<property name="Width" type="integer" value="120"/>
+		<property name="Height" type="integer" value="22"/>
+	</addon>
+
+	<addon id="Print_Report">
+		<property name="Width" type="integer" value="75"/>
+		<property name="Height" type="integer" value="75"/>
+		<property name="ShowExportButton" type="boolean" value="False"/>
+		<property name="Title" type="boolean" value="True"/>
+		<property name="TitleLabel" type="string" value="Title Report"/>
+		<property name="Subtitle" type="boolean" value="True"/>
+		<property name="SubtitleLabel" type="string" value="Subtitle Report"/>
+		<property name="Username" type="boolean" value="True"/>
+		<property name="PercentageScore" type="boolean" value="True"/>
+		<property name="PercentageScoreLabel" type="string" value="score"/>
+		<property name="Checks" type="boolean" value="True"/>
+		<property name="ChecksLabel" type="string" value="checks"/>
+		<property name="Mistakes" type="boolean" value="True"/>
+		<property name="MistakesLabel" type="string" value="mistakes"/>
+		<property name="Errors" type="boolean" value="True"/>
+		<property name="ErrorsLabel" type="string" value="errors"/>
+		<property name="PageScore" type="boolean" value="True"/>
+		<property name="PageScoreLabel" type="string" value="page score"/>
+		<property name="TimePerPage" type="boolean" value="True"/>
+		<property name="TimePerPageLabel" type="string" value="time per page"/>
+		<property name="Total" type="boolean" value="True"/>
+		<property name="TotalLabel" type="string" value="results"/>
+		<property name="Date" type="boolean" value="True"/>
+		<property name="Styles" displayName="Styles" type="text">
+			<![CDATA[.actions button.close {
+  text-transform: uppercase;
+  color: #fff;
+  background-color: #009688;
+  text-align: center;
+  letter-spacing: .5px;
+  cursor: pointer;
+  border-radius: 2px;
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+  transition: box-shadow .3s, background-color .3s;
+}
+
+.actions button.close:hover {
+  background-color: #26A69A;
+  transition: box-shadow .3s, background-color .3s;
+  box-shadow: 0 5px 11px 0 rgba(0,0,0,0.18),0 4px 15px 0 rgba(0,0,0,0.15);
+}
+
+.actions button.print {
+  text-transform: uppercase;
+  color: #fff;
+  background-color: #03A9F4;
+  text-align: center;
+  letter-spacing: .5px;
+  cursor: pointer;
+  border-radius: 2px;
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+  transition: box-shadow .3s, background-color .3s;
+}
+
+.wrapper {}
+
+.actions button.print:hover {
+  background-color: #29B6F6;
+  transition: box-shadow .3s, background-color .3s;
+  box-shadow: 0 5px 11px 0 rgba(0,0,0,0.18),0 4px 15px 0 rgba(0,0,0,0.15);
+}
+
+.actions {
+  border: none;
+  border-bottom: 1px solid #BDBDBD;
+  border-radius: 0;
+}
+
+.header {
+  padding: 15px 5px;
+}
+
+.title {}
+
+.date h2 {
+  font-size: 15px;
+  color:#757575;
+  font-weight: normal;
+}
+
+.subtitle {}
+
+.user {
+  font-size: 22px;
+}
+
+.firstname {}
+.lastname {}
+.report	{}
+
+.percentage-score-label, .percentage-score {
+  color:#009688;
+  text-align:center;
+}
+
+.checks-label, .checks {
+  color:#0097a7;
+  text-align:center;
+}
+
+.mistakes-label, .mistakes {
+  color:#ef6c00;
+  text-align:center;
+}
+
+.errors-label, .errors {
+  color:#c62828;
+  text-align:center;
+}
+
+.page-score-label, .page-score {
+  color:#43A047;
+  text-align:center;
+}
+
+.time-per-page-label, .time-per-page {
+  color:#757575;
+  text-align:center;
+}
+
+.name {}
+.total {}
+
+table td {
+  border-top: 1px solid #BDBDBD;
+  padding: 13px 5px;
+}
+
+table tbody > tr:nth-child(odd) td {
+  background: transparent;
+}
+
+.total td {
+  border-top: 1px solid #BDBDBD;
+}
+
+table th, table td {
+  padding:16px;
+}]]>
+		</property>
+	</addon>
+
+	<addon id="Done">
+		<property name="Width" type="integer" value="75"/>
+		<property name="Height" type="integer" value="75"/>
+	</addon>
+
+	<addon id="Lesson Reset">
+		<property name="Width" type="integer" value="55"/>
+		<property name="Height" type="integer" value="55"/>
+	</addon>
+
+	<addon id="Limited Check">
+		<property name="Width" type="integer" value="55"/>
+		<property name="Height" type="integer" value="55"/>
+	</addon>
+
+	<addon id="Limited Reset">
+		<property name="Width" type="integer" value="55"/>
+		<property name="Height" type="integer" value="55"/>
+	</addon>
+
+	<addon id="Submit">
+		<property name="Width" type="integer" value="62"/>
+		<property name="Height" type="integer" value="61"/>
+	</addon>
+
+	<addon id="Lesson_Progress">
+		<property name="Width" type="integer" value="775"/>
+		<property name="Height" type="integer" value="35"/>
+		<property name="Show_Progress_Bar" type="boolean" value="True"/>
+		<property name="Show_Checks" type="boolean" value="True"/>
+		<property name="Show_Correct_Answers" type="boolean" value="True"/>
+		<property name="Show_Errors" type="boolean" value="True"/>
+		<property name="Show_Mistakes" type="boolean" value="True"/>
+		<property name="Show_All_Answers" type="boolean" value="True"/>
+	</addon>
+	
+	<addon id="Page_Progress_Panel">
+		<property name="Width" type="integer" value="540"/>
+		<property name="Height" type="integer" value="70"/>
+		<property name="Show_Progress_Bar" type="boolean" value="True"/>
+        <property name="Progress_Bar_text" type="string" value="Progress"/>
+        <property name="Show_Correct_Answers" type="boolean" value="True"/>
+        <property name="Correct_Answers_text" type="string" value="Score"/>
+        <property name="Show_All_Answers" type="boolean" value="True"/>
+        <property name="All_Answers_text" type="string" value="Max score"/>
+        <property name="Show_Mistakes" type="boolean" value="True"/>
+		<property name="Mistakes_text" type="string" value="Mistakes"/>
+		<property name="Show_Checks" type="boolean" value="True"/>
+		<property name="Checks_text" type="string" value="Checks"/>
+		<property name="Show_Errors" type="boolean" value="True"/>
+		<property name="Errors_text" type="string" value="Errors"/>
+	</addon>
+
+	<addon id="eKeyboard">
+		<property name="Width" type="integer" value="96"/>
+		<property name="Height" type="integer" value="82"/>
+		<property name="workWith" type="text">Text1</property>
+		<property name="layoutType" type="{Numeric, French (Special Characters), German (Special Characters), Italian (Special Characters), Spanish (Special Characters), Custom}" value="Custom"/>
+		<property name="customLayout" type="text">
+		<![CDATA[{
+ 'default': ['a b c d e', 'f g h i j', '{shift} {meta1} {a} {c}'],
+ 'shift' : ['A B C D E', 'F G H I J', '{shift} {meta1} {a} {c}'],
+ 'meta1' : ['1 2 3 4 5', '6 7 8 9 0', '{shift} {meta1} {a} {c}']
+}]]>
+		</property>
+		<property name="lockStandardKeyboardInput" type="boolean" value="True"/>
+		<property name="customDisplay" type="text"/>
+	</addon>
+
+	<addon id="MenuPanel">
+		<property name="Width" type="integer" value="125"/>
+		<property name="Height" type="integer" value="75"/>
+		<property name="MenuItems" type="list">
+			<items>
+				<item>
+					<property name="id" type="string" value="1"/>
+					<property name="title" type="string" value="MENU"/>
+					<property name="isExpanded" type="boolean" value="False"/>
+					<property name="isSelected" type="boolean" value="False"/>
+					<property name="isDisabled" type="boolean" value="False"/>
+				</item>
+				<item>
+					<property name="id" type="string" value="2"/>
+					<property name="title" type="string" value="MENU"/>
+					<property name="image" type="image" value="//www.mauthor.com/file/serve/6177571500195840"/>
+					<property name="isExpanded" type="boolean" value="False"/>
+					<property name="isSelected" type="boolean" value="False"/>
+					<property name="isDisabled" type="boolean" value="False"/>
+				</item>
+				<item>
+					<property name="id" type="string" value="2-1"/>
+					<property name="title" type="string" value="PANEL"/>
+					<property name="parentId" type="string" value="2"/>
+					<property name="isExpanded" type="boolean" value="False"/>
+					<property name="isSelected" type="boolean" value="False"/>
+					<property name="isDisabled" type="boolean" value="False"/>
+				</item>
+			</items>
+		</property>
+		<property name="HorizontalAlignment" type="{default,left,center,right}" value="default"/>
+		<property name="VerticalAlignment" type="{default,top,center,bottom}" value="default"/>
+		<property name="autoExpand" type="boolean" value="True"/>
+	</addon>
+
+	<addon id="Connector">
+		<property name="Width" type="integer" value="100"/>
+		<property name="Height" type="integer" value="100"/>
+		<property name="Tasks" type="list">
+			<items>
+				<item>
+					<property name="Source" type="string" value="TrueFalse1"/>
+					<property name="Item" type="string" value="1-*"/>
+					<property name="Value" type="string" value="1"/>
+					<property name="Score" type="string" value="*"/>
+					<property name="Script" type="text">
+						<![CDATA[text1.setText("Answer for first question was choosen")]]>
+					</property>
+				</item>
+			</items>
+		</property>
+	</addon>
+
+	<addon id="Advanced_Connector">
+		<property name="Width" type="integer" value="100"/>
+		<property name="Height" type="integer" value="100"/>
+		<property name="Scripts" type="text">
+		<![CDATA[EVENTSTART
+Source:Choice1
+Score:1
+SCRIPTSTART
+
+  var image = presenter.playerController.getModule('Image1');
+  image.show();
+
+SCRIPTEND
+EVENTEND]]>
+		</property>
+	</addon>
+
+	<addon id="Multiple_Audio_Controls_Binder">
+		<property name="Width" type="integer" value="100"/>
+		<property name="Height" type="integer" value="10"/>
+		<property name="Connections" type="text">Audio1|Double_State_Button1</property>
+	</addon>
+
+	<addon id="SelectableAddonsBinder">
+		<property name="Width" type="integer" value="100"/>
+		<property name="Height" type="integer" value="75"/>
+		<property name="Addons" type="text">
+			<![CDATA[Image_Identification1
+Image_Identification2
+]]>
+		</property>
+	</addon>
+	
+	<addon id="Visual_Feedback_Creator">
+		<property name="Width" type="integer" value="100"/>
+		<property name="Height" type="integer" value="100"/>
+		<property name="ScriptBlocks" type="text">
+		<![CDATA[<xml xmlns="http://www.w3.org/1999/xhtml">
+					<block type="vfc_source_module" id="tMdBe8:E|Urxc_*KPD[;" x="-2" y="217">
+					<field name="ID">Choice1</field><value name="event">
+						<block type="vfc_choice_event" id="IVKgeQDZSk0t+KOPf:PM">
+							<field name="id"></field>
+							<field name="selection">-1</field>
+							<field name="score">1</field>
+							<statement name="action">
+							<block type="vfc_feedback_module" id="^!Vid*:CCQ9FT@$etadx">
+								<field name="id">Image1</field>
+								<statement name="action">
+								<block type="vfc_show" id="s*0aH@T.`/%``XS7w4v{"></block>
+								</statement>
+							</block>
+							</statement>
+						</block>
+					</value>
+					</block>
+				</xml>]]>
+		</property>
+	</addon>
+
+	<addon id="Variable_Storage">
+		<property name="Width" type="integer" value="100"/>
+		<property name="Height" type="integer" value="100"/>
+		<property name="Variables" type="list">
+			<items>
+				<item>
+					<property name="Name" type="string" value="number"/>
+					<property name="Start" type="string" value="1"/>
+				</item>
+			</items>
+		</property>
+	</addon>
+
+	<addon id="Programmed_Drawing">
+		<property name="Width" type="integer" value="300"/>
+		<property name="Height" type="integer" value="300"/>
+		<property name="Rows" type="string" value="6"/>
+		<property name="Columns" type="string" value="6"/>
+		<property name="Color" type="string" value="#ff7043"/>
+		<property name="Initial design" type="text">
+			<![CDATA[2 2
+2 3
+2 4
+2 5
+3 5
+4 5
+5 5]]>
+		</property>
+	</addon>
+
+	<addon id="MultiAudio">
+		<property name="Files" type="list">
+			<items>
+				<item>
+					<property name="ID" type="string" value="1"/>
+					<property name="Mp3" type="audio" value="//www.mauthor.com/file/serve/5183398030606336"/>
+					<property name="Ogg" type="audio" value="//www.mauthor.com/file/serve/5082862845427712"/>
+					<property name="Enable loop" type="boolean" value="False"/>
+				</item>
+			</items>
+		</property>
+		<property name="Interface" type="{None, Default controls, Display time}" value="None"/>
+		<property name="Narration" type="narration"/>
+	</addon>
+
+	<addon id="ErrorCounter">
+		<property name="Show errors" type="boolean" value="True"/>
+		<property name="Show mistakes" type="boolean" value="False"/>
+		<property name="Calculate in real time" type="boolean" value="False"/>
+	</addon>
+
+	<addon id="Image gap">
+		<property name="Width" type="integer" value="125"/>
+		<property name="Height" type="integer" value="100"/>
+	</addon>
+
+	<addon id="Image source">
+		<property name="Width" type="integer" value="125"/>
+		<property name="Height" type="integer" value="100"/>
+		<property name="Image" type="image" value="//www.mauthor.com/file/serve/5201996541853696"/>
+	</addon>
+
+	<addon id="Report">
+		<property name="Width" type="integer" value="850"/>
+		<property name="Height" type="integer" value="525"/>
+		<property name="Errors label" type="string" value="errors"/>
+		<property name="Checks label" type="string" value="checks"/>
+		<property name="Results label" type="string" value="results"/>
+		<property name="Total label" type="string" value="total"/>
+		<property name="Show counters" type="boolean" value="True"/>
+		<property name="Title width" type="string" value="0"/>
+	</addon>
+
+	<addon id="popupButton">
+		<property name="Width" type="integer" value="125"/>
+		<property name="Height" type="integer" value="50"/>
+		<property name="Title" type="string" value="Popup"/>
+		<property name="Page" type="string" value="Commons/Popup"/>
+	</addon>
+
+	<addon id="Assessments_Navigation_Bar">
+		<property name="Width" type="integer" value="500"/>
+		<property name="Height" type="integer" value="50"/>
+		<property name="Sections" type="text"><![CDATA[1-2;Lorem ipsum;P1,P2]]></property>
+	</addon>
+
+	<addon id="Event_Listener">
+		<property name="Width" type="integer" value="500"/>
+		<property name="Height" type="integer" value="400"/>
+	</addon>
+
+	<addon id="Event_Sender">
+		<property name="Width" type="integer" value="425"/>
+		<property name="Height" type="integer" value="200"/>
+	</addon>
+
+	<addon id="External_Link_Button">
+		<property name="Width" type="integer" value="175"/>
+		<property name="Height" type="integer" value="75"/>
+		<property name="Title" type="string" value="mAuthor"/>
+		<property name="Image" type="image" value=""/>
+		<property name="URI" type="string" value="www.mauthor.com"/>
+	</addon>
+
+	<addon id="Logger">
+		<property name="Width" type="integer" value="500"/>
+		<property name="Height" type="integer" value="150"/>
+	</addon>
+
+	<addon id="Hierarchical_Table_Of_Contents">
+		<property name="Width" type="integer" value="300"/>
+		<property name="Height" type="integer" value="250"/>
+		<property name="titleLabel" type="string" value="Table of Contents"/>
+	</addon>
+
+	<addon id="Line">
+		<property name="Width" type="integer" value="200"/>
+		<property name="Height" type="integer" value="25"/>
+		<property name="Line width" type="string" value="3"/>
+		<property name="Line color" type="string" value="#FB8C00"/>
+		<property name="Left line ending" type="{None, Round, Circle, Square}" value="Circle"/>
+		<property name="Right line ending" type="{None, Round, Circle, Square}" value="Square"/>
+	</addon>
+
+	<addon id="Navigation_Bar">
+		<property name="Width" type="integer" value="400"/>
+		<property name="Height" type="integer" value="50"/>
+		<property name="ShowNextPrevArrows" type="boolean" value="True"/>
+		<property name="HideHomeLastArrows" type="boolean" value="True"/>
+	</addon>
+
+	<addon id="Next">
+		<property name="Width" type="integer" value="75"/>
+		<property name="Height" type="integer" value="75"/>
+	</addon>
+
+	<addon id="Page_Name">
+		<property name="Width" type="integer" value="200"/>
+		<property name="Height" type="integer" value="25"/>
+	</addon>
+
+	<addon id="Page_Counter">
+		<property name="Width" type="integer" value="100"/>
+		<property name="Height" type="integer" value="50"/>
+	</addon>
+
+	<addon id="Table_Of_Contents">
+		<property name="Width" type="integer" value="250"/>
+		<property name="Height" type="integer" value="250"/>
+		<property name="displayType" type="{default, list, comboList}" value="list"/>
+	</addon>
+
+	<addon id="Hierarchical_Lesson_Report">
+		<property name="Width" type="integer" value="800"/>
+		<property name="Height" type="integer" value="400"/>
+		<property name="titleLabel" type="string" value="lesson report"/>
+		<property name="results" type="boolean" value="True"/>
+		<property name="resultsLabel" type="string" value="results"/>
+		<property name="checks" type="boolean" value="True"/>
+		<property name="checksLabel" type="string" value="checks"/>
+		<property name="errors" type="boolean" value="True"/>
+		<property name="errorsLabel" type="string" value="errors"/>
+		<property name="mistakes" type="boolean" value="True"/>
+		<property name="mistakesLabel" type="string" value="mistakes"/>
+		<property name="total" type="boolean" value="True"/>
+		<property name="totalLabel" type="string" value="total"/>
+		<property name="showpagescore" type="boolean" value="True"/>
+		<property name="pageScoresLabel" type="string" value="score"/>
+		<property name="unvisitedPageScoresLabel" type="string" value="-"/>
+	</addon>
+
+	<addon id="Grid_Scene">
+		<property name="Width" type="string" value="250"/>
+		<property name="Height" type="string" value="200"/>
+		<property name="Rows" type="string" value="4"/>
+		<property name="Columns" type="string" value="5"/>
+	</addon>
+
+	<addon id="Text_Coloring">
+		<property name="Width" type="integer" value="400"/>
+		<property name="Height" type="integer" value="125"/>
+		<property name="colors" type="list">
+			<items>
+				<item>
+					<property name="id" type="string" value="red"/>
+					<property name="color" type="string" value="#f34444"/>
+					<property name="description" type="string" value="red"/>
+				</item>
+				<item>
+					<property name="id" type="string" value="green"/>
+					<property name="color" type="string" value="#63e33c"/>
+					<property name="description" type="string" value="green"/>
+				</item>
+				<item>
+					<property name="id" type="string" value="blue"/>
+					<property name="color" type="string" value="#3ba8ed"/>
+					<property name="description" type="string" value="blue"/>
+				</item>
+			</items>
+		</property>
+		<property name="text" type="text">
+			<![CDATA[The addon allows marking relevant parts of text with different colors, e.g. you can color all verbs present in the text \color{red}{red} and all nouns \color{blue}{blue}.]]>
+		</property>
+	</addon>
+
+	<addon id="Catch">
+		<property name="Items" type="list">
+			<items>
+				<item>
+					<property name="Image" type="image" value="//www.mauthor.com/file/serve/5343586574139392" />
+					<property name="Description" type="string" value="Orange" />
+					<property name="Is Correct" type="boolean" value="True" />
+					<property name="Level" type="string" value="1,2,3" />
+				</item>
+				<item>
+					<property name="Image" type="image" value="//www.mauthor.com/file/serve/5200382331715584" />
+					<property name="Description" type="string" value="Carrot" />
+					<property name="Is Correct" type="boolean" value="True" />
+					<property name="Level" type="string" value="1,2,3" />
+				</item>
+				<item>
+					<property name="Image" type="image" value="//www.mauthor.com/file/serve/4879279033942016" />
+					<property name="Description" type="string" value="Apple" />
+					<property name="Is Correct" type="boolean" value="True" />
+					<property name="Level" type="string" value="1,2,3" />
+				</item>
+				<item>
+					<property name="Image" type="image" value="//www.mauthor.com/file/serve/5595891475152896" />
+					<property name="Description" type="string" value="Pear" />
+					<property name="Is Correct" type="boolean" value="True" />
+					<property name="Level" type="string" value="1,2,3" />
+				</item>
+				<item>
+					<property name="Image" type="image" value="//www.mauthor.com/file/serve/6611217079861248" />
+					<property name="Description" type="string" value="Strawberry" />
+					<property name="Is Correct" type="boolean" value="True" />
+					<property name="Level" type="string" value="1,2,3" />
+				</item>
+				<item>
+					<property name="Image" type="image" value="//www.mauthor.com/file/serve/4623223116529664" />
+					<property name="Description" type="string" value="Pineapple" />
+					<property name="Is Correct" type="boolean" value="True" />
+					<property name="Level" type="string" value="1,2,3" />
+				</item>
+				<item>
+					<property name="Image" type="image" value="//www.mauthor.com/file/serve/6076251254292480" />
+					<property name="Description" type="string" value="Sugar drink" />
+					<property name="Is Correct" type="boolean" value="False" />
+					<property name="Level" type="string" value="1,2,3" />
+				</item>
+				<item>
+					<property name="Image" type="image" value="//www.mauthor.com/file/serve/6389104825860096" />
+					<property name="Description" type="string" value="Chips" />
+					<property name="Is Correct" type="boolean" value="False" />
+					<property name="Level" type="string" value="1,2,3" />
+				</item>
+				<item>
+					<property name="Image" type="image" value="//www.mauthor.com/file/serve/4508673654390784" />
+					<property name="Description" type="string" value="Burger" />
+					<property name="Is Correct" type="boolean" value="False" />
+					<property name="Level" type="string" value="1,2,3" />
+				</item>
+				<item>
+					<property name="Image" type="image" value="//www.mauthor.com/file/serve/5332848619028480" />
+					<property name="Description" type="string" value="Candy" />
+					<property name="Is Correct" type="boolean" value="False" />
+					<property name="Level" type="string" value="1,2,3" />
+				</item>
+			</items>
+		</property>
+		<property name="Points to finish" type="string" value="0" />
+		<property name="Count errors" type="boolean" value="False" />
+		<property name="Item_Width" type="string" value="50" />
+		<property name="Item_Height" type="string" value="50" />
+	</addon>
+
+	<addon id="Quiz">
+		<property name="Width" type="integer" value="540"/>
+		<property name="Height" type="integer" value="300"/>
+		<property name="Questions" type="list">
+			<items>
+				<item>
+					<property name="Question" type="html">
+						<![CDATA[<span>The color of the sun:</span>]]>
+					</property>
+					<property name="CorrectAnswer" type="string" value="yellow"/>
+					<property name="WrongAnswer1" type="string" value="red"/>
+					<property name="WrongAnswer2" type="string" value="blue"/>
+					<property name="WrongAnswer3" type="string" value="green"/>
+					<property name="Hint" type="html">
+						<![CDATA[<br>]]>
+					</property>
+				</item>
+				<item>
+					<property name="Question" type="html">
+						<![CDATA[<span>The color of the sky:</span>]]>
+					</property>
+					<property name="CorrectAnswer" type="string" value="blue"/>
+					<property name="WrongAnswer1" type="string" value="green"/>
+					<property name="WrongAnswer2" type="string" value="yellow"/>
+					<property name="WrongAnswer3" type="string" value="red"/>
+					<property name="Hint" type="html">
+						<![CDATA[<br>]]>
+					</property>
+				</item>
+				<item>
+					<property name="Question" type="html">
+						<![CDATA[<span>The color of the lawn:</span>]]>
+					</property>
+					<property name="CorrectAnswer" type="string" value="green"/>
+					<property name="WrongAnswer1" type="string" value="yellow"/>
+					<property name="WrongAnswer2" type="string" value="red"/>
+					<property name="WrongAnswer3" type="string" value="blue"/>
+					<property name="Hint" type="html">
+						<![CDATA[<br>]]>
+					</property>
+				</item>
+				<item>
+					<property name="Question" type="html">
+						<![CDATA[<span>The color of the tomato:</span>]]>
+					</property>
+					<property name="CorrectAnswer" type="string" value="red"/>
+					<property name="WrongAnswer1" type="string" value="blue"/>
+					<property name="WrongAnswer2" type="string" value="green"/>
+					<property name="WrongAnswer3" type="string" value="yellow"/>
+					<property name="Hint" type="html">
+						<![CDATA[<br>]]>
+					</property>
+				</item>
+				<item>
+					<property name="Question" type="html">
+						<![CDATA[<span>What's orange?</span>]]>
+					</property>
+					<property name="CorrectAnswer" type="string" value="pumpkin"/>
+					<property name="WrongAnswer1" type="string" value="banana"/>
+					<property name="WrongAnswer2" type="string" value="apple"/>
+					<property name="WrongAnswer3" type="string" value="lemon"/>
+					<property name="Hint" type="html">
+						<![CDATA[<br>]]>
+					</property>
+				</item>
+			</items>
+		</property>
+		<property name="ShowHelpButtons" type="boolean" value="False"/>
+		<property name="NextLabel" type="string" value="Next"/>
+		<property name="GameLostMessage" type="html">
+			<![CDATA[<span>You lost!</span>]]>
+		</property>
+		<property name="GameWonMessage" type="html">
+			<![CDATA[<span>You won!</span>]]>
+		</property>
+		<property name="isActivity" type="boolean" value="True"/>
+	</addon>
+
+</addons>

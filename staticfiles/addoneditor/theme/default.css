@@ -1,0 +1,185 @@
+body{
+	font-family: Verdana, Arial Unicode MS, Arial, sans-serif;
+  	color: black;
+  	margin: 10px;
+  	border: 0px;
+  	padding: 0px;
+  	background: #fff;
+}
+
+.ice_header{
+	background: #6c6b67; 
+}
+
+.ice_headerButtons{
+	text-align: right;
+}
+
+.ice_headerButtons button{
+	margin-right: 6px;
+}
+
+.ice_panelHeader{
+	background-color: #c2c1c0;
+	padding: 4px;
+	font-weight: bold;
+	font-size:14px;
+}
+
+.ice_toolbar{
+	background-color: #f2f1f0;
+	padding: 2px;
+}
+
+.ice_toolbar .gwt-PushButton{
+	margin-left: 4px;
+}
+
+
+.ice_toolbarSeparator{
+	padding:10px;	
+}
+
+.gwt-DialogBox{
+	z-index: 10;
+}
+
+#doc-viewer img {
+    max-width: 100%;
+}
+
+#doc-viewer table {
+    border-width: 1px;
+    border-color: #666666;
+    border-collapse: collapse;
+    width:100%;
+}
+
+#doc-viewer th {
+    padding:4px;
+    width: auto;
+    text-align: left;
+    background-color:#efefef;
+}
+
+#doc-viewer td:FIRST-CHILD {
+    white-space: nowrap;
+}
+
+#doc-viewer td {
+    padding:4px;
+    width: auto;
+    text-align: left;
+}
+
+#doc-viewer > *:first-child,
+#doc-viewer .docs-page > *:first-child {
+    margin-top: 0;
+}
+
+#doc-viewer h1,
+#doc-viewer h2,
+#doc-viewer h3,
+#doc-viewer h4,
+#doc-viewer h5,
+#doc-viewer h6 {
+    font-family: inherit;
+    font-weight: 500;
+    line-height: 1.1;
+    color: inherit;
+}
+
+#doc-viewer h1,
+#doc-viewer h2,
+#doc-viewer h3 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+#doc-viewer h4,
+#doc-viewer h5,
+#doc-viewer h6 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#doc-viewer h1 {
+    font-size: 36px;
+}
+
+#doc-viewer h2 {
+    font-size: 30px;
+}
+
+#doc-viewer h3 {
+    font-size: 24px;
+}
+
+#doc-viewer h4 {
+    font-size: 18px;
+}
+
+#doc-viewer h5 {
+    font-size: 14px;
+}
+
+#doc-viewer h6 {
+    font-size: 12px;
+}
+
+#doc-viewer p,
+#doc-viewer blockquote,
+#doc-viewer pre,
+#doc-viewer ul,
+#doc-viewer ol,
+#doc-viewer dl,
+#doc-viewer hr,
+#doc-viewer table,
+#doc-viewer fieldset {
+    margin: 1.5em 0;
+}
+
+#doc-viewer pre {
+    display: block;
+    padding: 9.5px;
+    margin: 0 0 10px;
+    font-size: 13px;
+    line-height: 1.42857143;
+    word-break: break-all;
+    word-wrap: break-word;
+    color: #333;
+    background-color: #f5f5f5;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#doc-viewer pre code {
+    padding: 0;
+    font-size: inherit;
+    color: inherit;
+    white-space: pre-wrap;
+    background-color: transparent;
+    border-radius: 0;
+}
+
+#doc-viewer blockquote {
+    padding: 10px 20px;
+    margin: 0 0 20px;
+    font-size: 17.5px;
+    border-left: 5px solid #eee;
+}
+
+#doc-viewer a {
+    color: #428bca;
+    text-decoration: none;
+}
+#doc-viewer a:hover,
+#doc-viewer a:focus {
+    color: #2a6496;
+    text-decoration: underline;
+}
+#doc-viewer a:focus {
+    outline: thin dotted;
+    outline: 5px auto -webkit-focus-ring-color;
+    outline-offset: -2px;
+}

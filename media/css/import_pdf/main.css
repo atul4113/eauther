@@ -1,0 +1,15 @@
+.pdf_upload_gif_div {
+    display: none;
+    width:100%;
+}
+
+.wait_animation_gif{
+    display: block;
+    margin: auto auto;
+}
+
+.import_pdf_information_message {
+    color: indianred;
+    padding-top: 10px;
+    font-size: 13px;
+}

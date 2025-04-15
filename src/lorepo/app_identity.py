@@ -7,6 +7,6 @@ def mock_get_application_id():
         application_id = app_engine.get_project_id()
     except Exception:
         # this is a workaround for running unit tests, where no GAE server is running
-        application_id = 'ealpha-test-application'
+        application_id = 'eauthor-dev'
 
     return application_id

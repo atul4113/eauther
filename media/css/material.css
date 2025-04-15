@@ -1,0 +1,242 @@
+.content-container {
+    background-color: #f5f5f5;
+    padding-top: 0px;
+}
+
+.content-container > .container {
+    background-color: #fff;
+    border: 1px solid #E0E0E0;
+    padding-left: 0px;
+    padding-right: 0px;
+    width: 100%;
+}
+
+span.button_text {
+    margin-top: 0px !important;
+}
+
+div.button_click > div.button_left {
+    background-image: none;
+    display: none;
+}
+
+div.button_click > div.button_right {
+    background-image: none;
+    background: rgba(158, 158, 158, .2);
+    text-align: center;
+    -webkit-box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.3);
+    -moz-box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.3);
+    box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.3);
+    color: #000;
+    height: 36px;
+    margin: 0 !important;
+    margin-top: 0px !important;
+    min-width: 64px;
+    padding: 0 16px;
+    display: inline-block;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+    line-height: 36px;
+    border: none;
+    border-radius: 2px;
+    vertical-align: middle;
+}
+
+li > div > a {
+    text-decoration: none;
+    color: #000;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    position: absolute;
+    top: 0pt;
+    left: 15pt;
+}
+
+li > div {
+    position: relative;
+}
+
+ul > li > ul {
+    margin-top: 5pt;
+}
+
+#main-wrapper {
+    margin: 0px 0px;
+    width: inherit;
+}
+
+.page-title-bar {
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    height: 56px;
+    padding: 16px 20px;
+    background-color: #fff;
+    border-bottom: 1px solid #E0E0E0;
+}
+
+h1.title {
+    display: block;
+    font-family: Roboto, Helvetica, Arial, sans-serif;
+    color: #000;
+    font-size: 36px;
+    font-weight: 400;
+    padding: 16px 20px;
+    margin: 2px 0px 0px 0px;
+}
+
+table.search-box {
+    margin-top: 10px;
+    width: 500px;
+    position: absolute;
+    left: calc(50% - 250px);
+}
+
+
+@media only screen and (max-width: 926px) {
+    table.search-box {
+        margin-top: 10px;
+        width: 250px;
+        position: absolute;
+        left: calc(50% - 125px);
+    }
+}
+
+div#main > div.dropdown {
+    position: absolute;
+    top: 29px;
+    right: 20px;
+
+}
+
+div#main {
+    overflow-x: hidden;
+}
+
+div#wiki-pages-list-wrapper-not-sortable {
+    display: block;
+    width: 256px;
+    float: left;
+    padding-left: 12px;
+}
+
+div#wiki-pages-display-wrapper {
+    width: calc(100% - 268px);
+    font-family: Roboto, Helvetica, Arial, sans-serif;
+    margin-top: 0px;
+    min-height: 100vh;
+}
+
+div.wiki-page-preview-wrapper {
+    color: #000;
+    margin: 0px 13px;
+}
+
+div#wiki-page-buttons {
+    width: auto;
+    float: right;
+    margin: 4px;
+}
+
+div.wiki-page-preview-wrapper > div.wiki-page-preview-header > h4 {
+    font-family: Roboto, Helvetica, Arial, sans-serif;
+    color: #000;
+    font-size: 32px;
+    font-weight: 400;
+    float: left;
+    width: auto;
+    margin-top: 14px;
+    margin-bottom: 14px;
+}
+
+div.wiki-page-preview-text {
+    margin-left: 5px;
+    display: inline-block;
+    width: 95%;
+}
+
+input.form-control {
+    border-radius: 2px;
+}
+
+button.btn-primary, button.btn-primary:hover, button.btn-primary:focus, button.btn-primary:active, button.btn-primary.active {
+    border-radius: 2px;
+    background: rgba(158, 158, 158, .2);
+    color: #000;
+    border-color: rgba(158, 158, 158, .2);
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+button.dropdown-toggle, button.dropdown-toggle:hover, button.dropdown-toggle:focus, button.dropdown-toggle:active, button.dropdown-toggle.active {
+    border-radius: 2px !important;
+    color: #000;
+    background-color: #fff;
+    -webkit-box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.1);
+}
+
+form > div.input-group {
+    -webkit-box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.1);
+}
+
+ul.pagination > li  > a {
+    color: #000!important;
+    border: 0px;
+    background-color: #fff !important;
+    text-decoration: none;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+ul.pagination > li.active  > a {
+    color: #000!important;
+    font-weight: bold;
+}
+
+ul.pagination > li.disabled  > a {
+    color: #afafaf!important;
+}
+
+div.search_info{
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    margin: 10px 25px;
+    color: #000;
+    font-size: 16px;
+}
+
+div.search_results{
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    color: #000;
+    font-size: 14px;
+    margin: 15px;
+}
+
+div.search_description > h4 > a {
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    color: #428bca;
+    font-size: 20px;
+    margin: 0px;
+}
+
+div.row > div > a.logo {
+    display: none;
+}
+
+div.row > div.col-md-3 {
+    position: initial;
+}
+
+div.row > div.col-md-9 {
+    position: initial;
+}

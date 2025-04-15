@@ -6,6 +6,7 @@ from src.lorepo.user.views import register, custom_login
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -70,4 +71,9 @@ urlpatterns = [
     # Static Template Views
     re_path(r'^pricing/{0,1}$', TemplateView.as_view(template_name='public/plans_and_pricing.html')),
     re_path(r'^about_us$', TemplateView.as_view(template_name='public/aboutus.html'))
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+]
+
+# Serve static and media files in development
+if settings.DEBUG:
+    urlpatterns += staticfiles_urlpatterns()
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

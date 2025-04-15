@@ -1,0 +1,246 @@
+.semi-responsive-layouts-editing-form {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+     -moz-box-orient: horizontal;
+     -moz-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  width: 100%;
+  height: 100%;
+}
+.semi-responsive-layouts-editing-form .semi-responsive-layouts-editing-form-list {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+     -moz-box-orient: vertical;
+     -moz-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding-right: 12px;
+  height: 100%;
+}
+.semi-responsive-layouts-editing-form .semi-responsive-layouts-editing-form-list select.gwt-ListBox {
+  overflow-y: auto;
+  margin-top: 4px;
+  border: 0;
+  background: #efefef;
+  border-radius: 3px;
+  padding: 2px 4px;
+  min-width: 150px;
+}
+.semi-responsive-layouts-editing-form .semi-responsive-layouts-editing-form-container {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+     -moz-box-orient: vertical;
+     -moz-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+     -moz-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding-right: 20px;
+  width: 100%;
+}
+.semi-responsive-layouts-editing-form .semi-responsive-layouts-editing-form-container .semi-responsive-layouts-editing-form-content {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+     -moz-box-orient: vertical;
+     -moz-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-flex: 8;
+  -webkit-flex-grow: 8;
+     -moz-box-flex: 8;
+      -ms-flex-positive: 8;
+          flex-grow: 8;
+}
+.semi-responsive-layouts-editing-form .semi-responsive-layouts-editing-form-container .semi-responsive-layouts-editing-form-actions {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+     -moz-box-orient: horizontal;
+     -moz-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  height: 28px;
+  padding: 0;
+  color: #ddd;
+  font-size: 12px;
+  margin-left: 5px;
+}
+.semi-responsive-layouts-editing-form .semi-responsive-layouts-editing-form-container .semi-responsive-layouts-editing-form-actions .semi-responsive-layouts-editing-form-action-button {
+  display: block;
+  float: left;
+  margin: 1px 4px 0 0;
+  cursor: pointer;
+  padding: 0px;
+  background-color: transparent;
+  -o-background-size: 26px 26px;
+     background-size: 26px 26px;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 26px;
+  height: 26px;
+  opacity: 1.0;
+  border-radius: 2px;
+}
+.semi-responsive-layouts-editing-form .semi-responsive-layouts-editing-form-container .semi-responsive-layouts-editing-form-actions .semi-responsive-layouts-editing-form-action-add-new-layout {
+  background-image: url(../theme/images/semi-responsive-add-layout.png);
+}
+.semi-responsive-layouts-editing-form .semi-responsive-layouts-editing-form-container .semi-responsive-layouts-editing-form-actions .semi-responsive-layouts-editing-form-action-delete-layout {
+  background-image: url(../theme/images/semi-responsive-delete-layout.png);
+}
+.semi-responsive-layouts-editing-form .semi-responsive-layouts-editing-form-container .semi-responsive-layouts-editing-form-actions .semi-responsive-layouts-editing-form-action-set-as-default {
+  background-image: url(../theme/images/semi-responsive-set-as-default.png);
+}
+.semi-responsive-layouts-editing-form .semi-responsive-layouts-editing-form-container .semi-responsive-layouts-editing-form-actions .semi-responsive-layouts-editing-form-action-set-semi-responsive-layout-style {
+  background-image: url(../theme/images/semi-responsive-set-as-css.png);
+}
+.semi-responsive-layouts-editing-form .semi-responsive-layouts-editing-form-container-inputs {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+     -moz-box-orient: vertical;
+     -moz-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+     -moz-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  -webkit-justify-content: space-around;
+      -ms-flex-pack: distribute;
+          justify-content: space-around;
+}
+.semi-responsive-layouts-editing-form .semi-responsive-layouts-editing-form-container-inputs .semi-responsive-layout-row {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+     -moz-box-orient: horizontal;
+     -moz-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+     -moz-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  margin-top: 15px;
+  width: 75%;
+}
+.semi-responsive-layouts-editing-form .semi-responsive-layouts-editing-form-container-inputs .semi-responsive-layout-row select.gwt-ListBox {
+  margin-right: 4px;
+}
+.semi-responsive-layouts-editing-form .semi-responsive-layouts-editing-form-container-inputs .semi-responsive-layout-row .semi-responsive-layout-row-label {
+  min-height: 18px;
+  padding-right: 6px;
+  text-align: right;
+  vertical-align: middle;
+  width: 70px;
+}
+.semi-responsive-layouts-editing-form .semi-responsive-layouts-editing-form-container-inputs .semi-responsive-layout-row .gwt-CheckBox {
+  padding-right: 6px;
+}
+.semi-responsive-layouts-editing-form .semi-responsive-layouts-editing-form-container-inputs .semi-responsive-layout-row .gwt-CheckBox input {
+  width: 20px;
+  margin: 0;
+}
+.semi-responsive-layouts-editing-form .semi-responsive-layouts-editing-form-container-inputs .semi-responsive-layout-row .gwt-CheckBox + .semi-responsive-layout-row-label {
+  width: 100%;
+}
+.semi-responsive-layouts-editing-form .semi-responsive-layouts-editing-form-container-inputs .semi-responsive-layout-row input {
+  display: block;
+  border: 0;
+  background: #efefef;
+  border-radius: 3px;
+  padding: 2px 4px;
+  height: 20px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.semi-responsive-layouts-editing-form .semi-responsive-layouts-editing-form-container-inputs .semi-responsive-layout-row .semi-responsive-editing-disabled {
+  cursor: not-allowed;
+}
+.semi-responsive-layouts-editing-form .semi-responsive-layouts-editing-form-container-inputs .semi-responsive-layout-row select {
+  min-width: 177px;
+  border: 0;
+  background: #efefef;
+  border-radius: 3px;
+  padding: 2px 4px;
+  height: 20px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.semi-responsive-layouts-editing-form .semi-responsive-editing-layout-row-accept {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+     -moz-box-orient: horizontal;
+     -moz-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  width: 100%;
+  margin-top: 60px;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+     -moz-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+.semi-responsive-layouts-editing-form .semi-responsive-editing-layout-row-accept .semi-responsive-editing-layout-save-changes-button {
+  display: inline-block;
+  padding: 3px 8px 2px;
+  height: 18px;
+  font-size: 12px;
+  color: #fff;
+  background: #8e9598;
+  cursor: pointer;
+}

@@ -2,13 +2,14 @@ from src.lorepo.permission.util import get_company_for_user
 from src.lorepo.corporate.models import CorporatePublicSpace, CompanyProperties
 import src.libraries.utility.cacheproxy as cache
 import re
+from django.utils.deprecation import MiddlewareMixin
 
 USER_SPACES_CACHE_TIME = 60 * 60 * 24
 
 SKIPPED_URLS = re.compile('(^/file.*|^/editor/api/blobUploadDir$|^/proxy/get)')
 
 
-class CorporateMiddleware(object):
+class CorporateMiddleware(MiddlewareMixin):
     def process_request(self, request):
         request.user.company = None
         request.user.public_category = None
@@ -17,7 +18,7 @@ class CorporateMiddleware(object):
         if SKIPPED_URLS.match(request.path):
             return None
 
-        if not request.user.is_authenticated():
+        if not request.user.is_authenticated:
             return None
 
         company = cache.get_for_user(request.user, 'company')
