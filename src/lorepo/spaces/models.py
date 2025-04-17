@@ -32,7 +32,7 @@ class Space(models.Model):
     is_test = models.BooleanField(null=True, blank=True)
 
     def __str__(self):
-        return str(self).encode('utf-8')
+        return self.title
 
     def __unicode__(self):
         return '%s' % (self.title)

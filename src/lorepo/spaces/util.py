@@ -92,9 +92,13 @@ def get_private_space_for_user_cached(user):
 
 
 def _get_subspaces(spaces, is_deleted=False):
+    """
+    Get all subspaces for the given spaces
+    """
     tmp = set()
     for s in spaces:
-        tmp.update(Space.objects.filter(path=s.id, is_deleted=is_deleted))
+        # Use __contains instead of __exact for iterable field
+        tmp.update(Space.objects.filter(path__contains=s.id, is_deleted=is_deleted))
     return tmp
 
 

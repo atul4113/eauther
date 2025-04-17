@@ -12,6 +12,7 @@ from io import BytesIO
 import datetime
 from django.core.files.storage import default_storage
 from django.core.files.base import ContentFile
+from PIL import Image
 
 from src.lorepo.filestorage.forms import UploadForm
 from src.lorepo.filestorage.models import FileStorage, UploadedFile
@@ -148,13 +149,28 @@ def image_thumbnail(request, file_id, width=150, height=150):
     upload = get_object_or_404(UploadedFile, pk=file_id)
     if 'image' in upload.content_type:
         try:
+            if default_storage is None:
+                raise Http404("Storage backend not configured")
+                
+            if not upload.filename:
+                raise Http404("File not found in storage")
+                
+            if not default_storage.exists(upload.filename):
+                raise Http404("File not found in storage")
+                
             file_content = default_storage.open(upload.filename, 'rb')
-            image = images.Image(file_content.read())
-            image.resize(width, height)
-            response = HttpResponse(content=image.execute_transforms(output_encoding=images.PNG), content_type='image/png')
-        except images.BadImageError:
-            response = HttpResponseRedirect("/media/images/no_thumbnail.png")
-        except images.NotImageError:
+            image = Image.open(file_content)
+            image.thumbnail((width, height))
+            
+            # Save the thumbnail to a BytesIO object
+            output = BytesIO()
+            image.save(output, format='PNG')
+            output.seek(0)
+            
+            response = HttpResponse(content=output.read(), content_type='image/png')
+            file_content.close()
+        except (IOError, OSError, Http404) as e:
+            logging.error(f"Error generating thumbnail: {str(e)}")
             response = HttpResponseRedirect("/media/images/no_thumbnail.png")
     else:
         response = HttpResponseRedirect("/media/images/no_thumbnail.png")

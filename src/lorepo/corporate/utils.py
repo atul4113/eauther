@@ -42,8 +42,11 @@ def is_in_public_category(content, public_category):
     return ContentSpace.objects.filter(space__in=spaces, content=content).exists()
 
 
-def get_contents(space, is_trash=False, order_by='-modified_date'):
-    return Content.objects.filter(spaces=str(space.id), is_deleted=is_trash).order_by(order_by)
+def get_contents(space, is_trash=False, order_by='title'):
+    """
+    Get contents for a given space, optionally filtered by trash status
+    """
+    return Content.objects.filter(spaces__contains=str(space.id), is_deleted=is_trash).order_by(order_by)
 
 
 def get_spaces_path_for_corporate_content(content, space_filter):

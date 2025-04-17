@@ -187,7 +187,22 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'src/lorepo/templates/static_files'),
     os.path.join(BASE_DIR, 'media'),  # Add media directory to static files
 ]
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+# Media files configuration
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
+# File Storage Settings
+DEFAULT_FILE_STORAGE = 'src.lorepo.filestorage.storage.NonCachingFileSystemStorage'
+FILE_UPLOAD_PERMISSIONS = 0o644
+FILE_UPLOAD_DIRECTORY_PERMISSIONS = 0o755
+FILE_UPLOAD_HANDLERS = [
+    'django.core.files.uploadhandler.MemoryFileUploadHandler',
+    'django.core.files.uploadhandler.TemporaryFileUploadHandler',
+]
+
+# Clear any cached storage paths
+from django.core.files.storage import default_storage
+default_storage._wrapped = None
 
 ROOT_URLCONF = 'src.urls'
 
