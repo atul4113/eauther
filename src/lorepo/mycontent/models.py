@@ -94,10 +94,12 @@ class Content(models.Model, ModelCacheMixin):
         pass
 
     def __str__(self):
-        return str(self).encode('utf-8')
+        if self.title:
+            return self.title
+        return str(self.id)
 
     def __unicode__(self):
-        return '%s' % (self.title,)
+        return self.title if self.title else str(self.id)
 
     @staticmethod
     def get_cached_or_none(id):

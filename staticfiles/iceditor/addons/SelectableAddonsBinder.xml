@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><addon xmlns="http://icplayer.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="SelectableAddonsBinder" xsi:schemaLocation="http://icplayer.com ../../tools/addon.xsd">
+    <model>
+        <property isDefault="true" name="Addons" nameLabel="SelectableAddonsBinder_property_addons" type="text"/>
+    </model>
+<css/><view/><preview/><presenter>function AddonSelectableAddonsBinder_create(){&#13;
+    var presenter = function () {};&#13;
+    presenter.configuration = {};&#13;
+    function presenterLogic (view, model, isPreview) {&#13;
+        presenter.$view = $(view);&#13;
+        presenter.model = model;&#13;
+        presenter.addons = (model.Addons).split('\n');&#13;
+        if (isPreview) return;&#13;
+        presenter.$view.css('visible', 'hidden');&#13;
+    };&#13;
+    presenter.getModule = function (moduleID) {&#13;
+        return presenter.playerController.getModule(moduleID);&#13;
+    };&#13;
+    presenter.setPlayerController = function (controller) {&#13;
+        presenter.playerController = controller;&#13;
+        presenter.eventBus = controller.getEventBus();&#13;
+        presenter.eventBus.addEventListener('ValueChanged', this);&#13;
+    };&#13;
+    presenter.onEventReceived = function (eventName, eventData) {&#13;
+        var moduleID = eventData.source;&#13;
+        var matchedModule = presenter.matchEvent(moduleID);&#13;
+        if (!matchedModule || eventData.value != 1) return;&#13;
+        for (var i = 0; i &lt; presenter.addons.length; i++) {&#13;
+            if (presenter.addons[i] != moduleID)&#13;
+                if(presenter.getModule(presenter.addons[i]) != null &amp;&amp; presenter.getModule(presenter.addons[i]).deselect != undefined)&#13;
+                    presenter.getModule(presenter.addons[i]).deselect();&#13;
+        }&#13;
+    };&#13;
+    presenter.matchEvent = function (moduleID) {&#13;
+        for (var i = 0; i &lt; presenter.addons.length; i++) {&#13;
+            if (presenter.addons[i] == moduleID) return true;&#13;
+        }&#13;
+        return false;&#13;
+    };&#13;
+    presenter.getModule = function (moduleID) {&#13;
+        return presenter.playerController.getModule(moduleID);&#13;
+    };&#13;
+    presenter.run = function (view, model) {&#13;
+        presenterLogic(view, model, false);&#13;
+    };&#13;
+    presenter.createPreview = function (view, model) {&#13;
+        presenterLogic(view, model, true);&#13;
+    };&#13;
+    presenter.getState = function () {&#13;
+    };&#13;
+    presenter.setState = function (stringifiedState) {&#13;
+    };&#13;
+    return presenter;&#13;
+}&#13;
+</presenter></addon>

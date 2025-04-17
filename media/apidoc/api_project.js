@@ -1,0 +1,15 @@
+define({
+  "name": "MAUTHOR API",
+  "version": "0.1.0",
+  "description": "Api documentation",
+  "title": "mAuthor Api",
+  "sampleUrl": false,
+  "defaultVersion": "0.0.0",
+  "apidoc": "0.3.0",
+  "generator": {
+    "name": "apidoc",
+    "time": "2018-01-17T11:43:01.477Z",
+    "url": "http://apidocjs.com",
+    "version": "0.17.6"
+  }
+});

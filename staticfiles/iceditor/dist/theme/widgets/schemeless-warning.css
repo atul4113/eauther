@@ -1,0 +1,16 @@
+/* SCHEMELESS URL WARNING */
+.file-select-schemeless-urls-warning {
+  top: 88px;
+  left: 22px;
+  position: absolute;
+  display: block;
+  background: #e5cb1a;
+  color: #333;
+  background-position: 8px center;
+  text-align: center;
+  padding: 5px;
+  right: 14px;
+}
+.file-select-schemeless-urls-no-warning {
+  display: none;
+}

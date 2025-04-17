@@ -1,0 +1,170 @@
+@import "images-urls";
+
+.semi-responsive-layouts-editing-form {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+
+
+    .semi-responsive-layouts-editing-form-list {
+        display: flex;
+        flex-direction: column;
+        padding-right: 12px;
+        height: 100%;
+
+        select.gwt-ListBox {
+            overflow-y: auto;
+            margin-top: 4px;
+            border: 0;
+            background: #efefef;
+            border-radius: 3px;
+            padding: 2px 4px;
+            min-width: 150px
+        }
+    }
+
+    .semi-responsive-layouts-editing-form-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding-right: 20px;
+        width: 100%;
+
+
+        .semi-responsive-layouts-editing-form-content {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 8;
+        }
+
+        .semi-responsive-layouts-editing-form-actions {
+            display: flex;
+            flex-direction: row;
+            height: 28px;
+            padding: 0;
+            color: #ddd;
+            font-size: 12px;
+            margin-left: 5px;
+
+            .semi-responsive-layouts-editing-form-action-button {
+                display: block;
+                float: left;
+                margin: 1px 4px 0 0;
+                cursor: pointer;
+                padding: 0px;
+                background-color: transparent;
+                background-size: 26px 26px;
+                background-position: center;
+                background-repeat: no-repeat;
+                width: 26px;
+                height: 26px;
+                opacity: 1.0;
+                border-radius: 2px;
+            }
+
+            .semi-responsive-layouts-editing-form-action-add-new-layout {
+                background-image: @semi-responsive-add-layout;
+            }
+
+            .semi-responsive-layouts-editing-form-action-delete-layout {
+                background-image: @semi-responsive-delete-layout;
+            }
+
+            .semi-responsive-layouts-editing-form-action-set-as-default {
+                background-image: @semi-responsive-set-as-default;
+            }
+
+            .semi-responsive-layouts-editing-form-action-set-semi-responsive-layout-style {
+                background-image: @semi-responsive-set-as-css;
+            }
+        }
+    }
+
+    .semi-responsive-layouts-editing-form-container-inputs {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        justify-content: space-around;
+
+        .semi-responsive-layout-row {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            margin-top: 15px;
+            width: 75%;
+
+            select.gwt-ListBox {
+                margin-right: 4px;
+            }
+
+            .semi-responsive-layout-row-label {
+                min-height: 18px;
+                padding-right: 6px;
+                text-align: right;
+                vertical-align: middle;
+                width: 70px;
+            }
+
+            .gwt-CheckBox {
+                input {
+                    width: 20px;
+                    margin: 0;
+                }
+
+                padding-right: 6px;
+                + .semi-responsive-layout-row-label{
+                    width: 100%;
+                }
+            }
+
+
+            input {
+                display: block;
+                border: 0;
+                background: #efefef;
+                border-radius: 3px;
+                padding: 2px 4px;
+                height: 20px;
+                -webkit-box-sizing: border-box;
+                -moz-box-sizing: border-box;
+                box-sizing: border-box;
+            }
+
+            .semi-responsive-editing-disabled {
+                cursor: not-allowed;
+            }
+
+            select {
+                min-width: 177px;
+                border: 0;
+                background: #efefef;
+                border-radius: 3px;
+                padding: 2px 4px;
+                height: 20px;
+                -webkit-box-sizing: border-box;
+                -moz-box-sizing: border-box;
+                box-sizing: border-box;
+            }
+        }
+    }
+
+    .semi-responsive-editing-layout-row-accept {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        margin-top: 60px;
+        justify-content: flex-end;
+
+
+        .semi-responsive-editing-layout-save-changes-button {
+            display: inline-block;
+            padding: 3px 8px 2px;
+            height: 18px;
+            font-size: 12px;
+            color: #fff;
+            background: #8e9598;
+            cursor: pointer;
+        }
+    }
+}

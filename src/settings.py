@@ -81,11 +81,9 @@ INSTALLED_APPS = [
     'src.mauthor',
     'drf_spectacular',
     'django.contrib.admin',
-    # 'django.contrib.sites',
     'django.contrib.contenttypes',
     'django.contrib.auth',
     'django.contrib.sessions',
-    # 'django.contrib.markup',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'src.autoload',
@@ -146,111 +144,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'src.lorepo.corporate.middleware.CorporateMiddleware',
 ]
-MIDDLEWARE_CLASSES = [
-#    'google.appengine.ext.appstats.recording.AppStatsDjangoMiddleware', # uncomment to enable http://localhost:8000/_ah/stats
-#     'autoload.middleware.AutoloadMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.locale.LocaleMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'lorepo.corporate.middleware.CorporateMiddleware',
-    'lorepo.user.middleware.LoggingMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'lorepo.HTTPSRedirectMiddleware.HTTPSRedirect',
-]
-
-PASSWORD_HASHERS = (
-    'django.contrib.auth.hashers.SHA1PasswordHasher',
-    'django.contrib.auth.hashers.PBKDF2PasswordHasher',
-    'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
-    'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
-    'django.contrib.auth.hashers.BCryptPasswordHasher',
-    'django.contrib.auth.hashers.MD5PasswordHasher',
-    'django.contrib.auth.hashers.UnsaltedSHA1PasswordHasher',
-    'django.contrib.auth.hashers.UnsaltedMD5PasswordHasher',
-    'django.contrib.auth.hashers.CryptPasswordHasher',
-)
-# Celery settings
-CELERY_BROKER_URL = 'redis://localhost:6379/0'  # Redis as the message broker
-CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'  # Store task results in Redis
-CELERY_ACCEPT_CONTENT = ['json']
-CELERY_TASK_SERIALIZER = 'json'
-CELERY_RESULT_SERIALIZER = 'json'
-CELERY_TIMEZONE = 'UTC'  # Set the timezone for Celery tasks
-CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True  # Add this line
-
-ALLOWED_HOSTS = ['*']
-SITE_ID = 1
-TEMPLATES = [
-    {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-	    'DIRS': [os.path.join(os.path.dirname(__file__), 'mauthor', 'templates'),
-                 os.path.join(os.path.dirname(__file__), 'lorepo', 'templates')],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                # 'lorepo.context_processor.settings',
-                'django.contrib.auth.context_processors.auth',
-                'django.template.context_processors.debug',
-                # 'django.core.context_processors.i18n',
-                # 'django.core.context_processors.request',
-                'django.template.context_processors.request',
-                # 'django.core.context_processors.media',
-                'django.contrib.messages.context_processors.messages',
-                'lorepo.context_processors.settings',
-                'lorepo.context_processors.urls',
-            ],
-        },
-    },
-]
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:4200",
-    "http://127.0.0.1:4200",
-]
-CSRF_COOKIE_HTTPONLY = False
-CORS_ALLOW_CREDENTIALS = True
-CORS_ALLOW_HEADERS = list(default_headers) + [
-    'Authorization',
-    'X-Requested-With',
-    'Content-Type',
-]
-REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
-        'rest_framework.authentication.SessionAuthentication',
-    ),
-    'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated',
-    ),
-    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
-    'DEFAULT_RENDERER_CLASSES': (
-        'rest_framework.renderers.JSONRenderer',
-    ),
-    'UNICODE_JSON': False,
-}
-
-SIMPLE_JWT = {
-    'AUTH_HEADER_TYPES': ('Bearer', 'JWT'),  # Accept both formats
-    'ACCESS_TOKEN_LIFETIME': datetime.timedelta(minutes=60),
-    'REFRESH_TOKEN_LIFETIME': datetime.timedelta(days=1),
-    'ROTATE_REFRESH_TOKENS': True,
-    'BLACKLIST_AFTER_ROTATION': True,
-    'UPDATE_LAST_LOGIN': True,
-    'ALGORITHM': 'HS256',
-    'SIGNING_KEY': SECRET_KEY,
-    'VERIFYING_KEY': None,
-    'AUTH_HEADER_NAME': 'HTTP_AUTHORIZATION',
-    'USER_ID_FIELD': 'id',
-    'USER_ID_CLAIM': 'user_id',
-    'AUTH_TOKEN_CLASSES': ('rest_framework_simplejwt.tokens.AccessToken',),
-    'TOKEN_TYPE_CLAIM': 'token_type',
-}
-
-JWT_AUTH = {
-    'JWT_EXPIRATION_DELTA': datetime.timedelta(hours=1),
-    'JWT_ALLOW_REFRESH': True,
-}
 
 REST_FRAMEWORK_DOCS = {
     'HIDE_DOCS': False  # not is_development_server()
@@ -283,9 +178,12 @@ AUTHENTICATION_BACKENDS = [
 
 ADMIN_MEDIA_PREFIX = '/media/admin/'
 
-STATIC_URL = '/media/'
+# Static files (CSS, JavaScript, Images)
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'src/lorepo/templates/static_files'),
+    os.path.join(BASE_DIR, 'media'),  # Add media directory to static files
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
@@ -473,3 +371,102 @@ def get_bucket_name(name):
 # this is  for django tests, because on jenkins djangae in installed apps
 if 'test' in sys.argv[1:] or 'jenkins' in sys.argv[1:]:
     INSTALLED_APPS = INSTALLED_APPS[1:]
+
+SESSION_ENGINE = 'src.lorepo.session_backend'
+
+ALLOWED_HOSTS = ['*']
+SITE_ID = 1
+
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [
+            os.path.join(BASE_DIR, 'src/mauthor/templates'),
+            os.path.join(BASE_DIR, 'src/lorepo/templates')
+        ],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.contrib.auth.context_processors.auth',
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.messages.context_processors.messages',
+                'lorepo.context_processors.settings',
+                'lorepo.context_processors.urls',
+            ],
+        },
+    },
+]
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:4200",
+    "http://127.0.0.1:4200",
+]
+
+CSRF_COOKIE_HTTPONLY = False
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_HEADERS = list(default_headers) + [
+    'Authorization',
+    'X-Requested-With',
+    'Content-Type',
+]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+    ),
+    'UNICODE_JSON': False,
+}
+
+SIMPLE_JWT = {
+    'AUTH_HEADER_TYPES': ('Bearer', 'JWT'),
+    'ACCESS_TOKEN_LIFETIME': datetime.timedelta(minutes=60),
+    'REFRESH_TOKEN_LIFETIME': datetime.timedelta(days=1),
+    'ROTATE_REFRESH_TOKENS': True,
+    'BLACKLIST_AFTER_ROTATION': True,
+    'UPDATE_LAST_LOGIN': True,
+    'ALGORITHM': 'HS256',
+    'SIGNING_KEY': SECRET_KEY,
+    'VERIFYING_KEY': None,
+    'AUTH_HEADER_NAME': 'HTTP_AUTHORIZATION',
+    'USER_ID_FIELD': 'id',
+    'USER_ID_CLAIM': 'user_id',
+    'AUTH_TOKEN_CLASSES': ('rest_framework_simplejwt.tokens.AccessToken',),
+    'TOKEN_TYPE_CLAIM': 'token_type',
+}
+
+JWT_AUTH = {
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(hours=1),
+    'JWT_ALLOW_REFRESH': True,
+}
+
+REST_FRAMEWORK_DOCS = {
+    'HIDE_DOCS': False
+}
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Your API',
+    'DESCRIPTION': 'Your API description',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+    'SWAGGER_UI_SETTINGS': {
+        'deepLinking': True,
+    },
+}
+
+MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'rest_framework_simplejwt.authentication.JWTAuthentication',
+]
+
+ADMIN_MEDIA_PREFIX = '/media/admin/'

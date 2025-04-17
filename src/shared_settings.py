@@ -3,7 +3,7 @@ import sys
 
 FRONTEND_VERSION = '447'
 SHARED_SETTINGS = {
-    'ealpha-test-application': {
+    'eauthor-dev': {
         'app_name': 'eauthor-dev',
         'default_from_email': 'admin@ealpha-test-application.appspotmail.com',
         'server_email': 'admin@ealpha-test-application.appspotmail.com',

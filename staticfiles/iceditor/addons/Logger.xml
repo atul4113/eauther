@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><addon id="Logger">
+	<model>
+	</model>
+<css>.logger {&#13;
+    text-align: center;&#13;
+    font-weight: bold;&#13;
+    border: 1px dashed #999999;&#13;
+    padding: 0;&#13;
+    color: red;&#13;
+    overflow: auto;&#13;
+    width: 100%;&#13;
+    height: 100%;&#13;
+}&#13;
+&#13;
+.log-element {&#13;
+    color: black;&#13;
+    border-top: 1px dotted black;&#13;
+    font-weight: normal;&#13;
+}&#13;
+&#13;
+.logger-clear {&#13;
+    float: right;&#13;
+}&#13;
+</css><view>&lt;div class="logger"&gt;Logger - logs interceptor &lt;a href="" class="logger-clear"&gt;[Clear]&lt;/a&gt;&lt;/div&gt;&#13;
+</view><preview>&lt;div class="logger"&gt;Logger - logs interceptor &lt;a href="" class="logger-clear"&gt;[Clear]&lt;/a&gt;&lt;/div&gt;&#13;
+</preview><presenter>function AddonLogger_create() {&#13;
+    var presenter = function () {};&#13;
+&#13;
+    presenter.run = function(view, model) {&#13;
+        presenter.$view = $(view);&#13;
+&#13;
+        jQuery.aop.around({ target:console, method:'log'}, function (invocation) {&#13;
+            insertLogElement(invocation.arguments[0]);&#13;
+            return invocation.proceed();&#13;
+        });&#13;
+&#13;
+        presenter.$view.find('.logger-clear').click(function () {&#13;
+            presenter.$view.find('.log-element').remove();&#13;
+            return false;&#13;
+        });&#13;
+    };&#13;
+&#13;
+    function insertLogElement(logMessage) {&#13;
+        var $element = $(document.createElement('div')), logDate = new Date(), formattedDate;&#13;
+        formattedDate = logDate.getHours() + ":" + logDate.getMinutes() + ":" + logDate.getSeconds();&#13;
+&#13;
+        $element.addClass('log-element');&#13;
+        $element.text(formattedDate + ": " + logMessage);&#13;
+&#13;
+        presenter.$view.find('.logger').append($element);&#13;
+    }&#13;
+&#13;
+    return presenter;&#13;
+}&#13;
+</presenter></addon>

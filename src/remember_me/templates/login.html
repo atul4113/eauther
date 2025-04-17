@@ -10,13 +10,21 @@
     <div class="card p-4 shadow-sm" style="width: 350px;">
         <h3 class="text-center">Login</h3>
 
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+
         {% if form.errors %}
             <div class="alert alert-danger">
                 <strong>Error:</strong> Please correct the errors below.
             </div>
         {% endif %}
 
-        <form method="POST" action="{% url 'rest_framework_custom:login' %}">
+        <form method="POST" action="{% url 'remember_me_login' %}">
             {% csrf_token %}
 
             <div class="mb-3">
@@ -40,11 +48,15 @@
                 <label for="id_remember_me" class="form-check-label">Remember Me</label>
             </div>
 
+            {% if next %}
+                <input type="hidden" name="next" value="{{ next }}">
+            {% endif %}
+
             <button type="submit" class="btn btn-primary w-100">Login</button>
         </form>
 
         <div class="text-center mt-3">
-            <a href="{% url 'rest_framework_custom:password_reset' %}">Forgot Password?</a>
+            <a href="{% url 'password_reset' %}">Forgot Password?</a>
         </div>
     </div>
 

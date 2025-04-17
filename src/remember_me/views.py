@@ -5,6 +5,9 @@ from django.shortcuts import render, redirect
 from django.conf import settings
 from src.lorepo.spaces.models import SpaceAccess
 from src.remember_me.forms import AuthenticationRememberMeForm
+from django.db import transaction
+import time
+from google.api_core import retry
 
 @never_cache
 def remember_me_login(request, redirect_field_name=REDIRECT_FIELD_NAME):
@@ -25,7 +28,19 @@ def remember_me_login(request, redirect_field_name=REDIRECT_FIELD_NAME):
             else:
                 request.session.set_expiry(settings.SESSION_COOKIE_AGE)  # Default expiry
 
-            login(request, user)
+            # Add retry logic for login
+            max_retries = 3
+            retry_count = 0
+            while retry_count < max_retries:
+                try:
+                    with transaction.atomic():
+                        login(request, user)
+                        break
+                except Exception as e:
+                    retry_count += 1
+                    if retry_count == max_retries:
+                        raise
+                    time.sleep(0.1 * retry_count)  # Exponential backoff
 
             # Fetch spaces
             spaces = SpaceAccess.objects.filter(user=user)

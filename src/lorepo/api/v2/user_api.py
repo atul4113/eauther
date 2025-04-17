@@ -25,8 +25,9 @@ from rest_framework.response import Response
 from drf_spectacular import serializers as s
 
 
-class UserData(views.APIView):
+class UserData(MiddlewareMixin, views.APIView):
     permission_classes = [IsAuthenticated]
+    MIDDLEWARE_CLASSES = (CorporateMiddleware,)
 
     def get(self, request):
         print("\n=== UserData View Called ===")
@@ -311,7 +312,7 @@ class UserPassword(generics.GenericAPIView):
         return Response(response, status=st)
 
 
-class UserLogo(MiddlewareMixin, views.APIView):
+class UserLogo(views.APIView):
     """
     @api {get} /api/v2/user/logo/ /user/logo/
     @apiDescription Company user logo
@@ -331,7 +332,6 @@ class UserLogo(MiddlewareMixin, views.APIView):
       }
     """
     permission_classes = (IsAuthenticated, )
-    MIDDLEWARE_CLASSES = (CorporateMiddleware, )
 
     def get(self, request):
         logo = None

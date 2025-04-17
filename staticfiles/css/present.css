@@ -1,0 +1,46 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+div#content {
+    margin: 0 auto;
+    display: block;
+    overflow: hidden;
+}
+
+iframe#content-iframe {
+    width: 900px;
+    margin: 0 auto;
+    border: 0;
+    overflow: hidden;
+    display: table;
+    transform-origin: center top;
+    -ms-transform-origin: center top;
+    -webkit-transform-origin: center top;
+    transition: transform 0.01s;
+    -webkit-transition: transform 0.01s;
+    -webkit-transition: -webkit-transform 0.01s;
+}
+
+nav {
+    min-height: 70px;
+    padding: 10px 18px 0 18px;
+    background: #222222;
+    border-bottom: 1px solid #111111;
+    overflow: auto;
+}
+
+nav div.header {
+    display: inline-block;
+    float: left;
+}
+
+nav div.menu {
+    display: inline-block;
+    float: right;
+}
+
+img#logo{
+	height: 45px;
+}

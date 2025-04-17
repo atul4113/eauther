@@ -1,0 +1,337 @@
+/* Modal Base CSS */
+.mCurriculum-overlay
+{
+    position: fixed;
+    z-index: 9998;
+    left: 0;
+
+    opacity: 0;
+
+    width: 100%;
+    height: 100%;
+
+
+    top: -25%;
+    -webkit-transition: opacity 0.3s linear, top 0.3s ease-out;
+         -moz-transition: opacity 0.3s linear, top 0.3s ease-out;
+           -o-transition: opacity 0.3s linear, top 0.3s ease-out;
+              transition: opacity 0.3s linear, top 0.3s ease-out;
+
+    background: rgba(0,0,0,.6);
+    background-color: #000000;
+}
+
+.mCurriculum-modal
+{
+    position: absolute;
+    z-index: 9999;
+    top: 50%;
+    left: 50%;
+
+    opacity: 0;
+
+    width: 560px;
+
+      -webkit-transition: opacity 0.3s linear, top 0.3s ease-out;
+     -moz-transition: opacity 0.3s linear, top 0.3s ease-out;
+       -o-transition: opacity 0.3s linear, top 0.3s ease-out;
+          transition: opacity 0.3s linear, top 0.3s ease-out;
+
+    -webkit-transform: translate(-50%, -50%);
+       -moz-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+         -o-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+
+      border: 1px solid #999;
+      border: 1px solid rgba(0, 0, 0, 0.3);
+      *border: 1px solid #999;
+      -webkit-border-radius: 6px;
+         -moz-border-radius: 6px;
+              border-radius: 6px;
+      -webkit-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+         -moz-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+              box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+      -webkit-background-clip: padding-box;
+         -moz-background-clip: padding-box;
+              background-clip: padding-box;
+    background: #fff;
+}
+
+.mCurriculum-modal.mCurriculum-open.mCurriculum-anchored
+{
+    top: 20px;
+
+    -webkit-transform: translate(-50%, 0);
+       -moz-transform: translate(-50%, 0);
+        -ms-transform: translate(-50%, 0);
+         -o-transform: translate(-50%, 0);
+            transform: translate(-50%, 0);
+}
+
+.mCurriculum-modal.mCurriculum-open
+{
+    opacity: 1;
+}
+
+.mCurriculum-overlay.mCurriculum-open
+{
+    opacity: 1;
+
+}
+
+/* FOOTER */
+.mCurriculum-footer {
+    height: 30px;
+    padding: 7px 15px 7px;
+    margin-bottom: 0;
+    text-align: right;
+    background-color: #f5f5f5;
+    border-top: 1px solid #ddd;
+    -webkit-border-radius: 0 0 6px 6px;
+     -moz-border-radius: 0 0 6px 6px;
+          border-radius: 0 0 6px 6px;
+    *zoom: 1;
+    -webkit-box-shadow: inset 0 1px 0 #ffffff;
+     -moz-box-shadow: inset 0 1px 0 #ffffff;
+          box-shadow: inset 0 1px 0 #ffffff;
+}
+
+.mCurriculum-footer:before,
+.mCurriculum-footer:after {
+  display: table;
+  line-height: 0;
+  content: "";
+}
+
+.mCurriculum-footer:after {
+  clear: both;
+}
+
+.mCurriculum-footer .btn + .btn {
+  margin-bottom: 0;
+  margin-left: 5px;
+}
+
+.mCurriculum-footer .btn-group .btn + .btn {
+  margin-left: -1px;
+}
+.mCurriculum-button {
+    margin-left: 15px;
+    display: inline-block;
+    padding: 4px 14px;
+    margin-bottom: 0;
+    font-size: 14px;
+    line-height: 20px;
+    color: #333333;
+    text-align: center;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+    vertical-align: middle;
+    cursor: pointer;
+    background-color: #f5f5f5;
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#d6d6d6));
+    background-image: -webkit-linear-gradient(top, #ffffff, #d6d6d6);
+    background-image: -o-linear-gradient(top, #ffffff, #d6d6d6);
+    background-image: linear-gradient(to bottom, #ffffff, #d6d6d6);
+    background-image: -moz-linear-gradient(top, #ffffff, #d6d6d6);
+    background-repeat: repeat-x;
+    border: 1px solid #bbbbbb;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    border-color: #e6e6e6 #e6e6e6 #bfbfbf;
+    border-bottom-color: #a2a2a2;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    filter: progid:dximagetransform.microsoft.gradient(startColorstr='#ffffff', endColorstr='#d6d6d6', GradientType=0);
+    filter: progid:dximagetransform.microsoft.gradient(enabled=false);
+    -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+    -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.mCurriculum-danger-button {
+    margin-left: 7px;
+    color: #ffffff;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    background-color: #da4f49;
+    *background-color: #bd362f;
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ee5f5b), to(#bd362f));
+    background-image: -webkit-linear-gradient(top, #ee5f5b, #bd362f);
+    background-image: -o-linear-gradient(top, #ee5f5b, #bd362f);
+    background-image: linear-gradient(to bottom, #ee5f5b, #bd362f);
+    background-image: -moz-linear-gradient(top, #ee5f5b, #bd362f);
+    background-repeat: repeat-x;
+    border-color: #bd362f #bd362f #802420;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    filter: progid:dximagetransform.microsoft.gradient(startColorstr='#ffee5f5b', endColorstr='#ffbd362f', GradientType=0);
+    filter: progid:dximagetransform.microsoft.gradient(enabled=false);
+}
+
+.mCurriculum-danger-button:hover,
+.mCurriculum-danger-button:active,
+.mCurriculum-danger-button.active,
+.mCurriculum-danger-button.disabled,
+.mCurriculum-danger-button[disabled] {
+  color: #ffffff;
+  background-color: #bd362f;
+  *background-color: #a9302a;
+}
+
+.mCurriculum-danger-button:active,
+.mCurriculum-danger-button.active {
+  background-color: #942a25 \9;
+}
+
+.mCurriculum-primary-button {
+    margin-left: 7px;
+    color: #ffffff;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    background-color: #006dcc;
+    *background-color: #006dcc;
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#0088cc), to(#0044cc));
+    background-image: -webkit-linear-gradient(top, #0088cc, #0044cc);
+    background-image: -o-linear-gradient(top, #0088cc, #0044cc);
+    background-image: linear-gradient(to bottom, #0088cc, #0044cc);
+    background-image: -moz-linear-gradient(top, #0088cc, #0044cc);
+    background-repeat: repeat-x;
+    border-color: #006dcc #006dcc #006dff;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    filter: progid:dximagetransform.microsoft.gradient(startColorstr='#ffee5f5b', endColorstr='#ffbd362f', GradientType=0);
+    filter: progid:dximagetransform.microsoft.gradient(enabled=false);
+}
+
+.mCurriculum-primary-button:hover {
+  color: #ffffff;
+  background-color: #0033cc;
+  *background-color: #0044ff;
+  background-position: 0 -15px;
+  transition: background-position 0.1s linear 0s;
+}
+
+.mCurriculum-primary-button:active,
+.mCurriculum-primary-button.active,
+.mCurriculum-primary-button.disabled,
+.mCurriculum-primary-button[disabled] {
+  color: #ffffff;
+  background-color: #006dcc;
+  *background-color: #006dff;
+}
+
+.mCurriculum-primary-button:active,
+.mCurriculum-primary-button.active {
+  background-color: #006daa \9;
+}
+
+.mCurriculum-close-button {
+    margin-left: 7px;
+    color: #333333;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+    background-color: #f5f5f5;
+    *background-color: #f5f5f5;
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#d6d6d6));
+    background-image: -webkit-linear-gradient(top, #ffffff, #d6d6d6);
+    background-image: -o-linear-gradient(top, #ffffff, #d6d6d6);
+    background-image: linear-gradient(to bottom, #ffffff, #d6d6d6);
+    background-image: -moz-linear-gradient(top, #ffffff, #d6d6d6);
+    background-repeat: repeat-x;
+    border-color: #f5f5f5 #f5f5f5 #f5f5f5;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    filter: progid:dximagetransform.microsoft.gradient(startColorstr='#ffee5f5b', endColorstr='#ffbd362f', GradientType=0);
+    filter: progid:dximagetransform.microsoft.gradient(enabled=false);
+}
+
+.mCurriculum-close-button:hover {
+  background-color: #d6d6d6;
+  *background-color: #d6d6d6;
+  background-position: 0 -15px;
+  transition: background-position 0.1s linear 0s;
+}
+
+.mCurriculum-close-button:active,
+.mCurriculum-close-button.active,
+.mCurriculum-close-button.disabled,
+.mCurriculum-close-button[disabled] {
+  color: #ffffff;
+  background-color: #e6e6e6;
+  *background-color: #e6e6e6;
+}
+
+.mCurriculum-close-button:active,
+.mCurriculum-close-button.active {
+  background-color: #e6e6f7 \9;
+}
+
+/* Default Animation */
+
+.mCurriculum-overlay.mCurriculum-fade-and-drop
+{
+    display: block;
+
+    opacity: 0;
+}
+
+.mCurriculum-modal.mCurriculum-fade-and-drop
+{
+    top: -300%;
+
+    opacity: 1;
+
+    display: block;
+}
+
+.mCurriculum-modal.mCurriculum-fade-and-drop.mCurriculum-open
+{
+    top: 20%;
+
+      -webkit-transition: opacity 0.3s linear, top 0.3s ease-out;
+         -moz-transition: opacity 0.3s linear, top 0.3s ease-out;
+           -o-transition: opacity 0.3s linear, top 0.3s ease-out;
+              transition: opacity 0.3s linear, top 0.3s ease-out;
+}
+
+.mCurriculum-modal.mCurriculum-fade-and-drop.mCurriculum-open.mCurriculum-anchored
+{
+  -webkit-transition: opacity 0.3s linear, top 0.3s ease-out;
+     -moz-transition: opacity 0.3s linear, top 0.3s ease-out;
+       -o-transition: opacity 0.3s linear, top 0.3s ease-out;
+          transition: opacity 0.3s linear, top 0.3s ease-out;
+}
+
+.mCurriculum-overlay.mCurriculum-fade-and-drop.mCurriculum-open
+{
+    top: 0;
+
+    -webkit-transition: opacity 0.3s linear, top 0.3s ease-out;
+     -moz-transition: opacity 0.3s linear, top 0.3s ease-out;
+       -o-transition: opacity 0.3s linear, top 0.3s ease-out;
+          transition: opacity 0.3s linear, top 0.3s ease-out;
+
+    opacity: 0.8;
+}
+
+.mCurriculum-modal.mCurriculum-fade-and-drop
+{
+    -webkit-transition: opacity 0.3s linear, top 0.3s ease-out;
+    -moz-transition: opacity 0.3s linear, top 0.3s ease-out;
+    -o-transition: opacity 0.3s linear, top 0.3s ease-out;
+    transition: opacity 0.3s linear, top 0.3s ease-out;
+}
+
+.mCurriculum-overlay.mCurriculum-fade-and-drop
+{
+    -webkit-transition: opacity 0.3s linear, top 0.3s ease-out;
+    -moz-transition: opacity 0.3s linear, top 0.3s ease-out;
+    -o-transition: opacity 0.3s linear, top 0.3s ease-out;
+    transition: opacity 0.3s linear, top 0.3s ease-out;
+}
+
+.mCurriculum-content {
+  max-height: 400px;
+  padding: 15px;
+  overflow-y: auto;
+}
+
+.mCurriculum-login-link {
+    align-content: center;
+    padding-left: 15px;
+}

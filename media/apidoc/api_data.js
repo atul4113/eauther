@@ -1,0 +1,3121 @@
+define({ "api": [
+  {
+    "type": "get",
+    "url": "/api/v2/settings",
+    "title": "/settings",
+    "description": "<p>Global Settings Endpoint</p>",
+    "name": "AppSettings",
+    "group": "Application_Settings",
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "  HTTP/1.1 200 OK\n  {\n  email: \"mcourser.com <admin@muathor.com>\",\n  lang: \"en_US\",\n  version: \"356\",\n  application_name: \"lorepocorporate\",\n  select_user_language: false,\n  supported_languages: [\n        {\n            \"description\": \"english do usuniecia\",\n            \"id\": 4987281664376832,\n            \"key\": \"en_US6\"\n        },\n        {\n            \"description\": \"english do usuniecia\",\n            \"id\": 5724160613416960,\n            \"key\": \"en_US7\"\n        }\n    ]\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "lorepo/api/v2/settings_api.py",
+    "groupTitle": "Application_Settings"
+  },
+  {
+    "type": "put",
+    "url": "/api/v2/company/",
+    "title": "/",
+    "description": "<p>putting callback url to companyproperties</p>",
+    "name": "Company",
+    "group": "Company",
+    "permission": [
+      {
+        "name": "Permission.CONTENT_VIEW"
+      }
+    ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "callback_url",
+            "description": ""
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{ \"callback_url\": \"http://example.com/export_confirm\" }",
+          "type": "json"
+        }
+      ]
+    },
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>User Token.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"JWT TOKEN\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "lorepo/api/v2/company_api.py",
+    "groupTitle": "Company"
+  },
+  {
+    "type": "post",
+    "url": "/api/v2/export/lesson/<content_id>",
+    "title": "/export/lesson/<content_id>",
+    "description": "<p>exporting lessons</p>",
+    "name": "ExportLesson",
+    "group": "Export",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": true,
+            "field": "version",
+            "description": "<p>package version 1 - SCORM_1_2, 2 - SCORM_2004, 3 - SCORM_XAPI'</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "session_token",
+            "description": "<p>session token (random string) resend with callback</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "callback_url",
+            "description": "<p>Optional url address to send information about export status</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Boolean",
+            "optional": true,
+            "field": "include_player",
+            "description": "<p>Optional should include player</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{ \n\"version\": \"1\",\n\"session_token\": \"qwerty\",\n\"callback_url\": \"http://example.com/export_confirm\",\n\"include_player\": \"False\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>User Token.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"JWT TOKEN\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "lorepo/api/v2/export_api.py",
+    "groupTitle": "Export"
+  },
+  {
+    "type": "get",
+    "url": "/api/v2/file/serve/<package_id>",
+    "title": "/file/serve/<package_id>",
+    "name": "FileServePackageId",
+    "description": "<p>Get Lesson package</p>",
+    "group": "File",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "package_id",
+            "description": "<p>(required) - lesson package id</p>"
+          }
+        ]
+      }
+    },
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>User Token.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"JWT TOKEN\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n  data",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "lorepo/api/v2/file_api.py",
+    "groupTitle": "File"
+  },
+  {
+    "type": "get",
+    "url": "/api/v2/file/upload",
+    "title": "/file/upload",
+    "description": "<p>Get unique upload file url. This url is active only for one upload operation. You should not append this url to api server url.</p>",
+    "name": "UploadFileGet",
+    "group": "File",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>User Token.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"JWT TOKEN\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n   \"upload_url\": \"unique_upload_url\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "lorepo/api/v2/file_api.py",
+    "groupTitle": "File"
+  },
+  {
+    "type": "post",
+    "url": "unique_upload_url",
+    "title": "/file/upload",
+    "description": "<p>Upload file using upload unique url (fetched by get method on /api/v2/file/upload). You should send file as request payload, i.e. by submitting HTML form with file input element and action parameter set to unique upload url. Path to uploaded file: /file/serve/&lt;uploaded_file_id&gt;.</p>",
+    "name": "UploadFilePost",
+    "group": "File",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>User Token.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"JWT TOKEN\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n   \"uploaded_file_id\": \"6286122724360192\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 404 Not Found (unique upload url is expired)\n    404 Not Found\n    The resource could not be found.\n    No such upload session: unique_key",
+          "type": "html"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "lorepo/api/v2/file_api.py",
+    "groupTitle": "File"
+  },
+  {
+    "type": "get",
+    "url": "/api/v2/my_content/<content_id>/assets",
+    "title": "/<content_id>/assets/",
+    "description": "<p>getting lesson assets</p>",
+    "name": "MyContentAssets",
+    "group": "MyContent",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>User Token.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"JWT TOKEN\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n  \"assets\": [\n      {\n      \"href\": \"/file/serve/6341983069011968\",\n      \"content_type\": \"image/svg+xml\",\n      \"title\": \"\",\n      \"file_name\": \"555001.svg\"\n      },\n        {\n      \"href\": \"/file/serve/4934608185458688\",\n      \"content_type\": \"image/png\",\n      \"title\": \"\",\n      \"file_name\": \"addon_advconnector.png\"\n      },\n        {\n      \"href\": \"/file/serve/6060508092301312\",\n      \"content_type\": \"image/svg+xml\",\n      \"title\": \"\",\n      \"file_name\": \"btn_prev.svg\"\n      },\n  ]",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "lorepo/api/v2/my_content_api.py",
+    "groupTitle": "MyContent"
+  },
+  {
+    "type": "get",
+    "url": "/api/v2/my_content/categories",
+    "title": "/categories/",
+    "description": "<p>getting my_content categories</p>",
+    "name": "MyContentCategories",
+    "group": "MyContent",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>User Token.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"JWT TOKEN\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n  [\n    {\n      id: 4600081772707840,\n      title: \"g\",\n      is_locked: false,\n      is_owner: false,\n      is_admin: false,\n      parent: null,\n      contents_count: 6\n    },\n    {\n      id: 4694021297405952,\n      title: \"dwa\",\n      is_locked: false,\n      is_owner: false,\n      is_admin: false,\n      parent: 4600081772707840,\n      contents_count: 0\n    },\n    {\n      id: 6432555339350016,\n      title: \"qwert\",\n      is_locked: false,\n      is_owner: false,\n      is_admin: false,\n      parent: 4600081772707840,\n      contents_count: 1\n    },\n    {\n      id: 6242133669314560,\n      title: \"nowa\",\n      is_locked: false,\n      is_owner: false,\n      is_admin: false,\n      parent: 4600081772707840,\n      contents_count: 1\n    }\n  ]",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "lorepo/api/v2/my_content_api.py",
+    "groupTitle": "MyContent"
+  },
+  {
+    "type": "post",
+    "url": "/api/v2/my_content/<content_id>/<space_id>/copy",
+    "title": "/<content_id>/<space_id>/copy/",
+    "description": "<p>copy lesson</p>",
+    "name": "MyContentCopy",
+    "group": "MyContent",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>User Token.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n    \"Authorization\": \"JWT TOKEN\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 201 CREATED\n{}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "lorepo/api/v2/my_content_api.py",
+    "groupTitle": "MyContent"
+  },
+  {
+    "type": "delete",
+    "url": "/api/v2/my_content/<content_id>/delete",
+    "title": "/<content_id>/delete/",
+    "description": "<p>deleting lesson</p>",
+    "name": "MyContentDelete",
+    "group": "MyContent",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>User Token.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n    \"Authorization\": \"JWT TOKEN\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "lorepo/api/v2/my_content_api.py",
+    "groupTitle": "MyContent"
+  },
+  {
+    "type": "get",
+    "url": "/api/v2/my_content/edit_lesson_token",
+    "title": "/edit_lesson_token/",
+    "description": "<p>get edit lesson token</p>",
+    "name": "MyContentEditLessonToken",
+    "group": "MyContent",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>User Token.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n    \"Authorization\": \"JWT TOKEN\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n    {\n      \"token\": \"hV434\",\n      \"token_key\": \"token_mycontent_editor\",\n  }",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "lorepo/api/v2/my_content_api.py",
+    "groupTitle": "MyContent"
+  },
+  {
+    "type": "post",
+    "url": "/api/v2/my_content/<content_id>/<version>/copy",
+    "title": "/<content_id>/<version>/copy/",
+    "description": "<p>export lesson</p>",
+    "name": "MyContentExport",
+    "group": "MyContent",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>User Token.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n    \"Authorization\": \"JWT TOKEN\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "lorepo/api/v2/my_content_api.py",
+    "groupTitle": "MyContent"
+  },
+  {
+    "type": "delete",
+    "url": "/api/v2/my_content/<content_id>/makepublic",
+    "title": "/<content_id>/makepublic/",
+    "description": "<p>unpublish lesson</p>",
+    "name": "MyContentExport",
+    "group": "MyContent",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>User Token.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n    \"Authorization\": \"JWT TOKEN\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "lorepo/api/v2/my_content_api.py",
+    "groupTitle": "MyContent"
+  },
+  {
+    "type": "post",
+    "url": "/api/v2/my_content/<content_id>/makepublic",
+    "title": "/<content_id>/makepublic/",
+    "description": "<p>publish lesson</p>",
+    "name": "MyContentExport",
+    "group": "MyContent",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>User Token.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n    \"Authorization\": \"JWT TOKEN\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "lorepo/api/v2/my_content_api.py",
+    "groupTitle": "MyContent"
+  },
+  {
+    "type": "get",
+    "url": "/api/v2/my_content/<space_id>/<content_id>/page_list",
+    "title": "/<space_id>/<content_id>/page_list/",
+    "description": "<p>getting list of pages of lesson</p>",
+    "name": "MyContentGetListOfPages",
+    "group": "MyContent",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>User Token.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"JWT TOKEN\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n  \"common_pages\": [\n    {\n      \"index\": 2,\n      \"title\": \"Copyright\"\n    }\n  ],\n  \"pages_chapters\": [\n        {\n      \"isPage\": true,\n      \"index\": 0,\n      \"indent\": \"\",\n      \"title\": \"Cover Page\"\n      },\n        {\n      \"isPage\": false,\n      \"indent\": \"\",\n      \"title\": \"Story\"\n      },\n        {\n      \"isPage\": true,\n      \"index\": 1,\n      \"indent\": \"&nbsp;&nbsp;&nbsp;\",\n      \"title\": \"Page 1\"\n      },\n        {\n      \"isPage\": true,\n      \"index\": 2,\n      \"indent\": \"&nbsp;&nbsp;&nbsp;\",\n      \"title\": \"Page 2\"\n      },\n        {\n      \"isPage\": true,\n      \"index\": 3,\n      \"indent\": \"&nbsp;&nbsp;&nbsp;\",\n      \"title\": \"Page 3\"\n      }\n  ]",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "lorepo/api/v2/my_content_api.py",
+    "groupTitle": "MyContent"
+  },
+  {
+    "type": "get",
+    "url": "/api/v2/my_content/<content_id>/history",
+    "title": "/<content_id>/history/",
+    "description": "<p>getting lesson history</p>",
+    "name": "MyContentHistory",
+    "group": "MyContent",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>User Token.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"JWT TOKEN\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n  [\n      {\n          \"id\": 5144752345317376,\n          \"created_date\": \"2017-07-06T11:02:48.024000\",\n          \"modified_date\": \"2017-07-06T11:02:48.555000\",\n          \"owner\": \"miotla\",\n          \"version\": 18,\n          \"meta\": \"{\"comment\":\"\"}\"\n      },\n      {\n          \"id\": 6216776182398976,\n          \"created_date\": \"2017-07-05T09:36:02.170000\",\n          \"modified_date\": \"2017-07-05T09:36:03.023000\",\n          \"owner\": \"miotla\",\n          \"version\": 17,\n          \"meta\": \"{\"comment\":\"\"}\"\n      },\n      {\n          \"id\": 5249205949956096,\n          \"created_date\": \"2017-07-05T07:21:41.724000\",\n          \"modified_date\": \"2017-07-05T07:21:42.344000\",\n          \"owner\": \"miotla\",\n          \"version\": 16,\n          \"meta\": \"{\"comment\":\"\"}\"\n      }\n  ]",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "lorepo/api/v2/my_content_api.py",
+    "groupTitle": "MyContent"
+  },
+  {
+    "type": "get",
+    "url": "/api/v2/my_content/lessons_paginated",
+    "title": "/lessons/",
+    "description": "<p>getting lessons from my_content</p>",
+    "name": "MyContentLessons",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "modified_date",
+            "description": "<p>Optional parameter, order data by modified_date,  possible values: asc, desc</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "title",
+            "description": "<p>Optional parameter, order data by title, possible values: asc, desc</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "trash",
+            "description": "<p>Optional parameter, getting data from trash or not, possible values: true, false</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "page",
+            "description": "<p>Optional parameter, possible values: true, false</p>"
+          }
+        ]
+      }
+    },
+    "group": "MyContent",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>User Token.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"JWT TOKEN\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "  HTTP/1.1 200 OK\n    {\n    \"lessons\": [\n        {\n            \"author\": \"a\", \n            \"description\": \"rtew\", \n            \"file\": {\n                \"created_date\": \"2018-01-16T13:12:17.389000\", \n                \"id\": 6299102115528704, \n                \"meta\": null, \n                \"modified_date\": \"2018-01-16T13:12:17.416000\", \n                \"owner\": \"a\", \n                \"version\": 1\n            }, \n            \"icon_href\": \"/media/content/default_presentation.png\", \n            \"id\": 4891727231975424, \n            \"is_public\": false, \n            \"modified_date\": 1516108337000, \n            \"project_name\": \"a\", \n            \"publication_name\": \"\", \n            \"short_description\": \"twer\", \n            \"state\": null, \n            \"tags\": \"df\", \n            \"template\": null, \n            \"title\": \"Copy of 22222\", \n            \"version\": \"1\"\n        }, \n        {\n            \"author\": \"a\", \n            \"description\": \"rtew\", \n            \"file\": {\n                \"created_date\": \"2018-01-16T13:12:02.903000\", \n                \"id\": 6650945836417024, \n                \"meta\": null, \n                \"modified_date\": \"2018-01-16T13:12:02.930000\", \n                \"owner\": \"a\", \n                \"version\": 1\n            }, \n            \"icon_href\": \"/media/content/default_presentation.png\", \n            \"id\": 4610252255264768, \n            \"is_public\": false, \n            \"modified_date\": 1516108323000, \n            \"project_name\": \"a\", \n            \"publication_name\": \"\", \n            \"short_description\": \"twer\", \n            \"state\": null, \n            \"tags\": \"df\", \n            \"template\": null, \n            \"title\": \"Copy of 22222\", \n            \"version\": \"1\"\n        }\n    ], \n    \"more_count\": 10\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "lorepo/api/v2/my_content_api.py",
+    "groupTitle": "MyContent"
+  },
+  {
+    "type": "get",
+    "url": "/api/v2/my_content/<space_id>/lessons",
+    "title": "/lessons/",
+    "description": "<p>getting space lessons</p>",
+    "name": "MyContentLessons",
+    "group": "MyContent",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>User Token.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"JWT TOKEN\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n  {\n    more_count: 4,\n    lessons: [\n      {\n        id: 4581252636082176,\n        title: \"dafasfas\",\n        author: 6077825400438784,\n        state: null,\n        modified_date: \"2017-05-12T17:44:32.084000\",\n        version: \"22\",\n        icon_href: \"/media/content/default_presentation.png\"\n      },\n      {\n        id: 4916741121507328,\n        title: \"Copy of testowy tytul\",\n        author: 6077825400438784,\n        state: null,\n        modified_date: \"2017-05-12T14:58:06.536000\",\n        version: \"13\",\n        icon_href: \"/media/content/default_presentation.png\"\n      },\n      {\n        id: 5214571333681152,\n        title: \"test\",\n        author: 6077825400438784,\n        state: null,\n        modified_date: \"2017-05-12T14:48:13.436000\",\n        version: \"9\",\n        icon_href: \"/media/content/default_presentation.png\"\n      },\n      {\n        id: 5355308822036480,\n        title: \"Copy of Copy of testowy tytul\",\n        author: 6077825400438784,\n        state: null,\n        modified_date: \"2017-05-12T17:44:33.200000\",\n        version: \"22\",\n        icon_href: \"/media/content/default_presentation.png\"\n      },\n      {\n        id: 5425677566214144,\n        title: \"qewrqwrqw\",\n        author: 6077825400438784,\n        state: null,\n        modified_date: \"2017-05-12T17:44:34.617000\",\n        version: \"22\",\n        icon_href: \"/media/content/default_presentation.png\"\n      }\n    ],\n    cursor: \"CjsSNWoTZGV2fmxvcmVwb2NvcnBvcmF0ZXIeCxIRbXljb250ZW50X2NvbnRlbnQYgICAgIDU0QkMGAAgAA==\"\n  }",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "lorepo/api/v2/my_content_api.py",
+    "groupTitle": "MyContent"
+  },
+  {
+    "type": "get",
+    "url": "/api/v2/my_content/<company_id>/lessons/trash",
+    "title": "/lessons/trash",
+    "description": "<p>getting trash lessons</p>",
+    "name": "MyContentLessonsTrash",
+    "group": "MyContent",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>User Token.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"JWT TOKEN\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "trash",
+            "description": "<p>(optional) - if is set then content is getting from trash</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "/api/v2/my_content/<company_id>/lessons?trash=1 example trash request"
+      }
+    ],
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n  {\n    more_count: 4,\n    lessons: [\n      {\n        id: 4581252636082176,\n        title: \"dafasfas\",\n        author: 6077825400438784,\n        state: null,\n        modified_date: \"2017-05-12T17:44:32.084000\",\n        version: \"22\",\n        icon_href: \"/media/content/default_presentation.png\"\n      }\n    ],\n    cursor: \"CjsSNWoTZGV2fmxvcmVwb2NvcnBvcmF0ZXIeCxIRbXljb250ZW50X2NvbnRlbnQYgICAgIDU0QkMGAAgAA==\"\n  }",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "lorepo/api/v2/my_content_api.py",
+    "groupTitle": "MyContent"
+  },
+  {
+    "type": "post",
+    "url": "/api/v2/my_content/<space_id>/merge",
+    "title": "/<space_id>/merge/",
+    "description": "<p>merge lessons</p>",
+    "name": "MyContentMergeLessons",
+    "group": "MyContent",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>User Token.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n    \"Authorization\": \"JWT TOKEN\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n  \"content\":\n    {\n      \"id\": 6056110045790208,\n      \"title\": \"Copy of VLL Template\",\n      \"author\": \"miotla\",\n      \"state\": null,\n      \"modified_date\": \"2017-07-10T15:00:05.413000\",\n      \"version\": \"18\",\n      \"icon_href\": \"/file/serve/4917015999414272\",\n      \"is_public\": true,\n      \"template\": null,\n      \"file\": {\n          \"id\": 5144752345317376,\n          \"created_date\": \"2017-07-06T11:02:48.024000\",\n          \"modified_date\": \"2017-07-06T11:02:48.555000\",\n          \"owner\": \"miotla\",\n          \"version\": 18,\n          \"meta\": \"{\"comment\":\"\"}\"\n      }\n  }",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "lorepo/api/v2/my_content_api.py",
+    "groupTitle": "MyContent"
+  },
+  {
+    "type": "get",
+    "url": "/api/v2/my_content/lessons/edited",
+    "title": "/lessons/edited/",
+    "description": "<p>getting recently edited lessons</p>",
+    "name": "MyContentRecentlyEditedLessons",
+    "group": "MyContent",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>User Token.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"JWT TOKEN\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n  [\n      \"content\": [\n        {\n          \"id\": 6056110045790208,\n          \"title\": \"Copy of VLL Template\",\n          \"author\": \"miotla\",\n          \"state\": null,\n          \"modified_date\": \"2017-07-10T15:00:05.413000\",\n          \"version\": \"18\",\n          \"icon_href\": \"/file/serve/4917015999414272\",\n          \"is_public\": true,\n          \"template\": null,\n          \"file\": {\n              \"id\": 5144752345317376,\n              \"created_date\": \"2017-07-06T11:02:48.024000\",\n              \"modified_date\": \"2017-07-06T11:02:48.555000\",\n              \"owner\": \"miotla\",\n              \"version\": 18,\n              \"meta\": \"{\"comment\":\"\"}\"\n          }\n      },\n        {\n          \"id\": 6296903092273152,\n          \"title\": \"hangman\",\n          \"author\": \"miotla\",\n          \"state\": null,\n          \"modified_date\": \"2017-07-03T11:23:46.875000\",\n          \"version\": \"4\",\n          \"icon_href\": \"/media/content/default_presentation.png\",\n          \"is_public\": false,\n          \"template\": null,\n          \"file\": {\n              \"id\": 4837026528493568,\n              \"created_date\": \"2017-07-03T11:21:51.953000\",\n              \"modified_date\": \"2017-07-03T11:21:52.038000\",\n              \"owner\": \"miotla\",\n              \"version\": 4,\n              \"meta\": \"{\"comment\":\"\"}\"\n          }\n        }\n      ]\n  ]",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "lorepo/api/v2/my_content_api.py",
+    "groupTitle": "MyContent"
+  },
+  {
+    "type": "get",
+    "url": "/api/v2/my_content/<space_id>/lessons_paginated",
+    "title": "/lessons/",
+    "description": "<p>getting space lessons</p>",
+    "name": "MyContentSpaceLessons",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "modified_date",
+            "description": "<p>Optional parameter, order data by modified_date,  possible values: asc, desc</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "title",
+            "description": "<p>Optional parameter, order data by title, possible values: asc, desc</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "trash",
+            "description": "<p>Optional parameter, getting data from trash or not, possible values: true, false</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "page",
+            "description": "<p>Optional parameter, possible values: true, false</p>"
+          }
+        ]
+      }
+    },
+    "group": "MyContent",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>User Token.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"JWT TOKEN\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "  HTTP/1.1 200 OK\n    {\n    \"lessons\": [\n        {\n            \"author\": \"a\", \n            \"description\": \"rtew\", \n            \"file\": {\n                \"created_date\": \"2018-01-16T13:12:17.389000\", \n                \"id\": 6299102115528704, \n                \"meta\": null, \n                \"modified_date\": \"2018-01-16T13:12:17.416000\", \n                \"owner\": \"a\", \n                \"version\": 1\n            }, \n            \"icon_href\": \"/media/content/default_presentation.png\", \n            \"id\": 4891727231975424, \n            \"is_public\": false, \n            \"modified_date\": 1516108337000, \n            \"project_name\": \"a\", \n            \"publication_name\": \"\", \n            \"short_description\": \"twer\", \n            \"state\": null, \n            \"tags\": \"df\", \n            \"template\": null, \n            \"title\": \"Copy of 22222\", \n            \"version\": \"1\"\n        }, \n        {\n            \"author\": \"a\", \n            \"description\": \"rtew\", \n            \"file\": {\n                \"created_date\": \"2018-01-16T13:12:02.903000\", \n                \"id\": 6650945836417024, \n                \"meta\": null, \n                \"modified_date\": \"2018-01-16T13:12:02.930000\", \n                \"owner\": \"a\", \n                \"version\": 1\n            }, \n            \"icon_href\": \"/media/content/default_presentation.png\", \n            \"id\": 4610252255264768, \n            \"is_public\": false, \n            \"modified_date\": 1516108323000, \n            \"project_name\": \"a\", \n            \"publication_name\": \"\", \n            \"short_description\": \"twer\", \n            \"state\": null, \n            \"tags\": \"df\", \n            \"template\": null, \n            \"title\": \"Copy of 22222\", \n            \"version\": \"1\"\n        }\n    ], \n    \"more_count\": 10\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "lorepo/api/v2/my_content_api.py",
+    "groupTitle": "MyContent"
+  },
+  {
+    "type": "post",
+    "url": "/api/v2/my_content/<content_id>/assets",
+    "title": "/<content_id>/assets/",
+    "description": "<p>updating lesson assets</p>",
+    "name": "MyContentUpdateAssets",
+    "group": "MyContent",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>User Token.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"JWT TOKEN\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "lorepo/api/v2/my_content_api.py",
+    "groupTitle": "MyContent"
+  },
+  {
+    "type": "post",
+    "url": "/api/v2/my_content/<content_id>/update_template",
+    "title": "/<content_id>/update_template/",
+    "description": "<p>updating lesson template</p>",
+    "name": "MyContentUpdateTemplate",
+    "group": "MyContent",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>User Token.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n    \"Authorization\": \"JWT TOKEN\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "lorepo/api/v2/my_content_api.py",
+    "groupTitle": "MyContent"
+  },
+  {
+    "type": "get",
+    "url": "/api/v2/projects/<space_id>/lessons/<lesson_id>/tags",
+    "title": "/lessons/<lesson_id>/tags",
+    "description": "<p>getting lesson metadata</p>",
+    "name": "LessonMetadata",
+    "group": "Space",
+    "permission": [
+      {
+        "name": "Permission.CONTENT_VIEW"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>User Token.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"JWT TOKEN\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n  {\n      \"custom_metadata\": [\n          {\n              \"entered_value\": \"warto\\u015b\\u0107 oceny\",\n              \"field_type_name\": \"short_text\",\n              \"name\": \"Ocena\"\n          },\n          {\n              \"entered_value\": \"zajawka\",\n              \"field_type_name\": \"long_text\",\n              \"name\": \"Zajawka\"\n          },\n          {\n              \"entered_value\": \"val3\",\n              \"field_type_name\": \"select\",\n              \"name\": \"Select1\"\n          }\n      ],\n      \"description\": \"opis\",\n      \"enable_page_metadata\": false,\n      \"id\": 5805421394657280,\n      \"is_template\": false,\n      \"project\": 5664683906301952,\n      \"score_type\": \"last\",\n      \"short_description\": \"opis\",\n      \"tags\": \"tag1\",\n      \"title\": \"Copy of testowa lekcja\"\n  }",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "lorepo/api/v2/space_api.py",
+    "groupTitle": "Space"
+  },
+  {
+    "type": "get",
+    "url": "/api/v2/projects/<space_id>/get_project",
+    "title": "/<space_id>/get_project",
+    "description": "<p>getting project of publication</p>",
+    "name": "ProjectForPublications",
+    "group": "Space",
+    "permission": [
+      {
+        "name": "Permission.SPACE_EDIT"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>User Token.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"JWT TOKEN\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n      {\n          \"contents_count\": 3, \n          \"id\": 6265360852451328, \n          \"is_admin\": false, \n          \"is_locked\": false, \n          \"is_owner\": false, \n          \"parent\": 6429669121327104, \n          \"title\": \"druga\"\n      }",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "lorepo/api/v2/space_api.py",
+    "groupTitle": "Space"
+  },
+  {
+    "type": "get",
+    "url": "/api/v2/projects/<space_id>/publications/archived",
+    "title": "/publications/archived",
+    "description": "<p>getting project publications archived</p>",
+    "name": "ProjectPublications",
+    "group": "Space",
+    "permission": [
+      {
+        "name": "Permission.SPACE_EDIT"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>User Token.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"JWT TOKEN\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n[\n      {\n          \"contents_count\": 3, \n          \"id\": 6113009772527616, \n          \"is_admin\": false, \n          \"is_locked\": false, \n          \"is_owner\": false, \n          \"parent\": 6429669121327104, \n          \"title\": \"Publikacja1\"\n      }, \n      {\n          \"contents_count\": 3, \n          \"id\": 4857985968898048, \n          \"is_admin\": false, \n          \"is_locked\": false, \n          \"is_owner\": false, \n          \"parent\": 6429669121327104, \n          \"title\": \"aaa\"\n      }, \n      {\n          \"contents_count\": 3, \n          \"id\": 6265360852451328, \n          \"is_admin\": false, \n          \"is_locked\": false, \n          \"is_owner\": false, \n          \"parent\": 6429669121327104, \n          \"title\": \"druga\"\n      }\n  ]",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "lorepo/api/v2/space_api.py",
+    "groupTitle": "Space"
+  },
+  {
+    "type": "get",
+    "url": "/api/v2/projects/<space_id>/publications",
+    "title": "/publications/",
+    "description": "<p>getting project publications</p>",
+    "name": "ProjectPublications",
+    "group": "Space",
+    "permission": [
+      {
+        "name": "Permission.SPACE_EDIT"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>User Token.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"JWT TOKEN\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n  [\n      {\n          \"contents_count\": 3, \n          \"id\": 6113009772527616, \n          \"is_admin\": false, \n          \"is_locked\": false, \n          \"is_owner\": false, \n          \"parent\": 6429669121327104, \n          \"title\": \"Publikacja1\"\n      }, \n      {\n          \"contents_count\": 3, \n          \"id\": 4857985968898048, \n          \"is_admin\": false, \n          \"is_locked\": false, \n          \"is_owner\": false, \n          \"parent\": 6429669121327104, \n          \"title\": \"aaa\"\n      }, \n      {\n          \"contents_count\": 3, \n          \"id\": 6265360852451328, \n          \"is_admin\": false, \n          \"is_locked\": false, \n          \"is_owner\": false, \n          \"parent\": 6429669121327104, \n          \"title\": \"druga\"\n      }\n  ]",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "lorepo/api/v2/space_api.py",
+    "groupTitle": "Space"
+  },
+  {
+    "type": "get",
+    "url": "/api/v2/projects/",
+    "title": "/projects/",
+    "description": "<p>Retrieves projects</p>",
+    "name": "Projects",
+    "group": "Space",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>User Token.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"JWT TOKEN\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n[\n    {\n      id: 4553283809050624,\n      title: \"Sample Templates\",\n      is_locked: false,\n      is_owner: false,\n      is_admin: false\n    },\n    {\n      id: 6699530506469376,\n      title: \"Sample Lessons\",\n      is_locked: false,\n      is_owner: false,\n      is_admin: false\n    }\n  ]",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "lorepo/api/v2/space_api.py",
+    "groupTitle": "Space"
+  },
+  {
+    "type": "get",
+    "url": "/api/v2/projects/<space_id>/lessons",
+    "title": "/lessons/",
+    "description": "<p>getting space lessons</p>",
+    "name": "SpaceLessons",
+    "group": "Space",
+    "permission": [
+      {
+        "name": "Permission.CONTENT_VIEW"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>User Token.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"JWT TOKEN\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n  {\n    more_count: 4,\n    lessons: [\n      {\n        id: 4581252636082176,\n        title: \"dafasfas\",\n        author: 6077825400438784,\n        state: null,\n        modified_date: \"2017-05-12T17:44:32.084000\",\n        version: \"22\",\n        icon_href: \"/media/content/default_presentation.png\"\n      },\n      {\n        id: 4916741121507328,\n        title: \"Copy of testowy tytul\",\n        author: 6077825400438784,\n        state: null,\n        modified_date: \"2017-05-12T14:58:06.536000\",\n        version: \"13\",\n        icon_href: \"/media/content/default_presentation.png\"\n      },\n      {\n        id: 5214571333681152,\n        title: \"test\",\n        author: 6077825400438784,\n        state: null,\n        modified_date: \"2017-05-12T14:48:13.436000\",\n        version: \"9\",\n        icon_href: \"/media/content/default_presentation.png\"\n      },\n      {\n        id: 5355308822036480,\n        title: \"Copy of Copy of testowy tytul\",\n        author: 6077825400438784,\n        state: null,\n        modified_date: \"2017-05-12T17:44:33.200000\",\n        version: \"22\",\n        icon_href: \"/media/content/default_presentation.png\"\n      },\n      {\n        id: 5425677566214144,\n        title: \"qewrqwrqw\",\n        author: 6077825400438784,\n        state: null,\n        modified_date: \"2017-05-12T17:44:34.617000\",\n        version: \"22\",\n        icon_href: \"/media/content/default_presentation.png\"\n      }\n    ],\n    cursor: \"CjsSNWoTZGV2fmxvcmVwb2NvcnBvcmF0ZXIeCxIRbXljb250ZW50X2NvbnRlbnQYgICAgIDU0QkMGAAgAA==\"\n  }",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "lorepo/api/v2/space_api.py",
+    "groupTitle": "Space"
+  },
+  {
+    "type": "get",
+    "url": "/api/v2/projects/<space_id>/structure",
+    "title": "/structure/",
+    "description": "<p>getting space structure</p>",
+    "name": "SpaceStructure",
+    "group": "Space",
+    "permission": [
+      {
+        "name": "Permission.CONTENT_VIEW"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>User Token.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"JWT TOKEN\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n  {\n    name: \"proj1\",\n    id: 6429669121327104,\n    subspaces: [\n      {\n        name: \"aaa\",\n        id: 4857985968898048\n      },\n      {\n        name: \"Publikacja1\",\n        id: 6113009772527616,\n        subspaces: [\n          {\n            name: \"nowy unit\",\n            id: 5255871739199488,\n            subspaces: [\n              {\n                name: \"nowy unit_sub\",\n                id: 6381771646042112,\n                subspaces: [\n                  {\n                    name: \"nowy unit_sub_sub\",\n                    id: 4974396762488832,\n                    subspaces: [\n                      {\n                        name: \"nowy unit_sub_sub_sub\",\n                        id: 6100296669331456\n                      }\n                    ]\n                  }\n                ]\n              }\n            ]\n          },\n          {\n            name: \"6146941\",\n            id: 5818821692620800\n          }\n        ]\n      },\n      {\n        name: \"druga\",\n        id: 6265360852451328\n      }\n    ]\n  }",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "lorepo/api/v2/space_api.py",
+    "groupTitle": "Space"
+  },
+  {
+    "type": "POST",
+    "url": "/api/v2/jwt/obtain-token/",
+    "title": "/jwt/obtain-token/",
+    "name": "Obtain_token",
+    "description": "<p>API View that receives a POST with a user's username and password. Returns a JSON Web Token that can be used for authenticated requests.</p>",
+    "group": "Token",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "username",
+            "description": "<p>(required) - username</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "password",
+            "description": "<p>(required) - password</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n  {\n    token: \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo2MDU0OTc2MTc0NDI0MDY0LCJlbWFpbCI6Im1pY2hhbC56YXJ6eWNraUBzb2x3aXQuY29tIiwidXNlcm5hbWUiOiJhIiwib3JpZ19pYXQiOjE0NjkwMjg5MjUsImV4cCI6MTQ2OTAzMTkyNX0.rid7lFBVSEME7AQxaHM55M61G2V-lyJ69JgIsv5SJg0\"\n  }",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 400 Bad Request\n  {\n    non_field_errors: [\n      \"Unable to login with provided credentials.\"\n    ]\n  }",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "lorepo/api/v2/jwt_api.py",
+    "groupTitle": "Token"
+  },
+  {
+    "type": "get",
+    "url": "/api/v2/jwt/refresh_jwt_token/",
+    "title": "/jwt/refresh_jwt_token/",
+    "name": "Refresh_token",
+    "description": "<p>API View that returns a refreshed token (with new expiration) based on existing token If 'orig_iat' field (original issued-at-time) is found, will first check if it's within expiration window, then copy it to the new token</p>",
+    "group": "Token",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "token",
+            "description": "<p>(required) - token what status is expired</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n  {\n    token: \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo2MDU0OTc2MTc0NDI0MDY0LCJlbWFpbCI6Im1pY2hhbC56YXJ6eWNraUBzb2x3aXQuY29tIiwidXNlcm5hbWUiOiJhIiwib3JpZ19pYXQiOjE0NjkwMjg5MjUsImV4cCI6MTQ2OTAzMTkyNX0.rid7lFBVSEME7AQxaHM55M61G2V-lyJ69JgIsv5SJg0\"\n  }",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 400 Bad Request\n  {\n    non_field_errors: [\n      \"Unable to login with provided credentials.\"\n    ]\n  }",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "lorepo/api/v2/jwt_api.py",
+    "groupTitle": "Token"
+  },
+  {
+    "type": "get",
+    "url": "/api/v2/jwt/session_token",
+    "title": "/jwt/session_token",
+    "name": "Session_token",
+    "description": "<p>get session token</p>",
+    "group": "Token",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "token",
+            "description": "<p>(required) - token what status is expired</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n  {\n    token: \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo2MDU0OTc2MTc0NDI0MDY0LCJlbWFpbCI6Im1pY2hhbC56YXJ6eWNraUBzb2x3aXQuY29tIiwidXNlcm5hbWUiOiJhIiwib3JpZ19pYXQiOjE0NjkwMjg5MjUsImV4cCI6MTQ2OTAzMTkyNX0.rid7lFBVSEME7AQxaHM55M61G2V-lyJ69JgIsv5SJg0\"\n  }",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 400 Bad Request\n  {\n    non_field_errors: [\n      \"Unable to login with provided credentials.\"\n    ]\n  }",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "lorepo/api/v2/jwt_api.py",
+    "groupTitle": "Token"
+  },
+  {
+    "type": "post",
+    "url": "/api/v2/translations/image",
+    "title": "/translations/image",
+    "description": "<p>Adding Image to language</p>",
+    "name": "AddImage",
+    "group": "Translations",
+    "permission": [
+      {
+        "name": "Staff"
+      }
+    ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": true,
+            "field": "file",
+            "description": "<p>example 12131312</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": true,
+            "field": "lang",
+            "description": "<p>example 12131312</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "label",
+            "description": "<p>label from defined list in images.py</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n  \"file\": 4566306149892096,\n  \"lang\": 5252951161438208,\n  \"label\": \"mauthor_logo_shadow.svg\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>User Token.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"JWT TOKEN\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 201 OK \n  {\n      \"created_date\": \"2017-07-27T05:25:05.676181\", \n      \"file\": 4566306149892096, \n      \"id\": 4738998194929664, \n      \"label\": \"mauthor_logo_shadow.svg\", \n      \"lang\": 5252951161438208, \n      \"modified_date\": \"2017-07-27T05:25:05.676297\"\n  }",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "lorepo/api/v2/translations_api.py",
+    "groupTitle": "Translations"
+  },
+  {
+    "type": "post",
+    "url": "/api/v2/translations/label",
+    "title": "/translations/label",
+    "description": "<p>Adding label to all languages</p>",
+    "name": "AddLabel",
+    "group": "Translations",
+    "permission": [
+      {
+        "name": "Staff"
+      }
+    ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": true,
+            "field": "lang_id",
+            "description": "<p>example 12131312</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "import_json",
+            "description": "<p>json with labels</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Boolean",
+            "optional": true,
+            "field": "create_notification",
+            "description": "<p>should send notifications to editors</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n  \"lang_id\": 12131312,\n  \"create_notification\": True,\n  \"import_json\": {\"label1\": \"value\"}\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>User Token.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"JWT TOKEN\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 400 Bad Request\n{\n    \"message\": \"Translation language not exist\",\n    \"code\":\"3\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 400 Bad Request\n{\n    \"message\": \"Translation label already exists\",\n    \"code\":\"2\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 400 Bad Request\n{\n    \"message\": \"Translation malformed\",\n    \"code\": 1,\n    \"additional_message\": \"additional information\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 400 Bad Request\n{\n    \"message\": \"Translation conflict for key %s. You have to edit this label.\" % key,\n    \"code\": 0\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "lorepo/api/v2/translations_api.py",
+    "groupTitle": "Translations"
+  },
+  {
+    "type": "put",
+    "url": "/api/v2/translations/image/<pk>",
+    "title": "/translations/image/<pk>",
+    "description": "<p>Edit Image to language</p>",
+    "name": "EditImage",
+    "group": "Translations",
+    "permission": [
+      {
+        "name": "Staff"
+      }
+    ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": true,
+            "field": "file",
+            "description": "<p>12131312</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": true,
+            "field": "lang",
+            "description": "<p>12131312</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "label",
+            "description": "<p>label from defined list in images.py</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n  \"file\": 4566306149892096,\n  \"lang\": 5252951161438208,\n  \"label\": \"mauthor_logo_shadow.svg\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>User Token.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"JWT TOKEN\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 201 OK \n  {\n      \"created_date\": \"2017-07-27T05:25:05.676181\", \n      \"file\": 4566306149892096, \n      \"id\": 4738998194929664, \n      \"label\": \"mauthor_logo_shadow.svg\", \n      \"lang\": 5252951161438208, \n      \"modified_date\": \"2017-07-27T05:25:05.676297\"\n  }",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "lorepo/api/v2/translations_api.py",
+    "groupTitle": "Translations"
+  },
+  {
+    "type": "delete",
+    "url": "/api/v2/translations/image/<id>",
+    "title": "/translations/image/<id>",
+    "description": "<p>Delete Image</p>",
+    "name": "EditImage",
+    "group": "Translations",
+    "permission": [
+      {
+        "name": "Staff"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>User Token.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"JWT TOKEN\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 204 NO Content",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "lorepo/api/v2/translations_api.py",
+    "groupTitle": "Translations"
+  },
+  {
+    "type": "put",
+    "url": "/api/v2/translations/label",
+    "title": "/translations/label",
+    "description": "<p>Edit label to specific language</p>",
+    "name": "EditLabel",
+    "group": "Translations",
+    "permission": [
+      {
+        "name": "Staff"
+      }
+    ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "lang_key",
+            "description": "<p>en_US</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "name",
+            "description": "<p>label</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "value",
+            "description": "<p>label value</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n  \"lang_key\": \"en_US\",\n  \"name\": \"label1\",\n  \"value\": \"value\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>User Token.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"JWT TOKEN\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 400 Bad Request\n{\n    \"message\": \"Translation language not exist\",\n    \"code\":\"3\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 400 Bad Request\n{\n    \"message\": \"Translation label already exists\",\n    \"code\":\"2\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 400 Bad Request\n{\n    \"message\": \"Translation malformed\",\n    \"code\": 1,\n    \"additional_message\": \"additional information\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 400 Bad Request\n{\n    \"message\": \"Translation conflict for key %s. You have to edit this label.\" % key,\n    \"code\": 0\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "lorepo/api/v2/translations_api.py",
+    "groupTitle": "Translations"
+  },
+  {
+    "type": "put",
+    "url": "/api/v2/translations/languages/<lang_id>",
+    "title": "/translations/languages/<lang_id>",
+    "description": "<p>Edit language</p>",
+    "name": "EditLanguage",
+    "group": "Translations",
+    "permission": [
+      {
+        "name": "Staff"
+      }
+    ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "lang_key",
+            "description": "<p>en_US</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "lang_description",
+            "description": "<p>lang description</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n   \"lang_key\": \"en_US\",\n   \"lang_description\": 'language description'\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>User Token.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"JWT TOKEN\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "lorepo/api/v2/translations_api.py",
+    "groupTitle": "Translations"
+  },
+  {
+    "type": "get",
+    "url": "/api/v2/translations/image",
+    "title": "/translations/image",
+    "description": "<p>Get Images from all languages</p>",
+    "name": "GetImages",
+    "group": "Translations",
+    "permission": [
+      {
+        "name": "Staff"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>User Token.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"JWT TOKEN\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK \n  [\n      {\n          \"created_date\": \"2017-07-27T05:55:36.888779\", \n          \"file\": 4566306149892096, \n          \"id\": 5301948148350976, \n          \"label\": \"mauthor_logo_shadow.svg\", \n          \"lang\": 5252951161438208, \n          \"modified_date\": \"2017-07-27T05:55:36.888818\"\n      }\n  ]",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "lorepo/api/v2/translations_api.py",
+    "groupTitle": "Translations"
+  },
+  {
+    "type": "get",
+    "url": "/api/v2/translations/image/<id>",
+    "title": "/translations/image/<id>",
+    "description": "<p>Get Image by id</p>",
+    "name": "GetImages",
+    "group": "Translations",
+    "permission": [
+      {
+        "name": "Staff"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>User Token.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"JWT TOKEN\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK \n  {\n      \"created_date\": \"2017-07-27T05:55:36.888779\", \n      \"file\": 4566306149892096, \n      \"id\": 5301948148350976, \n      \"label\": \"mauthor_logo_shadow.svg\", \n      \"lang\": 5252951161438208, \n      \"modified_date\": \"2017-07-27T05:55:36.888818\"\n  }",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "lorepo/api/v2/translations_api.py",
+    "groupTitle": "Translations"
+  },
+  {
+    "type": "get",
+    "url": "/api/v2/image/labels",
+    "title": "/image/labels",
+    "description": "<p>Get Images labels</p>",
+    "name": "GetImagesLabels",
+    "group": "Translations",
+    "permission": [
+      {
+        "name": "Staff"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>User Token.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"JWT TOKEN\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n  [\n      [\n          \"mauthor_logo_shadow.svg\",\n          \"Logo in header\"\n      ],\n      [\n          \"mauthor_footer_logo.svg\",\n          \"Logo in footer\"\n      ]\n  ]",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "lorepo/api/v2/translations_api.py",
+    "groupTitle": "Translations"
+  },
+  {
+    "type": "post",
+    "url": "/api/v2/translations/import",
+    "title": "/translations/import",
+    "description": "<p>Importing translations labels</p>",
+    "name": "ImportLabels",
+    "group": "Translations",
+    "permission": [
+      {
+        "name": "Staff"
+      }
+    ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": true,
+            "field": "lang",
+            "description": "<p>example en_US</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "import_json",
+            "description": "<p>json with translations labels</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Boolean",
+            "optional": true,
+            "field": "create_notification",
+            "description": "<p>should send notification</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n  \"lang\": 12131312,\n  \"create_notification\": True,\n  \"import_json\": {\"label1\": \"value\"}\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>User Token.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"JWT TOKEN\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 400 Bad Request\n{\n    \"message\": \"Lang not exists\",\n    \"code\":\"0\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "lorepo/api/v2/translations_api.py",
+    "groupTitle": "Translations"
+  },
+  {
+    "type": "post",
+    "url": "/api/v2/translations/languages",
+    "title": "/translations/languages",
+    "description": "<p>adding new language</p>",
+    "name": "LanguageAdd",
+    "group": "Translations",
+    "permission": [
+      {
+        "name": "Staff"
+      }
+    ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "lang_key",
+            "description": "<p>example en_US</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "lang_description",
+            "description": "<p>language description</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n  \"lang_key\": \"en_US\",\n  \"lang_description\": \"english\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>User Token.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"JWT TOKEN\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 201 OK\n{\n  \"created_date\": \"2017-07-27T02:40:26.204017\",\n  \"id\": 5724160613416960,\n  \"lang_description\": \"english do usuniecia\",\n  \"lang_key\": \"en_US7\",\n  \"modified_date\": \"2017-07-27T02:40:26.204049\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "lorepo/api/v2/translations_api.py",
+    "groupTitle": "Translations"
+  },
+  {
+    "type": "get",
+    "url": "/api/v2/translations/languages",
+    "title": "/translations/languages",
+    "description": "<p>get all supported languages</p>",
+    "name": "LanguagesList",
+    "group": "Translations",
+    "permission": [
+      {
+        "name": "Staff"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>User Token.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"JWT TOKEN\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n  [\n      {\n          \"created_date\": \"2017-07-26T08:15:52.472832\", \n          \"id\": 4987281664376832, \n          \"lang_description\": \"english do usuniecia\", \n          \"lang_key\": \"en_US6\", \n          \"modified_date\": \"2017-07-26T08:15:52.472876\"\n      }, \n      {\n          \"created_date\": \"2017-07-20T08:14:32.067351\", \n          \"id\": 5252951161438208, \n          \"lang_description\": \"partial update\", \n          \"lang_key\": \"en_US\", \n          \"modified_date\": \"2017-07-26T08:15:05.171969\"\n      }\n  ]",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "lorepo/api/v2/translations_api.py",
+    "groupTitle": "Translations"
+  },
+  {
+    "type": "get",
+    "url": "/api/v2/translations/import/resolve_conflicts/<id>",
+    "title": "/translations/import/resolve_conflicts/<id>",
+    "description": "<p>get log</p>",
+    "name": "LanguagesList",
+    "group": "Translations",
+    "permission": [
+      {
+        "name": "Staff"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>User Token.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"JWT TOKEN\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n  [\n      {\n          \"created_date\": \"2017-07-26T08:15:52.472832\", \n          \"id\": 4987281664376832, \n          \"lang_description\": \"english do usuniecia\", \n          \"lang_key\": \"en_US6\", \n          \"modified_date\": \"2017-07-26T08:15:52.472876\"\n      }, \n      {\n          \"created_date\": \"2017-07-20T08:14:32.067351\", \n          \"id\": 5252951161438208, \n          \"lang_description\": \"partial update\", \n          \"lang_key\": \"en_US\", \n          \"modified_date\": \"2017-07-26T08:15:05.171969\"\n      }\n  ]",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 400 Bad Request\n{\n    \"message\": \"replace_conflict not provideded\",\n    \"code\":\"0\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "lorepo/api/v2/translations_api.py",
+    "groupTitle": "Translations"
+  },
+  {
+    "type": "delete",
+    "url": "/api/v2/translations/label",
+    "title": "/translations/label",
+    "description": "<p>Remove label from all languages</p>",
+    "name": "RemoveLabel",
+    "group": "Translations",
+    "permission": [
+      {
+        "name": "Staff"
+      }
+    ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "label",
+            "description": "<p>label name</p>"
+          }
+        ]
+      }
+    },
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>User Token.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"JWT TOKEN\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 204 No Content",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "lorepo/api/v2/translations_api.py",
+    "groupTitle": "Translations"
+  },
+  {
+    "type": "delete",
+    "url": "/api/v2/translations/languages/<lang_id>",
+    "title": "/translations/languages/<lang_id>",
+    "description": "<p>Remove language by lang_id</p>",
+    "name": "RemoveLanguage",
+    "group": "Translations",
+    "permission": [
+      {
+        "name": "Staff"
+      }
+    ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "label",
+            "description": "<p>label name</p>"
+          }
+        ]
+      }
+    },
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>User Token.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"JWT TOKEN\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 204 No Content",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "lorepo/api/v2/translations_api.py",
+    "groupTitle": "Translations"
+  },
+  {
+    "type": "post",
+    "url": "/api/v2/translations/import/resolve_conflicts/<id>",
+    "title": "/translations/import/resolve_conflicts/<id>",
+    "description": "<p>Resolving conflicts after import translations labels</p>",
+    "name": "ResolvingConflicts",
+    "group": "Translations",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": true,
+            "field": "import_table_id",
+            "description": "<p>id from email</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "replace_conflict",
+            "description": "<p>json with labels structure for more see request example</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\"replace_conflict\": \n    {\n    \"1\": {\"lang_key\": \"en_US\", \"name\": \"upload_icon.Upload\", \"value\": \"Upload121\"}, \n    \"3\": {\"lang_key\": \"en_US\", \"checked\": \"3\", \"name\": \"upload_icon.Current_icon\", \"value\": \"Current icon1121:\"}, \n    \"2\": {\"lang_key\": \"en_US\", \"checked\": \"2\", \"name\": \"upload_icon.No\", \"value\": \"No1121\"}\n    }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "permission": [
+      {
+        "name": "Staff"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>User Token.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"JWT TOKEN\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "lorepo/api/v2/translations_api.py",
+    "groupTitle": "Translations"
+  },
+  {
+    "type": "get",
+    "url": "/api/v2/translations/",
+    "title": "/translations/",
+    "description": "<p>Returns translations dictionary for specified language. If lang_id isn't specified, the dictionary is returned for default instance language</p>",
+    "name": "Translations",
+    "group": "Translations",
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n  {\n     \"labels\":{\n        \"ecommerce.Type_something_to_find_course\":\"Type something to find course\"\n     },\n     \"images\":{\n        \"mcourser_logo_shadow.svg\":\"/file/serve/6343125530312704\",\n        \"home_description_mcourser_logo\":\"/file/serve/6404423303561216\",\n        \"mcourser_logo_header\":\"/file/serve/6263685815205888\",\n        \"mcourser_logo_drawer\":\"/file/serve/6545160791916544\",\n        \"free.png\":\"/file/serve/6472996751409152\"\n     }\n  }",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "lorepo/api/v2/translations_api.py",
+    "groupTitle": "Translations"
+  },
+  {
+    "type": "post",
+    "url": "/api/v2/user/reset_password",
+    "title": "/user/reset_password",
+    "description": "<p>Check if provided token is valid</p>",
+    "name": "CheckToken",
+    "group": "User",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "token",
+            "description": "<p>(required) - token</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 400 Bad Request\n[\"token is invalid\"]",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "lorepo/api/v2/user_api.py",
+    "groupTitle": "User"
+  },
+  {
+    "type": "post",
+    "url": "/api/v2/user/edit",
+    "title": "/user/edit",
+    "description": "<p>change data in user profile</p>",
+    "name": "EditUser",
+    "group": "User",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>User Token.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"JWT TOKEN\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "email",
+            "description": "<p>(required) - user email</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  \"status\": \"OK\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 400 Bad Request\n{\n  {\"email\":[\"'This field may not be blank.\"]}\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "lorepo/api/v2/user_api.py",
+    "groupTitle": "User"
+  },
+  {
+    "type": "post",
+    "url": "/api/v2/user/password",
+    "title": "/user/password",
+    "description": "<p>Change user password, required old password</p>",
+    "name": "Password",
+    "group": "User",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>User Token.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"JWT TOKEN\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "old_password",
+            "description": "<p>(required) - user old password</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "new_password1",
+            "optional": false,
+            "field": "new_password1",
+            "description": "<ul> <li>user new password1</li> </ul>"
+          },
+          {
+            "group": "Parameter",
+            "type": "new_password2",
+            "optional": false,
+            "field": "new_password2",
+            "description": "<ul> <li>user new password2</li> </ul>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  \"status\": \"OK\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 400 Bad Request\n{\n  {\"old_password\":{\"code\":\"0\",\"message\":\"Old password is incorrect.\"}}\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "lorepo/api/v2/user_api.py",
+    "groupTitle": "User"
+  },
+  {
+    "type": "post",
+    "url": "/api/v2/register",
+    "title": "/register",
+    "description": "<p>User and sso user register with provided data</p>",
+    "name": "RegisterUser",
+    "group": "User",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "username",
+            "description": "<p>(required) - username</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "password1",
+            "description": "<p>(required) - password 1</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "password2",
+            "description": "<p>(required)- password 2</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "email",
+            "description": "<p>(required) - user email</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "email_confirmed",
+            "description": "<p>(required) - confirmed email</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Boolean",
+            "optional": false,
+            "field": "regulation_agreement",
+            "description": "<p>(required) - agree on term of use</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 201 CREATED\n{\n\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 400 Bad Request\n  {\n  \"regulation_agreement\":[\"This field is required.\"]\n  }",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "lorepo/api/v2/registration_api.py",
+    "groupTitle": "User"
+  },
+  {
+    "type": "post",
+    "url": "/api/v2/register/activate",
+    "title": "/register/activate",
+    "description": "<p>Activate registered account</p>",
+    "name": "RegisterUserActivate",
+    "group": "User",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "activation_key",
+            "description": "<p>(required) - activation key</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  'activated': true\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 400 Bad Request\n[\"Key has expired or does not exist.\"]",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "lorepo/api/v2/registration_api.py",
+    "groupTitle": "User"
+  },
+  {
+    "type": "post",
+    "url": "/api/v2/remind_login",
+    "title": "/remind_login",
+    "description": "<p>Reminds login</p>",
+    "name": "RemindLogin",
+    "group": "User",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "email",
+            "description": "<p>(required) - email</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  'reminded': true\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 400 Bad Request\n[\"E-mail does not exist.\"]",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "lorepo/api/v2/user_api.py",
+    "groupTitle": "User"
+  },
+  {
+    "type": "get",
+    "url": "/api/v2/user/reset_password",
+    "title": "/user/reset_password",
+    "description": "<p>Request to send email with reset link</p>",
+    "name": "RequestToSendResetEmail",
+    "group": "User",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "username",
+            "description": "<p>(required) - username</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 404 Not Found",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "lorepo/api/v2/user_api.py",
+    "groupTitle": "User"
+  },
+  {
+    "type": "put",
+    "url": "/api/v2/user/reset_password",
+    "title": "/user/reset_password",
+    "description": "<p>Reset password</p>",
+    "name": "ResetPassword",
+    "group": "User",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "token",
+            "description": "<p>(required) - token</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "password1",
+            "description": "<p>(required) - password1</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "password2",
+            "description": "<p>(required) - password2</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 400 Bad Request\n[\"password does not match\"]",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "lorepo/api/v2/user_api.py",
+    "groupTitle": "User"
+  },
+  {
+    "type": "get",
+    "url": "/api/v2/user/",
+    "title": "/user/",
+    "description": "<p>Roles and basic information about user</p>",
+    "name": "UserData",
+    "group": "User",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>User Token.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"JWT TOKEN\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n    id: 6077825400438784,\n    email: \"michal.zarzycki@solwit.com\",\n    username: \"g\",\n    language_code: \"en\",\n    is_superuser: true\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "lorepo/api/v2/user_api.py",
+    "groupTitle": "User"
+  }
+] });
