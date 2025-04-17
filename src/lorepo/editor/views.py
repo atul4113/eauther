@@ -72,7 +72,7 @@ def _read_corporate_templates(request):
     user_space = get_private_space_for_user(request.user)
     user_templates = None
     if user_templates is None:
-        user_templates = Content.objects.filter(spaces=str(user_space.id), content_type=ContentType.TEMPLATE,
+        user_templates = Content.objects.filter(spaces__contains=[str(user_space.id)], content_type=ContentType.TEMPLATE,
                                                 is_deleted=False).order_by('title')
         _assign_category(user_templates, 'Private')
         cache.set('templates_for_%s' % (request.user), user_templates, 60 * 60 * 24)
@@ -83,7 +83,7 @@ def _read_corporate_templates(request):
     if corporate_templates is None:
         corporate_templates = []
         for space in sharing_corporate_spaces:
-            corporate_templates.extend(Content.objects.filter(spaces=str(space.id), content_type=ContentType.TEMPLATE,
+            corporate_templates.extend(Content.objects.filter(spaces__contains=[str(space.id)], content_type=ContentType.TEMPLATE,
                                                               is_deleted=False).order_by('title'))
         _assign_category(corporate_templates, 'Public')
         cache.set('templates_for_%s' % (request.user.company.id), corporate_templates, 60 * 60 * 24)

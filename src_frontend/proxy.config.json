@@ -13,6 +13,15 @@
     "changeOrigin": true,
     "logLevel": "debug"
   },
+  "/api/v2/jwt": {
+    "target": "http://localhost:8000",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug",
+    "pathRewrite": {
+      "^/api/v2/jwt": "/api/v2/jwt"
+    }
+  },
   "/accounts/login/session": {
     "target": "http://localhost:8000",
     "secure": false
