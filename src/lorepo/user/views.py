@@ -138,39 +138,26 @@ def custom_login(request):
 
     try:
         data = json.loads(request.body) if request.content_type == 'application/json' else request.POST
-        username = data.get('username', '').strip().lower()  # Convert to lowercase
+        username = data.get('username', '').strip()
         password = data.get('password', '')
-
-        if not username or not password:
-            return JsonResponse({'error': 'Missing credentials'}, status=400)
-
-        User = get_user_model()
-
-        # Query using the lowercase field
-        user = User.objects.filter(username=username).first()
+        user = authenticate(request, username=username, password=password)
 
         if not user:
-            return JsonResponse({
-                'error': f'User does not exist',
-                'available_users': list(User.objects.values_list('username', flat=True)[:10])
-            }, status=404)
+            return JsonResponse({'error': 'Invalid credentials'}, status=401)
 
-        # Verify password
-        # if not user.check_password(password):
-        #     return JsonResponse({'error': 'Invalid password'}, status=401)
-
-        # Manual authentication
-        user.backend = 'django.contrib.auth.backends.ModelBackend'
+        # Log the user in (creates session)
         login(request, user)
 
+        print("login success")
         return JsonResponse({
             'success': True,
             'user': user.username,  # Return original username
-            'redirect': request.GET.get('next', '/')
         })
 
     except Exception as e:
         return JsonResponse({'error': str(e)}, status=500)
+    
+    
 @login_required
 def logout_view(request):
     """
