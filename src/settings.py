@@ -170,11 +170,13 @@ AUTHENTICATION_BACKENDS = [
     'rest_framework_simplejwt.authentication.JWTAuthentication',
 ]
 
+# Handle URLs with or without trailing slashes
+APPEND_SLASH = True
+
 # TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 
 # NOSE_ARGS = ['--with-xunit', '--xunit-file=website-corporate/test-reports/xunit.xml', '-v']
 # NOSE_PLUGINS = ['libraries.utility.noseplugins.TestDiscoveryPlugin']
-# APPEND_SLASH = False
 
 ADMIN_MEDIA_PREFIX = '/media/admin/'
 
