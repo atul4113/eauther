@@ -31,9 +31,11 @@ from src.lorepo.user.models import UserProfile
 from src.lorepo.mycontent.service import add_content_to_space
 import logging
 import datetime
-# from django.db import transaction
+from django.db import transaction
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import auth as auth_user
+from time import sleep
+from django.core.exceptions import ObjectDoesNotExist
 
 
 @shared_task
@@ -255,6 +257,26 @@ def profile_view(
     """
     User profile view for managing password, email, and language preferences.
     """
+    max_retries = 3
+    retry_count = 0
+    
+    while retry_count < max_retries:
+        try:
+            # Try to get or create the profile in a transaction
+            with transaction.atomic():
+                try:
+                    profile = request.user.profile
+                except ObjectDoesNotExist:
+                    profile = UserProfile(user=request.user)
+                    profile.save()
+            break  # If successful, break out of the retry loop
+        except Exception:
+            retry_count += 1
+            if retry_count >= max_retries:
+                messages.error(request, "Unable to access profile due to high system load. Please try again in a few moments.")
+                return redirect('/')
+            sleep(0.5 * retry_count)  # Exponential backoff
+    
     password_form = password_change_form(user=request.user)
     email_form = email_change_form(user=request.user)
     lang_form = language_form(user=request.user)
