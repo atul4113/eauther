@@ -98,7 +98,7 @@ export class RestClientService {
 
                 const headers = this.getHeaders().set(
                     "Authorization",
-                    `JWT ${token}`
+                    `Bearer ${token}`
                 );
                 const options = { headers };
 

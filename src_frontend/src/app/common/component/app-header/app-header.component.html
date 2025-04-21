@@ -1,243 +1,387 @@
-<header mdl [ngClass]="{'is-compact': isCompact}" (window:resize)="onResize($event)">
+<header
+    mdl
+    [ngClass]="{ 'is-compact': isCompact }"
+    (window:resize)="onResize($event)"
+>
     <mat-toolbar class="header__first-row">
         <a routerLink="/">
-            <img [src]="assetsUrl + '/images/ealpha4_white.svg'"
-                class="header-top-bar__logo"/>
+            <img
+                [src]="assetsUrl + '/images/ealpha4_white.svg'"
+                class="header-top-bar__logo"
+            />
         </a>
 
         <span class="toolbar-spacer"></span>
 
         <!-- SEARCH -->
-        <form (ngSubmit)="onSearchSubmit()" class="header-top-bar__search large-screen-only">
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
-                <label class="mdl-button mdl-js-button mdl-button--icon" for="header-top-bar__search-field">
+        <form
+            (ngSubmit)="onSearchSubmit()"
+            class="header-top-bar__search large-screen-only"
+        >
+            <div
+                class="mdl-textfield mdl-js-textfield mdl-textfield--expandable"
+            >
+                <label
+                    class="mdl-button mdl-js-button mdl-button--icon"
+                    for="header-top-bar__search-field"
+                >
                     <i class="material-icons">search</i>
                 </label>
                 <div class="mdl-textfield__expandable-holder">
-                    <input id="header-top-bar__search-field"
-                           class="mdl-textfield__input"
-                           type="text"
-                           name="text"
-                           [placeholder]= " translations | getLabel:'plain.common.add_header.search'"
-                           [(ngModel)]="text">
+                    <input
+                        id="header-top-bar__search-field"
+                        class="mdl-textfield__input"
+                        type="text"
+                        name="text"
+                        [placeholder]="
+                            translations
+                                | getLabel : 'plain.common.add_header.search'
+                        "
+                        [(ngModel)]="text"
+                    />
                 </div>
             </div>
         </form>
 
-        <a *ngIf="user.isAuthenticated && !user.company?.isLocked && user.company?.isOwner"
-           mat-button
-           href='/corporate/admin'
-           class="header__main-menu-item">
-            {{ translations | getLabel: "plain.common.add_drawer.company_admin" }}
+        <a
+            *ngIf="
+                user.isAuthenticated &&
+                !user.company?.isLocked &&
+                user.company?.isOwner
+            "
+            mat-button
+            routerLink="/corporate/admin"
+            class="header__main-menu-item"
+        >
+            {{
+                translations
+                    | getLabel : "plain.common.add_drawer.company_admin"
+            }}
         </a>
-        <a *ngIf="user.isAuthenticated && !user.company?.isLocked && user.permissions.isAnyDivisionAdmin"
-           mat-button
-           href='/corporate/divisionadmin' class="header__main-menu-item">
-            {{ translations | getLabel: "plain.common.add_drawer.project_admin" }}
+        <a
+            *ngIf="
+                user.isAuthenticated &&
+                !user.company?.isLocked &&
+                user.permissions.isAnyDivisionAdmin
+            "
+            mat-button
+            routerLink="/corporate/divisionadmin"
+            class="header__main-menu-item"
+        >
+            {{
+                translations
+                    | getLabel : "plain.common.add_drawer.project_admin"
+            }}
         </a>
 
-        <a *ngIf="!user.isAuthenticated"
+        <a
+            *ngIf="!user.isAuthenticated"
             mat-button
             routerLink="/accounts/login/"
-            class="large-screen-only">
-            {{  translations | getLabel: "plain.accounts.login.panel.login" }}
+            class="large-screen-only"
+        >
+            {{ translations | getLabel : "plain.accounts.login.panel.login" }}
         </a>
-        <a *ngIf="!user.isAuthenticated"
+        <a
+            *ngIf="!user.isAuthenticated"
             mat-button
             routerLink="/accounts/register/"
-            class="large-screen-only">
-            {{  translations | getLabel: "plain.accounts.register.panel.register" }}
+            class="large-screen-only"
+        >
+            {{
+                translations
+                    | getLabel : "plain.accounts.register.panel.register"
+            }}
         </a>
 
-        <a *ngIf="user.isAuthenticated && !user.permissions.isSuperUser"
-           mat-button
-           href="/user/profile"
-           class="large-screen-only">
+        <a
+            *ngIf="user.isAuthenticated && !user.permissions.isSuperUser"
+            mat-button
+            href="/user/profile"
+            class="large-screen-only"
+        >
             {{ user.username }}
         </a>
-        <a *ngIf="user.isAuthenticated && user.permissions.isSuperUser"
-           mat-button
-           href="/user/settings"
-           class="large-screen-only">
+        <a
+            *ngIf="user.isAuthenticated && user.permissions.isSuperUser"
+            mat-button
+            href="/user/settings"
+            class="large-screen-only"
+        >
             {{ user.username }}
         </a>
-        <a *ngIf="user.isAuthenticated"
+        <a
+            *ngIf="user.isAuthenticated"
             mat-button
             href="/user/logout"
-            class="large-screen-only">
-            {{  translations | getLabel:"plain.common.add_header.logout" }}
+            class="large-screen-only"
+        >
+            {{ translations | getLabel : "plain.common.add_header.logout" }}
         </a>
 
-
-
-        <button mat-icon-button
+        <button
+            mat-icon-button
             [matMenuTriggerFor]="useraction"
-            class="small-screen-only">
+            class="small-screen-only"
+        >
             <i class="material-icons">account_circle</i>
         </button>
 
         <mat-menu #useraction="matMenu" [overlapTrigger]="false">
-            <a *ngIf="!user.isAuthenticated"
+            <a
+                *ngIf="!user.isAuthenticated"
                 mat-menu-item
-                routerLink="/accounts/login/">
-                {{  translations | getLabel: "plain.accounts.login.panel.login" }}
+                routerLink="/accounts/login/"
+            >
+                {{
+                    translations | getLabel : "plain.accounts.login.panel.login"
+                }}
             </a>
-            <a *ngIf="!user.isAuthenticated"
+            <a
+                *ngIf="!user.isAuthenticated"
                 mat-menu-item
-                routerLink="/accounts/register/">
-                {{  translations | getLabel: "plain.accounts.register.panel.register" }}
+                routerLink="/accounts/register/"
+            >
+                {{
+                    translations
+                        | getLabel : "plain.accounts.register.panel.register"
+                }}
             </a>
 
-            <a *ngIf="user.isAuthenticated && !user.permissions.isSuperUser"
-               mat-menu-item
-               href="/user/profile">
-                {{ user.username }}
-            </a>
-            <a *ngIf="user.isAuthenticated && user.permissions.isSuperUser"
-               mat-menu-item
-               href="/user/settings">
-                {{ user.username }}
-            </a>
-            <a *ngIf="user.isAuthenticated"
+            <a
+                *ngIf="user.isAuthenticated && !user.permissions.isSuperUser"
                 mat-menu-item
-                href="/user/logout">
-                {{  translations | getLabel:"plain.common.add_header.logout" }}
+                href="/user/profile"
+            >
+                {{ user.username }}
+            </a>
+            <a
+                *ngIf="user.isAuthenticated && user.permissions.isSuperUser"
+                mat-menu-item
+                href="/user/settings"
+            >
+                {{ user.username }}
+            </a>
+            <a *ngIf="user.isAuthenticated" mat-menu-item href="/user/logout">
+                {{ translations | getLabel : "plain.common.add_header.logout" }}
             </a>
         </mat-menu>
     </mat-toolbar>
 
-    <mat-toolbar class="header__second-row large-screen-only" [ngClass]="{'is-smaller': !isFullSize}">
-        <a mat-button
-            href="/"
-            [ngClass]="{'active': activeSection == 'HOME'}"
-            class="header__main-menu-item">
-            {{ translations | getLabel:"plain.home.panel.home" }}
+    <mat-toolbar
+        class="header__second-row large-screen-only"
+        [ngClass]="{ 'is-smaller': !isFullSize }"
+    >
+        <a
+            mat-button
+            routerLink="/"
+            [ngClass]="{ active: activeSection == 'HOME' }"
+            class="header__main-menu-item"
+        >
+            {{ translations | getLabel : "plain.home.panel.home" }}
         </a>
 
-        <a *ngIf="user.isAuthenticated"
+        <a
+            *ngIf="user.isAuthenticated"
             mat-button
             routerLink="/corporate"
-            [ngClass]="{'active': activeSection == 'DASHBOARD'}"
-            class="header__main-menu-item">
-            {{ translations | getLabel:"plain.corporate.panel.corporate.dashboard" }}
+            [ngClass]="{ active: activeSection == 'DASHBOARD' }"
+            class="header__main-menu-item"
+        >
+            {{
+                translations
+                    | getLabel : "plain.corporate.panel.corporate.dashboard"
+            }}
         </a>
 
-        <a *ngIf="user.isAuthenticated && !user.company?.isLocked"
+        <a
+            *ngIf="user.isAuthenticated && !user.company?.isLocked"
             mat-button
             routerLink="/mycontent"
-            [ngClass]="{'active': activeSection == 'MY_LESSONS'}"
-            class="header__main-menu-item">
-            {{  translations | getLabel:"plain.my_lessons.panel.my_lessons.my_lessons" }}
+            [ngClass]="{ active: activeSection == 'MY_LESSONS' }"
+            class="header__main-menu-item"
+        >
+            {{
+                translations
+                    | getLabel : "plain.my_lessons.panel.my_lessons.my_lessons"
+            }}
         </a>
 
-        <a *ngIf="user.isAuthenticated && !user.company?.isLocked"
-           [ngClass]="{'active': activeSection == 'PROJECT'}"
-           id="projects_button"
-           mat-button class="header__main-menu-item"
-           [matMenuTriggerFor]="projectaction">
-            {{ translations | getLabel:"plain.common.add_drawer.projects" }}
+        <a
+            *ngIf="user.isAuthenticated && !user.company?.isLocked"
+            [ngClass]="{ active: activeSection == 'PROJECT' }"
+            id="projects_button"
+            mat-button
+            class="header__main-menu-item"
+            [matMenuTriggerFor]="projectaction"
+        >
+            {{ translations | getLabel : "plain.common.add_drawer.projects" }}
         </a>
-        <mat-menu #projectaction="matMenu"
-                 [overlapTrigger]="false">
-            <a *ngFor="let project of projects"
-               [routerLink]="'/corporate/list/' + project.id"
-               mat-menu-item>
+        <mat-menu #projectaction="matMenu" [overlapTrigger]="false">
+            <a
+                *ngFor="let project of projects"
+                [routerLink]="'/corporate/list/' + project.id"
+                mat-menu-item
+            >
                 {{ project.title }}
             </a>
         </mat-menu>
 
-        <a *ngIf="user.isAuthenticated && !user.company?.isLocked"
-           mat-button
-           href="/support"
-           class="header__main-menu-item">
-            {{ translations | getLabel:"plain.common.add_drawer.support" }}
+        <a
+            *ngIf="user.isAuthenticated && !user.company?.isLocked"
+            mat-button
+            href="/support"
+            class="header__main-menu-item"
+        >
+            {{ translations | getLabel : "plain.common.add_drawer.support" }}
         </a>
-        <a id="help_button"
-           mat-button
-           [matMenuTriggerFor]="helpaction"
-           class="header__main-menu-item">
-            {{ translations | getLabel:"plain.common.add_drawer.help" }}
+        <a
+            id="help_button"
+            mat-button
+            [matMenuTriggerFor]="helpaction"
+            class="header__main-menu-item"
+        >
+            {{ translations | getLabel : "plain.common.add_drawer.help" }}
         </a>
 
-        <mat-menu #helpaction="matMenu"
-                 [overlapTrigger]="false">
-            <a mat-menu-item
-               href="/doc">
-                {{  translations | getLabel:"plain.common.add_drawer.documentation" }}
+        <mat-menu #helpaction="matMenu" [overlapTrigger]="false">
+            <a mat-menu-item href="/doc">
+                {{
+                    translations
+                        | getLabel : "plain.common.add_drawer.documentation"
+                }}
             </a>
-            <a mat-menu-item
-               href="/doc/en/page/Interactive-Tutorials">
-                {{  translations | getLabel:"plain.corporate.panel.tiles.interactive_tutorials" }}
+            <a mat-menu-item href="/doc/en/page/Interactive-Tutorials">
+                {{
+                    translations
+                        | getLabel
+                            : "plain.corporate.panel.tiles.interactive_tutorials"
+                }}
             </a>
-            <a mat-menu-item
-               href="/doc/en/page/Sample-Lessons?no_menu">
-                {{  translations | getLabel:"plain.common.add_drawer.modules_examples" }}
+            <a mat-menu-item href="/doc/en/page/Sample-Lessons?no_menu">
+                {{
+                    translations
+                        | getLabel : "plain.common.add_drawer.modules_examples"
+                }}
             </a>
         </mat-menu>
 
         <span class="toolbar-spacer"></span>
-        <form (ngSubmit)="onSearchSubmit()" class="header-top-bar__search large-screen-only search-form">
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
-                <label class="mdl-button mdl-js-button mdl-button--icon" for="header-top-bar__search-field-second">
+        <form
+            (ngSubmit)="onSearchSubmit()"
+            class="header-top-bar__search large-screen-only search-form"
+        >
+            <div
+                class="mdl-textfield mdl-js-textfield mdl-textfield--expandable"
+            >
+                <label
+                    class="mdl-button mdl-js-button mdl-button--icon"
+                    for="header-top-bar__search-field-second"
+                >
                     <i class="material-icons">search</i>
                 </label>
                 <div class="mdl-textfield__expandable-holder">
-                    <input id="header-top-bar__search-field-second"
-                           class="mdl-textfield__input"
-                           type="text"
-                           name="text"
-                           [placeholder]= " translations | getLabel:'plain.common.add_header.search'"
-                           [(ngModel)]="text">
+                    <input
+                        id="header-top-bar__search-field-second"
+                        class="mdl-textfield__input"
+                        type="text"
+                        name="text"
+                        [placeholder]="
+                            translations
+                                | getLabel : 'plain.common.add_header.search'
+                        "
+                        [(ngModel)]="text"
+                    />
                 </div>
             </div>
         </form>
-        <a *ngIf="user.isAuthenticated && !user.company?.isLocked && user.company?.isOwner"
-           mat-button
-           href='/corporate/admin'
-           class="header__main-menu-item company-admin">
-            {{ translations | getLabel: "plain.common.add_drawer.company_admin" }}
+        <a
+            *ngIf="
+                user.isAuthenticated &&
+                !user.company?.isLocked &&
+                user.company?.isOwner
+            "
+            mat-button
+            href="/corporate/admin"
+            class="header__main-menu-item company-admin"
+        >
+            {{
+                translations
+                    | getLabel : "plain.common.add_drawer.company_admin"
+            }}
         </a>
-        <a *ngIf="user.isAuthenticated && !user.company?.isLocked && user.permissions.isAnyDivisionAdmin"
-           mat-button
-           href='/corporate/divisionadmin' class="header__main-menu-item project-admin">
-            {{ translations | getLabel: "plain.common.add_drawer.project_admin" }}
+        <a
+            *ngIf="
+                user.isAuthenticated &&
+                !user.company?.isLocked &&
+                user.permissions.isAnyDivisionAdmin
+            "
+            mat-button
+            href="/corporate/divisionadmin"
+            class="header__main-menu-item project-admin"
+        >
+            {{
+                translations
+                    | getLabel : "plain.common.add_drawer.project_admin"
+            }}
         </a>
-        <a class="company-logo" *ngIf="logoId" href="/corporate" title="Dashboard">
-            <img class="logo-img" alt="Dashboard" [src]="'/file/serve/' + logoId">
+        <a
+            class="company-logo"
+            *ngIf="logoId"
+            href="/corporate"
+            title="Dashboard"
+        >
+            <img
+                class="logo-img"
+                alt="Dashboard"
+                [src]="'/file/serve/' + logoId"
+            />
         </a>
-        <button mat-icon-button
+        <button
+            mat-icon-button
             [matMenuTriggerFor]="useraction"
             class="user-account-button"
-            >
+        >
             <i class="material-icons">account_circle</i>
         </button>
 
         <mat-menu #useraction="matMenu" [overlapTrigger]="false">
-            <a *ngIf="!user.isAuthenticated"
+            <a
+                *ngIf="!user.isAuthenticated"
                 mat-menu-item
-                routerLink="/accounts/login/">
-                {{  translations | getLabel: "plain.accounts.login.panel.login" }}
+                routerLink="/accounts/login/"
+            >
+                {{
+                    translations | getLabel : "plain.accounts.login.panel.login"
+                }}
             </a>
-            <a *ngIf="!user.isAuthenticated"
+            <a
+                *ngIf="!user.isAuthenticated"
                 mat-menu-item
-                routerLink="/accounts/register/">
-                {{  translations | getLabel: "plain.accounts.register.panel.register" }}
+                routerLink="/accounts/register/"
+            >
+                {{
+                    translations
+                        | getLabel : "plain.accounts.register.panel.register"
+                }}
             </a>
 
-            <a *ngIf="user.isAuthenticated && !user.permissions.isSuperUser"
-               mat-menu-item
-               href="/user/profile">
-                {{ user.username }}
-            </a>
-            <a *ngIf="user.isAuthenticated && user.permissions.isSuperUser"
-               mat-menu-item
-               href="/user/settings">
-                {{ user.username }}
-            </a>
-            <a *ngIf="user.isAuthenticated"
+            <a
+                *ngIf="user.isAuthenticated && !user.permissions.isSuperUser"
                 mat-menu-item
-                href="/user/logout">
-                {{  translations | getLabel:"plain.common.add_header.logout" }}
+                href="/user/profile"
+            >
+                {{ user.username }}
+            </a>
+            <a
+                *ngIf="user.isAuthenticated && user.permissions.isSuperUser"
+                mat-menu-item
+                href="/user/settings"
+            >
+                {{ user.username }}
+            </a>
+            <a *ngIf="user.isAuthenticated" mat-menu-item href="/user/logout">
+                {{ translations | getLabel : "plain.common.add_header.logout" }}
             </a>
         </mat-menu>
     </mat-toolbar>

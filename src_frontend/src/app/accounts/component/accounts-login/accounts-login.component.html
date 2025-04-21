@@ -1,38 +1,59 @@
 <section mdl id="accounts-login">
     <page-title-bar>
         <h1 class="title">
-            {{ translations | getLabel: "plain.accounts.login.panel.login" }}
+            {{ translations | getLabel : "plain.accounts.login.panel.login" }}
         </h1>
     </page-title-bar>
 
     <div [putFooterBottom]="30" class="page-content">
-        <form ngNoForm action="/accounts/login/session?next={{ previousPath }}" method="post" name="login">
+        <form (ngSubmit)="onSubmit()">
             <div *ngIf="error" class="error">
-               {{ translations | getLabel: "plain.accounts.login.panel.enter_password" }}
+                {{
+                    translations
+                        | getLabel : "plain.accounts.login.panel.enter_password"
+                }}
             </div>
 
             <ul class="mdl-list">
                 <li class="mdl-list__item">
                     <span class="mdl-list__item-primary-content">
-                        <i class="material-icons mdl-list__item-icon">&#xE7FD;</i>
+                        <i class="material-icons mdl-list__item-icon"
+                            >&#xE7FD;</i
+                        >
                         <mat-form-field>
-                          <input matInput
-                                 [placeholder] = " translations | getLabel: 'plain.accounts.login.panel.login' "
-                                 name="username"
-                                 id="username">
+                            <input
+                                matInput
+                                [(ngModel)]="username"
+                                [placeholder]="
+                                    translations
+                                        | getLabel
+                                            : 'plain.accounts.login.panel.login'
+                                "
+                                name="username"
+                                id="username"
+                            />
                         </mat-form-field>
                     </span>
                 </li>
 
                 <li class="mdl-list__item">
                     <span class="mdl-list__item-primary-content">
-                        <i class="material-icons mdl-list__item-icon">&#xE897;</i>
+                        <i class="material-icons mdl-list__item-icon"
+                            >&#xE897;</i
+                        >
                         <mat-form-field>
-                          <input matInput
-                                 [placeholder] = " translations | getLabel:'plain.accounts.login.panel.password'"
-                                 name="password"
-                                 id="password"
-                                 type="password">
+                            <input
+                                matInput
+                                [(ngModel)]="password"
+                                [placeholder]="
+                                    translations
+                                        | getLabel
+                                            : 'plain.accounts.login.panel.password'
+                                "
+                                name="password"
+                                id="password"
+                                type="password"
+                            />
                         </mat-form-field>
                     </span>
                 </li>
@@ -41,12 +62,17 @@
                     <span class="mdl-list__item-primary-content">
                         <i class="material-icons mdl-list__item-icon"></i>
                         <div class="mdl-textfield mdl-js-textfield">
-                            <mat-checkbox  color="primary"
-                                  [checked]="rememberMe"
-                                  (change)="rememberMe = $event.checked">
-                                {{ translations | getLabel: "plain.accounts.login.panel.remember_me" }}
+                            <mat-checkbox
+                                color="primary"
+                                [(ngModel)]="rememberMe"
+                                name="remember_me"
+                            >
+                                {{
+                                    translations
+                                        | getLabel
+                                            : "plain.accounts.login.panel.remember_me"
+                                }}
                             </mat-checkbox>
-                            <input class="hidden" id="remember-me" type="checkbox" name="remember_me" [ngModel]="rememberMe">
                         </div>
                     </span>
                 </li>
@@ -54,8 +80,15 @@
                 <li class="mdl-list__item">
                     <span class="mdl-list__item-primary-content">
                         <i class="material-icons mdl-list__item-icon"></i>
-                        <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent custom-login-button">
-                            {{ translations | getLabel: "plain.accounts.login.panel.login" }}
+                        <button
+                            type="submit"
+                            class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent custom-login-button"
+                        >
+                            {{
+                                translations
+                                    | getLabel
+                                        : "plain.accounts.login.panel.login"
+                            }}
                         </button>
                     </span>
                 </li>
@@ -63,16 +96,32 @@
                 <li class="mdl-list__item">
                     <span class="mdl-list__item-primary-content">
                         <i class="material-icons mdl-list__item-icon"></i>
-                        <a class="mdl-button mdl-js-button mdl-button--primary" href="/user/reset_password" mat-button>
-                            {{ translations | getLabel: "plain.accounts.login.panel.forgot_password" }}
+                        <a
+                            class="mdl-button mdl-js-button mdl-button--primary"
+                            routerLink="/user/reset_password"
+                            mat-button
+                        >
+                            {{
+                                translations
+                                    | getLabel
+                                        : "plain.accounts.login.panel.forgot_password"
+                            }}
                         </a>
                     </span>
                 </li>
                 <li class="mdl-list__item">
                     <span class="mdl-list__item-primary-content">
                         <i class="material-icons mdl-list__item-icon"></i>
-                        <a class="mdl-button mdl-js-button mdl-button--primary" href="/accounts/register/" mat-button>
-                            {{ translations | getLabel: "plain.accounts.login.panel.not_a_member" }}
+                        <a
+                            class="mdl-button mdl-js-button mdl-button--primary"
+                            routerLink="/accounts/register/"
+                            mat-button
+                        >
+                            {{
+                                translations
+                                    | getLabel
+                                        : "plain.accounts.login.panel.not_a_member"
+                            }}
                         </a>
                     </span>
                 </li>

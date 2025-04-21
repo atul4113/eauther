@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
 
 import { AccountsSettings } from "../../model/accounts-settings";
 import { PathsService } from "../../../common/service";
@@ -22,10 +23,14 @@ export class AccountsLoginComponent implements OnInit {
     public error: boolean = false;
     public rememberMe: boolean = false;
     public translations!: ITranslations;
+    public username: string = "";
+    public password: string = "";
 
     constructor(
         private _paths: PathsService,
-        private _translations: TranslationsService
+        private _translations: TranslationsService,
+        private _accounts: AccountsService,
+        private _router: Router
     ) {}
 
     ngOnInit() {
@@ -45,6 +50,20 @@ export class AccountsLoginComponent implements OnInit {
         }
 
         console.log("Test log message");
+    }
+
+    public onSubmit() {
+        this.error = false;
+        this._accounts
+            .login(this.username, this.password, this.rememberMe)
+            .subscribe({
+                next: () => {
+                    this._router.navigateByUrl(this.previousPath);
+                },
+                error: () => {
+                    this.error = true;
+                },
+            });
     }
 
     private setPreviousPath(next?: string) {
