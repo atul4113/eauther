@@ -12,8 +12,12 @@ export class NewsService {
     constructor(private readonly _restClient: RestClientService) {}
 
     public get(): Observable<News[]> {
-        return this._restClient
-            .get<INewsRaw[]>(NEWS_URL)
-            .pipe(map((response) => response.map((news) => new News(news))));
+        return this._restClient.get<INewsRaw[]>(NEWS_URL).pipe(
+            map((response) =>
+                response.map((news) => {
+                    return new News(news);
+                })
+            )
+        );
     }
 }
