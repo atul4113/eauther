@@ -1781,30 +1781,22 @@ class AddonsView(views.APIView):
     permission_classes = (IsAuthenticated, )
     trash = None
 
-    # @method_decorator(has_space_access(Permission.CONTENT_VIEW))
+    @method_decorator(has_space_access(Permission.CONTENT_VIEW))
     def get(self, request, space_id=None):
-        trash = False
         if space_id is None:
             try:
                 requested_space = get_private_space_for_user(request.user)
-            except :
-                raise ValidationError('No private space for user %(user)s' % {'user' : request.user.username})
+            except:
+                raise ValidationError('No private space for user %(user)s' % {'user': request.user.username})
         else:
-            if self.trash is not None:
-                trash = True
-            else:
-                trash = False
             requested_space = get_object_or_404(Space, id=space_id)
             if requested_space.is_company():
                 raise ValidationError('Requested space is company level')
 
         cursor = request.GET.get('cursor', None)
 
-        if requested_space.is_company():
-            raise ValidationError('Requested space is company level')
-
         serialized_data = get_data_with_cursor(
-            query_set=Content.objects.filter(spaces__contains=str(requested_space.id), content_type=3, is_deleted=trash),
+            query_set=Content.objects.filter(spaces__contains=str(requested_space.id), content_type=3, is_deleted=self.trash),
             cursor=cursor,
             serializer=ContentSerializer,
             context={},

@@ -2,118 +2,130 @@
 
 <!DOCTYPE html>
 <html>
-
-<head>
+  <head>
     <title>{{content.title}} - mauthor.com</title>
-    <meta http-equiv="cache-control" content="no-cache">
-    <meta name="viewport" content="width=device-width, maximum-scale=1">
-    <meta name="format-detection" content="telephone=no">
-    {% include 'common/math_jax.html' %}
-    <script type="text/javascript" src="/media/js/semi-responsive/semi-responsive-layout-chooser.js"></script>
-    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script type="text/javascript" src="/media/js/jquery.ba-resize.min.js"></script>
-    <script type="text/javascript" src="/media/icplayer/icplayer.nocache.js"></script>
+    <meta http-equiv="cache-control" content="no-cache" />
+    <meta name="viewport" content="width=device-width, maximum-scale=1" />
+    <meta name="format-detection" content="telephone=no" />
+    {% try %} {% include 'common/math_jax.html' %} {% except %}
+    <!-- Failed to load MathJax -->
+    {% endtry %}
+    <script
+      type="text/javascript"
+      src="/media/js/semi-responsive/semi-responsive-layout-chooser.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="/media/js/jquery.ba-resize.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="/media/icplayer/icplayer.nocache.js"
+    ></script>
     <script type="text/javascript" src="/media/js/util/screen.js"></script>
     <script src="/media/js/mauthor-redirect.js"></script>
     {% block styles %}{% endblock %}
     <style>
-        .no-margin {
-            margin: 0;
-            padding: 0;
-        }
-        .pull-left {
-            float: left;
-        }
-        .clear {
-            clear: both;
-        }
+      .no-margin {
+        margin: 0;
+        padding: 0;
+      }
+      .pull-left {
+        float: left;
+      }
+      .clear {
+        clear: both;
+      }
     </style>
 
     <script type="text/javascript">
-        function getPageNumber() {
-            var page = parseInt(window.location.hash.substring(1), 10);
+      function getPageNumber() {
+        var page = parseInt(window.location.hash.substring(1), 10);
 
-            if (!isNaN(page)) {
-                page = page - 1;
-            } else {
-                page = 0;
-            }
-            return page;
+        if (!isNaN(page)) {
+          page = page - 1;
+        } else {
+          page = 0;
+        }
+        return page;
+      }
+
+      function getPageNumberWithCommons() {
+        var page,
+          hash = window.location.hash,
+          isCommons = false;
+
+        if (hash.substring(1, 9) === "commons_") {
+          isCommons = true;
+          page = parseInt(hash.substring(9), 10);
+        } else {
+          page = parseInt(hash.substring(1), 10);
         }
 
-        function getPageNumberWithCommons() {
-            var page, hash = window.location.hash, isCommons = false;
-
-            if ( hash.substring(1,9) === 'commons_' ) {
-                isCommons = true;
-                page = parseInt(hash.substring(9), 10);
-            } else {
-                page = parseInt(hash.substring(1), 10);
-            }
-
-
-            if (!isNaN(page)) {
-                page = page - 1;
-            } else {
-                page = 0;
-            }
-
-            return {
-                'isCommons': isCommons,
-                'index': page
-            };
+        if (!isNaN(page)) {
+          page = page - 1;
+        } else {
+          page = 0;
         }
 
-        function getOpener() {
-            var parent = null;
-            if (window.parent != null && window.parent.postMessage != null) {
-                parent = window.parent;
-            }
-            if (window.opener != null && window.opener.postMessage != null) {
-                parent = window.opener;
-            }
-            return parent;
+        return {
+          isCommons: isCommons,
+          index: page,
+        };
+      }
+
+      function getOpener() {
+        var parent = null;
+        if (window.parent != null && window.parent.postMessage != null) {
+          parent = window.parent;
         }
-
-        function postResizeMessage(width, height) {
-            var parent = getOpener();
-
-            if (parent != null) {
-                var message = "RESIZE:" + width + ";" + height;
-                parent.postMessage(message, '*');
-            }
+        if (window.opener != null && window.opener.postMessage != null) {
+          parent = window.opener;
         }
+        return parent;
+      }
 
-        function postPageLoadedMessage() {
-            var parent = getOpener();
+      function postResizeMessage(width, height) {
+        var parent = getOpener();
 
-            if (parent != null) {
-                var message = "PAGE_LOADED";
-                parent.postMessage(message, '*');
-            }
+        if (parent != null) {
+          var message = "RESIZE:" + width + ";" + height;
+          parent.postMessage(message, "*");
         }
+      }
+
+      function postPageLoadedMessage() {
+        var parent = getOpener();
+
+        if (parent != null) {
+          var message = "PAGE_LOADED";
+          parent.postMessage(message, "*");
+        }
+      }
     </script>
 
     {% if request.user and request.user.company.id|is_test_company %}
-        <script type='text/javascript'>
-            window.__wtw_lucky_site_id = 76522;
+    <script type="text/javascript">
+      window.__wtw_lucky_site_id = 76522;
 
-            (function() {
-                var wa = document.createElement('script'); wa.type = 'text/javascript'; wa.async = true;
-                wa.src = 'https://d10lpsik1i8c69.cloudfront.net/w.js';
-                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(wa, s);
-            })();
-        </script>
-    {% endif %}
+      (function () {
+        var wa = document.createElement("script");
+        wa.type = "text/javascript";
+        wa.async = true;
+        wa.src = "https://d10lpsik1i8c69.cloudfront.net/w.js";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(wa, s);
+      })();
+    </script>
+    {% endif %} {% block player %}{% endblock %}
+  </head>
 
-    {% include 'common/math_jax.html' %}
-
-    {% block player %}{% endblock %}
-</head>
-
-<body class="no-margin">
+  <body class="no-margin">
     <div id="_icplayer" class="no-margin pull-left"></div>
     <div class="clear"></div>
-</body>
-
+  </body>
 </html>

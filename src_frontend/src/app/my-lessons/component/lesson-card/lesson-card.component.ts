@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import { environment } from "../../../../environments/environment";
 
 import { ITranslations } from "../../../common/model/translations";
 import { Lesson } from "../../model/lesson";
@@ -9,9 +10,9 @@ import { RolePermissions } from "../../../common/model/auth-user";
 import { InfoMessageService } from "../../../common/service/info-message.service";
 
 @Component({
-    selector: 'app-lesson-card',
-    templateUrl: './lesson-card.component.html',
-    providers: [MyContentService]
+    selector: "app-lesson-card",
+    templateUrl: "./lesson-card.component.html",
+    providers: [MyContentService],
 })
 export class LessonCardComponent implements OnInit {
     @Input() lesson!: Lesson;
@@ -38,11 +39,13 @@ export class LessonCardComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
-        this._translations.getTranslations().subscribe((translations: ITranslations | null) => {
-            if (translations) {
-                this.translations = translations;
-            }
-        });
+        this._translations
+            .getTranslations()
+            .subscribe((translations: ITranslations | null) => {
+                if (translations) {
+                    this.translations = translations;
+                }
+            });
         this.editEnabled = true;
     }
 
@@ -79,13 +82,17 @@ export class LessonCardComponent implements OnInit {
     }
 
     private successUndeleteCallback(): void {
-        const successMessage = this.translations?.labels['lesson.undelete.success'] ?? 'Lesson restored successfully';
+        const successMessage =
+            this.translations?.labels["lesson.undelete.success"] ??
+            "Lesson restored successfully";
         this._infoMessage.addSuccess(successMessage);
         this.undeleteLesson.emit(this.lesson);
     }
 
     private errorUndeleteCallback(): void {
-        const errorMessage = this.translations?.labels['lesson.undelete.error'] ?? 'Failed to restore lesson';
+        const errorMessage =
+            this.translations?.labels["lesson.undelete.error"] ??
+            "Failed to restore lesson";
         this._infoMessage.addError(errorMessage);
     }
 
@@ -95,5 +102,11 @@ export class LessonCardComponent implements OnInit {
             () => this.successUndeleteCallback(),
             () => this.errorUndeleteCallback()
         );
+    }
+
+    getPreviewUrl(path: string): string {
+        const apiUrl = environment.apiUrl;
+        const baseUrl = apiUrl.substring(0, apiUrl.indexOf("/api"));
+        return `${baseUrl}${path}`;
     }
 }

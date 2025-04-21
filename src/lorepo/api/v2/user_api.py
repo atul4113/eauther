@@ -335,9 +335,10 @@ class UserLogo(views.APIView):
 
     def get(self, request):
         logo = None
-        corporate_logo_list = CorporateLogo.objects.filter(space=request.user.company)
-        if len(corporate_logo_list) > 0:
-            logo = corporate_logo_list[0].logo
+        if hasattr(request.user, 'company') and request.user.company:
+            corporate_logo_list = CorporateLogo.objects.filter(space=request.user.company)
+            if len(corporate_logo_list) > 0:
+                logo = corporate_logo_list[0].logo
 
         return Response(logo.id if logo else None)
 

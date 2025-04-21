@@ -7,6 +7,9 @@ from src.lorepo.filestorage.models import FileStorage
 from src.lorepo.public.metaseo import MetaSEO
 from src.lorepo.spaces.util import is_company_locked
 from django.core.exceptions import PermissionDenied
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 def _check_if_company_locked(request):
@@ -42,22 +45,30 @@ def corporate_embed(request, content_id):
 
 @check_is_public
 def present(request, content_id):
-    content = Content.get_cached_or_404(id=content_id)
+    try:
+        content = Content.get_cached_or_404(id=content_id)
+        logger.info(f"Loading content {content_id} for presentation")
+        
+        context = {
+            'content': content,
+            'meta_seo': MetaSEO(request,
+                                title='%s - %s' % (content.title, settings.APP_NAME),
+                                description=content.short_description,
+                                image=content.icon_href)
+        }
 
-    context = {
-        'content': content,
-        'meta_seo': MetaSEO(request,
-                            title='%s - %s' % (content.title, settings.APP_NAME),
-                            description=content.short_description,
-                            image=content.icon_href)
-    }
-
-    if is_ios_user_agent(request):
-        return render(request, 'embed/present_mobile_ios.html', context)
-    elif is_mobile_user_agent(request):
-        return render(request, 'embed/present_mobile.html', context)
-    else:
-        return render(request, 'embed/present.html', context)
+        if is_ios_user_agent(request):
+            template = 'embed/present_mobile_ios.html'
+        elif is_mobile_user_agent(request):
+            template = 'embed/present_mobile.html'
+        else:
+            template = 'embed/present.html'
+            
+        logger.info(f"Rendering template {template} for content {content_id}")
+        return render(request, template, context)
+    except Exception as e:
+        logger.error(f"Error presenting content {content_id}: {str(e)}")
+        raise
 
 
 @check_is_public
