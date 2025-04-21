@@ -176,7 +176,7 @@ class MyContentView(views.APIView):
             raise ValidationError('Requested space is company level')
 
         serialized_data = get_data_with_cursor(
-            query_set=Content.objects.filter(spaces=str(requested_space.id), is_deleted=self.trash),
+            query_set=Content.objects.filter(spaces__contains=str(requested_space.id), is_deleted=self.trash),
             cursor=cursor,
             serializer=ContentSerializer,
             context={},
@@ -1153,9 +1153,9 @@ class ContentView(views.APIView):
             raise ValidationError('Requested space is company level')
 
         if self.trash:
-            query_set = Content.objects.filter(spaces=str(requested_space.id), is_deleted=self.trash).order_by(MODIFIED_DATE_FIELD)
+            query_set = Content.objects.filter(spaces__contains=str(requested_space.id), is_deleted=self.trash).order_by(MODIFIED_DATE_FIELD)
         else:
-            query_set = Content.objects.filter(Q(content_type=1) | Q(content_type=2)).filter(spaces=str(requested_space.id), is_deleted=self.trash).order_by(order_by)
+            query_set = Content.objects.filter(Q(content_type=1) | Q(content_type=2)).filter(spaces__contains=str(requested_space.id), is_deleted=self.trash).order_by(order_by)
 
         paginator = Paginator(query_set, page_size)
         contents = paginator.page(page)
@@ -1804,7 +1804,7 @@ class AddonsView(views.APIView):
             raise ValidationError('Requested space is company level')
 
         serialized_data = get_data_with_cursor(
-            query_set=Content.objects.filter(spaces=str(requested_space.id), content_type=3, is_deleted=trash),
+            query_set=Content.objects.filter(spaces__contains=str(requested_space.id), content_type=3, is_deleted=trash),
             cursor=cursor,
             serializer=ContentSerializer,
             context={},
