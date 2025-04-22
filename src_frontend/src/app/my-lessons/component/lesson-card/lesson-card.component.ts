@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { environment } from "../../../../environments/environment";
+import { Router } from "@angular/router";
 
 import { ITranslations } from "../../../common/model/translations";
 import { Lesson } from "../../model/lesson";
@@ -35,7 +36,8 @@ export class LessonCardComponent implements OnInit {
     constructor(
         private _myContent: MyContentService,
         private _infoMessage: InfoMessageService,
-        private _translations: TranslationsService
+        private _translations: TranslationsService,
+        private _router: Router
     ) {}
 
     ngOnInit(): void {
@@ -68,17 +70,49 @@ export class LessonCardComponent implements OnInit {
     }
 
     public onEdit(event: Event): void {
+        console.log("Edit button clicked");
         event.stopPropagation();
-        this.edit.emit({ lesson: this.lesson, event });
+        if (this.lesson.contentType.isLesson()) {
+            console.log("Getting lesson edit token...");
+            this._myContent.getEditLessonToken().subscribe(
+                (editToken) => {
+                    console.log("Got edit token:", editToken);
+                    this.openEditor(editToken);
+                },
+                (error) => {
+                    console.error("Error getting edit token:", error);
+                }
+            );
+        } else if (this.lesson.contentType.isAddon()) {
+            console.log("Getting addon edit token...");
+            this._myContent.getEditAddonToken().subscribe(
+                (editToken) => {
+                    console.log("Got edit token:", editToken);
+                    this.openEditor(editToken);
+                },
+                (error) => {
+                    console.error("Error getting edit token:", error);
+                }
+            );
+        }
     }
 
     public openEditor(editLessonToken: EditToken): void {
+        console.log("Opening editor with token:", editLessonToken);
         if (!editLessonToken) {
+            console.error("No edit token provided");
             return;
         }
 
-        const url = `/mycontent/${this.lesson.id}/editor?${editLessonToken.key}=${editLessonToken.token}`;
-        window.location.href = url;
+        console.log("Token properties:", {
+            token: editLessonToken.token,
+            tokenKey: editLessonToken.tokenKey,
+        });
+
+        const nextUrl = encodeURIComponent("/mycontent");
+        const url = `mycontent/${this.lesson.id}/editor?next=${nextUrl}&${editLessonToken.tokenKey}=${editLessonToken.token}&confirmed=True`;
+        console.log("Final redirect URL:", url);
+        this._router.navigateByUrl(url);
     }
 
     private successUndeleteCallback(): void {
