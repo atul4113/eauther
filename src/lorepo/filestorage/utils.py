@@ -8,6 +8,8 @@ from django.core.files.base import ContentFile
 from PIL import Image
 from io import BytesIO
 from src.lorepo.filestorage.models import FileStorage
+import json
+from google.api_core import retry
 
 MAX_RETRIES = 10
 
@@ -54,20 +56,28 @@ def create_new_subpages(file_storage, comment=''):
 
 
 def update_main_page(file_storage, id_mapping):
-    """
-    Updates the main page of content with IDs of subpages copies.
-    Each subpage is copied and gets a new ID which must be inserted
-    into the main page for a valid reference.
-    """
-    dom = minidom.parseString(file_storage.contents)
-    pages = dom.getElementsByTagName('page')
-    if len(pages) != len(id_mapping):
-        raise Exception('Invalid number of pages for the selected content')
-
-    for page in pages:
-        page.setAttribute('href', str(id_mapping[page.getAttribute('href')]))
-    file_storage.contents = dom.toxml("utf-8")
+    """Updates the main page with new subpage IDs."""
+    if not file_storage.contents:
+        return
+        
+    try:
+        content = json.loads(file_storage.contents)
+    except json.JSONDecodeError:
+        return
+        
+    if not isinstance(content, dict):
+        return
+        
+    # Update subpage IDs if they exist in the mapping
+    if 'subpages' in content:
+        for subpage in content['subpages']:
+            if 'id' in subpage and subpage['id'] in id_mapping:
+                subpage['id'] = id_mapping[subpage['id']]
+    
+    # Save the updated content
+    file_storage.contents = json.dumps(content).encode('utf-8')
     file_storage.save()
+    print('saved_main_pageeeeeeeeeeeeeeeeeeeeeeeeeeee')
 
 
 def resize_image(uploaded_file, width, height):

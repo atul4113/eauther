@@ -38,21 +38,24 @@ class FileStorage(models.Model):
     def __init__(self, *args, **kwargs):
         self.while_initializing = True
         self.__old_gcs_contents_filename = None
+        self._gcs_contents_filename = None
         super().__init__(*args, **kwargs)
+        self.while_initializing = False
 
     def __getattribute__(self, item):
         if item == 'contents':
-            return self._get_contents()
+            if not hasattr(self, '_gcs_contents_filename'):
+                return None
+            try:
+                return self._get_contents()
+            except self.DoesNotExist:
+                return None
         return super().__getattribute__(item)
 
     def __setattr__(self, key, value):
         if key == 'contents':
             if hasattr(self, '_gcs_contents_filename'):
                 self.__old_gcs_contents_filename = self._gcs_contents_filename
-
-            if self.while_initializing:
-                self.while_initializing = False
-            else:
                 self._gcs_contents_filename = None
         super().__setattr__(key, value)
 
@@ -90,29 +93,33 @@ class FileStorage(models.Model):
     def save(self, *args, **kwargs):
         self.__is_saving = True
         try:
+            # Save contents to GCS if needed before saving to Datastore
             self._save_contents()
             entity = super().save(*args, **kwargs)
+            return entity
         except Exception as e:
             logging.exception(e)
             raise
-        else:
-            self._remove_old_from_gcs()
-            return entity
         finally:
             self.__is_saving = False
+            self._remove_old_from_gcs()
 
     def getCopy(self, author, contents=None):
-        now = datetime.datetime.now()
-        contents = self.contents if contents is None else contents
-        pageFile = FileStorage(
-            created_date=now,
-            modified_date=now,
+        """Creates a copy of this file storage with a new author."""
+        new_file = FileStorage(
             content_type=self.content_type,
-            contents=contents,
-            owner=author
+            owner=author,
+            version=self.version,
+            history_for=self.history_for,
+            meta=self.meta
         )
-        pageFile.save()
-        return pageFile
+        
+        if contents is not None:
+            new_file.contents = contents
+        else:
+            new_file.contents = self.contents
+            
+        return new_file
 
 
 class BaseUploadedFile(models.Model):
