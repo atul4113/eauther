@@ -45,7 +45,7 @@ def is_being_edited(function):
             else:
                 redirect_url = '/mycontent/{}/confirm_editing?next_url={}&who={}'.format(content_id, encoded_full_url, user)
 
-            back_url = request.REQUEST.get("next")
+            back_url = request.GET.get("next")
             if back_url is not None:
                 redirect_url = redirect_url + '&back_url={}'.format(back_url)
 

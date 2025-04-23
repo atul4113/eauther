@@ -96,6 +96,12 @@ indexes:
     direction: desc
 
 - kind: filestorage_filestorage
+  ancestor: yes
+  properties:
+  - name: __key__
+  - name: _gcs_contents_filename
+
+- kind: filestorage_filestorage
   properties:
   - name: content_type
   - name: history_for_id

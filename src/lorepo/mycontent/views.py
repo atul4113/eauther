@@ -1296,7 +1296,7 @@ class ConfirmSelfEditing(LoginRequiredMixin, HasSpacePermissionMixin, TemplateVi
     permission = Permission.CONTENT_VIEW
 
     def get(self, request, *args, **kwargs):
-        back = request.REQUEST.get("back_url") or get_redirect_url(request)
+        back = request.GET.get("back_url") or get_redirect_url(request)
         full_path_to_editor = set_new_token_and_return_path(request)
 
         return render(request, 'mycontent/confirm_self_edit_content.html',
@@ -1311,7 +1311,7 @@ class ConfirmSelfEditingAddon(LoginRequiredMixin, HasSpacePermissionMixin, Templ
     permission = Permission.CONTENT_EDIT
 
     def get(self, request, *args, **kwargs):
-        back = request.REQUEST.get("back_url") or get_redirect_url(request)
+        back = request.GET.get("back_url") or get_redirect_url(request)
         full_path_to_editor = set_new_token_and_return_path(request)
 
         return render(request, 'mycontent/confirm_self_edit_content_addon.html',
@@ -1326,8 +1326,8 @@ class ConfirmEditing(LoginRequiredMixin, HasSpacePermissionMixin, TemplateView):
     permission = Permission.CONTENT_EDIT
 
     def get(self, request, *args, **kwargs):
-        who_editing = request.REQUEST.get("who")
-        back = request.REQUEST.get("back_url") or get_redirect_url(request)
+        who_editing = request.GET.get("who")
+        back = request.GET.get("back_url") or get_redirect_url(request)
         full_path_to_editor = set_new_token_and_return_path(request)
 
         return render(request, 'mycontent/confirm_edit_content.html',

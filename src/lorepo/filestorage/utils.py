@@ -7,6 +7,7 @@ from django.core.files.storage import default_storage
 from django.core.files.base import ContentFile
 from PIL import Image
 from io import BytesIO
+from src.lorepo.filestorage.models import FileStorage
 
 MAX_RETRIES = 10
 
