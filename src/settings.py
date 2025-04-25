@@ -23,7 +23,7 @@ pymysql.install_as_MySQLdb()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"]="C:\\Users\\Moro\\Work\\atul_last_updated\\eauther\\src\\key.json"
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"]="E:\\Work\\Programming\\Projects\\SmartEdu\\mauthor\\src\\key.json"
 os.environ["DATASTORE_PROJECT_ID"]="eauthor-dev"
 os.environ["CLOUDSDK_CORE_PROJECT"]="eauthor-dev"
 DJANGAE_INDEX_YAML = 'djangaeidx.yaml'
@@ -143,7 +143,7 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'src.lorepo.middleware.XFrameOptionsMiddleware',  # Custom middleware
     'src.lorepo.corporate.middleware.CorporateMiddleware',
 ]
 

@@ -110,9 +110,9 @@ export class LessonCardComponent implements OnInit {
         });
 
         const nextUrl = encodeURIComponent("/mycontent");
-        const url = `mycontent/${this.lesson.id}/editor?next=${nextUrl}&${editLessonToken.tokenKey}=${editLessonToken.token}&confirmed=True`;
+        const url = `http://localhost:8000/mycontent/${this.lesson.id}/editor?next=${nextUrl}&${editLessonToken.tokenKey}=${editLessonToken.token}`;
         console.log("Final redirect URL:", url);
-        this._router.navigateByUrl(url);
+        window.location.href = url;
     }
 
     private successUndeleteCallback(): void {
