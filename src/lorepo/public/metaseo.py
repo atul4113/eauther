@@ -1,4 +1,5 @@
 import json
+import re
 from django.http import HttpRequest
 from django.template.defaultfilters import striptags
 from django.utils.safestring import mark_safe
@@ -93,7 +94,13 @@ class MetaSEO(object):
             elements.append(self.og_html('image:height', self.kwargs['image_height']))
         else:
             try:
-                image_file = UploadedFile.get_by_href(image_url)
+                # Extract file id from image_url if possible
+                match = re.search(r'/file/serve/(\d+)', image_url)
+                image_file = None
+                if match:
+                    image_id = match.group(1)
+                    from src.lorepo.filestorage.models import UploadedFile
+                    image_file = UploadedFile.objects.filter(id=image_id).first()
                 if image_file:
                     if not image_file.meta:
                         image_file.calculate_uploaded_image_meta()
@@ -121,7 +128,7 @@ class MetaSEO(object):
         return mark_safe('\n'.join(elements))
 
     def __str__(self):
-        return str(str(self))
+        return self.__unicode__()
 
     def __bool__(self):
         return isinstance(self.request, HttpRequest)

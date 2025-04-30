@@ -52,7 +52,13 @@ export class TokenService {
             return this.observe;
         } else {
             this.observe = this._http
-                .get<TokenResponse>(API_URL + TOKEN_URL)
+                .get<TokenResponse>(API_URL + TOKEN_URL, {
+                    headers: this.token
+                        ? {
+                              Authorization: `Bearer ${this.token}`,
+                          }
+                        : undefined,
+                })
                 .pipe(
                     map(this.extractData.bind(this)),
                     catchError(this.handleError),
@@ -71,6 +77,10 @@ export class TokenService {
         }
     }
 
+    public getToken(): string | null {
+        return this.token;
+    }
+
     public clear(): void {
         this.token = null;
         this.refreshToken = null;
@@ -78,7 +88,7 @@ export class TokenService {
     }
 
     public getFreshToken(): Observable<string | null> {
-        this.clear();
+        this.observe = null;
         return this.get();
     }
 

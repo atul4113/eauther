@@ -3,31 +3,25 @@
         "target": "http://localhost:8000",
         "secure": false
     },
+    "/static": {
+        "target": "http://localhost:8000",
+        "secure": false
+    },
+    "/assets": {
+        "target": "http://localhost:8000",
+        "secure": false
+    },
     "/file/serve": {
         "target": "http://localhost:8000",
         "secure": false
     },
-    "/api": {
+    "/api/v2": {
         "target": "http://localhost:8000",
         "secure": false,
         "changeOrigin": true,
         "logLevel": "debug"
     },
-    "/api/v2/jwt": {
-        "target": "http://localhost:8000",
-        "secure": false,
-        "changeOrigin": true,
-        "logLevel": "debug",
-        "pathRewrite": {
-            "^/api/v2/jwt": "/api/v2/jwt"
-        }
-    },
     "/accounts/login/session": {
-        "target": "http://localhost:8000",
-        "secure": false
-    },
-
-    "/api/v2": {
         "target": "http://localhost:8000",
         "secure": false
     },
@@ -40,6 +34,10 @@
         "secure": false
     },
     "/corporate/no_space_info": {
+        "target": "http://localhost:8000",
+        "secure": false
+    },
+    "/present": {
         "target": "http://localhost:8000",
         "secure": false
     }

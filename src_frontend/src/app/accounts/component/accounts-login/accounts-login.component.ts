@@ -58,7 +58,7 @@ export class AccountsLoginComponent implements OnInit {
             .login(this.username, this.password, this.rememberMe)
             .subscribe({
                 next: () => {
-                    this._router.navigateByUrl(this.previousPath);
+                    window.location.href = this.previousPath;
                 },
                 error: () => {
                     this.error = true;

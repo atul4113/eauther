@@ -36,6 +36,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.models import auth as auth_user
 from time import sleep
 from django.core.exceptions import ObjectDoesNotExist
+from rest_framework_simplejwt.tokens import RefreshToken
 
 
 @shared_task
@@ -132,6 +133,12 @@ def update_owners_permissions(request):
 
 from django.views.decorators.csrf import csrf_exempt
 
+def get_tokens_for_user(user):
+    refresh = RefreshToken.for_user(user)
+    return {
+        'refresh': str(refresh),
+        'access': str(refresh.access_token),
+    }
 
 @csrf_exempt
 def custom_login(request):
@@ -147,14 +154,20 @@ def custom_login(request):
         if not user:
             return JsonResponse({'error': 'Invalid credentials'}, status=401)
 
-        # Log the user in (creates session)
+        # Log the user in (creates session and sets sessionid cookie)
         login(request, user)
+        # Note: Returning JsonResponse after login(request, user) will set the sessionid cookie if frontend allows it.
 
-        print("login success")
-        return JsonResponse({
+        # Generate JWT tokens
+        tokens = get_tokens_for_user(user)
+
+        response = JsonResponse({
             'success': True,
-            'user': user.username,  # Return original username
+            'user': user.username,
+            'access': tokens['access'],
+            'refresh': tokens['refresh'],
         })
+        return response
 
     except Exception as e:
         return JsonResponse({'error': str(e)}, status=500)
