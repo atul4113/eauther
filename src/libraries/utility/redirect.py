@@ -1,10 +1,21 @@
 from django.http import HttpResponseRedirect
+
 def get_redirect_url(request, target = '/mycontent'):
-    redirect_url = request.REQUEST.get("next") if "next" in request.REQUEST else target
+    """
+    Get the redirect URL from either GET or POST parameters.
+    In Django 4.1+, we need to check GET and POST separately as REQUEST is removed.
+    """
+    # First check GET, then POST, fallback to target if neither has 'next'
+    redirect_url = request.GET.get("next") or request.POST.get("next") or target
     return redirect_url
 
 def get_redirect_urls(request, target = '/mycontent'):
-    redirect_urls = request.REQUEST.getlist('next') if 'next' in request.REQUEST else [target]
+    """
+    Get multiple redirect URLs from either GET or POST parameters.
+    In Django 4.1+, we need to check GET and POST separately as REQUEST is removed.
+    """
+    # First check GET, then POST, fallback to target if neither has 'next'
+    redirect_urls = request.GET.getlist('next') or request.POST.getlist('next') or [target]
     return redirect_urls
 
 def join_redirect_urls(redirect_urls):
@@ -19,6 +30,10 @@ def join_redirect_urls(redirect_urls):
     return url
 
 def get_redirect(request, target = '/mycontent'):
-    if 'next' in request.REQUEST:
-        target = request.REQUEST['next']
+    """
+    Get the redirect URL and return a HttpResponseRedirect.
+    In Django 4.1+, we need to check GET and POST separately as REQUEST is removed.
+    """
+    # First check GET, then POST, fallback to target if neither has 'next'
+    target = request.GET.get('next') or request.POST.get('next') or target
     return HttpResponseRedirect(target)
