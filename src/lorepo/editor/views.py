@@ -26,7 +26,7 @@ def templates(request):
 def addons(request, content_id):
     content = Content.get_cached_or_404(id=content_id)
     space = get_space_for_content(content)
-    addons_from_request_space = Content.objects.filter(spaces=str(space.id), content_type=ContentType.ADDON,
+    addons_from_request_space = Content.objects.filter(spaces__contains=str(space.id), content_type=ContentType.ADDON,
                                                        is_deleted=False)
     for addon in addons_from_request_space:
         addon.category = 'Private'
@@ -57,7 +57,8 @@ def _read_corporate_addons(request):
         for space in spaces:
             if _should_include_contents_in_editor(space):
                 contents.extend(
-                    Content.objects.filter(spaces=str(space.id), content_type=ContentType.ADDON, is_deleted=False,
+                    Content.objects.filter(spaces__contains=str(space.id), content_type=ContentType.ADDON,
+                                           is_deleted=False,
                                            is_public=True))
         for content in contents:
             content.category = 'Corporate'
