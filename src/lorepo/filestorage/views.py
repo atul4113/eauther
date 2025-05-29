@@ -18,12 +18,19 @@ from src.lorepo.filestorage.forms import UploadForm
 from src.lorepo.filestorage.models import FileStorage, UploadedFile
 from src.lorepo.filestorage.utils import get_reader
 from src.lorepo.util.requests import is_request_secure
+from src.lorepo.editor.decorators import is_logged
+from django.views.decorators.csrf import csrf_exempt
+
+
 
 SIZE_32_MB = 32 * 1024 * 1024
 RETRY_COUNT = 5
 GAE_LIMIT = 1024 * 1024 * 5
 CACHE_MAXAGE = 60 * 60  # 3600 * 24 * 30 seems not working
 
+
+@csrf_exempt
+@is_logged
 def get_file(request, file_id):
     file = get_object_or_404(FileStorage, pk=file_id)
     if request.method == 'GET':
