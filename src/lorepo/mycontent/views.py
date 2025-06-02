@@ -70,6 +70,7 @@ from src.lorepo.mycontent.util import set_new_token_and_return_path
 from src.libraries.utility.decorators import backend
 from src.libraries.utility.environment import get_versioned_module
 from src.mauthor.utility.db_safe_iterator import safe_iterate
+from django.views.decorators.csrf import csrf_exempt
 
 
 def trash(request, space_id=None):
@@ -478,9 +479,10 @@ def save_favourite_modules(request):
 
     return HttpResponse("OK")
 
-
+@csrf_exempt
+@login_required
 def save_should_render(request):
-    if not request.user.is_authenticated():
+    if not request.user.is_authenticated:
         return HttpResponse('logged out', status=401)
 
     user_profile = request.user.profile
