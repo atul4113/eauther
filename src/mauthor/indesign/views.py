@@ -107,14 +107,14 @@ def create_lesson(request):
     contentFile.history_for = content
     contentFile.save()
 
-    space_id = request.REQUEST['space_id'] if 'space_id' in request.REQUEST else None
+    space_id = request.GET.get('space_id') or request.POST.get('space_id')
     if space_id is None:
         space = get_private_space_for_user(request.user)
     else:
         space = Space.objects.get(pk=space_id)
     add_content_to_space(content, space)
 
-    skip_editor = request.REQUEST['skip_editor'] if 'skip_editor' in request.REQUEST else None
+    skip_editor = request.GET.get('skip_editor') or request.POST.get('skip_editor')
     if skip_editor:
         return HttpResponseRedirect(get_redirect_url(request))
 

@@ -40,5 +40,25 @@
     "/present": {
         "target": "http://localhost:8000",
         "secure": false
+    },
+    "/corporate/list": {
+        "target": "http://localhost:8000",
+        "secure": false,
+        "changeOrigin": true
+    },
+    "/course/list": {
+        "target": "http://localhost:8000",
+        "secure": false,
+        "changeOrigin": true
+    },
+    "/course/export": {
+        "target": "http://localhost:8000",
+        "secure": false,
+        "changeOrigin": true
+    },
+    "/course": {
+        "target": "http://localhost:8000",
+        "secure": false,
+        "changeOrigin": true
     }
 }

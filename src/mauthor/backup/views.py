@@ -282,7 +282,7 @@ def export_lesson(request, content_id, project_backup_id, user_id, version, incl
 @has_space_access(Permission.BACKUP_ADMIN)
 def restore_project(request):
     upload_url = blobstore.create_upload_url(request.path)
-    next_url = request.REQUEST['next'] if 'next' in request.REQUEST else '/mycontent'
+    next_url = request.GET.get('next') or request.POST.get('next') or '/mycontent'
     form = UploadForm()
 
     if request.method == 'POST':

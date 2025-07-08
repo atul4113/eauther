@@ -935,7 +935,7 @@ def send_bad_zipfile_notification(user):
 @has_space_access(Permission.EXCHANGE_IMPORT)
 def import_presentation(request, space_id=None):
     upload_url = blobstore.create_upload_url(request.path)
-    next_url = request.REQUEST['next'] if 'next' in request.REQUEST else '/mycontent'
+    next_url = request.GET.get('next') or request.POST.get('next') or '/mycontent'
     if request.method == 'POST':
         if len(request.FILES) > 0:
             form = UploadForm(request.POST, request.FILES)

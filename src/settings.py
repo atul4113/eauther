@@ -23,7 +23,7 @@ pymysql.install_as_MySQLdb()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"]="C:\\Users\\Moro\\Work\\atul_last_updated\\eauther\\src\\key.json"
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"]="E:\\Work\\Programming\\Projects\\SmartEdu\\mauthor\\src\\key.json"
 os.environ["DATASTORE_PROJECT_ID"]="eauthor-dev"
 os.environ["CLOUDSDK_CORE_PROJECT"]="eauthor-dev"
 DJANGAE_INDEX_YAML = 'djangaeidx.yaml'
@@ -326,44 +326,19 @@ lxml_parser_options = {
 }
 etree.set_default_parser(parser=etree.XMLParser(**lxml_parser_options))
 
-# LOGGING = {
-#     'version': 1,
-#     'disable_existing_loggers': False,
-#     'filters': {
-#         'require_debug_false': {
-#             '()': 'django.utils.log.RequireDebugFalse'
-#         }
-#     },
-#     'handlers': {
-#         'log_error_message': {
-#             'level': 'ERROR',
-#             'filters': ['require_debug_false'],
-#             'class': 'src.mauthor.admin.log.LogAdminEmailHandler'
-#         },
-#         'mail_admins': {
-#             'level': 'ERROR',
-#             'filters': ['require_debug_false'],
-#             'class': 'django.utils.log.AdminEmailHandler'
-#         },
-#         'empty-handler': {
-#             'class': 'logging.NullHandler',
-#         },
-#     },
-#     'loggers': {
-#         # Silence SuspiciousOperation.DisallowedHost exception ('Invalid
-#         # HTTP_HOST' header messages). Set the handler to 'null' so we don't
-#         # get those annoying emails.
-#         'django.security.DisallowedHost': {
-#             'handlers': ['empty-handler'],
-#             'propagate': False,
-#         },
-#         'django.request': {
-#             'handlers': ['log_error_message', 'mail_admins'],
-#             'level': 'ERROR',
-#             'propagate': True,
-#         },
-#     }
-# }
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'DEBUG',  # Change to 'INFO' if you want less verbosity
+    },
+}
 
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'  # Or your custom backend
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' # For development,
@@ -487,3 +462,7 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 ADMIN_MEDIA_PREFIX = '/media/admin/'
+
+CSRF_TRUSTED_ORIGINS = [
+    "http://localhost:4200",
+]

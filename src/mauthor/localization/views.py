@@ -69,7 +69,7 @@ def export(request, content_id, user_id, language_code):
 
 @login_required
 def create_import(request, space_id):
-    next_url = request.REQUEST['next'] if 'next' in request.REQUEST else '/mycontent'
+    next_url = request.GET.get('next') or request.POST.get('next') or '/mycontent'
     if request.method == 'POST':
         if len(request.FILES) > 0:
             _import_backend(request, space_id)

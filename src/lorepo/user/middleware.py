@@ -13,7 +13,7 @@ class LoggingMiddleware(object):
                 logging.debug("User: %s, POST Request: %s", request.user, request.POST)
                 logging.debug("POST payload size: " + str(request.META.get('CONTENT_LENGTH')))
             else:
-                logging.debug("User: %s, %s Request: %s", request.user, request.method, request.REQUEST)
+                logging.debug("User: %s, %s Request: %s", request.user, request.method, dict(request.GET.items()) | dict(request.POST.items()))
 
         if LOGGING_URL.search(request.path) and "username" in request.POST:
             logging.debug("Loging-in user: %s", request.POST.get('username'))

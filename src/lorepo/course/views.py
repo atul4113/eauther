@@ -277,31 +277,40 @@ def remove_chapter(request, chapter_id, course_id):
 @login_required
 @has_space_access(Permission.COURSE_MANAGE)
 def trigger_export(request, course_id):
+    logging.info(f"Export requested for course_id={course_id} by user={request.user}")
     course = Course.get_cached_course(course_id)
     if course.is_being_exported:
+        logging.info(f"Export already in progress for course_id={course_id}")
         messages.warning(request, 'Course is being exported.')
         return get_redirect(request)
 
     if check_deleted_lessons(course):
+        logging.info(f"Export blocked: deleted lessons detected in course_id={course_id}")
         messages.error(request, 'Course has deleted lessons. Please remove them from Table of Contents.', 'danger')
         return HttpResponseRedirect('/course/edit_table_of_contents/%s/%s?next=%s' % (course.id, course.project_id, get_redirect_url(request)))
 
     if request.method == 'POST':
+        logging.info(f"POST received for export of course_id={course_id}")
         set_form_token(request.user, 'export')
         version = request.POST.get('scorm_version', 2)
         include_player = request.POST.get('include_player', 0)
+        logging.info(f"Export parameters: version={version}, include_player={include_player}")
         course.is_being_exported = True
         course.save()
         try:
+            logging.info(f"Triggering backend export task for course_id={course_id}")
             trigger_backend_task('/course/export/%s/async/%s/%s/%s' % (course_id, request.user.id, version, include_player), target=get_versioned_module('backup'), queue_name='backup')
         except Exception as e:
+            logging.error(f"Exception during export trigger for course_id={course_id}: {e}")
             course.is_being_exported = False
             course.save()
             raise e
 
+        logging.info(f"Export scheduled for course_id={course_id}")
         messages.info(request, 'Course scheduled for export. Once the exported course is ready you will be notified via email.')
         return get_redirect(request)
     else:
+        logging.info(f"Rendering export page for course_id={course_id}")
         return render(request, 'course/export.html', {
             'next_url': get_redirect_url(request),
             'course_id': course_id
@@ -310,40 +319,50 @@ def trigger_export(request, course_id):
 
 @backend
 def export(_, course_id, user_id, version, include_player):
-
+    logging.info(f"Starting export for course_id={course_id}, user_id={user_id}, version={version}, include_player={include_player}")
     def report_error():
         logging.exception("Course export failed, course_id=%s, user_id=%s", course_id, user_id)
         send_failure_notification(course_id, user_id)
 
     try:
         course = Course.objects.get(pk=course_id)
+        logging.info(f"Loaded course object for course_id={course_id}")
         course.set_id()
         lessons_ids = set(course.get_lessons_ids())
+        logging.info(f"Collected lesson ids: {lessons_ids}")
         eBooks_ids = set(course.get_eBooks_ids())
+        logging.info(f"Collected eBook ids: {eBooks_ids}")
         lessons_ids.update(eBooks_ids)
         course.update_lessons(lessons_ids)
         course.update_ebooks(eBooks_ids)
+        logging.info(f"Updated lessons and eBooks for course_id={course_id}")
         exported_course = ExportedCourse(number_of_contents = len(lessons_ids), course = course)
         exported_course.save()
+        logging.info(f"Created ExportedCourse object with id={exported_course.pk}")
 
         for content_id in lessons_ids:
             url = '/course/export_lesson/%s/%s/%s/%s/%s' % (content_id, user_id, exported_course.pk, version, include_player)
             name = url.replace('/', '_')
+            logging.info(f"Triggering backend export_lesson task for content_id={content_id}, url={url}")
             trigger_backend_task(url, name=name, target=get_versioned_module(os.environ('module_name')), queue_name='backup')
 
+        logging.info(f"Triggering backend export_structure task for course_id={course_id}, exported_course_id={exported_course.pk}")
         trigger_backend_task('/course/export_structure/%s/%s/%s/%s' %
                                  (course_id, exported_course.pk, user_id, version), name="structure_export_course_%s" % exported_course.pk, target=get_versioned_module(get_current_module_name()), queue_name='backup')
 
     except DeadlineExceeded:
+        logging.error(f"DeadlineExceeded during export for course_id={course_id}")
         report_error()
         try:
             course.is_being_exported = False
             course.save()
         except Exception:
             pass
-    except Exception:
+    except Exception as e:
+        logging.error(f"Exception during export for course_id={course_id}: {e}")
         report_error()
 
+    logging.info(f"Export process finished for course_id={course_id}")
     return HttpResponse()
 
 

@@ -3,6 +3,14 @@
         "target": "http://localhost:8000",
         "secure": false
     },
+    "/static": {
+        "target": "http://localhost:8000",
+        "secure": false
+    },
+    "/assets": {
+        "target": "http://localhost:8000",
+        "secure": false
+    },
     "/file/serve": {
         "target": "http://localhost:8000",
         "secure": false
@@ -22,11 +30,11 @@
             "^/api/v2/jwt": "/api/v2/jwt"
         }
     },
-    "/accounts/login/session": {
+    "/api/v2": {
         "target": "http://localhost:8000",
         "secure": false
     },
-    "/api/v2": {
+    "/accounts/login/session": {
         "target": "http://localhost:8000",
         "secure": false
     },
@@ -38,13 +46,18 @@
         "target": "http://localhost:8000",
         "secure": false
     },
-    "/corporate/no_space_info": {
+    "/corporate": {
         "target": "http://localhost:8000",
-        "secure": false
+        "secure": false,
+        "changeOrigin": true
     },
     "/mycontent": {
         "target": "http://localhost:8000",
         "secure": false,
         "changeOrigin": true
+    },
+    "/present": {
+        "target": "http://localhost:8000",
+        "secure": false
     }
 }
